@@ -1,0 +1,111 @@
+{
+  "implementation_commit": "45637a41dfaef5c7cd99c6fbf0f4b9b45455597e",
+  "scientific_tests": {
+    "tests": 116,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "application_tests": {
+    "tests": 107,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "new_ledger_cases": 18,
+  "new_observer_cases": 10,
+  "ledger_artifact_checks": [
+    {
+      "artifact": "mlx-ledger-1-False.npz",
+      "steps": 101,
+      "trials": 1,
+      "edges": 8,
+      "every_actual_event_clock_and_queue_entry_verified": true
+    },
+    {
+      "artifact": "mlx-ledger-1-True.npz",
+      "steps": 101,
+      "trials": 1,
+      "edges": 0,
+      "every_actual_event_clock_and_queue_entry_verified": true
+    },
+    {
+      "artifact": "mlx-ledger-4-False.npz",
+      "steps": 101,
+      "trials": 4,
+      "edges": 8,
+      "every_actual_event_clock_and_queue_entry_verified": true
+    },
+    {
+      "artifact": "mlx-ledger-4-True.npz",
+      "steps": 101,
+      "trials": 4,
+      "edges": 0,
+      "every_actual_event_clock_and_queue_entry_verified": true
+    }
+  ],
+  "observer_artifact_checks": [
+    {
+      "artifact": "mlx-observer-False-1.npz",
+      "every_ordinary_phase_and_final_queue_byte_verified": true,
+      "fresh_run_archive_byte_identical": true
+    },
+    {
+      "artifact": "mlx-observer-False-17.npz",
+      "every_ordinary_phase_and_final_queue_byte_verified": true,
+      "fresh_run_archive_byte_identical": true
+    },
+    {
+      "artifact": "mlx-observer-False-32.npz",
+      "every_ordinary_phase_and_final_queue_byte_verified": true,
+      "fresh_run_archive_byte_identical": true
+    },
+    {
+      "artifact": "mlx-observer-True-1.npz",
+      "every_ordinary_phase_and_final_queue_byte_verified": true,
+      "fresh_run_archive_byte_identical": true
+    },
+    {
+      "artifact": "mlx-observer-True-17.npz",
+      "every_ordinary_phase_and_final_queue_byte_verified": true,
+      "fresh_run_archive_byte_identical": true
+    },
+    {
+      "artifact": "mlx-observer-True-32.npz",
+      "every_ordinary_phase_and_final_queue_byte_verified": true,
+      "fresh_run_archive_byte_identical": true
+    }
+  ],
+  "newly_recorded_actual_repeat_and_four_solo_runs_bit_identical": true,
+  "actual_complete_small_state_queue_arrays_and_boundary_digests_recorded": true,
+  "quality": {
+    "ruff_lint": true,
+    "ruff_format": true,
+    "pyright_errors": 0,
+    "pyright_warnings": 0,
+    "import_contracts_kept": 3,
+    "locked_offline_resolution_packages": 38
+  },
+  "device": {
+    "device_name": "Apple M1 Max",
+    "max_recommended_working_set_size": 22906503168,
+    "memory_size": 34359738368,
+    "architecture": "applegpu_g13s",
+    "max_buffer_length": 17179869184,
+    "resource_limit": 499000
+  },
+  "MLX_ENABLE_TF32": "0",
+  "compilation": "disabled",
+  "trace_archives": 72,
+  "local_artifact_root": "/Users/ocasta/Code/fly-brain/data/results/milestone-4-observer-combined-20261005-01",
+  "source_sha256": {
+    "src/fly_brain/qualification/adapters/mlx_ledger.py": "ac0afd4d3a0ae80bb6c73e98016ac1857137444383e3c098f5eedc46005ad8f9",
+    "src/fly_brain/qualification/adapters/mlx_observer.py": "5d7dd850771f78eaa286cf631ce5484958779f0f514508161b7d369f17fe58ae",
+    "tests/qualification/test_mlx_ledger.py": "a66ebffdb9c099e7b8c007e7ae3e8a9ceaa542c4bc81c13d1268d5cda6a37f2c",
+    "tests/qualification/test_mlx_observer.py": "6624c3a3be5b760f14296e067e9209ecdecf5cdeee0bc946f0effce8b072338d",
+    "src/fly_brain/simulation/backend/core.py": "c4079b5d32cb05e701fcb89856a8b48066185bb5c470203e56f4785316461132",
+    "src/fly_brain/simulation/backend/bucketed.py": "0829f0cb3c67f08bb4dc861c1397548f8e66e4ce2262ef3471368ce772552747",
+    "src/fly_brain/simulation/backend/accumulation.py": "2ea94edfbae1852cdf269fe7169fa97a00c57bf8cb597879fd076abe0c17a894"
+  },
+  "scope": "Small reference/MLX observer proof and complete regressions, actual event/clock/queue invariants, ordinary phase/queue byte transparency, small four-trial batch/single and repeat evidence. No complete-network observer/memory, paired causal comparison, full 52-case parity, or benchmark acceptance."
+}

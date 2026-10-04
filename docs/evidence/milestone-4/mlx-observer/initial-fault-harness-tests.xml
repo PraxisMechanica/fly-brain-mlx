@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="9" skipped="0" tests="18" time="1.562" timestamp="2026-10-05T01:12:07.058793+02:00" hostname="Ocastas-MacBook-Pro.local"><testcase classname="tests.qualification.test_mlx_ledger" name="test_actual_device_queues_and_gates_agree_with_bounded_spike_history[False-1]" time="0.548" /><testcase classname="tests.qualification.test_mlx_ledger" name="test_actual_device_queues_and_gates_agree_with_bounded_spike_history[False-4]" time="0.322" /><testcase classname="tests.qualification.test_mlx_ledger" name="test_actual_device_queues_and_gates_agree_with_bounded_spike_history[True-1]" time="0.184" /><testcase classname="tests.qualification.test_mlx_ledger" name="test_actual_device_queues_and_gates_agree_with_bounded_spike_history[True-4]" time="0.188" /><testcase classname="tests.qualification.test_mlx_ledger" name="test_ledger_detects_changed_discrete_state_and_delivery_bits[available-available]" time="0.006"><failure message="AttributeError: 'ArrayAt' object has no attribute 'set'">precision = '0', field = 'available', check = 'available'
+
+    @pytest.mark.parametrize(
+        'field,check',
+        [
+            ('available', 'available'),
+            ('spikes', 'threshold'),
+            ('receiving', 'receiving'),
+            ('due', 'due'),
+            ('accepted', 'accepted'),
+            ('discarded', 'discarded'),
+            ('accepted_inputs', 'accepted_inputs'),
+            ('last_spike_step', 'last_spike_step'),
+        ],
+    )
+    def test_ledger_detects_changed_discrete_state_and_delivery_bits(
+        precision: str, field: str, check: str
+    ) -&gt; None:
+        original = connectome()
+        targets = (0, 0, 1)
+        execution = prepare(original, targets, (), precision)
+        state = core.initial_state(execution.network, voltage_mv=-44)
+        with mx.stream(mx.gpu):
+            events = mx.ones((1, 3), dtype=mx.bool_)
+        state, trace = execution.advance(state, events)
+        ledger = EventLedger(original, targets, 1)
+        with mx.stream(mx.gpu):
+            if field == 'last_spike_step':
+                state = state._replace(
+                    last_spike_step=state.last_spike_step.at[0, 0].add(1)
+                )
+            else:
+                value = cast(mx.array, getattr(trace, field))
+&gt;               trace = trace._replace(**{field: value.at[0, 0].set(~value[0, 0])})
+E               AttributeError: 'ArrayAt' object has no attribute 'set'
+
+tests/qualification/test_mlx_ledger.py:125: AttributeError</failure></testcase><testcase classname="tests.qualification.test_mlx_ledger" name="test_ledger_detects_changed_discrete_state_and_delivery_bits[spikes-threshold]" time="0.023"><failure message="AttributeError: 'ArrayAt' object has no attribute 'set'">precision = '0', field = 'spikes', check = 'threshold'
+
+    @pytest.mark.parametrize(
+        'field,check',
+        [
+            ('available', 'available'),
+            ('spikes', 'threshold'),
+            ('receiving', 'receiving'),
+            ('due', 'due'),
+            ('accepted', 'accepted'),
+            ('discarded', 'discarded'),
+            ('accepted_inputs', 'accepted_inputs'),
+            ('last_spike_step', 'last_spike_step'),
+        ],
+    )
+    def test_ledger_detects_changed_discrete_state_and_delivery_bits(
+        precision: str, field: str, check: str
+    ) -&gt; None:
+        original = connectome()
+        targets = (0, 0, 1)
+        execution = prepare(original, targets, (), precision)
+        state = core.initial_state(execution.network, voltage_mv=-44)
+        with mx.stream(mx.gpu):
+            events = mx.ones((1, 3), dtype=mx.bool_)
+        state, trace = execution.advance(state, events)
+        ledger = EventLedger(original, targets, 1)
+        with mx.stream(mx.gpu):
+            if field == 'last_spike_step':
+                state = state._replace(
+                    last_spike_step=state.last_spike_step.at[0, 0].add(1)
+                )
+            else:
+                value = cast(mx.array, getattr(trace, field))
+&gt;               trace = trace._replace(**{field: value.at[0, 0].set(~value[0, 0])})
+E               AttributeError: 'ArrayAt' object has no attribute 'set'
+
+tests/qualification/test_mlx_ledger.py:125: AttributeError</failure></testcase><testcase classname="tests.qualification.test_mlx_ledger" name="test_ledger_detects_changed_discrete_state_and_delivery_bits[receiving-receiving]" time="0.014"><failure message="AttributeError: 'ArrayAt' object has no attribute 'set'">precision = '0', field = 'receiving', check = 'receiving'
+
+    @pytest.mark.parametrize(
+        'field,check',
+        [
+            ('available', 'available'),
+            ('spikes', 'threshold'),
+            ('receiving', 'receiving'),
+            ('due', 'due'),
+            ('accepted', 'accepted'),
+            ('discarded', 'discarded'),
+            ('accepted_inputs', 'accepted_inputs'),
+            ('last_spike_step', 'last_spike_step'),
+        ],
+    )
+    def test_ledger_detects_changed_discrete_state_and_delivery_bits(
+        precision: str, field: str, check: str
+    ) -&gt; None:
+        original = connectome()
+        targets = (0, 0, 1)
+        execution = prepare(original, targets, (), precision)
+        state = core.initial_state(execution.network, voltage_mv=-44)
+        with mx.stream(mx.gpu):
+            events = mx.ones((1, 3), dtype=mx.bool_)
+        state, trace = execution.advance(state, events)
+        ledger = EventLedger(original, targets, 1)
+        with mx.stream(mx.gpu):
+            if field == 'last_spike_step':
+                state = state._replace(
+                    last_spike_step=state.last_spike_step.at[0, 0].add(1)
+                )
+            else:
+                value = cast(mx.array, getattr(trace, field))
+&gt;               trace = trace._replace(**{field: value.at[0, 0].set(~value[0, 0])})
+E               AttributeError: 'ArrayAt' object has no attribute 'set'
+
+tests/qualification/test_mlx_ledger.py:125: AttributeError</failure></testcase><testcase classname="tests.qualification.test_mlx_ledger" name="test_ledger_detects_changed_discrete_state_and_delivery_bits[due-due]" time="0.005"><failure message="AttributeError: 'ArrayAt' object has no attribute 'set'">precision = '0', field = 'due', check = 'due'
+
+    @pytest.mark.parametrize(
+        'field,check',
+        [
+            ('available', 'available'),
+            ('spikes', 'threshold'),
+            ('receiving', 'receiving'),
+            ('due', 'due'),
+            ('accepted', 'accepted'),
+            ('discarded', 'discarded'),
+            ('accepted_inputs', 'accepted_inputs'),
+            ('last_spike_step', 'last_spike_step'),
+        ],
+    )
+    def test_ledger_detects_changed_discrete_state_and_delivery_bits(
+        precision: str, field: str, check: str
+    ) -&gt; None:
+        original = connectome()
+        targets = (0, 0, 1)
+        execution = prepare(original, targets, (), precision)
+        state = core.initial_state(execution.network, voltage_mv=-44)
+        with mx.stream(mx.gpu):
+            events = mx.ones((1, 3), dtype=mx.bool_)
+        state, trace = execution.advance(state, events)
+        ledger = EventLedger(original, targets, 1)
+        with mx.stream(mx.gpu):
+            if field == 'last_spike_step':
+                state = state._replace(
+                    last_spike_step=state.last_spike_step.at[0, 0].add(1)
+                )
+            else:
+                value = cast(mx.array, getattr(trace, field))
+&gt;               trace = trace._replace(**{field: value.at[0, 0].set(~value[0, 0])})
+E               AttributeError: 'ArrayAt' object has no attribute 'set'
+
+tests/qualification/test_mlx_ledger.py:125: AttributeError</failure></testcase><testcase classname="tests.qualification.test_mlx_ledger" name="test_ledger_detects_changed_discrete_state_and_delivery_bits[accepted-accepted]" time="0.001"><failure message="AttributeError: 'ArrayAt' object has no attribute 'set'">precision = '0', field = 'accepted', check = 'accepted'
+
+    @pytest.mark.parametrize(
+        'field,check',
+        [
+            ('available', 'available'),
+            ('spikes', 'threshold'),
+            ('receiving', 'receiving'),
+            ('due', 'due'),
+            ('accepted', 'accepted'),
+            ('discarded', 'discarded'),
+            ('accepted_inputs', 'accepted_inputs'),
+            ('last_spike_step', 'last_spike_step'),
+        ],
+    )
+    def test_ledger_detects_changed_discrete_state_and_delivery_bits(
+        precision: str, field: str, check: str
+    ) -&gt; None:
+        original = connectome()
+        targets = (0, 0, 1)
+        execution = prepare(original, targets, (), precision)
+        state = core.initial_state(execution.network, voltage_mv=-44)
+        with mx.stream(mx.gpu):
+            events = mx.ones((1, 3), dtype=mx.bool_)
+        state, trace = execution.advance(state, events)
+        ledger = EventLedger(original, targets, 1)
+        with mx.stream(mx.gpu):
+            if field == 'last_spike_step':
+                state = state._replace(
+                    last_spike_step=state.last_spike_step.at[0, 0].add(1)
+                )
+            else:
+                value = cast(mx.array, getattr(trace, field))
+&gt;               trace = trace._replace(**{field: value.at[0, 0].set(~value[0, 0])})
+E               AttributeError: 'ArrayAt' object has no attribute 'set'
+
+tests/qualification/test_mlx_ledger.py:125: AttributeError</failure></testcase><testcase classname="tests.qualification.test_mlx_ledger" name="test_ledger_detects_changed_discrete_state_and_delivery_bits[discarded-discarded]" time="0.001"><failure message="AttributeError: 'ArrayAt' object has no attribute 'set'">precision = '0', field = 'discarded', check = 'discarded'
+
+    @pytest.mark.parametrize(
+        'field,check',
+        [
+            ('available', 'available'),
+            ('spikes', 'threshold'),
+            ('receiving', 'receiving'),
+            ('due', 'due'),
+            ('accepted', 'accepted'),
+            ('discarded', 'discarded'),
+            ('accepted_inputs', 'accepted_inputs'),
+            ('last_spike_step', 'last_spike_step'),
+        ],
+    )
+    def test_ledger_detects_changed_discrete_state_and_delivery_bits(
+        precision: str, field: str, check: str
+    ) -&gt; None:
+        original = connectome()
+        targets = (0, 0, 1)
+        execution = prepare(original, targets, (), precision)
+        state = core.initial_state(execution.network, voltage_mv=-44)
+        with mx.stream(mx.gpu):
+            events = mx.ones((1, 3), dtype=mx.bool_)
+        state, trace = execution.advance(state, events)
+        ledger = EventLedger(original, targets, 1)
+        with mx.stream(mx.gpu):
+            if field == 'last_spike_step':
+                state = state._replace(
+                    last_spike_step=state.last_spike_step.at[0, 0].add(1)
+                )
+            else:
+                value = cast(mx.array, getattr(trace, field))
+&gt;               trace = trace._replace(**{field: value.at[0, 0].set(~value[0, 0])})
+E               AttributeError: 'ArrayAt' object has no attribute 'set'
+
+tests/qualification/test_mlx_ledger.py:125: AttributeError</failure></testcase><testcase classname="tests.qualification.test_mlx_ledger" name="test_ledger_detects_changed_discrete_state_and_delivery_bits[accepted_inputs-accepted_inputs]" time="0.001"><failure message="AttributeError: 'ArrayAt' object has no attribute 'set'">precision = '0', field = 'accepted_inputs', check = 'accepted_inputs'
+
+    @pytest.mark.parametrize(
+        'field,check',
+        [
+            ('available', 'available'),
+            ('spikes', 'threshold'),
+            ('receiving', 'receiving'),
+            ('due', 'due'),
+            ('accepted', 'accepted'),
+            ('discarded', 'discarded'),
+            ('accepted_inputs', 'accepted_inputs'),
+            ('last_spike_step', 'last_spike_step'),
+        ],
+    )
+    def test_ledger_detects_changed_discrete_state_and_delivery_bits(
+        precision: str, field: str, check: str
+    ) -&gt; None:
+        original = connectome()
+        targets = (0, 0, 1)
+        execution = prepare(original, targets, (), precision)
+        state = core.initial_state(execution.network, voltage_mv=-44)
+        with mx.stream(mx.gpu):
+            events = mx.ones((1, 3), dtype=mx.bool_)
+        state, trace = execution.advance(state, events)
+        ledger = EventLedger(original, targets, 1)
+        with mx.stream(mx.gpu):
+            if field == 'last_spike_step':
+                state = state._replace(
+                    last_spike_step=state.last_spike_step.at[0, 0].add(1)
+                )
+            else:
+                value = cast(mx.array, getattr(trace, field))
+&gt;               trace = trace._replace(**{field: value.at[0, 0].set(~value[0, 0])})
+E               AttributeError: 'ArrayAt' object has no attribute 'set'
+
+tests/qualification/test_mlx_ledger.py:125: AttributeError</failure></testcase><testcase classname="tests.qualification.test_mlx_ledger" name="test_ledger_detects_changed_discrete_state_and_delivery_bits[last_spike_step-last_spike_step]" time="0.113" /><testcase classname="tests.qualification.test_mlx_ledger" name="test_ledger_detects_changed_pending_and_consumed_queue_slots[0]" time="0.001"><failure message="AttributeError: 'ArrayAt' object has no attribute 'set'">precision = '0', slot = 0
+
+    @pytest.mark.parametrize('slot', [0, 18])
+    def test_ledger_detects_changed_pending_and_consumed_queue_slots(
+        precision: str, slot: int
+    ) -&gt; None:
+        original = connectome()
+        execution = prepare(original, (), (), precision)
+        state = core.initial_state(execution.network, voltage_mv=-44)
+        with mx.stream(mx.gpu):
+            events = mx.zeros((1, 0), dtype=mx.bool_)
+        state, trace = execution.advance(state, events)
+        with mx.stream(mx.gpu):
+&gt;           queue = state.queue.at[slot, 0, 0].set(~state.queue[slot, 0, 0])
+E           AttributeError: 'ArrayAt' object has no attribute 'set'
+
+tests/qualification/test_mlx_ledger.py:141: AttributeError</failure></testcase><testcase classname="tests.qualification.test_mlx_ledger" name="test_ledger_detects_changed_pending_and_consumed_queue_slots[18]" time="0.001"><failure message="AttributeError: 'ArrayAt' object has no attribute 'set'">precision = '0', slot = 18
+
+    @pytest.mark.parametrize('slot', [0, 18])
+    def test_ledger_detects_changed_pending_and_consumed_queue_slots(
+        precision: str, slot: int
+    ) -&gt; None:
+        original = connectome()
+        execution = prepare(original, (), (), precision)
+        state = core.initial_state(execution.network, voltage_mv=-44)
+        with mx.stream(mx.gpu):
+            events = mx.zeros((1, 0), dtype=mx.bool_)
+        state, trace = execution.advance(state, events)
+        with mx.stream(mx.gpu):
+&gt;           queue = state.queue.at[slot, 0, 0].set(~state.queue[slot, 0, 0])
+E           AttributeError: 'ArrayAt' object has no attribute 'set'
+
+tests/qualification/test_mlx_ledger.py:141: AttributeError</failure></testcase><testcase classname="tests.qualification.test_mlx_ledger" name="test_ledger_rejects_nonfinite_state_in_every_observed_phase[pre]" time="0.003" /><testcase classname="tests.qualification.test_mlx_ledger" name="test_ledger_rejects_nonfinite_state_in_every_observed_phase[before]" time="0.003" /><testcase classname="tests.qualification.test_mlx_ledger" name="test_ledger_rejects_nonfinite_state_in_every_observed_phase[end]" time="0.003" /><testcase classname="tests.qualification.test_mlx_ledger" name="test_ledger_rejects_an_omitted_or_reordered_step" time="0.001" /></testsuite></testsuites>
