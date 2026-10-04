@@ -1,0 +1,309 @@
+{
+  "execution": "Uncompiled factored recurrent-input execution",
+  "mlx": "0.32.3",
+  "mlx_metal": "0.32.3",
+  "brian2": "2.8.0",
+  "numpy": "1.26.4",
+  "python": "3.10.14",
+  "platform": "macOS-15.3.1-arm64-arm-64bit",
+  "device": {
+    "device_name": "Apple M1 Max",
+    "max_recommended_working_set_size": 22906503168,
+    "memory_size": 34359738368,
+    "architecture": "applegpu_g13s",
+    "max_buffer_length": 17179869184,
+    "resource_limit": 499000
+  },
+  "MLX_ENABLE_TF32": "0",
+  "coefficients_float32": {
+    "a": 0.9950124621391296,
+    "b": 0.9801986813545227,
+    "c": 0.004937935154885054
+  },
+  "measurements": {
+    "factored-rest-empty": {
+      "steps": 60,
+      "trials": 1,
+      "spikes": 0,
+      "max_abs_error_mv": {
+        "pre_voltage_mv": 0.0,
+        "pre_synaptic_mv": 0.0,
+        "before_reset_voltage_mv": 0.0,
+        "before_reset_synaptic_mv": 0.0,
+        "voltage_mv": 0.0,
+        "synaptic_mv": 0.0
+      },
+      "exact_discrete_parity": true,
+      "repeat_bit_identical": true,
+      "minimum_available_threshold_margin_mv": 7.0
+    },
+    "factored-reset-weights": {
+      "steps": 60,
+      "trials": 1,
+      "spikes": 1,
+      "max_abs_error_mv": {
+        "pre_voltage_mv": 1.5347929682718586e-05,
+        "pre_synaptic_mv": 2.18504501714456e-07,
+        "before_reset_voltage_mv": 1.5347929682718586e-05,
+        "before_reset_synaptic_mv": 2.18504501714456e-07,
+        "voltage_mv": 1.5347929682718586e-05,
+        "synaptic_mv": 2.18504501714456e-07
+      },
+      "exact_discrete_parity": true,
+      "repeat_bit_identical": true,
+      "minimum_available_threshold_margin_mv": 0.9650377688367797
+    },
+    "factored-positive-negative": {
+      "steps": 80,
+      "trials": 1,
+      "spikes": 1,
+      "max_abs_error_mv": {
+        "pre_voltage_mv": 6.281642235705931e-06,
+        "pre_synaptic_mv": 8.058814340294873e-07,
+        "before_reset_voltage_mv": 6.281642235705931e-06,
+        "before_reset_synaptic_mv": 8.058814340294873e-07,
+        "voltage_mv": 6.281642235705931e-06,
+        "synaptic_mv": 8.058814340294873e-07
+      },
+      "exact_discrete_parity": true,
+      "repeat_bit_identical": true,
+      "minimum_available_threshold_margin_mv": 0.9600998335414701
+    },
+    "factored-balanced-duplicates": {
+      "steps": 80,
+      "trials": 1,
+      "spikes": 2,
+      "max_abs_error_mv": {
+        "pre_voltage_mv": 1.0133430926373421e-05,
+        "pre_synaptic_mv": 1.1002361030576502e-07,
+        "before_reset_voltage_mv": 1.0133430926373421e-05,
+        "before_reset_synaptic_mv": 1.1002361030576502e-07,
+        "voltage_mv": 1.0133430926373421e-05,
+        "synaptic_mv": 1.1002361030576502e-07
+      },
+      "exact_discrete_parity": true,
+      "repeat_bit_identical": true,
+      "minimum_available_threshold_margin_mv": 0.9600998335414701
+    },
+    "factored-cast-drift-triplet": {
+      "steps": 60,
+      "trials": 1,
+      "spikes": 1,
+      "max_abs_error_mv": {
+        "pre_voltage_mv": 1.566939907604592e-06,
+        "pre_synaptic_mv": 2.4708554597298294e-14,
+        "before_reset_voltage_mv": 1.566939907604592e-06,
+        "before_reset_synaptic_mv": 2.5207700510287978e-14,
+        "voltage_mv": 0.0,
+        "synaptic_mv": 2.5207700510287978e-14
+      },
+      "exact_discrete_parity": true,
+      "repeat_bit_identical": true,
+      "minimum_available_threshold_margin_mv": 0.9600998335414701
+    },
+    "factored-fanout-self-wrap": {
+      "steps": 160,
+      "trials": 1,
+      "spikes": 5,
+      "max_abs_error_mv": {
+        "pre_voltage_mv": 1.5347929682718586e-05,
+        "pre_synaptic_mv": 1.6740968038497783e-06,
+        "before_reset_voltage_mv": 1.5347929682718586e-05,
+        "before_reset_synaptic_mv": 1.6740968038497783e-06,
+        "voltage_mv": 1.5347929682718586e-05,
+        "synaptic_mv": 1.6740968038497783e-06
+      },
+      "exact_discrete_parity": true,
+      "repeat_bit_identical": true,
+      "minimum_available_threshold_margin_mv": 5.594783444167412
+    },
+    "factored-refractory-held": {
+      "steps": 40,
+      "trials": 1,
+      "spikes": 0,
+      "max_abs_error_mv": {
+        "pre_voltage_mv": 6.832886583651998e-06,
+        "pre_synaptic_mv": 5.947536485528815e-08,
+        "before_reset_voltage_mv": 6.832886583651998e-06,
+        "before_reset_synaptic_mv": 5.947536485528815e-08,
+        "voltage_mv": 6.832886583651998e-06,
+        "synaptic_mv": 5.947536485528815e-08
+      },
+      "exact_discrete_parity": true,
+      "repeat_bit_identical": true,
+      "minimum_available_threshold_margin_mv": 5.005037106319321
+    },
+    "factored-released-at-arrival": {
+      "steps": 50,
+      "trials": 1,
+      "spikes": 1,
+      "max_abs_error_mv": {
+        "pre_voltage_mv": 9.477551465408851e-06,
+        "pre_synaptic_mv": 2.0658860488964592e-07,
+        "before_reset_voltage_mv": 9.477551465408851e-06,
+        "before_reset_synaptic_mv": 2.0658860488964592e-07,
+        "voltage_mv": 9.477551465408851e-06,
+        "synaptic_mv": 2.0658860488964592e-07
+      },
+      "exact_discrete_parity": true,
+      "repeat_bit_identical": true,
+      "minimum_available_threshold_margin_mv": 0.9600998335414701
+    },
+    "factored-outgoing-silencing": {
+      "steps": 80,
+      "trials": 1,
+      "spikes": 2,
+      "max_abs_error_mv": {
+        "pre_voltage_mv": 5.12725057433272e-06,
+        "pre_synaptic_mv": 1.3042537034380075e-05,
+        "before_reset_voltage_mv": 5.12725057433272e-06,
+        "before_reset_synaptic_mv": 1.3042537034380075e-05,
+        "voltage_mv": 5.12725057433272e-06,
+        "synaptic_mv": 1.3042537034380075e-05
+      },
+      "exact_discrete_parity": true,
+      "repeat_bit_identical": true,
+      "minimum_available_threshold_margin_mv": 0.10170987998372993
+    },
+    "factored-overlapping-inputs": {
+      "steps": 80,
+      "trials": 1,
+      "spikes": 4,
+      "max_abs_error_mv": {
+        "pre_voltage_mv": 6.904618814473906e-06,
+        "pre_synaptic_mv": 0.0,
+        "before_reset_voltage_mv": 6.904618814473906e-06,
+        "before_reset_synaptic_mv": 0.0,
+        "voltage_mv": 0.0,
+        "synaptic_mv": 0.0
+      },
+      "exact_discrete_parity": true,
+      "repeat_bit_identical": true,
+      "minimum_available_threshold_margin_mv": 7.0
+    },
+    "factored-zero-refractory-loss": {
+      "steps": 12,
+      "trials": 1,
+      "spikes": 6,
+      "max_abs_error_mv": {
+        "pre_voltage_mv": 3.452309410789667e-06,
+        "pre_synaptic_mv": 0.0,
+        "before_reset_voltage_mv": 3.452309410789667e-06,
+        "before_reset_synaptic_mv": 0.0,
+        "voltage_mv": 0.0,
+        "synaptic_mv": 0.0
+      },
+      "exact_discrete_parity": true,
+      "repeat_bit_identical": true,
+      "minimum_available_threshold_margin_mv": 7.0
+    },
+    "factored-32-edge-fanin": {
+      "steps": 80,
+      "trials": 1,
+      "spikes": 1,
+      "max_abs_error_mv": {
+        "pre_voltage_mv": 1.2449419251936433e-05,
+        "pre_synaptic_mv": 1.7606841884454383e-07,
+        "before_reset_voltage_mv": 1.2449419251936433e-05,
+        "before_reset_synaptic_mv": 1.7606841884454383e-07,
+        "voltage_mv": 1.2449419251936433e-05,
+        "synaptic_mv": 1.7606841884454383e-07
+      },
+      "exact_discrete_parity": true,
+      "repeat_bit_identical": true,
+      "minimum_available_threshold_margin_mv": 0.9600998335414701
+    },
+    "factored-boundary": {
+      "steps": 50,
+      "trials": 1,
+      "spikes": 2,
+      "max_abs_error_mv": {
+        "pre_voltage_mv": 1.0829672042689253e-05,
+        "pre_synaptic_mv": 6.777382230982454e-07,
+        "before_reset_voltage_mv": 1.0829672042689253e-05,
+        "before_reset_synaptic_mv": 6.777382230982454e-07,
+        "voltage_mv": 1.0829672042689253e-05,
+        "synaptic_mv": 6.777382230982454e-07
+      },
+      "exact_discrete_parity": true,
+      "repeat_bit_identical": true,
+      "minimum_available_threshold_margin_mv": 4.967320087991418
+    },
+    "factored-same-step-loss": {
+      "steps": 50,
+      "trials": 1,
+      "spikes": 3,
+      "max_abs_error_mv": {
+        "pre_voltage_mv": 3.452309410789667e-06,
+        "pre_synaptic_mv": 8.047767452445953e-09,
+        "before_reset_voltage_mv": 3.452309410789667e-06,
+        "before_reset_synaptic_mv": 8.047767452445953e-09,
+        "voltage_mv": 0.0,
+        "synaptic_mv": 0.0
+      },
+      "exact_discrete_parity": true,
+      "repeat_bit_identical": true,
+      "minimum_available_threshold_margin_mv": 0.9650377688367797
+    },
+    "factored-replay-1000": {
+      "steps": 1000,
+      "trials": 1,
+      "spikes": 43,
+      "max_abs_error_mv": {
+        "pre_voltage_mv": 2.552409682010648e-05,
+        "pre_synaptic_mv": 2.5746218966560264e-05,
+        "before_reset_voltage_mv": 2.552409682010648e-05,
+        "before_reset_synaptic_mv": 2.5746218966560264e-05,
+        "voltage_mv": 2.552409682010648e-05,
+        "synaptic_mv": 2.151518128812313e-05
+      },
+      "exact_discrete_parity": true,
+      "repeat_bit_identical": true,
+      "minimum_available_threshold_margin_mv": 0.06642987713574655
+    },
+    "factored-batch-chunks": {
+      "steps": 180,
+      "trials": 3,
+      "spikes": 21,
+      "max_abs_error_mv": {
+        "pre_voltage_mv": 2.673265657904267e-05,
+        "pre_synaptic_mv": 2.3792297952240915e-05,
+        "before_reset_voltage_mv": 2.673265657904267e-05,
+        "before_reset_synaptic_mv": 2.3792297952240915e-05,
+        "voltage_mv": 2.673265657904267e-05,
+        "synaptic_mv": 2.3792297952240915e-05
+      },
+      "exact_discrete_parity": true,
+      "repeat_bit_identical": true,
+      "minimum_available_threshold_margin_mv": 0.06642987713574655
+    },
+    "factored-retained-large": {
+      "steps": 40,
+      "edges": 4097,
+      "max_abs_error_mv": {
+        "pre_voltage_mv": 1.3050772750489159e-05,
+        "pre_synaptic_mv": 3.790845548579114e-08,
+        "before_reset_voltage_mv": 1.3050772750489159e-05,
+        "before_reset_synaptic_mv": 3.790845548579114e-08,
+        "voltage_mv": 1.3050772750489159e-05,
+        "synaptic_mv": 3.790845548579114e-08
+      },
+      "exact_discrete_parity": true,
+      "repeat_bit_identical": true
+    },
+    "factored-cast-drift-large": {
+      "steps": 40,
+      "edges": 384,
+      "max_abs_error_mv": {
+        "pre_voltage_mv": 1.566939907604592e-06,
+        "pre_synaptic_mv": 2.4708554597298294e-14,
+        "before_reset_voltage_mv": 1.566939907604592e-06,
+        "before_reset_synaptic_mv": 2.5207700510287978e-14,
+        "voltage_mv": 0.0,
+        "synaptic_mv": 2.5207700510287978e-14
+      },
+      "exact_discrete_parity": true,
+      "repeat_bit_identical": true
+    }
+  }
+}
