@@ -340,7 +340,7 @@ Present all prices or costs in USD($) unless I explicitly ask otherwise. if you 
 
 Read `milestone.md` before project work. It is the authoritative source for the project plan, work breakdown, acceptance criteria, progress, unresolved issues, and completion evidence. Determine the next work from that document and keep it updated. It consolidates the supplied plans and latest user amendments.
 
-The user's 2026-10-04 architecture-compliance hold in `milestone.md` supersedes earlier milestone, manual-review, and subagent continuation instructions. Halt feature and numerical development until the application meets the recorded architecture acceptance checks. The current assignment is investigation and a remediation proposal; preserve all existing code, evidence, data, and work in progress.
+The user's 2026-10-04 architecture-compliance hold in `milestone.md` supersedes earlier milestone, manual-review, and subagent continuation instructions. The user has now authorized architecture remediation. Make the application MLX-only; eliminate Conda, NVIDIA backend support, and non-essential dependencies. Brian2 and PyTorch are qualification-only dependencies required by the numerical contract. Preserve data, scientific evidence, and incoming work. Halt further feature and numerical development until the application meets the recorded architecture acceptance checks.
 
 Use GPT-6.1 Sol for implementation at the reasoning effort selected by the user (currently `max`). The user controls parent-model changes; do not switch or substitute the parent model yourself.
 
