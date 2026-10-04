@@ -331,11 +331,13 @@ Silent-control and integration completion checkpoint (2026-10-04):
 
 ## Milestone 4 — Full-network parity
 
-Status: not started.
+Status: in progress. Integration is complete. A bounded Astra review selects adequate complete-state/first-divergence evidence capture before dependent qualification instrumentation. The frozen comparison metrics and matrix remain unchanged; no full-network parity result is claimed.
 
 Acceptance: execute the [frozen 52-case matrix and protocol](docs/mlx-port-baseline.md#full-network-acceptance-fixed-before-validation) through Brian2, the pinned PyTorch numerical core with common experiment setup/replay, and MLX. Sugar and p9 cover 0.1/1/10 seconds with five paired trials; silenced sugar and two-class stimulation cover 0.1/1 seconds with five trials; silent controls cover both shorter durations. Repeat each case and execute the specified batch checks.
 
 Every case must satisfy active Jaccard ≥0.95, relative total count error ≤0.02, normalized neuronwise count error ≤0.05, common-support rate correlation ≥0.99 when defined, and one-to-one timing F1 ≥0.95 within 1 ms. MLX must also be no worse than PyTorch on **every** primary metric for that case, with the documented empty/undefined rules. Require deterministic replay and an explained first divergence; aggregate averages cannot rescue failures. These thresholds precede all full-network MLX results. Obtain a bounded Astra parity adjudication if interpretation is required; do not relax the frozen criteria retrospectively.
+
+Evidence-design assignment (2026-10-04): [bounded handoff](docs/handoffs/astra-full-network-evidence.md). Fresh-context Astra at explicit `xhigh` reviews a complete-reference observer/chunk method, actual state/queue replay evidence, and first-cause coverage within local memory. Sol awaits and independently verifies the decision before dependent instrumentation. Pure frozen acceptance-metric implementation is independent. The review has no authority to change the model, references, tolerances, schema, or project scope.
 
 ## Milestone 5 — Complete-brain benchmark and profiling
 
