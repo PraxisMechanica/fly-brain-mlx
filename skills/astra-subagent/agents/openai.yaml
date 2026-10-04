@@ -1,0 +1,4 @@
+interface:
+  display_name: "Astra Subagent"
+  short_description: "Bounded Astra reviews at xhigh, with verified results"
+  default_prompt: "Use $astra-subagent to obtain a bounded Astra review, await its evidence, and integrate the verified result."

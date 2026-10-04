@@ -340,4 +340,8 @@ Present all prices or costs in USD($) unless I explicitly ask otherwise. if you 
 
 Read `milestone.md` before project work. It is the authoritative source for the project plan, work breakdown, acceptance criteria, progress, unresolved issues, and completion evidence. Determine the next work from that document and keep it updated. It consolidates the supplied plans and latest user amendments.
 
-Use GPT-6.1 Sol at `xhigh` for implementation. The user controls all model changes; do not switch or substitute models yourself. Request bounded handoffs to GPT-6 Astra at `xhigh` when scientific interpretation, numerical correctness, or difficult kernel design needs deeper judgment. Include the checkpoint, relevant evidence, and requested outcome. Stop for every requested model switch. Astra must request return to Sol when its assigned component is resolved. Ignore the original GPT-5.6 requirement.
+Use GPT-6.1 Sol for implementation at the reasoning effort selected by the user (currently `max`). The user controls parent-model changes; do not switch or substitute the parent model yourself.
+
+The user has authorized future bounded reviews by GPT-6 Astra subagents when scientific interpretation, numerical correctness, or difficult kernel design needs deeper judgment. Use [the Astra subagent skill](skills/astra-subagent/SKILL.md): explicitly spawn `gpt-6-astra` at `xhigh` with fresh context, await its result, verify its evidence, and record the decision before dependent implementation. Astra must not inherit the parent's `max` setting. The parent remains Sol and resumes its own work after the review.
+
+This user amendment supersedes the older manual-switch procedure for future Astra reviews in `milestone.md` and handoffs. The already assigned manual accumulation-design review remains with its current owner and keeps its recorded completion/return procedure; do not duplicate or alter that assignment.

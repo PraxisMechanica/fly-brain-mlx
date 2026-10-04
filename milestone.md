@@ -6,7 +6,7 @@ This is the authoritative project plan, acceptance criteria, and progress record
 
 Develop a scientifically validated Apple MLX backend for the [Eon Systems fly-brain simulation](https://github.com/eonsystemspbc/fly-brain), preserving the existing FlyWire v783 leaky integrate-and-fire model's numerical behavior, activation and silencing experiments, and output contracts. Run the complete connectome locally on Apple silicon and provide reproducible correctness evidence, measured performance, and verified installation instructions. This is an MLX array-compute project, not an MLX-LM language-model project.
 
-Implementation owner: GPT-6.1 Sol at `xhigh`. The user controls all model switches. Request a bounded handoff to GPT-6 Astra at `xhigh` for scientific interpretation, numerical correctness, or difficult kernel design requiring deeper judgment. Stop for each requested switch and resume from the recorded checkpoint. Astra must request return to Sol when its assigned component is resolved.
+Implementation owner: GPT-6.1 Sol at the reasoning effort selected by the user (currently `max`). The user controls parent-model changes. Future bounded scientific, numerical, and difficult kernel-design reviews use GPT-6 Astra subagents at `xhigh`, following [the current delegation rule](AGENTS.md#active-project-specification). Keep the already assigned manual accumulation-design review with its current owner and recorded return procedure.
 
 Do not implement MaleCNS, new neuron models, plasticity, reinforcement learning, a user interface, or a generalized simulation framework. Do not rewrite upstream architecture or port every existing backend. Optimize only after correctness is established. No custom Metal kernel without profiling evidence. Honor [AGENTS.md](AGENTS.md), including schema approval and database preservation requirements.
 
@@ -21,7 +21,7 @@ The numerical backend varies; the model, experiment definitions, neuron ordering
 - Verify one milestone before proceeding to the next. Update this file after significant steps with exact commands, test results, measured outcomes, unresolved issues, and supporting artifact links. Commit verified work incrementally on `main`.
 - Distinguish tolerance-bounded small-network continuous state with exact ordinary-fixture discrete parity from full-network event/statistical parity. Keep the separately asserted threshold-rounding limitation explicit. Do not declare acceptance thresholds after seeing results, explain away discrepancies, or infer scientific validity from a successful run alone.
 
-Each handoff must contain the reason for deeper review, current checkpoint and commits, exact evidence and files to inspect, one bounded requested outcome, and a return condition. The user performs the requested model switch. Astra records decisions and relevant verification, commits any assigned changes, and requests return to GPT-6.1 Sol at `xhigh` before subsequent routine work.
+Each review assignment must contain the reason for deeper review, current checkpoint and commits, exact evidence and files to inspect, one bounded requested outcome, and a completion condition. Use [the Astra subagent skill](skills/astra-subagent/SKILL.md) for future reviews. Sol awaits the result, verifies the evidence, records the decision, and commits integrated work before continuing dependent implementation. The earlier manual handoffs retain their historical completion records.
 
 ## Completion requirements
 
@@ -189,7 +189,7 @@ Status: not started.
 
 Acceptance: pinned dependencies, Apple-silicon installation instructions, example commands, benchmark methodology, numerical tolerances, known limitations, licence notices, and focused tests are complete. Execute the documented clean-install/test workflow and prepare a focused upstream-reviewable patch.
 
-Obtain a bounded final Astra scientific review covering contract compliance, test adequacy, claims, benchmark validity, CPU fallback, hidden semantic changes, and the distinction between exact and statistical parity. Astra requests return to Sol after approval or precise requested corrections.
+Obtain a bounded final Astra scientific review covering contract compliance, test adequacy, claims, benchmark validity, CPU fallback, hidden semantic changes, and the distinction between exact and statistical parity. Sol verifies the returned evidence and applies any precise requested corrections before finalization.
 
 ## Milestone 7 — Finalization
 
@@ -202,5 +202,7 @@ Acceptance: final corrections are applied; the complete approved verification su
 Next work: the user switches back to GPT-6.1 Sol at `xhigh` for the [Milestone 2 host-side mapping and cast-error audit](docs/handoffs/astra-accumulation-design.md#exact-next-work-for-sol-milestone-2-input-audit). The bounded review is concluded with a precise unresolved blocker, not an approved accumulation strategy. Milestone 1 is complete for its tested envelope; Milestone 2 has not started. Stop for the requested model switch. Preserve the qualified core until a subsequent numerical decision resolves input casting; the current private core and probe do not change an existing public interface or persisted production schema.
 
 A private small-network MLX core is qualified within the reviewed envelope. The integrated MLX backend, full-network parity, speed, peak memory, and clean installation remain unverified. Existing simulation results and generated standalone artifacts are preserved. Reruns require a fresh output directory; both harnesses refuse an existing destination.
+
+Delegation setup (2026-10-04): [the versioned Astra subagent skill](skills/astra-subagent/SKILL.md) is installed through a symlink at `~/.codex/skills/astra-subagent`, with automatic discovery enabled. The bundled `quick_validate.py` passed for the installed skill; the link and parsed interface metadata were verified. A read-only `gpt-6-astra` subagent at explicit `xhigh` with `fork_turns: "none"` completed its workflow review, found no blocking defects, and suggested the incorporated clarification about completion messages. Sol retains the user's selected `max`; the already assigned manual review and its scientific evidence remain with their owner. This setup did not start Milestone 2 or run additional numerical checks.
 
 Git remote `upstream` is the public reference repository. No user-owned push destination has been supplied; local commits have not been pushed. Do not assume permission or write access to the upstream repository.
