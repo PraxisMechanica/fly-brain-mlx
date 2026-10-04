@@ -1,0 +1,294 @@
+{
+  "tests": 80,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "artifacts": [
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/accumulation-limit.npz",
+      "bytes": 664,
+      "sha256": "c9cf51e4cc91f9a8c515dcf8dcbdfaeff26ee23b17f5c447cc0282f372b417d3"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/balanced-duplicates.npz",
+      "bytes": 11633,
+      "sha256": "1759fa4b2122dd319e994a89cf2d58ea2d29f9034948e4b264a2acf488effbe4"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/batched-trials.npz",
+      "bytes": 63594,
+      "sha256": "ad7dc7df10f481c8d4bb14ce5897dc63b5d2ac5c9b122398e1a1133088b73857"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/bucketed_case-32-edge-fanin.npz",
+      "bytes": 11692,
+      "sha256": "5789c21a5762defce8b5d9ddfdc0e0a5a47af4ffd4844d5ed6f71f01e47fb08a"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/bucketed_case-balanced-duplicates.npz",
+      "bytes": 11633,
+      "sha256": "1759fa4b2122dd319e994a89cf2d58ea2d29f9034948e4b264a2acf488effbe4"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/bucketed_case-batch-chunks.npz",
+      "bytes": 36480,
+      "sha256": "7be4dc39012116dd8caf888feb74ad38ec47c845efdc9e79cd91205f160c2bbb"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/bucketed_case-boundary.npz",
+      "bytes": 9231,
+      "sha256": "b173eae5d032edb4e3065c6a61fe83c2ecc0c308d8aa7891f3cdc81150469bdf"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/bucketed_case-cast-drift-large.npz",
+      "bytes": 8577,
+      "sha256": "4e2aecb63270008cef2887c6eb0717080a2dfb866326765c5af9fa349f0e104a"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/bucketed_case-cast-drift-triplet.npz",
+      "bytes": 8019,
+      "sha256": "eeeda9fbfa6c0e2c3730417d60bd1c3e6f0fded686351ed154ac3d174497d90a"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/bucketed_case-fanout-self-wrap.npz",
+      "bytes": 26167,
+      "sha256": "b033d8f780d4108393a9a55369d90b4e1f7b16df3448ab9fe27164a62565bb8a"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/bucketed_case-outgoing-silencing.npz",
+      "bytes": 8545,
+      "sha256": "dafef04a1f85d62611266d42ed8f0be14c8c74b64e482e72d08dda6a692be28e"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/bucketed_case-overlapping-inputs.npz",
+      "bytes": 7101,
+      "sha256": "3b609d8617c23839d4827adc22eca13c3380695e5450964da5e4dc88875a1f2e"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/bucketed_case-positive-negative.npz",
+      "bytes": 14240,
+      "sha256": "45138c45ec9c2dc0dfb52aa08fcda891f2cef2f15081142bc6c8db88266b3852"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/bucketed_case-refractory-held.npz",
+      "bytes": 8089,
+      "sha256": "cb6b914fce291f02a46d5863252716328f8232e7664fa16e10082b47f093a819"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/bucketed_case-released-at-arrival.npz",
+      "bytes": 9694,
+      "sha256": "d5fbcffc93203280dd3a4d08148011d83c254f7de2674225cdc8449b8f330cc6"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/bucketed_case-replay-1000.npz",
+      "bytes": 78193,
+      "sha256": "704946289893fd272848b2cf30695636672cc37b4ca58c21e1c63700d460ce9e"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/bucketed_case-reset-weights.npz",
+      "bytes": 9965,
+      "sha256": "5271097c208f902710f466bc6dfb5cccfdcecbb87fbbc6a3e76972addd19b3ba"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/bucketed_case-rest-empty.npz",
+      "bytes": 6815,
+      "sha256": "39b064a96dd35f88591c58c4dc6cf4f5a43a2ddf5057824da75fff6e6948e9df"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/bucketed_case-retained-large.npz",
+      "bytes": 15873,
+      "sha256": "1ae52be5eff62c0bbe557d83e9fca46cf4257ccc647213d396f252bca8632cbd"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/bucketed_case-same-step-loss.npz",
+      "bytes": 7244,
+      "sha256": "f8a01442c6dc39e1ff356fa26e3efdf70aac9c6f5e77fb2e0dada52f21bcf50b"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/bucketed_case-zero-refractory-loss.npz",
+      "bytes": 6818,
+      "sha256": "e76e3cf9776f0f5be0cbbadb16c2ab50cb606789ad52b4613802dccc792c948e"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/chunked-continuation.npz",
+      "bytes": 7236,
+      "sha256": "d960898d2a8cb2f04195b3299207f2cea7de350c71f658598fed94fa07f1c106"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/classes-overlap-zero-rate.npz",
+      "bytes": 7101,
+      "sha256": "3b609d8617c23839d4827adc22eca13c3380695e5450964da5e4dc88875a1f2e"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/factored-32-edge-fanin.npz",
+      "bytes": 11692,
+      "sha256": "5789c21a5762defce8b5d9ddfdc0e0a5a47af4ffd4844d5ed6f71f01e47fb08a"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/factored-balanced-duplicates.npz",
+      "bytes": 11633,
+      "sha256": "1759fa4b2122dd319e994a89cf2d58ea2d29f9034948e4b264a2acf488effbe4"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/factored-batch-chunks.npz",
+      "bytes": 36480,
+      "sha256": "7be4dc39012116dd8caf888feb74ad38ec47c845efdc9e79cd91205f160c2bbb"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/factored-boundary.npz",
+      "bytes": 9231,
+      "sha256": "b173eae5d032edb4e3065c6a61fe83c2ecc0c308d8aa7891f3cdc81150469bdf"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/factored-cast-drift-large.npz",
+      "bytes": 8577,
+      "sha256": "4e2aecb63270008cef2887c6eb0717080a2dfb866326765c5af9fa349f0e104a"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/factored-cast-drift-triplet.npz",
+      "bytes": 8019,
+      "sha256": "eeeda9fbfa6c0e2c3730417d60bd1c3e6f0fded686351ed154ac3d174497d90a"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/factored-fanout-self-wrap.npz",
+      "bytes": 26167,
+      "sha256": "b033d8f780d4108393a9a55369d90b4e1f7b16df3448ab9fe27164a62565bb8a"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/factored-outgoing-silencing.npz",
+      "bytes": 8545,
+      "sha256": "dafef04a1f85d62611266d42ed8f0be14c8c74b64e482e72d08dda6a692be28e"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/factored-overlapping-inputs.npz",
+      "bytes": 7101,
+      "sha256": "3b609d8617c23839d4827adc22eca13c3380695e5450964da5e4dc88875a1f2e"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/factored-positive-negative.npz",
+      "bytes": 14240,
+      "sha256": "45138c45ec9c2dc0dfb52aa08fcda891f2cef2f15081142bc6c8db88266b3852"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/factored-refractory-held.npz",
+      "bytes": 8089,
+      "sha256": "cb6b914fce291f02a46d5863252716328f8232e7664fa16e10082b47f093a819"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/factored-released-at-arrival.npz",
+      "bytes": 9694,
+      "sha256": "d5fbcffc93203280dd3a4d08148011d83c254f7de2674225cdc8449b8f330cc6"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/factored-replay-1000.npz",
+      "bytes": 78193,
+      "sha256": "704946289893fd272848b2cf30695636672cc37b4ca58c21e1c63700d460ce9e"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/factored-reset-weights.npz",
+      "bytes": 9965,
+      "sha256": "5271097c208f902710f466bc6dfb5cccfdcecbb87fbbc6a3e76972addd19b3ba"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/factored-rest-empty.npz",
+      "bytes": 6815,
+      "sha256": "39b064a96dd35f88591c58c4dc6cf4f5a43a2ddf5057824da75fff6e6948e9df"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/factored-retained-large.npz",
+      "bytes": 15873,
+      "sha256": "1ae52be5eff62c0bbe557d83e9fca46cf4257ccc647213d396f252bca8632cbd"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/factored-same-step-loss.npz",
+      "bytes": 7244,
+      "sha256": "f8a01442c6dc39e1ff356fa26e3efdf70aac9c6f5e77fb2e0dada52f21bcf50b"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/factored-zero-refractory-loss.npz",
+      "bytes": 6818,
+      "sha256": "e76e3cf9776f0f5be0cbbadb16c2ab50cb606789ad52b4613802dccc792c948e"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/fanout-self-wrap.npz",
+      "bytes": 25918,
+      "sha256": "29ee060dd250eb2a4afb21e3e77a128ad3aa66f9c3400dbd4c04a876e4d4fd23"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/linear-10000.npz",
+      "bytes": 465344,
+      "sha256": "fbae022a582cb4da12dcabeb03b9c5adf0d09b9d54d1d76ea25fc2955a8fe266"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/outgoing-silencing.npz",
+      "bytes": 8535,
+      "sha256": "38df1df6217e81273abf8d52d5bcdbe21e166e23739e7ae7c6f6e6e294873fe1"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/positive-negative.npz",
+      "bytes": 14250,
+      "sha256": "8d918fb2fab7eb6ebf592fcb5cb7c36322c8653a84e5df513cf2a836d0ac4bba"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/production-collection.npz",
+      "bytes": 3967,
+      "sha256": "5b60039d1b1e04d5e1f53bef5e4d2e2c46e2f2227e38924f9103335f34c74f43"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/refractory-boundary.npz",
+      "bytes": 9219,
+      "sha256": "d4966bb89cc372f38c2163d5eb13c8141fcaf8eeabe6aa1166dec889310cd1b4"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/refractory-held.npz",
+      "bytes": 8089,
+      "sha256": "cb6b914fce291f02a46d5863252716328f8232e7664fa16e10082b47f093a819"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/reset-weights.npz",
+      "bytes": 9935,
+      "sha256": "3c1c9f8a46fa47aff03d0f4815c473219213f59b9991f109e83c4114e5b143b4"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/rest-empty.npz",
+      "bytes": 6815,
+      "sha256": "39b064a96dd35f88591c58c4dc6cf4f5a43a2ddf5057824da75fff6e6948e9df"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/retained-replay.npz",
+      "bytes": 78253,
+      "sha256": "daad9992ba9ba6a6b0ea8be29ca9c46b2d9a68a4a44dc673d675c04152c02d8d"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/same-step-recurrent-loss.npz",
+      "bytes": 7244,
+      "sha256": "f8a01442c6dc39e1ff356fa26e3efdf70aac9c6f5e77fb2e0dada52f21bcf50b"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/target-released-at-arrival.npz",
+      "bytes": 9701,
+      "sha256": "60c891bd0b8c0e9fb7822d23040b6e6cc542f19de5e5b5f579d993aa0f4bf49b"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/thirty-two-event-fanin.npz",
+      "bytes": 11686,
+      "sha256": "889351c7b29a6a4e385d00e2a71b1e117450f75e6fefc41094ad730c32e6fb07"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/threshold-rounding-limitation.npz",
+      "bytes": 420,
+      "sha256": "e905b7fd65be5d557cf858962b7692016bb502065a770a9dd73f21ce606c92eb"
+    },
+    {
+      "path": "data/results/milestone-3-qualification-20261004-01/zero-refractory-loss.npz",
+      "bytes": 6818,
+      "sha256": "e76e3cf9776f0f5be0cbbadb16c2ab50cb606789ad52b4613802dccc792c948e"
+    }
+  ],
+  "source_sha256": {
+    "src/fly_brain/simulation/backend/core.py": "c4079b5d32cb05e701fcb89856a8b48066185bb5c470203e56f4785316461132",
+    "src/fly_brain/simulation/backend/accumulation.py": "2ea94edfbae1852cdf269fe7169fa97a00c57bf8cb597879fd076abe0c17a894",
+    "src/fly_brain/simulation/backend/bucketed.py": "0829f0cb3c67f08bb4dc861c1397548f8e66e4ce2262ef3471368ce772552747",
+    "src/fly_brain/simulation/backend/runner.py": "67a1f51bb03e2a82df0f9076b899ec277608911666b9be92c5eb135382009216"
+  }
+}

@@ -2,7 +2,7 @@
 
 This application targets Apple silicon and uses MLX for simulation. It is based on the FlyWire v783 leaky integrate-and-fire model from [Eon Systems](https://github.com/eonsystemspbc/fly-brain), pinned at `a3db62f9436074e485c0278290c2164ed6150808`.
 
-The small numerical core and complete host input mapping are qualified. Device fan-in qualification, a complete simulation command, production spike export, and performance qualification remain open. See [the authoritative plan](milestone.md), [the numerical contract](docs/mlx-port-baseline.md), and [project rules](AGENTS.md).
+The numerical core, complete connectome mapping, device propagation, and controlled delivery are qualified. The normal experiment command and spike export pass their implementation tests; complete production-run verification is in progress. Full-network scientific parity and performance remain open. See [the authoritative plan](milestone.md), [the numerical contract](docs/mlx-port-baseline.md), and [project rules](AGENTS.md).
 
 ## Install
 
@@ -26,6 +26,18 @@ Brian2 2.8.0 and PyTorch 2.11.0 are independent CPU references required by the f
 
 The C++ reference replay also requires Apple's command line compiler tools.
 
+## Run
+
+Run a complete sugar experiment from this checkout:
+
+```sh
+uv run --locked --no-dev fly-brain simulate --duration-s 0.1 --trials 1
+```
+
+The default creates a new directory under `data/results`. Use `--output` for a specific new directory and `--project` when running outside the checkout. `--experiment` selects `sugar`, `p9`, `sugar-silenced`, `two-class`, or `silent`. The original neuron identifiers, channel rates, and outgoing silencing are preserved.
+
+Each run writes the canonical stimulus before execution and reloads its exact event bytes. It records schedule/data hashes, per-trial seed provenance, source/dependency versions, timing stages, and MLX allocator peak. Spike files use the existing six-column Brotli Parquet contract, including typed empty outputs. Neural state remains on Metal; collection transfers bounded blocks of spike events.
+
 ## Verify
 
 Run from this checkout. Use a new output directory each time; commands reject existing output directories.
@@ -41,7 +53,7 @@ uv run --locked --group qualification fly-brain qualify --output data/results/qu
 
 The default pytest selection covers unit tests and file/process integration tests. The `qualify` command runs the independent reference, serial MLX core, and factored qualification cases on a real Metal device. It records logs, the test report, measurements, and complete state/event arrays. A skipped test, missing report, empty suite, or failed test prevents acceptance.
 
-Bootstrap sets `MLX_ENABLE_TF32=0` before loading MLX. An explicit unsafe setting is rejected. The core uses float32 arrays and explicit Metal streams; CPU fallback is unsupported. The factored adapter remains a small-network qualification candidate, with no full-connectome or performance approval.
+Bootstrap sets `MLX_ENABLE_TF32=0` before loading MLX. An explicit unsafe setting is rejected. The core uses float32 arrays and explicit Metal streams; CPU fallback is unsupported. Complete destination layout and controlled full-connectome delivery are qualified; full experiment parity and performance acceptance remain separate gates.
 
 Existing scientific diagnostics are available through the installed command:
 

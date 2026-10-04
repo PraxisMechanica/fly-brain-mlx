@@ -11,6 +11,9 @@ def test_installed_imports_have_no_engine_or_file_side_effects(tmp_path: Path) -
     source = """
 import sys
 import fly_brain.simulation.models
+import fly_brain.simulation.experiments
+import fly_brain.simulation.stimuli
+import fly_brain.simulation.service
 import fly_brain.qualification.models
 import fly_brain.qualification.service
 import fly_brain.comparison.models
@@ -39,4 +42,5 @@ def test_installed_help_exposes_only_supported_commands(tmp_path: Path) -> None:
     )
     assert result.returncode == 0, result.stderr
     assert 'qualify' in result.stdout and 'compare' in result.stdout
+    assert 'simulate' in result.stdout
     assert 'cuda' not in result.stdout.lower()

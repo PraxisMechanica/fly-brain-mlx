@@ -1,12 +1,18 @@
 import os
 import platform
+from functools import partial
 from pathlib import Path
 
 from fly_brain.comparison.models import ComparisonRequest, ComparisonResult
 from fly_brain.comparison.service import compare
 from fly_brain.qualification.models import QualificationRequest, QualificationResult
 from fly_brain.qualification.service import qualify
-from fly_brain.simulation.models import Connectome, InputPin
+from fly_brain.simulation.models import (
+    Connectome,
+    InputPin,
+    SimulationRequest,
+    SimulationResult,
+)
 
 
 def configure_mlx() -> str:
@@ -129,3 +135,18 @@ def connectome_pulse(project: Path, output: Path) -> dict[str, object]:
 
     connectome, pin = pinned_inputs(project)
     return run(connectome, pin, output, precision)
+
+
+def simulation(request: SimulationRequest) -> SimulationResult:
+    precision = configure_mlx()
+    from fly_brain.simulation.backend.runner import run
+    from fly_brain.simulation.service import simulate
+    from fly_brain.simulation.storage import persist_stimulus, write_run
+
+    return simulate(
+        request,
+        pinned_inputs,
+        persist_stimulus,
+        partial(run, precision=precision),
+        write_run,
+    )

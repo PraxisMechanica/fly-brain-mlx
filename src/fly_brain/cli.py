@@ -1,15 +1,19 @@
 import argparse
 import json
+import time
 from collections.abc import Sequence
 from pathlib import Path
 
 from . import bootstrap
 from .comparison.schemas import ComparisonOptions
 from .qualification.schemas import QualificationOptions
+from .simulation.schemas import SimulationOptions
 
 
 def parser() -> argparse.ArgumentParser:
-    result = argparse.ArgumentParser(description='MLX numerical-core qualification')
+    result = argparse.ArgumentParser(
+        description='MLX fly-brain simulation and qualification'
+    )
     commands = result.add_subparsers(dest='command', required=True)
     for name in (
         'qualify',
@@ -36,11 +40,48 @@ def parser() -> argparse.ArgumentParser:
     command.add_argument('--first-label', default='mlx')
     command.add_argument('--second-label', default='brian2cpp')
     command.add_argument('--output', type=Path, required=True)
+    command = commands.add_parser('simulate')
+    command.add_argument('--project', type=Path, default=Path.cwd())
+    command.add_argument('--output', type=Path)
+    command.add_argument(
+        '--experiment',
+        choices=('sugar', 'p9', 'sugar-silenced', 'two-class', 'silent'),
+        default='sugar',
+    )
+    command.add_argument('--duration-s', type=float, default=0.1)
+    command.add_argument('--trials', type=int, default=1)
+    command.add_argument('--seed', type=int, default=20261004)
     return result
 
 
 def main(argv: Sequence[str] | None = None) -> int:
     arguments = parser().parse_args(argv)
+    if arguments.command == 'simulate':
+        output = (
+            arguments.output
+            or arguments.project / 'data/results' / f'mlx-{time.time_ns()}'
+        )
+        request = SimulationOptions(
+            project=arguments.project,
+            output=output,
+            experiment=arguments.experiment,
+            duration_s=arguments.duration_s,
+            trials=arguments.trials,
+            seed=arguments.seed,
+        ).to_request()
+        result = bootstrap.simulation(request)
+        print(
+            json.dumps(
+                {
+                    'spike_file': str(result.spike_file),
+                    'spikes': result.spikes,
+                    'active_neurons': result.active_neurons,
+                    'elapsed_s': result.elapsed_s,
+                },
+                indent=2,
+            )
+        )
+        return 0
     if arguments.command == 'compare':
         options = ComparisonOptions(
             first=arguments.first,

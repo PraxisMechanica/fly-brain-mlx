@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Literal
 
 import numpy as np
@@ -73,3 +74,36 @@ class Stimulus:
     seed: int
     generator_code: int
     sha256: str
+
+
+@dataclass(frozen=True)
+class SimulationRequest:
+    project: Path
+    output: Path
+    experiment: ExperimentName
+    duration_s: float
+    trials: int
+    seed: int
+
+
+@dataclass(frozen=True)
+class SpikeEvents:
+    trials: NDArray[np.int64]
+    neurons: NDArray[np.int64]
+    steps: NDArray[np.int64]
+
+
+@dataclass(frozen=True)
+class SimulationRun:
+    spikes: SpikeEvents
+    timings: dict[str, float]
+    peak_device_bytes: int
+    device_name: str
+
+
+@dataclass(frozen=True)
+class SimulationResult:
+    spike_file: Path
+    spikes: int
+    active_neurons: int
+    elapsed_s: float
