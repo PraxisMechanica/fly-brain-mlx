@@ -1,0 +1,29 @@
+{
+  "neurons": 138639,
+  "connection_rows": 15091983,
+  "completeness_index_unique": true,
+  "completeness_columns": [
+    "Completed"
+  ],
+  "connectivity_schema": "Presynaptic_ID: int64\nPostsynaptic_ID: int64\nPresynaptic_Index: int64\nPostsynaptic_Index: int64\nConnectivity: int64\nExcitatory: int64\nExcitatory x Connectivity: int64\n__index_level_0__: int64\n-- schema metadata --\npandas: '{\"index_columns\": [\"__index_level_0__\"], \"column_indexes\": [{\"na' + 1237",
+  "presynaptic_index_range": [
+    0,
+    138638
+  ],
+  "postsynaptic_index_range": [
+    0,
+    138638
+  ],
+  "signed_connectivity_sum": 10496512.0,
+  "first_flywire_ids": [
+    720575940596125868,
+    720575940597856265,
+    720575940597944841,
+    720575940598267657,
+    720575940599333574
+  ],
+  "input_sha256": {
+    "data/2025_Completeness_783.csv": "52b0ac6094cd32c546f8d4c341e094376f48f4e791f8db9b166de5dff8199ea4",
+    "data/2025_Connectivity_783.parquet": "efeb23fb99098e9c390f6869969b2a121a2ee92c833cfc45ecb2c1d8e1af0347"
+  }
+}

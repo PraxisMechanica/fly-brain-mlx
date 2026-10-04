@@ -1,0 +1,59 @@
+{
+  "upstream": {
+    "repository": "https://github.com/eonsystemspbc/fly-brain",
+    "commit": "a3db62f9436074e485c0278290c2164ed6150808",
+    "observed_branch": "main",
+    "imported_at": "2026-10-04",
+    "source_changes_at_import": []
+  },
+  "python": "3.10.14",
+  "machine": "arm64",
+  "versions": {
+    "brian2": "2.8.0",
+    "numpy": "1.26.4",
+    "torch": "2.11.0",
+    "pandas": "2.3.3",
+    "pyarrow": "25.0.1"
+  },
+  "timestep_ms": 0.1,
+  "seed": null,
+  "operational_overrides": {
+    "result_directory": "/Users/ocasta/Code/fly-brain/data/results/mlx-reference-20261004/spikes",
+    "benchmark_csv": "/Users/ocasta/Code/fly-brain/data/results/mlx-reference-20261004/benchmarks.csv",
+    "standalone_directory": "/Users/ocasta/Code/fly-brain/data/results/mlx-reference-20261004/standalone",
+    "make_parallel_jobs": 2
+  },
+  "result": {
+    "t_run_sec": 0.1,
+    "n_run": 1,
+    "n_active_neurons": 321,
+    "n_spikes": 1518,
+    "status": "success",
+    "timings": {
+      "id_mapping": 0.03907837500446476,
+      "data_load": 1.886025583022274,
+      "neuron_creation": 0.010096000012708828,
+      "synapse_creation": 0.42826437499024905,
+      "network_creation_total": 2.3473666250065435,
+      "poisson_inputs": 0.02139162499224767,
+      "device_build": 12.741823792021023,
+      "simulation_total": 1.3482162920117844,
+      "simulation_avg_per_trial": 1.3482162920117844,
+      "spike_extraction_total": 0.3292516249930486,
+      "simulation_wall_total": 1.6776581669982988,
+      "result_collection": 0.00421783301862888,
+      "result_save": 0.014064499991945922,
+      "total_elapsed": 16.82401904204744,
+      "realtime_ratio": 0.07417207505390828,
+      "realtime_ratio_total": 0.005943882953893178
+    },
+    "backend_key": "brian2cpp",
+    "experiment_name": "Sugar GRNs (200 Hz)",
+    "experiment_key": "sugar",
+    "run_label": "reference",
+    "round": 1,
+    "spike_path": "/Users/ocasta/Code/fly-brain/data/results/mlx-reference-20261004/spikes/reference/round_01/brian2cpp_t0.1s_n1.parquet"
+  },
+  "parquet_schema": "t: double\ntime_ms: double\ntrial: int64\nneuron_index: int64\nflywire_id: int64\nexp_name: string\n-- schema metadata --\npandas: '{\"index_columns\": [{\"kind\": \"range\", \"name\": null, \"start\": 0, \"' + 959",
+  "parquet_rows": 1518
+}
