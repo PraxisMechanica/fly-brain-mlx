@@ -133,9 +133,9 @@ Final qualification checkpoint (2026-10-04):
 
 ## Accumulation-design handoff
 
-Status: diagnostic evidence complete in GPT-6 Astra at `xhigh`; final decision record in progress. No full-connectome accumulation strategy is approved.
+Status: bounded review concluded with a measured input-precision blocker; awaiting the user's return to GPT-6.1 Sol at `xhigh`. No full-connectome accumulation strategy is approved.
 
-Milestone 1 is complete at `52f8427`. The [bounded accumulation review](docs/handoffs/astra-accumulation-design.md) records actual Metal cancellation failures, all relevant evidence, the requested strategy/finite qualification, and the return condition. Select a deterministic accumulation design under the existing budgets before choosing a full-connectome propagation representation. No custom kernel, tolerance waiver, backend integration, or full-data benchmark is approved by this handoff. Astra must request return to GPT-6.1 Sol at `xhigh` after the bounded outcome is recorded.
+Milestone 1 is complete at `52f8427`. The [bounded accumulation review](docs/handoffs/astra-accumulation-design.md#decision-record--concluded-with-blocker) records the candidate reduction, failed alternatives, exact casting blocker, conditional representation guidance, and next audit. A production accumulation design must meet the existing budgets before choosing a full-connectome propagation representation. No custom kernel, tolerance waiver, backend integration, or full-data benchmark is approved by this handoff.
 
 Review diagnostic checkpoint (2026-10-04):
 
@@ -145,13 +145,19 @@ Review diagnostic checkpoint (2026-10-04):
 - This is **not an accumulation parity pass**: only **109/125** cases meet the original-weight float64 one-step budget, and **119/125** meet the trajectory budget. All failures are retained individually. In particular, 128 copies of `[2405, -2404, -1]*0.275 mV` have near-zero float64 sum but a **0.003124237060546875 mV** sum after individual float32 weight casts, exceeding the unchanged **0.001 mV** trajectory floor even with exact subsequent addition. Ordinary reductions can accidentally cancel this input error; that does not qualify them.
 - Ruff and strict Pyright passed for the new probe. The qualified small core, its existing tests, upstream runners, dependencies, and production contracts are unchanged. The existing 43-test suite was not rerun in this diagnostic-only step; its retained Milestone 1 result is not a test result for this candidate. No full-data loading, custom kernel, compilation, or benchmark was performed.
 
+Decision checkpoint:
+
+- Probe/evidence commit `0084fe0`. The [durable precision record](docs/mlx-port-baseline.md#accumulation-review-reduction-candidate-and-weight-cast-blocker) separates weight-cast error from reduction error and preserves all fixed budgets. The candidate is supported for further diagnostics only; six measured trajectory failures preclude strategy approval. Independent-process repeatability and full propagation remain untested.
+- The return condition is met through the documented-blocker branch. After the user's switch, Sol may begin the [precisely specified Milestone 2 host-side input audit](docs/handoffs/astra-accumulation-design.md#exact-next-work-for-sol-milestone-2-input-audit), preserving data and existing numerical code. Mapping, per-source cast-error extrema, and representative pinned-data masks provide evidence for the next bounded numerical decision. The audit cannot dismiss the retained synthetic failures or authorize rollout by itself.
+- Final documentation verification: all 138 local links/anchors across the README, milestone, baseline, and handoffs passed. The retained arrays independently reproduced the exact cast-input sums, correctly rounded outputs, and bitwise repeated/standalone comparisons; evidence hashes matched. Ruff, strict Pyright, and `git diff --check` passed. The diff against incoming `1757aa8` for existing core/tests/runners/dependencies is empty. Both review commits remain local because no user-owned push destination is configured.
+
 ## Milestone 2 — Connectome loading
 
-Status: not started.
+Status: not started. Read-only mapping and precision audit is the next work after the user's return to Sol; production accumulation and propagation-layout selection remain blocked by the review above.
 
 Acceptance: MLX input arrays are demonstrably equivalent to upstream in neuron count, connection count, identifier-to-index mapping, source/destination orientation, weight scaling, delays, silencing masks, and deterministic checksums. Raw input counts and hashes collected in Milestone 0 are baseline evidence only; no MLX conversion is yet verified.
 
-Prove the mapping before introducing another sparse representation. Qualify signed high-fan-in accumulation against float64 and repeatability, including the retained 4,097-event cancellation diagnostic, without relaxing the state budget. The choice of an accurate/repeatable full-network reduction is not yet validated. Representation changes requiring scientific or kernel judgment require a bounded Astra handoff.
+Prove the mapping before introducing another sparse representation. Follow the [bounded input-audit instructions](docs/handoffs/astra-accumulation-design.md#exact-next-work-for-sol-milestone-2-input-audit). Qualify signed high-fan-in accumulation against original float64 weights and repeatability, including both the retained 4,097-event reduction diagnostic and the new coherent weight-cast failures, without relaxing either budget. The choice of an accurate/repeatable full-network strategy is not yet validated. Prepare the next bounded Astra handoff with actual pinned-data casting evidence before implementing a propagation strategy or changing weight precision.
 
 ## Milestone 3 — Backend integration
 
@@ -193,7 +199,7 @@ Acceptance: final corrections are applied; the complete approved verification su
 
 ## Current checkpoint and constraints
 
-Next work: finish the [bounded accumulation-design decision record](docs/handoffs/astra-accumulation-design.md) with the measured individual-weight casting blocker and the exact next input audit, then request the user's return to GPT-6.1 Sol at `xhigh`. Milestone 1 is complete for its tested envelope; Milestone 2 has not started. The private in-memory core does not change an existing public interface or persisted production schema.
+Next work: the user switches back to GPT-6.1 Sol at `xhigh` for the [Milestone 2 host-side mapping and cast-error audit](docs/handoffs/astra-accumulation-design.md#exact-next-work-for-sol-milestone-2-input-audit). The bounded review is concluded with a precise unresolved blocker, not an approved accumulation strategy. Milestone 1 is complete for its tested envelope; Milestone 2 has not started. Stop for the requested model switch. Preserve the qualified core until a subsequent numerical decision resolves input casting; the current private core and probe do not change an existing public interface or persisted production schema.
 
 A private small-network MLX core is qualified within the reviewed envelope. The integrated MLX backend, full-network parity, speed, peak memory, and clean installation remain unverified. Existing simulation results and generated standalone artifacts are preserved. Reruns require a fresh output directory; both harnesses refuse an existing destination.
 
