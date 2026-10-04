@@ -247,6 +247,14 @@ Stable host bucket representation (2026-10-04):
 - Three new focused tests verify stable padding, exact edge/count/destination recovery, and retained identities under outgoing silencing. The full application suite passes **53 tests, zero failures/errors/skips**. [Report](docs/evidence/milestone-2/buckets/application-tests.xml). Ruff, strict Pyright, and all three import contracts pass.
 - Device execution, queue/event membership, and full reference/state regression remain the next qualification step.
 
+Bucketed device execution checkpoint (2026-10-04):
+
+- The production preparation path reads original integer connectivity, preserves occupied leaves and source/edge identities, and applies the unchanged factored operation to each destination bucket. Functional concatenation/inverse gathering restores original neuron order. It uses the original integration/threshold helpers and unchanged 19-slot per-edge queue semantics.
+- `uv run --locked --group qualification fly-brain qualify --output data/results/milestone-2-bucketed-qualification-20261004-01` passes **79 tests, zero failures/errors/skips**: all 61 original scientific tests remain, plus the same 18 factored fixtures executed through the actual bucketed engine. [Result](docs/evidence/milestone-2/buckets/qualification/result.json), [test report](docs/evidence/milestone-2/buckets/qualification/tests.xml), [bucketed measurements](docs/evidence/milestone-2/buckets/qualification/bucketed_case-networks.json), and [all 55 raw trace hashes](docs/evidence/milestone-2/buckets/qualification/manifest.json).
+- Live Brian2 comparisons retain every phase-state budget and exact spikes, availability, last-spike clocks, due/accepted/discarded decisions, channel events, and pending-edge queues. The adapted engine passes large cancellation, outgoing silencing, refractory loss/release, batch/standalone, chunked continuation, CPU-default stream isolation, and fresh-state reset checks.
+- The default application suite passes **53 tests, zero failures/errors/skips**. [Report](docs/evidence/milestone-2/buckets/tests-device-adapter.xml). Ruff, strict Pyright, and all three import contracts pass. The original numerical oracle and operation sequence remain intact.
+- Remaining Milestone 2 checks: the retained 157 scalar cases through the actual layout path, actual pinned-array layout arithmetic/transfer verification, and full-connectome event construction evidence. No complete production simulation, full-network parity, or performance result is claimed.
+
 ## Milestone 3 — Backend integration
 
 Status: not started.

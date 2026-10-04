@@ -8,7 +8,7 @@ import mlx.core as mx
 import numpy as np
 import pytest
 
-from fly_brain.simulation.backend.engines import Factory, factored, serial
+from fly_brain.simulation.backend.engines import Factory, serial
 from tests.support.artifacts import ArtifactRecorder
 from tests.support.qualification import Harness
 
@@ -34,14 +34,14 @@ def harness(
     mx.disable_compile()
     path = cast(str | None, request.config.getoption('--artifact-output'))
     output = Path(path) if path is not None else None
-    is_factored = compiler is factored
-    recorder = ArtifactRecorder(output, 'factored-' if is_factored else '')
+    is_serial = compiler is serial
+    recorder = ArtifactRecorder(output, '' if is_serial else f'{compiler.__name__}-')
     yield Harness(lambda case: compiler(case, precision), recorder)
     recorder.finish(
-        'factored-networks.json' if is_factored else 'measurements.json',
-        'Uncompiled factored recurrent-input adapter over unchanged qualified core'
-        if is_factored
-        else 'uncompiled, explicit Metal stream, ordered edge/channel additions',
+        'measurements.json' if is_serial else f'{compiler.__name__}-networks.json',
+        'uncompiled, explicit Metal stream, ordered edge/channel additions'
+        if is_serial
+        else f'Uncompiled {compiler.__name__} recurrent-input execution',
     )
 
 
