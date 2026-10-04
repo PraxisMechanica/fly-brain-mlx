@@ -266,6 +266,9 @@ something else. Match what's there before introducing something new.
   own initiative.
 - Make **incremental commits** as you work. Do not dump all changes at the
   end.
+- Commit each verified implementation step before starting the next one.
+  Commit later execution evidence separately. Check `git status --short`
+  before proceeding, and report any work that remains uncommitted.
 - Commit messages: 3-8 words. Maximally descriptive within that constraint.
 - Always push your changes.
 
