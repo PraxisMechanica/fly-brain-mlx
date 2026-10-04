@@ -40,6 +40,7 @@ class NeuronGroup(BrianObject):
     def __getitem__(self, key: int) -> NeuronGroup: ...
 
 class SynapticPathway:
+    name: str
     order: int
 
 class Synapses(BrianObject):
@@ -70,11 +71,14 @@ class PoissonInput(BrianObject):
     ) -> None: ...
 
 class SpikeGeneratorGroup(BrianObject):
+    variables: dict[str, Variable]
     def __init__(
         self, N: int, indices: Any, times: Quantity, *, name: str | None = None
     ) -> None: ...
 
 class StateMonitor(BrianObject):
+    variables: dict[str, Variable]
+    t: Quantity
     v: Quantity
     g: Quantity
     lastspike: Quantity
@@ -87,6 +91,7 @@ class StateMonitor(BrianObject):
         record: bool,
         when: str,
         order: int = 0,
+        name: str | None = None,
     ) -> None: ...
 
 class SpikeMonitor(BrianObject):
@@ -95,7 +100,8 @@ class SpikeMonitor(BrianObject):
     def __init__(self, source: NeuronGroup) -> None: ...
 
 class Network:
-    def __init__(self, *objects: BrianObject) -> None: ...
+    name: str
+    def __init__(self, *objects: BrianObject, name: str | None = None) -> None: ...
     def run(self, duration: Quantity) -> None: ...
     def scheduling_summary(self) -> object: ...
 
@@ -122,6 +128,10 @@ prefs: Preferences
 class Device:
     def reinit(self) -> None: ...
     def build(self, *, directory: str, clean: bool, with_output: bool) -> None: ...
+    def get_array_name(
+        self, variable: Variable, *, access_data: bool = True
+    ) -> str: ...
+    def insert_code(self, slot: str, code: str) -> None: ...
 
 device: Device
 

@@ -2,7 +2,7 @@
 
 Pyright checks every application module and test in strict mode. MLX, NumPy, Pydantic, PyTorch, and pytest use their published types. These local stubs cover only the Brian2 and PyArrow APIs used here; they do not supply runtime code.
 
-Brian2 creates unit-bearing arrays and state attributes from equation strings at runtime. Its quantity arithmetic and dynamic views use `Any` inside this stub. Names, constructors, schedules, and configuration remain typed. The independent adapter converts monitored values into NumPy trace arrays before returning them. Numerical qualification verifies units, shapes, phases, and values. The stub does not prove dimensional correctness.
+Brian2 creates unit-bearing arrays and state attributes from equation strings at runtime. Its quantity arithmetic and dynamic views use `Any` inside this stub. Names, constructors, schedules, configuration, observer variable metadata, and standalone insertion/array-name methods remain typed. The independent adapter converts monitored values into NumPy trace arrays before returning them. Numerical qualification verifies units, shapes, phases, and values. The stub does not prove dimensional correctness or observer transparency.
 
 PyArrow file/table operations, including the exporter's compression argument, have typed signatures here. Column values enter the application as NumPy arrays; the reader checks required columns, nulls, and finite times. Real Parquet tests verify these operations and the supported time-column contracts, including canonical types for empty production output. This stub does not prove the physical type of arbitrary input files.
 
