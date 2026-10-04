@@ -129,9 +129,10 @@ def test_spiking_blocks_same_step_inputs_even_with_zero_refractory_duration():
     source = b.SpikeGeneratorGroup(1, [0], [0] * b.ms)
     synapses = b.Synapses(source, group, on_pre='g += 3*mV; v += 4*mV')
     synapses.connect()
+    inputs = b.PoissonInput(group, 'v', N=1, rate=10000 * b.Hz, weight=68.75 * b.mV)
     before = b.StateMonitor(group, ('v', 'g', 'not_refractory'), record=True, when='synapses', order=-2)
     after = b.StateMonitor(group, ('v', 'g', 'not_refractory'), record=True, when='synapses', order=1)
-    b.Network(group, source, synapses, before, after).run(0.1 * b.ms)
+    b.Network(group, source, synapses, inputs, before, after).run(0.1 * b.ms)
     np.testing.assert_array_equal(after.v[:], before.v[:])
     np.testing.assert_array_equal(after.g[:], before.g[:])
     assert after.not_refractory[:, 0].tolist() == [False, False]

@@ -14,12 +14,12 @@ Do not implement MaleCNS, new neuron models, plasticity, reinforcement learning,
 
 The numerical backend varies; the model, experiment definitions, neuron ordering, connection direction, weights, delays, activation, silencing, thresholds, reset, and timestep semantics must remain invariant under the reviewed contract.
 
-- Read and run the reference before adding MLX code. Brian2 CPU is the proposed ground truth; documented material inconsistencies require scientific review. Collect conflicting evidence without averaging contradictory behavior.
+- Read and run the reference before adding MLX code. The bounded review selects pinned Brian2 2.8.0 CPU float64 as ground truth; the [reviewed contract](docs/mlx-port-baseline.md#reviewed-discrete-contract) resolves material inconsistencies. Do not blend contradictory backend behavior.
 - Extend the existing backend interface with a small validated numerical core. Preserve upstream structure, tools, callers, and unrelated code.
 - Generate stochastic stimulus schedules outside the engines and feed identical events to each. Equal seed values across unrelated generators do not prove equal stimuli.
 - Keep simulation state resident on the Apple graphics processing unit. Do not transfer complete state to the CPU each timestep. Retain the simple correct implementation as an oracle if optimized kernels are introduced.
 - Verify one milestone before proceeding to the next. Update this file after significant steps with exact commands, test results, measured outcomes, unresolved issues, and supporting artifact links. Commit verified work incrementally on `main`.
-- Distinguish exact small-network state parity from full-network event/statistical parity. Do not declare acceptance thresholds after seeing results, explain away discrepancies, or infer scientific validity from a successful run alone.
+- Distinguish tolerance-bounded small-network continuous state with exact ordinary-fixture discrete parity from full-network event/statistical parity. Keep the separately asserted threshold-rounding limitation explicit. Do not declare acceptance thresholds after seeing results, explain away discrepancies, or infer scientific validity from a successful run alone.
 
 Each handoff must contain the reason for deeper review, current checkpoint and commits, exact evidence and files to inspect, one bounded requested outcome, and a return condition. The user performs the requested model switch. Astra records decisions and relevant verification, commits any assigned changes, and requests return to GPT-6.1 Sol at `xhigh` before subsequent routine work.
 
@@ -39,7 +39,7 @@ Every requirement remains open until the evidence below is recorded and inspecte
 
 ## Milestone 0 — Reference baseline
 
-Status: complete for reference evidence; numerical-contract approval remains pending below.
+Status: complete for reference evidence; the numerical-contract review is also resolved below.
 
 Acceptance: `docs/mlx-port-baseline.md` documents enough implementation-level detail to reproduce the pinned Brian2 model without guessing. Relevant tests and experiments provide direct evidence for the stated behavior. Material disagreements are collected for review, not silently resolved.
 
@@ -74,34 +74,34 @@ Evidence completed:
 - The inspection harness reproduced the retained schedule/delay evidence exactly. All 71 local links in the README, milestone, baseline, and handoff documents passed verification. `git diff --check` passed; the diff against the upstream pin for numerical source, data, original scripts, environments, and licences is empty.
 - [Bounded Astra review request](docs/handoffs/astra-numerical-contract.md) records the checkpoint, evidence, required decisions, and return condition. No review decision is implied by Milestone 0 completion.
 
-Pending scientific review:
+Resolved scientific review:
 
-- Brian2 uses linear integration and threshold-before-stimulation scheduling; PyTorch uses Euler integration and stimulation-before-threshold scheduling.
-- PyTorch's refractory state does not gate voltage integration or its threshold, unlike Brian2.
-- Silencing differs among the reference, README, PyTorch, GeNN, and NEST implementations.
-- Tolerances and full-network acceptance are unapproved. Do not begin the MLX numerical kernel until these decisions have been recorded.
+- Brian2's coupled linear integration, threshold-before-stimulation scheduling, frozen/gated refractory state, outgoing-only silencing, and step-18 delivery/step-19 voltage effect are authoritative. PyTorch remains the comparison baseline with its known numerical differences.
+- A firing neuron immediately blocks incoming writes even when its refractory duration is zero; the review refined the earlier reset-only explanation with a pre-reset observation.
+- Float32 policy, state tolerances, exact discrete invariants, threshold-rounding treatment, deterministic stimuli, and full-network acceptance are fixed in the [reviewed baseline](docs/mlx-port-baseline.md#reviewed-precision-and-state-acceptance). The full-network gate requires both fixed floors and no worse than PyTorch for every primary metric/case.
 
 ## Numerical-contract handoff
 
-Status: bounded review in progress. Reference evidence and focused review probes are complete; the contract decision record is being finalized.
+Status: resolved. Contract approved for Milestone 1 implementation/qualification; awaiting the user's return to GPT-6.1 Sol at `xhigh`. This is not approval of an MLX implementation or full-network result.
 
 Review checkpoint (2026-10-04):
 
-- `.venv/bin/python scripts/probe_numerical_contract.py --output data/results/mlx-numerical-review-20261004` completed all assertions. It probes linear float32 error, threshold rounding, cancellation, and deterministic external replay; it does not implement a backend.
+- Probe/evidence commit: `4b7ea63`, following incoming checkpoint `6deca27`. `.venv/bin/python scripts/probe_numerical_contract.py --output data/results/mlx-numerical-review-20261004` completed all assertions. It probes linear float32 error, threshold rounding, cancellation, and deterministic external replay; it does not implement a backend.
 - A 10,000-step linear diagnostic against Brian2 float64 measured maximum float32 voltage/synaptic errors of 0.000381470/0.000218289 mV. A quarter-unit-in-the-last-place threshold offset changes the float32 spike decision; a 4,097-event cancellation case changes the sum from 0.275 to 0.25 mV with adverse ordering. These are explicit precision limitations, not parity passes.
 - Two NumPy runtime replays and two independently built C++ standalone replays produced identical complete state/discrete traces and 43 spikes each under the same 1,000-step, three-channel event schedule. Schedule regeneration, save/load, duration prefix, and trial separation checks passed.
 - [Probe measurements](docs/evidence/milestone-0/numerical-contract.json), [compressed raw reference trace and events](docs/evidence/milestone-0/numerical-contract-replay.npz), and [probe source](scripts/probe_numerical_contract.py) are retained. Fresh standalone builds and four raw traces remain in the probe output directory; no existing output was removed.
-- `.venv/bin/python -m pytest -q tests/test_reference_contract.py --junitxml=docs/evidence/milestone-0/reference-tests-review-final.xml --disable-warnings`: 12 passed, zero skipped/failures/errors, 160 dependency warnings, 18.63 seconds. Added tests settle same-step input gating, refractory-boundary arrival, and replay equivalence with guaranteed native Poisson input. The preceding 11-test run is also preserved.
+- `.venv/bin/python -m pytest -q tests/test_reference_contract.py --junitxml=docs/evidence/milestone-0/reference-tests-contract-final.xml --disable-warnings`: 12 passed, zero skipped/failures/errors, 162 dependency warnings, 17.97 seconds. Added tests settle same-step recurrent/native-Poisson input gating, refractory-boundary arrival, and replay equivalence with guaranteed native Poisson input. The preceding 11-test and 12-test runs are preserved; the final refinement adds native Poisson input to the pre-reset gating test.
+- All 92 local links/Markdown anchors across the README, milestone, baseline, and handoff passed verification. The compressed evidence matches each of the four retained raw traces and the stimulus hash. Original upstream file changes remain limited to the pre-existing `.gitignore` and README changes; numerical source/data are untouched. `git diff --check` passed.
 
-Deliverable: the [bounded review record](docs/handoffs/astra-numerical-contract.md) must record the selected reference semantics, exact invariants, justified floating-point tolerances, deterministic stimulus placement, and full-network metrics and acceptance rule. It currently contains the request and evidence, not an approved contract. Astra must not implement the MLX backend during this review.
+Deliverable completed: the [bounded review record](docs/handoffs/astra-numerical-contract.md#decision-record--resolved) records selected semantics, evidence, limits, and remaining qualification. The [baseline](docs/mlx-port-baseline.md#reviewed-discrete-contract) holds the durable specification. No numerical backend or public interface was implemented in this review.
 
-Return condition: the numerical contract is explicit and supported by evidence, any additional required reference probes are identified, and Astra requests return to GPT-6.1 Sol at `xhigh`.
+Return condition met: reference semantics and acceptance decisions are explicit and evidence-supported. No further reference probe blocks Milestone 1. Actual MLX precision/compilation/repeatability, high-fan-in accumulation, the full-network matrix, and future public/empty-output schema changes remain unverified or unapproved as specified in the handoff. The user must switch back before implementation resumes.
 
 ## Milestone 1 — Small MLX numerical kernel
 
 Status: not started.
 
-Acceptance: every timestep's voltage, synaptic state, spikes, reset, and refractory/delay state matches the approved reference within approved tolerances for synthetic networks. Tests cover all small-network cases in completion requirement 4, supplied deterministic stimulus schedules, and repeated identical runs.
+Acceptance: every timestep's voltage and synaptic state meet the [reviewed budgets](docs/mlx-port-baseline.md#reviewed-precision-and-state-acceptance): isolated one-step error ≤`2e-5 + 2e-6*abs(reference)` mV and trajectory error ≤`1e-3 + 1e-5*abs(reference)` mV. Ordinary fixtures require exact spike/reset/refractory/delay-event state, with no timing slack. Test strict equality and neighboring representable values, and assert the separate near-threshold rounding limitation rather than claiming universal float64 spike equivalence. Run every enumerated synthetic case, shared deterministic stimuli, and repeated identical runs without skips.
 
 Start with source indices, destination indices, and weights. Keep model state on the Apple graphics processing unit. Use externally generated stochastic schedules shared with the reference. Do not load the full connectome or add a custom Metal kernel at this milestone.
 
@@ -111,7 +111,7 @@ Status: not started.
 
 Acceptance: MLX input arrays are demonstrably equivalent to upstream in neuron count, connection count, identifier-to-index mapping, source/destination orientation, weight scaling, delays, silencing masks, and deterministic checksums. Raw input counts and hashes collected in Milestone 0 are baseline evidence only; no MLX conversion is yet verified.
 
-Prove the mapping before introducing another sparse representation. Representation changes requiring scientific or kernel judgment require a bounded Astra handoff.
+Prove the mapping before introducing another sparse representation. Qualify signed high-fan-in accumulation against float64 and repeatability, including the retained 4,097-event cancellation diagnostic, without relaxing the state budget. The choice of an accurate/repeatable full-network reduction is not yet validated. Representation changes requiring scientific or kernel judgment require a bounded Astra handoff.
 
 ## Milestone 3 — Backend integration
 
@@ -125,7 +125,9 @@ Present and obtain explicit approval for any required application programming in
 
 Status: not started.
 
-Acceptance: identical stimuli are run through Brian2, PyTorch, and MLX; active-neuron overlap, firing-rate correlation, total spike-count ratio, spike-time agreement, repeatability, and earliest meaningful divergence satisfy the approved acceptance rule. Record direct evidence and obtain a bounded Astra parity adjudication if scientific interpretation is required. Do not explain away discrepancies.
+Acceptance: execute the [frozen 52-case matrix and protocol](docs/mlx-port-baseline.md#full-network-acceptance-fixed-before-validation) through Brian2, the pinned PyTorch numerical core with common experiment setup/replay, and MLX. Sugar and p9 cover 0.1/1/10 seconds with five paired trials; silenced sugar and two-class stimulation cover 0.1/1 seconds with five trials; silent controls cover both shorter durations. Repeat each case and execute the specified batch checks.
+
+Every case must satisfy active Jaccard ≥0.95, relative total count error ≤0.02, normalized neuronwise count error ≤0.05, common-support rate correlation ≥0.99 when defined, and one-to-one timing F1 ≥0.95 within 1 ms. MLX must also be no worse than PyTorch on **every** primary metric for that case, with the documented empty/undefined rules. Require deterministic replay and an explained first divergence; aggregate averages cannot rescue failures. These thresholds precede all full-network MLX results. Obtain a bounded Astra parity adjudication if interpretation is required; do not relax the frozen criteria retrospectively.
 
 ## Milestone 5 — Complete-brain benchmark and profiling
 
@@ -151,7 +153,7 @@ Acceptance: final corrections are applied; the complete approved verification su
 
 ## Current checkpoint and constraints
 
-Next work: the user switches to GPT-6 Astra at `xhigh` for the bounded numerical-contract review. Resume from `docs/handoffs/astra-numerical-contract.md`; request return to GPT-6.1 Sol at `xhigh` once the bounded outcome is recorded. No MLX implementation before the review decisions are resolved.
+Next work: the user returns to **GPT-6.1 Sol at `xhigh`**. Resume from the [completed bounded review](docs/handoffs/astra-numerical-contract.md#return-checkpoint-and-next-action), then begin Milestone 1's small, uncompiled MLX core and qualification suite under the reviewed contract. Stop for the model switch; no implementation in the review turn.
 
 No MLX backend has been written. No MLX parity, speed, peak memory, or installation claim is verified. Existing simulation results and generated standalone artifacts are preserved. Baseline reruns require a fresh output directory; the harness refuses an existing destination.
 
