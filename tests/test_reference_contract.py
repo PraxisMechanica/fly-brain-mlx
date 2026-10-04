@@ -122,6 +122,55 @@ def test_reference_silencing_only_zeroes_outgoing_edges():
     assert list(synapses.w / b.mV) == [1, 0, 3]
 
 
+def test_spiking_blocks_same_step_inputs_even_with_zero_refractory_duration():
+    group, _ = neurons(2)
+    group.v = -44 * b.mV
+    group.rfc = [0, 2.2] * b.ms
+    source = b.SpikeGeneratorGroup(1, [0], [0] * b.ms)
+    synapses = b.Synapses(source, group, on_pre='g += 3*mV; v += 4*mV')
+    synapses.connect()
+    before = b.StateMonitor(group, ('v', 'g', 'not_refractory'), record=True, when='synapses', order=-2)
+    after = b.StateMonitor(group, ('v', 'g', 'not_refractory'), record=True, when='synapses', order=1)
+    b.Network(group, source, synapses, before, after).run(0.1 * b.ms)
+    np.testing.assert_array_equal(after.v[:], before.v[:])
+    np.testing.assert_array_equal(after.g[:], before.g[:])
+    assert after.not_refractory[:, 0].tolist() == [False, False]
+
+
+def test_refractory_release_accepts_only_events_at_or_after_step_22():
+    group, _ = neurons(1)
+    group.lastspike = 0 * b.ms
+    source = b.SpikeGeneratorGroup(1, [0, 0], [2.1, 2.2] * b.ms)
+    synapses = b.Synapses(source, group, on_pre='g += 3*mV')
+    synapses.connect()
+    monitor = b.StateMonitor(group, ('v', 'g'), record=True, when='end')
+    b.Network(group, source, synapses, monitor).run(2.4 * b.ms)
+    assert list(monitor.g[0, 21:23] / b.mV) == [0, 3]
+    assert float(monitor.v[0, 22] / b.mV) == pytest.approx(-52, rel=0, abs=1e-11)
+    assert float(monitor.v[0, 23] / b.mV) > -52
+
+
+def test_deterministic_replay_matches_guaranteed_native_poisson_input():
+    traces = []
+    for native in (True, False):
+        group, params = neurons(1, r_poi=10000 * b.Hz)
+        group.rfc = 0 * b.ms
+        if native:
+            inputs = reference.add_poisson_inputs(group, [0], [], params)
+        else:
+            source = b.SpikeGeneratorGroup(1, [0] * 5, np.arange(5) * 0.1 * b.ms)
+            synapses = b.Synapses(source, group, on_pre='v += 68.75*mV')
+            synapses.connect()
+            synapses.pre.order = 0
+            inputs = [source, synapses]
+        state = b.StateMonitor(group, ('v', 'g'), record=True, when='end')
+        spikes = b.SpikeMonitor(group)
+        b.Network(group, state, spikes, *inputs).run(0.5 * b.ms)
+        traces.append((np.asarray(state.v[:]), np.asarray(state.g[:]), np.asarray(spikes.t[:])))
+    for native, replay in zip(*traces):
+        np.testing.assert_array_equal(native, replay)
+
+
 def test_pytorch_refractory_counter_does_not_gate_voltage_or_threshold():
     model = AlphaLIF(1, 1, 0.1, MODEL_PARAMS)
     conductance, delay, spikes, voltage, refractory = model.state_init()

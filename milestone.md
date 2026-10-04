@@ -83,7 +83,15 @@ Pending scientific review:
 
 ## Numerical-contract handoff
 
-Status: requested; awaiting the user's switch to GPT-6 Astra at `xhigh`. Reference evidence is complete; contract decisions are pending.
+Status: bounded review in progress. Reference evidence and focused review probes are complete; the contract decision record is being finalized.
+
+Review checkpoint (2026-10-04):
+
+- `.venv/bin/python scripts/probe_numerical_contract.py --output data/results/mlx-numerical-review-20261004` completed all assertions. It probes linear float32 error, threshold rounding, cancellation, and deterministic external replay; it does not implement a backend.
+- A 10,000-step linear diagnostic against Brian2 float64 measured maximum float32 voltage/synaptic errors of 0.000381470/0.000218289 mV. A quarter-unit-in-the-last-place threshold offset changes the float32 spike decision; a 4,097-event cancellation case changes the sum from 0.275 to 0.25 mV with adverse ordering. These are explicit precision limitations, not parity passes.
+- Two NumPy runtime replays and two independently built C++ standalone replays produced identical complete state/discrete traces and 43 spikes each under the same 1,000-step, three-channel event schedule. Schedule regeneration, save/load, duration prefix, and trial separation checks passed.
+- [Probe measurements](docs/evidence/milestone-0/numerical-contract.json), [compressed raw reference trace and events](docs/evidence/milestone-0/numerical-contract-replay.npz), and [probe source](scripts/probe_numerical_contract.py) are retained. Fresh standalone builds and four raw traces remain in the probe output directory; no existing output was removed.
+- `.venv/bin/python -m pytest -q tests/test_reference_contract.py --junitxml=docs/evidence/milestone-0/reference-tests-review-final.xml --disable-warnings`: 12 passed, zero skipped/failures/errors, 160 dependency warnings, 18.63 seconds. Added tests settle same-step input gating, refractory-boundary arrival, and replay equivalence with guaranteed native Poisson input. The preceding 11-test run is also preserved.
 
 Deliverable: the [bounded review record](docs/handoffs/astra-numerical-contract.md) must record the selected reference semantics, exact invariants, justified floating-point tolerances, deterministic stimulus placement, and full-network metrics and acceptance rule. It currently contains the request and evidence, not an approved contract. Astra must not implement the MLX backend during this review.
 
