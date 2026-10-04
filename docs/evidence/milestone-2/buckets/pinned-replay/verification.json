@@ -1,0 +1,230 @@
+{
+  "cases": 24576,
+  "targets": 31,
+  "all_case_inputs_references_checks_and_output_bytes_match_independently_verified_isolated_matrix": true,
+  "all_artifact_and_source_hashes_match": true,
+  "original_one_step_conversion_failures": 99,
+  "compact_artifact": "inputs-and-results.npz",
+  "compact_artifact_sha256": "a925f57819686597e12c82b86adf72a52627492e0d33e2e92831607d8b921c25",
+  "dense_leaves": "Bit-exact reconstruction from counts/masks/order and retained width; complete original artifacts remain locally preserved.",
+  "artifacts": [
+    {
+      "target": 102,
+      "cases": 840,
+      "original_artifact": "data/results/milestone-2-layout-fan-in-20261004-01/target-102.npz",
+      "sha256": "0caeb954d5a3fa95e5897fa5e9c35f98ecaf89c7b4637f8dcd23fcaaa51c2fe8",
+      "all_array_bytes_match_verified_isolated_matrix": true
+    },
+    {
+      "target": 210,
+      "cases": 840,
+      "original_artifact": "data/results/milestone-2-layout-fan-in-20261004-01/target-210.npz",
+      "sha256": "a344d60152518ca69856303f4afc17e5629cccafce56188e6eecdebaca80099b",
+      "all_array_bytes_match_verified_isolated_matrix": true
+    },
+    {
+      "target": 494,
+      "cases": 840,
+      "original_artifact": "data/results/milestone-2-layout-fan-in-20261004-01/target-494.npz",
+      "sha256": "38fd4ab762caf7796cc543784319da69a45c9314cfd454730f8953b006fdbf01",
+      "all_array_bytes_match_verified_isolated_matrix": true
+    },
+    {
+      "target": 11645,
+      "cases": 783,
+      "original_artifact": "data/results/milestone-2-layout-fan-in-20261004-01/target-11645.npz",
+      "sha256": "1482a4602b573a9d789e5c5a125a30c17a8c385a43d4e668548c4912795f02c1",
+      "all_array_bytes_match_verified_isolated_matrix": true
+    },
+    {
+      "target": 15196,
+      "cases": 840,
+      "original_artifact": "data/results/milestone-2-layout-fan-in-20261004-01/target-15196.npz",
+      "sha256": "b8528a8c21ab03090eaf4ed85ccf735ff6edbde336fea12badcf0e9583f04fe3",
+      "all_array_bytes_match_verified_isolated_matrix": true
+    },
+    {
+      "target": 17837,
+      "cases": 732,
+      "original_artifact": "data/results/milestone-2-layout-fan-in-20261004-01/target-17837.npz",
+      "sha256": "b7ae0c120bc7c2df983923803da5aa40abaed53e867403fcbd3531ab42e12ad6",
+      "all_array_bytes_match_verified_isolated_matrix": true
+    },
+    {
+      "target": 41335,
+      "cases": 777,
+      "original_artifact": "data/results/milestone-2-layout-fan-in-20261004-01/target-41335.npz",
+      "sha256": "bb6590336b2695b9da401db20f67d0a56eebcfb610ad22f0c909ab312f4b065e",
+      "all_array_bytes_match_verified_isolated_matrix": true
+    },
+    {
+      "target": 46609,
+      "cases": 738,
+      "original_artifact": "data/results/milestone-2-layout-fan-in-20261004-01/target-46609.npz",
+      "sha256": "945da24cb2321b87f02fde030e1156911d43b0b3d897bb8480490879e4aac2db",
+      "all_array_bytes_match_verified_isolated_matrix": true
+    },
+    {
+      "target": 47410,
+      "cases": 780,
+      "original_artifact": "data/results/milestone-2-layout-fan-in-20261004-01/target-47410.npz",
+      "sha256": "9558c7714888ae8f3923579f0515d0341feec645a0b751550434b40a2159a091",
+      "all_array_bytes_match_verified_isolated_matrix": true
+    },
+    {
+      "target": 55547,
+      "cases": 777,
+      "original_artifact": "data/results/milestone-2-layout-fan-in-20261004-01/target-55547.npz",
+      "sha256": "5e0237f7bbc89dd5d6184a6dfbf7e350a8f6274e119fb3dd82a97146e4488ff1",
+      "all_array_bytes_match_verified_isolated_matrix": true
+    },
+    {
+      "target": 60791,
+      "cases": 801,
+      "original_artifact": "data/results/milestone-2-layout-fan-in-20261004-01/target-60791.npz",
+      "sha256": "ba63c55e3f95dae8d151d0e3e561abf6eacc7b190be8d174fc646bb3a12a173f",
+      "all_array_bytes_match_verified_isolated_matrix": true
+    },
+    {
+      "target": 61120,
+      "cases": 834,
+      "original_artifact": "data/results/milestone-2-layout-fan-in-20261004-01/target-61120.npz",
+      "sha256": "9ad9ee988174acd879bd4ce6cdc4ad61de6de3256ae1e1c4499a7b4c3a27d487",
+      "all_array_bytes_match_verified_isolated_matrix": true
+    },
+    {
+      "target": 63126,
+      "cases": 834,
+      "original_artifact": "data/results/milestone-2-layout-fan-in-20261004-01/target-63126.npz",
+      "sha256": "d869dbb8176622fed15030bd8e3289221e05abcf3355bc2b85c43d6d0dde7c79",
+      "all_array_bytes_match_verified_isolated_matrix": true
+    },
+    {
+      "target": 66912,
+      "cases": 732,
+      "original_artifact": "data/results/milestone-2-layout-fan-in-20261004-01/target-66912.npz",
+      "sha256": "da1eaafb805b149b2b727b9968f8a3533a772c8fd5c71c787455b598923f7625",
+      "all_array_bytes_match_verified_isolated_matrix": true
+    },
+    {
+      "target": 73972,
+      "cases": 741,
+      "original_artifact": "data/results/milestone-2-layout-fan-in-20261004-01/target-73972.npz",
+      "sha256": "63d7d0bf44002e890b8fac0b8bc71b68f0e9f9a0256fb1c0126a009ef8b0ca7d",
+      "all_array_bytes_match_verified_isolated_matrix": true
+    },
+    {
+      "target": 74067,
+      "cases": 777,
+      "original_artifact": "data/results/milestone-2-layout-fan-in-20261004-01/target-74067.npz",
+      "sha256": "3b0d4dc6943431b25d8ff9864fba5901ec782158634f5a4c7f0508bac54ce05e",
+      "all_array_bytes_match_verified_isolated_matrix": true
+    },
+    {
+      "target": 76326,
+      "cases": 834,
+      "original_artifact": "data/results/milestone-2-layout-fan-in-20261004-01/target-76326.npz",
+      "sha256": "e740b2a8927e4105f901494fc2035699e4de6020c8dda95bb335fceb22da1429",
+      "all_array_bytes_match_verified_isolated_matrix": true
+    },
+    {
+      "target": 79529,
+      "cases": 729,
+      "original_artifact": "data/results/milestone-2-layout-fan-in-20261004-01/target-79529.npz",
+      "sha256": "0dc91eb6919dbf046418bd6f6ada7a4f015c5828b2102b77f5ba41bdc0ac15e7",
+      "all_array_bytes_match_verified_isolated_matrix": true
+    },
+    {
+      "target": 80928,
+      "cases": 777,
+      "original_artifact": "data/results/milestone-2-layout-fan-in-20261004-01/target-80928.npz",
+      "sha256": "e755a4ea4282b2417ded534b6b8d4385a70ce9b48359bd9e595cf70778a60bb4",
+      "all_array_bytes_match_verified_isolated_matrix": true
+    },
+    {
+      "target": 82815,
+      "cases": 777,
+      "original_artifact": "data/results/milestone-2-layout-fan-in-20261004-01/target-82815.npz",
+      "sha256": "cccbf069bfb727cdbb50367de7c523e5f612f06f61a5f3f1d2a41819db8bea5a",
+      "all_array_bytes_match_verified_isolated_matrix": true
+    },
+    {
+      "target": 86059,
+      "cases": 834,
+      "original_artifact": "data/results/milestone-2-layout-fan-in-20261004-01/target-86059.npz",
+      "sha256": "d250068bf37766931eeaea01a6878117bcfe17c388da4cccf3ec4eb237c98cac",
+      "all_array_bytes_match_verified_isolated_matrix": true
+    },
+    {
+      "target": 87447,
+      "cases": 780,
+      "original_artifact": "data/results/milestone-2-layout-fan-in-20261004-01/target-87447.npz",
+      "sha256": "da5e8b79a772b64786a2be569d77cb61f598a08cfe7574f02505aa17d199e61b",
+      "all_array_bytes_match_verified_isolated_matrix": true
+    },
+    {
+      "target": 90883,
+      "cases": 729,
+      "original_artifact": "data/results/milestone-2-layout-fan-in-20261004-01/target-90883.npz",
+      "sha256": "4af4b40428890b0d147357098513dc317daa5909c4ef91d055bf69f4564a052d",
+      "all_array_bytes_match_verified_isolated_matrix": true
+    },
+    {
+      "target": 93981,
+      "cases": 792,
+      "original_artifact": "data/results/milestone-2-layout-fan-in-20261004-01/target-93981.npz",
+      "sha256": "7df67831bdf3702b82351a3cf5fadbecce20e5202b73023ec816829e6f4d5b19",
+      "all_array_bytes_match_verified_isolated_matrix": true
+    },
+    {
+      "target": 103357,
+      "cases": 780,
+      "original_artifact": "data/results/milestone-2-layout-fan-in-20261004-01/target-103357.npz",
+      "sha256": "e876ddbad0aa0cbecb4b66f21037b980ed4b9e69d57b8bcd7f66c7a7a7052ff7",
+      "all_array_bytes_match_verified_isolated_matrix": true
+    },
+    {
+      "target": 112021,
+      "cases": 834,
+      "original_artifact": "data/results/milestone-2-layout-fan-in-20261004-01/target-112021.npz",
+      "sha256": "aa4d4e8b60ce2d70fe1b6de8bf8e805cba85f89389412218e11581c094692094",
+      "all_array_bytes_match_verified_isolated_matrix": true
+    },
+    {
+      "target": 115594,
+      "cases": 765,
+      "original_artifact": "data/results/milestone-2-layout-fan-in-20261004-01/target-115594.npz",
+      "sha256": "50d53fcf0e16a1fd9330a0fed1a551706b18ec9db1ff4c51f2ab01921da40abe",
+      "all_array_bytes_match_verified_isolated_matrix": true
+    },
+    {
+      "target": 120535,
+      "cases": 834,
+      "original_artifact": "data/results/milestone-2-layout-fan-in-20261004-01/target-120535.npz",
+      "sha256": "32065aebe17ed03b9e4723d927be2b552a51db94ad4797a0e67102d6cb65a36e",
+      "all_array_bytes_match_verified_isolated_matrix": true
+    },
+    {
+      "target": 129880,
+      "cases": 834,
+      "original_artifact": "data/results/milestone-2-layout-fan-in-20261004-01/target-129880.npz",
+      "sha256": "0916ddea192c37bc5e3740532f47d403ce2e8825391865980911e33dc8a1fe4a",
+      "all_array_bytes_match_verified_isolated_matrix": true
+    },
+    {
+      "target": 130107,
+      "cases": 777,
+      "original_artifact": "data/results/milestone-2-layout-fan-in-20261004-01/target-130107.npz",
+      "sha256": "631dc19294f1351b20c7acd5741e072aaaeb12da98b5a0ba95e05462bf5fb85d",
+      "all_array_bytes_match_verified_isolated_matrix": true
+    },
+    {
+      "target": 136978,
+      "cases": 834,
+      "original_artifact": "data/results/milestone-2-layout-fan-in-20261004-01/target-136978.npz",
+      "sha256": "8ff01839f2cf8c5c247525fa7fde8c7c50f857b38a91c4b0effbc8e197050519",
+      "all_array_bytes_match_verified_isolated_matrix": true
+    }
+  ],
+  "scope": "Complete prescribed pinned-case replay through actual production layout; complete device roundtrip and dynamics remain separate."
+}
