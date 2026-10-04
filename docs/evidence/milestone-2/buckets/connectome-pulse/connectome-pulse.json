@@ -1,0 +1,392 @@
+{
+  "accepted": true,
+  "neurons": 138639,
+  "edges": 15091983,
+  "source": 0,
+  "source_id": 720575940596125868,
+  "blocked_target_in_trial_1": 128818,
+  "outgoing_rows": 62,
+  "modes": [
+    {
+      "mode": "original",
+      "steps": 20,
+      "trials": 2,
+      "all_complete_checks_pass": true,
+      "all_phase_state_budgets_pass": true,
+      "arrival_one_step_budget_pass": true,
+      "first_conductance_step": 18,
+      "first_voltage_influence_step": 19,
+      "max_phase_state_error_mv": 1.7003459902298346e-06,
+      "due_event_sha256": "5add92dfb1396f9678a792ca3aea72c2c9d8fe88546153156db4e9a8d7ca72cb",
+      "accepted_event_sha256": "0576e64156ea6a757faa02fc17156fd9df21cd8484b912f7883a0c2293f21663",
+      "discarded_event_sha256": "e9387fabddc4a334551c60496f17d278e4aff9c641f05fc6fdcb390d8e19c1de",
+      "measurements": [
+        {
+          "step": 0,
+          "all_complete_masks_clocks_queues_and_unaffected_states_match": true,
+          "due": 0,
+          "accepted": 0,
+          "discarded": 0,
+          "pending_events": 124
+        },
+        {
+          "step": 1,
+          "all_complete_masks_clocks_queues_and_unaffected_states_match": true,
+          "due": 0,
+          "accepted": 0,
+          "discarded": 0,
+          "pending_events": 124
+        },
+        {
+          "step": 2,
+          "all_complete_masks_clocks_queues_and_unaffected_states_match": true,
+          "due": 0,
+          "accepted": 0,
+          "discarded": 0,
+          "pending_events": 124
+        },
+        {
+          "step": 3,
+          "all_complete_masks_clocks_queues_and_unaffected_states_match": true,
+          "due": 0,
+          "accepted": 0,
+          "discarded": 0,
+          "pending_events": 124
+        },
+        {
+          "step": 4,
+          "all_complete_masks_clocks_queues_and_unaffected_states_match": true,
+          "due": 0,
+          "accepted": 0,
+          "discarded": 0,
+          "pending_events": 124
+        },
+        {
+          "step": 5,
+          "all_complete_masks_clocks_queues_and_unaffected_states_match": true,
+          "due": 0,
+          "accepted": 0,
+          "discarded": 0,
+          "pending_events": 124
+        },
+        {
+          "step": 6,
+          "all_complete_masks_clocks_queues_and_unaffected_states_match": true,
+          "due": 0,
+          "accepted": 0,
+          "discarded": 0,
+          "pending_events": 124
+        },
+        {
+          "step": 7,
+          "all_complete_masks_clocks_queues_and_unaffected_states_match": true,
+          "due": 0,
+          "accepted": 0,
+          "discarded": 0,
+          "pending_events": 124
+        },
+        {
+          "step": 8,
+          "all_complete_masks_clocks_queues_and_unaffected_states_match": true,
+          "due": 0,
+          "accepted": 0,
+          "discarded": 0,
+          "pending_events": 124
+        },
+        {
+          "step": 9,
+          "all_complete_masks_clocks_queues_and_unaffected_states_match": true,
+          "due": 0,
+          "accepted": 0,
+          "discarded": 0,
+          "pending_events": 124
+        },
+        {
+          "step": 10,
+          "all_complete_masks_clocks_queues_and_unaffected_states_match": true,
+          "due": 0,
+          "accepted": 0,
+          "discarded": 0,
+          "pending_events": 124
+        },
+        {
+          "step": 11,
+          "all_complete_masks_clocks_queues_and_unaffected_states_match": true,
+          "due": 0,
+          "accepted": 0,
+          "discarded": 0,
+          "pending_events": 124
+        },
+        {
+          "step": 12,
+          "all_complete_masks_clocks_queues_and_unaffected_states_match": true,
+          "due": 0,
+          "accepted": 0,
+          "discarded": 0,
+          "pending_events": 124
+        },
+        {
+          "step": 13,
+          "all_complete_masks_clocks_queues_and_unaffected_states_match": true,
+          "due": 0,
+          "accepted": 0,
+          "discarded": 0,
+          "pending_events": 124
+        },
+        {
+          "step": 14,
+          "all_complete_masks_clocks_queues_and_unaffected_states_match": true,
+          "due": 0,
+          "accepted": 0,
+          "discarded": 0,
+          "pending_events": 124
+        },
+        {
+          "step": 15,
+          "all_complete_masks_clocks_queues_and_unaffected_states_match": true,
+          "due": 0,
+          "accepted": 0,
+          "discarded": 0,
+          "pending_events": 124
+        },
+        {
+          "step": 16,
+          "all_complete_masks_clocks_queues_and_unaffected_states_match": true,
+          "due": 0,
+          "accepted": 0,
+          "discarded": 0,
+          "pending_events": 124
+        },
+        {
+          "step": 17,
+          "all_complete_masks_clocks_queues_and_unaffected_states_match": true,
+          "due": 0,
+          "accepted": 0,
+          "discarded": 0,
+          "pending_events": 124
+        },
+        {
+          "step": 18,
+          "all_complete_masks_clocks_queues_and_unaffected_states_match": true,
+          "due": 124,
+          "accepted": 123,
+          "discarded": 1,
+          "pending_events": 0
+        },
+        {
+          "step": 19,
+          "all_complete_masks_clocks_queues_and_unaffected_states_match": true,
+          "due": 0,
+          "accepted": 0,
+          "discarded": 0,
+          "pending_events": 0
+        }
+      ],
+      "artifact": "original.npz",
+      "artifact_sha256": "46819c4f6a7c77271c81c801b77683930521dce7f9782ac52d994962b051b50f"
+    },
+    {
+      "mode": "outgoing-silenced",
+      "steps": 20,
+      "trials": 2,
+      "all_complete_checks_pass": true,
+      "all_phase_state_budgets_pass": true,
+      "arrival_one_step_budget_pass": true,
+      "first_conductance_step": null,
+      "first_voltage_influence_step": null,
+      "max_phase_state_error_mv": 1.5669398933937373e-06,
+      "due_event_sha256": "5add92dfb1396f9678a792ca3aea72c2c9d8fe88546153156db4e9a8d7ca72cb",
+      "accepted_event_sha256": "0576e64156ea6a757faa02fc17156fd9df21cd8484b912f7883a0c2293f21663",
+      "discarded_event_sha256": "e9387fabddc4a334551c60496f17d278e4aff9c641f05fc6fdcb390d8e19c1de",
+      "measurements": [
+        {
+          "step": 0,
+          "all_complete_masks_clocks_queues_and_unaffected_states_match": true,
+          "due": 0,
+          "accepted": 0,
+          "discarded": 0,
+          "pending_events": 124
+        },
+        {
+          "step": 1,
+          "all_complete_masks_clocks_queues_and_unaffected_states_match": true,
+          "due": 0,
+          "accepted": 0,
+          "discarded": 0,
+          "pending_events": 124
+        },
+        {
+          "step": 2,
+          "all_complete_masks_clocks_queues_and_unaffected_states_match": true,
+          "due": 0,
+          "accepted": 0,
+          "discarded": 0,
+          "pending_events": 124
+        },
+        {
+          "step": 3,
+          "all_complete_masks_clocks_queues_and_unaffected_states_match": true,
+          "due": 0,
+          "accepted": 0,
+          "discarded": 0,
+          "pending_events": 124
+        },
+        {
+          "step": 4,
+          "all_complete_masks_clocks_queues_and_unaffected_states_match": true,
+          "due": 0,
+          "accepted": 0,
+          "discarded": 0,
+          "pending_events": 124
+        },
+        {
+          "step": 5,
+          "all_complete_masks_clocks_queues_and_unaffected_states_match": true,
+          "due": 0,
+          "accepted": 0,
+          "discarded": 0,
+          "pending_events": 124
+        },
+        {
+          "step": 6,
+          "all_complete_masks_clocks_queues_and_unaffected_states_match": true,
+          "due": 0,
+          "accepted": 0,
+          "discarded": 0,
+          "pending_events": 124
+        },
+        {
+          "step": 7,
+          "all_complete_masks_clocks_queues_and_unaffected_states_match": true,
+          "due": 0,
+          "accepted": 0,
+          "discarded": 0,
+          "pending_events": 124
+        },
+        {
+          "step": 8,
+          "all_complete_masks_clocks_queues_and_unaffected_states_match": true,
+          "due": 0,
+          "accepted": 0,
+          "discarded": 0,
+          "pending_events": 124
+        },
+        {
+          "step": 9,
+          "all_complete_masks_clocks_queues_and_unaffected_states_match": true,
+          "due": 0,
+          "accepted": 0,
+          "discarded": 0,
+          "pending_events": 124
+        },
+        {
+          "step": 10,
+          "all_complete_masks_clocks_queues_and_unaffected_states_match": true,
+          "due": 0,
+          "accepted": 0,
+          "discarded": 0,
+          "pending_events": 124
+        },
+        {
+          "step": 11,
+          "all_complete_masks_clocks_queues_and_unaffected_states_match": true,
+          "due": 0,
+          "accepted": 0,
+          "discarded": 0,
+          "pending_events": 124
+        },
+        {
+          "step": 12,
+          "all_complete_masks_clocks_queues_and_unaffected_states_match": true,
+          "due": 0,
+          "accepted": 0,
+          "discarded": 0,
+          "pending_events": 124
+        },
+        {
+          "step": 13,
+          "all_complete_masks_clocks_queues_and_unaffected_states_match": true,
+          "due": 0,
+          "accepted": 0,
+          "discarded": 0,
+          "pending_events": 124
+        },
+        {
+          "step": 14,
+          "all_complete_masks_clocks_queues_and_unaffected_states_match": true,
+          "due": 0,
+          "accepted": 0,
+          "discarded": 0,
+          "pending_events": 124
+        },
+        {
+          "step": 15,
+          "all_complete_masks_clocks_queues_and_unaffected_states_match": true,
+          "due": 0,
+          "accepted": 0,
+          "discarded": 0,
+          "pending_events": 124
+        },
+        {
+          "step": 16,
+          "all_complete_masks_clocks_queues_and_unaffected_states_match": true,
+          "due": 0,
+          "accepted": 0,
+          "discarded": 0,
+          "pending_events": 124
+        },
+        {
+          "step": 17,
+          "all_complete_masks_clocks_queues_and_unaffected_states_match": true,
+          "due": 0,
+          "accepted": 0,
+          "discarded": 0,
+          "pending_events": 124
+        },
+        {
+          "step": 18,
+          "all_complete_masks_clocks_queues_and_unaffected_states_match": true,
+          "due": 124,
+          "accepted": 123,
+          "discarded": 1,
+          "pending_events": 0
+        },
+        {
+          "step": 19,
+          "all_complete_masks_clocks_queues_and_unaffected_states_match": true,
+          "due": 0,
+          "accepted": 0,
+          "discarded": 0,
+          "pending_events": 0
+        }
+      ],
+      "artifact": "silenced.npz",
+      "artifact_sha256": "aee03656255f2411c1e78968b36cd5cd43402d03e107c123530741179b1a7086"
+    }
+  ],
+  "network_fields_round_trip_exactly": true,
+  "complete_event_masks_and_queues_checked_each_step": true,
+  "unaffected_neural_state_bits_exact_each_step": true,
+  "reference": "Independent analytic float64 update and ordered original-weight delivery for the controlled pulse; not live full-network Brian2.",
+  "MLX_ENABLE_TF32": "0",
+  "device": {
+    "device_name": "Apple M1 Max",
+    "max_recommended_working_set_size": 22906503168,
+    "memory_size": 34359738368,
+    "architecture": "applegpu_g13s",
+    "max_buffer_length": 17179869184,
+    "resource_limit": 499000
+  },
+  "compilation": "disabled",
+  "input_sha256": {
+    "completeness": "52b0ac6094cd32c546f8d4c341e094376f48f4e791f8db9b166de5dff8199ea4",
+    "connectivity": "efeb23fb99098e9c390f6869969b2a121a2ee92c833cfc45ecb2c1d8e1af0347"
+  },
+  "source_sha256": {
+    "qualification/adapters/connectome_pulse.py": "7833c3a90e02110bb2df5816b24d6824a7312052919fea1da6095f261dea4385",
+    "simulation/backend/bucketed.py": "0829f0cb3c67f08bb4dc861c1397548f8e66e4ce2262ef3471368ce772552747",
+    "simulation/backend/core.py": "c4079b5d32cb05e701fcb89856a8b48066185bb5c470203e56f4785316461132",
+    "simulation/backend/accumulation.py": "2ea94edfbae1852cdf269fe7169fa97a00c57bf8cb597879fd076abe0c17a894"
+  },
+  "scope": "Controlled complete-connectome construction and delayed pulse, including blocked delivery and silenced edge identities; no full-experiment parity or performance claim."
+}

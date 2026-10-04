@@ -1,0 +1,11 @@
+{
+  "all_artifact_source_and_pinned_file_hashes_match": true,
+  "all_original_outgoing_rows_and_identifiers_recovered": true,
+  "complete_expected_event_memberships_and_queue_counts_recomputed": true,
+  "all_40_step_complete_device_check_vectors_pass": true,
+  "all_tracked_original_weight_float64_phases_independently_recomputed": true,
+  "both_arrival_and_phase_budgets_pass": true,
+  "strict_bit_check_repeat_artifacts_identical_to_initial_pulse": true,
+  "retained_initial_run": "/Users/ocasta/Code/fly-brain/data/results/milestone-2-connectome-pulse-20261004-01",
+  "scope": "Controlled complete-data pulse; no live full-network Brian2, production experiment, parity, or benchmark claim."
+}

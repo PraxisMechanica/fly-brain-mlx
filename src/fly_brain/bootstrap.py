@@ -121,3 +121,11 @@ def device_layout_audit(project: Path, output: Path) -> dict[str, object]:
 
     connectome, pin = pinned_inputs(project)
     return run(connectome, pin, output, precision)
+
+
+def connectome_pulse(project: Path, output: Path) -> dict[str, object]:
+    precision = configure_mlx()
+    from fly_brain.qualification.adapters.connectome_pulse import run
+
+    connectome, pin = pinned_inputs(project)
+    return run(connectome, pin, output, precision)

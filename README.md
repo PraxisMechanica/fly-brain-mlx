@@ -71,6 +71,7 @@ The complete prescribed input fan-in audit is available through the installed co
 uv run --locked --no-dev fly-brain qualify-fan-in --output data/results/fan-in-01
 uv run --locked --no-dev fly-brain qualify-layout-fan-in --output data/results/layout-fan-in-01
 uv run --locked --no-dev fly-brain qualify-device-layout --output data/results/device-layout-01
+uv run --locked --no-dev fly-brain qualify-connectome-pulse --output data/results/connectome-pulse-01
 ```
 
 It preserves every target, mask, initial state, edge order, reference, and device result, with repeated and individual-run comparisons. The isolated arithmetic check starts both engines from the same stored state; original-state conversion limitations remain visible, and the original-state trajectory limits remain mandatory. A failed required case returns a failure status. This audit does not establish full-network parity.
@@ -78,6 +79,8 @@ It preserves every target, mask, initial state, edge order, reference, and devic
 `qualify-layout-fan-in` uses the same case builder, limits, and evidence writer. It feeds each prescribed edge order and event mask through the production layout, including actual source identifiers, target index recovery, empty targets, and untouched source states.
 
 `qualify-device-layout` verifies every field and gathered event against all original connection rows, including every padding leaf. Five fixed source/receiving patterns cover all events, no events with negative-zero state, and seeded patterns. It retains full neuron results and both original-weight references, with exact counts and repeated/individual-run checks.
+
+`qualify-connectome-pulse` executes 20 steps on the complete network, with two trials and an independently computed float64 pulse reference. It checks every due/accepted/discarded event, every queue slot, clocks, and exact unaffected-neuron bits. The outgoing-silenced repeat retains all event identities. This qualifies complete construction and controlled delivery; full experiment parity remains open.
 
 ## Compare existing spikes
 
