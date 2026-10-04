@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from fractions import Fraction
 from pathlib import Path
 from typing import Protocol
 
@@ -13,6 +14,35 @@ class Spikes:
     trials: NDArray[np.int16]
     neuron_ids: NDArray[np.int64]
     time_s: NDArray[np.float64]
+
+
+@dataclass(frozen=True)
+class SpikeSteps:
+    neurons: NDArray[np.int64]
+    steps: NDArray[np.int64]
+
+
+@dataclass(frozen=True)
+class ParityMetrics:
+    reference_spikes: int
+    candidate_spikes: int
+    active_jaccard: Fraction
+    count_error: Fraction | None
+    signed_count_ratio: Fraction | None
+    neuron_count_error: Fraction | None
+    rate_correlation: float | None
+    counts_equal: bool
+    timing_matches: int
+    timing_f1: Fraction
+    timing_precision: Fraction
+    timing_recall: Fraction
+    exact_step_f1: Fraction
+    one_step_f1: Fraction
+    mean_timing_error_ms: float | None
+    median_timing_error_ms: float | None
+    shared_rate_correlation: float | None
+    common_rate_mae_hz: float | None
+    common_rate_rmse_hz: float | None
 
 
 @dataclass(frozen=True)

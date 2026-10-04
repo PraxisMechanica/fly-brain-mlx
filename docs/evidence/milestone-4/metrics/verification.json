@@ -1,0 +1,23 @@
+{
+  "application_tests": 75,
+  "new_metric_intent_tests": 9,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "ruff_lint_and_format_pass": true,
+  "strict_pyright_errors_warnings": [
+    0,
+    0
+  ],
+  "import_contracts_kept": 3,
+  "source_sha256": {
+    "src/fly_brain/comparison/acceptance.py": "f2af5996862ad5849572aa8cd9696844eacade3ff5e46079ac4b10a49960681c",
+    "src/fly_brain/comparison/models.py": "4eb2842c96955e68ffd52caba3ef2e604fc97e6db3659d796eb4e36efa5901d7",
+    "tests/unit/test_parity_metrics.py": "42ba7a52e7fb3b0659b262529d6a831129395dff5c86911a039a87649391e7be",
+    "pyproject.toml": "eb1dc5fa8e1a956a09084b9e44f687562fcd01acf76de3f4b2c9507f074fe21d"
+  },
+  "report_sha256": "4ab3b1579e8772744cdabcadbe82b84a2ec2f02b7016f29a4a05cedd79f19970",
+  "development_correction": "The initial application run had three empty-group failures (72 passed); grouping now computes endpoints from actual per-neuron counts and the full final suite passes.",
+  "environment": "Existing uv-managed development/qualification environment via uv run --locked --group qualification --no-sync. An attempted automatic rebuild hit restricted network access; no new dependencies were introduced.",
+  "scope": "Pure per-case metric calculations under frozen definitions. Acceptance gates, validated full-network inputs, trace capture, and complete scientific comparison remain open. Production numerical engine and legacy comparison service/storage are unchanged."
+}

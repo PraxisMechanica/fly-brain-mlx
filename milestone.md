@@ -339,6 +339,12 @@ Every case must satisfy active Jaccard ≥0.95, relative total count error ≤0.
 
 Evidence-design assignment (2026-10-04): [bounded handoff](docs/handoffs/astra-full-network-evidence.md). Fresh-context Astra at explicit `xhigh` reviews a complete-reference observer/chunk method, actual state/queue replay evidence, and first-cause coverage within local memory. Sol awaits and independently verifies the decision before dependent instrumentation. Pure frozen acceptance-metric implementation is independent. The review has no authority to change the model, references, tolerances, schema, or project scope.
 
+Metric-calculation checkpoint (2026-10-04):
+
+- Pure [comparison calculations](src/fly_brain/comparison/acceptance.py) use integer per-case spike steps, the union of all three engines' active neurons, exact rational activity/count/timing metrics, and full-precision common-support correlation. Missing-neuron zeros, inclusive ten-step one-to-one matching, exact/one-step diagnostics, and explicit empty/undefined values follow the frozen contract. Existing rounded comparison outputs remain unchanged.
+- Nine intent tests cover common support, missing neurons, integer timing boundaries/nonreuse, distinct diagnostic windows, exact silence with active PyTorch, empty candidates, zero denominators, and row-order independence. An initial empty-group bug caused three failures and was corrected before this checkpoint. **75 application tests pass, zero failures/errors/skips**; full Ruff, strict Pyright, three import contracts, and the offline lock check pass. [Test report](docs/evidence/milestone-4/metrics/application-tests.xml) and [verification/source hashes](docs/evidence/milestone-4/metrics/verification.json).
+- This step calculates metrics only. Fixed absolute/paired gate execution, validated case inputs, actual-engine trace capture, and full-network comparison remain open. The production numerical engine is unchanged; its retained 80-test scientific qualification is not a new run of this metric code. Commit this verified unit before adding gates.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.
