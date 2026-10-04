@@ -40,3 +40,11 @@ class DestinationGrouping:
     edge_ids: NDArray[np.int32]
     inverse: NDArray[np.int32]
     offsets: NDArray[np.int64]
+
+
+@dataclass(frozen=True)
+class DestinationBucket:
+    targets: NDArray[np.int32]
+    edge_ids: NDArray[np.int32]
+    counts: NDArray[np.float32]
+    occupied: NDArray[np.bool_]

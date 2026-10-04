@@ -1,7 +1,7 @@
 import numpy as np
 from numpy.typing import NDArray
 
-from .models import Connectome, DestinationGrouping
+from .models import Connectome, DestinationBucket, DestinationGrouping
 
 
 def absolute_count_sums(connectome: Connectome) -> NDArray[np.int64]:
@@ -17,6 +17,33 @@ def group_destinations(connectome: Connectome) -> DestinationGrouping:
     degree = np.bincount(connectome.destinations, minlength=connectome.neuron_ids.size)
     offsets = np.concatenate((np.zeros(1, dtype=np.int64), np.cumsum(degree)))
     return DestinationGrouping(order, inverse, offsets)
+
+
+def bucket_destinations(connectome: Connectome) -> tuple[DestinationBucket, ...]:
+    grouping = group_destinations(connectome)
+    degree = np.diff(grouping.offsets)
+    widths = np.fromiter(
+        (1 << (max(1, int(value)) - 1).bit_length() for value in degree),
+        dtype=np.int32,
+        count=degree.size,
+    )
+    buckets: list[DestinationBucket] = []
+    for width in np.unique(widths):
+        targets = np.flatnonzero(widths == width).astype(np.int32)
+        edge_ids = np.full((targets.size, width), -1, dtype=np.int32)
+        counts = np.zeros((targets.size, width), dtype=np.float32)
+        occupied = np.zeros((targets.size, width), dtype=np.bool_)
+        for row, target in enumerate(targets):
+            edges = grouping.edge_ids[
+                grouping.offsets[target] : grouping.offsets[target + 1]
+            ]
+            edge_ids[row, : edges.size] = edges
+            counts[row, : edges.size] = connectome.counts[edges]
+            occupied[row, : edges.size] = True
+        for values in (targets, edge_ids, counts, occupied):
+            values.setflags(write=False)
+        buckets.append(DestinationBucket(targets, edge_ids, counts, occupied))
+    return tuple(buckets)
 
 
 def silence_sources(connectome: Connectome, silenced: tuple[int, ...]) -> Connectome:

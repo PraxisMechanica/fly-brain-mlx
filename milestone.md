@@ -239,6 +239,14 @@ Complete isolated fan-in qualification (2026-10-04):
 - A fresh process reloaded the pinned source files, verified every selected original row, reconstructed complete case membership and both reference paths, and reproduced all 24,576 results/count components bit for bit on Metal. [Versioned complete inputs and results](docs/evidence/milestone-2/fan-in/inputs-and-results.npz) retain every original field except redundant dense leaves; those leaves reconstruct bit-exactly from counts/masks/orders and recorded widths. Full original artifacts remain locally preserved, with their hashes in the verification record.
 - No queue layout, event rule, operation order, compiled expression, or production simulation was introduced. Next: implement the approved stable destination buckets, qualify exact event membership and state transitions, and rerun the 157 scalar and complete 61-test reference/core/factored regressions against the adapted implementation.
 
+Stable host bucket representation (2026-10-04):
+
+- The pure mapping builds the approved 15 power-of-two destination buckets, with original edge identities, float32 integer counts, and explicit occupied masks. Every neuron and all **15,091,983 original connections** appear exactly once, in stable row order within their destinations. Padding uses identity -1, zero count, and a false mask; real zero/silenced rows remain occupied.
+- The installed `audit-inputs` command independently verifies destination/count/original-weight identity, the complete edge/target partitions, stable ordering, and minimal widths. The canonical original mapping artifact remains byte-identical to the preceding audit. [Complete host mapping and bucket checksums](docs/evidence/milestone-2/buckets/host-mapping.json).
+- There are **6,672,741 padding leaves**; the host bucket arrays total **196,437,072 bytes**. This is measured host representation storage, not a device peak-memory benchmark.
+- Three new focused tests verify stable padding, exact edge/count/destination recovery, and retained identities under outgoing silencing. The full application suite passes **53 tests, zero failures/errors/skips**. [Report](docs/evidence/milestone-2/buckets/application-tests.xml). Ruff, strict Pyright, and all three import contracts pass.
+- Device execution, queue/event membership, and full reference/state regression remain the next qualification step.
+
 ## Milestone 3 — Backend integration
 
 Status: not started.

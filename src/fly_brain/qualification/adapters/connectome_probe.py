@@ -7,12 +7,82 @@ from numpy.typing import NDArray
 
 from fly_brain.simulation.mapping import (
     absolute_count_sums,
+    bucket_destinations,
     group_destinations,
     silence_sources,
 )
 from fly_brain.simulation.models import Connectome, InputPin
 
 MappedArray = NDArray[np.int32] | NDArray[np.int64] | NDArray[np.float64]
+
+
+def bucket_report(connectome: Connectome, pin: InputPin) -> dict[str, object]:
+    restored: list[NDArray[np.int32]] = []
+    targets: list[NDArray[np.int32]] = []
+    reports: list[dict[str, object]] = []
+    for bucket in bucket_destinations(connectome):
+        identities = bucket.edge_ids[bucket.occupied]
+        target_grid = np.broadcast_to(bucket.targets[:, None], bucket.edge_ids.shape)
+        np.testing.assert_array_equal(
+            target_grid[bucket.occupied], connectome.destinations[identities]
+        )
+        np.testing.assert_array_equal(
+            bucket.counts[bucket.occupied].astype(np.int64),
+            connectome.counts[identities],
+        )
+        np.testing.assert_array_equal(
+            bucket.counts[bucket.occupied].astype(np.float64) * pin.scale_mv,
+            connectome.weights_mv[identities],
+        )
+        assert np.all(bucket.edge_ids[~bucket.occupied] == -1)
+        assert np.all(bucket.counts[~bucket.occupied] == 0)
+        assert np.all(np.diff(bucket.edge_ids, axis=1)[bucket.occupied[:, 1:]] > 0)
+        degree = bucket.occupied.sum(axis=1)
+        width = bucket.edge_ids.shape[1]
+        assert width == 1 or np.all(degree > width // 2)
+        restored.append(identities)
+        targets.append(bucket.targets)
+        arrays = {
+            'targets': bucket.targets,
+            'original_edge_ids': bucket.edge_ids,
+            'counts32': bucket.counts,
+            'occupied': bucket.occupied,
+        }
+        reports.append(
+            {
+                'width': width,
+                'targets': int(bucket.targets.size),
+                'occupied_leaves': int(identities.size),
+                'padded_leaves': int(bucket.edge_ids.size - identities.size),
+                'host_bytes': sum(values.nbytes for values in arrays.values()),
+                'checksums': {
+                    name: {
+                        'dtype': values.dtype.str,
+                        'shape': list(values.shape),
+                        'sha256': hashlib.sha256(values.tobytes()).hexdigest(),
+                    }
+                    for name, values in arrays.items()
+                },
+            }
+        )
+    np.testing.assert_array_equal(
+        np.sort(np.concatenate(restored)),
+        np.arange(connectome.counts.size, dtype=np.int32),
+    )
+    np.testing.assert_array_equal(
+        np.sort(np.concatenate(targets)),
+        np.arange(connectome.neuron_ids.size, dtype=np.int32),
+    )
+    return {
+        'all_original_edges_present_once': True,
+        'all_targets_present_once': True,
+        'source_count_weight_destination_identity_verified': True,
+        'stable_original_row_order': True,
+        'minimal_power_of_two_widths': True,
+        'padding_false_with_zero_count_and_no_real_edge': True,
+        'buckets': reports,
+        'scope': 'Host bucket representation; device transitions remain unqualified.',
+    }
 
 
 def run(connectome: Connectome, pin: InputPin, output: Path) -> dict[str, object]:
@@ -112,6 +182,7 @@ def run(connectome: Connectome, pin: InputPin, output: Path) -> dict[str, object
         },
         'artifact': str(artifact),
         'artifact_sha256': hashlib.sha256(artifact.read_bytes()).hexdigest(),
+        'destination_buckets': bucket_report(connectome, pin),
         'scope': 'Host input mapping only; no full-network execution or parity claim.',
     }
     with (output / 'mapping.json').open('x') as destination:
