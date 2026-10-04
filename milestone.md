@@ -1,6 +1,6 @@
 # MLX fly-brain milestones
 
-This is the authoritative project plan, acceptance criteria, and progress record. Updated 2026-10-04 (Europe/Paris). It consolidates the supplied charter, milestone specification, startup evidence, and subsequent user amendments.
+This is the authoritative project plan, acceptance criteria, and progress record. Updated 2026-10-05 (Europe/Paris). It consolidates the supplied charter, milestone specification, startup evidence, and subsequent user amendments.
 
 ## Architecture compliance — hold released
 
@@ -331,7 +331,7 @@ Silent-control and integration completion checkpoint (2026-10-04):
 
 ## Milestone 4 — Full-network parity
 
-Status: in progress. Integration is complete. A bounded Astra review selects adequate complete-state/first-divergence evidence capture before dependent qualification instrumentation. The frozen comparison metrics and matrix remain unchanged; no full-network parity result is claimed.
+Status: in progress. Integration is complete. Frozen metric calculations and absolute/paired gates are implemented and tested; the bounded Astra evidence-design decision is independently inspected and recorded. Observer execution transparency, actual-engine full-state/first-divergence capture, and the complete comparison matrix remain open. No full-network parity result is claimed.
 
 Acceptance: execute the [frozen 52-case matrix and protocol](docs/mlx-port-baseline.md#full-network-acceptance-fixed-before-validation) through Brian2, the pinned PyTorch numerical core with common experiment setup/replay, and MLX. Sugar and p9 cover 0.1/1/10 seconds with five paired trials; silenced sugar and two-class stimulation cover 0.1/1 seconds with five trials; silent controls cover both shorter durations. Repeat each case and execute the specified batch checks.
 
@@ -349,6 +349,12 @@ Evidence-design review completion (2026-10-04):
 
 - Fresh-context Astra at explicit `xhigh` returns the [bounded decision](docs/evidence/milestone-4/evidence-design/astra-review.md). Select one continuous Brian2 C++ run, three actual all-neuron phase monitors, and an appended observer that streams/clears only bounded monitor storage. Inspect actual recurrent/replay queues and counters; distinguish physical repeat digests from normalized pending-event comparisons. MLX uses the unchanged update with bounded phase capture and complete device queue/event checks. No reconstructed ledger is mislabeled as an observed queue.
 - Sol independently inspects insertion/scheduling order, monitor storage behavior, public queue fields, and actual MLX edge-queue dimensions; the installed queue source matches the retained C++ build exactly. [Source verification](docs/evidence/milestone-4/evidence-design/verification.json). The review and parent ran no observer simulation: transparency, integrity, complete/four-trial memory, causal evidence, and parity still require execution qualification. Implement the small-network observer proof before full-network wiring, retaining all frozen gates. Pure metrics are committed at `73ceebc`.
+
+Metric-gate checkpoint (2026-10-05):
+
+- Execute all five frozen absolute and paired metric gates, including exact silent-reference agreement and the exact count-vector fallback for undefined correlation. Rational comparisons have no tolerance; only paired computed correlation permits the frozen `1e-12` host slack. A weak PyTorch result cannot excuse an absolute failure, and a one-spike degradation cannot hide inside comparison slack.
+- Eighteen new boundary/intent cases verify inclusive fixed thresholds, paired exactness, silence, empty candidates, constant vectors, undefined PyTorch correlation, and limited host correlation slack. **93 application tests pass, zero failures/errors/skips**; full Ruff, strict Pyright, and all three import contracts pass. [Test report](docs/evidence/milestone-4/gates/application-tests.xml) and [verification/source hashes](docs/evidence/milestone-4/gates/verification.json). Source-supported observer design is committed at `178aa9b`.
+- Metric acceptance is one required component. Validated data/setup, actual-engine observer transparency, deterministic full-state/queue/batch evidence, causal diagnosis, and every full-network case remain open. This pure step does not change or requalify the production numerical engine. Commit it before observer implementation.
 
 ## Milestone 5 — Complete-brain benchmark and profiling
 
@@ -378,7 +384,7 @@ Milestone 2 completion checkpoint: `fe5f269` on `main`. Milestone 3 implementati
 
 Milestones 1–3 are complete within their recorded envelopes. All 24,576 prescribed cases pass through the actual layout under the [recorded input-state accounting decision](docs/evidence/milestone-2/initial-state-cast/astra-review.md#recorded-engineering-decision). All 99 original-state one-step conversion limitations remain visible; original-state trajectory gates pass. Complete device fields/events and controlled original/silenced full-network pulses pass. Two complete sugar outputs repeat byte for byte; the complete silent control has zero events; existing comparison tools consume both. Next work is Milestone 4's full-network scientific comparison and causal audit. Later milestones remain open.
 
-The current application report records 66 passed tests, zero failures/errors/skips; the scientific suite records 80 passed tests, zero failures/errors/skips. Ruff, strict Pyright, and all three import contracts pass. A fresh normal installation executes the complete shortest sugar experiment. Full-experiment scientific parity, benchmark speed, and total peak unified memory remain unverified. Existing data, results, and standalone artifacts are preserved. New runs require a fresh output directory. Engineering choices remain delegated to Sol; use bounded Astra review where deeper numerical judgment is needed.
+The current application report records 93 passed tests, zero failures/errors/skips; the unchanged-engine scientific suite records 80 passed tests, zero failures/errors/skips. Ruff, strict Pyright, and all three import contracts pass. A fresh normal installation executes the complete shortest sugar experiment. Frozen metric gates are tested and the observer design is recorded, while observer execution qualification, full-experiment scientific parity, benchmark speed, and total peak unified memory remain unverified. Existing data, results, and standalone artifacts are preserved. New runs require a fresh output directory. Engineering choices remain delegated to Sol; use bounded Astra review where deeper numerical judgment is needed.
 
 Delegation setup (2026-10-04): [the versioned bounded subagent skill](skills/bounded-subagent/SKILL.md) is installed through a symlink at `~/.codex/skills/bounded-subagent`, with automatic discovery enabled. At the user's request, model and reasoning effort are resolved from user instructions or project rules rather than fixed in the reusable skill. The bundled `quick_validate.py` passed; the installed link, file contents, and parsed interface metadata were verified. A read-only `gpt-6-astra` subagent at explicit `xhigh` completed the workflow review and four hypothetical dispatch checks: an explicit Sol/high pair, the project's Astra/xhigh pair, missing choices without defaults, and explicitly requested inheritance. It found no material defects. These were instruction/tool-contract checks, not four live dispatches. At that setup checkpoint, Sol retained the user's selected `max`; the updated goal now requests `xhigh`. The existing manual assignment and scientific evidence retained their owner. This setup did not start Milestone 2 or run additional numerical checks.
 

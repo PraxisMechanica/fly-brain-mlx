@@ -1,0 +1,22 @@
+{
+  "application_tests": 93,
+  "new_gate_intent_cases": 18,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "ruff_lint_and_format_pass": true,
+  "strict_pyright_errors_warnings": [
+    0,
+    0
+  ],
+  "import_contracts_kept": 3,
+  "source_sha256": {
+    "src/fly_brain/comparison/acceptance.py": "b9f7606075d549b604f9bbf30d6ded2bb42b3d76debeeef54443be11fea2ead0",
+    "src/fly_brain/comparison/models.py": "181c802b95b57fee8b1a0ac68cd712aeec37a8a42c07634853078e5dc6e489d1",
+    "tests/unit/test_parity_gates.py": "d020271ac977333aba2d95148a2654a4cd1fbdf34879db090a6548f0d8f1b384"
+  },
+  "report_sha256": "005ecb44472bf209e2d81aeb6dc0ee6a2811aca36ef740bcbb65d37fafbd47da",
+  "rational_gates": "Exact Fraction comparisons; no paired spike or percentage degradation allowance.",
+  "correlation_comparisons": "Absolute floor 0.99 has no slack. Only paired correlation permits the frozen maximum 1e-12 host comparison slack.",
+  "scope": "Frozen metric gates only. Data validation, actual-engine evidence, repeat/batch proof, causal audit, and all 52 full-network cases remain required before scientific acceptance."
+}

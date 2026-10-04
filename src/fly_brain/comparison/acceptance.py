@@ -3,7 +3,7 @@ from fractions import Fraction
 import numpy as np
 from numpy.typing import NDArray
 
-from .models import ParityMetrics, SpikeSteps
+from .models import MetricAcceptance, ParityMetrics, SpikeSteps
 from .service import pearson_or_none
 
 
@@ -126,4 +126,45 @@ def measure(
         common_rate_rmse_hz=float(np.sqrt(np.mean(common_errors**2)))
         if support.size
         else None,
+    )
+
+
+def no_greater(first: Fraction | None, second: Fraction | None) -> bool:
+    return first is not None and (second is None or first <= second)
+
+
+def apply_gates(mlx: ParityMetrics, torch: ParityMetrics) -> dict[str, bool]:
+    return {
+        'silent_reference_exact': bool(
+            mlx.reference_spikes or not mlx.candidate_spikes
+        ),
+        'activity_floor': mlx.active_jaccard >= Fraction(19, 20),
+        'activity_paired': mlx.active_jaccard >= torch.active_jaccard,
+        'count_floor': mlx.count_error is not None
+        and mlx.count_error <= Fraction(1, 50),
+        'count_paired': no_greater(mlx.count_error, torch.count_error),
+        'neuron_count_floor': mlx.neuron_count_error is not None
+        and mlx.neuron_count_error <= Fraction(1, 20),
+        'neuron_count_paired': no_greater(
+            mlx.neuron_count_error, torch.neuron_count_error
+        ),
+        'correlation_floor_or_exact_counts': mlx.rate_correlation >= 0.99
+        if mlx.rate_correlation is not None
+        else mlx.counts_equal,
+        'correlation_paired': mlx.rate_correlation is None
+        or torch.rate_correlation is None
+        or mlx.rate_correlation >= torch.rate_correlation - 1e-12,
+        'timing_floor': mlx.timing_f1 >= Fraction(19, 20),
+        'timing_paired': mlx.timing_f1 >= torch.timing_f1,
+    }
+
+
+def evaluate_case(
+    reference: SpikeSteps, mlx: SpikeSteps, torch: SpikeSteps, duration_s: float
+) -> MetricAcceptance:
+    support = common_support(reference, mlx, torch)
+    mlx_metrics = measure(reference, mlx, support, duration_s)
+    torch_metrics = measure(reference, torch, support, duration_s)
+    return MetricAcceptance(
+        mlx_metrics, torch_metrics, apply_gates(mlx_metrics, torch_metrics)
     )

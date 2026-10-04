@@ -46,6 +46,17 @@ class ParityMetrics:
 
 
 @dataclass(frozen=True)
+class MetricAcceptance:
+    mlx: ParityMetrics
+    torch: ParityMetrics
+    checks: dict[str, bool]
+
+    @property
+    def accepted(self) -> bool:
+        return all(self.checks.values())
+
+
+@dataclass(frozen=True)
 class ComparisonRequest:
     first: Path
     second: Path
