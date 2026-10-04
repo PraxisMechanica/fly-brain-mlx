@@ -1,0 +1,155 @@
+{
+  "brian2_version": "2.8.0",
+  "timestep_ms": 0.1,
+  "voltage_dtype": "<class 'numpy.float64'>",
+  "schedule": "                     object                      |               part of                |       Clock dt       |    when    | order | active\n-------------------------------------------------+--------------------------------------+----------------------+------------+-------+-------\ncontract_neurons_stateupdater (StateUpdater)     | contract_neurons (NeuronGroup)       | 100. us (every step) | groups     |     0 |  yes  \ncontract_neurons_spike_thresholder (Thresholder) | contract_neurons (NeuronGroup)       | 100. us (every step) | thresholds |     0 |  yes  \nspikemonitor (SpikeMonitor)                      | spikemonitor (SpikeMonitor)          | 100. us (every step) | thresholds |     1 |  yes  \ncontract_synapses_pre (SynapticPathway)          | contract_synapses (Synapses)         | 100. us (every step) | synapses   |    -1 |  yes  \npoissoninput (PoissonInput)                      | contract_neurons_subgroup (Subgroup) | 100. us (every step) | synapses   |     0 |  yes  \ncontract_neurons_spike_resetter (Resetter)       | contract_neurons (NeuronGroup)       | 100. us (every step) | resets     |     0 |  yes  \nstatemonitor (StateMonitor)                      | statemonitor (StateMonitor)          | 100. us (every step) | end        |     0 |  yes  ",
+  "generated_state_update": "not_refractory = timestep(t - lastspike, dt) >= timestep(rfc, dt)\n_g = g*exp(-dt*int(not_refractory)/tau)\n_v = g*tau*(-exp(dt*int(not_refractory)/t_mbr) + exp(dt*int(not_refractory)/tau))*exp(-dt*int(not_refractory)/t_mbr)*exp(-dt*int(not_refractory)/tau)/(t_mbr - tau) + v*exp(-dt*int(not_refractory)/t_mbr) + v_0 - v_0*exp(-dt*int(not_refractory)/t_mbr)\ng = _g\nv = _v",
+  "reset": "v = v_rst; w = 0; g = 0 * mV",
+  "synaptic_delay_ms": 1.8,
+  "guaranteed_stimulation": {
+    "rate_hz": 10000,
+    "end_voltage_mv": [
+      16.75,
+      -52.0,
+      16.75,
+      -52.0,
+      16.75
+    ],
+    "spike_times_ms": [
+      0.1,
+      0.30000000000000004
+    ]
+  },
+  "pytorch_single_spike_delay": {
+    "setup": "Two neurons, source initialized at -44 mV, destination at -52 mV, weight[post=1,pre=0]=1, no external input; source spikes at step 0",
+    "first_destination_g_step": 20,
+    "first_destination_v_step": 21,
+    "trace": [
+      {
+        "step": 0,
+        "g_mv": 0.0,
+        "v_mv": -52.0
+      },
+      {
+        "step": 1,
+        "g_mv": 0.0,
+        "v_mv": -52.0
+      },
+      {
+        "step": 2,
+        "g_mv": 0.0,
+        "v_mv": -52.0
+      },
+      {
+        "step": 3,
+        "g_mv": 0.0,
+        "v_mv": -52.0
+      },
+      {
+        "step": 4,
+        "g_mv": 0.0,
+        "v_mv": -52.0
+      },
+      {
+        "step": 5,
+        "g_mv": 0.0,
+        "v_mv": -52.0
+      },
+      {
+        "step": 6,
+        "g_mv": 0.0,
+        "v_mv": -52.0
+      },
+      {
+        "step": 7,
+        "g_mv": 0.0,
+        "v_mv": -52.0
+      },
+      {
+        "step": 8,
+        "g_mv": 0.0,
+        "v_mv": -52.0
+      },
+      {
+        "step": 9,
+        "g_mv": 0.0,
+        "v_mv": -52.0
+      },
+      {
+        "step": 10,
+        "g_mv": 0.0,
+        "v_mv": -52.0
+      },
+      {
+        "step": 11,
+        "g_mv": 0.0,
+        "v_mv": -52.0
+      },
+      {
+        "step": 12,
+        "g_mv": 0.0,
+        "v_mv": -52.0
+      },
+      {
+        "step": 13,
+        "g_mv": 0.0,
+        "v_mv": -52.0
+      },
+      {
+        "step": 14,
+        "g_mv": 0.0,
+        "v_mv": -52.0
+      },
+      {
+        "step": 15,
+        "g_mv": 0.0,
+        "v_mv": -52.0
+      },
+      {
+        "step": 16,
+        "g_mv": 0.0,
+        "v_mv": -52.0
+      },
+      {
+        "step": 17,
+        "g_mv": 0.0,
+        "v_mv": -52.0
+      },
+      {
+        "step": 18,
+        "g_mv": 0.0,
+        "v_mv": -52.0
+      },
+      {
+        "step": 19,
+        "g_mv": 0.0,
+        "v_mv": -52.0
+      },
+      {
+        "step": 20,
+        "g_mv": 0.2750000059604645,
+        "v_mv": -52.0
+      },
+      {
+        "step": 21,
+        "g_mv": 0.2695000171661377,
+        "v_mv": -51.998626708984375
+      },
+      {
+        "step": 22,
+        "g_mv": 0.2641100287437439,
+        "v_mv": -51.99728775024414
+      },
+      {
+        "step": 23,
+        "g_mv": 0.2588278353214264,
+        "v_mv": -51.99597930908203
+      },
+      {
+        "step": 24,
+        "g_mv": 0.25365129113197327,
+        "v_mv": -51.99470520019531
+      }
+    ]
+  }
+}

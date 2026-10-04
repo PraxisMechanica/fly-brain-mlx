@@ -5,7 +5,8 @@ This checkout is pinned to upstream commit `a3db62f9436074e485c0278290c2164ed615
 # Emulation of the *Drosophila Fly* Brain
 
 Whole-brain leaky integrate-and-fire model of the adult fruit fly, built from the
-[FlyWire](https://flywire.ai/) connectome (~138k neurons, ~5M synapses).
+[FlyWire](https://flywire.ai/) connectome (138,639 neurons and 15,091,983
+connection rows in the pinned v783 dataset).
 Activate and silence arbitrary neurons; observe downstream spike propagation.
 
 Based on the paper

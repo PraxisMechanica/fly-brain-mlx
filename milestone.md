@@ -48,11 +48,11 @@ Required work:
 - [x] Pin and import upstream while preserving its source and licence notices.
 - [x] Read Brian2, PyTorch, and orchestration code.
 - [x] Reproduce the shortest supported Brian2 CPU experiment.
-- [ ] Record equations, exact discrete integration, operation order, timestep, delay, threshold, reset, refractory behavior, activation, and silencing.
-- [ ] Record neuron ordering, connection direction, data counts, random-number and seed behavior.
-- [ ] Record benchmark fields, spike-output schema, comparison-tool contracts, and backend disagreements.
-- [ ] Record licensing and publication/source distinctions.
-- [ ] Run focused reference-contract tests and preserve raw evidence.
+- [x] Record equations, exact discrete integration, operation order, timestep, delay, threshold, reset, refractory behavior, activation, and silencing.
+- [x] Record neuron ordering, connection direction, data counts, random-number and seed behavior.
+- [x] Record benchmark fields, spike-output schema, comparison-tool contracts, and backend disagreements.
+- [x] Record licensing and publication/source distinctions.
+- [x] Run focused reference-contract tests and preserve raw evidence.
 - [ ] Finish the baseline document and the bounded numerical-contract handoff.
 
 Evidence completed:
@@ -66,6 +66,10 @@ Evidence completed:
 - Measured build: 12.742 seconds; simulation: 1.348 seconds; spike extraction: 0.329 seconds; total accounted time: 16.824 seconds. This is one unseeded reference run, not a repeatability or MLX-performance claim.
 - [Raw result and schema](docs/evidence/milestone-0/brian2-baseline.json), [log](docs/evidence/milestone-0/brian2-baseline.log), [input summary and hashes](docs/evidence/milestone-0/input-summary.json).
 - Measured inputs: 138,639 neurons, 15,091,983 connection rows. The original approximate five-million figure does not describe the pinned connectivity file.
+- [Reference baseline contract](docs/mlx-port-baseline.md) records the exact observed model, ordering, data/output contracts, comparison tools, differences, and licence notices.
+- `.venv/bin/python -m pytest -q tests/test_reference_contract.py --junitxml=docs/evidence/milestone-0/reference-tests-final.xml --disable-warnings`: nine passed, zero skipped/failures/errors, 136 dependency warnings, 2.84 seconds. [Final test report](docs/evidence/milestone-0/reference-tests-final.xml).
+- [Generated update, schedule, and delay diagnostic](docs/evidence/milestone-0/reference-schedule.json): Brian2 recurrent conductance arrives at step 18 and affects voltage at step 19; PyTorch's measured arrival/influence steps are 20/21.
+- [Publication equations and source provenance](docs/evidence/milestone-0/publication-source.json) were retrieved from the Europe PMC full-text interface and distinguish the original v630 study from this v783 dataset.
 
 Pending scientific review:
 
@@ -136,7 +140,7 @@ Acceptance: final corrections are applied; the complete approved verification su
 
 ## Current checkpoint and constraints
 
-Next work: finish Milestone 0's focused reference probes, contract documentation, and numerical-contract handoff.
+Next work: commit the completed reference evidence, then write and request the bounded Astra numerical-contract review. No MLX implementation before the review decisions are recorded.
 
 No MLX backend has been written. No MLX parity, speed, peak memory, or installation claim is verified. Existing simulation results and generated standalone artifacts are preserved. Baseline reruns require a fresh output directory; the harness refuses an existing destination.
 
