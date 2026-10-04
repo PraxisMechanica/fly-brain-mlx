@@ -131,6 +131,12 @@ Final qualification checkpoint (2026-10-04):
 - `.venv/bin/ruff check code/mlx_core.py tests/test_mlx_core.py scripts/qualify_mlx_core.py` passed; `.venv/bin/pyright` passed strict checks for the authored core/runner; `UV_CACHE_DIR="$PWD/.uv-cache" uv pip check --python .venv/bin/python` confirmed all 41 installed packages are compatible. Authored diffs passed whitespace checks. Existing numerical source/data match the upstream pin.
 - The core keeps neural state and propagation on explicit Metal streams, with host-only setup/coefficient construction and integer loop control. Qualification collects traces after execution; its per-step synchronization is for correctness evidence and makes no throughput claim. No compilation, custom kernel, connectome load, public MLX command, production output, full-network parity, clean installation, or performance result is claimed.
 
+## Accumulation-design handoff
+
+Status: requested; awaiting the user's switch to GPT-6 Astra at `xhigh`.
+
+Milestone 1 is complete at `52f8427`. The [bounded accumulation review](docs/handoffs/astra-accumulation-design.md) records actual Metal cancellation failures, all relevant evidence, the requested strategy/finite qualification, and the return condition. Select a deterministic accumulation design under the existing budgets before choosing a full-connectome propagation representation. No custom kernel, tolerance waiver, backend integration, or full-data benchmark is approved by this handoff. Astra must request return to GPT-6.1 Sol at `xhigh` after the bounded outcome is recorded.
+
 ## Milestone 2 — Connectome loading
 
 Status: not started.
@@ -179,7 +185,7 @@ Acceptance: final corrections are applied; the complete approved verification su
 
 ## Current checkpoint and constraints
 
-Next work: prepare a bounded accumulation-design review using the measured large-cancellation failure before accepting a connectome propagation representation. Milestone 1 is complete; Milestone 2 has not started. Execution remains GPT-6.1 Sol at `xhigh` until the user performs a requested switch. The private in-memory core does not change an existing public interface or persisted production schema.
+Next work: the user switches to GPT-6 Astra at `xhigh` for the [bounded accumulation-design review](docs/handoffs/astra-accumulation-design.md), based on measured Metal cancellation failures. Milestone 1 is complete; Milestone 2 has not started. Stop for the requested switch and resume from the recorded checkpoint. The private in-memory core does not change an existing public interface or persisted production schema.
 
 A private small-network MLX core is qualified within the reviewed envelope. The integrated MLX backend, full-network parity, speed, peak memory, and clean installation remain unverified. Existing simulation results and generated standalone artifacts are preserved. Reruns require a fresh output directory; both harnesses refuse an existing destination.
 
