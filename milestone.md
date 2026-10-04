@@ -21,7 +21,7 @@ The numerical backend varies; the model, experiment definitions, neuron ordering
 - Verify one milestone before proceeding to the next. Update this file after significant steps with exact commands, test results, measured outcomes, unresolved issues, and supporting artifact links. Commit verified work incrementally on `main`.
 - Distinguish tolerance-bounded small-network continuous state with exact ordinary-fixture discrete parity from full-network event/statistical parity. Keep the separately asserted threshold-rounding limitation explicit. Do not declare acceptance thresholds after seeing results, explain away discrepancies, or infer scientific validity from a successful run alone.
 
-Each review assignment must contain the reason for deeper review, current checkpoint and commits, exact evidence and files to inspect, one bounded requested outcome, and a completion condition. Use [the Astra subagent skill](skills/astra-subagent/SKILL.md) for future reviews. Sol awaits the result, verifies the evidence, records the decision, and commits integrated work before continuing dependent implementation. The earlier manual handoffs retain their historical completion records.
+Each review assignment must contain the reason for deeper review, current checkpoint and commits, exact evidence and files to inspect, one bounded requested outcome, and a completion condition. Use [the bounded subagent skill](skills/bounded-subagent/SKILL.md) with the model and effort specified by this project's delegation rule for future reviews. Sol awaits the result, verifies the evidence, records the decision, and commits integrated work before continuing dependent implementation. The earlier manual handoffs retain their historical completion records.
 
 ## Completion requirements
 
@@ -133,7 +133,7 @@ Final qualification checkpoint (2026-10-04):
 
 ## Accumulation-design handoff
 
-Status: bounded review concluded with a measured input-precision blocker; awaiting the user's return to GPT-6.1 Sol at `xhigh`. No full-connectome accumulation strategy is approved.
+Status: reopened by the user's request to attempt the preferred passing-strategy outcome. The same manually assigned Astra owner is continuing; no review agent or parent-model switch is involved. A factored-scale prototype passes the scalar gates; firing-network qualification and the final design decision are in progress.
 
 Milestone 1 is complete at `52f8427`. The [bounded accumulation review](docs/handoffs/astra-accumulation-design.md#decision-record--concluded-with-blocker) records the candidate reduction, failed alternatives, exact casting blocker, conditional representation guidance, and next audit. A production accumulation design must meet the existing budgets before choosing a full-connectome propagation representation. No custom kernel, tolerance waiver, backend integration, or full-data benchmark is approved by this handoff.
 
@@ -150,6 +150,12 @@ Decision checkpoint:
 - Probe/evidence commit `0084fe0`. The [durable precision record](docs/mlx-port-baseline.md#accumulation-review-reduction-candidate-and-weight-cast-blocker) separates weight-cast error from reduction error and preserves all fixed budgets. The candidate is supported for further diagnostics only; six measured trajectory failures preclude strategy approval. Independent-process repeatability and full propagation remain untested.
 - The return condition is met through the documented-blocker branch. After the user's switch, Sol may begin the [precisely specified Milestone 2 host-side input audit](docs/handoffs/astra-accumulation-design.md#exact-next-work-for-sol-milestone-2-input-audit), preserving data and existing numerical code. Mapping, per-source cast-error extrema, and representative pinned-data masks provide evidence for the next bounded numerical decision. The audit cannot dismiss the retained synthetic failures or authorize rollout by itself.
 - Final documentation verification: all 138 local links/anchors across the README, milestone, baseline, and handoffs passed. The retained arrays independently reproduced the exact cast-input sums, correctly rounded outputs, and bitwise repeated/standalone comparisons; evidence hashes matched. Ruff, strict Pyright, and `git diff --check` passed. The diff against incoming `1757aa8` for existing core/tests/runners/dependencies is empty. Both review commits remain local because no user-owned push destination is configured.
+
+Reopened review checkpoint (2026-10-04):
+
+- Incoming checkpoint `71400e3` includes the user's new delegation workflow, which explicitly preserves this manual review's owner. The user asked this owner to attempt a passing strategy. The earlier blocker and evidence remain recorded; the next input audit is deferred until this attempt concludes.
+- [Factored-scale probe](scripts/probe_mlx_factored_accumulation.py): keep signed integer connectivity exactly in float32, reduce it with the compensated tree, then use compensated products with high/low float32 components of the shared `0.275` scale and combine current synaptic state before final rounding. This tests the factoring alternative already contemplated by the numerical contract. No per-edge extra weight component, float64 device state, tolerance change, or production-core change is introduced.
+- `MLX_ENABLE_TF32=0 .venv/bin/python scripts/probe_mlx_factored_accumulation.py --output data/results/mlx-factored-review-20261004-01`: **157/157** scalar cases pass both original-float64 one-step and trajectory budgets, including all retained 125 cases and 32 new cases. Count expansions are exact; repeated components/results and independently sized standalone results are bit-identical. Maximum measured one-step budget fraction is **0.023660**. [Measurements](docs/evidence/factored-accumulation/scalars/factored.json) and [complete scalar inputs/results](docs/evidence/factored-accumulation/scalars/factored.npz) are retained. Ruff and strict Pyright pass for the new probe. This checkpoint does not yet approve firing-network behavior or connectome rollout.
 
 ## Milestone 2 — Connectome loading
 
@@ -199,7 +205,7 @@ Acceptance: final corrections are applied; the complete approved verification su
 
 ## Current checkpoint and constraints
 
-Next work: the user switches back to GPT-6.1 Sol at `xhigh` for the [Milestone 2 host-side mapping and cast-error audit](docs/handoffs/astra-accumulation-design.md#exact-next-work-for-sol-milestone-2-input-audit). The bounded review is concluded with a precise unresolved blocker, not an approved accumulation strategy. Milestone 1 is complete for its tested envelope; Milestone 2 has not started. Stop for the requested model switch. Preserve the qualified core until a subsequent numerical decision resolves input casting; the current private core and probe do not change an existing public interface or persisted production schema.
+Next work: the current manual Astra owner completes the user's requested second attempt at the preferred accumulation-design outcome. The factored-scale scalar prototype passes; qualify firing-network behavior and finalize the bounded decision before requesting return to Sol. Milestone 1 is complete for its tested envelope; Milestone 2 has not started. The existing qualified core and production contracts remain unchanged.
 
 A private small-network MLX core is qualified within the reviewed envelope. The integrated MLX backend, full-network parity, speed, peak memory, and clean installation remain unverified. Existing simulation results and generated standalone artifacts are preserved. Reruns require a fresh output directory; both harnesses refuse an existing destination.
 
