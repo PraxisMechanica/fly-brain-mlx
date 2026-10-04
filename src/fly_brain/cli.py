@@ -20,6 +20,7 @@ def parser() -> argparse.ArgumentParser:
         'inspect-reference',
         'audit-inputs',
         'qualify-fan-in',
+        'qualify-layout-fan-in',
     ):
         command = commands.add_parser(name)
         command.add_argument('--output', type=Path, required=True)
@@ -79,6 +80,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         report = bootstrap.input_audit(request.project, request.output)
     elif arguments.command == 'qualify-fan-in':
         report = bootstrap.fan_in_audit(request.project, request.output)
+    elif arguments.command == 'qualify-layout-fan-in':
+        report = bootstrap.layout_fan_in_audit(request.project, request.output)
     else:
         report = bootstrap.schedule(request.output)
     print(json.dumps(report, indent=2))

@@ -1,17 +1,21 @@
 import hashlib
 import importlib.metadata
 import json
+from collections.abc import Callable
 from pathlib import Path
 
 import mlx.core as mx
 import numpy as np
 from numpy.typing import NDArray
 
-from fly_brain.qualification.fan_in import build_cases, compare_cases
+from fly_brain.qualification.fan_in import FanInCases, build_cases, compare_cases
 from fly_brain.qualification.input_patterns import analyze_inputs
 from fly_brain.simulation.backend.accumulation import factored_sum
 from fly_brain.simulation.mapping import group_destinations
 from fly_brain.simulation.models import Connectome, InputPin
+
+Reduction = tuple[NDArray[np.float32], NDArray[np.float32], NDArray[np.float32]]
+Evaluation = tuple[Reduction, Reduction, Reduction]
 
 
 def execute(
@@ -26,8 +30,29 @@ def execute(
         )
 
 
+def evaluate_cases(
+    connectome: Connectome, target: int, edges: NDArray[np.int32], cases: FanInCases
+) -> Evaluation:
+    initial = cases.initial64.astype(np.float32)
+    actual = execute(cases.leaves32, initial)
+    repeated = execute(cases.leaves32, initial)
+    standalone = tuple(np.empty_like(value) for value in actual)
+    for row in range(initial.size):
+        own = execute(cases.leaves32[row], np.asarray(initial[row], dtype=np.float32))
+        for destination, value in zip(standalone, own, strict=True):
+            destination[row] = value
+    return actual, repeated, (standalone[0], standalone[1], standalone[2])
+
+
 def run(
-    connectome: Connectome, pin: InputPin, output: Path, precision: str
+    connectome: Connectome,
+    pin: InputPin,
+    output: Path,
+    precision: str,
+    evaluator: Callable[
+        [Connectome, int, NDArray[np.int32], FanInCases], Evaluation
+    ] = evaluate_cases,
+    scope: str = 'Isolated pinned-data fan-in qualification; not a full-network run.',
 ) -> dict[str, object]:
     output.mkdir(parents=True, exist_ok=False)
     assert precision == '0'
@@ -52,19 +77,11 @@ def run(
         weights = connectome.weights_mv[edges]
         cases = build_cases(target, sources, counts, weights)
         initial32 = cases.initial64.astype(np.float32)
-        actual, high, low = execute(cases.leaves32, initial32)
-        repeat, repeat_high, repeat_low = execute(cases.leaves32, initial32)
-        standalone = np.empty_like(actual)
-        standalone_high, standalone_low = np.empty_like(high), np.empty_like(low)
-        for row in range(initial32.size):
-            own, own_high, own_low = execute(
-                cases.leaves32[row], np.asarray(initial32[row], dtype=np.float32)
-            )
-            standalone[row], standalone_high[row], standalone_low[row] = (
-                own,
-                own_high,
-                own_low,
-            )
+        (
+            (actual, high, low),
+            (repeat, repeat_high, repeat_low),
+            (standalone, standalone_high, standalone_low),
+        ) = evaluator(connectome, target, edges, cases)
         checks = compare_cases(cases, actual)
         repeat_pass = (
             (actual.view(np.uint32) == repeat.view(np.uint32))
@@ -255,10 +272,12 @@ def run(
                 Path(__file__).resolve().parents[1] / 'input_patterns.py',
                 Path(__file__).resolve().parents[2]
                 / 'simulation/backend/accumulation.py',
+                Path(__file__).with_name('bucketed_fan_in.py'),
+                Path(__file__).resolve().parents[2] / 'simulation/backend/bucketed.py',
             )
         },
         'measurements': targets,
-        'scope': 'Isolated pinned-data fan-in qualification; not a full-network run.',
+        'scope': scope,
     }
     with (output / 'fan-in.json').open('x') as destination:
         json.dump(report, destination, indent=2, allow_nan=False)

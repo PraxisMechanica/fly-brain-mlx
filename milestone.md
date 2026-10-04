@@ -262,6 +262,11 @@ Bucketed scalar and bounded review checkpoint (2026-10-04):
 - **53 application tests pass, zero failures/errors/skips**; Ruff, strict Pyright, and three import contracts pass. [Report](docs/evidence/milestone-2/buckets/scalars/application-tests.xml). No numerical source changed after the recorded 79-test scientific run.
 - A fresh-context Astra subagent at explicit `xhigh` finds **no blocking defect** in its bounded implementation review, checks retained evidence, and performs additional Metal checks. [Assignment, decision, verification, and limits](docs/evidence/milestone-2/buckets/astra-execution-review.md). Its remaining requirements are the complete prescribed pinned-case replay through the layout, all device fields and gathered event masks, and a complete-connectome delayed pulse. Sol owns these engineering decisions and qualification; no user choice of numerical internals is required.
 
+Pinned layout replay implementation checkpoint (2026-10-04):
+
+- The installed `qualify-layout-fan-in` command injects actual layout execution into the existing fan-in case/report path. It retains the same 31 targets, 70 masks, three orders, all initial states, accurate/ordered references, count/component checks, and every individual execution. Induced incoming networks preserve original neuron identifiers, source membership, signed counts, and row order; every other neuron must retain its exact state bits.
+- Ruff formatting/lint, strict Pyright, three import contracts, and **53 application tests, zero failures/errors/skips**, pass. The full Metal run is executing under `data/results/milestone-2-layout-fan-in-20261004-01`; its first 11 targets pass. No complete layout-matrix pass is claimed at this implementation checkpoint.
+
 ## Milestone 3 — Backend integration
 
 Status: not started.
