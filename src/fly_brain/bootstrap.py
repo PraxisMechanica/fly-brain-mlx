@@ -113,3 +113,11 @@ def layout_fan_in_audit(project: Path, output: Path) -> dict[str, object]:
         evaluator=evaluate_cases,
         scope='All prescribed pinned fan-in cases through production layout; not full-network dynamics.',
     )
+
+
+def device_layout_audit(project: Path, output: Path) -> dict[str, object]:
+    precision = configure_mlx()
+    from fly_brain.qualification.adapters.device_layout_probe import run
+
+    connectome, pin = pinned_inputs(project)
+    return run(connectome, pin, output, precision)

@@ -70,11 +70,14 @@ The complete prescribed input fan-in audit is available through the installed co
 ```sh
 uv run --locked --no-dev fly-brain qualify-fan-in --output data/results/fan-in-01
 uv run --locked --no-dev fly-brain qualify-layout-fan-in --output data/results/layout-fan-in-01
+uv run --locked --no-dev fly-brain qualify-device-layout --output data/results/device-layout-01
 ```
 
 It preserves every target, mask, initial state, edge order, reference, and device result, with repeated and individual-run comparisons. The isolated arithmetic check starts both engines from the same stored state; original-state conversion limitations remain visible, and the original-state trajectory limits remain mandatory. A failed required case returns a failure status. This audit does not establish full-network parity.
 
 `qualify-layout-fan-in` uses the same case builder, limits, and evidence writer. It feeds each prescribed edge order and event mask through the production layout, including actual source identifiers, target index recovery, empty targets, and untouched source states.
+
+`qualify-device-layout` verifies every field and gathered event against all original connection rows, including every padding leaf. Five fixed source/receiving patterns cover all events, no events with negative-zero state, and seeded patterns. It retains full neuron results and both original-weight references, with exact counts and repeated/individual-run checks.
 
 ## Compare existing spikes
 

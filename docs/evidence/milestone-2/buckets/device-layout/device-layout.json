@@ -1,0 +1,763 @@
+{
+  "accepted": true,
+  "neurons": 138639,
+  "edges": 15091983,
+  "patterns": [
+    "all-accepted",
+    "none-accepted-negative-zero",
+    "source-0.001-receiving-0.8",
+    "source-0.01-receiving-0.6",
+    "source-0.5-receiving-0.5"
+  ],
+  "seed": [
+    20261004,
+    785
+  ],
+  "accepted_events_per_trial": [
+    15091983,
+    0,
+    9879,
+    94545,
+    3820288
+  ],
+  "all_fields_round_trip_exactly": true,
+  "inverse_target_order_exact": true,
+  "every_gathered_event_and_padding_leaf_matches": true,
+  "integer_count_expansions_exact": true,
+  "repeat_and_standalone_bits_identical": true,
+  "zero_counts_copy_initial_bits": true,
+  "both_original_state_budgets_pass": true,
+  "max_one_step_budget_fraction": 0.02362013208363158,
+  "max_trajectory_budget_fraction": 0.004623383166716167,
+  "input_sha256": {
+    "completeness": "52b0ac6094cd32c546f8d4c341e094376f48f4e791f8db9b166de5dff8199ea4",
+    "connectivity": "efeb23fb99098e9c390f6869969b2a121a2ee92c833cfc45ecb2c1d8e1af0347"
+  },
+  "accepted_event_sha256": "1c5b8b3f931822a1e0f3a0f7509d996377144ca6bd46c4e147a4247d3a220915",
+  "buckets": [
+    {
+      "width": 1,
+      "fields": {
+        "targets": {
+          "dtype": "<i4",
+          "shape": [
+            3798
+          ],
+          "sha256": "142235a484b86a22788d920599ae66ab316760b711a456694989341bf38f4487",
+          "exact_device_round_trip": true
+        },
+        "edge_ids": {
+          "dtype": "<i4",
+          "shape": [
+            3798,
+            1
+          ],
+          "sha256": "597099ecd22934159cf9a4324b053f65cad0d7a6ec253604a686456f815c7f38",
+          "exact_device_round_trip": true
+        },
+        "counts": {
+          "dtype": "<f4",
+          "shape": [
+            3798,
+            1
+          ],
+          "sha256": "fff5e6c5a982be777d567261a4cfa182f7bd539993756f3660a61b2e0e2cb8f2",
+          "exact_device_round_trip": true
+        },
+        "occupied": {
+          "dtype": "|b1",
+          "shape": [
+            3798,
+            1
+          ],
+          "sha256": "245964551ef64a3b31f998f8454a9343b438692db37d8ede222b22d4d9a76694",
+          "exact_device_round_trip": true
+        }
+      },
+      "gathered_event_shape": [
+        5,
+        3798,
+        1
+      ],
+      "gathered_event_sha256": "2f0ecf545edfb7f03f38ada9394dad85b5ba4b867af69d7ccd9f5edf0d6ef69c",
+      "every_occupied_and_padding_event_matches": true
+    },
+    {
+      "width": 2,
+      "fields": {
+        "targets": {
+          "dtype": "<i4",
+          "shape": [
+            2169
+          ],
+          "sha256": "deac242b4a62246b700de52294ff43b854511b03727287e68fd078a1f396f41a",
+          "exact_device_round_trip": true
+        },
+        "edge_ids": {
+          "dtype": "<i4",
+          "shape": [
+            2169,
+            2
+          ],
+          "sha256": "8a7e6924ea16e59b3b271a1bc7a9ad5c05b5a10797c67b865f012fa7389db57c",
+          "exact_device_round_trip": true
+        },
+        "counts": {
+          "dtype": "<f4",
+          "shape": [
+            2169,
+            2
+          ],
+          "sha256": "a9d03bb8a600207e14ad08e0e3c00f87c97e0baa1cc8ee797af5455682db4705",
+          "exact_device_round_trip": true
+        },
+        "occupied": {
+          "dtype": "|b1",
+          "shape": [
+            2169,
+            2
+          ],
+          "sha256": "1b6227e12e048672cffd503686dac56e9e01d7bfbc560dd3a3de20f4f849de8c",
+          "exact_device_round_trip": true
+        }
+      },
+      "gathered_event_shape": [
+        5,
+        2169,
+        2
+      ],
+      "gathered_event_sha256": "7db1879a10d74a50b54dd11b2704b870a85b411ac2dfd16eb76a0798ac500795",
+      "every_occupied_and_padding_event_matches": true
+    },
+    {
+      "width": 4,
+      "fields": {
+        "targets": {
+          "dtype": "<i4",
+          "shape": [
+            3563
+          ],
+          "sha256": "50536cb11b7188c6ebf0be42b4c801a3a8c22282e9bd77bce25398d23200ed02",
+          "exact_device_round_trip": true
+        },
+        "edge_ids": {
+          "dtype": "<i4",
+          "shape": [
+            3563,
+            4
+          ],
+          "sha256": "ad41da1265f8d96cd8355513569d53ae36680934ba9296000f661b81b6fe68b6",
+          "exact_device_round_trip": true
+        },
+        "counts": {
+          "dtype": "<f4",
+          "shape": [
+            3563,
+            4
+          ],
+          "sha256": "b130c64ed2d953565b1aee94ad49dd7017df75a0910293c5a665a36a307fade1",
+          "exact_device_round_trip": true
+        },
+        "occupied": {
+          "dtype": "|b1",
+          "shape": [
+            3563,
+            4
+          ],
+          "sha256": "8ee034a730c5bfa6e156752d3a933b65d130f9656e77ccbe3bd2f9032c7230a5",
+          "exact_device_round_trip": true
+        }
+      },
+      "gathered_event_shape": [
+        5,
+        3563,
+        4
+      ],
+      "gathered_event_sha256": "1afab9a8aca260c15ea660ea014d614f907b83d7775404c089e5bd5c88612fdc",
+      "every_occupied_and_padding_event_matches": true
+    },
+    {
+      "width": 8,
+      "fields": {
+        "targets": {
+          "dtype": "<i4",
+          "shape": [
+            3858
+          ],
+          "sha256": "c61956a7cc0437b0e95cd8a11776b49455fd7d762a4b404278a0a5c91a00e0ae",
+          "exact_device_round_trip": true
+        },
+        "edge_ids": {
+          "dtype": "<i4",
+          "shape": [
+            3858,
+            8
+          ],
+          "sha256": "8831963ae05fa92fc80dae0c0322f7b85314802de49a5bfc3b0cedf5b893f145",
+          "exact_device_round_trip": true
+        },
+        "counts": {
+          "dtype": "<f4",
+          "shape": [
+            3858,
+            8
+          ],
+          "sha256": "4778a03408a19453215b87708987046601a1a37ba5d0725cfb69cd3fadee74fc",
+          "exact_device_round_trip": true
+        },
+        "occupied": {
+          "dtype": "|b1",
+          "shape": [
+            3858,
+            8
+          ],
+          "sha256": "6a3bf601a82e0612df15e25eeb05f6a5678d2ea4e3bf1d9a0805576842cbda64",
+          "exact_device_round_trip": true
+        }
+      },
+      "gathered_event_shape": [
+        5,
+        3858,
+        8
+      ],
+      "gathered_event_sha256": "b48306bb20a20af7f8eea64803424fdca1971085b3825109fcb475e1a89690b7",
+      "every_occupied_and_padding_event_matches": true
+    },
+    {
+      "width": 16,
+      "fields": {
+        "targets": {
+          "dtype": "<i4",
+          "shape": [
+            5013
+          ],
+          "sha256": "87008293f308c8e42729041f6af9f0f383fa95d8d286fa8974a97b3ed9870305",
+          "exact_device_round_trip": true
+        },
+        "edge_ids": {
+          "dtype": "<i4",
+          "shape": [
+            5013,
+            16
+          ],
+          "sha256": "7fc29d72ce9f3e29049b12bda62eb003a360703a411e75020a35d138a67d4b5d",
+          "exact_device_round_trip": true
+        },
+        "counts": {
+          "dtype": "<f4",
+          "shape": [
+            5013,
+            16
+          ],
+          "sha256": "3f6f67fb16d24fd5ec9461adfeccc61003ba9ca4f4c27ee9ae51e4ee11b367cf",
+          "exact_device_round_trip": true
+        },
+        "occupied": {
+          "dtype": "|b1",
+          "shape": [
+            5013,
+            16
+          ],
+          "sha256": "18793b5a248c914a1e73c8094bedba7809a16451bdd0887e023add3aafe7cc38",
+          "exact_device_round_trip": true
+        }
+      },
+      "gathered_event_shape": [
+        5,
+        5013,
+        16
+      ],
+      "gathered_event_sha256": "5d9393abcdd75fe4bdea12625ee14b2423172066fc58c4234c36e5a8cd1bae46",
+      "every_occupied_and_padding_event_matches": true
+    },
+    {
+      "width": 32,
+      "fields": {
+        "targets": {
+          "dtype": "<i4",
+          "shape": [
+            13301
+          ],
+          "sha256": "75ec541811186feb29b290e84287be0459218eb45aea2eebb64cbf6ffcc50534",
+          "exact_device_round_trip": true
+        },
+        "edge_ids": {
+          "dtype": "<i4",
+          "shape": [
+            13301,
+            32
+          ],
+          "sha256": "397aaf32165bef29fba7c6f3449f08d778b7d9bee12a75b8b93b70b5dca17b52",
+          "exact_device_round_trip": true
+        },
+        "counts": {
+          "dtype": "<f4",
+          "shape": [
+            13301,
+            32
+          ],
+          "sha256": "08868f6b86eb76193dddd64fdc09c960846e81473f76c33ab05272c0c0420065",
+          "exact_device_round_trip": true
+        },
+        "occupied": {
+          "dtype": "|b1",
+          "shape": [
+            13301,
+            32
+          ],
+          "sha256": "f536b0013f8ce43c591b321c5773fecda83454420027c635ac3cba198290469d",
+          "exact_device_round_trip": true
+        }
+      },
+      "gathered_event_shape": [
+        5,
+        13301,
+        32
+      ],
+      "gathered_event_sha256": "03127cded79438863cee651499ee616cec1f58b06e6be43a63c3f6a39f5d1a08",
+      "every_occupied_and_padding_event_matches": true
+    },
+    {
+      "width": 64,
+      "fields": {
+        "targets": {
+          "dtype": "<i4",
+          "shape": [
+            32966
+          ],
+          "sha256": "3c211acb596be6a387a061c6fe88ecdd74a3157e36a28d4a2615f782eafe89da",
+          "exact_device_round_trip": true
+        },
+        "edge_ids": {
+          "dtype": "<i4",
+          "shape": [
+            32966,
+            64
+          ],
+          "sha256": "16fb20a89026cd556989da78a6cfa3367986d3af8863c311d0d1842ca64ffa84",
+          "exact_device_round_trip": true
+        },
+        "counts": {
+          "dtype": "<f4",
+          "shape": [
+            32966,
+            64
+          ],
+          "sha256": "415b21feb33591f955585d216268b6457d268363f2efada51c90110750f84103",
+          "exact_device_round_trip": true
+        },
+        "occupied": {
+          "dtype": "|b1",
+          "shape": [
+            32966,
+            64
+          ],
+          "sha256": "5c2a810325765eccca105db170cef5a91ee486ce4b9d02deab07a3a0e00c7683",
+          "exact_device_round_trip": true
+        }
+      },
+      "gathered_event_shape": [
+        5,
+        32966,
+        64
+      ],
+      "gathered_event_sha256": "3f80ab7cb07cc7afe57c9f5c859052d71ff157a2d5137ea89bcd0d5636cab587",
+      "every_occupied_and_padding_event_matches": true
+    },
+    {
+      "width": 128,
+      "fields": {
+        "targets": {
+          "dtype": "<i4",
+          "shape": [
+            38902
+          ],
+          "sha256": "dfe69b0082bc40ba64f8946450b0b9bf174f05f990b0e3908d1f0b3bcce0de7c",
+          "exact_device_round_trip": true
+        },
+        "edge_ids": {
+          "dtype": "<i4",
+          "shape": [
+            38902,
+            128
+          ],
+          "sha256": "e9457b5a06d7a8b00a4d2ed6875e8db1bdd45249ecda2f5c7d10f71acb209c0a",
+          "exact_device_round_trip": true
+        },
+        "counts": {
+          "dtype": "<f4",
+          "shape": [
+            38902,
+            128
+          ],
+          "sha256": "64d91b47fabe485fadcb6db00d26b319754f1c61c6a3bddfe24e84985b286eac",
+          "exact_device_round_trip": true
+        },
+        "occupied": {
+          "dtype": "|b1",
+          "shape": [
+            38902,
+            128
+          ],
+          "sha256": "4021b76062f03a2c50a3c587f79a9e060cfd66d98f5d2195e935a2b90bee9293",
+          "exact_device_round_trip": true
+        }
+      },
+      "gathered_event_shape": [
+        5,
+        38902,
+        128
+      ],
+      "gathered_event_sha256": "befe875b6f7c23db4b7a807aec8b86361d556d10a2008246bd63574787cf4dbe",
+      "every_occupied_and_padding_event_matches": true
+    },
+    {
+      "width": 256,
+      "fields": {
+        "targets": {
+          "dtype": "<i4",
+          "shape": [
+            23600
+          ],
+          "sha256": "6e1aa063a9ce10e4abb3ad826cf30ae6cca04521de36460568de750d62378793",
+          "exact_device_round_trip": true
+        },
+        "edge_ids": {
+          "dtype": "<i4",
+          "shape": [
+            23600,
+            256
+          ],
+          "sha256": "881262179db97234023e60f6819ab0ceb15676a2e0a13199fcb99905787dd6b2",
+          "exact_device_round_trip": true
+        },
+        "counts": {
+          "dtype": "<f4",
+          "shape": [
+            23600,
+            256
+          ],
+          "sha256": "de6433d91a524ea9a08bed505d9e114891f2096a55f72e00823d49cd899e4f4d",
+          "exact_device_round_trip": true
+        },
+        "occupied": {
+          "dtype": "|b1",
+          "shape": [
+            23600,
+            256
+          ],
+          "sha256": "707d794c0ebf748f91cfa392b72428e1d8b861b4dff3ddc1c6ff13269d43c6e8",
+          "exact_device_round_trip": true
+        }
+      },
+      "gathered_event_shape": [
+        5,
+        23600,
+        256
+      ],
+      "gathered_event_sha256": "8d53eb6104dc2e5249e0306946957e1a192b2a75a13ba8989559c41bdb288bb8",
+      "every_occupied_and_padding_event_matches": true
+    },
+    {
+      "width": 512,
+      "fields": {
+        "targets": {
+          "dtype": "<i4",
+          "shape": [
+            8727
+          ],
+          "sha256": "332731f10dd55c4df57a7300ad18988a7550167745c3402f4af398f0604d827a",
+          "exact_device_round_trip": true
+        },
+        "edge_ids": {
+          "dtype": "<i4",
+          "shape": [
+            8727,
+            512
+          ],
+          "sha256": "cf0cec8e82603fe68f9bd863aaba83e7b00f8f49a3e90b0aec4df474574632ee",
+          "exact_device_round_trip": true
+        },
+        "counts": {
+          "dtype": "<f4",
+          "shape": [
+            8727,
+            512
+          ],
+          "sha256": "00466838ccfcbd055c54ba2129ab47ac43c02e7e274f40c03911658d979a3925",
+          "exact_device_round_trip": true
+        },
+        "occupied": {
+          "dtype": "|b1",
+          "shape": [
+            8727,
+            512
+          ],
+          "sha256": "442e53f40205b2ee44b08f68394c0dd0a1295c118afccfbf523458aae120322d",
+          "exact_device_round_trip": true
+        }
+      },
+      "gathered_event_shape": [
+        5,
+        8727,
+        512
+      ],
+      "gathered_event_sha256": "ba54f654a858cded93052ada716fd9a3e65aae5fd011bbb501f5d503f967d645",
+      "every_occupied_and_padding_event_matches": true
+    },
+    {
+      "width": 1024,
+      "fields": {
+        "targets": {
+          "dtype": "<i4",
+          "shape": [
+            2248
+          ],
+          "sha256": "19362f5a914a7c0796e2a6ac398296174e05a89f888e24b33d77520c03f28af4",
+          "exact_device_round_trip": true
+        },
+        "edge_ids": {
+          "dtype": "<i4",
+          "shape": [
+            2248,
+            1024
+          ],
+          "sha256": "4baa8dc22f7f6ffe860f0cec1310c24d67733cfc177943c051562e91cc35fa53",
+          "exact_device_round_trip": true
+        },
+        "counts": {
+          "dtype": "<f4",
+          "shape": [
+            2248,
+            1024
+          ],
+          "sha256": "c7e869a60225f5b5b058114e8fd029aed57a0144e80eb53d4584402f4b6b8026",
+          "exact_device_round_trip": true
+        },
+        "occupied": {
+          "dtype": "|b1",
+          "shape": [
+            2248,
+            1024
+          ],
+          "sha256": "efb3b667ea7bd23710e713200d6fe5d6e71e7caee3cae6126107a4204b24ee29",
+          "exact_device_round_trip": true
+        }
+      },
+      "gathered_event_shape": [
+        5,
+        2248,
+        1024
+      ],
+      "gathered_event_sha256": "9cd23e659fa462a61be25a47a15778a824d7d7e9759214096c1b500ce4e80cc1",
+      "every_occupied_and_padding_event_matches": true
+    },
+    {
+      "width": 2048,
+      "fields": {
+        "targets": {
+          "dtype": "<i4",
+          "shape": [
+            389
+          ],
+          "sha256": "be281c57465c1fd18a4ec9db879aed15b1c767c4f3f3d43e0093c822dd77a011",
+          "exact_device_round_trip": true
+        },
+        "edge_ids": {
+          "dtype": "<i4",
+          "shape": [
+            389,
+            2048
+          ],
+          "sha256": "a8606456942de555d682fbe05b96ce61aba51147e1b2ff20857a80acf24c76eb",
+          "exact_device_round_trip": true
+        },
+        "counts": {
+          "dtype": "<f4",
+          "shape": [
+            389,
+            2048
+          ],
+          "sha256": "339cce6fbd943772515e0b429b64e2e347cc50dab50a1151267235c6f414454f",
+          "exact_device_round_trip": true
+        },
+        "occupied": {
+          "dtype": "|b1",
+          "shape": [
+            389,
+            2048
+          ],
+          "sha256": "e9771b237d0d977b50a8ad3a62062f033b996681a235c05049e96928e2157631",
+          "exact_device_round_trip": true
+        }
+      },
+      "gathered_event_shape": [
+        5,
+        389,
+        2048
+      ],
+      "gathered_event_sha256": "48eeec47e7bb65030596ba261772386c917bb0f19ee510d0cca224c5231fcde6",
+      "every_occupied_and_padding_event_matches": true
+    },
+    {
+      "width": 4096,
+      "fields": {
+        "targets": {
+          "dtype": "<i4",
+          "shape": [
+            90
+          ],
+          "sha256": "80c051ca9fd0ca8a831ddfabf2011df83ab4a1f68205cbb9eef6120260d9a180",
+          "exact_device_round_trip": true
+        },
+        "edge_ids": {
+          "dtype": "<i4",
+          "shape": [
+            90,
+            4096
+          ],
+          "sha256": "4879349ac0eafb8e7e831d38d142d6d7e81597c96ea6ef0729fd9b444b19aaf0",
+          "exact_device_round_trip": true
+        },
+        "counts": {
+          "dtype": "<f4",
+          "shape": [
+            90,
+            4096
+          ],
+          "sha256": "82c2df997515c3acc6ecd6ce8b06e4ef7f87f857f4e06d4f660901fba8236187",
+          "exact_device_round_trip": true
+        },
+        "occupied": {
+          "dtype": "|b1",
+          "shape": [
+            90,
+            4096
+          ],
+          "sha256": "5e159ea3aaed35d343503e45252380944ceca999b0c3e9397ff3c51993f60c2e",
+          "exact_device_round_trip": true
+        }
+      },
+      "gathered_event_shape": [
+        5,
+        90,
+        4096
+      ],
+      "gathered_event_sha256": "7dcb67b178e8a153cbafe36fb98568b18d228afad2de36197c494a8660bfc0da",
+      "every_occupied_and_padding_event_matches": true
+    },
+    {
+      "width": 8192,
+      "fields": {
+        "targets": {
+          "dtype": "<i4",
+          "shape": [
+            13
+          ],
+          "sha256": "2b017fae5c75683c6798f9080d14fb15d45c1af39da9affdbd303e3f57f19496",
+          "exact_device_round_trip": true
+        },
+        "edge_ids": {
+          "dtype": "<i4",
+          "shape": [
+            13,
+            8192
+          ],
+          "sha256": "ec2cb62ba60752984067685ed714a77ec367c3c6355af631e9ad096b6ca100ea",
+          "exact_device_round_trip": true
+        },
+        "counts": {
+          "dtype": "<f4",
+          "shape": [
+            13,
+            8192
+          ],
+          "sha256": "28218d364de0d040d07cb8c2993d07abda29c8fbd347fe8ac4efdad9cb0c7c78",
+          "exact_device_round_trip": true
+        },
+        "occupied": {
+          "dtype": "|b1",
+          "shape": [
+            13,
+            8192
+          ],
+          "sha256": "a2eed1b64e6f1c92ca9f5169e0c9e4ebde040be6049fe47f6c6a7fa7e3e61b16",
+          "exact_device_round_trip": true
+        }
+      },
+      "gathered_event_shape": [
+        5,
+        13,
+        8192
+      ],
+      "gathered_event_sha256": "7b0b3ef0a74de243297cbfd01d4b15010555e86aa8450d945da2961153b76539",
+      "every_occupied_and_padding_event_matches": true
+    },
+    {
+      "width": 16384,
+      "fields": {
+        "targets": {
+          "dtype": "<i4",
+          "shape": [
+            2
+          ],
+          "sha256": "173d54c1173d782b47da34298db518bf521be410d2389c804f938ebb21f19d74",
+          "exact_device_round_trip": true
+        },
+        "edge_ids": {
+          "dtype": "<i4",
+          "shape": [
+            2,
+            16384
+          ],
+          "sha256": "94c1b142a22b0c20a2157570ee71d3bd24dd9be37d8cd41ccc7c1703b4513552",
+          "exact_device_round_trip": true
+        },
+        "counts": {
+          "dtype": "<f4",
+          "shape": [
+            2,
+            16384
+          ],
+          "sha256": "93dddb1106fff45e622b02fc6a210ce8d02f9ccdf9e6aa8d2d795fd59dc1c4dd",
+          "exact_device_round_trip": true
+        },
+        "occupied": {
+          "dtype": "|b1",
+          "shape": [
+            2,
+            16384
+          ],
+          "sha256": "3a32b3af6237885c47d9e497f7f72a9b7da61229914663f306f475a55de3d932",
+          "exact_device_round_trip": true
+        }
+      },
+      "gathered_event_shape": [
+        5,
+        2,
+        16384
+      ],
+      "gathered_event_sha256": "c7414d829ca236c715685bc08add357b23535eae37e34db15b954a7a29b00c1a",
+      "every_occupied_and_padding_event_matches": true
+    }
+  ],
+  "artifact": "device-layout.npz",
+  "artifact_sha256": "d2a8dbf8a51c7cc5cf9b38700daa2dc96a576a70585cfeebf52b170a82a35bc2",
+  "MLX_ENABLE_TF32": "0",
+  "device": {
+    "device_name": "Apple M1 Max",
+    "max_recommended_working_set_size": 22906503168,
+    "memory_size": 34359738368,
+    "architecture": "applegpu_g13s",
+    "max_buffer_length": 17179869184,
+    "resource_limit": 499000
+  },
+  "compilation": "disabled",
+  "source_sha256": {
+    "qualification/adapters/device_layout_probe.py": "cbb195a26b6f4a34ee4dc35c7b327f5dc04ad5ba94757518c397379fce71db6f",
+    "simulation/backend/bucketed.py": "0829f0cb3c67f08bb4dc861c1397548f8e66e4ce2262ef3471368ce772552747",
+    "simulation/backend/accumulation.py": "2ea94edfbae1852cdf269fe7169fa97a00c57bf8cb597879fd076abe0c17a894",
+    "simulation/mapping.py": "409932868e8c52c337c75bd94e6c866c084a9a66053be7e9b717a4ca974ce52f"
+  },
+  "scope": "Complete pinned-device representation and isolated propagation; no full-network parity or performance claim."
+}

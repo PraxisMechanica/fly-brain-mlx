@@ -1,0 +1,11 @@
+{
+  "all_artifact_source_and_pinned_file_hashes_match": true,
+  "every_device_field_matches_prior_complete_host_manifest": true,
+  "all_seeded_source_and_receiving_masks_reproduced": true,
+  "all_original_edge_event_memberships_recomputed": true,
+  "every_exact_count_and_both_references_recomputed_from_pinned_original_rows": true,
+  "both_budgets_repeat_standalone_and_zero_copy_bits_pass": true,
+  "target_trial_results": 693195,
+  "original_edge_trials": 75459915,
+  "scope": "Independent complete-data evidence check; no full-network parity or performance claim."
+}

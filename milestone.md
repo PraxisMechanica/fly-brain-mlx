@@ -273,6 +273,13 @@ Complete pinned layout replay checkpoint (2026-10-04):
 - Sol independently verifies every artifact/source hash and compares all arrays with the previously independently verified isolated matrix: inputs, references, results, high/low components, repeats, individual runs, and gate flags are byte-identical. All **99 original-state conversion limitations** remain unchanged. [Verification and complete compact inputs/results](docs/evidence/milestone-2/buckets/pinned-replay/verification.json).
 - This closes the bounded review's prescribed-case requirement. Complete pinned-device field/event gathering and full-connectome delayed pulse remain open. The implementation checkpoint is `7a92065`; production numerical source remains unchanged from the 79-test scientific qualification.
 
+Complete pinned-device representation checkpoint (2026-10-04):
+
+- `uv run --locked --group qualification fly-brain qualify-device-layout --output data/results/milestone-2-device-layout-20261004-01` completes with exit status zero. All 15 buckets' targets, original edge identities, signed counts, occupied masks, padding, and inverse neuron gathering round-trip with exact dtype/shape/bytes. The gathered events match the host prediction at every occupied and padding leaf for all five fixed patterns. [Report and complete results](docs/evidence/milestone-2/buckets/device-layout/device-layout.json).
+- The patterns accept 15,091,983 / 0 / 9,879 / 94,545 / 3,820,288 original rows. Every one of **693,195 neuron/trial results** has an exact high/low count expansion and meets both original-state budgets against accurate and ordered original-weight references. Repeats, individual runs, and zero-count state bits match exactly. Greatest one-step budget fraction is `0.0236201321`.
+- Sol reloads the pinned files, matches all device-field checksums against the previously verified host manifest, regenerates seeded source/receiving masks and every original edge event, and recomputes all exact counts and both references using original rows rather than padded device leaves. Artifact/source hashes and all budgets/component/copy checks pass. [Independent verification](docs/evidence/milestone-2/buckets/device-layout/verification.json).
+- **53 application tests, zero failures/errors/skips**, full Ruff, strict Pyright, and three import contracts pass. [Report](docs/evidence/milestone-2/buckets/device-layout/application-tests.xml). Complete-connectome delayed-pulse construction remains the final Milestone 2 requirement; full experiment parity and performance remain later gates.
+
 ## Milestone 3 — Backend integration
 
 Status: not started.
