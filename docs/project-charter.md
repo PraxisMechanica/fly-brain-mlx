@@ -2,7 +2,7 @@
 
 ## Status and provenance
 
-This document preserves the useful project specification from the user's pasted planning material. It is a proposed charter, not authorization to begin implementation. The user will supply the active goal separately.
+This document preserves the earlier planning material. The user has now supplied the active specification in [goal.md](goal.md), which supersedes this charter, including its milestone numbering and proposed first assignment. Follow the active specification and its mandatory model-handoff gates.
 
 Primary reference: <https://github.com/eonsystemspbc/fly-brain>
 

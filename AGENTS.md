@@ -335,3 +335,9 @@ requests for approval, in ordinary chat text.
 Never use interactive question forms or selection dialogs.
 
 Present all prices or costs in USD($) unless I explicitly ask otherwise. if you look up figures and they are in another value, you must provide the native value *and* the USD value.
+
+## Active Project Specification
+
+Read `docs/goal.md` before project work. It contains the user-provided active objective, success criteria, milestone ownership, and mandatory model-handoff protocol. It supersedes the earlier `docs/project-charter.md` plan.
+
+Routine work is assigned to GPT-5.6 Sol at `xhigh`; the designated scientific review and high-risk optimization gates are assigned to GPT-6 Astra at `xhigh`. Preserve the exact requested models. Do not claim a model switch occurred without evidence. If automatic switching is unavailable, follow the specification's human handoff procedure and stop at the required boundary.
