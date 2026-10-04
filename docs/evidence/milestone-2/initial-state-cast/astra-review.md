@@ -4,7 +4,7 @@ Reviewed at `4e91c4241a4f9dba0858aad1386841cff8527100` on 2026-10-04 by fresh-co
 
 ## Decision
 
-The original-state one-step gate remains **failed**. The approved reducer cannot recover initial-state information lost when the state becomes one float32 value. Dependent implementation waits for an explicit contract decision.
+The original-state one-step gate remains **failed**. The approved reducer cannot recover initial-state information lost when the state becomes one float32 value. At the review checkpoint, dependent implementation awaited an explicit contract decision. The subsequent [engineering decision](#recorded-engineering-decision) resolves that hold without reclassifying the original failure.
 
 The reviewer independently checked both artifact hashes, all 31 selected targets, the target's rows against the mapped input, its source mask, all three orders/leaves, accurate and ordered references, integer expansions, and repeated result bits. The accepted signed count sum is 2,871. Exact source-function replay with NumPy float32 operations reproduces the saved Metal output word `0xb7cccccd` in all three orders. The result is the correctly rounded float32 value of the accurate stored-state sum.
 
@@ -21,14 +21,22 @@ The parent independently verified the artifact/result bits, exact error decompos
 
 ## Proposed human decision
 
-Recommended smallest amendment, **pending approval**:
+Recommended smallest amendment, pending approval **at the review checkpoint**:
 
 > For the isolated high-fan-in audit, apply the unchanged one-step budget to float64 accumulation starting from the identical stored float32 initial state supplied to MLX, using the original float64 weights. Retain every prescribed original state and all original-state accurate and ordered comparisons. Report initial conversion separately, and continue to require the unchanged trajectory budget against the original state. Preserve original-state one-step failures as recorded conversion limitations, never as passes. This exception does not change the other small-network gates or the full-network Brian2 reference.
 
-This is a proposed contract amendment, not an interpretation already allowed by the casting-inclusive rule. The parent must obtain the human decision before dependent implementation.
+This was a proposed contract amendment, not an interpretation already allowed by the casting-inclusive rule. The review directed the parent to obtain the human decision before dependent implementation.
 
 If the human retains the original gate, additional initial-state information must instead be authorized and qualified. A low component consumed by the first transition is one possible direction, but changes the current input/state representation and is not approved or qualified by this review.
 
+## Recorded engineering decision
+
+On 2026-10-04 the user reaffirmed that the agent must execute this project using its best engineering judgment and that the user has no opinion on low-level precision choices. This delegates the decision to the implementation owner; it is not a user selection of a numeric representation.
+
+Sol adopts the exact amendment above, supported by the completed Astra review and independent parent verification. Accumulation must meet the unchanged one-step budget against accurate and ordered references starting from the same stored state; conversion remains separately visible. Every original-state comparison is retained, and both original-state trajectory comparisons remain mandatory. The recorded original-state one-step failures remain failures labelled conversion limitations. No arithmetic, tolerance value, event rule, other small-network gate, or full-network criterion changes.
+
+The rationale is that the one-step arithmetic check must compare engines receiving identical representable state. The original-state trajectory check still constrains total error, including conversion. Adding persistent or transient correction state to satisfy a diagnostic starting from unavailable precision would change the implementation without improving the established full-network acceptance requirement. The complete prescribed matrix must now be measured before the selected representation proceeds.
+
 ## Limits and next action
 
-The full actual-data target/mask/state/order matrix remains unqualified. No tolerance, representation, operation order, kernel, or full-network acceptance rule changed. Preserve the original failure; request the human decision on the exact amendment or continued original gate, then record it before implementation.
+The full actual-data target/mask/state/order matrix remains unqualified. No tolerance value, representation, operation order, kernel, or full-network acceptance rule changed. Preserve the original failure and execute the complete matrix with this explicit input-state accounting before implementing the approved bucket representation.
