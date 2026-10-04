@@ -23,8 +23,18 @@ The user authorized this work on 2026-10-04. The application must use MLX only. 
 ## Progress
 
 - Incoming scientific work: archived with original hashes; 47 files preserved.
-- Application refactor: not started.
-- Quality and scientific verification: not started.
+- Application refactor: implemented as one MLX-only package; obsolete runtime, Conda, and requirements workflows removed.
+- Initial verification: strict Pyright and import contracts pass; 61 scientific tests pass with zero skips. Scalar/replay checks, clean runtime installation, and final review remain open.
 - Feature development: held until architecture checks pass.
 
 All changes belong on `main`. Commit verified steps incrementally. Push remains pending until a user-owned remote exists.
+
+## Retired source
+
+The checkpoint `22c813e` retains the original application in Git. For an exact historical source citation, run `git show 22c813e:code/run_brian2_cuda.py` or substitute the recorded repository path. The earlier audit and numerical reports cite those historical versions. Their line numbers describe the original files, not the moved package.
+
+Removed active workflows: `environment.yml`, `environment-brian2genn.yml`, split requirements files, the CUDA/GeNN/NEST runners and installers, the multi-framework benchmark dispatcher, unused vendored Python/notebooks, and the old standalone entrypoint scripts. Their source remains in Git; all existing data, result bundles, licenses, and scientific evidence remain on disk.
+
+Moved numerical code: MLX core and accumulation arithmetic now belong to `simulation/backend`; independent Brian2/PyTorch references and diagnostic execution belong to `qualification/adapters`; shared test helpers belong to `tests/support`. Comparison rules no longer depend on Pandas or the benchmark dispatcher. No compatibility wrappers or duplicate installation methods were added.
+
+The [source preservation record](evidence/architecture-remediation/source-preservation.json) checks 28 arithmetic/reference bodies against `22c813e`. Precision configuration and the factored propagation binding are explicit. Their behavior is covered by fresh scientific qualification, not inferred from source identity alone.

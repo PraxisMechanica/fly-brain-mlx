@@ -22,6 +22,9 @@ Current work is architecture remediation only. The [implementation record](docs/
 - [ ] Requalify preserved scientific suites and deterministic replays after relevant refactors, using fresh evidence and unchanged acceptance budgets, with no skipped required checks.
 - [ ] Record the final Python/software architecture review and all completion evidence here before lifting the hold or advancing milestones.
 
+
+Architecture implementation checkpoint (2026-10-04): one installed `src/fly_brain` package now owns MLX execution, CPU qualification references, and spike comparison. Conda, NVIDIA runners/installers, split requirements, path injection, benchmark cycles, and unused runtime packages are removed. Strict Pyright checks the full application and tests; import contracts pass; 29 boundary/unit tests and the preserved 61-case scientific suite pass with no skips. [28 source-identity checks](docs/evidence/architecture-remediation/source-preservation.json) preserve numerical bodies. Fresh scalar/replay, clean-install, and final review evidence are being completed; the hold remains until all checks are recorded.
+
 The complete definitions are in the [audit acceptance checks](docs/architecture-audit.md#acceptance-checks-for-lifting-the-hold). This hold supersedes older instructions to preserve a defective application structure, while numerical semantics, source provenance, evidence, data, existing external contracts, and unrelated code remain preserved. The manual accumulation review is now idle and acknowledges the hold; its unfinished work is preserved, not finalized by this audit.
 
 ## Objective and execution

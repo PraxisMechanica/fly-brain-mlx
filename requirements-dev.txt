@@ -1,4 +1,0 @@
--r requirements-mlx.txt
-nodeenv==1.11.0
-pyright==1.1.414
-ruff==0.16.10

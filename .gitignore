@@ -1,7 +1,7 @@
 __pycache__
 *.egg-info
 
-# Brian2/Brian2CUDA generated standalone code
+# Historical reference builds
 code/output*
 
 # Simulation results (large parquet files)
@@ -13,7 +13,7 @@ data/results/nature_2026_07/analysis*
 data/results/nature_2026_07/logs*
 data/results/nature_2026_07/archive*
 
-# PyTorch cached weight matrices (generated from connectivity data)
+# Historical weight caches; preserve existing data
 data/weight_coo.pkl
 data/weight_csr.pkl
 
@@ -24,3 +24,5 @@ __pycache__/
 .pytest_cache/
 .ruff_cache/
 .uv-cache/
+.import_linter_cache/
+dist/

@@ -1,6 +1,6 @@
 # Architecture compliance audit
 
-Recorded 2026-10-04 (Europe/Paris). Audited checkpoint: `ab8637c885ee9e23e81c3d1596744a63695650f8` on `main`, plus the explicitly identified uncommitted review work. Status: **investigation complete; remediation proposed, not implemented; development halted**.
+Recorded 2026-10-04 (Europe/Paris). Audited checkpoint: `ab8637c885ee9e23e81c3d1596744a63695650f8` on `main`, plus the explicitly identified uncommitted review work. Historical audit status: **investigation complete; remediation was proposed and development was halted**. The subsequent authorized implementation and current checks are in the [remediation record](architecture-remediation.md).
 
 ## Conclusion and scope
 
