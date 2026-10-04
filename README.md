@@ -2,7 +2,7 @@
 
 This application targets Apple silicon and uses MLX for simulation. It is based on the FlyWire v783 leaky integrate-and-fire model from [Eon Systems](https://github.com/eonsystemspbc/fly-brain), pinned at `a3db62f9436074e485c0278290c2164ed6150808`.
 
-The small numerical core is qualified. Full-connectome loading, a complete simulation command, production spike export, and performance qualification remain later milestones. See [the authoritative plan](milestone.md), [the numerical contract](docs/mlx-port-baseline.md), and [project rules](AGENTS.md).
+The small numerical core and complete host input mapping are qualified. Device fan-in qualification, a complete simulation command, production spike export, and performance qualification remain open. See [the authoritative plan](milestone.md), [the numerical contract](docs/mlx-port-baseline.md), and [project rules](AGENTS.md).
 
 ## Install
 
@@ -61,6 +61,14 @@ uv run --locked --no-dev fly-brain audit-inputs --output data/results/input-audi
 ```
 
 This command performs host setup and evidence collection. It does not simulate the full connectome.
+
+The complete prescribed input fan-in audit is available through the installed command:
+
+```sh
+uv run --locked --no-dev fly-brain qualify-fan-in --output data/results/fan-in-01
+```
+
+It preserves every target, mask, initial state, edge order, reference, and device result, with repeated and individual-run comparisons. The isolated arithmetic check starts both engines from the same stored state; original-state conversion limitations remain visible, and the original-state trajectory limits remain mandatory. A failed required case returns a failure status. This audit does not establish full-network parity.
 
 ## Compare existing spikes
 

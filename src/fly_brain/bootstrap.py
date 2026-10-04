@@ -6,6 +6,7 @@ from fly_brain.comparison.models import ComparisonRequest, ComparisonResult
 from fly_brain.comparison.service import compare
 from fly_brain.qualification.models import QualificationRequest, QualificationResult
 from fly_brain.qualification.service import qualify
+from fly_brain.simulation.models import Connectome, InputPin
 
 
 def configure_mlx() -> str:
@@ -59,10 +60,8 @@ def schedule(output: Path) -> dict[str, object]:
     return run(output)
 
 
-def input_audit(project: Path, output: Path) -> dict[str, object]:
-    from fly_brain.qualification.adapters.connectome_probe import run
+def pinned_inputs(project: Path) -> tuple[Connectome, InputPin]:
     from fly_brain.simulation.inputs import load_connectome
-    from fly_brain.simulation.models import InputPin
 
     pin = InputPin(
         '52b0ac6094cd32c546f8d4c341e094376f48f4e791f8db9b166de5dff8199ea4',
@@ -75,4 +74,19 @@ def input_audit(project: Path, output: Path) -> dict[str, object]:
         project / 'data/2025_Connectivity_783.parquet',
         pin,
     )
+    return connectome, pin
+
+
+def input_audit(project: Path, output: Path) -> dict[str, object]:
+    from fly_brain.qualification.adapters.connectome_probe import run
+
+    connectome, pin = pinned_inputs(project)
     return run(connectome, pin, output)
+
+
+def fan_in_audit(project: Path, output: Path) -> dict[str, object]:
+    precision = configure_mlx()
+    from fly_brain.qualification.adapters.fan_in_probe import run
+
+    connectome, pin = pinned_inputs(project)
+    return run(connectome, pin, output, precision)
