@@ -1,0 +1,29 @@
+[
+  {
+    "framework_a": "mlx-original",
+    "framework_b": "mlx-repeat",
+    "backend_a": "mlx-original",
+    "backend_b": "mlx-repeat",
+    "t_run": 0.1,
+    "n_run": 1,
+    "tolerance_ms": 1.0,
+    "spikes_a": 1612,
+    "spikes_b": 1612,
+    "spike_count_ratio_b_over_a": 1.0,
+    "active_a": 335,
+    "active_b": 335,
+    "active_shared": 335,
+    "active_jaccard": 1.0,
+    "active_precision_b_over_a": 1.0,
+    "active_recall_b_over_a": 1.0,
+    "rate_pearson_shared": 1.0,
+    "rate_rmse_hz_shared": 0.0,
+    "rate_mae_hz_shared": 0.0,
+    "timing_matches": 1612,
+    "timing_f1": 1.0,
+    "timing_precision_b_over_a": 1.0,
+    "timing_recall_b_over_a": 1.0,
+    "timing_mean_abs_dt_ms": 0.0,
+    "timing_median_abs_dt_ms": 0.0
+  }
+]

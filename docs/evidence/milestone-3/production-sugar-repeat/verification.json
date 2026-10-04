@@ -1,0 +1,23 @@
+{
+  "implementation_commit": "c863ed8",
+  "run_exit_code": 0,
+  "comparison_exit_code": 0,
+  "first_output": "/Users/ocasta/Code/fly-brain/data/results/milestone-3-sugar-20261004-01",
+  "repeat_output": "/Users/ocasta/Code/fly-brain/data/results/milestone-3-sugar-20261004-02",
+  "comparison_output": "/Users/ocasta/Code/fly-brain/data/results/milestone-3-sugar-comparison-20261004-01",
+  "all_recorded_source_hashes_and_data_versions_match": true,
+  "complete_stimulus_metadata_and_npz_bytes_identical": true,
+  "complete_parquet_bytes_and_typed_columns_identical": true,
+  "integer_step_trial_neuron_coordinates_identical": true,
+  "existing_comparison_command_pass": true,
+  "spikes": 1612,
+  "active_neurons": 335,
+  "canonical_stimulus_sha256": "d7bb792f082eeca79d6e88a1e8ca0791dca210eb15c86ec70a34348b272a82b3",
+  "parquet_sha256": "5acc7b12009b7bb7e04105e1b7c73d18e6261a9eac36f704d6cb6ddc395ba864",
+  "artifact_sha256": {
+    "pairwise_summary.json": "1825c00b16bf7ad674db371b5cae0c9b8d612fa8f8867a487c9d81db5850b05e",
+    "run.log": "2547e23df10b9ee18d735b0221d04ed19e6b08b523894462f9c50bbfd89eb994",
+    "simulation.json": "90f965934812397513493e9e9e4c3565a7b5b1a7f65296400b0eb6be38b84a42"
+  },
+  "scope": "Production-output determinism from two independent fresh processes. Full-state/queue repeatability and scientific parity remain Milestone 4 gates."
+}
