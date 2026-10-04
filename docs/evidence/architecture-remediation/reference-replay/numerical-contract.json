@@ -1,0 +1,217 @@
+{
+  "brian2": "2.8.0",
+  "numpy": "1.26.4",
+  "linear_precision": {
+    "steps": 10000,
+    "threshold_disabled_for_linear_diagnostic": true,
+    "initial_voltage_mv": [
+      -52.0,
+      -50.0,
+      -100.0,
+      -52.0,
+      -52.0,
+      -52.0
+    ],
+    "initial_synaptic_state_mv": [
+      0.0,
+      0.0,
+      -100.0,
+      100.0,
+      1024.0,
+      -1024.0
+    ],
+    "coefficients_float64": {
+      "a": 0.9950124791926823,
+      "b": 0.9801986733067553,
+      "c": 0.004937935295309005
+    },
+    "coefficients_float32": {
+      "a": 0.9950124621391296,
+      "b": 0.9801986813545227,
+      "c": 0.004937935154885054
+    },
+    "coefficient_c_from_float32_exponential_subtraction": 0.004937926772981882,
+    "brian2_state_range_mv_v_g": [
+      [
+        -213.2684695552027,
+        -1003.7234414661174
+      ],
+      [
+        109.26846955520236,
+        1003.7234414661174
+      ]
+    ],
+    "comparisons": [
+      {
+        "dtype": "float64",
+        "max_abs_error_mv_by_variable_v_g": [
+          1.5916157281026244e-12,
+          2.2737367544323206e-13
+        ],
+        "max_abs_error_mv_by_neuron_v_g": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            4.405364961712621e-13,
+            0.0
+          ],
+          [
+            4.476419235288631e-13,
+            2.842170943040401e-14
+          ],
+          [
+            4.334310688136611e-13,
+            2.842170943040401e-14
+          ],
+          [
+            1.0658141036401503e-12,
+            2.2737367544323206e-13
+          ],
+          [
+            1.5916157281026244e-12,
+            2.2737367544323206e-13
+          ]
+        ],
+        "first_step_max_abs_error_mv_v_g": [
+          2.842170943040401e-14,
+          0.0
+        ],
+        "within_trajectory_budget": true,
+        "within_first_step_budget": true
+      },
+      {
+        "dtype": "float32",
+        "max_abs_error_mv_by_variable_v_g": [
+          0.00038146972624275577,
+          0.00021828870384865695
+        ],
+        "max_abs_error_mv_by_neuron_v_g": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0003814697255037913,
+            0.0
+          ],
+          [
+            0.00038146972624275577,
+            2.3893375733052835e-05
+          ],
+          [
+            0.0003814697255037913,
+            2.3893375733052835e-05
+          ],
+          [
+            0.0003814697255037913,
+            0.00021828870384865695
+          ],
+          [
+            0.00038146972624275577,
+            0.00021828870384865695
+          ]
+        ],
+        "first_step_max_abs_error_mv_v_g": [
+          2.000470360030704e-06,
+          8.240913871304656e-06
+        ],
+        "within_trajectory_budget": true,
+        "within_first_step_budget": true
+      }
+    ],
+    "euler_first_step_voltage_error_for_g100_mv": 0.006206470469099501,
+    "euler_first_step_synaptic_error_for_g100_mv": -0.01986733067552393
+  },
+  "threshold_and_summation": {
+    "float32_ulp_at_threshold_mv": 3.814697265625e-06,
+    "threshold_only_probe_no_integration": true,
+    "threshold_input_mv": [
+      -45.000003814697266,
+      -45.000000953674316,
+      -45.0,
+      -44.999999046325684,
+      -44.999996185302734
+    ],
+    "threshold_input_float32_mv": [
+      -45.000003814697266,
+      -45.0,
+      -45.0,
+      -45.0,
+      -44.999996185302734
+    ],
+    "brian2_float64_spiking_indices": [
+      3,
+      4
+    ],
+    "float32_strict_comparison_spiking_indices": [
+      4
+    ],
+    "fanin_events": 4097,
+    "fanin_sum_abs_mv": 2708992.275,
+    "fanin_exact_real_sum_mv": 0.275,
+    "fanin_float64_serial_mv": 0.27499999990686774,
+    "fanin_float32_serial_mv": 0.25,
+    "fanin_float32_interleaved_serial_mv": 0.2750000059604645,
+    "fanin_float32_numpy_sum_mv": 0.25
+  },
+  "stimulus": {
+    "seed": 20261004,
+    "experiment_code": 2,
+    "trial": 0,
+    "generator": "PCG64(SeedSequence([seed, experiment_code, trial]))",
+    "shape": [
+      1000,
+      3
+    ],
+    "rates_hz": [
+      200,
+      100,
+      0
+    ],
+    "channel_targets": [
+      0,
+      0,
+      1
+    ],
+    "events_per_channel": [
+      20,
+      10,
+      0
+    ],
+    "raw_uint8_sha256": "f1da12a8a7f3a44198fe04a385f897f991eadea36f680bf5d668ed19343fa09d",
+    "regeneration_roundtrip_and_duration_prefix_exact": true,
+    "different_trial_changes_events": true
+  },
+  "replay_comparisons": {
+    "numpy-0": {
+      "max_abs_voltage_error_mv": 0.0,
+      "max_abs_synaptic_error_mv": 0.0,
+      "discrete_and_lastspike_exact": true,
+      "same_engine_repeat_bitwise": true,
+      "spikes": 43
+    },
+    "numpy-1": {
+      "max_abs_voltage_error_mv": 0.0,
+      "max_abs_synaptic_error_mv": 0.0,
+      "discrete_and_lastspike_exact": true,
+      "same_engine_repeat_bitwise": true,
+      "spikes": 43
+    },
+    "cpp-0": {
+      "max_abs_voltage_error_mv": 0.0,
+      "max_abs_synaptic_error_mv": 0.0,
+      "discrete_and_lastspike_exact": true,
+      "same_engine_repeat_bitwise": true,
+      "spikes": 43
+    },
+    "cpp-1": {
+      "max_abs_voltage_error_mv": 0.0,
+      "max_abs_synaptic_error_mv": 0.0,
+      "discrete_and_lastspike_exact": true,
+      "same_engine_repeat_bitwise": true,
+      "spikes": 43
+    }
+  }
+}
