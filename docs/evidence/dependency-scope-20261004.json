@@ -1,0 +1,95 @@
+{
+  "recorded_at": "2026-10-04T18:32:36.403545+02:00",
+  "checkpoint": "025d2b4c57f992978a382ebad5feb9f412458f44",
+  "scope": "Dependency clarification during architecture hold. No package installation, application changes, simulations, or data deletion.",
+  "environment_check": {
+    "command": [
+      "uv",
+      "--no-cache",
+      "pip",
+      "check",
+      "--python",
+      ".venv/bin/python"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "Checked 41 packages in 84ms\nAll installed packages are compatible\n",
+    "note": "Captured from the earlier read-only command in this turn. This is package metadata compatibility, not a clean installation or numerical qualification."
+  },
+  "database_import_search": {
+    "method": "Parse every Python source under main.py, code/, scripts/, and tests/; inspect import statements.",
+    "files_scanned": 23,
+    "modules_checked": [
+      "alembic",
+      "asyncpg",
+      "duckdb",
+      "mysql",
+      "psycopg",
+      "psycopg2",
+      "pymysql",
+      "sqlalchemy",
+      "sqlite3",
+      "sqlmodel"
+    ],
+    "matches": [],
+    "source_sha256": {
+      "main.py": "6e774953ebb68e924a5198a53c6777ea7c79898869c683e060dad515f3af83bc",
+      "code/benchmark.py": "e18dae9072baf9ee0f0581282641c58864fdc138c6e75b718a542eb27d272874",
+      "code/compare_backend_to_brian2.py": "e4225dd122be29d6c713dd463f26ba5de4298fc3654d31088808ae6a4c56a6ac",
+      "code/compare_ground_truth.py": "2c19c46fca52fc102c4936fa3fc79e3752c96c43544c68062d10c85c16ba580f",
+      "code/compare_spike_outputs.py": "4882aacb565bab1847cd1aeda68fdbe91909a1334240cef7d460248a524e58b5",
+      "code/mlx_core.py": "1ac73efbb5da5f89c008548884ad5b35f8b65177b444cc5fc8adfd4d18234ece",
+      "code/paper-phil-drosophila/model.py": "6e2cb5aab4ddf08cde2ca05cc49e87dd252c0358afe0dad17314211837b1f539",
+      "code/paper-phil-drosophila/utils.py": "6fa3ddaec34866e6a573626aad88252abe50e7003e1678fbf60c74d352a543ea",
+      "code/run_brian2_cuda.py": "0184fb8bbd28e36643a0bcffbe64675d58cb1bcce27cbe1fc08deb8cb1777722",
+      "code/run_brian2_genn.py": "f0dbed77b0c9cb645177381fb4efa4eec7c4953e1cafe4ac76b207facee9602f",
+      "code/run_genn.py": "ad24e429d5720f8b8785d638d30dfb696606a556f40da877e1a3b62627e1d127",
+      "code/run_nestgpu.py": "8a6e69e4ed033748be02b559bb43174365fb34ed64eb64be27fddee439db9602",
+      "code/run_pytorch.py": "699655db7a56045271ba467268be153d0a3318d4cc4cecc0a13f33e69ce79667",
+      "scripts/inspect_reference_contract.py": "3e0a064f5aab6ba77439250d2f41671cf101477c3d44ed2ad366740077b42741",
+      "scripts/nestgpu_source_files/pythonlib/nestgpu.py": "4b833e621faabcff5965ac33f861bdd58a5b54cac405ae079ab62afc69cbbfbf",
+      "scripts/probe_mlx_accumulation.py": "09444c91cddd609e093e3fbe581237459735b3be30a012e011786ea34671135a",
+      "scripts/probe_mlx_factored_accumulation.py": "0e409e05ed6ed6b6886cc798ebaef912fcf6e88f37bb70bb7be0d7ecab5acb34",
+      "scripts/probe_numerical_contract.py": "b4fbaacb759064c5a7cdb6de1fb327ee2b3b3a3c854f2b06e157de055c8da254",
+      "scripts/qualify_mlx_core.py": "73fa5bc59e249a2eb7e1a74d61169048fd8a7af68772692e57d6adfd6787db8f",
+      "scripts/run_reference_baseline.py": "cab0f450b5972e19526999e0e9495ac15fa8f0df1a9c1f130499a2985cf1b061",
+      "tests/test_factored_accumulation.py": "802e8ff0e8fdda85abfb90177cd5f9544fd5f9c1f6a0d5fda6d152e4b6a41094",
+      "tests/test_mlx_core.py": "d6e95126e0c29cbe743373fa9846e24c6fb9daf3f96d962daeafa6c9186eea95",
+      "tests/test_reference_contract.py": "4a738d5a2a5dce895b460ac04db7cc5e6600baf260e64df9264264d6e22a8aa2"
+    }
+  },
+  "sql_schema_file_search": {
+    "scope": [
+      "root",
+      "code",
+      "scripts",
+      "tests",
+      "migrations",
+      "alembic"
+    ],
+    "matches": []
+  },
+  "proposed_dependency_scope": {
+    "package_workflow": "One uv project, lockfile, and supported virtual environment",
+    "application_backend": "MLX",
+    "qualification_dependencies": [
+      "Brian2 2.8.0 reference",
+      "PyTorch comparison"
+    ],
+    "excluded_application_dependencies": [
+      "Conda",
+      "Brian2CUDA",
+      "NEST GPU",
+      "GeNN",
+      "Brian2GeNN",
+      "SQLModel",
+      "Alembic"
+    ],
+    "native_reference_requirement": "System C++ compiler; not a Conda environment"
+  },
+  "official_sources": [
+    "https://brian2.readthedocs.io/en/2.8.0/introduction/install.html",
+    "https://docs.astral.sh/uv/concepts/indexes/",
+    "https://docs.astral.sh/uv/guides/integration/pytorch/"
+  ]
+}

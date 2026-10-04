@@ -20,8 +20,8 @@ The [technology inventory](evidence/architecture-audit/technology-inventory.json
 
 | Area | Current state | Required target for this application |
 | --- | --- | --- |
-| Package management | uv 0.5.31 was used with pinned requirements files. Inherited Conda manifests also specify pip installation. No `pyproject.toml` or `uv.lock` exists. | One uv-managed application package with `pyproject.toml`, reproducible resolution, and `uv.lock` for the supported application environment. |
-| Environment isolation | A local `.venv` exists. Inherited Conda manifests describe other backend environments. | Create and reproduce supported environments with `uv venv`; record platform and dependency conflicts explicitly. |
+| Package management | uv 0.5.31 was used with pinned requirements files. Inherited Conda manifests also specify pip installation. No `pyproject.toml` or `uv.lock` exists. | One uv-managed application package with `pyproject.toml` and `uv.lock`. No Conda workflow is required for the MLX goal. |
+| Environment isolation | A local `.venv` exists. Inherited Conda manifests describe other backend environments. | One supported application environment created with `uv venv`. Keep qualification dependencies in the same uv project. |
 | Formatting and lint | Ruff 0.16.10 is installed. No project Ruff configuration exists; checks were limited in scope. | Configure Ruff for formatting, lint, and import sorting across all application-owned code. |
 | Type checking | Pyright 1.1.414 is installed. Its strict configuration selects two files. ty is absent. | Keep Pyright and apply a documented policy to all application-owned code. Make public boundaries strict. No second checker is needed. |
 | Tests | pytest 9.1.1 is installed. pytest-asyncio and declared unit/integration/device groups are absent. | Use pytest and pytest-asyncio as the approved test dependencies. Declare unit, integration, and Metal qualification groups. Use asynchronous tests only for asynchronous behavior. |
@@ -31,11 +31,23 @@ The [technology inventory](evidence/architecture-audit/technology-inventory.json
 | Dependency injection | Global paths, environment reads, framework preferences, and concrete runner back-references. | Inject configuration, engine callables/ports, clocks, and output writers through function parameters or constructors. Wire them at the entrypoint. |
 | Command-line handling | Standard-library `argparse` with workflow and backend-selection logic. | Keep `argparse` as a thin adapter over an application service. A new command-line framework has no demonstrated need. |
 | File persistence | pandas, PyArrow, Parquet, comma-separated values (CSV), and JSON; storage logic mixed with execution. | Keep existing file contracts. Put file reads/writes in domain-owned adapters that return typed values. |
-| Database models and migrations | No database was identified. SQLModel and Alembic are absent. | SQLModel and Alembic apply if database persistence is required. Do not add a database to justify these packages. Any future migration must use approved raw SQL. |
+| Database models and migrations | No database, SQLModel, Alembic, or database boilerplate was found in the application. | Excluded from this application. No database models, migrations, repositories, or transaction units of work are proposed. |
 
 The installed scientific stack is Python 3.10.14, Brian2 2.8.0, NumPy 1.26.4, MLX/MLX-Metal 0.32.3, and PyTorch 2.11.0. Data and analysis dependencies include pandas 2.3.3, PyArrow 25.0.1, SciPy 1.15.3, joblib 1.6.0, matplotlib 3.10.9, and Cython 3.3.0. Preserve qualified versions during architecture repair. These libraries serve the simulation; they do not replace the approved application tools.
 
 The source also contains Brian2CUDA, NEST GPU, GeNN, and Brian2GeNN adapters. Their presence does not prove installation or qualification in the current Apple-silicon environment. No web service, frontend, or database stack is needed for the present command-line simulation.
+
+### Dependency scope after user clarification
+
+On 2026-10-04, the user specified one package workflow and no competing application frameworks. The proposal is one uv project, one lockfile, and one supported environment. MLX is the application execution backend. Brian2 and PyTorch remain qualification dependencies because the reviewed contract requires their reference and comparison results. They already coexist with MLX in the current environment.
+
+Conda is not required for these dependencies. Install the same Python packages through uv; no equivalent library replacement is needed. Brian2 publishes a normal Python package, and uv supports the Python package index and PyTorch installation. See [Brian2 installation](https://brian2.readthedocs.io/en/2.8.0/introduction/install.html), [uv package indexes](https://docs.astral.sh/uv/concepts/indexes/), and [uv with PyTorch](https://docs.astral.sh/uv/guides/integration/pytorch/). Brian2's reference code generation still needs a system C++ compiler.
+
+Brian2CUDA, NEST GPU, GeNN, and Brian2GeNN are outside the proposed MLX application installation. Their native build requirements and the older Brian2GeNN version conflict do not justify a second supported package workflow. Jupyter is optional analysis tooling. Preserve the inherited source and existing evidence during the hold; do not port these optional backends or change command contracts in this investigation.
+
+There is no database infrastructure to remove. SQLModel and Alembic were listed as conditional approved tools in the initial audit. That was unnecessary for this application. They are now explicitly excluded from the proposed stack.
+
+The [dependency-scope check](evidence/dependency-scope-20261004.json) records the read-only environment check and database-import search. All 41 installed packages passed uv's compatibility check. This does not replace a clean installation test. No package installation, backend removal, or application change was performed.
 
 ## Verified findings
 
@@ -90,7 +102,7 @@ The latest user instruction resolves the conflict: repair necessary application 
 ### Ordered remediation work
 
 1. **Record package and domain boundaries.** Map every application-owned runner, comparison tool, probe, and test helper to its owner. Distinguish pinned vendored source from application code explicitly. Declare allowed imports before moving code. Simulation services cannot import concrete runners, command parsers, or benchmark presentation/persistence; benchmarking and comparison call simulation services through their declared contracts.
-2. **Package without dependency upgrades.** Introduce `pyproject.toml`, uv-managed installation, reproducible resolution, and explicit Ruff/pytest/type-check configuration. Preserve the qualified Python 3.10.14, Brian2 2.8.0, NumPy 1.26.4, and MLX 0.32.3 versions. Record separate platform/environment constraints for incompatible optional backends instead of combining them into an invalid environment. Remove application/test path injection as callers move to installed imports.
+2. **Package without dependency upgrades.** Introduce `pyproject.toml`, uv-managed installation, reproducible resolution, and explicit Ruff/pytest/type-check configuration. Preserve the qualified Python 3.10.14, Brian2 2.8.0, NumPy 1.26.4, and MLX 0.32.3 versions. Use one supported MLX environment, with Brian2/PyTorch qualification dependencies in the same project. Exclude the optional NVIDIA backends from the application installation. Remove application/test path injection as callers move to installed imports.
 3. **Make execution dependencies explicit.** Separate experiment values and scheduling from concrete backend wiring, logging, clocks, and output persistence. Inject run configuration, paths, engine selection, and output collaborators. Isolate unavoidable framework-global preferences inside the owning adapter's execution lifecycle. Preserve command options, spike/manifest fields, and numerical expressions, ordering, dtypes, queue semantics, and precision guards.
 4. **Give qualification code stable ownership.** Move existing reusable MLX arithmetic without optimization or algebraic changes. Share reference fixtures through test support while keeping independent oracle equations independent. Replace test-module monkeypatching with the minimal real propagation seam. Classify pure unit, reference integration, and Metal qualification tests; keep artifact recording explicit and use fresh destinations that preserve existing evidence.
 5. **Verify and review before resuming milestones.** Run the gates below, record exceptions and unsupported environments honestly, and conduct a final review against both skills. Packaging or refactoring success cannot replace numerical requalification. The unfinished manual scientific review remains preserved and must not be treated as finalized by this audit.
