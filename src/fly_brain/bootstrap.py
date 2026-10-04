@@ -48,6 +48,13 @@ def factored(project: Path, output: Path) -> dict[str, object]:
     return run(project, output, precision)
 
 
+def bucketed_scalars(project: Path, output: Path) -> dict[str, object]:
+    precision = configure_mlx()
+    from fly_brain.qualification.adapters.bucketed_scalars import run
+
+    return run(project, output, precision)
+
+
 def replay(output: Path) -> dict[str, object]:
     from fly_brain.qualification.adapters.replay_probe import run
 

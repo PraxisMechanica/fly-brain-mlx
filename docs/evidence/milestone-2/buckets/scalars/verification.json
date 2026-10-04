@@ -1,0 +1,13 @@
+{
+  "cases": 157,
+  "all_artifact_and_source_hashes_match": true,
+  "original_inputs_match_prototype": true,
+  "all_output_and_count_component_bits_match_prototype": true,
+  "both_references_independently_recomputed": true,
+  "both_original_state_budgets_pass": true,
+  "repeat_standalone_and_zero_copy_bits_pass": true,
+  "maximum_one_step_budget_fraction": 0.0236594749621527,
+  "ordered_negative_zero_reference_note": "Case 155 has -0.0 rather than the old padded ordered reference +0.0; numerical values agree, and output negative-zero bits are preserved.",
+  "raw_output": "/Users/ocasta/Code/fly-brain/data/results/milestone-2-bucketed-scalars-20261004-01",
+  "verification_execution_note": "All independent numerical assertions passed before the initial artifact-copy step stopped because pytest had created the destination. This continuation copies evidence into new files; no numerical failure or overwrite occurred."
+}

@@ -15,6 +15,7 @@ def parser() -> argparse.ArgumentParser:
         'qualify',
         'probe-accumulation',
         'probe-factored',
+        'probe-bucketed',
         'probe-replay',
         'inspect-reference',
         'audit-inputs',
@@ -70,6 +71,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         report = bootstrap.accumulation(request.project, request.output)
     elif arguments.command == 'probe-factored':
         report = bootstrap.factored(request.project, request.output)
+    elif arguments.command == 'probe-bucketed':
+        report = bootstrap.bucketed_scalars(request.project, request.output)
     elif arguments.command == 'probe-replay':
         report = bootstrap.replay(request.output)
     elif arguments.command == 'audit-inputs':

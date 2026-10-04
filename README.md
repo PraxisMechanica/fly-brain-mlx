@@ -48,11 +48,14 @@ Existing scientific diagnostics are available through the installed command:
 ```sh
 uv run --locked --group qualification fly-brain probe-accumulation --output data/results/accumulation-01
 uv run --locked --group qualification fly-brain probe-factored --output data/results/factored-01
+uv run --locked --group qualification fly-brain probe-bucketed --output data/results/bucketed-scalars-01
 uv run --locked --group qualification fly-brain probe-replay --output data/results/replay-01
 uv run --locked --group qualification fly-brain inspect-reference --output data/results/schedule-01
 ```
 
 The serial accumulation diagnostic records an asserted precision limitation. Its successful execution does not mean every diagnostic case meets parity. Acceptance limits remain fixed in the numerical contract.
+
+`probe-bucketed` executes all 157 retained scalar cases through the actual destination layout and event gather. It verifies both original-state budgets, exact integer count expansions, negative-zero copies, repeated results, and individual versus batched execution.
 
 Milestone 2's host input audit verifies both pinned files, identifier order and direction, signed counts, all row identities, arithmetic guards, and stable reversible destination grouping. It retains full converted arrays and checksums in a fresh output directory:
 
