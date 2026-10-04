@@ -1,0 +1,41 @@
+{
+  "implementation_commit": "c863ed8",
+  "command": "UV_CACHE_DIR=/private/tmp/fly-brain-uv-remediation-cache UV_PROJECT_ENVIRONMENT=/private/tmp/fly-brain-m3-normal-runtime-20261004 uv run --locked --no-dev --no-editable fly-brain simulate --duration-s 0.1 --trials 1 --output data/results/milestone-3-sugar-20261004-01",
+  "exit_code": 0,
+  "python": "3.10.14",
+  "runtime_packages": {
+    "annotated-types": "0.8.0",
+    "fly-brain": "0.1.0",
+    "mlx": "0.32.3",
+    "mlx-metal": "0.32.3",
+    "numpy": "1.26.4",
+    "pyarrow": "25.0.1",
+    "pydantic": "2.13.5",
+    "pydantic_core": "2.46.5",
+    "typing-inspection": "0.4.4",
+    "typing_extensions": "4.16.0"
+  },
+  "package_path": "/private/tmp/fly-brain-m3-normal-runtime-20261004/lib/python3.10/site-packages/fly_brain",
+  "noneditable_normal_install": true,
+  "installed_and_checkout_source_hashes_match": true,
+  "both_original_data_hashes_match": true,
+  "canonical_schedule_independently_regenerated": true,
+  "original_experiment_ids_rates_order_match": true,
+  "full_neuron_csv_mapping_verified": true,
+  "original_six_column_schema_and_brotli_verified": true,
+  "valid_unique_ordered_step_trial_neuron_coordinates": true,
+  "counts_and_identifiers_verified": true,
+  "existing_comparison_reader_consumes_complete_output": true,
+  "spikes": 1612,
+  "active_neurons": 335,
+  "stimulus_events": 417,
+  "artifact_sha256": {
+    "run.log": "7e4b9b3382f24c70ab45b6c02b6dba6aea6663cbab1be564193c9ec24450c308",
+    "simulation.json": "67b81d2d38198a97a6050edf0cda1fa0562ac77d5780bafb60b7bf0d9d3ce7ee",
+    "spike-events.npz": "5fdd2d40dd37574632bb6e872718a5a5f35356dab7e68c39ae0df11d9127be3b",
+    "stimulus.json": "8b6f45e78799bf1b6ca1b5846bfd30a78a15f0875315b12db85c5dd91c1c45a1",
+    "stimulus.npz": "cc0f41051d3798d717c62dfd0d3c1a98f37602d91b6671d075bdd314ecb11c13"
+  },
+  "raw_parquet": "/Users/ocasta/Code/fly-brain/data/results/milestone-3-sugar-20261004-01/mlx_t0.1s_n1.parquet",
+  "scope": "One complete production sugar run and file contract. Repeatability, silent control, full-network scientific parity, and performance acceptance remain open."
+}
