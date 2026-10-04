@@ -224,6 +224,12 @@ Pinned-data qualification checkpoint (2026-10-04):
 - **Engineering decision recorded:** on 2026-10-04 the user delegated low-level engineering judgment to the agent. Sol adopts the bounded review's exact input-state accounting amendment in the [numerical contract](docs/mlx-port-baseline.md#reviewed-precision-and-state-acceptance). The isolated fan-in one-step check compares accurate and ordered accumulation from the same stored float32 starting state with original float64 weights. Every prescribed original state and comparison remains recorded; both unchanged original-state trajectory gates remain mandatory. Original-state one-step failures stay labelled conversion limitations. All tolerance values, other small-network gates, event semantics, and full-network Brian2 criteria are unchanged. The [decision and rationale](docs/evidence/milestone-2/initial-state-cast/astra-review.md#recorded-engineering-decision) resolve the hold; the complete matrix is the next required work.
 - Current application suite: **46 passed, zero skips/failures/errors**. [Report](docs/evidence/milestone-2/source-patterns/application-tests.xml). Full Ruff, strict Pyright, and all three import contracts pass. No numerical core change occurred during this decision review.
 
+Qualification implementation under delegated engineering judgment (2026-10-04):
+
+- The decision was committed at `93ba165` before dependent implementation. The pure fan-in case builder retains all prescribed source masks, conditional cancellation states, three orders, original and stored-state accurate/ordered references, and the old once-cast-input diagnostic. No device arithmetic changes.
+- Four focused tests verify that conversion failures stay visible, the original-state trajectory gate still rejects excessive error, empty targets retain all cases, and reordered duplicate masks preserve counts. The full application suite passes **50 tests, zero failures/errors/skips**. [Report](docs/evidence/milestone-2/fan-in/tests-cases.xml). Ruff, strict Pyright, and all three import contracts pass.
+- Next: execute the complete pinned-data matrix on Metal, preserving inputs, individual results, count expansions, repeatability, and standalone/batch evidence. The builder's unit tests do not qualify device accumulation.
+
 ## Milestone 3 — Backend integration
 
 Status: not started.
