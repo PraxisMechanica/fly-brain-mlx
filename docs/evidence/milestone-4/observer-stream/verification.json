@@ -1,0 +1,21 @@
+{
+  "application_tests": 107,
+  "new_transport_intent_cases": 14,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "ruff_lint_and_format_pass": true,
+  "strict_pyright_errors_warnings": [
+    0,
+    0
+  ],
+  "import_contracts_kept": 3,
+  "source_sha256": {
+    "src/fly_brain/qualification/adapters/observer_stream.py": "8aaebb08e5feb0ccecdde927d17026666b98212d22ff9c72622a54133416ed73",
+    "tests/unit/test_observer_stream.py": "457345f3c2cb386dac2349e203c039eda4cbc3e2f6cd0a852bfd2f9543a2d079"
+  },
+  "report_sha256": "3d30cf611c280e8be37f5907a25980eddee46b867787758d913fe882bab1b097",
+  "format": "Internal qualification stream FBQOBS01, little-endian scalars/arrays, framed step/phase/final observations, CRC-32 per header/frame, canonical Boolean bytes.",
+  "scope": "Reader bounds, ordering, truncation, partial reads, queue/state checksums, final-block completeness, and trailing-data rejection. No live observer, actual queue ledger, numerical transparency, full-network parity, or performance approval.",
+  "typing_corrections_before_checkpoint": "Removed a redundant cast; aligned the partial-read test fixture with BytesIO.read(int | None)."
+}
