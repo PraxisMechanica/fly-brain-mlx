@@ -1,0 +1,71 @@
+{
+  "case": {
+    "target": 11645,
+    "flywire_id": 720575940611563310,
+    "mask": "negative-error",
+    "initial64_mv": -789.5250000000001,
+    "initial32_mv": -789.5250244140625,
+    "initial_cast_error_mv": -2.441406240905053e-05,
+    "reference64_mv": -3.175237850427948e-14,
+    "one_step_budget_mv": 2.0000000000000066e-05,
+    "incoming_edges": 4268,
+    "accepted_edges": 1998,
+    "absolute_count_sum": 11559
+  },
+  "MLX_ENABLE_TF32": "0",
+  "device": {
+    "device_name": "Apple M1 Max",
+    "max_recommended_working_set_size": 22906503168,
+    "memory_size": 34359738368,
+    "architecture": "applegpu_g13s",
+    "max_buffer_length": 17179869184,
+    "resource_limit": 499000
+  },
+  "compilation": "disabled",
+  "orders": [
+    {
+      "order": "original",
+      "original_initial_accurate_reference_mv": -3.175237850427948e-14,
+      "original_initial_ordered_reference_mv": 1.5269785436089478e-11,
+      "stored_initial_accurate_reference_mv": -2.441406244080291e-05,
+      "factored_result_mv": -2.441406286379788e-05,
+      "original_initial_error_mv": 2.4414062832045502e-05,
+      "original_initial_one_step_budget_mv": 2.0000000000000066e-05,
+      "original_initial_one_step_pass": false,
+      "original_initial_trajectory_pass": true,
+      "stored_initial_error_mv": 4.2299497238218464e-13,
+      "stored_initial_one_step_pass": true
+    },
+    {
+      "order": "reversed",
+      "original_initial_accurate_reference_mv": -3.175237850427948e-14,
+      "original_initial_ordered_reference_mv": 1.742395117076967e-11,
+      "stored_initial_accurate_reference_mv": -2.441406244080291e-05,
+      "factored_result_mv": -2.441406286379788e-05,
+      "original_initial_error_mv": 2.4414062832045502e-05,
+      "original_initial_one_step_budget_mv": 2.0000000000000066e-05,
+      "original_initial_one_step_pass": false,
+      "original_initial_trajectory_pass": true,
+      "stored_initial_error_mv": 4.2299497238218464e-13,
+      "stored_initial_one_step_pass": true
+    },
+    {
+      "order": "seeded-permutation",
+      "original_initial_accurate_reference_mv": -3.175237850427948e-14,
+      "original_initial_ordered_reference_mv": 1.93354221522668e-11,
+      "stored_initial_accurate_reference_mv": -2.441406244080291e-05,
+      "factored_result_mv": -2.441406286379788e-05,
+      "original_initial_error_mv": 2.4414062832045502e-05,
+      "original_initial_one_step_budget_mv": 2.0000000000000066e-05,
+      "original_initial_one_step_pass": false,
+      "original_initial_trajectory_pass": true,
+      "stored_initial_error_mv": 4.2299497238218464e-13,
+      "stored_initial_one_step_pass": true
+    }
+  ],
+  "all_required_original_initial_one_step_cases_pass": false,
+  "all_original_initial_trajectory_cases_pass": true,
+  "repeated_bit_identical": true,
+  "artifact_sha256": "d2c808e3c0114bacc525240e54ad48e8ed9911b86876be21c17e09fa0b335699",
+  "scope": "Diagnostic of the first mandatory cancellation case whose initial float32 cast exceeds the frozen one-step floor. Not a completed pinned-data qualification and no tolerance or reference waiver."
+}

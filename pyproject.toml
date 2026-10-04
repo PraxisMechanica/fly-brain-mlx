@@ -78,6 +78,7 @@ source_modules = [
     "fly_brain.simulation.models",
     "fly_brain.simulation.mapping",
     "fly_brain.qualification.models",
+    "fly_brain.qualification.input_patterns",
     "fly_brain.qualification.service",
     "fly_brain.comparison.models",
     "fly_brain.comparison.service",
