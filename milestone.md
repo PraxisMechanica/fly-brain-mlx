@@ -82,7 +82,7 @@ Resolved scientific review:
 
 ## Numerical-contract handoff
 
-Status: resolved. Contract approved for Milestone 1 implementation/qualification; awaiting the user's return to GPT-6.1 Sol at `xhigh`. This is not approval of an MLX implementation or full-network result.
+Status: resolved. Contract approved for Milestone 1 implementation/qualification; the user returned execution to GPT-6.1 Sol at `xhigh`. This is not approval of an MLX implementation or full-network result.
 
 Review checkpoint (2026-10-04):
 
@@ -99,11 +99,18 @@ Return condition met: reference semantics and acceptance decisions are explicit 
 
 ## Milestone 1 — Small MLX numerical kernel
 
-Status: not started.
+Status: in progress.
 
 Acceptance: every timestep's voltage and synaptic state meet the [reviewed budgets](docs/mlx-port-baseline.md#reviewed-precision-and-state-acceptance): isolated one-step error ≤`2e-5 + 2e-6*abs(reference)` mV and trajectory error ≤`1e-3 + 1e-5*abs(reference)` mV. Ordinary fixtures require exact spike/reset/refractory/delay-event state, with no timing slack. Test strict equality and neighboring representable values, and assert the separate near-threshold rounding limitation rather than claiming universal float64 spike equivalence. Run every enumerated synthetic case, shared deterministic stimuli, and repeated identical runs without skips.
 
 Start with source indices, destination indices, and weights. Keep model state on the Apple graphics processing unit. Use externally generated stochastic schedules shared with the reference. Do not load the full connectome or add a custom Metal kernel at this milestone.
+
+Startup checkpoint (2026-10-04):
+
+- Review checkpoint `4fcb224` was clean. The active session metadata confirms GPT-6.1 Sol at `xhigh`; no model was switched or substituted by the agent.
+- Installed MLX/MLX-Metal 0.32.3 into the existing Python 3.10.14 environment; [MLX requirements](requirements-mlx.txt) and [qualification tools](requirements-dev.txt) are pinned. Existing reference dependency versions were preserved.
+- `MLX_ENABLE_TF32=0` GPU smoke test succeeded on Apple M1 Max, macOS 15.3.1, architecture `applegpu_g13s`, 34,359,738,368 bytes unified memory. Device operations returned `[2.0, 3.0]` for `[1, 2] + 1`.
+- The sandbox cannot expose a Metal device; the GPU smoke process was authorized outside the sandbox. Actual qualification must use the same access, without CPU fallback. No core correctness or milestone acceptance is inferred from this smoke test.
 
 ## Milestone 2 — Connectome loading
 
@@ -153,7 +160,7 @@ Acceptance: final corrections are applied; the complete approved verification su
 
 ## Current checkpoint and constraints
 
-Next work: the user returns to **GPT-6.1 Sol at `xhigh`**. Resume from the [completed bounded review](docs/handoffs/astra-numerical-contract.md#return-checkpoint-and-next-action), then begin Milestone 1's small, uncompiled MLX core and qualification suite under the reviewed contract. Stop for the model switch; no implementation in the review turn.
+Next work: implement and qualify Milestone 1's small, uncompiled MLX core under the [completed bounded review](docs/handoffs/astra-numerical-contract.md#return-checkpoint-and-next-action). Execution has returned to GPT-6.1 Sol at `xhigh`. The private in-memory core does not change an existing public interface or persisted production schema.
 
 No MLX backend has been written. No MLX parity, speed, peak memory, or installation claim is verified. Existing simulation results and generated standalone artifacts are preserved. Baseline reruns require a fresh output directory; the harness refuses an existing destination.
 
