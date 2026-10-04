@@ -2,7 +2,7 @@
 
 This application targets Apple silicon and uses MLX for simulation. It is based on the FlyWire v783 leaky integrate-and-fire model from [Eon Systems](https://github.com/eonsystemspbc/fly-brain), pinned at `a3db62f9436074e485c0278290c2164ed6150808`.
 
-The numerical core, complete connectome mapping, device propagation, and controlled delivery are qualified. The normal experiment command and spike export pass their implementation tests; complete production-run verification is in progress. Full-network scientific parity and performance remain open. See [the authoritative plan](milestone.md), [the numerical contract](docs/mlx-port-baseline.md), and [project rules](AGENTS.md).
+The numerical core, complete connectome mapping, device propagation, and controlled delivery are qualified. The normal installation runs the complete shortest sugar experiment twice with byte-identical outputs; the complete silent control produces zero spikes. Existing comparison tools consume populated and empty exports. Full-network scientific parity and performance remain open. See [the authoritative plan](milestone.md), [the numerical contract](docs/mlx-port-baseline.md), and [project rules](AGENTS.md).
 
 ## Install
 

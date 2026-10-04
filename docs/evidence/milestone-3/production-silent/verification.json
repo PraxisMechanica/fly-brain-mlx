@@ -1,0 +1,23 @@
+{
+  "implementation_commit": "c863ed8",
+  "run_exit_code": 0,
+  "comparison_exit_code": 0,
+  "complete_connectome_neurons": 138639,
+  "complete_connectome_edges": 15091983,
+  "steps": 1000,
+  "spikes": 0,
+  "active_neurons": 0,
+  "source_data_and_dependency_hashes_match_verified_sugar_run": true,
+  "independently_regenerated_empty_stimulus_and_provenance_pass": true,
+  "original_six_column_types_and_brotli_pass": true,
+  "existing_comparison_reader_and_command_consume_empty_output": true,
+  "artifact_sha256": {
+    "pairwise_summary.json": "c24435ff0122e1cf31409023e9f2b9924d5c6259fedcf8df6a86bf6cb8047518",
+    "run.log": "d8ea82e18e8c4323a7da37eb7bff2a761dc1a5c4aa85b3b47440c7c01a22f955",
+    "simulation.json": "bc740fddab58fe5c9479eaa44b79e194ff51c714045391d7f1336b3265885686",
+    "stimulus.json": "69b82c68a64f4d3ff88e30039c9a312b626a4afa9eb5cf93402c93305338d341",
+    "stimulus.npz": "f88fe26f600bff6bd36f9ad6ffa08834e1995f1427cd7de794829bbf2ecc6069"
+  },
+  "raw_parquet": "/Users/ocasta/Code/fly-brain/data/results/milestone-3-silent-20261004-01/mlx_t0.1s_n1.parquet",
+  "scope": "Complete production silent control and empty file integration. Legacy comparison empty metrics remain unchanged; Milestone 4 uses its frozen explicit empty-agreement rules. No full-network parity or performance approval."
+}

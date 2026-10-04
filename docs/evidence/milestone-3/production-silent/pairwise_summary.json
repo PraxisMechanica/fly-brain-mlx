@@ -1,0 +1,29 @@
+[
+  {
+    "framework_a": "mlx-silent",
+    "framework_b": "mlx-silent",
+    "backend_a": "mlx-silent",
+    "backend_b": "mlx-silent",
+    "t_run": 0.1,
+    "n_run": 1,
+    "tolerance_ms": 1.0,
+    "spikes_a": 0,
+    "spikes_b": 0,
+    "spike_count_ratio_b_over_a": null,
+    "active_a": 0,
+    "active_b": 0,
+    "active_shared": 0,
+    "active_jaccard": 0.0,
+    "active_precision_b_over_a": 0.0,
+    "active_recall_b_over_a": 0.0,
+    "rate_pearson_shared": null,
+    "rate_rmse_hz_shared": null,
+    "rate_mae_hz_shared": null,
+    "timing_matches": 0,
+    "timing_f1": 0.0,
+    "timing_precision_b_over_a": 0.0,
+    "timing_recall_b_over_a": 0.0,
+    "timing_mean_abs_dt_ms": null,
+    "timing_median_abs_dt_ms": null
+  }
+]

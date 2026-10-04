@@ -1,0 +1,55 @@
+{
+  "completed": true,
+  "backend": "mlx",
+  "experiment": "silent",
+  "duration_s": 0.1,
+  "trials": 1,
+  "seed": 20261004,
+  "spikes": 0,
+  "active_neurons": 0,
+  "spike_file": "/Users/ocasta/Code/fly-brain/data/results/milestone-3-silent-20261004-01/mlx_t0.1s_n1.parquet",
+  "timings": {
+    "data_load_s": 1.5342327079852112,
+    "schedule_s": 0.04705745799583383,
+    "stimulus_io_s": 0.0025252919876948,
+    "setup_s": 9.196980042004725,
+    "first_step_s": 0.6324482079944573,
+    "warm_simulation_s": 39.31555232932442,
+    "collection_s": 0.46808849900844507,
+    "compilation_s": 0.0,
+    "spike_io_s": 0.07502474999637343
+  },
+  "elapsed_s": 51.2839832919999,
+  "device": "Apple M1 Max",
+  "mlx_peak_allocation_bytes": 1602430261,
+  "memory_scope": "MLX allocator peak, not total system unified-memory usage",
+  "compilation": "disabled",
+  "MLX_ENABLE_TF32": "0",
+  "canonical_stimulus_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "spike_sha256": "96bf711adcaaefa7371bdf0323ab23efbf0923c7dc598ad607cfe7477f3e5124",
+  "input_sha256": {
+    "completeness": "52b0ac6094cd32c546f8d4c341e094376f48f4e791f8db9b166de5dff8199ea4",
+    "connectivity": "efeb23fb99098e9c390f6869969b2a121a2ee92c833cfc45ecb2c1d8e1af0347"
+  },
+  "versions": {
+    "fly-brain": "0.1.0",
+    "mlx": "0.32.3",
+    "mlx-metal": "0.32.3",
+    "numpy": "1.26.4",
+    "pyarrow": "25.0.1",
+    "pydantic": "2.13.5"
+  },
+  "source_sha256": {
+    "inputs.py": "b047574624e5f25b62f34099f56951e02e09e5a0b54d93a5f535c594de3fbd62",
+    "mapping.py": "409932868e8c52c337c75bd94e6c866c084a9a66053be7e9b717a4ca974ce52f",
+    "experiments.py": "6c45ad3e19f26c757434571fd25fbd0c4de8b4879dd758f8a64d26fd72d9938d",
+    "stimuli.py": "589f1873061f299964b431435e77b0ce7c421d014806080e87146beafa780b1d",
+    "service.py": "676e36b2c18184054da282767951e1f0b96e1a9d1458756cd93ad5ba3f4615d1",
+    "storage.py": "83796fbfb2b568a25d76c3b75bac75dc3fe00e985d50c18a20ef005c3ab28508",
+    "backend/core.py": "c4079b5d32cb05e701fcb89856a8b48066185bb5c470203e56f4785316461132",
+    "backend/accumulation.py": "2ea94edfbae1852cdf269fe7169fa97a00c57bf8cb597879fd076abe0c17a894",
+    "backend/bucketed.py": "0829f0cb3c67f08bb4dc861c1397548f8e66e4ce2262ef3471368ce772552747",
+    "backend/runner.py": "67a1f51bb03e2a82df0f9076b899ec277608911666b9be92c5eb135382009216"
+  },
+  "scope": "Production MLX execution and file export; scientific parity and performance acceptance are separate gates."
+}
