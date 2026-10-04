@@ -1,0 +1,25 @@
+{
+  "reviewer": "/root/review_full_network_evidence",
+  "model": "gpt-6-astra",
+  "reasoning_effort": "xhigh",
+  "context": "fresh; read-only",
+  "implementation_checkpoint": "73ceebc",
+  "source_locations_and_api_insertion_order_independently_inspected": true,
+  "queue_source_matches_retained_reference_build": true,
+  "queue_source_sha256": "f1d52276dc24695854047fd38cc301ccfe1130997562784ec64dd9f1a52089dc",
+  "installed_brian2_source_sha256": {
+    "devices/cpp_standalone/device.py": "99f7e099978ae3bdba8e31992375441452d580aec9e57abac75de0f1d6956240",
+    "devices/cpp_standalone/templates/network.cpp": "c0aea1b09c2e99b255f159d1d9aa8876703871eec5eaea4aab4e79025881d2bb",
+    "devices/cpp_standalone/templates/statemonitor.cpp": "6805c4076ed65eaf7eba7578078d5fcf3c6b3b74cc4a0535be266d0cbf5f886c",
+    "devices/cpp_standalone/templates/synapses_classes.cpp": "52eae749724a0e091e53d3625da957971320e7af2eb80d19dd314b3d0086c440",
+    "devices/cpp_standalone/templates/synapses_push_spikes.cpp": "677e3c862bf328e0c86903811db3e0b8a9b17460fa4cac98a1429d5a40ee2fc4",
+    "devices/cpp_standalone/brianlib/dynamic_array.h": "6bdf77741f8d63d8f35e406d9b2878ca3a1728b530a6b8502785c2a5e602967f",
+    "synapses/cspikequeue.cpp": "f1d52276dc24695854047fd38cc301ccfe1130997562784ec64dd9f1a52089dc"
+  },
+  "mlx_one_trial_queue_bytes": 286747677,
+  "mlx_four_trial_queue_bytes": 1146990708,
+  "maximum_retained_observation_steps": 32,
+  "reviewer_simulations_run": 0,
+  "parent_observer_simulations_run": 0,
+  "scope": "Source-supported evidence design only; transparency, transport integrity, observed memory, and all scientific execution/acceptance gates remain unqualified."
+}

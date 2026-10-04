@@ -345,6 +345,11 @@ Metric-calculation checkpoint (2026-10-04):
 - Nine intent tests cover common support, missing neurons, integer timing boundaries/nonreuse, distinct diagnostic windows, exact silence with active PyTorch, empty candidates, zero denominators, and row-order independence. An initial empty-group bug caused three failures and was corrected before this checkpoint. **75 application tests pass, zero failures/errors/skips**; full Ruff, strict Pyright, three import contracts, and the offline lock check pass. [Test report](docs/evidence/milestone-4/metrics/application-tests.xml) and [verification/source hashes](docs/evidence/milestone-4/metrics/verification.json).
 - This step calculates metrics only. Fixed absolute/paired gate execution, validated case inputs, actual-engine trace capture, and full-network comparison remain open. The production numerical engine is unchanged; its retained 80-test scientific qualification is not a new run of this metric code. Commit this verified unit before adding gates.
 
+Evidence-design review completion (2026-10-04):
+
+- Fresh-context Astra at explicit `xhigh` returns the [bounded decision](docs/evidence/milestone-4/evidence-design/astra-review.md). Select one continuous Brian2 C++ run, three actual all-neuron phase monitors, and an appended observer that streams/clears only bounded monitor storage. Inspect actual recurrent/replay queues and counters; distinguish physical repeat digests from normalized pending-event comparisons. MLX uses the unchanged update with bounded phase capture and complete device queue/event checks. No reconstructed ledger is mislabeled as an observed queue.
+- Sol independently inspects insertion/scheduling order, monitor storage behavior, public queue fields, and actual MLX edge-queue dimensions; the installed queue source matches the retained C++ build exactly. [Source verification](docs/evidence/milestone-4/evidence-design/verification.json). The review and parent ran no observer simulation: transparency, integrity, complete/four-trial memory, causal evidence, and parity still require execution qualification. Implement the small-network observer proof before full-network wiring, retaining all frozen gates. Pure metrics are committed at `73ceebc`.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.
