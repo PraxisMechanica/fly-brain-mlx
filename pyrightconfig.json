@@ -1,0 +1,6 @@
+{
+  "include": ["code/mlx_core.py", "scripts/qualify_mlx_core.py"],
+  "typeCheckingMode": "strict",
+  "venvPath": ".",
+  "venv": ".venv"
+}

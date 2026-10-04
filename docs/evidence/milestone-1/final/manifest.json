@@ -1,0 +1,94 @@
+{
+  "accumulation-limit.npz": {
+    "bytes": 664,
+    "sha256": "c9cf51e4cc91f9a8c515dcf8dcbdfaeff26ee23b17f5c447cc0282f372b417d3"
+  },
+  "balanced-duplicates.npz": {
+    "bytes": 11633,
+    "sha256": "1759fa4b2122dd319e994a89cf2d58ea2d29f9034948e4b264a2acf488effbe4"
+  },
+  "batched-trials.npz": {
+    "bytes": 63594,
+    "sha256": "ad7dc7df10f481c8d4bb14ce5897dc63b5d2ac5c9b122398e1a1133088b73857"
+  },
+  "chunked-continuation.npz": {
+    "bytes": 7236,
+    "sha256": "d960898d2a8cb2f04195b3299207f2cea7de350c71f658598fed94fa07f1c106"
+  },
+  "classes-overlap-zero-rate.npz": {
+    "bytes": 7101,
+    "sha256": "3b609d8617c23839d4827adc22eca13c3380695e5450964da5e4dc88875a1f2e"
+  },
+  "fanout-self-wrap.npz": {
+    "bytes": 25918,
+    "sha256": "29ee060dd250eb2a4afb21e3e77a128ad3aa66f9c3400dbd4c04a876e4d4fd23"
+  },
+  "linear-10000.npz": {
+    "bytes": 465344,
+    "sha256": "fbae022a582cb4da12dcabeb03b9c5adf0d09b9d54d1d76ea25fc2955a8fe266"
+  },
+  "measurements.json": {
+    "bytes": 10030,
+    "sha256": "5c23ce7cbeeced25ee1c643029c1685490263db1b55f69533b4350e4aad9ffde"
+  },
+  "outgoing-silencing.npz": {
+    "bytes": 8535,
+    "sha256": "38df1df6217e81273abf8d52d5bcdbe21e166e23739e7ae7c6f6e6e294873fe1"
+  },
+  "positive-negative.npz": {
+    "bytes": 14250,
+    "sha256": "8d918fb2fab7eb6ebf592fcb5cb7c36322c8653a84e5df513cf2a836d0ac4bba"
+  },
+  "qualification.log": {
+    "bytes": 114,
+    "sha256": "6cbeb1cd2ea6b5f174405b060c1b299aaaf29a507f1ea90eca69686d51f34da4"
+  },
+  "refractory-boundary.npz": {
+    "bytes": 9219,
+    "sha256": "d4966bb89cc372f38c2163d5eb13c8141fcaf8eeabe6aa1166dec889310cd1b4"
+  },
+  "refractory-held.npz": {
+    "bytes": 8089,
+    "sha256": "cb6b914fce291f02a46d5863252716328f8232e7664fa16e10082b47f093a819"
+  },
+  "reset-weights.npz": {
+    "bytes": 9935,
+    "sha256": "3c1c9f8a46fa47aff03d0f4815c473219213f59b9991f109e83c4114e5b143b4"
+  },
+  "rest-empty.npz": {
+    "bytes": 6815,
+    "sha256": "39b064a96dd35f88591c58c4dc6cf4f5a43a2ddf5057824da75fff6e6948e9df"
+  },
+  "result.json": {
+    "bytes": 432,
+    "sha256": "57df093a3c8ebf466a4a7045404d04c1c8cf380f8c96c7e70d8345bd5c7f2853"
+  },
+  "retained-replay.npz": {
+    "bytes": 78253,
+    "sha256": "daad9992ba9ba6a6b0ea8be29ca9c46b2d9a68a4a44dc673d675c04152c02d8d"
+  },
+  "same-step-recurrent-loss.npz": {
+    "bytes": 7244,
+    "sha256": "f8a01442c6dc39e1ff356fa26e3efdf70aac9c6f5e77fb2e0dada52f21bcf50b"
+  },
+  "target-released-at-arrival.npz": {
+    "bytes": 9701,
+    "sha256": "60c891bd0b8c0e9fb7822d23040b6e6cc542f19de5e5b5f579d993aa0f4bf49b"
+  },
+  "tests.xml": {
+    "bytes": 6209,
+    "sha256": "842c1644a91ac8e105e23a2ab44c9aada68bf1df4a91b64c138bbd82b9acec85"
+  },
+  "thirty-two-event-fanin.npz": {
+    "bytes": 11686,
+    "sha256": "889351c7b29a6a4e385d00e2a71b1e117450f75e6fefc41094ad730c32e6fb07"
+  },
+  "threshold-rounding-limitation.npz": {
+    "bytes": 420,
+    "sha256": "e905b7fd65be5d557cf858962b7692016bb502065a770a9dd73f21ce606c92eb"
+  },
+  "zero-refractory-loss.npz": {
+    "bytes": 6818,
+    "sha256": "e76e3cf9776f0f5be0cbbadb16c2ab50cb606789ad52b4613802dccc792c948e"
+  }
+}

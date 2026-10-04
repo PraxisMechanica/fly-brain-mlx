@@ -308,20 +308,24 @@ def test_ten_thousand_linear_steps_stay_within_the_reviewed_budget():
     expected = np.stack((monitor.v[:] / b.mV, monitor.g[:] / b.mV), axis=-1).transpose(
         1, 0, 2
     )
-    trace = []
-    with mx.stream(mx.gpu):
-        v, g, available = (
-            mx.array(initial_v.astype(np.float32)),
-            mx.array(initial_g.astype(np.float32)),
-            mx.ones((6,), dtype=mx.bool_),
-        )
-        for _ in range(10000):
-            v, g = core.integrate(v, g, available)
-            mx.eval(v, g)
-            trace.append(mx.stack((v, g), axis=-1))
-        actual = mx.stack(trace)
-        mx.eval(actual)
-    actual = np.asarray(actual)
+    runs = []
+    for _ in range(2):
+        trace = []
+        with mx.stream(mx.gpu):
+            v, g, available = (
+                mx.array(initial_v.astype(np.float32)),
+                mx.array(initial_g.astype(np.float32)),
+                mx.ones((6,), dtype=mx.bool_),
+            )
+            for _ in range(10000):
+                v, g = core.integrate(v, g, available)
+                mx.eval(v, g)
+                trace.append(mx.stack((v, g), axis=-1))
+            actual = mx.stack(trace)
+            mx.eval(actual)
+        runs.append(np.asarray(actual))
+    actual = runs[0]
+    np.testing.assert_array_equal(actual, runs[1])
     error = np.abs(actual - expected)
     assert np.all(error <= 1e-3 + 1e-5 * np.abs(expected))
     assert tuple(core.COEFFICIENTS) == (
@@ -332,7 +336,11 @@ def test_ten_thousand_linear_steps_stay_within_the_reviewed_budget():
     record(
         'linear-10000',
         {'reference': expected, 'mlx': actual},
-        {'steps': 10000, 'max_abs_error_mv_v_g': error.max(axis=(0, 1)).tolist()},
+        {
+            'steps': 10000,
+            'max_abs_error_mv_v_g': error.max(axis=(0, 1)).tolist(),
+            'repeat_bit_identical': True,
+        },
     )
 
 
@@ -464,9 +472,9 @@ def test_quarter_ulp_rounding_is_an_asserted_precision_limitation():
                 3,
                 (0, 1, 2),
                 (1, 2, 1),
-                (1, 3, 2),
+                (100, 3, 2),
                 silenced=(1,),
-                voltage=(-44, -44, -44),
+                voltage=(-44, -52, -52),
             ),
             80,
             (),
@@ -506,6 +514,11 @@ def test_ordinary_network_matches_every_reference_phase(name, case, steps, impul
         np.testing.assert_array_equal(
             np.flatnonzero(observed['spikes'][:, 0, 0]), [1, 3, 5, 7, 9, 11]
         )
+    if name == 'outgoing-silencing':
+        assert observed['spikes'][:, 0, 1].any()
+        assert np.max(observed['synaptic_mv'][:, 0, 1]) > 0
+        assert not observed['spikes'][:, 0, 2].any()
+        np.testing.assert_array_equal(observed['synaptic_mv'][:, 0, 2], 0)
 
 
 def test_refractory_boundary_discards_due_at_21_but_accepts_due_at_22():
@@ -562,6 +575,21 @@ def test_retained_reference_replay_qualifies_exact_events_and_integer_times():
     np.testing.assert_array_equal(events[:100], replay_events(100))
     observed = qualify('retained-replay', REPLAY_CASE, events)
     assert observed['spikes'].sum() == 43
+    for name in ('voltage_mv', 'synaptic_mv'):
+        wanted = retained[name].T
+        error = np.abs(observed[name][:, 0] - wanted)
+        assert np.all(error <= 1e-3 + 1e-5 * np.abs(wanted))
+    np.testing.assert_array_equal(
+        observed['receiving'][:, 0], retained['not_refractory'].T
+    )
+    np.testing.assert_array_equal(
+        observed['last_spike_step'][:, 0],
+        np.rint(retained['lastspike_ms'].T / 0.1).astype(np.int32),
+    )
+    retained_steps, _, retained_neurons = np.nonzero(observed['spikes'])
+    np.testing.assert_array_equal(retained_steps, retained['spike_steps'])
+    np.testing.assert_array_equal(retained_neurons, retained['spike_neurons'])
+    MEASUREMENTS['retained-replay']['retained_complete_state_and_events_checked'] = True
     steps = np.nonzero(observed['spikes'])[0]
     milliseconds = steps.astype(np.float64) * core.DT_MS
     np.testing.assert_allclose(
@@ -645,3 +673,95 @@ def test_unsafe_precision_setting_is_rejected_at_the_network_boundary(monkeypatc
     monkeypatch.setenv('MLX_ENABLE_TF32', '1')
     with pytest.raises(RuntimeError, match='MLX_ENABLE_TF32=0'):
         core.make_network(1)
+
+
+def test_firing_discards_same_step_recurrent_events_at_both_refractory_durations():
+    case = Case(
+        3,
+        (0, 0),
+        (1, 2),
+        (3, 3),
+        (0, 1),
+        voltage=(-52, -52, -44),
+        synaptic=(0, 0, 1),
+        last_spike=(core.INITIAL_LAST_SPIKE, core.INITIAL_LAST_SPIKE, 0),
+    )
+    observed = qualify(
+        'same-step-recurrent-loss', case, events_for(case, 50, ((3, 0), (21, 1)))
+    )
+    np.testing.assert_array_equal(observed['spikes'][22, 0, 1:], [True, True])
+    np.testing.assert_array_equal(observed['discarded'][22, 0], [True, True])
+    np.testing.assert_array_equal(
+        observed['before_reset_synaptic_mv'][22, 0, 1:],
+        observed['pre_synaptic_mv'][22, 0, 1:],
+    )
+
+
+def test_fresh_state_clears_previous_trial_pending_edges_without_mutating_weights():
+    network = core.make_network(2, [0], [1], [0.275])
+    previous = core.initial_state(network, voltage_mv=[-44, -52])
+    with mx.stream(mx.gpu):
+        previous, _ = core.advance(network, previous, mx.zeros((1, 0), dtype=mx.bool_))
+        assert np.asarray(previous.queue).any()
+        fresh = core.initial_state(network)
+        assert fresh.step == 0
+        assert not np.asarray(fresh.queue).any()
+        np.testing.assert_array_equal(
+            np.asarray(fresh.last_spike_step), core.INITIAL_LAST_SPIKE
+        )
+        np.testing.assert_array_equal(
+            np.asarray(network.weights_mv), np.array([0.275], dtype=np.float32)
+        )
+        for _ in range(40):
+            fresh, trace = core.advance(
+                network, fresh, mx.zeros((1, 0), dtype=mx.bool_)
+            )
+            mx.eval(*fresh[:-1], *trace)
+            assert not np.asarray(trace.due).any()
+        np.testing.assert_array_equal(np.asarray(fresh.voltage_mv), -52)
+        np.testing.assert_array_equal(np.asarray(fresh.synaptic_mv), 0)
+
+
+def test_large_cancellation_is_an_asserted_accumulation_limit_not_a_parity_pass():
+    ordered = np.concatenate((np.full(2048, 2405), [1], np.full(2048, -2405))) * 0.275
+    interleaved = np.concatenate((np.tile([2405, -2405], 2048), [1])) * 0.275
+
+    def serial_sum(weights):
+        with mx.stream(mx.gpu):
+            values = mx.array(weights.astype(np.float32))
+            total = mx.array(0, dtype=mx.float32)
+            for index in range(len(weights)):
+                total = total + values[index]
+                if index % 64 == 0:
+                    mx.eval(total)
+            mx.eval(total)
+        return float(total.item())
+
+    serial = serial_sum(ordered)
+    assert serial == serial_sum(ordered)
+    alternate = serial_sum(interleaved)
+    with mx.stream(mx.gpu):
+        library = float(mx.sum(mx.array(ordered.astype(np.float32))).item())
+    expected = 0.275
+    budget = 1e-3 + 1e-5 * abs(expected)
+    assert abs(serial - expected) > budget
+    assert abs(alternate - expected) <= budget
+    u = 2**-24
+    gamma = len(ordered) * u / (1 - len(ordered) * u)
+    record(
+        'accumulation-limit',
+        {'ordered_weights_mv': ordered, 'interleaved_weights_mv': interleaved},
+        {
+            'events': len(ordered),
+            'expected_real_sum_mv': expected,
+            'serial_mlx_mv': serial,
+            'interleaved_serial_mlx_mv': alternate,
+            'mlx_sum_mv': library,
+            'trajectory_budget_mv': budget,
+            'serial_qualifies': False,
+            'serial_repeat_bit_identical': True,
+            'sum_abs_weights_mv': float(np.abs(ordered).sum()),
+            'gamma_m_sum_abs_mv': float(gamma * np.abs(ordered).sum()),
+            'connectome_accumulation_approved': False,
+        },
+    )
