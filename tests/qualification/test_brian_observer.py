@@ -1,4 +1,5 @@
 import gc
+import re
 from dataclasses import dataclass
 from pathlib import Path
 from typing import cast
@@ -36,7 +37,7 @@ class CapturedRun:
 
 
 def execute(
-    case: NetworkCase, events: NDArray[np.uint8], output: Path, block_size: int
+    case: NetworkCase, events: NDArray[np.uint8], output: Path, block_size: int | None
 ) -> CapturedRun:
     output.mkdir(parents=True, exist_ok=False)
     b.device.reinit()
@@ -115,14 +116,17 @@ def execute(
         len(events),
         len(case.targets),
         (len(case.sources), len(case.targets)),
-        block_size,
+        block_size or 0,
     )
-    install(network, group, source, (recurrent, inputs), monitors, shape)
+    if block_size is not None:
+        install(network, group, source, (recurrent, inputs), monitors, shape)
     network.run(len(events) * 0.1 * b.ms)
     b.prefs.devices.cpp_standalone.extra_make_args_unix = ['-j2']
     b.device.build(directory=str(output / 'standalone'), clean=False, with_output=False)
-    with (output / 'standalone/results/stdout.txt').open('rb') as recorded:
-        frames = tuple(read_frames(recorded, shape))
+    frames: tuple[Frame, ...] = ()
+    if block_size is not None:
+        with (output / 'standalone/results/stdout.txt').open('rb') as recorded:
+            frames = tuple(read_frames(recorded, shape))
     phases: dict[str, ObservationArray] = {}
     if block_size:
         blocks = [frame for frame in frames if isinstance(frame, PhaseBlock)]
@@ -164,7 +168,7 @@ def execute(
 @pytest.fixture(scope='module')
 def runs(
     request: pytest.FixtureRequest, tmp_path_factory: pytest.TempPathFactory
-) -> dict[int, CapturedRun]:
+) -> dict[int | None, CapturedRun]:
     destination = cast(str | None, request.config.getoption('--artifact-output'))
     output = (
         Path(destination) / 'brian-observer'
@@ -188,7 +192,7 @@ def runs(
     try:
         result = {
             size: execute(case, events, output / f'block-{size}', size)
-            for size in (0, 1, 17, 32)
+            for size in (None, 0, 1, 17, 32)
         }
     finally:
         b.device.reinit()
@@ -203,11 +207,11 @@ def runs(
     return result
 
 
-@pytest.mark.parametrize('block_size', [1, 17, 32])
+@pytest.mark.parametrize('block_size', [0, 1, 17, 32])
 def test_streamed_monitor_clearing_preserves_every_stock_phase_byte(
-    runs: dict[int, CapturedRun], block_size: int
+    runs: dict[int | None, CapturedRun], block_size: int
 ) -> None:
-    stock = runs[0]
+    stock = runs[None]
     observed = runs[block_size]
     assert stock.phases.keys() == observed.phases.keys()
     for name, values in stock.phases.items():
@@ -222,7 +226,7 @@ def test_streamed_monitor_clearing_preserves_every_stock_phase_byte(
 
 
 def test_all_physical_queue_and_cursor_observations_are_partition_independent(
-    runs: dict[int, CapturedRun],
+    runs: dict[int | None, CapturedRun],
 ) -> None:
     expected = [frame for frame in runs[0].frames if isinstance(frame, StepSnapshot)]
     for size in (1, 17, 32):
@@ -249,13 +253,130 @@ def test_all_physical_queue_and_cursor_observations_are_partition_independent(
 
 
 def test_final_frame_observes_real_neural_state_and_pending_queue(
-    runs: dict[int, CapturedRun],
+    runs: dict[int | None, CapturedRun],
 ) -> None:
     for run in runs.values():
+        if not run.frames:
+            continue
         final = run.frames[-1]
         assert isinstance(final, FinalSnapshot) and final.step.clock_step == 101
         for name, values in run.final.items():
             assert final.fields[name].tobytes() == values.tobytes(), name
         assert any(
             slot.size for queue in final.step.pathways[0].queues for slot in queue.slots
+        )
+
+
+def test_every_actual_queue_slot_and_delivery_matches_an_independent_event_ledger(
+    runs: dict[int | None, CapturedRun],
+) -> None:
+    with np.load(runs[0].directory.parent / 'input.npz') as recorded:
+        events = np.asarray(recorded['events'], dtype=np.uint8)
+        sources = np.asarray(recorded['sources'], dtype=np.int64)
+    outgoing = [
+        np.flatnonzero(sources == neuron).astype(np.int32) for neuron in range(6)
+    ]
+    for run in runs.values():
+        if not run.frames:
+            continue
+        snapshots = [frame for frame in run.frames if isinstance(frame, StepSnapshot)]
+        ledger: dict[int, NDArray[np.int32]] = {}
+        cursor = 0
+        for snapshot in snapshots:
+            step = snapshot.step
+            spikes = run.spike_coordinates[run.spike_coordinates[:, 0] == step, 1]
+            assert np.array_equal(snapshot.spikes, spikes), step
+            ledger[step + 18] = np.concatenate(
+                [
+                    np.empty(0, dtype=np.int32),
+                    *(outgoing[int(index)] for index in spikes),
+                ]
+            ).astype(np.int32)
+            recurrent, replay = snapshot.pathways
+            queue = recurrent.queues[0]
+            assert len(queue.slots) == 19 and queue.offset == (step + 1) % 19
+            for position, actual in enumerate(queue.slots):
+                due = step + (position - queue.offset) % 19
+                expected = ledger.get(due, np.empty(0, dtype=np.int32))
+                assert np.array_equal(actual, expected), (step, position)
+            assert np.array_equal(recurrent.delivered, queue.slots[queue.offset])
+            channels = np.flatnonzero(events[step]).astype(np.int32)
+            cursor += len(channels)
+            assert snapshot.source_cursor == cursor
+            assert np.array_equal(snapshot.source_spikes, channels)
+            assert replay.queues[0].offset == 0 and len(replay.queues[0].slots) == 1
+            assert np.array_equal(replay.queues[0].slots[0], channels)
+            assert np.array_equal(replay.delivered, channels)
+        final = run.frames[-1]
+        assert isinstance(final, FinalSnapshot) and final.step.source_cursor == cursor
+        for actual, expected in zip(
+            final.step.pathways, snapshots[-1].pathways, strict=True
+        ):
+            assert actual.delivered.tobytes() == expected.delivered.tobytes()
+            for left, right in zip(actual.queues, expected.queues, strict=True):
+                assert left.offset == right.offset
+                assert tuple(slot.tobytes() for slot in left.slots) == tuple(
+                    slot.tobytes() for slot in right.slots
+                )
+
+
+def test_observer_preserves_generated_numerical_code_initialization_and_schedule(
+    runs: dict[int | None, CapturedRun],
+) -> None:
+    stock = runs[None].directory / 'standalone'
+    files = {
+        path.relative_to(stock)
+        for path in stock.rglob('*')
+        if path.is_file()
+        and (
+            path.suffix in ('.cpp', '.h')
+            or path.parent.name == 'static_arrays'
+            or path.name == 'makefile'
+        )
+        and path.name != 'main.cpp'
+    }
+    main = (stock / 'main.cpp').read_text()
+    clock_write = '        _array_defaultclock_dt[0] = 0.0001;\n'
+    consecutive_clock_writes = '(?:' + re.escape(clock_write) + ')+'
+    initialization = main.split('observed_network.clear();')[0]
+    assert clock_write in initialization
+    initialization = re.sub(consecutive_clock_writes, clock_write, initialization)
+    calls = re.findall(r'observed_network.add\(&defaultclock, (\w+)\);', main)
+    assert calls == [
+        '_run_observed_neurons_stateupdater_codeobject',
+        '_run_observed_pre_codeobject',
+        '_run_observed_neurons_spike_thresholder_codeobject',
+        '_run_observed_source_codeobject',
+        '_run_spikemonitor_codeobject',
+        '_run_observed_recurrent_pre_push_spikes',
+        '_run_observed_recurrent_pre_codeobject',
+        '_run_observed_input_pre_push_spikes',
+        '_run_observed_input_pre_codeobject',
+        '_run_observed_before_codeobject',
+        '_run_observed_neurons_spike_resetter_codeobject',
+        '_run_observed_end_codeobject',
+    ]
+    invocation = re.findall(r'observed_network.run\([^;]+;', main)
+    assert len(invocation) == 1
+    assert '-O3 -ffast-math -fno-finite-math-only' in (stock / 'makefile').read_text()
+    for size in (0, 1, 17, 32):
+        directory = runs[size].directory / 'standalone'
+        for name in files:
+            assert (stock / name).read_bytes() == (directory / name).read_bytes(), name
+        observed = (directory / 'main.cpp').read_text()
+        observed_initialization = observed.split('observed_network.clear();')[0]
+        assert clock_write in observed_initialization
+        assert (
+            re.sub(consecutive_clock_writes, clock_write, observed_initialization)
+            == initialization
+        )
+        assert (
+            re.findall(r'observed_network.add\(&defaultclock, (\w+)\);', observed)
+            == calls
+        )
+        assert re.findall(r'observed_network.run\([^;]+;', observed) == invocation
+        assert observed.index(
+            'observed_network.add(&defaultclock, +[]()'
+        ) > observed.index(
+            'observed_network.add(&defaultclock, _run_observed_end_codeobject);'
         )
