@@ -1,0 +1,159 @@
+{
+  "date": "2026-10-04",
+  "application_checkpoint": "c61e246f1411e683fa1b6c4b6fe393df096fa31a",
+  "commands": [
+    {
+      "command": ".venv/bin/ruff check .",
+      "exit_code": 0,
+      "result": "lint and import sorting pass"
+    },
+    {
+      "command": ".venv/bin/ruff format --check .",
+      "exit_code": 0,
+      "files": 64
+    },
+    {
+      "command": ".venv/bin/pyright --outputjson",
+      "exit_code": 0,
+      "summary": {
+        "filesAnalyzed": 48,
+        "errorCount": 0,
+        "warningCount": 0,
+        "informationCount": 0,
+        "timeInSec": 4.474
+      }
+    },
+    {
+      "command": ".venv/bin/lint-imports --no-cache",
+      "exit_code": 0,
+      "contracts_kept": 3,
+      "contracts_broken": 0,
+      "files_analyzed": 53,
+      "dependencies": 118
+    },
+    {
+      "command": "UV_CACHE_DIR=/private/tmp/fly-brain-uv-remediation-cache uv lock --check --offline",
+      "exit_code": 0,
+      "resolved_packages": 38
+    },
+    {
+      "command": "uv pip check --python .venv/bin/python",
+      "exit_code": 0,
+      "packages": 38
+    },
+    {
+      "command": "uv pip check --python /private/tmp/fly-brain-clean-runtime-20261004/bin/python",
+      "exit_code": 0,
+      "packages": 10
+    },
+    {
+      "command": ".venv/bin/pytest -q --disable-warnings --junitxml=docs/evidence/architecture-remediation/boundary-tests-final.xml",
+      "exit_code": 0,
+      "counts": {
+        "tests": 31,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "command": "uv run --locked --group qualification fly-brain qualify --output data/results/architecture-remediation-20261004/qualification-final",
+      "exit_code": 0,
+      "counts": {
+        "tests": 61,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "command": ".venv/bin/python /private/tmp/fly-brain-final-record.py",
+      "exit_code": 0,
+      "local_document_links_checked": 223,
+      "documents": 10
+    }
+  ],
+  "normal_clean_runtime_install": "clean-runtime.json",
+  "factored_scalars": {
+    "cases": 157,
+    "one_step_passes": 157,
+    "trajectory_passes": 157,
+    "repeat_and_standalone_bit_identical": true
+  },
+  "retained_casting_limitation": {
+    "diagnostic_assertions": 125,
+    "original_weight_one_step_passes": 109,
+    "original_weight_trajectory_passes": 119,
+    "strategy_approved": false
+  },
+  "preservation": {
+    "source_checks": 28,
+    "arrays": 1076,
+    "npz_files": 39,
+    "reference_replays": 4,
+    "incoming_files": 47
+  },
+  "application_import_scan": {
+    "no_path_injection": true,
+    "no_database_or_retired_framework_imports": true,
+    "no_nvidia_packages_in_lock": true
+  },
+  "source_sha256": {
+    "pyproject.toml": "7a3a30345e2e0a5822dce2e8f4838d63cd140588b33acf17063d7729bdccd296",
+    "uv.lock": "041b0c7424f3e5e49aa04a6989464a0b44a4bcaf59516c5e5cdf2c70512f0835",
+    ".python-version": "01a2aae23aa21d8ef8a86fa06a9123925dc2d48a8b8e009cd3675082a3371678",
+    "main.py": "8e1022936adf3695fb3b8d255ea977da69067df99de11ab947a9fae70e1ae356",
+    "src/fly_brain/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/fly_brain/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "src/fly_brain/bootstrap.py": "a0662f59f8aebcf8fb59e023e3d8c14037d2cd2c43ef64baed18a1dba45a66a4",
+    "src/fly_brain/cli.py": "97108630df8b1fea2d6c704adf313010481b6ac9c8e57eec9c5e5bff24815824",
+    "src/fly_brain/comparison/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/fly_brain/comparison/models.py": "44b2763ea45df41cd5db062f1510d756966a6ba6466ced74a5d6b58b8539780b",
+    "src/fly_brain/comparison/schemas.py": "95ad7229c284180f966cd9fc66d04d0c1cb546b3dbfc0dd0c188fd15ae2e8884",
+    "src/fly_brain/comparison/service.py": "71ba57d007f74433152c1ec6f8c2bd580bae4d70f97f3fee25a2830be2177c30",
+    "src/fly_brain/comparison/storage.py": "268a753072871763d7092f8277edb1d8dfad10a0e9ca9c0068a505fa4827d0c6",
+    "src/fly_brain/qualification/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/fly_brain/qualification/adapters/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/fly_brain/qualification/adapters/accumulation_probe.py": "7c08ef11825b9fb9a61a749a5ef4eab377a9055d2988431e595c0b0d84bb2e01",
+    "src/fly_brain/qualification/adapters/brian_reference.py": "8e46193a8f0f330f072c19c12f650e118a068cff13e70ce1e806c067787dd1c5",
+    "src/fly_brain/qualification/adapters/brian_replay.py": "c604933c1b6a5120ab5bd498a6bc6a69ec926af9cb09a1c95d044cbc0eba739d",
+    "src/fly_brain/qualification/adapters/factored_probe.py": "12fce5088085267fa10aeb35fbe542ee6c1e3df56169fa04024e5ea45f3d1ef0",
+    "src/fly_brain/qualification/adapters/pytest_runner.py": "a2ffdb3aadc5d702f83384b50baeb6727dd8320b3d6adfa978b4724d1a8b3d0e",
+    "src/fly_brain/qualification/adapters/replay_probe.py": "7b061098e209d9365d0b5794ad47aca3789381e59a88a08cf186701d1cec49eb",
+    "src/fly_brain/qualification/adapters/results.py": "bf061b9c737af67b5e36bc58caf35fff72a67bb17ff68dac500200fec015878e",
+    "src/fly_brain/qualification/adapters/schedule_probe.py": "4c76590978d58460b4caf8dda3955d93f8abef9ee9fc4fd3cd30b56573b2040e",
+    "src/fly_brain/qualification/adapters/torch_reference.py": "bf52258041a464156ce05b267601dbefceb893356fbf8401b358b036a29ba6cb",
+    "src/fly_brain/qualification/models.py": "8688c12352bcb8c0b14ac99e94fec91752888da93bd6545745075b242c0d5d50",
+    "src/fly_brain/qualification/schemas.py": "452a090305ae571b5e9da89edafd34c5063de4cbedf72cdc863cf0f7550c646b",
+    "src/fly_brain/qualification/service.py": "3ade23820a793592555198c2caad998fb59326aa619070bf44d652fbdcfc749b",
+    "src/fly_brain/simulation/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/fly_brain/simulation/backend/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/fly_brain/simulation/backend/accumulation.py": "2ea94edfbae1852cdf269fe7169fa97a00c57bf8cb597879fd076abe0c17a894",
+    "src/fly_brain/simulation/backend/arrays.py": "5a3d301590bb4c7e38ea9983bdddbc2d71e51ab73ca8ffe5fd88ae4965b13cac",
+    "src/fly_brain/simulation/backend/core.py": "c4079b5d32cb05e701fcb89856a8b48066185bb5c470203e56f4785316461132",
+    "src/fly_brain/simulation/backend/engines.py": "7bb3ac4853450dc807dae0a8060cfdd2e3b31f8661c0097107bda5651352239f",
+    "src/fly_brain/simulation/models.py": "f5616141fe09d0e83d5072018ed4944d55b911b0a18a536f25d888285c43833b",
+    "tests/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tests/conftest.py": "4b0d21992bfeb24c725e7399c44be78d9744b9c7987eca77cd56a9e6199839e5",
+    "tests/integration/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tests/integration/test_package.py": "6619a5b757d16b751b38846ee970a4aad5c6e93e7f0424d44bc4100f2beb5c56",
+    "tests/integration/test_storage.py": "376c190859ce81b64c521b3783031eb75abf98aeb07f8d0209403aec738676e9",
+    "tests/qualification/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tests/qualification/conftest.py": "afa46a3f7f0e366f5d41702a543d98230978498f1af0d295470f01e6b3c3fbee",
+    "tests/qualification/test_factored_accumulation.py": "5ff7ff25f237e4944792a8cfb996b68a73084356a83fba630a51468b3bf24c9d",
+    "tests/qualification/test_mlx_core.py": "9e4928cf6a7c04f5776f20e7d17530b1e475e7890efdf9525e4fedff614958f7",
+    "tests/qualification/test_reference_contract.py": "1c536577df58ea32e79262ddec05331763fab3015e944b3c422e9c97be337e65",
+    "tests/support/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tests/support/artifacts.py": "bd39ff9352449e74536d20c7f654e2ed969bb5dbf5aa5b1e7b121f6b2af889b0",
+    "tests/support/qualification.py": "1c64bb0875f88efa7ba22f2e6e73d15a9dd626d41aaa6fbde2e41a3eea2a1e4e",
+    "tests/unit/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tests/unit/test_bootstrap.py": "1470f4837f362cb1e3d5671e7fad5d6bce55539493c6261790ff7f99c33f0a84",
+    "tests/unit/test_comparison.py": "a2e45c3a0688b7d6011849a986881c6b3bbc834e6aa7bc1aa5358cc1720d1a62",
+    "tests/unit/test_qualification.py": "29dc80239fc6298d05ca99b72da408ce96e229752c79a0fe78a9bacc1709aab1",
+    "typings/brian2/__init__.pyi": "7656ebad8c361187dd452fc019455e95215f966c6f906d940d3c0360c90db9c2",
+    "typings/pyarrow/__init__.pyi": "1250196c57242acbad95f3df3ca34d84016714837dcca4cd7525a391cd6f1f2c",
+    "typings/pyarrow/parquet.pyi": "03f5d948de154747f3f51749134f7e729927d87c922537ee0d2955da3482cc3d"
+  },
+  "scope": "Current installed MLX small-core, qualification, and comparison application. No full-connectome, compiled arithmetic, full-network parity, or performance claim.",
+  "push": "Pending: only reference upstream is configured; no user-owned remote."
+}

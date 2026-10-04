@@ -1,5 +1,7 @@
 # Bounded Astra accumulation-design review
 
+Current architecture note (2026-10-04): numerical statements and measured historical commands below retain their original scope. Source links now resolve to the installed package or the retired-source record. Use the current uv commands in [README](../../README.md) for reproduction; the standalone scripts and Conda workflows are retired. The architecture hold and later milestones are governed by [milestone.md](../../milestone.md). This note does not change scientific limits or the manual review's owner.
+
 Status: bounded review concluded with a measured input-precision blocker. The compensated tree is a supported diagnostic candidate, **not an approved full-connectome accumulation strategy**. Return to GPT-6.1 Sol at `xhigh` for the precisely bounded input audit below. [milestone.md](../../milestone.md) owns the project plan and acceptance status.
 
 ## Requested outcome
@@ -22,8 +24,8 @@ Read [AGENTS.md](../../AGENTS.md), [milestone.md](../../milestone.md), and the [
 
 | Evidence | Purpose |
 | --- | --- |
-| [Private core](../../code/mlx_core.py) | Current ordered per-edge device additions, per-edge Boolean delayed-event queue, and exact write gating |
-| [Qualification source](../../tests/test_mlx_core.py) | `test_large_cancellation_is_an_asserted_accumulation_limit_not_a_parity_pass`, independent reference phases, and ordinary qualification cases |
+| [Private core](../../src/fly_brain/simulation/backend/core.py) | Current ordered per-edge device additions, per-edge Boolean delayed-event queue, and exact write gating |
+| [Qualification source](../../tests/qualification/test_mlx_core.py) | `test_large_cancellation_is_an_asserted_accumulation_limit_not_a_parity_pass`, independent reference phases, and ordinary qualification cases |
 | [Measured outcomes](../evidence/milestone-1/final/measurements.json) | Actual Metal values, fixed budget, repeatability, and rounding-scale diagnostic |
 | [Raw cancellation weights](../evidence/milestone-1/final/accumulation-limit.npz) | Complete ordered and interleaved float64 source weights |
 | [Final report](../evidence/milestone-1/final/tests.xml), [result](../evidence/milestone-1/final/result.json), [artifact hashes](../evidence/milestone-1/final/manifest.json) | Verification provenance and preserved complete small-network traces |
@@ -50,10 +52,10 @@ The ordered/library error is 0.025 mV, exceeding the budget. Interleaving demons
 3. Run finite synthetic diagnostics covering the retained adverse ordering, balanced/unbalanced mixed signs, different event counts/orders, zeros/silenced weights, repeated runs, and standalone-vs-batched execution. Require every scalar result to meet the unchanged bound; no mean-error rescue. Reordering/compensation is a candidate requiring evidence, not an automatic approval. Preserve outputs in fresh destinations.
 4. Define the exact next Milestone 2 qualification, including representative signed fan-in patterns from the pinned data, comparison against float64, repeatability, and regression of the entire small-network suite after any core replacement. This review can approve a design supported by finite evidence; it cannot declare the unloaded connectome or a future implementation qualified.
 
-Use the existing environment and locked requirements. The reproduction command for the current suite is:
+Use the single uv project and lockfile. The reproduction command for the current suite is:
 
 ```sh
-.venv/bin/python scripts/qualify_mlx_core.py --output data/results/<fresh-review-directory>
+uv run --locked --group qualification fly-brain qualify --output data/results/<fresh-review-directory>
 ```
 
 Do not weaken acceptance to accommodate an unsuccessful prototype. If ordinary operations cannot satisfy the fixed requirements, record precise failed candidates and the next evidence needed for a separately bounded kernel review.
@@ -66,7 +68,7 @@ Review date: 2026-10-04. Incoming `main` checkpoint `1757aa8`; probe/evidence co
 
 ### Diagnostic candidate and ordering
 
-The [standalone probe](../../scripts/probe_mlx_accumulation.py) implements `two_sum(a,b)` as:
+The [standalone probe](../../src/fly_brain/qualification/adapters/accumulation_probe.py) implements `two_sum(a,b)` as:
 
 ```text
 s = float32(a+b)

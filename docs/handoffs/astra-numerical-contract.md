@@ -1,5 +1,7 @@
 # Bounded Astra numerical-contract review
 
+Current architecture note (2026-10-04): numerical statements and measured historical commands below retain their original scope. Source links now resolve to the installed package or the retired-source record. Use the current uv commands in [README](../../README.md) for reproduction; the standalone scripts and Conda workflows are retired. The architecture hold and later milestones are governed by [milestone.md](../../milestone.md). This note does not change scientific limits or the manual review's owner.
+
 Status: bounded review resolved on 2026-10-04. The numerical contract is approved for Milestone 1 implementation/qualification; no MLX implementation or full-network parity has been approved. Awaiting the user's return to GPT-6.1 Sol at `xhigh`. [milestone.md](../../milestone.md) remains authoritative for scope, acceptance, and progress.
 
 ## Requested outcome and boundary
@@ -24,14 +26,14 @@ Read the [working rules](../../AGENTS.md), [authoritative milestones](../../mile
 
 | Evidence | Purpose |
 | --- | --- |
-| [Brian2 runner](../../code/run_brian2_cuda.py), [original paper model](../../code/paper-phil-drosophila/model.py), [orchestration](../../code/benchmark.py) | Actual equations, parameters, scheduling declarations, experiment definitions, and silencing |
-| [PyTorch runner](../../code/run_pytorch.py) | Existing comparison baseline and its differing integration, delay, stimulus, and refractory behavior |
-| [Focused tests](../../tests/test_reference_contract.py), [final test report](../evidence/milestone-0/reference-tests-final.xml) | Executable reference observations and verification results |
-| [Schedule and delay trace](../evidence/milestone-0/reference-schedule.json), [inspection harness](../../scripts/inspect_reference_contract.py) | Generated integration/refractory/reset code, schedule, stimulus placement, and cross-backend delay observations |
-| [Baseline result](../evidence/milestone-0/brian2-baseline.json), [log](../evidence/milestone-0/brian2-baseline.log), [run harness](../../scripts/run_reference_baseline.py) | Full-data execution, actual output schema, environment, timing boundaries, and reproducible command |
+| [Brian2 runner](../../src/fly_brain/qualification/adapters/brian_reference.py), [original paper model](../architecture-remediation.md#retired-source), [orchestration](../architecture-remediation.md#retired-source) | Actual equations, parameters, scheduling declarations, experiment definitions, and silencing |
+| [PyTorch runner](../../src/fly_brain/qualification/adapters/torch_reference.py) | Existing comparison baseline and its differing integration, delay, stimulus, and refractory behavior |
+| [Focused tests](../../tests/qualification/test_reference_contract.py), [final test report](../evidence/milestone-0/reference-tests-final.xml) | Executable reference observations and verification results |
+| [Schedule and delay trace](../evidence/milestone-0/reference-schedule.json), [inspection harness](../../src/fly_brain/qualification/adapters/schedule_probe.py) | Generated integration/refractory/reset code, schedule, stimulus placement, and cross-backend delay observations |
+| [Baseline result](../evidence/milestone-0/brian2-baseline.json), [log](../evidence/milestone-0/brian2-baseline.log), [run harness](../architecture-remediation.md#retired-source) | Full-data execution, actual output schema, environment, timing boundaries, and reproducible command |
 | [Input counts and hashes](../evidence/milestone-0/input-summary.json) | Pinned v783 data size and ordering/weight evidence |
 | [Publication equations and provenance](../evidence/milestone-0/publication-source.json) | Continuous model and outgoing-output elimination; original publication used v630 |
-| [Spike comparator](../../code/compare_spike_outputs.py), [reference comparator](../../code/compare_backend_to_brian2.py), [ground-truth comparator](../../code/compare_ground_truth.py) | Current metrics, time normalization, timing window, and undefined/empty-metric treatment |
+| [Spike comparator](../../src/fly_brain/comparison/service.py), [reference comparator](../architecture-remediation.md#retired-source), [ground-truth comparator](../architecture-remediation.md#retired-source) | Current metrics, time normalization, timing window, and undefined/empty-metric treatment |
 
 Additional GeNN/NEST source links and licence notices are in the baseline. Review them where needed to resolve a disputed contract; porting those backends is outside this assignment.
 
@@ -61,7 +63,7 @@ The durable specification is in the baseline's [reviewed discrete contract](../m
 | Stimulus | External per-channel Bernoulli bits from pinned NumPy PCG64 generation; fixed step/channel order, independent trial seeds, immutable byte hashes, duplicate-channel preservation, correct replay slot. Brian2 NumPy/C++ replay and native guaranteed-input equivalence are verified. |
 | Full-network gate | Freeze the 52-case paired matrix plus repeats/batch checks before results. Require Jaccard ≥0.95, count error ≤0.02, neuronwise normalized error ≤0.05, rate correlation ≥0.99, 1 ms timing F1 ≥0.95, **and** no worse than the pinned PyTorch core on every primary metric/case. Empty/undefined handling and earliest-divergence diagnosis are explicit. |
 
-The [new probe](../../scripts/probe_numerical_contract.py) is a finite diagnostic, not a candidate backend. It runs six uncoupled linear trajectories, a threshold predicate counterexample, a cancellation sum, and a three-neuron reference replay. It neither loads the connectome nor benchmarks it. [Raw numerical findings](../evidence/milestone-0/numerical-contract.json) and [compressed complete replay state/events](../evidence/milestone-0/numerical-contract-replay.npz) are retained. The original four JSON traces, schedule, and two fresh standalone builds remain under `data/results/mlx-numerical-review-20261004`.
+The [new probe](../../src/fly_brain/qualification/adapters/replay_probe.py) is a finite diagnostic, not a candidate backend. It runs six uncoupled linear trajectories, a threshold predicate counterexample, a cancellation sum, and a three-neuron reference replay. It neither loads the connectome nor benchmarks it. [Raw numerical findings](../evidence/milestone-0/numerical-contract.json) and [compressed complete replay state/events](../evidence/milestone-0/numerical-contract-replay.npz) are retained. The original four JSON traces, schedule, and two fresh standalone builds remain under `data/results/mlx-numerical-review-20261004`.
 
 Executed verification:
 

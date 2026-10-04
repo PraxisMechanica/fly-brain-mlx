@@ -1,5 +1,7 @@
 # Pinned fly-brain reference baseline
 
+Current architecture note (2026-10-04): numerical statements and measured historical commands below retain their original scope. Source links now resolve to the installed package or the retired-source record. Use the current uv commands in [README](../README.md) for reproduction; the standalone scripts and Conda workflows are retired. The architecture hold and later milestones are governed by [milestone.md](../milestone.md). This note does not change scientific limits or the manual review's owner.
+
 Date: 2026-10-04. Scope: Milestone 0 and the bounded numerical-contract review. The reviewed contract below is approved for Milestone 1 implementation and qualification, not a claim that an MLX implementation has passed. [milestone.md](../milestone.md) owns project scope, acceptance, and progress; the [handoff](handoffs/astra-numerical-contract.md) records the review outcome.
 
 ## Source and reproducible reference environment
@@ -10,14 +12,14 @@ Pinned commit: `a3db62f9436074e485c0278290c2164ed6150808`. The import is a merge
 
 Relevant implementations:
 
-- [Orchestrator](../code/benchmark.py) and [command-line entrypoint](../main.py).
-- [Brian2 CPU/Brian2CUDA runner](../code/run_brian2_cuda.py).
-- [Original paper implementation](../code/paper-phil-drosophila/model.py).
-- [PyTorch runner](../code/run_pytorch.py).
-- [GeNN runner](../code/run_genn.py), [Brian2GeNN runner](../code/run_brian2_genn.py), and [NEST GPU runner](../code/run_nestgpu.py).
-- [NEST neuron kernel](../scripts/nestgpu_source_files/src/user_m1.cu).
+- [Orchestrator](architecture-remediation.md#retired-source) and [command-line entrypoint](../main.py).
+- [Brian2 CPU/Brian2CUDA runner](../src/fly_brain/qualification/adapters/brian_reference.py).
+- [Original paper implementation](architecture-remediation.md#retired-source).
+- [PyTorch runner](../src/fly_brain/qualification/adapters/torch_reference.py).
+- [GeNN runner](architecture-remediation.md#retired-source), [Brian2GeNN runner](architecture-remediation.md#retired-source), and [NEST GPU runner](architecture-remediation.md#retired-source).
+- [NEST neuron kernel](architecture-remediation.md#retired-source).
 
-Reference environment: macOS 15.3.1 on `arm64`, Python 3.10.14, Brian2 2.8.0, NumPy 1.26.4, PyTorch 2.11.0, pandas 2.3.3, and PyArrow 25.0.1. [requirements-reference.txt](../requirements-reference.txt) pins all 36 resolved packages; [requirements-reference.in](../requirements-reference.in) records direct dependencies. Brian2CUDA 1.0a7 requires Brian2 2.8.0; its CUDA packages are unnecessary for this CPU baseline. This is a reference environment, not a verified MLX installation.
+Reference environment: macOS 15.3.1 on `arm64`, Python 3.10.14, Brian2 2.8.0, NumPy 1.26.4, PyTorch 2.11.0, pandas 2.3.3, and PyArrow 25.0.1. [requirements-reference.txt](../uv.lock) pins all 36 resolved packages; [requirements-reference.in](architecture-remediation.md#retired-source) records direct dependencies. Brian2CUDA 1.0a7 requires Brian2 2.8.0; its CUDA packages are unnecessary for this CPU baseline. This is a reference environment, not a verified MLX installation.
 
 Commands executed from the repository root:
 
@@ -32,7 +34,7 @@ uv pip install --python .venv/bin/python -r requirements-reference.txt
 .venv/bin/python -m pytest -q tests/test_reference_contract.py --junitxml=docs/evidence/milestone-0/reference-tests-final.xml --disable-warnings
 ```
 
-The [baseline harness](../scripts/run_reference_baseline.py) invokes the unchanged orchestrator for the shortest supported CPU experiment: sugar, 0.1 seconds, one trial. It redirects the result CSV, spike directory, and standalone build into a new destination and limits compilation to two jobs. These operational overrides do not change equations, stimuli, integration, or recording. It refuses an existing destination, avoiding upstream's `shutil.rmtree(output_dir)` and preserving persisted results. A rerun needs a fresh output path. The harness also checks the returned status because upstream catches runner exceptions and can finish orchestration despite a failed benchmark.
+The [baseline harness](architecture-remediation.md#retired-source) invokes the unchanged orchestrator for the shortest supported CPU experiment: sugar, 0.1 seconds, one trial. It redirects the result CSV, spike directory, and standalone build into a new destination and limits compilation to two jobs. These operational overrides do not change equations, stimuli, integration, or recording. It refuses an existing destination, avoiding upstream's `shutil.rmtree(output_dir)` and preserving persisted results. A rerun needs a fresh output path. The harness also checks the returned status because upstream catches runner exceptions and can finish orchestration despite a failed benchmark.
 
 ## Neuron equations and parameters
 
@@ -168,9 +170,9 @@ Brian2 records detailed timings for identifier mapping, data loading, neuron/syn
 
 ## Existing comparison tools
 
-- [compare_ground_truth.py](../code/compare_ground_truth.py): Brian2 CPU reference, active overlap, shared-active firing-rate correlation, and spike-count ratio. Its `MATCH`/`CLOSE` labels are heuristic thresholds, not an approved MLX acceptance rule.
-- [compare_spike_outputs.py](../code/compare_spike_outputs.py): normalizes canonical `time_ms` to seconds, groups by trial and FlyWire identifier, computes active Jaccard/precision/recall, rates, errors, and greedy one-to-one spike-time matching. Timing defaults to an inclusive 1 ms window. Pearson is undefined for fewer than two shared neurons or constant rate vectors. Empty-network overlap/matching metrics are represented as zero.
-- [compare_backend_to_brian2.py](../code/compare_backend_to_brian2.py): round-based backend-vs-reference reports; timing computation is off unless `--include-timing` is supplied.
+- [compare_ground_truth.py](architecture-remediation.md#retired-source): Brian2 CPU reference, active overlap, shared-active firing-rate correlation, and spike-count ratio. Its `MATCH`/`CLOSE` labels are heuristic thresholds, not an approved MLX acceptance rule.
+- [compare_spike_outputs.py](../src/fly_brain/comparison/service.py): normalizes canonical `time_ms` to seconds, groups by trial and FlyWire identifier, computes active Jaccard/precision/recall, rates, errors, and greedy one-to-one spike-time matching. Timing defaults to an inclusive 1 ms window. Pearson is undefined for fewer than two shared neurons or constant rate vectors. Empty-network overlap/matching metrics are represented as zero.
+- [compare_backend_to_brian2.py](architecture-remediation.md#retired-source): round-based backend-vs-reference reports; timing computation is off unless `--include-timing` is supplied.
 
 Each tool has a fixed backend registry or argument choices, so MLX is not currently selectable. Integration will need a focused registry extension. The acceptance protocol below fixes the timing window, undefined cases, coverage, baseline comparison, and thresholds before validation. Comparing unrelated random schedules would mix stimulus variance with backend error. Existing rounded summaries and shared-active-only rate correlations are insufficient to execute the new gate without a focused validation adapter.
 
@@ -201,11 +203,11 @@ The root [LICENSE](../LICENSE) is GNU General Public License version 2 (GPLv2). 
 
 The [full-data baseline result](evidence/milestone-0/brian2-baseline.json) and [log](evidence/milestone-0/brian2-baseline.log) prove a successful 0.1-second sugar run: 1,518 spikes, 321 active neurons, 2.347 seconds network construction, 12.742 seconds build, 1.348 seconds simulation, 0.329 seconds extraction, 0.004 seconds collection, 0.014 seconds saving, and 16.824 seconds accounted total. No repeatability, parity, or MLX performance is inferred from it.
 
-[Nine focused tests](../tests/test_reference_contract.py) passed with no skips, failures, or errors: exact leak, coupled synaptic integration, threshold equality, reset/weight persistence, stimulus placement, recurrent delay placement, refractory freezing/input loss/release, outgoing-only silencing, and PyTorch's ineffective refractory gating. [Final test report](evidence/milestone-0/reference-tests-final.xml) is retained alongside the earlier run. Assertions on analytical Brian2 double-precision states use absolute 1e-11 mV with relative tolerance zero; time assertions use absolute 1e-12 ms. These are diagnostic bounds, not approved MLX tolerances.
+[Nine focused tests](../tests/qualification/test_reference_contract.py) passed with no skips, failures, or errors: exact leak, coupled synaptic integration, threshold equality, reset/weight persistence, stimulus placement, recurrent delay placement, refractory freezing/input loss/release, outgoing-only silencing, and PyTorch's ineffective refractory gating. [Final test report](evidence/milestone-0/reference-tests-final.xml) is retained alongside the earlier run. Assertions on analytical Brian2 double-precision states use absolute 1e-11 mV with relative tolerance zero; time assertions use absolute 1e-12 ms. These are diagnostic bounds, not approved MLX tolerances.
 
 Tests use in-memory synthetic networks and Brian2's NumPy runtime target. They do not create or delete a database, run CUDA, exercise MLX, or claim complete Milestone 1 coverage. The full-data run separately exercises Brian2 C++ standalone. Brian2 and dependency imports produced 136 deprecation/private-API warnings; they are recorded as warnings, not skips. The final run removed a diagnostic object's unused-network warning. A schedule-capture attempt initially indexed Brian2's scalar delay as an array; that inspection error was corrected, and the successful capture reads the scalar properly.
 
-The [inspection harness](../scripts/inspect_reference_contract.py) reproduces the recorded schedule and delay trace into a fresh directory. Its output was compared structurally with the retained evidence and matched exactly.
+The [inspection harness](../src/fly_brain/qualification/adapters/schedule_probe.py) reproduces the recorded schedule and delay trace into a fresh directory. Its output was compared structurally with the retained evidence and matched exactly.
 
 No upstream numerical source has been changed. The normal MLX command-line interface (CLI), full-network parity, MLX device residency, MLX memory/performance, and clean MLX installation remain unverified. The bounded review is resolved below. The next work is the small synthetic MLX kernel after the user's return to Sol.
 
@@ -268,7 +270,7 @@ Summation order is material: the 4,097-event probe has weights `[2405 repeated 2
 
 ### Accumulation review: reduction candidate and weight-cast blocker
 
-The [2026-10-04 bounded review](handoffs/astra-accumulation-design.md#decision-record--concluded-with-blocker) does **not approve a full-connectome accumulation strategy**. The [Metal diagnostic](../scripts/probe_mlx_accumulation.py) uses a fixed adjacent-pair tree, with float32 high/low components at every node. Apply the standard six-operation `TwoSum` to the two highs, add the two lows and that residual in a fixed order, then renormalize with `TwoSum`. Leaf zero is existing post-integration synaptic state; other leaves are accepted individual weights or zeros. Collapse to one float32 only at the root. The [review record](handoffs/astra-accumulation-design.md) specifies the operation sequence and its primary numerical source. State between timesteps remains float32; these diagnostics do not approve persistent correction state or a weight-precision change.
+The [2026-10-04 bounded review](handoffs/astra-accumulation-design.md#decision-record--concluded-with-blocker) does **not approve a full-connectome accumulation strategy**. The [Metal diagnostic](../src/fly_brain/qualification/adapters/accumulation_probe.py) uses a fixed adjacent-pair tree, with float32 high/low components at every node. Apply the standard six-operation `TwoSum` to the two highs, add the two lows and that residual in a fixed order, then renormalize with `TwoSum`. Leaf zero is existing post-integration synaptic state; other leaves are accepted individual weights or zeros. Collapse to one float32 only at the root. The [review record](handoffs/astra-accumulation-design.md) specifies the operation sequence and its primary numerical source. State between timesteps remains float32; these diagnostics do not approve persistent correction state or a weight-precision change.
 
 In all 125 finite cases, the measured high/low pair exactly represented the sum of the already-cast inputs; the final output was its correctly rounded float32 value. Components and outputs repeated bit for bit and matched standalone reductions with different amounts of trailing zero padding. The retained adverse ordering now gives `0.2750000059604645 mV`. These are measured properties of this uncompiled tree and environment, not a theorem of universal exact summation or a compilation/performance qualification. The arithmetic is device-resident; host float64 is used only for diagnostic references and input construction.
 
@@ -288,7 +290,7 @@ Canonical generation for qualification: NumPy 1.26.4 `Generator(PCG64(SeedSequen
 
 Persist/reload the generated schedule as immutable validation input once an artifact format is agreed, along with its dimensions, channel order/rates, timestep, seed tuple, generator/version, data/experiment hashes, and SHA-256 (Secure Hash Algorithm 256-bit) over canonical row-major uint8 event bytes. Retain integer event steps; a sparse replay is equivalent only if its `(step, channel)` pairs reconstruct those exact bytes, without merging independent channels or losing simultaneous events. Compare reconstructed schedule hashes at every adapter boundary. Hash equality plus metadata equality, rather than matching seeds, establishes shared input.
 
-For Brian2 tests, replace native randomness with `SpikeGeneratorGroup` and zero-delay input `Synapses` targeting `v`, with `pre.when='synapses'`, `pre.order=0`, and the same refractory write gating. The [review probe](../scripts/probe_numerical_contract.py) exercises this with overlapping channels; the new reference test proves equality with guaranteed native Poisson input including firing-step loss. Do not add native Poisson input on top of replay. MLX consumes each event in step 5 of the reviewed schedule. The PyTorch comparison consumes the identical step's counts at its existing pre-integration stimulus input, preserving its known placement discrepancy; do not time-shift its events to improve its score.
+For Brian2 tests, replace native randomness with `SpikeGeneratorGroup` and zero-delay input `Synapses` targeting `v`, with `pre.when='synapses'`, `pre.order=0`, and the same refractory write gating. The [review probe](../src/fly_brain/qualification/adapters/replay_probe.py) exercises this with overlapping channels; the new reference test proves equality with guaranteed native Poisson input including firing-step loss. Do not add native Poisson input on top of replay. MLX consumes each event in step 5 of the reviewed schedule. The PyTorch comparison consumes the identical step's counts at its existing pre-integration stimulus input, preserving its known placement discrepancy; do not time-shift its events to improve its score.
 
 Before any parity score, require byte-identical regeneration and reload, identical duration prefixes, distinct trial streams, and deterministic replay twice from fresh initial state. The review's [raw trace/events](evidence/milestone-0/numerical-contract-replay.npz) contain a 1,000-step, three-channel schedule with counts `[20,10,0]` and hash `f1da12a8a7f3a44198fe04a385f897f991eadea36f680bf5d668ed19343fa09d`. Two NumPy runs and two independent C++ builds all produced 43 spikes and bit-identical full traces. This qualifies the reference replay technique, not MLX repeatability.
 
