@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from typing import Literal
 
 import numpy as np
 from numpy.typing import ArrayLike, NDArray
@@ -48,3 +49,27 @@ class DestinationBucket:
     edge_ids: NDArray[np.int32]
     counts: NDArray[np.float32]
     occupied: NDArray[np.bool_]
+
+
+ExperimentName = Literal['sugar', 'p9', 'sugar-silenced', 'two-class', 'silent']
+
+
+@dataclass(frozen=True)
+class Experiment:
+    name: ExperimentName
+    code: int
+    generator_code: int
+    activated_ids: tuple[int, ...]
+    rates_hz: tuple[float, ...]
+    silenced_ids: tuple[int, ...] = ()
+
+
+@dataclass(frozen=True)
+class Stimulus:
+    events: NDArray[np.uint8]
+    targets: tuple[int, ...]
+    rates_hz: tuple[float, ...]
+    trial_indices: tuple[int, ...]
+    seed: int
+    generator_code: int
+    sha256: str

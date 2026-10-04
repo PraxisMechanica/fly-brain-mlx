@@ -290,11 +290,17 @@ Complete-connectome pulse and Milestone 2 completion (2026-10-04):
 
 ## Milestone 3 — Backend integration
 
-Status: not started.
+Status: in progress. Original experiment definitions and canonical shared schedule generation are verified. The normal simulation command and spike export remain open.
 
 Acceptance: the normal command-line interface runs the shortest MLX experiment, consumes existing experiment definitions, uses the sole MLX execution backend, writes the existing spike schema, and produces outputs consumable by the analysis tools. Record initialization, compilation, simulation, and collection separately. Preserve device-resident state and avoid complete CPU-device transfers each timestep.
 
 Present and obtain explicit approval for any required application programming interface or database schema change before writing dependent code, as required by `AGENTS.md`.
+
+Experiment/stimulus checkpoint (2026-10-04):
+
+- Pure immutable experiment/stimulus types preserve the exact upstream sugar/P9 identifier lists and rates. The five frozen parity configurations retain channel order, distinct experiment/generator codes, and outgoing silencing. Sol compares the original definitions directly with the imported upstream source and resolves every identifier against pinned CSV order. [Evidence](docs/evidence/milestone-3/stimuli/experiments.json).
+- Schedule generation uses pinned NumPy PCG64 seed tuples, float64 row-major step/channel draws, explicit rates, and immutable uint8 event bytes. Each trial is independent of batch size and shorter durations are prefixes. Sugar silencing reuses sugar events exactly; the silent control has a real empty channel dimension.
+- Six intent tests cover original channel order under unsorted neuron data, trial/batch/prefix identity, unchanged silenced stimuli, the frozen draw protocol, silent controls, and missing IDs. The complete application suite passes **59 tests, zero failures/errors/skips**, Ruff, strict Pyright, and three import contracts. [Report](docs/evidence/milestone-3/stimuli/application-tests.xml). This checkpoint does not run a production experiment or change a database/application programming interface schema.
 
 ## Milestone 4 — Full-network parity
 
@@ -328,11 +334,11 @@ Acceptance: final corrections are applied; the complete approved verification su
 
 ## Current checkpoint and constraints
 
-Latest committed complete-device checkpoint: `ab76171` on `main`; the current completion checkpoint records the complete-connectome pulse and closes Milestone 2. The architecture hold was released at `d834713`; the independently verified manual accumulation-design handoff was integrated at `8b7fdb7`. Scalars/review were committed at `065ba00`; prescribed layout replay at `5ef4788`. Commit verified steps separately on `main`.
+Milestone 2 completion checkpoint: `fe5f269` on `main`. The current Milestone 3 checkpoint establishes original experiment definitions and shared stimulus generation. The architecture hold was released at `d834713`; the independently verified manual accumulation-design handoff was integrated at `8b7fdb7`. Commit verified steps separately on `main`.
 
 Milestones 1 and 2 are complete within their recorded envelopes. All 24,576 prescribed cases pass through the actual layout under the [recorded input-state accounting decision](docs/evidence/milestone-2/initial-state-cast/astra-review.md#recorded-engineering-decision). All 99 original-state one-step conversion limitations remain visible; original-state trajectory gates pass. Complete device fields/events and controlled original/silenced full-network pulses pass. Next work is Milestone 3's normal experiment command, canonical shared stimulus persistence, and existing Parquet output integration. Later milestones remain open.
 
-The current application report records 53 passed tests, zero failures/errors/skips; Ruff, strict Pyright, and all three import contracts pass. The architecture release separately records the clean small-core runtime installation. Complete-backend installation, full-experiment dynamics/parity, speed, and peak memory remain unverified. Existing data, results, and standalone artifacts are preserved. New runs require a fresh output directory. Engineering choices remain delegated to Sol; use bounded Astra review where deeper numerical judgment is needed.
+The current application report records 59 passed tests, zero failures/errors/skips; Ruff, strict Pyright, and all three import contracts pass. The architecture release separately records the clean small-core runtime installation. Complete-backend installation, full-experiment dynamics/parity, speed, and peak memory remain unverified. Existing data, results, and standalone artifacts are preserved. New runs require a fresh output directory. Engineering choices remain delegated to Sol; use bounded Astra review where deeper numerical judgment is needed.
 
 Delegation setup (2026-10-04): [the versioned bounded subagent skill](skills/bounded-subagent/SKILL.md) is installed through a symlink at `~/.codex/skills/bounded-subagent`, with automatic discovery enabled. At the user's request, model and reasoning effort are resolved from user instructions or project rules rather than fixed in the reusable skill. The bundled `quick_validate.py` passed; the installed link, file contents, and parsed interface metadata were verified. A read-only `gpt-6-astra` subagent at explicit `xhigh` completed the workflow review and four hypothetical dispatch checks: an explicit Sol/high pair, the project's Astra/xhigh pair, missing choices without defaults, and explicitly requested inheritance. It found no material defects. These were instruction/tool-contract checks, not four live dispatches. At that setup checkpoint, Sol retained the user's selected `max`; the updated goal now requests `xhigh`. The existing manual assignment and scientific evidence retained their owner. This setup did not start Milestone 2 or run additional numerical checks.
 
