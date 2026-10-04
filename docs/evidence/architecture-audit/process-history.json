@@ -1,0 +1,121 @@
+{
+  "recorded_at": "2026-10-04T18:05:17.155277+02:00",
+  "source_thread": "01a106cc-5f52-7811-9f20-39293f14aeaa",
+  "sources": "Selected public tool-call and assistant-commentary records, plus local Git objects. Private reasoning and unrelated chats are excluded.",
+  "skill_read_calls": [
+    {
+      "timestamp_utc": "2026-10-04T12:14:49.754Z",
+      "timestamp_europe_paris": "2026-10-04T14:14:49.754000+02:00",
+      "record_type": "custom_tool_call",
+      "tool": "exec",
+      "files": [
+        "/Users/ocasta/.codex/skills/python-design/SKILL.md",
+        "/Users/ocasta/.codex/skills/software-design/SKILL.md"
+      ]
+    },
+    {
+      "timestamp_utc": "2026-10-04T13:22:36.502Z",
+      "timestamp_europe_paris": "2026-10-04T15:22:36.502000+02:00",
+      "record_type": "custom_tool_call",
+      "tool": "exec",
+      "files": [
+        "/Users/ocasta/.codex/skills/python-design/SKILL.md",
+        "/Users/ocasta/.codex/skills/software-design/SKILL.md"
+      ]
+    }
+  ],
+  "skill_application_announcement": [
+    {
+      "timestamp_utc": "2026-10-04T12:16:59.437Z",
+      "timestamp_europe_paris": "2026-10-04T14:16:59.437000+02:00",
+      "text": "The upstream commit is `a3db62f9436074e485c0278290c2164ed6150808`. The source already shows differences worth investigating: Brian2 uses linear integration, while PyTorch uses Euler updates and handles stimulation and refractory state differently. I\u2019ll collect evidence for Gate A without resolving those differences.\n\nI\u2019m using the software-design and Python Design skills to keep the eventual port within the existing backend interface.\n"
+    }
+  ],
+  "selected_commits": [
+    {
+      "commit": "4466b37598529bde09829dff4deff4642e43f341",
+      "timestamp_europe_paris": "2026-10-04T14:19:32+02:00",
+      "subject": "Import pinned fly-brain reference source"
+    },
+    {
+      "commit": "295994b64a50ef3d4d500757fa97985c8bbeaad8",
+      "timestamp_europe_paris": "2026-10-04T14:24:30+02:00",
+      "subject": "Reproduce shortest Brian2 reference experiment"
+    },
+    {
+      "commit": "396f169ae988e4b5d6bcef4caaade60390f5eb71",
+      "timestamp_europe_paris": "2026-10-04T14:35:22+02:00",
+      "subject": "Consolidate project plans and progress"
+    },
+    {
+      "commit": "5489ae0d4afa67905edb10e3b0f4fe77952427d3",
+      "timestamp_europe_paris": "2026-10-04T14:46:39+02:00",
+      "subject": "Document and verify reference numerical behavior"
+    },
+    {
+      "commit": "4b7ea638c8bfdc17f047ae2e560f4eef71fd5331",
+      "timestamp_europe_paris": "2026-10-04T15:08:32+02:00",
+      "subject": "Probe numerical precision and deterministic replay"
+    },
+    {
+      "commit": "af06fa8d1ef9fc306481ef7663740e4f16c8bc42",
+      "timestamp_europe_paris": "2026-10-04T15:29:16+02:00",
+      "subject": "Pin MLX qualification dependencies"
+    },
+    {
+      "commit": "03f5b40bace11e6c7a527490dcebe36a31862348",
+      "timestamp_europe_paris": "2026-10-04T15:41:56+02:00",
+      "subject": "Qualify initial small MLX core"
+    },
+    {
+      "commit": "52f84278fe466d91319fcf924ebfd9d2c561f026",
+      "timestamp_europe_paris": "2026-10-04T15:53:30+02:00",
+      "subject": "Complete small MLX kernel qualification"
+    },
+    {
+      "commit": "1757aa818989b67ca4621467461b133ca95d242e",
+      "timestamp_europe_paris": "2026-10-04T15:57:04+02:00",
+      "subject": "Prepare bounded accumulation design review"
+    },
+    {
+      "commit": "0084fe02411857f681fedf67fa7700a144265731",
+      "timestamp_europe_paris": "2026-10-04T17:05:10+02:00",
+      "subject": "Probe compensated Metal accumulation limits"
+    },
+    {
+      "commit": "8a6e9aa07f7021193043c39e52a2688d8d5bf053",
+      "timestamp_europe_paris": "2026-10-04T17:10:56+02:00",
+      "subject": "Record accumulation precision blocker"
+    },
+    {
+      "commit": "4aa7ec80d7d6b1ad090736b5527e1548c8cb3289",
+      "timestamp_europe_paris": "2026-10-04T17:29:15+02:00",
+      "subject": "Qualify factored accumulation scalar prototype"
+    },
+    {
+      "commit": "ab8637c885ee9e23e81c3d1596744a63695650f8",
+      "timestamp_europe_paris": "2026-10-04T17:31:06+02:00",
+      "subject": "Generalize subagent model and effort"
+    }
+  ],
+  "pyright_configuration_at_introduction": {
+    "include": [
+      "code/mlx_core.py",
+      "scripts/qualify_mlx_core.py"
+    ],
+    "typeCheckingMode": "strict",
+    "venvPath": ".",
+    "venv": ".venv"
+  },
+  "inference": "The implementing agent read both skills but did not implement the required application architecture or establish the approved Python stack as its foundation. Numerical acceptance and source preservation took priority without an application-compliance prerequisite.",
+  "separate_review_confirmation": {
+    "source": "read_thread, 2026-10-04",
+    "thread_id": "01a1076a-1c02-73c0-ab46-a77cdb4f15da",
+    "title": "Review accumulation design",
+    "status": "idle",
+    "last_turn_status": "completed",
+    "last_turn_completed_utc": "2026-10-04T15:48:57+00:00",
+    "public_final_acknowledgment": "The architecture-compliance hold takes precedence. Continue only the architecture investigation and remediation proposal; do not begin Milestone 2 or further numerical development.",
+    "unfinished_work": "Final documentation consistency checks and the concluding commit are unfinished."
+  }
+}

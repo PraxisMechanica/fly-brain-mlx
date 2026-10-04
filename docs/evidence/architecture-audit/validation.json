@@ -1,0 +1,9 @@
+{
+  "audit_local_links_verified": 20,
+  "audited_source_hashes_verified": 10,
+  "preserved_review_files_verified": 47,
+  "numerical_tests_run": false,
+  "application_remediation_implemented": false,
+  "staged_milestone_scientific_section_matches_head": true,
+  "exact_pyright_stdout_preserved_as_gzip": true
+}

@@ -2,6 +2,26 @@
 
 This is the authoritative project plan, acceptance criteria, and progress record. Updated 2026-10-04 (Europe/Paris). It consolidates the supplied charter, milestone specification, startup evidence, and subsequent user amendments.
 
+## Development hold — architecture compliance
+
+Status: **halted by the user on 2026-10-04**. Audit the application against the `python-design` and `software-design` skills, investigate the process failure, and propose remediation. This instruction supersedes the next-work and manual-review continuation instructions below.
+
+Do not add application features, numerical kernels or prototypes, backend integration, connectome loading, optimizations, or benchmarks while this hold is active. Preserve existing code, evidence, data, and concurrent work. The current assignment permits investigation, the remediation proposal, and recording this hold; application remediation is not being implemented in this audit. Further feature development requires the application to satisfy the documented architecture acceptance checks and completion evidence to be recorded.
+
+Investigation complete: [architecture audit and remediation proposal](docs/architecture-audit.md). The implementing agent read both design skills but did not implement the required application architecture and approved Python stack. The audit records that implementation omission, the [current-versus-approved technology inventory](docs/architecture-audit.md#current-technologies-and-approved-target), and the required repairs. The [static evidence](docs/evidence/architecture-audit/checks.json) records a two-file configured Pyright pass versus 881 diagnostics across nine authored files and five Ruff import-order diagnostics; these are not claims of 881 runtime defects. No application remediation or numerical execution occurred during the audit.
+
+The proposed next work is architecture remediation only, following the audit's ordered plan. All hold-release checks remain open:
+
+- [ ] Declare ownership and allowed imports for all application-owned code; resolve every audit finding or record an explicit user-approved exception.
+- [ ] Verify uv-managed package installation, pinned dependency resolution, normal imports without application path injection, and side-effect-free domain/service imports.
+- [ ] Enforce dependency boundaries; inject configuration, execution engines, and output collaborators instead of hidden globals and runner/orchestrator back-references.
+- [ ] Pass full-scope Ruff and the documented typing policy, with strict public boundaries and narrowly scoped third-party limitations.
+- [ ] Verify thin entrypoints, independent run configurations, and existing input/output contracts; classify unit, reference integration, and Metal qualification tests.
+- [ ] Requalify preserved scientific suites and deterministic replays after relevant refactors, using fresh evidence and unchanged acceptance budgets, with no skipped required checks.
+- [ ] Record the final Python/software architecture review and all completion evidence here before lifting the hold or advancing milestones.
+
+The complete definitions are in the [audit acceptance checks](docs/architecture-audit.md#acceptance-checks-for-lifting-the-hold). This hold supersedes older instructions to preserve a defective application structure, while numerical semantics, source provenance, evidence, data, existing external contracts, and unrelated code remain preserved. The manual accumulation review is now idle and acknowledges the hold; its unfinished work is preserved, not finalized by this audit.
+
 ## Objective and execution
 
 Develop a scientifically validated Apple MLX backend for the [Eon Systems fly-brain simulation](https://github.com/eonsystemspbc/fly-brain), preserving the existing FlyWire v783 leaky integrate-and-fire model's numerical behavior, activation and silencing experiments, and output contracts. Run the complete connectome locally on Apple silicon and provide reproducible correctness evidence, measured performance, and verified installation instructions. This is an MLX array-compute project, not an MLX-LM language-model project.

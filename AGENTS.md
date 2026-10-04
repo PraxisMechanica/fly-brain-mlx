@@ -340,6 +340,8 @@ Present all prices or costs in USD($) unless I explicitly ask otherwise. if you 
 
 Read `milestone.md` before project work. It is the authoritative source for the project plan, work breakdown, acceptance criteria, progress, unresolved issues, and completion evidence. Determine the next work from that document and keep it updated. It consolidates the supplied plans and latest user amendments.
 
+The user's 2026-10-04 architecture-compliance hold in `milestone.md` supersedes earlier milestone, manual-review, and subagent continuation instructions. Halt feature and numerical development until the application meets the recorded architecture acceptance checks. The current assignment is investigation and a remediation proposal; preserve all existing code, evidence, data, and work in progress.
+
 Use GPT-6.1 Sol for implementation at the reasoning effort selected by the user (currently `max`). The user controls parent-model changes; do not switch or substitute the parent model yourself.
 
 The user has authorized future bounded reviews by GPT-6 Astra subagents when scientific interpretation, numerical correctness, or difficult kernel design needs deeper judgment. Use [the bounded subagent skill](skills/bounded-subagent/SKILL.md) with this project's settings: explicitly spawn `gpt-6-astra` at `xhigh` with fresh context, await its result, verify its evidence, and record the decision before dependent implementation. Astra must not inherit the parent's `max` setting. The parent remains Sol and resumes its own work after the review. The reusable skill takes model and effort from the user or project; this project's pair remains Astra at `xhigh`.

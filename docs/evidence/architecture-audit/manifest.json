@@ -1,0 +1,62 @@
+{
+  "checkpoint": "ab8637c885ee9e23e81c3d1596744a63695650f8",
+  "purpose": "Static architecture audit outputs, technology inventory, and selected public process/preservation evidence; no numerical execution.",
+  "files": {
+    "docs/evidence/architecture-audit/authored_pyright.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "docs/evidence/architecture-audit/authored_pyright.stdout.json": {
+      "sha256": "803fde96ffd4570128277f22fea7778afae412f8930d9a185bfa922abefe3eb0",
+      "bytes": 501339
+    },
+    "docs/evidence/architecture-audit/authored_pyright.stdout.json.gz": {
+      "sha256": "16f37db40c7586fa0ed41bfd9504e49d852a1255da8e313a802eb15698d838a6",
+      "bytes": 16863
+    },
+    "docs/evidence/architecture-audit/authored_ruff.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "docs/evidence/architecture-audit/authored_ruff.stdout.json": {
+      "sha256": "fab2940189ebef76bc5d2c6b8b9bb24b340b3c2aac3f8575a9c36094b357d9af",
+      "bytes": 4420
+    },
+    "docs/evidence/architecture-audit/checks.json": {
+      "sha256": "18fac305d57dea83e5cd8986ab221b9e7257293f79f620b1a22ca93ff5128aa6",
+      "bytes": 16892
+    },
+    "docs/evidence/architecture-audit/configured_pyright.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "docs/evidence/architecture-audit/configured_pyright.stdout.json": {
+      "sha256": "3b2b9c63c2e35b3b3156afbe9a1af62848efdd2f354a93b3c699172bdd116294",
+      "bytes": 250
+    },
+    "docs/evidence/architecture-audit/configured_pyright.stdout.json.gz": {
+      "sha256": "18b3960016bc0665002d1158764e8e23a510546350c3ce3d61972d799145b892",
+      "bytes": 170
+    },
+    "docs/evidence/architecture-audit/preserved-review-work.json": {
+      "sha256": "231bb0b575eba04788a1bc995bac92f2cf83d1ba2e4051ba163282ce1922b153",
+      "bytes": 6907
+    },
+    "docs/evidence/architecture-audit/process-history.json": {
+      "sha256": "4e6ad7c67287e4392226d9d301145df2164e62769f8cb773d18266959f5db925",
+      "bytes": 5307
+    },
+    "docs/evidence/architecture-audit/ruff-settings.txt": {
+      "sha256": "f261f99a3b7e52513375b9d2dc8d099b0b583d4fb1b2dfd9f7603b04818b7bea",
+      "bytes": 36920
+    },
+    "docs/evidence/architecture-audit/technology-inventory.json": {
+      "sha256": "a873398e550252606b0d15a33f57647fb291fdeeef75e41002d00d453beb1631",
+      "bytes": 5308
+    },
+    "docs/evidence/architecture-audit/validation.json": {
+      "sha256": "eb63f2c2b6e3e6f064a7fe4d39b4f1988360984a6f6a65552e8dd303f18bdf7a",
+      "bytes": 310
+    }
+  }
+}
