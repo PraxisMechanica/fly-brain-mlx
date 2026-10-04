@@ -197,11 +197,21 @@ Final reopened-review decision:
 
 ## Milestone 2 — Connectome loading
 
-Status: not started. Next work after return to Sol is input mapping and the approved factored-connectivity implementation/qualification. The reviewed design is selected; actual connectome conversion and accumulation have not been qualified.
+Status: in progress. Pinned host input mapping is verified; actual signed fan-in qualification and the approved device representation remain open. The selected factored arithmetic is unchanged.
 
 Acceptance: MLX input arrays are demonstrably equivalent to upstream in neuron count, connection count, identifier-to-index mapping, source/destination orientation, weight scaling, delays, silencing masks, and deterministic checksums. Raw input counts and hashes collected in Milestone 0 are baseline evidence only; no MLX conversion is yet verified.
 
 Prove the mapping before introducing the approved destination grouping. Follow the [current Milestone 2 instructions](docs/handoffs/astra-accumulation-design.md#minimal-representation-and-exact-next-milestone-2-work), including arithmetic guards and the earlier audit's fixed source-mask selection. Implement the selected factored arithmetic, then qualify actual signed high-fan-in arrays against original float64 weights, exact event membership, repeatability and all fixed budgets. Rerun all 157 scalar cases and 61 reference/core/factored tests against the adapted implementation, retaining the original oracle. Full-network parity remains a separate later gate. A failed qualification or additional representation/precision change requires a bounded Astra subagent review; existing design approval does not waive it.
+
+Input mapping checkpoint (2026-10-04):
+
+- The installed `audit-inputs` command validates the two pinned SHA-256 hashes, preserves the CSV neuron order, verifies every presynaptic/postsynaptic identifier against its index, checks signed integer connectivity against sign times count, and retains every original edge row. NumPy/CSV/PyArrow perform host setup; no Pandas or neural CPU fallback is used.
+- Verified **138,639 neurons and 15,091,983 edges**. Signed counts range from -2,405 to 1,897; there are no zero-count or duplicate source/destination/count rows in the pinned input. All counts convert exactly to float32. The greatest per-target absolute-count sum is **69,948**, below the approved `2^40` guard. Maximum incoming degree is **10,356**; nearest degree quantiles 0/50/90/99/100 percent are 0/69/229/662/10,356.
+- Stable destination grouping retains original edge order within targets. Both permutation directions and every source/destination/count/float64-weight column round-trip exactly. Canonical original/regrouped checksums and complete locally retained arrays are recorded in [the installed-command report](docs/evidence/milestone-2/input-mapping/installed-command.json). The temporary first audit and installed command produced byte-identical complete NPZ artifacts. [Repeat verification](docs/evidence/milestone-2/input-mapping/repeat.json).
+- Outgoing-only silencing is verified across the complete edge set and preserves row identity; unit/file tests also cover negative and zero counts, duplicates, invalid orientation/indices/counts, changed pins, and reversible ordering.
+- **42 application tests passed, zero skips**; full Ruff, strict Pyright, and all three import contracts pass. The preserved 61 scientific tests remain the recorded unchanged-core result; this host-only step does not claim a new device qualification.
+- Reproduction: `uv run --locked --no-dev fly-brain audit-inputs --output data/results/<fresh-input-audit-directory>`. Full converted arrays remain under `data/results`; their hashes and compact evidence are versioned. No original file was modified or deleted.
+- Next: compute the prescribed cast-error/source-group extrema and deterministic target/mask selection; qualify actual signed fan-in with the selected factored strategy under both fixed budgets. Then implement the approved bucket representation, verify event membership, and rerun the 157 scalar/61 scientific regressions against it. Full-network execution and parity remain later gates.
 
 ## Milestone 3 — Backend integration
 

@@ -54,6 +54,14 @@ uv run --locked --group qualification fly-brain inspect-reference --output data/
 
 The serial accumulation diagnostic records an asserted precision limitation. Its successful execution does not mean every diagnostic case meets parity. Acceptance limits remain fixed in the numerical contract.
 
+Milestone 2's host input audit verifies both pinned files, identifier order and direction, signed counts, all row identities, arithmetic guards, and stable reversible destination grouping. It retains full converted arrays and checksums in a fresh output directory:
+
+```sh
+uv run --locked --no-dev fly-brain audit-inputs --output data/results/input-audit-01
+```
+
+This command performs host setup and evidence collection. It does not simulate the full connectome.
+
 ## Compare existing spikes
 
 The comparison adapter reads `trial`, `neuron_index`, and `flywire_id`, with `time_ms`, `time_s`, or the existing `t` convention. It preserves the existing matching and rounded diagnostic metrics. These metrics do not replace the future full-network acceptance gate.

@@ -76,6 +76,7 @@ name = "Services and models have no framework or adapter dependencies"
 type = "forbidden"
 source_modules = [
     "fly_brain.simulation.models",
+    "fly_brain.simulation.mapping",
     "fly_brain.qualification.models",
     "fly_brain.qualification.service",
     "fly_brain.comparison.models",
@@ -85,6 +86,7 @@ forbidden_modules = [
     "fly_brain.cli",
     "fly_brain.bootstrap",
     "fly_brain.simulation.backend",
+    "fly_brain.simulation.inputs",
     "fly_brain.qualification.adapters",
     "fly_brain.comparison.storage",
     "mlx", "torch", "brian2", "pyarrow", "pydantic",

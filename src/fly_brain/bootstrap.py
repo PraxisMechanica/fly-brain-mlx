@@ -57,3 +57,22 @@ def schedule(output: Path) -> dict[str, object]:
     from fly_brain.qualification.adapters.schedule_probe import run
 
     return run(output)
+
+
+def input_audit(project: Path, output: Path) -> dict[str, object]:
+    from fly_brain.qualification.adapters.connectome_probe import run
+    from fly_brain.simulation.inputs import load_connectome
+    from fly_brain.simulation.models import InputPin
+
+    pin = InputPin(
+        '52b0ac6094cd32c546f8d4c341e094376f48f4e791f8db9b166de5dff8199ea4',
+        'efeb23fb99098e9c390f6869969b2a121a2ee92c833cfc45ecb2c1d8e1af0347',
+        138639,
+        15091983,
+    )
+    connectome = load_connectome(
+        project / 'data/2025_Completeness_783.csv',
+        project / 'data/2025_Connectivity_783.parquet',
+        pin,
+    )
+    return run(connectome, pin, output)

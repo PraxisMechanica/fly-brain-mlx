@@ -1,0 +1,14 @@
+{
+  "first": "data/results/milestone-2-input-mapping-20261004-01",
+  "installed_command": "data/results/milestone-2-input-mapping-20261004-03",
+  "command": ".venv/bin/fly-brain audit-inputs --output data/results/milestone-2-input-mapping-20261004-03",
+  "all_canonical_array_hashes_identical": true,
+  "complete_npz_bytes_identical": true,
+  "artifact_sha256": "f4f5c4795544652eae6cfa3212aef155d58167888e0057a12b6fe1408857b677",
+  "duplicate_edge_rows": 0,
+  "tests": 42,
+  "skipped": 0,
+  "ruff": "pass",
+  "strict_pyright": "pass",
+  "import_contracts_kept": 3
+}

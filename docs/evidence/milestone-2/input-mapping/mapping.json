@@ -1,0 +1,100 @@
+{
+  "input_sha256": {
+    "data/2025_Completeness_783.csv": "52b0ac6094cd32c546f8d4c341e094376f48f4e791f8db9b166de5dff8199ea4",
+    "data/2025_Connectivity_783.parquet": "efeb23fb99098e9c390f6869969b2a121a2ee92c833cfc45ecb2c1d8e1af0347"
+  },
+  "neurons": 138639,
+  "edges": 15091983,
+  "signed_count_min": -2405,
+  "signed_count_max": 1897,
+  "zero_count_rows": 0,
+  "neuron_order_and_id_index_orientation_verified": true,
+  "all_rows_retained": true,
+  "stable_grouping_verified": true,
+  "both_inverse_directions_verified": true,
+  "all_edge_columns_round_trip_exact": true,
+  "float32_counts_exact": true,
+  "max_absolute_count_sum": 69948,
+  "max_absolute_count_target_index": 79529,
+  "incoming_degree_min": 0,
+  "incoming_degree_max": 10356,
+  "incoming_degree_quantiles": [
+    0,
+    69,
+    229,
+    662,
+    10356
+  ],
+  "outgoing_only_silencing_verified_on_all_edges": true,
+  "delay_steps": 18,
+  "queue_slots": 19,
+  "checksums": {
+    "neuron_ids": {
+      "dtype": "<i8",
+      "shape": [
+        138639
+      ],
+      "sha256": "70200482b9fe6656f215a97b71332dd6725b80e2cb32e0052a4d47916ca1579b"
+    },
+    "sources": {
+      "dtype": "<i4",
+      "shape": [
+        15091983
+      ],
+      "sha256": "8ec65c761057a2b000dcc246d6dc94a586b31596b8331c1db1ada61691d67f17"
+    },
+    "destinations": {
+      "dtype": "<i4",
+      "shape": [
+        15091983
+      ],
+      "sha256": "302786e9dacecf6f04683f7e46a6c3aa223b136b42b44880ccae0f0487dcd5f3"
+    },
+    "signed_counts": {
+      "dtype": "<i4",
+      "shape": [
+        15091983
+      ],
+      "sha256": "2d30bb197223a4ec6a602bfa91decc81c89e31138448dba47935bb7ab3d8484e"
+    },
+    "weights_mv": {
+      "dtype": "<f8",
+      "shape": [
+        15091983
+      ],
+      "sha256": "c0ce774e14b6481860adaced8ea552940d4b6eb81b81109bc5e6e0591bc497f5"
+    },
+    "grouped_edge_ids": {
+      "dtype": "<i4",
+      "shape": [
+        15091983
+      ],
+      "sha256": "5a053b029e8f31a120ac186101e38b53d32c4ab6b82e6765848597c3c8beae8b"
+    },
+    "inverse_grouping": {
+      "dtype": "<i4",
+      "shape": [
+        15091983
+      ],
+      "sha256": "86ca5542d399cd2a825f50b242bfbac7a2dda7f6805c0aefb623f34506301893"
+    },
+    "destination_offsets": {
+      "dtype": "<i8",
+      "shape": [
+        138640
+      ],
+      "sha256": "f109ae03b95b300e8588b1896b932f6a6fd371f210a035ffa7f9c2f050fc3a9a"
+    },
+    "absolute_count_sums": {
+      "dtype": "<i8",
+      "shape": [
+        138639
+      ],
+      "sha256": "421b278116e82b3699aa85e4096e0d0ccd331a296f5af6c0d28054d591cf95d6"
+    }
+  },
+  "load_and_mapping_seconds": 13.092168374976609,
+  "artifact": "data/results/milestone-2-input-mapping-20261004-01/mapped-inputs.npz",
+  "scope": "Host input mapping only. No neural execution, full-network parity, or performance qualification.",
+  "artifact_sha256": "f4f5c4795544652eae6cfa3212aef155d58167888e0057a12b6fe1408857b677"
+}
