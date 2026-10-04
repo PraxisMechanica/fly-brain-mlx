@@ -133,9 +133,17 @@ Final qualification checkpoint (2026-10-04):
 
 ## Accumulation-design handoff
 
-Status: requested; awaiting the user's switch to GPT-6 Astra at `xhigh`.
+Status: diagnostic evidence complete in GPT-6 Astra at `xhigh`; final decision record in progress. No full-connectome accumulation strategy is approved.
 
 Milestone 1 is complete at `52f8427`. The [bounded accumulation review](docs/handoffs/astra-accumulation-design.md) records actual Metal cancellation failures, all relevant evidence, the requested strategy/finite qualification, and the return condition. Select a deterministic accumulation design under the existing budgets before choosing a full-connectome propagation representation. No custom kernel, tolerance waiver, backend integration, or full-data benchmark is approved by this handoff. Astra must request return to GPT-6.1 Sol at `xhigh` after the bounded outcome is recorded.
+
+Review diagnostic checkpoint (2026-10-04):
+
+- Incoming checkpoint `1757aa8`, clean `main`. Active session metadata confirms GPT-6 Astra at `xhigh`; no model substitution or review agent was used.
+- `MLX_ENABLE_TF32=0 .venv/bin/python scripts/probe_mlx_accumulation.py --output data/results/mlx-accumulation-review-20261004-final` completed all diagnostic assertions on the Apple M1 Max Metal device. [Probe](scripts/probe_mlx_accumulation.py), [measurements](docs/evidence/accumulation-review/accumulation.json), and [complete raw inputs/results](docs/evidence/accumulation-review/accumulation.npz) are retained; source and artifact hashes were verified. The initial `-01` output remains intact.
+- All **125 scalar diagnostics** produced an exact two-component representation of the sum of their stored float32 inputs and the correctly rounded final float32 sum. High/low components and final results repeated bit for bit and matched independently run, minimally padded standalone reductions. The original adverse case returned **0.2750000059604645 mV** instead of 0.25 mV.
+- This is **not an accumulation parity pass**: only **109/125** cases meet the original-weight float64 one-step budget, and **119/125** meet the trajectory budget. All failures are retained individually. In particular, 128 copies of `[2405, -2404, -1]*0.275 mV` have near-zero float64 sum but a **0.003124237060546875 mV** sum after individual float32 weight casts, exceeding the unchanged **0.001 mV** trajectory floor even with exact subsequent addition. Ordinary reductions can accidentally cancel this input error; that does not qualify them.
+- Ruff and strict Pyright passed for the new probe. The qualified small core, its existing tests, upstream runners, dependencies, and production contracts are unchanged. The existing 43-test suite was not rerun in this diagnostic-only step; its retained Milestone 1 result is not a test result for this candidate. No full-data loading, custom kernel, compilation, or benchmark was performed.
 
 ## Milestone 2 — Connectome loading
 
@@ -185,7 +193,7 @@ Acceptance: final corrections are applied; the complete approved verification su
 
 ## Current checkpoint and constraints
 
-Next work: the user switches to GPT-6 Astra at `xhigh` for the [bounded accumulation-design review](docs/handoffs/astra-accumulation-design.md), based on measured Metal cancellation failures. Milestone 1 is complete; Milestone 2 has not started. Stop for the requested switch and resume from the recorded checkpoint. The private in-memory core does not change an existing public interface or persisted production schema.
+Next work: finish the [bounded accumulation-design decision record](docs/handoffs/astra-accumulation-design.md) with the measured individual-weight casting blocker and the exact next input audit, then request the user's return to GPT-6.1 Sol at `xhigh`. Milestone 1 is complete for its tested envelope; Milestone 2 has not started. The private in-memory core does not change an existing public interface or persisted production schema.
 
 A private small-network MLX core is qualified within the reviewed envelope. The integrated MLX backend, full-network parity, speed, peak memory, and clean installation remain unverified. Existing simulation results and generated standalone artifacts are preserved. Reruns require a fresh output directory; both harnesses refuse an existing destination.
 
