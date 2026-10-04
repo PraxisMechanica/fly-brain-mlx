@@ -1,0 +1,11 @@
+{
+  "tests": 61,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "exit_code": 0,
+  "warnings": 352,
+  "seconds": 77.34,
+  "accepted": true,
+  "command": "MLX_ENABLE_TF32=0 MLX_QUALIFICATION_OUTPUT=\"$PWD/data/results/mlx-factored-networks-20261004-01\" MPLCONFIGDIR=\"$PWD/data/results/mlx-factored-networks-20261004-01/matplotlib\" .venv/bin/python -m pytest -q tests/test_reference_contract.py tests/test_mlx_core.py tests/test_factored_accumulation.py --disable-warnings --junitxml=data/results/mlx-factored-networks-20261004-01/tests.xml"
+}

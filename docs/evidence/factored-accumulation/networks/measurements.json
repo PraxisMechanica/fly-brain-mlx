@@ -1,0 +1,303 @@
+{
+  "execution": "uncompiled, explicit Metal stream, ordered edge/channel additions",
+  "mlx": "0.32.3",
+  "mlx_metal": "0.32.3",
+  "brian2": "2.8.0",
+  "numpy": "1.26.4",
+  "python": "3.10.14",
+  "platform": "macOS-15.3.1-arm64-arm-64bit",
+  "device": {
+    "device_name": "Apple M1 Max",
+    "max_recommended_working_set_size": 22906503168,
+    "memory_size": 34359738368,
+    "architecture": "applegpu_g13s",
+    "max_buffer_length": 17179869184,
+    "resource_limit": 499000
+  },
+  "MLX_ENABLE_TF32": "0",
+  "coefficients_float32": {
+    "a": 0.9950124621391296,
+    "b": 0.9801986813545227,
+    "c": 0.004937935154885054
+  },
+  "measurements": {
+    "linear-10000": {
+      "steps": 10000,
+      "max_abs_error_mv_v_g": [
+        0.00038146972624275577,
+        0.00021828870384865695
+      ],
+      "repeat_bit_identical": true
+    },
+    "threshold-rounding-limitation": {
+      "input_mv": -44.999999046325684,
+      "expected_difference": true,
+      "universal_float64_spike_equivalence": false
+    },
+    "rest-empty": {
+      "steps": 60,
+      "trials": 1,
+      "spikes": 0,
+      "max_abs_error_mv": {
+        "pre_voltage_mv": 0.0,
+        "pre_synaptic_mv": 0.0,
+        "before_reset_voltage_mv": 0.0,
+        "before_reset_synaptic_mv": 0.0,
+        "voltage_mv": 0.0,
+        "synaptic_mv": 0.0
+      },
+      "exact_discrete_parity": true,
+      "repeat_bit_identical": true,
+      "minimum_available_threshold_margin_mv": 7.0
+    },
+    "reset-weights": {
+      "steps": 60,
+      "trials": 1,
+      "spikes": 1,
+      "max_abs_error_mv": {
+        "pre_voltage_mv": 7.421120301387418e-06,
+        "pre_synaptic_mv": 2.0988848969949458e-07,
+        "before_reset_voltage_mv": 7.421120301387418e-06,
+        "before_reset_synaptic_mv": 2.0988848969949458e-07,
+        "voltage_mv": 7.421120301387418e-06,
+        "synaptic_mv": 2.0988848969949458e-07
+      },
+      "exact_discrete_parity": true,
+      "repeat_bit_identical": true,
+      "minimum_available_threshold_margin_mv": 0.9650377688367797
+    },
+    "positive-negative": {
+      "steps": 80,
+      "trials": 1,
+      "spikes": 1,
+      "max_abs_error_mv": {
+        "pre_voltage_mv": 1.1612822724771377e-05,
+        "pre_synaptic_mv": 8.42961695779465e-07,
+        "before_reset_voltage_mv": 1.1612822724771377e-05,
+        "before_reset_synaptic_mv": 8.42961695779465e-07,
+        "voltage_mv": 1.1612822724771377e-05,
+        "synaptic_mv": 8.42961695779465e-07
+      },
+      "exact_discrete_parity": true,
+      "repeat_bit_identical": true,
+      "minimum_available_threshold_margin_mv": 0.9600998335414701
+    },
+    "balanced-duplicates": {
+      "steps": 80,
+      "trials": 1,
+      "spikes": 2,
+      "max_abs_error_mv": {
+        "pre_voltage_mv": 1.0133430926373421e-05,
+        "pre_synaptic_mv": 1.1002361030576502e-07,
+        "before_reset_voltage_mv": 1.0133430926373421e-05,
+        "before_reset_synaptic_mv": 1.1002361030576502e-07,
+        "voltage_mv": 1.0133430926373421e-05,
+        "synaptic_mv": 1.1002361030576502e-07
+      },
+      "exact_discrete_parity": true,
+      "repeat_bit_identical": true,
+      "minimum_available_threshold_margin_mv": 0.9600998335414701
+    },
+    "fanout-self-wrap": {
+      "steps": 160,
+      "trials": 1,
+      "spikes": 5,
+      "max_abs_error_mv": {
+        "pre_voltage_mv": 3.787758144824238e-05,
+        "pre_synaptic_mv": 1.7101143798825547e-06,
+        "before_reset_voltage_mv": 3.787758144824238e-05,
+        "before_reset_synaptic_mv": 1.7101143798825547e-06,
+        "voltage_mv": 3.787758144824238e-05,
+        "synaptic_mv": 1.7101143798825547e-06
+      },
+      "exact_discrete_parity": true,
+      "repeat_bit_identical": true,
+      "minimum_available_threshold_margin_mv": 5.54003474718688
+    },
+    "refractory-held": {
+      "steps": 40,
+      "trials": 1,
+      "spikes": 0,
+      "max_abs_error_mv": {
+        "pre_voltage_mv": 6.832886583651998e-06,
+        "pre_synaptic_mv": 5.947536485528815e-08,
+        "before_reset_voltage_mv": 6.832886583651998e-06,
+        "before_reset_synaptic_mv": 5.947536485528815e-08,
+        "voltage_mv": 6.832886583651998e-06,
+        "synaptic_mv": 5.947536485528815e-08
+      },
+      "exact_discrete_parity": true,
+      "repeat_bit_identical": true,
+      "minimum_available_threshold_margin_mv": 5.005037106319321
+    },
+    "target-released-at-arrival": {
+      "steps": 50,
+      "trials": 1,
+      "spikes": 1,
+      "max_abs_error_mv": {
+        "pre_voltage_mv": 4.337733138015665e-06,
+        "pre_synaptic_mv": 3.568000344067457e-07,
+        "before_reset_voltage_mv": 4.337733138015665e-06,
+        "before_reset_synaptic_mv": 3.568000344067457e-07,
+        "voltage_mv": 4.337733138015665e-06,
+        "synaptic_mv": 3.568000344067457e-07
+      },
+      "exact_discrete_parity": true,
+      "repeat_bit_identical": true,
+      "minimum_available_threshold_margin_mv": 0.9600998335414701
+    },
+    "zero-refractory-loss": {
+      "steps": 12,
+      "trials": 1,
+      "spikes": 6,
+      "max_abs_error_mv": {
+        "pre_voltage_mv": 3.452309410789667e-06,
+        "pre_synaptic_mv": 0.0,
+        "before_reset_voltage_mv": 3.452309410789667e-06,
+        "before_reset_synaptic_mv": 0.0,
+        "voltage_mv": 0.0,
+        "synaptic_mv": 0.0
+      },
+      "exact_discrete_parity": true,
+      "repeat_bit_identical": true,
+      "minimum_available_threshold_margin_mv": 7.0
+    },
+    "outgoing-silencing": {
+      "steps": 80,
+      "trials": 1,
+      "spikes": 2,
+      "max_abs_error_mv": {
+        "pre_voltage_mv": 9.86668197100471e-06,
+        "pre_synaptic_mv": 2.0252651225405316e-05,
+        "before_reset_voltage_mv": 9.86668197100471e-06,
+        "before_reset_synaptic_mv": 2.0252651225405316e-05,
+        "voltage_mv": 9.86668197100471e-06,
+        "synaptic_mv": 2.0252651225405316e-05
+      },
+      "exact_discrete_parity": true,
+      "repeat_bit_identical": true,
+      "minimum_available_threshold_margin_mv": 0.10860127870501657
+    },
+    "classes-overlap-zero-rate": {
+      "steps": 80,
+      "trials": 1,
+      "spikes": 4,
+      "max_abs_error_mv": {
+        "pre_voltage_mv": 6.904618814473906e-06,
+        "pre_synaptic_mv": 0.0,
+        "before_reset_voltage_mv": 6.904618814473906e-06,
+        "before_reset_synaptic_mv": 0.0,
+        "voltage_mv": 0.0,
+        "synaptic_mv": 0.0
+      },
+      "exact_discrete_parity": true,
+      "repeat_bit_identical": true,
+      "minimum_available_threshold_margin_mv": 7.0
+    },
+    "thirty-two-event-fanin": {
+      "steps": 80,
+      "trials": 1,
+      "spikes": 1,
+      "max_abs_error_mv": {
+        "pre_voltage_mv": 1.2449419251936433e-05,
+        "pre_synaptic_mv": 1.7606841884454383e-07,
+        "before_reset_voltage_mv": 1.2449419251936433e-05,
+        "before_reset_synaptic_mv": 1.7606841884454383e-07,
+        "voltage_mv": 1.2449419251936433e-05,
+        "synaptic_mv": 1.7606841884454383e-07
+      },
+      "exact_discrete_parity": true,
+      "repeat_bit_identical": true,
+      "minimum_available_threshold_margin_mv": 0.9600998335414701
+    },
+    "refractory-boundary": {
+      "steps": 50,
+      "trials": 1,
+      "spikes": 2,
+      "max_abs_error_mv": {
+        "pre_voltage_mv": 1.5437006091190142e-05,
+        "pre_synaptic_mv": 3.802717185585891e-07,
+        "before_reset_voltage_mv": 1.5437006091190142e-05,
+        "before_reset_synaptic_mv": 3.802717185585891e-07,
+        "voltage_mv": 1.5437006091190142e-05,
+        "synaptic_mv": 3.802717185585891e-07
+      },
+      "exact_discrete_parity": true,
+      "repeat_bit_identical": true,
+      "minimum_available_threshold_margin_mv": 4.9618116897573685
+    },
+    "retained-replay": {
+      "steps": 1000,
+      "trials": 1,
+      "spikes": 43,
+      "max_abs_error_mv": {
+        "pre_voltage_mv": 2.552409682010648e-05,
+        "pre_synaptic_mv": 3.113573657742563e-05,
+        "before_reset_voltage_mv": 2.552409682010648e-05,
+        "before_reset_synaptic_mv": 3.113573657742563e-05,
+        "voltage_mv": 2.552409682010648e-05,
+        "synaptic_mv": 2.6076359517901437e-05
+      },
+      "exact_discrete_parity": true,
+      "repeat_bit_identical": true,
+      "minimum_available_threshold_margin_mv": 0.059370506629136344,
+      "retained_complete_state_and_events_checked": true
+    },
+    "chunked-continuation": {
+      "chunks": [
+        1,
+        17,
+        1,
+        18,
+        40,
+        103
+      ],
+      "all_state_and_discrete_bit_identical": true
+    },
+    "batched-trials": {
+      "steps": 300,
+      "trials": 3,
+      "spikes": 40,
+      "max_abs_error_mv": {
+        "pre_voltage_mv": 2.673265657904267e-05,
+        "pre_synaptic_mv": 4.5943992319052995e-05,
+        "before_reset_voltage_mv": 2.673265657904267e-05,
+        "before_reset_synaptic_mv": 4.5943992319052995e-05,
+        "voltage_mv": 2.673265657904267e-05,
+        "synaptic_mv": 4.105471006710104e-05
+      },
+      "exact_discrete_parity": true,
+      "repeat_bit_identical": true,
+      "minimum_available_threshold_margin_mv": 0.059370506629136344
+    },
+    "same-step-recurrent-loss": {
+      "steps": 50,
+      "trials": 1,
+      "spikes": 3,
+      "max_abs_error_mv": {
+        "pre_voltage_mv": 3.452309410789667e-06,
+        "pre_synaptic_mv": 8.047767452445953e-09,
+        "before_reset_voltage_mv": 3.452309410789667e-06,
+        "before_reset_synaptic_mv": 8.047767452445953e-09,
+        "voltage_mv": 0.0,
+        "synaptic_mv": 0.0
+      },
+      "exact_discrete_parity": true,
+      "repeat_bit_identical": true,
+      "minimum_available_threshold_margin_mv": 0.9650377688367797
+    },
+    "accumulation-limit": {
+      "events": 4097,
+      "expected_real_sum_mv": 0.275,
+      "serial_mlx_mv": 0.25,
+      "interleaved_serial_mlx_mv": 0.2750000059604645,
+      "mlx_sum_mv": 0.25,
+      "trajectory_budget_mv": 0.00100275,
+      "serial_qualifies": false,
+      "serial_repeat_bit_identical": true,
+      "sum_abs_weights_mv": 2708992.275,
+      "gamma_m_sum_abs_mv": 661.6981224943911,
+      "connectome_accumulation_approved": false
+    }
+  }
+}
