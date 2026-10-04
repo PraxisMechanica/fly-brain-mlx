@@ -37,7 +37,7 @@ def default_parameters() -> ReferenceParameters:
         'f_poi': 250,
         'eqs': dedent("""
             dv/dt = (v_0 - v + g) / t_mbr : volt (unless refractory)
-            dg/dt = -g / tau               : volt (unless refractory) 
+            dg/dt = -g / tau               : volt (unless refractory)
             rfc                           : second
         """),
         'eq_th': 'v > v_th',

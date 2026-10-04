@@ -1,5 +1,7 @@
 import csv
 import json
+import subprocess
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -65,6 +67,67 @@ def test_reader_rejects_nonfinite_times(tmp_path: Path) -> None:
     )
     with pytest.raises(ValueError, match='finite'):
         read_spikes(path, 0.1)
+
+
+def test_reader_rejects_null_identifiers(tmp_path: Path) -> None:
+    path = tmp_path / 'null.parquet'
+    pq.write_table(
+        pa.table(
+            {'trial': [0], 'flywire_id': [None], 'neuron_index': [0], 'time_ms': [0.1]}
+        ),
+        path,
+    )
+    with pytest.raises(ValueError, match='null'):
+        read_spikes(path, 0.1)
+
+
+def test_installed_comparison_command_reads_and_writes_the_file_contract(
+    tmp_path: Path,
+) -> None:
+    first, second = tmp_path / 'first.parquet', tmp_path / 'second.parquet'
+    for path, times in ((first, [1.0, 3.0]), (second, [1.0])):
+        pq.write_table(
+            pa.table(
+                {
+                    'trial': [0] * len(times),
+                    'neuron_index': [0] * len(times),
+                    'flywire_id': [10] * len(times),
+                    'time_ms': times,
+                }
+            ),
+            path,
+        )
+    output = tmp_path / 'comparison'
+    process = subprocess.run(
+        [
+            sys.executable,
+            '-m',
+            'fly_brain',
+            'compare',
+            '--first',
+            str(first),
+            '--second',
+            str(second),
+            '--duration-s',
+            '0.1',
+            '--trials',
+            '1',
+            '--output',
+            str(output),
+        ],
+        cwd=tmp_path,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert process.returncode == 0, process.stderr
+    report = json.loads((output / 'pairwise_summary.json').read_text())[0]
+    assert (report['spikes_a'], report['spikes_b'], report['timing_matches']) == (
+        2,
+        1,
+        1,
+    )
+    assert (output / 'parity_rates.csv').is_file()
 
 
 def test_comparison_writes_existing_report_filenames_without_overwriting(

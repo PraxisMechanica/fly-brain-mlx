@@ -24,6 +24,8 @@ uv sync --locked --group qualification
 
 Brian2 2.8.0 and PyTorch 2.11.0 are independent CPU references required by the frozen numerical contract. They are absent from the default runtime installation and are not application execution backends. The same uv project manages both groups.
 
+The C++ reference replay also requires Apple's command line compiler tools.
+
 ## Verify
 
 Run from this checkout. Use a new output directory each time; commands reject existing output directories.
