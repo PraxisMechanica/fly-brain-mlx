@@ -39,7 +39,7 @@ Every requirement remains open until the evidence below is recorded and inspecte
 
 ## Milestone 0 — Reference baseline
 
-Status: in progress.
+Status: complete for reference evidence; numerical-contract approval remains pending below.
 
 Acceptance: `docs/mlx-port-baseline.md` documents enough implementation-level detail to reproduce the pinned Brian2 model without guessing. Relevant tests and experiments provide direct evidence for the stated behavior. Material disagreements are collected for review, not silently resolved.
 
@@ -53,13 +53,14 @@ Required work:
 - [x] Record benchmark fields, spike-output schema, comparison-tool contracts, and backend disagreements.
 - [x] Record licensing and publication/source distinctions.
 - [x] Run focused reference-contract tests and preserve raw evidence.
-- [ ] Finish the baseline document and the bounded numerical-contract handoff.
+- [x] Finish the baseline document and the bounded numerical-contract handoff.
 
 Evidence completed:
 
 - Upstream commit: `a3db62f9436074e485c0278290c2164ed6150808`; [pin record](docs/upstream-pin.json).
 - Import commit: `4466b37`; upstream implementation matches the pinned tree. Only project documentation and ignore patterns differ at import.
 - Experiment commit: `295994b`.
+- Consolidation commit: `396f169`; reference-contract evidence commit: `5489ae0`.
 - Command: `.venv/bin/python scripts/run_reference_baseline.py --output data/results/mlx-reference-20261004`.
 - Brian2 2.8.0, NumPy 1.26.4, Python 3.10.14; full resolved reference environment in `requirements-reference.txt`.
 - Full-data sugar experiment: 21 stimulated neurons at 200 Hz, 0.1 seconds, one trial, 0.1 ms timestep; 1,518 spikes and 321 active neurons.
@@ -70,6 +71,8 @@ Evidence completed:
 - `.venv/bin/python -m pytest -q tests/test_reference_contract.py --junitxml=docs/evidence/milestone-0/reference-tests-final.xml --disable-warnings`: nine passed, zero skipped/failures/errors, 136 dependency warnings, 2.84 seconds. [Final test report](docs/evidence/milestone-0/reference-tests-final.xml).
 - [Generated update, schedule, and delay diagnostic](docs/evidence/milestone-0/reference-schedule.json): Brian2 recurrent conductance arrives at step 18 and affects voltage at step 19; PyTorch's measured arrival/influence steps are 20/21.
 - [Publication equations and source provenance](docs/evidence/milestone-0/publication-source.json) were retrieved from the Europe PMC full-text interface and distinguish the original v630 study from this v783 dataset.
+- The inspection harness reproduced the retained schedule/delay evidence exactly. All 71 local links in the README, milestone, baseline, and handoff documents passed verification. `git diff --check` passed; the diff against the upstream pin for numerical source, data, original scripts, environments, and licences is empty.
+- [Bounded Astra review request](docs/handoffs/astra-numerical-contract.md) records the checkpoint, evidence, required decisions, and return condition. No review decision is implied by Milestone 0 completion.
 
 Pending scientific review:
 
@@ -80,9 +83,9 @@ Pending scientific review:
 
 ## Numerical-contract handoff
 
-Status: not yet requested; collect the complete Milestone 0 evidence first.
+Status: requested; awaiting the user's switch to GPT-6 Astra at `xhigh`. Reference evidence is complete; contract decisions are pending.
 
-Deliverable: `docs/handoffs/astra-numerical-contract.md` records the selected reference semantics, exact invariants, justified floating-point tolerances, deterministic stimulus placement, and full-network metrics and acceptance rule. Astra must not implement the MLX backend during this review.
+Deliverable: the [bounded review record](docs/handoffs/astra-numerical-contract.md) must record the selected reference semantics, exact invariants, justified floating-point tolerances, deterministic stimulus placement, and full-network metrics and acceptance rule. It currently contains the request and evidence, not an approved contract. Astra must not implement the MLX backend during this review.
 
 Return condition: the numerical contract is explicit and supported by evidence, any additional required reference probes are identified, and Astra requests return to GPT-6.1 Sol at `xhigh`.
 
@@ -140,7 +143,7 @@ Acceptance: final corrections are applied; the complete approved verification su
 
 ## Current checkpoint and constraints
 
-Next work: commit the completed reference evidence, then write and request the bounded Astra numerical-contract review. No MLX implementation before the review decisions are recorded.
+Next work: the user switches to GPT-6 Astra at `xhigh` for the bounded numerical-contract review. Resume from `docs/handoffs/astra-numerical-contract.md`; request return to GPT-6.1 Sol at `xhigh` once the bounded outcome is recorded. No MLX implementation before the review decisions are resolved.
 
 No MLX backend has been written. No MLX parity, speed, peak memory, or installation claim is verified. Existing simulation results and generated standalone artifacts are preserved. Baseline reruns require a fresh output directory; the harness refuses an existing destination.
 
