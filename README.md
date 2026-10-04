@@ -1,6 +1,6 @@
 ## Apple MLX backend work
 
-This checkout is pinned to upstream commit `a3db62f9436074e485c0278290c2164ed6150808`. Reference baseline work is in progress; the MLX backend has not been implemented. See [active goal](docs/goal.md), [working rules](AGENTS.md), and [project status](docs/project-status.md). The user controls all model changes.
+This checkout is pinned to upstream commit `a3db62f9436074e485c0278290c2164ed6150808`. The shortest Brian2 reference experiment has run successfully; numerical-contract documentation is in progress and the MLX backend has not been implemented. See [project plan and progress](milestone.md) and [working rules](AGENTS.md). The user controls all model changes.
 
 # Emulation of the *Drosophila Fly* Brain
 

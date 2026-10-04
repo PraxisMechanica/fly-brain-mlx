@@ -338,6 +338,6 @@ Present all prices or costs in USD($) unless I explicitly ask otherwise. if you 
 
 ## Active Project Specification
 
-Read `docs/goal.md` before project work. It contains the user-provided active objective, success criteria, milestone ownership, and mandatory model-handoff protocol. It supersedes the earlier `docs/project-charter.md` plan.
+Read `milestone.md` before project work. It is the authoritative source for the project plan, work breakdown, acceptance criteria, progress, unresolved issues, and completion evidence. Determine the next work from that document and keep it updated. It consolidates the supplied plans and latest user amendments.
 
-The user controls all model changes. Do not switch or substitute models yourself. Ignore the original GPT-5.6 requirement; routine work proceeds in the user's selected chat model. The scientific review and high-risk optimization gates remain stopping boundaries. Write the required handoff and let the user perform the model change. The latest amendment in `docs/goal.md` overrides conflicting model instructions in the original specification.
+Use GPT-6.1 Sol at `xhigh` for implementation. The user controls all model changes; do not switch or substitute models yourself. Request bounded handoffs to GPT-6 Astra at `xhigh` when scientific interpretation, numerical correctness, or difficult kernel design needs deeper judgment. Include the checkpoint, relevant evidence, and requested outcome. Stop for every requested model switch. Astra must request return to Sol when its assigned component is resolved. Ignore the original GPT-5.6 requirement.
