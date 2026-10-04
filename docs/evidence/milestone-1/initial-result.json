@@ -1,0 +1,19 @@
+{
+  "command": [
+    "/Users/ocasta/Code/fly-brain/.venv/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "tests/test_reference_contract.py",
+    "tests/test_mlx_core.py",
+    "--disable-warnings",
+    "--junitxml=/Users/ocasta/Code/fly-brain/data/results/mlx-milestone1-20261004-01/tests.xml"
+  ],
+  "exit_code": 0,
+  "MLX_ENABLE_TF32": "0",
+  "tests": 40,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "accepted": true
+}

@@ -112,6 +112,13 @@ Startup checkpoint (2026-10-04):
 - `MLX_ENABLE_TF32=0` GPU smoke test succeeded on Apple M1 Max, macOS 15.3.1, architecture `applegpu_g13s`, 34,359,738,368 bytes unified memory. Device operations returned `[2.0, 3.0]` for `[1, 2] + 1`.
 - The sandbox cannot expose a Metal device; the GPU smoke process was authorized outside the sandbox. Actual qualification must use the same access, without CPU fallback. No core correctness or milestone acceptance is inferred from this smoke test.
 
+Initial implementation checkpoint:
+
+- [Private core](code/mlx_core.py) uses explicit Metal streams, float32 state, integer last-spike steps, a Boolean 19-slot per-edge queue, exact availability/reset/input gating, and ordered edge/channel additions. This deliberately small oracle does not claim a scalable connectome accumulation method.
+- [Qualification suite](tests/test_mlx_core.py) compares independent Brian2 phase monitors plus a spike-derived event ledger with complete MLX state/event traces. Ordinary fixtures require the approved threshold margins, exact discrete parity, state budgets, and bit-identical repeats. The threshold rounding counterexample is an asserted limitation.
+- `.venv/bin/python scripts/qualify_mlx_core.py --output data/results/mlx-milestone1-20261004-01`: 40 passed (12 reference, 28 MLX qualification), zero skipped/failures/errors, 251 dependency warnings, 31.79 seconds. [Initial report](docs/evidence/milestone-1/initial-tests.xml), [measurements](docs/evidence/milestone-1/initial-measurements.json), [result](docs/evidence/milestone-1/initial-result.json), and [log](docs/evidence/milestone-1/initial-qualification.log) are preserved. Complete traces remain in the fresh output directory.
+- Ruff and Pyright passed for the authored core/qualification runner. Repeated long linear traces, coincident recurrent delivery at both refractory durations, fresh-state pending-queue reset, and the actual large-cancellation limitation still need explicit coverage before milestone completion.
+
 ## Milestone 2 — Connectome loading
 
 Status: not started.
