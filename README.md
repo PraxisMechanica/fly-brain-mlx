@@ -8,7 +8,7 @@ The intended first target is the existing FlyWire v783 leaky integrate-and-fire 
 
 The active goal and mandatory model-handoff protocol are saved in [docs/goal.md](docs/goal.md). This specification supersedes the earlier planning charter.
 
-Startup inspection confirmed Apple silicon and available `uv` tooling. No upstream source has been fetched or pinned, no numerical experiments have run, and no backend implementation has begun. The active session was verified as GPT-6.1 Sol at `xhigh`; the goal requires GPT-5.6 Sol at `xhigh` for routine work. Startup is awaiting that model selection. See [execution startup notes](docs/handoffs/execution-start.md).
+Startup inspection confirmed Apple silicon and available `uv` tooling. Reference baseline work is beginning; no numerical experiments or backend implementation have begun. The user controls model changes and has removed the original GPT-5.6 requirement. See [execution startup notes](docs/handoffs/execution-start.md).
 
 ## Project context
 

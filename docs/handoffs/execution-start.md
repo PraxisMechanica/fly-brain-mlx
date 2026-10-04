@@ -2,6 +2,10 @@
 
 Date: 2026-10-04 (Europe/Paris).
 
+## User amendment and current status
+
+The user clarified: "do not substitute the models yourself. *I* will do that. also ignore 5.6". This clears the initial model-selection blocker. Proceed with Milestone 0 in the user's selected chat model, retaining the scientific handoff gates. The original startup state below is historical evidence, not a current instruction to change models.
+
 ## Authority and ownership
 
 [The active goal](../goal.md) was copied verbatim from the user's second pasted file. It replaces the earlier charter. The full backend project remains the active objective; saving this context does not complete it.
@@ -53,9 +57,7 @@ No numerical tests have been run. No application code or dependencies have been 
 
 ## Next required step
 
-Select GPT-5.6 Sol at `xhigh` for this chat and resume the active goal. Do not substitute GPT-6.1 Sol without the user's explicit change to model ownership.
-
-Under the requested model, complete Milestone 0 exactly as specified: pin and inspect upstream, run the smallest Brian2 central processing unit (CPU) experiment, collect numerical and backend-contract evidence, record licensing, and write `docs/mlx-port-baseline.md`.
+Complete Milestone 0 in the user's selected chat model: pin and inspect upstream, run the smallest Brian2 central processing unit (CPU) experiment, collect numerical and backend-contract evidence, record licensing, and write `docs/mlx-port-baseline.md`.
 
 Collect disagreements without adjudicating them. Commit the completed reference work, write `docs/handoffs/astra-numerical-contract.md`, then emit the exact Gate A handoff request and stop for GPT-6 Astra.
 

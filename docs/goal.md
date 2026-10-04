@@ -1,3 +1,11 @@
+# Active specification
+
+## User amendment — 2026-10-04
+
+The user controls all model changes. Do not switch, substitute, or spawn a different model yourself. Ignore the original GPT-5.6 requirement; routine work proceeds in the user's selected chat model. The scientific review gates remain stopping boundaries, with the user performing any requested model change. References to GPT-5.6 in the original text below are superseded by this amendment.
+
+## Original supplied specification
+
 Project: Add a correctness-verified Apple MLX backend to Eon Systems fly-brain
 
 Primary reference:
