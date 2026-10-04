@@ -1,0 +1,28 @@
+{
+  "original_reference_mv": -3.175237850427948e-14,
+  "stored_reference_mv": -2.441406244080291e-05,
+  "actual_mv": -2.441406286379788e-05,
+  "output_word": "0xb7cccccd",
+  "initial_cast_error_mv": -2.441406240905053e-05,
+  "remaining_arithmetic_error_mv": -4.2299497238218464e-13,
+  "total_error_mv": -2.4414062832045502e-05,
+  "unchanged_budget_mv": 2.0000000000000066e-05,
+  "error_budget_ratio": 1.2207031416022711,
+  "correctly_rounded_stored_reference": true,
+  "identical_stored_states_original_mv": [
+    -789.5250494140626,
+    -789.5249994140624
+  ],
+  "required_output_intervals_mv": [
+    [
+      -6.94141613194958e-05,
+      -2.941396366324583e-05
+    ],
+    [
+      -1.9414063562110223e-05,
+      2.0585938781640218e-05
+    ]
+  ],
+  "intervals_disjoint": true,
+  "scope": "Independent parent verification of the reviewed initial-state loss. Existing failed gate remains failed; no rule amendment approved."
+}
