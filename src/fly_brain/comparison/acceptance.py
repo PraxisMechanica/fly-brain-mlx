@@ -28,6 +28,23 @@ def validate_coordinates(spikes: SpikeSteps, neurons: int, steps: int) -> None:
         raise ValueError('Duplicate neuron/step spikes invalidate the case')
 
 
+def steps_from_reference_clock(
+    time_s: NDArray[np.float64], horizon: int
+) -> NDArray[np.int64]:
+    if (
+        time_s.ndim != 1
+        or time_s.dtype != np.float64
+        or not np.isfinite(time_s).all()
+        or np.any(time_s < 0)
+        or np.any(time_s >= horizon * 0.0001)
+    ):
+        raise ValueError('Reference times require native float64 within the horizon')
+    steps = np.rint(time_s / 0.0001).astype(np.int64)
+    if not np.array_equal(time_s, steps * 0.0001):
+        raise ValueError('Reference times must lie on the frozen integer clock')
+    return steps
+
+
 def common_support(
     reference: SpikeSteps, mlx: SpikeSteps, torch: SpikeSteps
 ) -> NDArray[np.int64]:
