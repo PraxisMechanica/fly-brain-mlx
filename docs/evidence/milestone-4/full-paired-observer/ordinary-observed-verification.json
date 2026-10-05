@@ -1,0 +1,87 @@
+{
+  "implementation_commit": "c0e76e1",
+  "steps": 1000,
+  "neurons": 138639,
+  "edges": 15091983,
+  "ordinary_observed_mlx_every_phase_boundary_queue_and_due_hash_identical": true,
+  "native_final_archives_independently_rehashed": true,
+  "first_spike_step": null,
+  "first_budget_violation": null,
+  "reference_all_1001_physical_hashes_and_native_output_match_prior_complete_proof": true,
+  "final_pending_queues_compared_from_actual_arrays": [
+    {
+      "absolute_due_step": 1006,
+      "original_rows": 320
+    },
+    {
+      "absolute_due_step": 1007,
+      "original_rows": 380
+    },
+    {
+      "absolute_due_step": 1008,
+      "original_rows": 241
+    },
+    {
+      "absolute_due_step": 1009,
+      "original_rows": 0
+    },
+    {
+      "absolute_due_step": 1010,
+      "original_rows": 609
+    },
+    {
+      "absolute_due_step": 1011,
+      "original_rows": 182
+    },
+    {
+      "absolute_due_step": 1012,
+      "original_rows": 470
+    },
+    {
+      "absolute_due_step": 1013,
+      "original_rows": 471
+    },
+    {
+      "absolute_due_step": 1014,
+      "original_rows": 234
+    },
+    {
+      "absolute_due_step": 1015,
+      "original_rows": 0
+    },
+    {
+      "absolute_due_step": 1016,
+      "original_rows": 485
+    },
+    {
+      "absolute_due_step": 1017,
+      "original_rows": 148
+    },
+    {
+      "absolute_due_step": 1000,
+      "original_rows": 680
+    },
+    {
+      "absolute_due_step": 1001,
+      "original_rows": 184
+    },
+    {
+      "absolute_due_step": 1002,
+      "original_rows": 0
+    },
+    {
+      "absolute_due_step": 1003,
+      "original_rows": 262
+    },
+    {
+      "absolute_due_step": 1004,
+      "original_rows": 635
+    },
+    {
+      "absolute_due_step": 1005,
+      "original_rows": 312
+    }
+  ],
+  "scope": "Complete shortest sugar ordinary/observed MLX transparency and live Brian2 common-history causal audit. Repeat execution and sampled memory report are pending; PyTorch/full-matrix acceptance remains open.",
+  "local_artifact_root": "/Users/ocasta/Code/fly-brain/data/results/milestone-4-full-paired-observer-20261005-01"
+}
