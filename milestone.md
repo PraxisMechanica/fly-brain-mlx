@@ -1118,6 +1118,12 @@ Completed timing review and prospective prototype decision (2026-10-05):
 - The preserved sugar session `3625` finishes at 6,279.312 seconds (about 1 hour 45 minutes), exit 1, with `case_accepted=false`. Its original report explicitly retains the failed timing floor and scientific-review requirement. Independent archival verification of the terminal failed case remains next work. P9 session `88326` is still live. No executing source changes occur; no additional full cases launch. The old implementation retains its nine accepted cases; no replacement implementation has accepted cases yet.
 - Commit this verified host-review and prospective decision immediately. The two-to-three-week estimate remains conditional on successful native/full-case qualification; the existing architectural and application checks are unchanged separate evidence.
 
+Completed failed-case archival proof (2026-10-05):
+
+- At clean `50840f3`, independently verify and preserve the terminal one-second sugar case, retaining `case_accepted=false`. [Complete failed-case proof](docs/evidence/milestone-4/one-second-sugar-metric-failure/completed-case/verification.json) and [exact executed verifier](docs/evidence/milestone-4/one-second-sugar-metric-failure/completed-case/executed-verification.py). The unchanged acceptance function explicitly refuses the failed timing floor. All nineteen metrics and eleven check results are reproduced by the bound independent scorer; explaining the first cause grants no exception.
+- All native phase/state/spike/cause/final files, physical reference queues and CPU observations repeat exactly. Verify complete 313-block / 10,001 reference-queue / 10,001 CPU-snapshot coverage per execution, every original cause descriptor, canonical input/mapping/pins, all current/launch sources, and each engine's own eighteen future original-row delivery sets after the fork. The [archive](docs/evidence/milestone-4/one-second-sugar-metric-failure/completed-case/observations.zip) contains all 26 original scientific artifacts, every member checked against its original bytes. Original raw data and standalone results remain intact.
+- Commit this complete failure record immediately. Nine cases remain accepted for the original arithmetic; the proposed increment prototype has no accepted full cases. P9 remains preserved under its original source. Next action is isolated native prototype qualification; no production arithmetic or acceptance change occurs here.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.

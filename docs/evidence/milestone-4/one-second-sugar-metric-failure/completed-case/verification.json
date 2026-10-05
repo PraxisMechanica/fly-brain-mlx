@@ -1,0 +1,246 @@
+{
+  "execution_checkpoint": "55ea35f",
+  "parent_verification_checkpoint": "50840f3617d13bbc1e9061a61991844baa7c7ea8",
+  "case_accepted": false,
+  "all_11_metric_gates_pass": false,
+  "failed_metric_checks": [
+    "timing_floor"
+  ],
+  "executed_verifier_sha256": "38c7fbdda808db8dffc343028b3c067d26ddf84ae3a80273ed508e47c8f98b02",
+  "full_matrix_accepted": false,
+  "case": {
+    "experiment": "sugar",
+    "steps": 10000,
+    "trial": 0
+  },
+  "scope": "Independent archival proof of the completed failed one-second sugar case; complete native repeats, own queues and metrics are verified without granting acceptance.",
+  "automatic_report_accepted": false,
+  "original_report_and_scientific_review_requirement_preserved": true,
+  "scientific_adjudication": "The fixed timing floor fails. The explained first cause grants no exception, and the original rejection remains in force.",
+  "first_spike_step": 5719,
+  "first_spike_neurons": [
+    100750
+  ],
+  "completed_review_policy_and_parent_verification_sha256": {
+    "docs/evidence/milestone-4/one-second-sugar-cause/review-decision.json": "5a50dd443713814c9e9b1f25d9e407fc2caff19434676de73fa3a1f594668677",
+    "docs/evidence/milestone-4/one-second-sugar-cause/astra-review.md": "dc39cca9f18267e51a135065a95fb279b2fd257aac71a1903221fcc1459d7b10",
+    "docs/evidence/milestone-4/one-second-sugar-cause/first-cause-preflight.json": "4af4261eaf3687e20289a8a694c17401cc49675b1d1b16a586452dba749f7ce2",
+    "docs/evidence/milestone-4/one-second-sugar-cause/first-observation.zip": "4c1daf70d48e97b8924e3e92f9f964e3c6b54a36f3f6dd0082d35d4ae20c29de",
+    "docs/evidence/milestone-4/one-second-sugar-cause/executed-preflight.py": "f3bfb0e7d54d9a9c80013cce85e6bc457df3259302f02f6b5234aa19d759e97e",
+    "docs/evidence/milestone-4/one-second-sugar-cause/parent-host-proof.json": "bdcbbe27af61fb9330c7077b6c9d40bde93b42222a12bc4e03f698ec40acf178",
+    "docs/evidence/milestone-4/one-second-sugar-cause/executed-host-proof.py": "a2ef3c74aae6ff8ba94e82b2aca0ccb2ecc5e22e9a68f16ae9343fe033bbed27",
+    "docs/evidence/milestone-4/one-second-sugar-cause/dispatch.json": "ac0c172e1a9f7adfd3d4cde5f666191ae91883fb9909eb02c47c84ef3162656e",
+    "docs/evidence/milestone-4/case-adjudication/astra-review.md": "dc2b4f05f605c84c0a88c55b64ff197a7faa85bb95f8656b3918e4cadc5fae8a",
+    "docs/evidence/milestone-4/case-adjudication/parent-verification.json": "c2a0d01d43228b179941d676e0a1489a2ef05d416da2c691660a0f4baec5a6c5",
+    "docs/evidence/milestone-4/case-adjudication/independent-score.py": "32405d9b474ab5c216e4d2e2f9d5d7e760e07d730aa8f37ead01089795bbb2ca",
+    "docs/evidence/milestone-4/case-adjudication/independent-score-verification.json": "2cc2549d856e1e7b3ef87dbc744054c49694bb0f47d4b47759cdf5b3a9fbcf7e"
+  },
+  "all_recorded_executed_sources_equal_launch_checkpoint_and_current_source": true,
+  "pinned_inputs_mapping_and_regenerated_canonical_stimulus_verified": true,
+  "actual_reference_outgoing_silenced_weights_verified_original_rows_retained": null,
+  "actual_reference_weight_sha256": null,
+  "outgoing_silenced_original_row_count": null,
+  "every_native_phase_physical_queue_due_and_final_array_repeats": true,
+  "complete_native_phase_physical_queue_and_cpu_digest_coverage": true,
+  "observation_coverage": {
+    "horizon_steps": 10000,
+    "paired_blocks": 313,
+    "reference_physical_snapshots": 10001,
+    "cpu_native_snapshots": 10001
+  },
+  "every_actual_final_pending_original_row_set_matches_its_own_spike_history": true,
+  "cross_engine_pending_equality_after_first_difference": "inapplicable",
+  "pending_counts": {
+    "brian": [
+      671,
+      1307,
+      264,
+      0,
+      85,
+      823,
+      98,
+      454,
+      284,
+      354,
+      131,
+      93,
+      454,
+      161,
+      815,
+      494,
+      790,
+      302
+    ],
+    "mlx": [
+      379,
+      211,
+      61,
+      161,
+      733,
+      447,
+      658,
+      356,
+      0,
+      507,
+      346,
+      0,
+      0,
+      405,
+      242,
+      172,
+      478,
+      187
+    ]
+  },
+  "complete_common_prefix_raw_mapped_spikes_exact": true,
+  "complete_first_difference_set_and_native_threshold_prerequisites_verified": true,
+  "native_cause_descriptors_verified": 112,
+  "all_19_metric_fields_and_11_gates_independently_verified": true,
+  "independent_scorer_sha256": "32405d9b474ab5c216e4d2e2f9d5d7e760e07d730aa8f37ead01089795bbb2ca",
+  "metrics_by_independent_counter_fraction_statistics_and_dynamic_program": {
+    "mlx": {
+      "reference_spikes": 16752,
+      "candidate_spikes": 16665,
+      "active_jaccard": {
+        "numerator": 409,
+        "denominator": 413,
+        "value": 0.9903147699757869
+      },
+      "count_error": {
+        "numerator": 29,
+        "denominator": 5584,
+        "value": 0.005193409742120344
+      },
+      "signed_count_ratio": {
+        "numerator": 5555,
+        "denominator": 5584,
+        "value": 0.9948065902578797
+      },
+      "neuron_count_error": {
+        "numerator": 347,
+        "denominator": 16752,
+        "value": 0.02071394460362942
+      },
+      "rate_correlation": 0.9996497886766692,
+      "counts_equal": false,
+      "timing_matches": 13347,
+      "timing_f1": {
+        "numerator": 2966,
+        "denominator": 3713,
+        "value": 0.7988149744142203
+      },
+      "timing_precision": {
+        "numerator": 4449,
+        "denominator": 5555,
+        "value": 0.8009000900090009
+      },
+      "timing_recall": {
+        "numerator": 4449,
+        "denominator": 5584,
+        "value": 0.7967406876790831
+      },
+      "exact_step_f1": {
+        "numerator": 24646,
+        "denominator": 33417,
+        "value": 0.7375288027052099
+      },
+      "one_step_f1": {
+        "numerator": 25184,
+        "denominator": 33417,
+        "value": 0.7536283927342371
+      },
+      "mean_timing_error_ms": 0.032029669588671615,
+      "median_timing_error_ms": 0.0,
+      "shared_rate_correlation": 0.9996471278326035,
+      "common_rate_mae_hz": 0.8261904761904761,
+      "common_rate_rmse_hz": 1.2373166049772308
+    },
+    "torch": {
+      "reference_spikes": 16752,
+      "candidate_spikes": 17062,
+      "active_jaccard": {
+        "numerator": 388,
+        "denominator": 419,
+        "value": 0.9260143198090692
+      },
+      "count_error": {
+        "numerator": 155,
+        "denominator": 8376,
+        "value": 0.018505253104106972
+      },
+      "signed_count_ratio": {
+        "numerator": 8531,
+        "denominator": 8376,
+        "value": 1.018505253104107
+      },
+      "neuron_count_error": {
+        "numerator": 50,
+        "denominator": 1047,
+        "value": 0.04775549188156638
+      },
+      "rate_correlation": 0.9986154217528144,
+      "counts_equal": false,
+      "timing_matches": 6734,
+      "timing_f1": {
+        "numerator": 6734,
+        "denominator": 16907,
+        "value": 0.3982965635535577
+      },
+      "timing_precision": {
+        "numerator": 3367,
+        "denominator": 8531,
+        "value": 0.3946782323291525
+      },
+      "timing_recall": {
+        "numerator": 3367,
+        "denominator": 8376,
+        "value": 0.401981852913085
+      },
+      "exact_step_f1": {
+        "numerator": 280,
+        "denominator": 16907,
+        "value": 0.016561187673744603
+      },
+      "one_step_f1": {
+        "numerator": 4592,
+        "denominator": 16907,
+        "value": 0.27160347784941147
+      },
+      "mean_timing_error_ms": 0.24557469557469558,
+      "median_timing_error_ms": 0.1,
+      "shared_rate_correlation": 0.998586686618853,
+      "common_rate_mae_hz": 1.9047619047619047,
+      "common_rate_rmse_hz": 2.7524880519614388
+    }
+  },
+  "archive_file_count": 26,
+  "archive_manifest_sha256": {
+    "case.json": "b70e4a7e9a30dc5082e1c83d27790f3b620d63161d0a081fe4c7b598cb193030",
+    "environment.json": "5b22f9e5518fd1b5ca9cc5207a7129f2ce3275e15e43dd673311259762871cf4",
+    "normalized-spikes.npz": "040e8acb952c0db6d4013a20aec0df5e426d1f520dd3ee9c0db9c5aecfc91275",
+    "observations/cpu-first/native-digests.jsonl": "140e38c6c94e0ef8bf6e24439b58ced742858f8a8356c9f6a92b6f5b98f05e7d",
+    "observations/cpu-first/native.npz": "b9558134bf2367aed9971057a0d5467fa34824db9b64de10e53cca4721aad6a9",
+    "observations/cpu-repeat/native-digests.jsonl": "140e38c6c94e0ef8bf6e24439b58ced742858f8a8356c9f6a92b6f5b98f05e7d",
+    "observations/cpu-repeat/native.npz": "b9558134bf2367aed9971057a0d5467fa34824db9b64de10e53cca4721aad6a9",
+    "observations/paired-first/causal.json": "c815f6b290ddf9fb916e0e22cb2349b3e4d2c8f1d53bbe0a70264bdd66f98e60",
+    "observations/paired-first/mlx-native.npz": "9f52548859f4d79a74983fc3ced4e5b642b092ded6f48972094b8763e29673e2",
+    "observations/paired-first/phase-digests.jsonl": "e58ed46b23e010aa2adab65e75d045e32cd8514290568fdb055808a2be85705c",
+    "observations/paired-first/physical-digests.jsonl": "60141acee2cfa4f0afc77dfe696257d2827cb87c3aab3620861ad5702e013151",
+    "observations/paired-first/reference-final-physical.json": "c68e415f5921b5e3863d6901c0ce52f5d648ac41736f3e967e5a5150000950ce",
+    "observations/paired-first/reference-final-physical.npz": "1689094e5a32064411da92845351f3ad60146395d36ede153b9797f7daceca41",
+    "observations/paired-first/reference-native.npz": "b861402a0b44c835756b478f885a34be81ac270d1d48d9fa6565d2ea6efd9f90",
+    "observations/paired-first/spike-context.npz": "3645995cef962d490158adea72340abe04c7940dbf15d1b2a0e814423eb63e96",
+    "observations/paired-repeat/causal.json": "c815f6b290ddf9fb916e0e22cb2349b3e4d2c8f1d53bbe0a70264bdd66f98e60",
+    "observations/paired-repeat/mlx-native.npz": "9f52548859f4d79a74983fc3ced4e5b642b092ded6f48972094b8763e29673e2",
+    "observations/paired-repeat/phase-digests.jsonl": "e58ed46b23e010aa2adab65e75d045e32cd8514290568fdb055808a2be85705c",
+    "observations/paired-repeat/physical-digests.jsonl": "60141acee2cfa4f0afc77dfe696257d2827cb87c3aab3620861ad5702e013151",
+    "observations/paired-repeat/reference-final-physical.json": "c68e415f5921b5e3863d6901c0ce52f5d648ac41736f3e967e5a5150000950ce",
+    "observations/paired-repeat/reference-final-physical.npz": "1689094e5a32064411da92845351f3ad60146395d36ede153b9797f7daceca41",
+    "observations/paired-repeat/reference-native.npz": "b861402a0b44c835756b478f885a34be81ac270d1d48d9fa6565d2ea6efd9f90",
+    "observations/paired-repeat/spike-context.npz": "3645995cef962d490158adea72340abe04c7940dbf15d1b2a0e814423eb63e96",
+    "reference-job.json": "e327804b22f89409766bb576c4d5f3837deb08bb83078e0ea306e4f9dd109e68",
+    "stimulus.json": "5049a75ea9f1048ef21979cd2cb053caa6941538e32b1dac0c28fa9806fff773",
+    "stimulus.npz": "54008b4e235b1c50a08d40fd2493815952f32dd86ef9e74aacb0c582867dd42e"
+  },
+  "every_archive_file_matches_preserved_original": true
+}
