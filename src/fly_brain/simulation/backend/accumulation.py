@@ -54,6 +54,19 @@ def factored_sum(
     counts: mx.array, initial: mx.array
 ) -> tuple[mx.array, mx.array, mx.array]:
     count_high, count_low = compensated_tree(counts)
+    return scaled_count_sum(count_high, count_low, initial)
+
+
+def exact_count_sum(
+    counts: mx.array, initial: mx.array
+) -> tuple[mx.array, mx.array, mx.array]:
+    count_high = mx.sum(counts, axis=-1)
+    return scaled_count_sum(count_high, mx.zeros_like(count_high), initial)
+
+
+def scaled_count_sum(
+    count_high: mx.array, count_low: mx.array, initial: mx.array
+) -> tuple[mx.array, mx.array, mx.array]:
     terms = [initial]
     for count in (count_high, count_low):
         for scale in (SCALE_HIGH, SCALE_LOW):

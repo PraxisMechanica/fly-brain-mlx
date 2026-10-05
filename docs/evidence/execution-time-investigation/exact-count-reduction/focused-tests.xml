@@ -1,0 +1,3983 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="19" failures="33" skipped="0" tests="63" time="27.810" timestamp="2026-10-05T13:02:32.097552+02:00" hostname="Ocastas-MacBook-Pro.local"><testcase classname="tests.qualification.test_exact_count_reduction" name="test_guarded_whole_layout_preserves_every_count_and_scaled_native_bit[counts0-True]" time="0.028" /><testcase classname="tests.qualification.test_exact_count_reduction" name="test_guarded_whole_layout_preserves_every_count_and_scaled_native_bit[counts1-True]" time="0.075" /><testcase classname="tests.qualification.test_exact_count_reduction" name="test_guarded_whole_layout_preserves_every_count_and_scaled_native_bit[counts2-True]" time="0.018" /><testcase classname="tests.qualification.test_exact_count_reduction" name="test_guarded_whole_layout_preserves_every_count_and_scaled_native_bit[counts3-True]" time="0.015" /><testcase classname="tests.qualification.test_exact_count_reduction" name="test_guarded_whole_layout_preserves_every_count_and_scaled_native_bit[counts4-True]" time="0.013" /><testcase classname="tests.qualification.test_exact_count_reduction" name="test_guarded_whole_layout_preserves_every_count_and_scaled_native_bit[counts5-True]" time="0.021" /><testcase classname="tests.qualification.test_exact_count_reduction" name="test_guarded_whole_layout_preserves_every_count_and_scaled_native_bit[counts6-False]" time="0.024" /><testcase classname="tests.qualification.test_exact_count_reduction" name="test_guarded_whole_layout_preserves_every_count_and_scaled_native_bit[counts7-False]" time="0.022" /><testcase classname="tests.qualification.test_exact_count_reduction" name="test_accumulator_rejects_nonboolean_edge_membership" time="0.001" /><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_network_matches_reference_phases[factored-rest-empty-case0-60-impulses0]" time="0.467"><failure message="FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/factored-rest-empty.npz'">name = 'rest-empty'
+case = NetworkCase(neurons=2, sources=(), destinations=(), weights=(), targets=(), silenced=(), voltage=-52, synaptic=0, last_spike=-100000000)
+steps = 60, impulses = ()
+harness = Harness(compile=&lt;function harness.&lt;locals&gt;.&lt;lambda&gt; at 0x12400feb0&gt;, recorder=ArtifactRecorder(output=PosixPath('data/...v': 0.0}, 'exact_discrete_parity': True, 'repeat_bit_identical': True, 'minimum_available_threshold_margin_mv': 7.0}}))
+
+    @pytest.mark.parametrize(
+        'name,case,steps,impulses',
+        [
+            ('rest-empty', Case(2), 60, ()),
+            (
+                'reset-weights',
+                Case(2, (0,), (1,), weights([4]), voltage=(-44, -52), synaptic=(1, 0)),
+                60,
+                (),
+            ),
+            (
+                'positive-negative',
+                Case(3, (0, 0), (1, 2), weights([15, -15]), voltage=(-44, -52, -52)),
+                80,
+                (),
+            ),
+            (
+                'balanced-duplicates',
+                Case(
+                    4,
+                    (0, 1, 0, 1),
+                    (2, 2, 3, 3),
+                    weights([4, -4, 1, 1]),
+                    voltage=(-44, -44, -52, -52),
+                ),
+                80,
+                (),
+            ),
+            (
+                'cast-drift-triplet',
+                Case(
+                    2, (0, 0, 0), (1, 1, 1), weights([2405, -2404, -1]), voltage=(-44, -52)
+                ),
+                60,
+                (),
+            ),
+            (
+                'fanout-self-wrap',
+                Case(3, (0, 0, 0), (0, 1, 2), weights([4, 7, -7]), (0,)),
+                160,
+                ((0, 0), (25, 0), (50, 0), (75, 0), (100, 0)),
+            ),
+            ('refractory-held', Case(1, voltage=-50, synaptic=1, last_spike=0), 40, ()),
+            (
+                'released-at-arrival',
+                Case(
+                    2,
+                    (0,),
+                    (1,),
+                    weights([4]),
+                    voltage=(-44, -50),
+                    synaptic=(0, 1),
+                    last_spike=(INITIAL, -10),
+                ),
+                50,
+                (),
+            ),
+            (
+                'outgoing-silencing',
+                Case(
+                    3,
+                    (0, 1, 2),
+                    (1, 2, 1),
+                    weights([364, 11, 7]),
+                    silenced=(1,),
+                    voltage=(-44, -52, -52),
+                ),
+                80,
+                (),
+            ),
+            (
+                'overlapping-inputs',
+                Case(2, targets=(0, 0, 1)),
+                80,
+                ((0, 0), (0, 1), (5, 0), (12, 1), (24, 0), (24, 1)),
+            ),
+            (
+                'zero-refractory-loss',
+                Case(1, targets=(0,)),
+                12,
+                tuple((step, 0) for step in range(12)),
+            ),
+            (
+                '32-edge-fanin',
+                Case(
+                    2,
+                    (0,) * 32,
+                    (1,) * 32,
+                    weights([1, -1] * 15 + [2, 1]),
+                    voltage=(-44, -52),
+                ),
+                80,
+                (),
+            ),
+        ],
+    )
+    def test_factored_network_matches_reference_phases(
+        name: str,
+        case: Case,
+        steps: int,
+        impulses: tuple[tuple[int, int], ...],
+        harness: Harness,
+    ) -&gt; None:
+&gt;       observed = harness.qualify(name, case, events_for(case, steps, impulses))
+
+tests/qualification/test_factored_accumulation.py:137: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/support/qualification.py:119: in qualify
+    self.recorder.record(
+tests/support/artifacts.py:32: in record
+    with (self.output / f'{name}.npz').open('xb') as destination:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('data/results/performance-remediation-exact-count-focused-20261005/factored-rest-empty.npz')
+mode = 'xb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+&gt;       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/factored-rest-empty.npz'
+
+/opt/homebrew/Cellar/python@3.10/3.10.14/Frameworks/Python.framework/Versions/3.10/lib/python3.10/pathlib.py:1119: FileNotFoundError</failure></testcase><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_network_matches_reference_phases[factored-reset-weights-case1-60-impulses1]" time="0.256"><failure message="FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/factored-reset-weights.npz'">name = 'reset-weights'
+case = NetworkCase(neurons=2, sources=(0,), destinations=(1,), weights=(1.1,), targets=(), silenced=(), voltage=(-44, -52), synaptic=(1, 0), last_spike=-100000000)
+steps = 60, impulses = ()
+harness = Harness(compile=&lt;function harness.&lt;locals&gt;.&lt;lambda&gt; at 0x12400feb0&gt;, recorder=ArtifactRecorder(output=PosixPath('data/...t_discrete_parity': True, 'repeat_bit_identical': True, 'minimum_available_threshold_margin_mv': 0.9650377688367797}}))
+
+    @pytest.mark.parametrize(
+        'name,case,steps,impulses',
+        [
+            ('rest-empty', Case(2), 60, ()),
+            (
+                'reset-weights',
+                Case(2, (0,), (1,), weights([4]), voltage=(-44, -52), synaptic=(1, 0)),
+                60,
+                (),
+            ),
+            (
+                'positive-negative',
+                Case(3, (0, 0), (1, 2), weights([15, -15]), voltage=(-44, -52, -52)),
+                80,
+                (),
+            ),
+            (
+                'balanced-duplicates',
+                Case(
+                    4,
+                    (0, 1, 0, 1),
+                    (2, 2, 3, 3),
+                    weights([4, -4, 1, 1]),
+                    voltage=(-44, -44, -52, -52),
+                ),
+                80,
+                (),
+            ),
+            (
+                'cast-drift-triplet',
+                Case(
+                    2, (0, 0, 0), (1, 1, 1), weights([2405, -2404, -1]), voltage=(-44, -52)
+                ),
+                60,
+                (),
+            ),
+            (
+                'fanout-self-wrap',
+                Case(3, (0, 0, 0), (0, 1, 2), weights([4, 7, -7]), (0,)),
+                160,
+                ((0, 0), (25, 0), (50, 0), (75, 0), (100, 0)),
+            ),
+            ('refractory-held', Case(1, voltage=-50, synaptic=1, last_spike=0), 40, ()),
+            (
+                'released-at-arrival',
+                Case(
+                    2,
+                    (0,),
+                    (1,),
+                    weights([4]),
+                    voltage=(-44, -50),
+                    synaptic=(0, 1),
+                    last_spike=(INITIAL, -10),
+                ),
+                50,
+                (),
+            ),
+            (
+                'outgoing-silencing',
+                Case(
+                    3,
+                    (0, 1, 2),
+                    (1, 2, 1),
+                    weights([364, 11, 7]),
+                    silenced=(1,),
+                    voltage=(-44, -52, -52),
+                ),
+                80,
+                (),
+            ),
+            (
+                'overlapping-inputs',
+                Case(2, targets=(0, 0, 1)),
+                80,
+                ((0, 0), (0, 1), (5, 0), (12, 1), (24, 0), (24, 1)),
+            ),
+            (
+                'zero-refractory-loss',
+                Case(1, targets=(0,)),
+                12,
+                tuple((step, 0) for step in range(12)),
+            ),
+            (
+                '32-edge-fanin',
+                Case(
+                    2,
+                    (0,) * 32,
+                    (1,) * 32,
+                    weights([1, -1] * 15 + [2, 1]),
+                    voltage=(-44, -52),
+                ),
+                80,
+                (),
+            ),
+        ],
+    )
+    def test_factored_network_matches_reference_phases(
+        name: str,
+        case: Case,
+        steps: int,
+        impulses: tuple[tuple[int, int], ...],
+        harness: Harness,
+    ) -&gt; None:
+&gt;       observed = harness.qualify(name, case, events_for(case, steps, impulses))
+
+tests/qualification/test_factored_accumulation.py:137: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/support/qualification.py:119: in qualify
+    self.recorder.record(
+tests/support/artifacts.py:32: in record
+    with (self.output / f'{name}.npz').open('xb') as destination:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('data/results/performance-remediation-exact-count-focused-20261005/factored-reset-weights.npz')
+mode = 'xb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+&gt;       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/factored-reset-weights.npz'
+
+/opt/homebrew/Cellar/python@3.10/3.10.14/Frameworks/Python.framework/Versions/3.10/lib/python3.10/pathlib.py:1119: FileNotFoundError</failure></testcase><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_network_matches_reference_phases[factored-positive-negative-case2-80-impulses2]" time="0.400"><failure message="FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/factored-positive-negative.npz'">name = 'positive-negative'
+case = NetworkCase(neurons=3, sources=(0, 0), destinations=(1, 2), weights=(4.125, -4.125), targets=(), silenced=(), voltage=(-44, -52, -52), synaptic=0, last_spike=-100000000)
+steps = 80, impulses = ()
+harness = Harness(compile=&lt;function harness.&lt;locals&gt;.&lt;lambda&gt; at 0x12400feb0&gt;, recorder=ArtifactRecorder(output=PosixPath('data/...t_discrete_parity': True, 'repeat_bit_identical': True, 'minimum_available_threshold_margin_mv': 0.9600998335414701}}))
+
+    @pytest.mark.parametrize(
+        'name,case,steps,impulses',
+        [
+            ('rest-empty', Case(2), 60, ()),
+            (
+                'reset-weights',
+                Case(2, (0,), (1,), weights([4]), voltage=(-44, -52), synaptic=(1, 0)),
+                60,
+                (),
+            ),
+            (
+                'positive-negative',
+                Case(3, (0, 0), (1, 2), weights([15, -15]), voltage=(-44, -52, -52)),
+                80,
+                (),
+            ),
+            (
+                'balanced-duplicates',
+                Case(
+                    4,
+                    (0, 1, 0, 1),
+                    (2, 2, 3, 3),
+                    weights([4, -4, 1, 1]),
+                    voltage=(-44, -44, -52, -52),
+                ),
+                80,
+                (),
+            ),
+            (
+                'cast-drift-triplet',
+                Case(
+                    2, (0, 0, 0), (1, 1, 1), weights([2405, -2404, -1]), voltage=(-44, -52)
+                ),
+                60,
+                (),
+            ),
+            (
+                'fanout-self-wrap',
+                Case(3, (0, 0, 0), (0, 1, 2), weights([4, 7, -7]), (0,)),
+                160,
+                ((0, 0), (25, 0), (50, 0), (75, 0), (100, 0)),
+            ),
+            ('refractory-held', Case(1, voltage=-50, synaptic=1, last_spike=0), 40, ()),
+            (
+                'released-at-arrival',
+                Case(
+                    2,
+                    (0,),
+                    (1,),
+                    weights([4]),
+                    voltage=(-44, -50),
+                    synaptic=(0, 1),
+                    last_spike=(INITIAL, -10),
+                ),
+                50,
+                (),
+            ),
+            (
+                'outgoing-silencing',
+                Case(
+                    3,
+                    (0, 1, 2),
+                    (1, 2, 1),
+                    weights([364, 11, 7]),
+                    silenced=(1,),
+                    voltage=(-44, -52, -52),
+                ),
+                80,
+                (),
+            ),
+            (
+                'overlapping-inputs',
+                Case(2, targets=(0, 0, 1)),
+                80,
+                ((0, 0), (0, 1), (5, 0), (12, 1), (24, 0), (24, 1)),
+            ),
+            (
+                'zero-refractory-loss',
+                Case(1, targets=(0,)),
+                12,
+                tuple((step, 0) for step in range(12)),
+            ),
+            (
+                '32-edge-fanin',
+                Case(
+                    2,
+                    (0,) * 32,
+                    (1,) * 32,
+                    weights([1, -1] * 15 + [2, 1]),
+                    voltage=(-44, -52),
+                ),
+                80,
+                (),
+            ),
+        ],
+    )
+    def test_factored_network_matches_reference_phases(
+        name: str,
+        case: Case,
+        steps: int,
+        impulses: tuple[tuple[int, int], ...],
+        harness: Harness,
+    ) -&gt; None:
+&gt;       observed = harness.qualify(name, case, events_for(case, steps, impulses))
+
+tests/qualification/test_factored_accumulation.py:137: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/support/qualification.py:119: in qualify
+    self.recorder.record(
+tests/support/artifacts.py:32: in record
+    with (self.output / f'{name}.npz').open('xb') as destination:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('data/results/performance-remediation-exact-count-focused-20261005/factored-positive-negative.npz')
+mode = 'xb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+&gt;       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/factored-positive-negative.npz'
+
+/opt/homebrew/Cellar/python@3.10/3.10.14/Frameworks/Python.framework/Versions/3.10/lib/python3.10/pathlib.py:1119: FileNotFoundError</failure></testcase><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_network_matches_reference_phases[factored-balanced-duplicates-case3-80-impulses3]" time="0.428"><failure message="FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/factored-balanced-duplicates.npz'">name = 'balanced-duplicates'
+case = NetworkCase(neurons=4, sources=(0, 1, 0, 1), destinations=(2, 2, 3, 3), weights=(1.1, -1.1, 0.275, 0.275), targets=(), silenced=(), voltage=(-44, -44, -52, -52), synaptic=0, last_spike=-100000000)
+steps = 80, impulses = ()
+harness = Harness(compile=&lt;function harness.&lt;locals&gt;.&lt;lambda&gt; at 0x12400feb0&gt;, recorder=ArtifactRecorder(output=PosixPath('data/...t_discrete_parity': True, 'repeat_bit_identical': True, 'minimum_available_threshold_margin_mv': 0.9600998335414701}}))
+
+    @pytest.mark.parametrize(
+        'name,case,steps,impulses',
+        [
+            ('rest-empty', Case(2), 60, ()),
+            (
+                'reset-weights',
+                Case(2, (0,), (1,), weights([4]), voltage=(-44, -52), synaptic=(1, 0)),
+                60,
+                (),
+            ),
+            (
+                'positive-negative',
+                Case(3, (0, 0), (1, 2), weights([15, -15]), voltage=(-44, -52, -52)),
+                80,
+                (),
+            ),
+            (
+                'balanced-duplicates',
+                Case(
+                    4,
+                    (0, 1, 0, 1),
+                    (2, 2, 3, 3),
+                    weights([4, -4, 1, 1]),
+                    voltage=(-44, -44, -52, -52),
+                ),
+                80,
+                (),
+            ),
+            (
+                'cast-drift-triplet',
+                Case(
+                    2, (0, 0, 0), (1, 1, 1), weights([2405, -2404, -1]), voltage=(-44, -52)
+                ),
+                60,
+                (),
+            ),
+            (
+                'fanout-self-wrap',
+                Case(3, (0, 0, 0), (0, 1, 2), weights([4, 7, -7]), (0,)),
+                160,
+                ((0, 0), (25, 0), (50, 0), (75, 0), (100, 0)),
+            ),
+            ('refractory-held', Case(1, voltage=-50, synaptic=1, last_spike=0), 40, ()),
+            (
+                'released-at-arrival',
+                Case(
+                    2,
+                    (0,),
+                    (1,),
+                    weights([4]),
+                    voltage=(-44, -50),
+                    synaptic=(0, 1),
+                    last_spike=(INITIAL, -10),
+                ),
+                50,
+                (),
+            ),
+            (
+                'outgoing-silencing',
+                Case(
+                    3,
+                    (0, 1, 2),
+                    (1, 2, 1),
+                    weights([364, 11, 7]),
+                    silenced=(1,),
+                    voltage=(-44, -52, -52),
+                ),
+                80,
+                (),
+            ),
+            (
+                'overlapping-inputs',
+                Case(2, targets=(0, 0, 1)),
+                80,
+                ((0, 0), (0, 1), (5, 0), (12, 1), (24, 0), (24, 1)),
+            ),
+            (
+                'zero-refractory-loss',
+                Case(1, targets=(0,)),
+                12,
+                tuple((step, 0) for step in range(12)),
+            ),
+            (
+                '32-edge-fanin',
+                Case(
+                    2,
+                    (0,) * 32,
+                    (1,) * 32,
+                    weights([1, -1] * 15 + [2, 1]),
+                    voltage=(-44, -52),
+                ),
+                80,
+                (),
+            ),
+        ],
+    )
+    def test_factored_network_matches_reference_phases(
+        name: str,
+        case: Case,
+        steps: int,
+        impulses: tuple[tuple[int, int], ...],
+        harness: Harness,
+    ) -&gt; None:
+&gt;       observed = harness.qualify(name, case, events_for(case, steps, impulses))
+
+tests/qualification/test_factored_accumulation.py:137: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/support/qualification.py:119: in qualify
+    self.recorder.record(
+tests/support/artifacts.py:32: in record
+    with (self.output / f'{name}.npz').open('xb') as destination:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('data/results/performance-remediation-exact-count-focused-20261005/factored-balanced-duplicates.npz')
+mode = 'xb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+&gt;       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/factored-balanced-duplicates.npz'
+
+/opt/homebrew/Cellar/python@3.10/3.10.14/Frameworks/Python.framework/Versions/3.10/lib/python3.10/pathlib.py:1119: FileNotFoundError</failure></testcase><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_network_matches_reference_phases[factored-cast-drift-triplet-case4-60-impulses4]" time="0.283"><failure message="FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/factored-cast-drift-triplet.npz'">name = 'cast-drift-triplet'
+case = NetworkCase(neurons=2, sources=(0, 0, 0), destinations=(1, 1, 1), weights=(661.375, -661.1, -0.275), targets=(), silenced=(), voltage=(-44, -52), synaptic=0, last_spike=-100000000)
+steps = 60, impulses = ()
+harness = Harness(compile=&lt;function harness.&lt;locals&gt;.&lt;lambda&gt; at 0x12400feb0&gt;, recorder=ArtifactRecorder(output=PosixPath('data/...t_discrete_parity': True, 'repeat_bit_identical': True, 'minimum_available_threshold_margin_mv': 0.9600998335414701}}))
+
+    @pytest.mark.parametrize(
+        'name,case,steps,impulses',
+        [
+            ('rest-empty', Case(2), 60, ()),
+            (
+                'reset-weights',
+                Case(2, (0,), (1,), weights([4]), voltage=(-44, -52), synaptic=(1, 0)),
+                60,
+                (),
+            ),
+            (
+                'positive-negative',
+                Case(3, (0, 0), (1, 2), weights([15, -15]), voltage=(-44, -52, -52)),
+                80,
+                (),
+            ),
+            (
+                'balanced-duplicates',
+                Case(
+                    4,
+                    (0, 1, 0, 1),
+                    (2, 2, 3, 3),
+                    weights([4, -4, 1, 1]),
+                    voltage=(-44, -44, -52, -52),
+                ),
+                80,
+                (),
+            ),
+            (
+                'cast-drift-triplet',
+                Case(
+                    2, (0, 0, 0), (1, 1, 1), weights([2405, -2404, -1]), voltage=(-44, -52)
+                ),
+                60,
+                (),
+            ),
+            (
+                'fanout-self-wrap',
+                Case(3, (0, 0, 0), (0, 1, 2), weights([4, 7, -7]), (0,)),
+                160,
+                ((0, 0), (25, 0), (50, 0), (75, 0), (100, 0)),
+            ),
+            ('refractory-held', Case(1, voltage=-50, synaptic=1, last_spike=0), 40, ()),
+            (
+                'released-at-arrival',
+                Case(
+                    2,
+                    (0,),
+                    (1,),
+                    weights([4]),
+                    voltage=(-44, -50),
+                    synaptic=(0, 1),
+                    last_spike=(INITIAL, -10),
+                ),
+                50,
+                (),
+            ),
+            (
+                'outgoing-silencing',
+                Case(
+                    3,
+                    (0, 1, 2),
+                    (1, 2, 1),
+                    weights([364, 11, 7]),
+                    silenced=(1,),
+                    voltage=(-44, -52, -52),
+                ),
+                80,
+                (),
+            ),
+            (
+                'overlapping-inputs',
+                Case(2, targets=(0, 0, 1)),
+                80,
+                ((0, 0), (0, 1), (5, 0), (12, 1), (24, 0), (24, 1)),
+            ),
+            (
+                'zero-refractory-loss',
+                Case(1, targets=(0,)),
+                12,
+                tuple((step, 0) for step in range(12)),
+            ),
+            (
+                '32-edge-fanin',
+                Case(
+                    2,
+                    (0,) * 32,
+                    (1,) * 32,
+                    weights([1, -1] * 15 + [2, 1]),
+                    voltage=(-44, -52),
+                ),
+                80,
+                (),
+            ),
+        ],
+    )
+    def test_factored_network_matches_reference_phases(
+        name: str,
+        case: Case,
+        steps: int,
+        impulses: tuple[tuple[int, int], ...],
+        harness: Harness,
+    ) -&gt; None:
+&gt;       observed = harness.qualify(name, case, events_for(case, steps, impulses))
+
+tests/qualification/test_factored_accumulation.py:137: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/support/qualification.py:119: in qualify
+    self.recorder.record(
+tests/support/artifacts.py:32: in record
+    with (self.output / f'{name}.npz').open('xb') as destination:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('data/results/performance-remediation-exact-count-focused-20261005/factored-cast-drift-triplet.npz')
+mode = 'xb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+&gt;       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/factored-cast-drift-triplet.npz'
+
+/opt/homebrew/Cellar/python@3.10/3.10.14/Frameworks/Python.framework/Versions/3.10/lib/python3.10/pathlib.py:1119: FileNotFoundError</failure></testcase><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_network_matches_reference_phases[factored-fanout-self-wrap-case5-160-impulses5]" time="0.538"><failure message="FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/factored-fanout-self-wrap.npz'">name = 'fanout-self-wrap'
+case = NetworkCase(neurons=3, sources=(0, 0, 0), destinations=(0, 1, 2), weights=(1.1, 1.9250000000000003, -1.9250000000000003), targets=(0,), silenced=(), voltage=-52, synaptic=0, last_spike=-100000000)
+steps = 160, impulses = ((0, 0), (25, 0), (50, 0), (75, 0), (100, 0))
+harness = Harness(compile=&lt;function harness.&lt;locals&gt;.&lt;lambda&gt; at 0x12400feb0&gt;, recorder=ArtifactRecorder(output=PosixPath('data/...ct_discrete_parity': True, 'repeat_bit_identical': True, 'minimum_available_threshold_margin_mv': 5.594783444167412}}))
+
+    @pytest.mark.parametrize(
+        'name,case,steps,impulses',
+        [
+            ('rest-empty', Case(2), 60, ()),
+            (
+                'reset-weights',
+                Case(2, (0,), (1,), weights([4]), voltage=(-44, -52), synaptic=(1, 0)),
+                60,
+                (),
+            ),
+            (
+                'positive-negative',
+                Case(3, (0, 0), (1, 2), weights([15, -15]), voltage=(-44, -52, -52)),
+                80,
+                (),
+            ),
+            (
+                'balanced-duplicates',
+                Case(
+                    4,
+                    (0, 1, 0, 1),
+                    (2, 2, 3, 3),
+                    weights([4, -4, 1, 1]),
+                    voltage=(-44, -44, -52, -52),
+                ),
+                80,
+                (),
+            ),
+            (
+                'cast-drift-triplet',
+                Case(
+                    2, (0, 0, 0), (1, 1, 1), weights([2405, -2404, -1]), voltage=(-44, -52)
+                ),
+                60,
+                (),
+            ),
+            (
+                'fanout-self-wrap',
+                Case(3, (0, 0, 0), (0, 1, 2), weights([4, 7, -7]), (0,)),
+                160,
+                ((0, 0), (25, 0), (50, 0), (75, 0), (100, 0)),
+            ),
+            ('refractory-held', Case(1, voltage=-50, synaptic=1, last_spike=0), 40, ()),
+            (
+                'released-at-arrival',
+                Case(
+                    2,
+                    (0,),
+                    (1,),
+                    weights([4]),
+                    voltage=(-44, -50),
+                    synaptic=(0, 1),
+                    last_spike=(INITIAL, -10),
+                ),
+                50,
+                (),
+            ),
+            (
+                'outgoing-silencing',
+                Case(
+                    3,
+                    (0, 1, 2),
+                    (1, 2, 1),
+                    weights([364, 11, 7]),
+                    silenced=(1,),
+                    voltage=(-44, -52, -52),
+                ),
+                80,
+                (),
+            ),
+            (
+                'overlapping-inputs',
+                Case(2, targets=(0, 0, 1)),
+                80,
+                ((0, 0), (0, 1), (5, 0), (12, 1), (24, 0), (24, 1)),
+            ),
+            (
+                'zero-refractory-loss',
+                Case(1, targets=(0,)),
+                12,
+                tuple((step, 0) for step in range(12)),
+            ),
+            (
+                '32-edge-fanin',
+                Case(
+                    2,
+                    (0,) * 32,
+                    (1,) * 32,
+                    weights([1, -1] * 15 + [2, 1]),
+                    voltage=(-44, -52),
+                ),
+                80,
+                (),
+            ),
+        ],
+    )
+    def test_factored_network_matches_reference_phases(
+        name: str,
+        case: Case,
+        steps: int,
+        impulses: tuple[tuple[int, int], ...],
+        harness: Harness,
+    ) -&gt; None:
+&gt;       observed = harness.qualify(name, case, events_for(case, steps, impulses))
+
+tests/qualification/test_factored_accumulation.py:137: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/support/qualification.py:119: in qualify
+    self.recorder.record(
+tests/support/artifacts.py:32: in record
+    with (self.output / f'{name}.npz').open('xb') as destination:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('data/results/performance-remediation-exact-count-focused-20261005/factored-fanout-self-wrap.npz')
+mode = 'xb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+&gt;       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/factored-fanout-self-wrap.npz'
+
+/opt/homebrew/Cellar/python@3.10/3.10.14/Frameworks/Python.framework/Versions/3.10/lib/python3.10/pathlib.py:1119: FileNotFoundError</failure></testcase><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_network_matches_reference_phases[factored-refractory-held-case6-40-impulses6]" time="0.321"><failure message="FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/factored-refractory-held.npz'">name = 'refractory-held'
+case = NetworkCase(neurons=1, sources=(), destinations=(), weights=(), targets=(), silenced=(), voltage=-50, synaptic=1, last_spike=0)
+steps = 40, impulses = ()
+harness = Harness(compile=&lt;function harness.&lt;locals&gt;.&lt;lambda&gt; at 0x12400feb0&gt;, recorder=ArtifactRecorder(output=PosixPath('data/...ct_discrete_parity': True, 'repeat_bit_identical': True, 'minimum_available_threshold_margin_mv': 5.005037106319321}}))
+
+    @pytest.mark.parametrize(
+        'name,case,steps,impulses',
+        [
+            ('rest-empty', Case(2), 60, ()),
+            (
+                'reset-weights',
+                Case(2, (0,), (1,), weights([4]), voltage=(-44, -52), synaptic=(1, 0)),
+                60,
+                (),
+            ),
+            (
+                'positive-negative',
+                Case(3, (0, 0), (1, 2), weights([15, -15]), voltage=(-44, -52, -52)),
+                80,
+                (),
+            ),
+            (
+                'balanced-duplicates',
+                Case(
+                    4,
+                    (0, 1, 0, 1),
+                    (2, 2, 3, 3),
+                    weights([4, -4, 1, 1]),
+                    voltage=(-44, -44, -52, -52),
+                ),
+                80,
+                (),
+            ),
+            (
+                'cast-drift-triplet',
+                Case(
+                    2, (0, 0, 0), (1, 1, 1), weights([2405, -2404, -1]), voltage=(-44, -52)
+                ),
+                60,
+                (),
+            ),
+            (
+                'fanout-self-wrap',
+                Case(3, (0, 0, 0), (0, 1, 2), weights([4, 7, -7]), (0,)),
+                160,
+                ((0, 0), (25, 0), (50, 0), (75, 0), (100, 0)),
+            ),
+            ('refractory-held', Case(1, voltage=-50, synaptic=1, last_spike=0), 40, ()),
+            (
+                'released-at-arrival',
+                Case(
+                    2,
+                    (0,),
+                    (1,),
+                    weights([4]),
+                    voltage=(-44, -50),
+                    synaptic=(0, 1),
+                    last_spike=(INITIAL, -10),
+                ),
+                50,
+                (),
+            ),
+            (
+                'outgoing-silencing',
+                Case(
+                    3,
+                    (0, 1, 2),
+                    (1, 2, 1),
+                    weights([364, 11, 7]),
+                    silenced=(1,),
+                    voltage=(-44, -52, -52),
+                ),
+                80,
+                (),
+            ),
+            (
+                'overlapping-inputs',
+                Case(2, targets=(0, 0, 1)),
+                80,
+                ((0, 0), (0, 1), (5, 0), (12, 1), (24, 0), (24, 1)),
+            ),
+            (
+                'zero-refractory-loss',
+                Case(1, targets=(0,)),
+                12,
+                tuple((step, 0) for step in range(12)),
+            ),
+            (
+                '32-edge-fanin',
+                Case(
+                    2,
+                    (0,) * 32,
+                    (1,) * 32,
+                    weights([1, -1] * 15 + [2, 1]),
+                    voltage=(-44, -52),
+                ),
+                80,
+                (),
+            ),
+        ],
+    )
+    def test_factored_network_matches_reference_phases(
+        name: str,
+        case: Case,
+        steps: int,
+        impulses: tuple[tuple[int, int], ...],
+        harness: Harness,
+    ) -&gt; None:
+&gt;       observed = harness.qualify(name, case, events_for(case, steps, impulses))
+
+tests/qualification/test_factored_accumulation.py:137: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/support/qualification.py:119: in qualify
+    self.recorder.record(
+tests/support/artifacts.py:32: in record
+    with (self.output / f'{name}.npz').open('xb') as destination:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('data/results/performance-remediation-exact-count-focused-20261005/factored-refractory-held.npz')
+mode = 'xb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+&gt;       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/factored-refractory-held.npz'
+
+/opt/homebrew/Cellar/python@3.10/3.10.14/Frameworks/Python.framework/Versions/3.10/lib/python3.10/pathlib.py:1119: FileNotFoundError</failure></testcase><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_network_matches_reference_phases[factored-released-at-arrival-case7-50-impulses7]" time="0.225"><failure message="FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/factored-released-at-arrival.npz'">name = 'released-at-arrival'
+case = NetworkCase(neurons=2, sources=(0,), destinations=(1,), weights=(1.1,), targets=(), silenced=(), voltage=(-44, -50), synaptic=(0, 1), last_spike=(-100000000, -10))
+steps = 50, impulses = ()
+harness = Harness(compile=&lt;function harness.&lt;locals&gt;.&lt;lambda&gt; at 0x12400feb0&gt;, recorder=ArtifactRecorder(output=PosixPath('data/...t_discrete_parity': True, 'repeat_bit_identical': True, 'minimum_available_threshold_margin_mv': 0.9600998335414701}}))
+
+    @pytest.mark.parametrize(
+        'name,case,steps,impulses',
+        [
+            ('rest-empty', Case(2), 60, ()),
+            (
+                'reset-weights',
+                Case(2, (0,), (1,), weights([4]), voltage=(-44, -52), synaptic=(1, 0)),
+                60,
+                (),
+            ),
+            (
+                'positive-negative',
+                Case(3, (0, 0), (1, 2), weights([15, -15]), voltage=(-44, -52, -52)),
+                80,
+                (),
+            ),
+            (
+                'balanced-duplicates',
+                Case(
+                    4,
+                    (0, 1, 0, 1),
+                    (2, 2, 3, 3),
+                    weights([4, -4, 1, 1]),
+                    voltage=(-44, -44, -52, -52),
+                ),
+                80,
+                (),
+            ),
+            (
+                'cast-drift-triplet',
+                Case(
+                    2, (0, 0, 0), (1, 1, 1), weights([2405, -2404, -1]), voltage=(-44, -52)
+                ),
+                60,
+                (),
+            ),
+            (
+                'fanout-self-wrap',
+                Case(3, (0, 0, 0), (0, 1, 2), weights([4, 7, -7]), (0,)),
+                160,
+                ((0, 0), (25, 0), (50, 0), (75, 0), (100, 0)),
+            ),
+            ('refractory-held', Case(1, voltage=-50, synaptic=1, last_spike=0), 40, ()),
+            (
+                'released-at-arrival',
+                Case(
+                    2,
+                    (0,),
+                    (1,),
+                    weights([4]),
+                    voltage=(-44, -50),
+                    synaptic=(0, 1),
+                    last_spike=(INITIAL, -10),
+                ),
+                50,
+                (),
+            ),
+            (
+                'outgoing-silencing',
+                Case(
+                    3,
+                    (0, 1, 2),
+                    (1, 2, 1),
+                    weights([364, 11, 7]),
+                    silenced=(1,),
+                    voltage=(-44, -52, -52),
+                ),
+                80,
+                (),
+            ),
+            (
+                'overlapping-inputs',
+                Case(2, targets=(0, 0, 1)),
+                80,
+                ((0, 0), (0, 1), (5, 0), (12, 1), (24, 0), (24, 1)),
+            ),
+            (
+                'zero-refractory-loss',
+                Case(1, targets=(0,)),
+                12,
+                tuple((step, 0) for step in range(12)),
+            ),
+            (
+                '32-edge-fanin',
+                Case(
+                    2,
+                    (0,) * 32,
+                    (1,) * 32,
+                    weights([1, -1] * 15 + [2, 1]),
+                    voltage=(-44, -52),
+                ),
+                80,
+                (),
+            ),
+        ],
+    )
+    def test_factored_network_matches_reference_phases(
+        name: str,
+        case: Case,
+        steps: int,
+        impulses: tuple[tuple[int, int], ...],
+        harness: Harness,
+    ) -&gt; None:
+&gt;       observed = harness.qualify(name, case, events_for(case, steps, impulses))
+
+tests/qualification/test_factored_accumulation.py:137: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/support/qualification.py:119: in qualify
+    self.recorder.record(
+tests/support/artifacts.py:32: in record
+    with (self.output / f'{name}.npz').open('xb') as destination:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('data/results/performance-remediation-exact-count-focused-20261005/factored-released-at-arrival.npz')
+mode = 'xb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+&gt;       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/factored-released-at-arrival.npz'
+
+/opt/homebrew/Cellar/python@3.10/3.10.14/Frameworks/Python.framework/Versions/3.10/lib/python3.10/pathlib.py:1119: FileNotFoundError</failure></testcase><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_network_matches_reference_phases[factored-outgoing-silencing-case8-80-impulses8]" time="0.609"><failure message="FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/factored-outgoing-silencing.npz'">name = 'outgoing-silencing'
+case = NetworkCase(neurons=3, sources=(0, 1, 2), destinations=(1, 2, 1), weights=(100.10000000000001, 3.0250000000000004, 1.9250000000000003), targets=(), silenced=(1,), voltage=(-44, -52, -52), synaptic=0, last_spike=-100000000)
+steps = 80, impulses = ()
+harness = Harness(compile=&lt;function harness.&lt;locals&gt;.&lt;lambda&gt; at 0x12400feb0&gt;, recorder=ArtifactRecorder(output=PosixPath('data/..._discrete_parity': True, 'repeat_bit_identical': True, 'minimum_available_threshold_margin_mv': 0.10170987998372993}}))
+
+    @pytest.mark.parametrize(
+        'name,case,steps,impulses',
+        [
+            ('rest-empty', Case(2), 60, ()),
+            (
+                'reset-weights',
+                Case(2, (0,), (1,), weights([4]), voltage=(-44, -52), synaptic=(1, 0)),
+                60,
+                (),
+            ),
+            (
+                'positive-negative',
+                Case(3, (0, 0), (1, 2), weights([15, -15]), voltage=(-44, -52, -52)),
+                80,
+                (),
+            ),
+            (
+                'balanced-duplicates',
+                Case(
+                    4,
+                    (0, 1, 0, 1),
+                    (2, 2, 3, 3),
+                    weights([4, -4, 1, 1]),
+                    voltage=(-44, -44, -52, -52),
+                ),
+                80,
+                (),
+            ),
+            (
+                'cast-drift-triplet',
+                Case(
+                    2, (0, 0, 0), (1, 1, 1), weights([2405, -2404, -1]), voltage=(-44, -52)
+                ),
+                60,
+                (),
+            ),
+            (
+                'fanout-self-wrap',
+                Case(3, (0, 0, 0), (0, 1, 2), weights([4, 7, -7]), (0,)),
+                160,
+                ((0, 0), (25, 0), (50, 0), (75, 0), (100, 0)),
+            ),
+            ('refractory-held', Case(1, voltage=-50, synaptic=1, last_spike=0), 40, ()),
+            (
+                'released-at-arrival',
+                Case(
+                    2,
+                    (0,),
+                    (1,),
+                    weights([4]),
+                    voltage=(-44, -50),
+                    synaptic=(0, 1),
+                    last_spike=(INITIAL, -10),
+                ),
+                50,
+                (),
+            ),
+            (
+                'outgoing-silencing',
+                Case(
+                    3,
+                    (0, 1, 2),
+                    (1, 2, 1),
+                    weights([364, 11, 7]),
+                    silenced=(1,),
+                    voltage=(-44, -52, -52),
+                ),
+                80,
+                (),
+            ),
+            (
+                'overlapping-inputs',
+                Case(2, targets=(0, 0, 1)),
+                80,
+                ((0, 0), (0, 1), (5, 0), (12, 1), (24, 0), (24, 1)),
+            ),
+            (
+                'zero-refractory-loss',
+                Case(1, targets=(0,)),
+                12,
+                tuple((step, 0) for step in range(12)),
+            ),
+            (
+                '32-edge-fanin',
+                Case(
+                    2,
+                    (0,) * 32,
+                    (1,) * 32,
+                    weights([1, -1] * 15 + [2, 1]),
+                    voltage=(-44, -52),
+                ),
+                80,
+                (),
+            ),
+        ],
+    )
+    def test_factored_network_matches_reference_phases(
+        name: str,
+        case: Case,
+        steps: int,
+        impulses: tuple[tuple[int, int], ...],
+        harness: Harness,
+    ) -&gt; None:
+&gt;       observed = harness.qualify(name, case, events_for(case, steps, impulses))
+
+tests/qualification/test_factored_accumulation.py:137: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/support/qualification.py:119: in qualify
+    self.recorder.record(
+tests/support/artifacts.py:32: in record
+    with (self.output / f'{name}.npz').open('xb') as destination:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('data/results/performance-remediation-exact-count-focused-20261005/factored-outgoing-silencing.npz')
+mode = 'xb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+&gt;       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/factored-outgoing-silencing.npz'
+
+/opt/homebrew/Cellar/python@3.10/3.10.14/Frameworks/Python.framework/Versions/3.10/lib/python3.10/pathlib.py:1119: FileNotFoundError</failure></testcase><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_network_matches_reference_phases[factored-overlapping-inputs-case9-80-impulses9]" time="0.780"><failure message="FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/factored-overlapping-inputs.npz'">name = 'overlapping-inputs'
+case = NetworkCase(neurons=2, sources=(), destinations=(), weights=(), targets=(0, 0, 1), silenced=(), voltage=-52, synaptic=0, last_spike=-100000000)
+steps = 80, impulses = ((0, 0), (0, 1), (5, 0), (12, 1), (24, 0), (24, 1))
+harness = Harness(compile=&lt;function harness.&lt;locals&gt;.&lt;lambda&gt; at 0x12400feb0&gt;, recorder=ArtifactRecorder(output=PosixPath('data/...v': 0.0}, 'exact_discrete_parity': True, 'repeat_bit_identical': True, 'minimum_available_threshold_margin_mv': 7.0}}))
+
+    @pytest.mark.parametrize(
+        'name,case,steps,impulses',
+        [
+            ('rest-empty', Case(2), 60, ()),
+            (
+                'reset-weights',
+                Case(2, (0,), (1,), weights([4]), voltage=(-44, -52), synaptic=(1, 0)),
+                60,
+                (),
+            ),
+            (
+                'positive-negative',
+                Case(3, (0, 0), (1, 2), weights([15, -15]), voltage=(-44, -52, -52)),
+                80,
+                (),
+            ),
+            (
+                'balanced-duplicates',
+                Case(
+                    4,
+                    (0, 1, 0, 1),
+                    (2, 2, 3, 3),
+                    weights([4, -4, 1, 1]),
+                    voltage=(-44, -44, -52, -52),
+                ),
+                80,
+                (),
+            ),
+            (
+                'cast-drift-triplet',
+                Case(
+                    2, (0, 0, 0), (1, 1, 1), weights([2405, -2404, -1]), voltage=(-44, -52)
+                ),
+                60,
+                (),
+            ),
+            (
+                'fanout-self-wrap',
+                Case(3, (0, 0, 0), (0, 1, 2), weights([4, 7, -7]), (0,)),
+                160,
+                ((0, 0), (25, 0), (50, 0), (75, 0), (100, 0)),
+            ),
+            ('refractory-held', Case(1, voltage=-50, synaptic=1, last_spike=0), 40, ()),
+            (
+                'released-at-arrival',
+                Case(
+                    2,
+                    (0,),
+                    (1,),
+                    weights([4]),
+                    voltage=(-44, -50),
+                    synaptic=(0, 1),
+                    last_spike=(INITIAL, -10),
+                ),
+                50,
+                (),
+            ),
+            (
+                'outgoing-silencing',
+                Case(
+                    3,
+                    (0, 1, 2),
+                    (1, 2, 1),
+                    weights([364, 11, 7]),
+                    silenced=(1,),
+                    voltage=(-44, -52, -52),
+                ),
+                80,
+                (),
+            ),
+            (
+                'overlapping-inputs',
+                Case(2, targets=(0, 0, 1)),
+                80,
+                ((0, 0), (0, 1), (5, 0), (12, 1), (24, 0), (24, 1)),
+            ),
+            (
+                'zero-refractory-loss',
+                Case(1, targets=(0,)),
+                12,
+                tuple((step, 0) for step in range(12)),
+            ),
+            (
+                '32-edge-fanin',
+                Case(
+                    2,
+                    (0,) * 32,
+                    (1,) * 32,
+                    weights([1, -1] * 15 + [2, 1]),
+                    voltage=(-44, -52),
+                ),
+                80,
+                (),
+            ),
+        ],
+    )
+    def test_factored_network_matches_reference_phases(
+        name: str,
+        case: Case,
+        steps: int,
+        impulses: tuple[tuple[int, int], ...],
+        harness: Harness,
+    ) -&gt; None:
+&gt;       observed = harness.qualify(name, case, events_for(case, steps, impulses))
+
+tests/qualification/test_factored_accumulation.py:137: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/support/qualification.py:119: in qualify
+    self.recorder.record(
+tests/support/artifacts.py:32: in record
+    with (self.output / f'{name}.npz').open('xb') as destination:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('data/results/performance-remediation-exact-count-focused-20261005/factored-overlapping-inputs.npz')
+mode = 'xb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+&gt;       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/factored-overlapping-inputs.npz'
+
+/opt/homebrew/Cellar/python@3.10/3.10.14/Frameworks/Python.framework/Versions/3.10/lib/python3.10/pathlib.py:1119: FileNotFoundError</failure></testcase><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_network_matches_reference_phases[factored-zero-refractory-loss-case10-12-impulses10]" time="0.198"><failure message="FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/factored-zero-refractory-loss.npz'">name = 'zero-refractory-loss'
+case = NetworkCase(neurons=1, sources=(), destinations=(), weights=(), targets=(0,), silenced=(), voltage=-52, synaptic=0, last_spike=-100000000)
+steps = 12, impulses = ((0, 0), (1, 0), (2, 0), (3, 0), (4, 0), (5, 0), ...)
+harness = Harness(compile=&lt;function harness.&lt;locals&gt;.&lt;lambda&gt; at 0x12400feb0&gt;, recorder=ArtifactRecorder(output=PosixPath('data/...v': 0.0}, 'exact_discrete_parity': True, 'repeat_bit_identical': True, 'minimum_available_threshold_margin_mv': 7.0}}))
+
+    @pytest.mark.parametrize(
+        'name,case,steps,impulses',
+        [
+            ('rest-empty', Case(2), 60, ()),
+            (
+                'reset-weights',
+                Case(2, (0,), (1,), weights([4]), voltage=(-44, -52), synaptic=(1, 0)),
+                60,
+                (),
+            ),
+            (
+                'positive-negative',
+                Case(3, (0, 0), (1, 2), weights([15, -15]), voltage=(-44, -52, -52)),
+                80,
+                (),
+            ),
+            (
+                'balanced-duplicates',
+                Case(
+                    4,
+                    (0, 1, 0, 1),
+                    (2, 2, 3, 3),
+                    weights([4, -4, 1, 1]),
+                    voltage=(-44, -44, -52, -52),
+                ),
+                80,
+                (),
+            ),
+            (
+                'cast-drift-triplet',
+                Case(
+                    2, (0, 0, 0), (1, 1, 1), weights([2405, -2404, -1]), voltage=(-44, -52)
+                ),
+                60,
+                (),
+            ),
+            (
+                'fanout-self-wrap',
+                Case(3, (0, 0, 0), (0, 1, 2), weights([4, 7, -7]), (0,)),
+                160,
+                ((0, 0), (25, 0), (50, 0), (75, 0), (100, 0)),
+            ),
+            ('refractory-held', Case(1, voltage=-50, synaptic=1, last_spike=0), 40, ()),
+            (
+                'released-at-arrival',
+                Case(
+                    2,
+                    (0,),
+                    (1,),
+                    weights([4]),
+                    voltage=(-44, -50),
+                    synaptic=(0, 1),
+                    last_spike=(INITIAL, -10),
+                ),
+                50,
+                (),
+            ),
+            (
+                'outgoing-silencing',
+                Case(
+                    3,
+                    (0, 1, 2),
+                    (1, 2, 1),
+                    weights([364, 11, 7]),
+                    silenced=(1,),
+                    voltage=(-44, -52, -52),
+                ),
+                80,
+                (),
+            ),
+            (
+                'overlapping-inputs',
+                Case(2, targets=(0, 0, 1)),
+                80,
+                ((0, 0), (0, 1), (5, 0), (12, 1), (24, 0), (24, 1)),
+            ),
+            (
+                'zero-refractory-loss',
+                Case(1, targets=(0,)),
+                12,
+                tuple((step, 0) for step in range(12)),
+            ),
+            (
+                '32-edge-fanin',
+                Case(
+                    2,
+                    (0,) * 32,
+                    (1,) * 32,
+                    weights([1, -1] * 15 + [2, 1]),
+                    voltage=(-44, -52),
+                ),
+                80,
+                (),
+            ),
+        ],
+    )
+    def test_factored_network_matches_reference_phases(
+        name: str,
+        case: Case,
+        steps: int,
+        impulses: tuple[tuple[int, int], ...],
+        harness: Harness,
+    ) -&gt; None:
+&gt;       observed = harness.qualify(name, case, events_for(case, steps, impulses))
+
+tests/qualification/test_factored_accumulation.py:137: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/support/qualification.py:119: in qualify
+    self.recorder.record(
+tests/support/artifacts.py:32: in record
+    with (self.output / f'{name}.npz').open('xb') as destination:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('data/results/performance-remediation-exact-count-focused-20261005/factored-zero-refractory-loss.npz')
+mode = 'xb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+&gt;       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/factored-zero-refractory-loss.npz'
+
+/opt/homebrew/Cellar/python@3.10/3.10.14/Frameworks/Python.framework/Versions/3.10/lib/python3.10/pathlib.py:1119: FileNotFoundError</failure></testcase><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_network_matches_reference_phases[factored-32-edge-fanin-case11-80-impulses11]" time="0.488"><failure message="FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/factored-32-edge-fanin.npz'">name = '32-edge-fanin'
+case = NetworkCase(neurons=2, sources=(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,...5, -0.275, 0.275, -0.275, 0.55, 0.275), targets=(), silenced=(), voltage=(-44, -52), synaptic=0, last_spike=-100000000)
+steps = 80, impulses = ()
+harness = Harness(compile=&lt;function harness.&lt;locals&gt;.&lt;lambda&gt; at 0x12400feb0&gt;, recorder=ArtifactRecorder(output=PosixPath('data/...t_discrete_parity': True, 'repeat_bit_identical': True, 'minimum_available_threshold_margin_mv': 0.9600998335414701}}))
+
+    @pytest.mark.parametrize(
+        'name,case,steps,impulses',
+        [
+            ('rest-empty', Case(2), 60, ()),
+            (
+                'reset-weights',
+                Case(2, (0,), (1,), weights([4]), voltage=(-44, -52), synaptic=(1, 0)),
+                60,
+                (),
+            ),
+            (
+                'positive-negative',
+                Case(3, (0, 0), (1, 2), weights([15, -15]), voltage=(-44, -52, -52)),
+                80,
+                (),
+            ),
+            (
+                'balanced-duplicates',
+                Case(
+                    4,
+                    (0, 1, 0, 1),
+                    (2, 2, 3, 3),
+                    weights([4, -4, 1, 1]),
+                    voltage=(-44, -44, -52, -52),
+                ),
+                80,
+                (),
+            ),
+            (
+                'cast-drift-triplet',
+                Case(
+                    2, (0, 0, 0), (1, 1, 1), weights([2405, -2404, -1]), voltage=(-44, -52)
+                ),
+                60,
+                (),
+            ),
+            (
+                'fanout-self-wrap',
+                Case(3, (0, 0, 0), (0, 1, 2), weights([4, 7, -7]), (0,)),
+                160,
+                ((0, 0), (25, 0), (50, 0), (75, 0), (100, 0)),
+            ),
+            ('refractory-held', Case(1, voltage=-50, synaptic=1, last_spike=0), 40, ()),
+            (
+                'released-at-arrival',
+                Case(
+                    2,
+                    (0,),
+                    (1,),
+                    weights([4]),
+                    voltage=(-44, -50),
+                    synaptic=(0, 1),
+                    last_spike=(INITIAL, -10),
+                ),
+                50,
+                (),
+            ),
+            (
+                'outgoing-silencing',
+                Case(
+                    3,
+                    (0, 1, 2),
+                    (1, 2, 1),
+                    weights([364, 11, 7]),
+                    silenced=(1,),
+                    voltage=(-44, -52, -52),
+                ),
+                80,
+                (),
+            ),
+            (
+                'overlapping-inputs',
+                Case(2, targets=(0, 0, 1)),
+                80,
+                ((0, 0), (0, 1), (5, 0), (12, 1), (24, 0), (24, 1)),
+            ),
+            (
+                'zero-refractory-loss',
+                Case(1, targets=(0,)),
+                12,
+                tuple((step, 0) for step in range(12)),
+            ),
+            (
+                '32-edge-fanin',
+                Case(
+                    2,
+                    (0,) * 32,
+                    (1,) * 32,
+                    weights([1, -1] * 15 + [2, 1]),
+                    voltage=(-44, -52),
+                ),
+                80,
+                (),
+            ),
+        ],
+    )
+    def test_factored_network_matches_reference_phases(
+        name: str,
+        case: Case,
+        steps: int,
+        impulses: tuple[tuple[int, int], ...],
+        harness: Harness,
+    ) -&gt; None:
+&gt;       observed = harness.qualify(name, case, events_for(case, steps, impulses))
+
+tests/qualification/test_factored_accumulation.py:137: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/support/qualification.py:119: in qualify
+    self.recorder.record(
+tests/support/artifacts.py:32: in record
+    with (self.output / f'{name}.npz').open('xb') as destination:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('data/results/performance-remediation-exact-count-focused-20261005/factored-32-edge-fanin.npz')
+mode = 'xb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+&gt;       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/factored-32-edge-fanin.npz'
+
+/opt/homebrew/Cellar/python@3.10/3.10.14/Frameworks/Python.framework/Versions/3.10/lib/python3.10/pathlib.py:1119: FileNotFoundError</failure></testcase><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_refractory_boundary_and_firing_step_discard_events[factored]" time="0.240"><failure message="FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/factored-boundary.npz'">harness = Harness(compile=&lt;function harness.&lt;locals&gt;.&lt;lambda&gt; at 0x12400feb0&gt;, recorder=ArtifactRecorder(output=PosixPath('data/...ct_discrete_parity': True, 'repeat_bit_identical': True, 'minimum_available_threshold_margin_mv': 4.967320087991418}}))
+
+    def test_factored_refractory_boundary_and_firing_step_discard_events(
+        harness: Harness,
+    ) -&gt; None:
+        case = Case(
+            3,
+            (0, 1),
+            (2, 2),
+            weights([4, 7]),
+            (0, 1),
+            voltage=(-52, -52, -50),
+            synaptic=(0, 0, 1),
+            last_spike=(INITIAL, INITIAL, 0),
+        )
+&gt;       observed = harness.qualify('boundary', case, events_for(case, 50, ((2, 0), (3, 1))))
+
+tests/qualification/test_factored_accumulation.py:160: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/support/qualification.py:119: in qualify
+    self.recorder.record(
+tests/support/artifacts.py:32: in record
+    with (self.output / f'{name}.npz').open('xb') as destination:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('data/results/performance-remediation-exact-count-focused-20261005/factored-boundary.npz')
+mode = 'xb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+&gt;       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/factored-boundary.npz'
+
+/opt/homebrew/Cellar/python@3.10/3.10.14/Frameworks/Python.framework/Versions/3.10/lib/python3.10/pathlib.py:1119: FileNotFoundError</failure></testcase><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_replay_preserves_reference_states_and_events[factored]" time="3.656"><failure message="FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/factored-replay-1000.npz'">harness = Harness(compile=&lt;function harness.&lt;locals&gt;.&lt;lambda&gt; at 0x12400feb0&gt;, recorder=ArtifactRecorder(output=PosixPath('data/..._discrete_parity': True, 'repeat_bit_identical': True, 'minimum_available_threshold_margin_mv': 0.06642987713574655}}))
+
+    def test_factored_replay_preserves_reference_states_and_events(
+        harness: Harness,
+    ) -&gt; None:
+&gt;       harness.qualify('replay-1000', REPLAY, replay_events())
+
+tests/qualification/test_factored_accumulation.py:187: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/support/qualification.py:119: in qualify
+    self.recorder.record(
+tests/support/artifacts.py:32: in record
+    with (self.output / f'{name}.npz').open('xb') as destination:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('data/results/performance-remediation-exact-count-focused-20261005/factored-replay-1000.npz')
+mode = 'xb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+&gt;       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/factored-replay-1000.npz'
+
+/opt/homebrew/Cellar/python@3.10/3.10.14/Frameworks/Python.framework/Versions/3.10/lib/python3.10/pathlib.py:1119: FileNotFoundError</failure></testcase><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_batch_and_chunked_runs_preserve_complete_state[factored]" time="0.964"><failure message="FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/factored-batch-chunks.npz'">harness = Harness(compile=&lt;function harness.&lt;locals&gt;.&lt;lambda&gt; at 0x12400feb0&gt;, recorder=ArtifactRecorder(output=PosixPath('data/..._discrete_parity': True, 'repeat_bit_identical': True, 'minimum_available_threshold_margin_mv': 0.06642987713574655}}))
+
+    def test_factored_batch_and_chunked_runs_preserve_complete_state(
+        harness: Harness,
+    ) -&gt; None:
+        events = replay_events(180, trials=3)
+&gt;       batch = harness.qualify('batch-chunks', REPLAY, events)
+
+tests/qualification/test_factored_accumulation.py:194: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/support/qualification.py:119: in qualify
+    self.recorder.record(
+tests/support/artifacts.py:32: in record
+    with (self.output / f'{name}.npz').open('xb') as destination:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('data/results/performance-remediation-exact-count-focused-20261005/factored-batch-chunks.npz')
+mode = 'xb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+&gt;       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/factored-batch-chunks.npz'
+
+/opt/homebrew/Cellar/python@3.10/3.10.14/Frameworks/Python.framework/Versions/3.10/lib/python3.10/pathlib.py:1119: FileNotFoundError</failure></testcase><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_large_fanin_meets_delayed_reference_trace[factored-retained-large-counts0]" time="3.924"><failure message="FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/factored-retained-large.npz'">name = 'retained-large', counts = [2405, 2405, 2405, 2405, 2405, 2405, ...]
+harness = Harness(compile=&lt;function harness.&lt;locals&gt;.&lt;lambda&gt; at 0x12400feb0&gt;, recorder=ArtifactRecorder(output=PosixPath('data/...72750489159e-05, 'synaptic_mv': 3.790845548579114e-08}, 'exact_discrete_parity': True, 'repeat_bit_identical': True}}))
+
+    @pytest.mark.parametrize(
+        'name,counts',
+        [
+            ('retained-large', [2405] * 2048 + [1] + [-2405] * 2048),
+            ('cast-drift-large', [2405, -2404, -1] * 128),
+        ],
+    )
+    def test_factored_large_fanin_meets_delayed_reference_trace(
+        name: str, counts: list[int], harness: Harness
+    ) -&gt; None:
+        case = Case(
+            2, (0,) * len(counts), (1,) * len(counts), weights(counts), voltage=(-44, -52)
+        )
+        events = events_for(case, 40)
+        expected = run_reference(case, events)
+        observed = harness.run_candidate(case, events)
+        repeated = harness.run_candidate(case, events)
+        errors = {}
+        for key, wanted in expected.items():
+            if key.endswith('_mv'):
+                error = np.abs(
+                    np.asarray(observed[key], dtype=np.float64)
+                    - np.asarray(wanted, dtype=np.float64)
+                )
+                assert np.all(error &lt;= 1e-3 + 1e-5 * np.abs(wanted))
+                errors[key] = float(error.max(initial=0))
+            else:
+                np.testing.assert_array_equal(observed[key], wanted)
+        for key in observed:
+            np.testing.assert_array_equal(observed[key], repeated[key])
+        assert observed['accepted'][18, 0].all()
+        assert not observed['due'][:18].any()
+        state = expected['before_reset_synaptic_mv'][18]
+        assert np.all(
+            np.abs(observed['before_reset_synaptic_mv'][18] - state)
+            &lt;= 2e-5 + 2e-6 * np.abs(state)
+        )
+&gt;       harness.recorder.record(
+            name,
+            {
+                **{f'reference_{key}': value for key, value in expected.items()},
+                **{f'mlx_{key}': value for key, value in observed.items()},
+                'events': events,
+            },
+            {
+                'steps': 40,
+                'edges': len(counts),
+                'max_abs_error_mv': errors,
+                'exact_discrete_parity': True,
+                'repeat_bit_identical': True,
+            },
+        )
+
+tests/qualification/test_factored_accumulation.py:241: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/support/artifacts.py:32: in record
+    with (self.output / f'{name}.npz').open('xb') as destination:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('data/results/performance-remediation-exact-count-focused-20261005/factored-retained-large.npz')
+mode = 'xb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+&gt;       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/factored-retained-large.npz'
+
+/opt/homebrew/Cellar/python@3.10/3.10.14/Frameworks/Python.framework/Versions/3.10/lib/python3.10/pathlib.py:1119: FileNotFoundError</failure></testcase><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_large_fanin_meets_delayed_reference_trace[factored-cast-drift-large-counts1]" time="0.626"><failure message="FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/factored-cast-drift-large.npz'">name = 'cast-drift-large', counts = [2405, -2404, -1, 2405, -2404, -1, ...]
+harness = Harness(compile=&lt;function harness.&lt;locals&gt;.&lt;lambda&gt; at 0x12400feb0&gt;, recorder=ArtifactRecorder(output=PosixPath('data/...ltage_mv': 0.0, 'synaptic_mv': 2.5207700510287978e-14}, 'exact_discrete_parity': True, 'repeat_bit_identical': True}}))
+
+    @pytest.mark.parametrize(
+        'name,counts',
+        [
+            ('retained-large', [2405] * 2048 + [1] + [-2405] * 2048),
+            ('cast-drift-large', [2405, -2404, -1] * 128),
+        ],
+    )
+    def test_factored_large_fanin_meets_delayed_reference_trace(
+        name: str, counts: list[int], harness: Harness
+    ) -&gt; None:
+        case = Case(
+            2, (0,) * len(counts), (1,) * len(counts), weights(counts), voltage=(-44, -52)
+        )
+        events = events_for(case, 40)
+        expected = run_reference(case, events)
+        observed = harness.run_candidate(case, events)
+        repeated = harness.run_candidate(case, events)
+        errors = {}
+        for key, wanted in expected.items():
+            if key.endswith('_mv'):
+                error = np.abs(
+                    np.asarray(observed[key], dtype=np.float64)
+                    - np.asarray(wanted, dtype=np.float64)
+                )
+                assert np.all(error &lt;= 1e-3 + 1e-5 * np.abs(wanted))
+                errors[key] = float(error.max(initial=0))
+            else:
+                np.testing.assert_array_equal(observed[key], wanted)
+        for key in observed:
+            np.testing.assert_array_equal(observed[key], repeated[key])
+        assert observed['accepted'][18, 0].all()
+        assert not observed['due'][:18].any()
+        state = expected['before_reset_synaptic_mv'][18]
+        assert np.all(
+            np.abs(observed['before_reset_synaptic_mv'][18] - state)
+            &lt;= 2e-5 + 2e-6 * np.abs(state)
+        )
+&gt;       harness.recorder.record(
+            name,
+            {
+                **{f'reference_{key}': value for key, value in expected.items()},
+                **{f'mlx_{key}': value for key, value in observed.items()},
+                'events': events,
+            },
+            {
+                'steps': 40,
+                'edges': len(counts),
+                'max_abs_error_mv': errors,
+                'exact_discrete_parity': True,
+                'repeat_bit_identical': True,
+            },
+        )
+
+tests/qualification/test_factored_accumulation.py:241: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/support/artifacts.py:32: in record
+    with (self.output / f'{name}.npz').open('xb') as destination:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('data/results/performance-remediation-exact-count-focused-20261005/factored-cast-drift-large.npz')
+mode = 'xb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+&gt;       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/factored-cast-drift-large.npz'
+
+/opt/homebrew/Cellar/python@3.10/3.10.14/Frameworks/Python.framework/Versions/3.10/lib/python3.10/pathlib.py:1119: FileNotFoundError</failure></testcase><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_adapter_uses_metal_with_cpu_default_and_resets_pending_trials[factored]" time="0.005" /><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_network_matches_reference_phases[bucketed_case-rest-empty-case0-60-impulses0]" time="0.026"><error message="failed on setup with &quot;FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/factored-networks.json'&quot;">request = &lt;SubRequest 'harness' for &lt;Function test_factored_network_matches_reference_phases[factored-rest-empty-case0-60-impulses0]&gt;&gt;
+compiler = &lt;function factored at 0x10b6e2b90&gt;, precision = '0'
+
+    @pytest.fixture(scope='module')
+    def harness(
+        request: pytest.FixtureRequest, compiler: Factory, precision: str
+    ) -&gt; Iterator[Harness]:
+        assert importlib.metadata.version('mlx') == '0.32.3'
+        assert importlib.metadata.version('mlx-metal') == '0.32.3'
+        assert np.__version__ == '1.26.4'
+        assert mx.metal.is_available()
+        mx.disable_compile()
+        path = cast(str | None, request.config.getoption('--artifact-output'))
+        output = Path(path) if path is not None else None
+        is_serial = compiler is serial
+        recorder = ArtifactRecorder(output, '' if is_serial else f'{compiler.__name__}-')
+        yield Harness(lambda case: compiler(case, precision), recorder)
+&gt;       recorder.finish(
+            'measurements.json' if is_serial else f'{compiler.__name__}-networks.json',
+            'uncompiled, explicit Metal stream, ordered edge/channel additions'
+            if is_serial
+            else f'Uncompiled {compiler.__name__} recurrent-input execution',
+        )
+
+tests/qualification/conftest.py:40: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/support/artifacts.py:54: in finish
+    with (self.output / filename).open('x') as destination:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('data/results/performance-remediation-exact-count-focused-20261005/factored-networks.json')
+mode = 'x', buffering = -1, encoding = 'locale', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+&gt;       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/factored-networks.json'
+
+/opt/homebrew/Cellar/python@3.10/3.10.14/Frameworks/Python.framework/Versions/3.10/lib/python3.10/pathlib.py:1119: FileNotFoundError</error></testcase><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_network_matches_reference_phases[bucketed_case-reset-weights-case1-60-impulses1]" time="0.272"><failure message="FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/bucketed_case-reset-weights.npz'">name = 'reset-weights'
+case = NetworkCase(neurons=2, sources=(0,), destinations=(1,), weights=(1.1,), targets=(), silenced=(), voltage=(-44, -52), synaptic=(1, 0), last_spike=-100000000)
+steps = 60, impulses = ()
+harness = Harness(compile=&lt;function harness.&lt;locals&gt;.&lt;lambda&gt; at 0x12530d630&gt;, recorder=ArtifactRecorder(output=PosixPath('data/...t_discrete_parity': True, 'repeat_bit_identical': True, 'minimum_available_threshold_margin_mv': 0.9650377688367797}}))
+
+    @pytest.mark.parametrize(
+        'name,case,steps,impulses',
+        [
+            ('rest-empty', Case(2), 60, ()),
+            (
+                'reset-weights',
+                Case(2, (0,), (1,), weights([4]), voltage=(-44, -52), synaptic=(1, 0)),
+                60,
+                (),
+            ),
+            (
+                'positive-negative',
+                Case(3, (0, 0), (1, 2), weights([15, -15]), voltage=(-44, -52, -52)),
+                80,
+                (),
+            ),
+            (
+                'balanced-duplicates',
+                Case(
+                    4,
+                    (0, 1, 0, 1),
+                    (2, 2, 3, 3),
+                    weights([4, -4, 1, 1]),
+                    voltage=(-44, -44, -52, -52),
+                ),
+                80,
+                (),
+            ),
+            (
+                'cast-drift-triplet',
+                Case(
+                    2, (0, 0, 0), (1, 1, 1), weights([2405, -2404, -1]), voltage=(-44, -52)
+                ),
+                60,
+                (),
+            ),
+            (
+                'fanout-self-wrap',
+                Case(3, (0, 0, 0), (0, 1, 2), weights([4, 7, -7]), (0,)),
+                160,
+                ((0, 0), (25, 0), (50, 0), (75, 0), (100, 0)),
+            ),
+            ('refractory-held', Case(1, voltage=-50, synaptic=1, last_spike=0), 40, ()),
+            (
+                'released-at-arrival',
+                Case(
+                    2,
+                    (0,),
+                    (1,),
+                    weights([4]),
+                    voltage=(-44, -50),
+                    synaptic=(0, 1),
+                    last_spike=(INITIAL, -10),
+                ),
+                50,
+                (),
+            ),
+            (
+                'outgoing-silencing',
+                Case(
+                    3,
+                    (0, 1, 2),
+                    (1, 2, 1),
+                    weights([364, 11, 7]),
+                    silenced=(1,),
+                    voltage=(-44, -52, -52),
+                ),
+                80,
+                (),
+            ),
+            (
+                'overlapping-inputs',
+                Case(2, targets=(0, 0, 1)),
+                80,
+                ((0, 0), (0, 1), (5, 0), (12, 1), (24, 0), (24, 1)),
+            ),
+            (
+                'zero-refractory-loss',
+                Case(1, targets=(0,)),
+                12,
+                tuple((step, 0) for step in range(12)),
+            ),
+            (
+                '32-edge-fanin',
+                Case(
+                    2,
+                    (0,) * 32,
+                    (1,) * 32,
+                    weights([1, -1] * 15 + [2, 1]),
+                    voltage=(-44, -52),
+                ),
+                80,
+                (),
+            ),
+        ],
+    )
+    def test_factored_network_matches_reference_phases(
+        name: str,
+        case: Case,
+        steps: int,
+        impulses: tuple[tuple[int, int], ...],
+        harness: Harness,
+    ) -&gt; None:
+&gt;       observed = harness.qualify(name, case, events_for(case, steps, impulses))
+
+tests/qualification/test_factored_accumulation.py:137: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/support/qualification.py:119: in qualify
+    self.recorder.record(
+tests/support/artifacts.py:32: in record
+    with (self.output / f'{name}.npz').open('xb') as destination:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('data/results/performance-remediation-exact-count-focused-20261005/bucketed_case-reset-weights.npz')
+mode = 'xb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+&gt;       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/bucketed_case-reset-weights.npz'
+
+/opt/homebrew/Cellar/python@3.10/3.10.14/Frameworks/Python.framework/Versions/3.10/lib/python3.10/pathlib.py:1119: FileNotFoundError</failure></testcase><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_network_matches_reference_phases[bucketed_case-positive-negative-case2-80-impulses2]" time="0.401"><failure message="FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/bucketed_case-positive-negative.npz'">name = 'positive-negative'
+case = NetworkCase(neurons=3, sources=(0, 0), destinations=(1, 2), weights=(4.125, -4.125), targets=(), silenced=(), voltage=(-44, -52, -52), synaptic=0, last_spike=-100000000)
+steps = 80, impulses = ()
+harness = Harness(compile=&lt;function harness.&lt;locals&gt;.&lt;lambda&gt; at 0x12530d630&gt;, recorder=ArtifactRecorder(output=PosixPath('data/...t_discrete_parity': True, 'repeat_bit_identical': True, 'minimum_available_threshold_margin_mv': 0.9600998335414701}}))
+
+    @pytest.mark.parametrize(
+        'name,case,steps,impulses',
+        [
+            ('rest-empty', Case(2), 60, ()),
+            (
+                'reset-weights',
+                Case(2, (0,), (1,), weights([4]), voltage=(-44, -52), synaptic=(1, 0)),
+                60,
+                (),
+            ),
+            (
+                'positive-negative',
+                Case(3, (0, 0), (1, 2), weights([15, -15]), voltage=(-44, -52, -52)),
+                80,
+                (),
+            ),
+            (
+                'balanced-duplicates',
+                Case(
+                    4,
+                    (0, 1, 0, 1),
+                    (2, 2, 3, 3),
+                    weights([4, -4, 1, 1]),
+                    voltage=(-44, -44, -52, -52),
+                ),
+                80,
+                (),
+            ),
+            (
+                'cast-drift-triplet',
+                Case(
+                    2, (0, 0, 0), (1, 1, 1), weights([2405, -2404, -1]), voltage=(-44, -52)
+                ),
+                60,
+                (),
+            ),
+            (
+                'fanout-self-wrap',
+                Case(3, (0, 0, 0), (0, 1, 2), weights([4, 7, -7]), (0,)),
+                160,
+                ((0, 0), (25, 0), (50, 0), (75, 0), (100, 0)),
+            ),
+            ('refractory-held', Case(1, voltage=-50, synaptic=1, last_spike=0), 40, ()),
+            (
+                'released-at-arrival',
+                Case(
+                    2,
+                    (0,),
+                    (1,),
+                    weights([4]),
+                    voltage=(-44, -50),
+                    synaptic=(0, 1),
+                    last_spike=(INITIAL, -10),
+                ),
+                50,
+                (),
+            ),
+            (
+                'outgoing-silencing',
+                Case(
+                    3,
+                    (0, 1, 2),
+                    (1, 2, 1),
+                    weights([364, 11, 7]),
+                    silenced=(1,),
+                    voltage=(-44, -52, -52),
+                ),
+                80,
+                (),
+            ),
+            (
+                'overlapping-inputs',
+                Case(2, targets=(0, 0, 1)),
+                80,
+                ((0, 0), (0, 1), (5, 0), (12, 1), (24, 0), (24, 1)),
+            ),
+            (
+                'zero-refractory-loss',
+                Case(1, targets=(0,)),
+                12,
+                tuple((step, 0) for step in range(12)),
+            ),
+            (
+                '32-edge-fanin',
+                Case(
+                    2,
+                    (0,) * 32,
+                    (1,) * 32,
+                    weights([1, -1] * 15 + [2, 1]),
+                    voltage=(-44, -52),
+                ),
+                80,
+                (),
+            ),
+        ],
+    )
+    def test_factored_network_matches_reference_phases(
+        name: str,
+        case: Case,
+        steps: int,
+        impulses: tuple[tuple[int, int], ...],
+        harness: Harness,
+    ) -&gt; None:
+&gt;       observed = harness.qualify(name, case, events_for(case, steps, impulses))
+
+tests/qualification/test_factored_accumulation.py:137: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/support/qualification.py:119: in qualify
+    self.recorder.record(
+tests/support/artifacts.py:32: in record
+    with (self.output / f'{name}.npz').open('xb') as destination:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('data/results/performance-remediation-exact-count-focused-20261005/bucketed_case-positive-negative.npz')
+mode = 'xb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+&gt;       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/bucketed_case-positive-negative.npz'
+
+/opt/homebrew/Cellar/python@3.10/3.10.14/Frameworks/Python.framework/Versions/3.10/lib/python3.10/pathlib.py:1119: FileNotFoundError</failure></testcase><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_network_matches_reference_phases[bucketed_case-balanced-duplicates-case3-80-impulses3]" time="0.497"><failure message="FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/bucketed_case-balanced-duplicates.npz'">name = 'balanced-duplicates'
+case = NetworkCase(neurons=4, sources=(0, 1, 0, 1), destinations=(2, 2, 3, 3), weights=(1.1, -1.1, 0.275, 0.275), targets=(), silenced=(), voltage=(-44, -44, -52, -52), synaptic=0, last_spike=-100000000)
+steps = 80, impulses = ()
+harness = Harness(compile=&lt;function harness.&lt;locals&gt;.&lt;lambda&gt; at 0x12530d630&gt;, recorder=ArtifactRecorder(output=PosixPath('data/...t_discrete_parity': True, 'repeat_bit_identical': True, 'minimum_available_threshold_margin_mv': 0.9600998335414701}}))
+
+    @pytest.mark.parametrize(
+        'name,case,steps,impulses',
+        [
+            ('rest-empty', Case(2), 60, ()),
+            (
+                'reset-weights',
+                Case(2, (0,), (1,), weights([4]), voltage=(-44, -52), synaptic=(1, 0)),
+                60,
+                (),
+            ),
+            (
+                'positive-negative',
+                Case(3, (0, 0), (1, 2), weights([15, -15]), voltage=(-44, -52, -52)),
+                80,
+                (),
+            ),
+            (
+                'balanced-duplicates',
+                Case(
+                    4,
+                    (0, 1, 0, 1),
+                    (2, 2, 3, 3),
+                    weights([4, -4, 1, 1]),
+                    voltage=(-44, -44, -52, -52),
+                ),
+                80,
+                (),
+            ),
+            (
+                'cast-drift-triplet',
+                Case(
+                    2, (0, 0, 0), (1, 1, 1), weights([2405, -2404, -1]), voltage=(-44, -52)
+                ),
+                60,
+                (),
+            ),
+            (
+                'fanout-self-wrap',
+                Case(3, (0, 0, 0), (0, 1, 2), weights([4, 7, -7]), (0,)),
+                160,
+                ((0, 0), (25, 0), (50, 0), (75, 0), (100, 0)),
+            ),
+            ('refractory-held', Case(1, voltage=-50, synaptic=1, last_spike=0), 40, ()),
+            (
+                'released-at-arrival',
+                Case(
+                    2,
+                    (0,),
+                    (1,),
+                    weights([4]),
+                    voltage=(-44, -50),
+                    synaptic=(0, 1),
+                    last_spike=(INITIAL, -10),
+                ),
+                50,
+                (),
+            ),
+            (
+                'outgoing-silencing',
+                Case(
+                    3,
+                    (0, 1, 2),
+                    (1, 2, 1),
+                    weights([364, 11, 7]),
+                    silenced=(1,),
+                    voltage=(-44, -52, -52),
+                ),
+                80,
+                (),
+            ),
+            (
+                'overlapping-inputs',
+                Case(2, targets=(0, 0, 1)),
+                80,
+                ((0, 0), (0, 1), (5, 0), (12, 1), (24, 0), (24, 1)),
+            ),
+            (
+                'zero-refractory-loss',
+                Case(1, targets=(0,)),
+                12,
+                tuple((step, 0) for step in range(12)),
+            ),
+            (
+                '32-edge-fanin',
+                Case(
+                    2,
+                    (0,) * 32,
+                    (1,) * 32,
+                    weights([1, -1] * 15 + [2, 1]),
+                    voltage=(-44, -52),
+                ),
+                80,
+                (),
+            ),
+        ],
+    )
+    def test_factored_network_matches_reference_phases(
+        name: str,
+        case: Case,
+        steps: int,
+        impulses: tuple[tuple[int, int], ...],
+        harness: Harness,
+    ) -&gt; None:
+&gt;       observed = harness.qualify(name, case, events_for(case, steps, impulses))
+
+tests/qualification/test_factored_accumulation.py:137: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/support/qualification.py:119: in qualify
+    self.recorder.record(
+tests/support/artifacts.py:32: in record
+    with (self.output / f'{name}.npz').open('xb') as destination:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('data/results/performance-remediation-exact-count-focused-20261005/bucketed_case-balanced-duplicates.npz')
+mode = 'xb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+&gt;       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/bucketed_case-balanced-duplicates.npz'
+
+/opt/homebrew/Cellar/python@3.10/3.10.14/Frameworks/Python.framework/Versions/3.10/lib/python3.10/pathlib.py:1119: FileNotFoundError</failure></testcase><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_network_matches_reference_phases[bucketed_case-cast-drift-triplet-case4-60-impulses4]" time="0.414"><failure message="FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/bucketed_case-cast-drift-triplet.npz'">name = 'cast-drift-triplet'
+case = NetworkCase(neurons=2, sources=(0, 0, 0), destinations=(1, 1, 1), weights=(661.375, -661.1, -0.275), targets=(), silenced=(), voltage=(-44, -52), synaptic=0, last_spike=-100000000)
+steps = 60, impulses = ()
+harness = Harness(compile=&lt;function harness.&lt;locals&gt;.&lt;lambda&gt; at 0x12530d630&gt;, recorder=ArtifactRecorder(output=PosixPath('data/...t_discrete_parity': True, 'repeat_bit_identical': True, 'minimum_available_threshold_margin_mv': 0.9600998335414701}}))
+
+    @pytest.mark.parametrize(
+        'name,case,steps,impulses',
+        [
+            ('rest-empty', Case(2), 60, ()),
+            (
+                'reset-weights',
+                Case(2, (0,), (1,), weights([4]), voltage=(-44, -52), synaptic=(1, 0)),
+                60,
+                (),
+            ),
+            (
+                'positive-negative',
+                Case(3, (0, 0), (1, 2), weights([15, -15]), voltage=(-44, -52, -52)),
+                80,
+                (),
+            ),
+            (
+                'balanced-duplicates',
+                Case(
+                    4,
+                    (0, 1, 0, 1),
+                    (2, 2, 3, 3),
+                    weights([4, -4, 1, 1]),
+                    voltage=(-44, -44, -52, -52),
+                ),
+                80,
+                (),
+            ),
+            (
+                'cast-drift-triplet',
+                Case(
+                    2, (0, 0, 0), (1, 1, 1), weights([2405, -2404, -1]), voltage=(-44, -52)
+                ),
+                60,
+                (),
+            ),
+            (
+                'fanout-self-wrap',
+                Case(3, (0, 0, 0), (0, 1, 2), weights([4, 7, -7]), (0,)),
+                160,
+                ((0, 0), (25, 0), (50, 0), (75, 0), (100, 0)),
+            ),
+            ('refractory-held', Case(1, voltage=-50, synaptic=1, last_spike=0), 40, ()),
+            (
+                'released-at-arrival',
+                Case(
+                    2,
+                    (0,),
+                    (1,),
+                    weights([4]),
+                    voltage=(-44, -50),
+                    synaptic=(0, 1),
+                    last_spike=(INITIAL, -10),
+                ),
+                50,
+                (),
+            ),
+            (
+                'outgoing-silencing',
+                Case(
+                    3,
+                    (0, 1, 2),
+                    (1, 2, 1),
+                    weights([364, 11, 7]),
+                    silenced=(1,),
+                    voltage=(-44, -52, -52),
+                ),
+                80,
+                (),
+            ),
+            (
+                'overlapping-inputs',
+                Case(2, targets=(0, 0, 1)),
+                80,
+                ((0, 0), (0, 1), (5, 0), (12, 1), (24, 0), (24, 1)),
+            ),
+            (
+                'zero-refractory-loss',
+                Case(1, targets=(0,)),
+                12,
+                tuple((step, 0) for step in range(12)),
+            ),
+            (
+                '32-edge-fanin',
+                Case(
+                    2,
+                    (0,) * 32,
+                    (1,) * 32,
+                    weights([1, -1] * 15 + [2, 1]),
+                    voltage=(-44, -52),
+                ),
+                80,
+                (),
+            ),
+        ],
+    )
+    def test_factored_network_matches_reference_phases(
+        name: str,
+        case: Case,
+        steps: int,
+        impulses: tuple[tuple[int, int], ...],
+        harness: Harness,
+    ) -&gt; None:
+&gt;       observed = harness.qualify(name, case, events_for(case, steps, impulses))
+
+tests/qualification/test_factored_accumulation.py:137: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/support/qualification.py:119: in qualify
+    self.recorder.record(
+tests/support/artifacts.py:32: in record
+    with (self.output / f'{name}.npz').open('xb') as destination:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('data/results/performance-remediation-exact-count-focused-20261005/bucketed_case-cast-drift-triplet.npz')
+mode = 'xb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+&gt;       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/bucketed_case-cast-drift-triplet.npz'
+
+/opt/homebrew/Cellar/python@3.10/3.10.14/Frameworks/Python.framework/Versions/3.10/lib/python3.10/pathlib.py:1119: FileNotFoundError</failure></testcase><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_network_matches_reference_phases[bucketed_case-fanout-self-wrap-case5-160-impulses5]" time="0.693"><failure message="FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/bucketed_case-fanout-self-wrap.npz'">name = 'fanout-self-wrap'
+case = NetworkCase(neurons=3, sources=(0, 0, 0), destinations=(0, 1, 2), weights=(1.1, 1.9250000000000003, -1.9250000000000003), targets=(0,), silenced=(), voltage=-52, synaptic=0, last_spike=-100000000)
+steps = 160, impulses = ((0, 0), (25, 0), (50, 0), (75, 0), (100, 0))
+harness = Harness(compile=&lt;function harness.&lt;locals&gt;.&lt;lambda&gt; at 0x12530d630&gt;, recorder=ArtifactRecorder(output=PosixPath('data/...ct_discrete_parity': True, 'repeat_bit_identical': True, 'minimum_available_threshold_margin_mv': 5.594783444167412}}))
+
+    @pytest.mark.parametrize(
+        'name,case,steps,impulses',
+        [
+            ('rest-empty', Case(2), 60, ()),
+            (
+                'reset-weights',
+                Case(2, (0,), (1,), weights([4]), voltage=(-44, -52), synaptic=(1, 0)),
+                60,
+                (),
+            ),
+            (
+                'positive-negative',
+                Case(3, (0, 0), (1, 2), weights([15, -15]), voltage=(-44, -52, -52)),
+                80,
+                (),
+            ),
+            (
+                'balanced-duplicates',
+                Case(
+                    4,
+                    (0, 1, 0, 1),
+                    (2, 2, 3, 3),
+                    weights([4, -4, 1, 1]),
+                    voltage=(-44, -44, -52, -52),
+                ),
+                80,
+                (),
+            ),
+            (
+                'cast-drift-triplet',
+                Case(
+                    2, (0, 0, 0), (1, 1, 1), weights([2405, -2404, -1]), voltage=(-44, -52)
+                ),
+                60,
+                (),
+            ),
+            (
+                'fanout-self-wrap',
+                Case(3, (0, 0, 0), (0, 1, 2), weights([4, 7, -7]), (0,)),
+                160,
+                ((0, 0), (25, 0), (50, 0), (75, 0), (100, 0)),
+            ),
+            ('refractory-held', Case(1, voltage=-50, synaptic=1, last_spike=0), 40, ()),
+            (
+                'released-at-arrival',
+                Case(
+                    2,
+                    (0,),
+                    (1,),
+                    weights([4]),
+                    voltage=(-44, -50),
+                    synaptic=(0, 1),
+                    last_spike=(INITIAL, -10),
+                ),
+                50,
+                (),
+            ),
+            (
+                'outgoing-silencing',
+                Case(
+                    3,
+                    (0, 1, 2),
+                    (1, 2, 1),
+                    weights([364, 11, 7]),
+                    silenced=(1,),
+                    voltage=(-44, -52, -52),
+                ),
+                80,
+                (),
+            ),
+            (
+                'overlapping-inputs',
+                Case(2, targets=(0, 0, 1)),
+                80,
+                ((0, 0), (0, 1), (5, 0), (12, 1), (24, 0), (24, 1)),
+            ),
+            (
+                'zero-refractory-loss',
+                Case(1, targets=(0,)),
+                12,
+                tuple((step, 0) for step in range(12)),
+            ),
+            (
+                '32-edge-fanin',
+                Case(
+                    2,
+                    (0,) * 32,
+                    (1,) * 32,
+                    weights([1, -1] * 15 + [2, 1]),
+                    voltage=(-44, -52),
+                ),
+                80,
+                (),
+            ),
+        ],
+    )
+    def test_factored_network_matches_reference_phases(
+        name: str,
+        case: Case,
+        steps: int,
+        impulses: tuple[tuple[int, int], ...],
+        harness: Harness,
+    ) -&gt; None:
+&gt;       observed = harness.qualify(name, case, events_for(case, steps, impulses))
+
+tests/qualification/test_factored_accumulation.py:137: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/support/qualification.py:119: in qualify
+    self.recorder.record(
+tests/support/artifacts.py:32: in record
+    with (self.output / f'{name}.npz').open('xb') as destination:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('data/results/performance-remediation-exact-count-focused-20261005/bucketed_case-fanout-self-wrap.npz')
+mode = 'xb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+&gt;       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/bucketed_case-fanout-self-wrap.npz'
+
+/opt/homebrew/Cellar/python@3.10/3.10.14/Frameworks/Python.framework/Versions/3.10/lib/python3.10/pathlib.py:1119: FileNotFoundError</failure></testcase><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_network_matches_reference_phases[bucketed_case-refractory-held-case6-40-impulses6]" time="0.172"><failure message="FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/bucketed_case-refractory-held.npz'">name = 'refractory-held'
+case = NetworkCase(neurons=1, sources=(), destinations=(), weights=(), targets=(), silenced=(), voltage=-50, synaptic=1, last_spike=0)
+steps = 40, impulses = ()
+harness = Harness(compile=&lt;function harness.&lt;locals&gt;.&lt;lambda&gt; at 0x12530d630&gt;, recorder=ArtifactRecorder(output=PosixPath('data/...ct_discrete_parity': True, 'repeat_bit_identical': True, 'minimum_available_threshold_margin_mv': 5.005037106319321}}))
+
+    @pytest.mark.parametrize(
+        'name,case,steps,impulses',
+        [
+            ('rest-empty', Case(2), 60, ()),
+            (
+                'reset-weights',
+                Case(2, (0,), (1,), weights([4]), voltage=(-44, -52), synaptic=(1, 0)),
+                60,
+                (),
+            ),
+            (
+                'positive-negative',
+                Case(3, (0, 0), (1, 2), weights([15, -15]), voltage=(-44, -52, -52)),
+                80,
+                (),
+            ),
+            (
+                'balanced-duplicates',
+                Case(
+                    4,
+                    (0, 1, 0, 1),
+                    (2, 2, 3, 3),
+                    weights([4, -4, 1, 1]),
+                    voltage=(-44, -44, -52, -52),
+                ),
+                80,
+                (),
+            ),
+            (
+                'cast-drift-triplet',
+                Case(
+                    2, (0, 0, 0), (1, 1, 1), weights([2405, -2404, -1]), voltage=(-44, -52)
+                ),
+                60,
+                (),
+            ),
+            (
+                'fanout-self-wrap',
+                Case(3, (0, 0, 0), (0, 1, 2), weights([4, 7, -7]), (0,)),
+                160,
+                ((0, 0), (25, 0), (50, 0), (75, 0), (100, 0)),
+            ),
+            ('refractory-held', Case(1, voltage=-50, synaptic=1, last_spike=0), 40, ()),
+            (
+                'released-at-arrival',
+                Case(
+                    2,
+                    (0,),
+                    (1,),
+                    weights([4]),
+                    voltage=(-44, -50),
+                    synaptic=(0, 1),
+                    last_spike=(INITIAL, -10),
+                ),
+                50,
+                (),
+            ),
+            (
+                'outgoing-silencing',
+                Case(
+                    3,
+                    (0, 1, 2),
+                    (1, 2, 1),
+                    weights([364, 11, 7]),
+                    silenced=(1,),
+                    voltage=(-44, -52, -52),
+                ),
+                80,
+                (),
+            ),
+            (
+                'overlapping-inputs',
+                Case(2, targets=(0, 0, 1)),
+                80,
+                ((0, 0), (0, 1), (5, 0), (12, 1), (24, 0), (24, 1)),
+            ),
+            (
+                'zero-refractory-loss',
+                Case(1, targets=(0,)),
+                12,
+                tuple((step, 0) for step in range(12)),
+            ),
+            (
+                '32-edge-fanin',
+                Case(
+                    2,
+                    (0,) * 32,
+                    (1,) * 32,
+                    weights([1, -1] * 15 + [2, 1]),
+                    voltage=(-44, -52),
+                ),
+                80,
+                (),
+            ),
+        ],
+    )
+    def test_factored_network_matches_reference_phases(
+        name: str,
+        case: Case,
+        steps: int,
+        impulses: tuple[tuple[int, int], ...],
+        harness: Harness,
+    ) -&gt; None:
+&gt;       observed = harness.qualify(name, case, events_for(case, steps, impulses))
+
+tests/qualification/test_factored_accumulation.py:137: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/support/qualification.py:119: in qualify
+    self.recorder.record(
+tests/support/artifacts.py:32: in record
+    with (self.output / f'{name}.npz').open('xb') as destination:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('data/results/performance-remediation-exact-count-focused-20261005/bucketed_case-refractory-held.npz')
+mode = 'xb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+&gt;       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/bucketed_case-refractory-held.npz'
+
+/opt/homebrew/Cellar/python@3.10/3.10.14/Frameworks/Python.framework/Versions/3.10/lib/python3.10/pathlib.py:1119: FileNotFoundError</failure></testcase><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_network_matches_reference_phases[bucketed_case-released-at-arrival-case7-50-impulses7]" time="0.239"><failure message="FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/bucketed_case-released-at-arrival.npz'">name = 'released-at-arrival'
+case = NetworkCase(neurons=2, sources=(0,), destinations=(1,), weights=(1.1,), targets=(), silenced=(), voltage=(-44, -50), synaptic=(0, 1), last_spike=(-100000000, -10))
+steps = 50, impulses = ()
+harness = Harness(compile=&lt;function harness.&lt;locals&gt;.&lt;lambda&gt; at 0x12530d630&gt;, recorder=ArtifactRecorder(output=PosixPath('data/...t_discrete_parity': True, 'repeat_bit_identical': True, 'minimum_available_threshold_margin_mv': 0.9600998335414701}}))
+
+    @pytest.mark.parametrize(
+        'name,case,steps,impulses',
+        [
+            ('rest-empty', Case(2), 60, ()),
+            (
+                'reset-weights',
+                Case(2, (0,), (1,), weights([4]), voltage=(-44, -52), synaptic=(1, 0)),
+                60,
+                (),
+            ),
+            (
+                'positive-negative',
+                Case(3, (0, 0), (1, 2), weights([15, -15]), voltage=(-44, -52, -52)),
+                80,
+                (),
+            ),
+            (
+                'balanced-duplicates',
+                Case(
+                    4,
+                    (0, 1, 0, 1),
+                    (2, 2, 3, 3),
+                    weights([4, -4, 1, 1]),
+                    voltage=(-44, -44, -52, -52),
+                ),
+                80,
+                (),
+            ),
+            (
+                'cast-drift-triplet',
+                Case(
+                    2, (0, 0, 0), (1, 1, 1), weights([2405, -2404, -1]), voltage=(-44, -52)
+                ),
+                60,
+                (),
+            ),
+            (
+                'fanout-self-wrap',
+                Case(3, (0, 0, 0), (0, 1, 2), weights([4, 7, -7]), (0,)),
+                160,
+                ((0, 0), (25, 0), (50, 0), (75, 0), (100, 0)),
+            ),
+            ('refractory-held', Case(1, voltage=-50, synaptic=1, last_spike=0), 40, ()),
+            (
+                'released-at-arrival',
+                Case(
+                    2,
+                    (0,),
+                    (1,),
+                    weights([4]),
+                    voltage=(-44, -50),
+                    synaptic=(0, 1),
+                    last_spike=(INITIAL, -10),
+                ),
+                50,
+                (),
+            ),
+            (
+                'outgoing-silencing',
+                Case(
+                    3,
+                    (0, 1, 2),
+                    (1, 2, 1),
+                    weights([364, 11, 7]),
+                    silenced=(1,),
+                    voltage=(-44, -52, -52),
+                ),
+                80,
+                (),
+            ),
+            (
+                'overlapping-inputs',
+                Case(2, targets=(0, 0, 1)),
+                80,
+                ((0, 0), (0, 1), (5, 0), (12, 1), (24, 0), (24, 1)),
+            ),
+            (
+                'zero-refractory-loss',
+                Case(1, targets=(0,)),
+                12,
+                tuple((step, 0) for step in range(12)),
+            ),
+            (
+                '32-edge-fanin',
+                Case(
+                    2,
+                    (0,) * 32,
+                    (1,) * 32,
+                    weights([1, -1] * 15 + [2, 1]),
+                    voltage=(-44, -52),
+                ),
+                80,
+                (),
+            ),
+        ],
+    )
+    def test_factored_network_matches_reference_phases(
+        name: str,
+        case: Case,
+        steps: int,
+        impulses: tuple[tuple[int, int], ...],
+        harness: Harness,
+    ) -&gt; None:
+&gt;       observed = harness.qualify(name, case, events_for(case, steps, impulses))
+
+tests/qualification/test_factored_accumulation.py:137: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/support/qualification.py:119: in qualify
+    self.recorder.record(
+tests/support/artifacts.py:32: in record
+    with (self.output / f'{name}.npz').open('xb') as destination:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('data/results/performance-remediation-exact-count-focused-20261005/bucketed_case-released-at-arrival.npz')
+mode = 'xb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+&gt;       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/bucketed_case-released-at-arrival.npz'
+
+/opt/homebrew/Cellar/python@3.10/3.10.14/Frameworks/Python.framework/Versions/3.10/lib/python3.10/pathlib.py:1119: FileNotFoundError</failure></testcase><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_network_matches_reference_phases[bucketed_case-outgoing-silencing-case8-80-impulses8]" time="0.545"><failure message="FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/bucketed_case-outgoing-silencing.npz'">name = 'outgoing-silencing'
+case = NetworkCase(neurons=3, sources=(0, 1, 2), destinations=(1, 2, 1), weights=(100.10000000000001, 3.0250000000000004, 1.9250000000000003), targets=(), silenced=(1,), voltage=(-44, -52, -52), synaptic=0, last_spike=-100000000)
+steps = 80, impulses = ()
+harness = Harness(compile=&lt;function harness.&lt;locals&gt;.&lt;lambda&gt; at 0x12530d630&gt;, recorder=ArtifactRecorder(output=PosixPath('data/..._discrete_parity': True, 'repeat_bit_identical': True, 'minimum_available_threshold_margin_mv': 0.10170987998372993}}))
+
+    @pytest.mark.parametrize(
+        'name,case,steps,impulses',
+        [
+            ('rest-empty', Case(2), 60, ()),
+            (
+                'reset-weights',
+                Case(2, (0,), (1,), weights([4]), voltage=(-44, -52), synaptic=(1, 0)),
+                60,
+                (),
+            ),
+            (
+                'positive-negative',
+                Case(3, (0, 0), (1, 2), weights([15, -15]), voltage=(-44, -52, -52)),
+                80,
+                (),
+            ),
+            (
+                'balanced-duplicates',
+                Case(
+                    4,
+                    (0, 1, 0, 1),
+                    (2, 2, 3, 3),
+                    weights([4, -4, 1, 1]),
+                    voltage=(-44, -44, -52, -52),
+                ),
+                80,
+                (),
+            ),
+            (
+                'cast-drift-triplet',
+                Case(
+                    2, (0, 0, 0), (1, 1, 1), weights([2405, -2404, -1]), voltage=(-44, -52)
+                ),
+                60,
+                (),
+            ),
+            (
+                'fanout-self-wrap',
+                Case(3, (0, 0, 0), (0, 1, 2), weights([4, 7, -7]), (0,)),
+                160,
+                ((0, 0), (25, 0), (50, 0), (75, 0), (100, 0)),
+            ),
+            ('refractory-held', Case(1, voltage=-50, synaptic=1, last_spike=0), 40, ()),
+            (
+                'released-at-arrival',
+                Case(
+                    2,
+                    (0,),
+                    (1,),
+                    weights([4]),
+                    voltage=(-44, -50),
+                    synaptic=(0, 1),
+                    last_spike=(INITIAL, -10),
+                ),
+                50,
+                (),
+            ),
+            (
+                'outgoing-silencing',
+                Case(
+                    3,
+                    (0, 1, 2),
+                    (1, 2, 1),
+                    weights([364, 11, 7]),
+                    silenced=(1,),
+                    voltage=(-44, -52, -52),
+                ),
+                80,
+                (),
+            ),
+            (
+                'overlapping-inputs',
+                Case(2, targets=(0, 0, 1)),
+                80,
+                ((0, 0), (0, 1), (5, 0), (12, 1), (24, 0), (24, 1)),
+            ),
+            (
+                'zero-refractory-loss',
+                Case(1, targets=(0,)),
+                12,
+                tuple((step, 0) for step in range(12)),
+            ),
+            (
+                '32-edge-fanin',
+                Case(
+                    2,
+                    (0,) * 32,
+                    (1,) * 32,
+                    weights([1, -1] * 15 + [2, 1]),
+                    voltage=(-44, -52),
+                ),
+                80,
+                (),
+            ),
+        ],
+    )
+    def test_factored_network_matches_reference_phases(
+        name: str,
+        case: Case,
+        steps: int,
+        impulses: tuple[tuple[int, int], ...],
+        harness: Harness,
+    ) -&gt; None:
+&gt;       observed = harness.qualify(name, case, events_for(case, steps, impulses))
+
+tests/qualification/test_factored_accumulation.py:137: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/support/qualification.py:119: in qualify
+    self.recorder.record(
+tests/support/artifacts.py:32: in record
+    with (self.output / f'{name}.npz').open('xb') as destination:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('data/results/performance-remediation-exact-count-focused-20261005/bucketed_case-outgoing-silencing.npz')
+mode = 'xb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+&gt;       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/bucketed_case-outgoing-silencing.npz'
+
+/opt/homebrew/Cellar/python@3.10/3.10.14/Frameworks/Python.framework/Versions/3.10/lib/python3.10/pathlib.py:1119: FileNotFoundError</failure></testcase><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_network_matches_reference_phases[bucketed_case-overlapping-inputs-case9-80-impulses9]" time="0.355"><failure message="FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/bucketed_case-overlapping-inputs.npz'">name = 'overlapping-inputs'
+case = NetworkCase(neurons=2, sources=(), destinations=(), weights=(), targets=(0, 0, 1), silenced=(), voltage=-52, synaptic=0, last_spike=-100000000)
+steps = 80, impulses = ((0, 0), (0, 1), (5, 0), (12, 1), (24, 0), (24, 1))
+harness = Harness(compile=&lt;function harness.&lt;locals&gt;.&lt;lambda&gt; at 0x12530d630&gt;, recorder=ArtifactRecorder(output=PosixPath('data/...v': 0.0}, 'exact_discrete_parity': True, 'repeat_bit_identical': True, 'minimum_available_threshold_margin_mv': 7.0}}))
+
+    @pytest.mark.parametrize(
+        'name,case,steps,impulses',
+        [
+            ('rest-empty', Case(2), 60, ()),
+            (
+                'reset-weights',
+                Case(2, (0,), (1,), weights([4]), voltage=(-44, -52), synaptic=(1, 0)),
+                60,
+                (),
+            ),
+            (
+                'positive-negative',
+                Case(3, (0, 0), (1, 2), weights([15, -15]), voltage=(-44, -52, -52)),
+                80,
+                (),
+            ),
+            (
+                'balanced-duplicates',
+                Case(
+                    4,
+                    (0, 1, 0, 1),
+                    (2, 2, 3, 3),
+                    weights([4, -4, 1, 1]),
+                    voltage=(-44, -44, -52, -52),
+                ),
+                80,
+                (),
+            ),
+            (
+                'cast-drift-triplet',
+                Case(
+                    2, (0, 0, 0), (1, 1, 1), weights([2405, -2404, -1]), voltage=(-44, -52)
+                ),
+                60,
+                (),
+            ),
+            (
+                'fanout-self-wrap',
+                Case(3, (0, 0, 0), (0, 1, 2), weights([4, 7, -7]), (0,)),
+                160,
+                ((0, 0), (25, 0), (50, 0), (75, 0), (100, 0)),
+            ),
+            ('refractory-held', Case(1, voltage=-50, synaptic=1, last_spike=0), 40, ()),
+            (
+                'released-at-arrival',
+                Case(
+                    2,
+                    (0,),
+                    (1,),
+                    weights([4]),
+                    voltage=(-44, -50),
+                    synaptic=(0, 1),
+                    last_spike=(INITIAL, -10),
+                ),
+                50,
+                (),
+            ),
+            (
+                'outgoing-silencing',
+                Case(
+                    3,
+                    (0, 1, 2),
+                    (1, 2, 1),
+                    weights([364, 11, 7]),
+                    silenced=(1,),
+                    voltage=(-44, -52, -52),
+                ),
+                80,
+                (),
+            ),
+            (
+                'overlapping-inputs',
+                Case(2, targets=(0, 0, 1)),
+                80,
+                ((0, 0), (0, 1), (5, 0), (12, 1), (24, 0), (24, 1)),
+            ),
+            (
+                'zero-refractory-loss',
+                Case(1, targets=(0,)),
+                12,
+                tuple((step, 0) for step in range(12)),
+            ),
+            (
+                '32-edge-fanin',
+                Case(
+                    2,
+                    (0,) * 32,
+                    (1,) * 32,
+                    weights([1, -1] * 15 + [2, 1]),
+                    voltage=(-44, -52),
+                ),
+                80,
+                (),
+            ),
+        ],
+    )
+    def test_factored_network_matches_reference_phases(
+        name: str,
+        case: Case,
+        steps: int,
+        impulses: tuple[tuple[int, int], ...],
+        harness: Harness,
+    ) -&gt; None:
+&gt;       observed = harness.qualify(name, case, events_for(case, steps, impulses))
+
+tests/qualification/test_factored_accumulation.py:137: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/support/qualification.py:119: in qualify
+    self.recorder.record(
+tests/support/artifacts.py:32: in record
+    with (self.output / f'{name}.npz').open('xb') as destination:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('data/results/performance-remediation-exact-count-focused-20261005/bucketed_case-overlapping-inputs.npz')
+mode = 'xb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+&gt;       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/bucketed_case-overlapping-inputs.npz'
+
+/opt/homebrew/Cellar/python@3.10/3.10.14/Frameworks/Python.framework/Versions/3.10/lib/python3.10/pathlib.py:1119: FileNotFoundError</failure></testcase><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_network_matches_reference_phases[bucketed_case-zero-refractory-loss-case10-12-impulses10]" time="0.115"><failure message="FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/bucketed_case-zero-refractory-loss.npz'">name = 'zero-refractory-loss'
+case = NetworkCase(neurons=1, sources=(), destinations=(), weights=(), targets=(0,), silenced=(), voltage=-52, synaptic=0, last_spike=-100000000)
+steps = 12, impulses = ((0, 0), (1, 0), (2, 0), (3, 0), (4, 0), (5, 0), ...)
+harness = Harness(compile=&lt;function harness.&lt;locals&gt;.&lt;lambda&gt; at 0x12530d630&gt;, recorder=ArtifactRecorder(output=PosixPath('data/...v': 0.0}, 'exact_discrete_parity': True, 'repeat_bit_identical': True, 'minimum_available_threshold_margin_mv': 7.0}}))
+
+    @pytest.mark.parametrize(
+        'name,case,steps,impulses',
+        [
+            ('rest-empty', Case(2), 60, ()),
+            (
+                'reset-weights',
+                Case(2, (0,), (1,), weights([4]), voltage=(-44, -52), synaptic=(1, 0)),
+                60,
+                (),
+            ),
+            (
+                'positive-negative',
+                Case(3, (0, 0), (1, 2), weights([15, -15]), voltage=(-44, -52, -52)),
+                80,
+                (),
+            ),
+            (
+                'balanced-duplicates',
+                Case(
+                    4,
+                    (0, 1, 0, 1),
+                    (2, 2, 3, 3),
+                    weights([4, -4, 1, 1]),
+                    voltage=(-44, -44, -52, -52),
+                ),
+                80,
+                (),
+            ),
+            (
+                'cast-drift-triplet',
+                Case(
+                    2, (0, 0, 0), (1, 1, 1), weights([2405, -2404, -1]), voltage=(-44, -52)
+                ),
+                60,
+                (),
+            ),
+            (
+                'fanout-self-wrap',
+                Case(3, (0, 0, 0), (0, 1, 2), weights([4, 7, -7]), (0,)),
+                160,
+                ((0, 0), (25, 0), (50, 0), (75, 0), (100, 0)),
+            ),
+            ('refractory-held', Case(1, voltage=-50, synaptic=1, last_spike=0), 40, ()),
+            (
+                'released-at-arrival',
+                Case(
+                    2,
+                    (0,),
+                    (1,),
+                    weights([4]),
+                    voltage=(-44, -50),
+                    synaptic=(0, 1),
+                    last_spike=(INITIAL, -10),
+                ),
+                50,
+                (),
+            ),
+            (
+                'outgoing-silencing',
+                Case(
+                    3,
+                    (0, 1, 2),
+                    (1, 2, 1),
+                    weights([364, 11, 7]),
+                    silenced=(1,),
+                    voltage=(-44, -52, -52),
+                ),
+                80,
+                (),
+            ),
+            (
+                'overlapping-inputs',
+                Case(2, targets=(0, 0, 1)),
+                80,
+                ((0, 0), (0, 1), (5, 0), (12, 1), (24, 0), (24, 1)),
+            ),
+            (
+                'zero-refractory-loss',
+                Case(1, targets=(0,)),
+                12,
+                tuple((step, 0) for step in range(12)),
+            ),
+            (
+                '32-edge-fanin',
+                Case(
+                    2,
+                    (0,) * 32,
+                    (1,) * 32,
+                    weights([1, -1] * 15 + [2, 1]),
+                    voltage=(-44, -52),
+                ),
+                80,
+                (),
+            ),
+        ],
+    )
+    def test_factored_network_matches_reference_phases(
+        name: str,
+        case: Case,
+        steps: int,
+        impulses: tuple[tuple[int, int], ...],
+        harness: Harness,
+    ) -&gt; None:
+&gt;       observed = harness.qualify(name, case, events_for(case, steps, impulses))
+
+tests/qualification/test_factored_accumulation.py:137: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/support/qualification.py:119: in qualify
+    self.recorder.record(
+tests/support/artifacts.py:32: in record
+    with (self.output / f'{name}.npz').open('xb') as destination:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('data/results/performance-remediation-exact-count-focused-20261005/bucketed_case-zero-refractory-loss.npz')
+mode = 'xb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+&gt;       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/bucketed_case-zero-refractory-loss.npz'
+
+/opt/homebrew/Cellar/python@3.10/3.10.14/Frameworks/Python.framework/Versions/3.10/lib/python3.10/pathlib.py:1119: FileNotFoundError</failure></testcase><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_network_matches_reference_phases[bucketed_case-32-edge-fanin-case11-80-impulses11]" time="0.526"><failure message="FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/bucketed_case-32-edge-fanin.npz'">name = '32-edge-fanin'
+case = NetworkCase(neurons=2, sources=(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,...5, -0.275, 0.275, -0.275, 0.55, 0.275), targets=(), silenced=(), voltage=(-44, -52), synaptic=0, last_spike=-100000000)
+steps = 80, impulses = ()
+harness = Harness(compile=&lt;function harness.&lt;locals&gt;.&lt;lambda&gt; at 0x12530d630&gt;, recorder=ArtifactRecorder(output=PosixPath('data/...t_discrete_parity': True, 'repeat_bit_identical': True, 'minimum_available_threshold_margin_mv': 0.9600998335414701}}))
+
+    @pytest.mark.parametrize(
+        'name,case,steps,impulses',
+        [
+            ('rest-empty', Case(2), 60, ()),
+            (
+                'reset-weights',
+                Case(2, (0,), (1,), weights([4]), voltage=(-44, -52), synaptic=(1, 0)),
+                60,
+                (),
+            ),
+            (
+                'positive-negative',
+                Case(3, (0, 0), (1, 2), weights([15, -15]), voltage=(-44, -52, -52)),
+                80,
+                (),
+            ),
+            (
+                'balanced-duplicates',
+                Case(
+                    4,
+                    (0, 1, 0, 1),
+                    (2, 2, 3, 3),
+                    weights([4, -4, 1, 1]),
+                    voltage=(-44, -44, -52, -52),
+                ),
+                80,
+                (),
+            ),
+            (
+                'cast-drift-triplet',
+                Case(
+                    2, (0, 0, 0), (1, 1, 1), weights([2405, -2404, -1]), voltage=(-44, -52)
+                ),
+                60,
+                (),
+            ),
+            (
+                'fanout-self-wrap',
+                Case(3, (0, 0, 0), (0, 1, 2), weights([4, 7, -7]), (0,)),
+                160,
+                ((0, 0), (25, 0), (50, 0), (75, 0), (100, 0)),
+            ),
+            ('refractory-held', Case(1, voltage=-50, synaptic=1, last_spike=0), 40, ()),
+            (
+                'released-at-arrival',
+                Case(
+                    2,
+                    (0,),
+                    (1,),
+                    weights([4]),
+                    voltage=(-44, -50),
+                    synaptic=(0, 1),
+                    last_spike=(INITIAL, -10),
+                ),
+                50,
+                (),
+            ),
+            (
+                'outgoing-silencing',
+                Case(
+                    3,
+                    (0, 1, 2),
+                    (1, 2, 1),
+                    weights([364, 11, 7]),
+                    silenced=(1,),
+                    voltage=(-44, -52, -52),
+                ),
+                80,
+                (),
+            ),
+            (
+                'overlapping-inputs',
+                Case(2, targets=(0, 0, 1)),
+                80,
+                ((0, 0), (0, 1), (5, 0), (12, 1), (24, 0), (24, 1)),
+            ),
+            (
+                'zero-refractory-loss',
+                Case(1, targets=(0,)),
+                12,
+                tuple((step, 0) for step in range(12)),
+            ),
+            (
+                '32-edge-fanin',
+                Case(
+                    2,
+                    (0,) * 32,
+                    (1,) * 32,
+                    weights([1, -1] * 15 + [2, 1]),
+                    voltage=(-44, -52),
+                ),
+                80,
+                (),
+            ),
+        ],
+    )
+    def test_factored_network_matches_reference_phases(
+        name: str,
+        case: Case,
+        steps: int,
+        impulses: tuple[tuple[int, int], ...],
+        harness: Harness,
+    ) -&gt; None:
+&gt;       observed = harness.qualify(name, case, events_for(case, steps, impulses))
+
+tests/qualification/test_factored_accumulation.py:137: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/support/qualification.py:119: in qualify
+    self.recorder.record(
+tests/support/artifacts.py:32: in record
+    with (self.output / f'{name}.npz').open('xb') as destination:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('data/results/performance-remediation-exact-count-focused-20261005/bucketed_case-32-edge-fanin.npz')
+mode = 'xb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+&gt;       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/bucketed_case-32-edge-fanin.npz'
+
+/opt/homebrew/Cellar/python@3.10/3.10.14/Frameworks/Python.framework/Versions/3.10/lib/python3.10/pathlib.py:1119: FileNotFoundError</failure></testcase><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_refractory_boundary_and_firing_step_discard_events[bucketed_case]" time="0.322"><failure message="FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/bucketed_case-boundary.npz'">harness = Harness(compile=&lt;function harness.&lt;locals&gt;.&lt;lambda&gt; at 0x12530d630&gt;, recorder=ArtifactRecorder(output=PosixPath('data/...ct_discrete_parity': True, 'repeat_bit_identical': True, 'minimum_available_threshold_margin_mv': 4.967320087991418}}))
+
+    def test_factored_refractory_boundary_and_firing_step_discard_events(
+        harness: Harness,
+    ) -&gt; None:
+        case = Case(
+            3,
+            (0, 1),
+            (2, 2),
+            weights([4, 7]),
+            (0, 1),
+            voltage=(-52, -52, -50),
+            synaptic=(0, 0, 1),
+            last_spike=(INITIAL, INITIAL, 0),
+        )
+&gt;       observed = harness.qualify('boundary', case, events_for(case, 50, ((2, 0), (3, 1))))
+
+tests/qualification/test_factored_accumulation.py:160: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/support/qualification.py:119: in qualify
+    self.recorder.record(
+tests/support/artifacts.py:32: in record
+    with (self.output / f'{name}.npz').open('xb') as destination:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('data/results/performance-remediation-exact-count-focused-20261005/bucketed_case-boundary.npz')
+mode = 'xb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+&gt;       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/bucketed_case-boundary.npz'
+
+/opt/homebrew/Cellar/python@3.10/3.10.14/Frameworks/Python.framework/Versions/3.10/lib/python3.10/pathlib.py:1119: FileNotFoundError</failure></testcase><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_replay_preserves_reference_states_and_events[bucketed_case]" time="5.760"><failure message="FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/bucketed_case-replay-1000.npz'">harness = Harness(compile=&lt;function harness.&lt;locals&gt;.&lt;lambda&gt; at 0x12530d630&gt;, recorder=ArtifactRecorder(output=PosixPath('data/..._discrete_parity': True, 'repeat_bit_identical': True, 'minimum_available_threshold_margin_mv': 0.06642987713574655}}))
+
+    def test_factored_replay_preserves_reference_states_and_events(
+        harness: Harness,
+    ) -&gt; None:
+&gt;       harness.qualify('replay-1000', REPLAY, replay_events())
+
+tests/qualification/test_factored_accumulation.py:187: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/support/qualification.py:119: in qualify
+    self.recorder.record(
+tests/support/artifacts.py:32: in record
+    with (self.output / f'{name}.npz').open('xb') as destination:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('data/results/performance-remediation-exact-count-focused-20261005/bucketed_case-replay-1000.npz')
+mode = 'xb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+&gt;       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/bucketed_case-replay-1000.npz'
+
+/opt/homebrew/Cellar/python@3.10/3.10.14/Frameworks/Python.framework/Versions/3.10/lib/python3.10/pathlib.py:1119: FileNotFoundError</failure></testcase><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_batch_and_chunked_runs_preserve_complete_state[bucketed_case]" time="1.294"><failure message="FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/bucketed_case-batch-chunks.npz'">harness = Harness(compile=&lt;function harness.&lt;locals&gt;.&lt;lambda&gt; at 0x12530d630&gt;, recorder=ArtifactRecorder(output=PosixPath('data/..._discrete_parity': True, 'repeat_bit_identical': True, 'minimum_available_threshold_margin_mv': 0.06642987713574655}}))
+
+    def test_factored_batch_and_chunked_runs_preserve_complete_state(
+        harness: Harness,
+    ) -&gt; None:
+        events = replay_events(180, trials=3)
+&gt;       batch = harness.qualify('batch-chunks', REPLAY, events)
+
+tests/qualification/test_factored_accumulation.py:194: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/support/qualification.py:119: in qualify
+    self.recorder.record(
+tests/support/artifacts.py:32: in record
+    with (self.output / f'{name}.npz').open('xb') as destination:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('data/results/performance-remediation-exact-count-focused-20261005/bucketed_case-batch-chunks.npz')
+mode = 'xb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+&gt;       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/bucketed_case-batch-chunks.npz'
+
+/opt/homebrew/Cellar/python@3.10/3.10.14/Frameworks/Python.framework/Versions/3.10/lib/python3.10/pathlib.py:1119: FileNotFoundError</failure></testcase><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_large_fanin_meets_delayed_reference_trace[bucketed_case-retained-large-counts0]" time="0.426"><failure message="FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/bucketed_case-retained-large.npz'">name = 'retained-large', counts = [2405, 2405, 2405, 2405, 2405, 2405, ...]
+harness = Harness(compile=&lt;function harness.&lt;locals&gt;.&lt;lambda&gt; at 0x12530d630&gt;, recorder=ArtifactRecorder(output=PosixPath('data/...72750489159e-05, 'synaptic_mv': 3.790845548579114e-08}, 'exact_discrete_parity': True, 'repeat_bit_identical': True}}))
+
+    @pytest.mark.parametrize(
+        'name,counts',
+        [
+            ('retained-large', [2405] * 2048 + [1] + [-2405] * 2048),
+            ('cast-drift-large', [2405, -2404, -1] * 128),
+        ],
+    )
+    def test_factored_large_fanin_meets_delayed_reference_trace(
+        name: str, counts: list[int], harness: Harness
+    ) -&gt; None:
+        case = Case(
+            2, (0,) * len(counts), (1,) * len(counts), weights(counts), voltage=(-44, -52)
+        )
+        events = events_for(case, 40)
+        expected = run_reference(case, events)
+        observed = harness.run_candidate(case, events)
+        repeated = harness.run_candidate(case, events)
+        errors = {}
+        for key, wanted in expected.items():
+            if key.endswith('_mv'):
+                error = np.abs(
+                    np.asarray(observed[key], dtype=np.float64)
+                    - np.asarray(wanted, dtype=np.float64)
+                )
+                assert np.all(error &lt;= 1e-3 + 1e-5 * np.abs(wanted))
+                errors[key] = float(error.max(initial=0))
+            else:
+                np.testing.assert_array_equal(observed[key], wanted)
+        for key in observed:
+            np.testing.assert_array_equal(observed[key], repeated[key])
+        assert observed['accepted'][18, 0].all()
+        assert not observed['due'][:18].any()
+        state = expected['before_reset_synaptic_mv'][18]
+        assert np.all(
+            np.abs(observed['before_reset_synaptic_mv'][18] - state)
+            &lt;= 2e-5 + 2e-6 * np.abs(state)
+        )
+&gt;       harness.recorder.record(
+            name,
+            {
+                **{f'reference_{key}': value for key, value in expected.items()},
+                **{f'mlx_{key}': value for key, value in observed.items()},
+                'events': events,
+            },
+            {
+                'steps': 40,
+                'edges': len(counts),
+                'max_abs_error_mv': errors,
+                'exact_discrete_parity': True,
+                'repeat_bit_identical': True,
+            },
+        )
+
+tests/qualification/test_factored_accumulation.py:241: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/support/artifacts.py:32: in record
+    with (self.output / f'{name}.npz').open('xb') as destination:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('data/results/performance-remediation-exact-count-focused-20261005/bucketed_case-retained-large.npz')
+mode = 'xb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+&gt;       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/bucketed_case-retained-large.npz'
+
+/opt/homebrew/Cellar/python@3.10/3.10.14/Frameworks/Python.framework/Versions/3.10/lib/python3.10/pathlib.py:1119: FileNotFoundError</failure></testcase><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_large_fanin_meets_delayed_reference_trace[bucketed_case-cast-drift-large-counts1]" time="0.323"><failure message="FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/bucketed_case-cast-drift-large.npz'">name = 'cast-drift-large', counts = [2405, -2404, -1, 2405, -2404, -1, ...]
+harness = Harness(compile=&lt;function harness.&lt;locals&gt;.&lt;lambda&gt; at 0x12530d630&gt;, recorder=ArtifactRecorder(output=PosixPath('data/...ltage_mv': 0.0, 'synaptic_mv': 2.5207700510287978e-14}, 'exact_discrete_parity': True, 'repeat_bit_identical': True}}))
+
+    @pytest.mark.parametrize(
+        'name,counts',
+        [
+            ('retained-large', [2405] * 2048 + [1] + [-2405] * 2048),
+            ('cast-drift-large', [2405, -2404, -1] * 128),
+        ],
+    )
+    def test_factored_large_fanin_meets_delayed_reference_trace(
+        name: str, counts: list[int], harness: Harness
+    ) -&gt; None:
+        case = Case(
+            2, (0,) * len(counts), (1,) * len(counts), weights(counts), voltage=(-44, -52)
+        )
+        events = events_for(case, 40)
+        expected = run_reference(case, events)
+        observed = harness.run_candidate(case, events)
+        repeated = harness.run_candidate(case, events)
+        errors = {}
+        for key, wanted in expected.items():
+            if key.endswith('_mv'):
+                error = np.abs(
+                    np.asarray(observed[key], dtype=np.float64)
+                    - np.asarray(wanted, dtype=np.float64)
+                )
+                assert np.all(error &lt;= 1e-3 + 1e-5 * np.abs(wanted))
+                errors[key] = float(error.max(initial=0))
+            else:
+                np.testing.assert_array_equal(observed[key], wanted)
+        for key in observed:
+            np.testing.assert_array_equal(observed[key], repeated[key])
+        assert observed['accepted'][18, 0].all()
+        assert not observed['due'][:18].any()
+        state = expected['before_reset_synaptic_mv'][18]
+        assert np.all(
+            np.abs(observed['before_reset_synaptic_mv'][18] - state)
+            &lt;= 2e-5 + 2e-6 * np.abs(state)
+        )
+&gt;       harness.recorder.record(
+            name,
+            {
+                **{f'reference_{key}': value for key, value in expected.items()},
+                **{f'mlx_{key}': value for key, value in observed.items()},
+                'events': events,
+            },
+            {
+                'steps': 40,
+                'edges': len(counts),
+                'max_abs_error_mv': errors,
+                'exact_discrete_parity': True,
+                'repeat_bit_identical': True,
+            },
+        )
+
+tests/qualification/test_factored_accumulation.py:241: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/support/artifacts.py:32: in record
+    with (self.output / f'{name}.npz').open('xb') as destination:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('data/results/performance-remediation-exact-count-focused-20261005/bucketed_case-cast-drift-large.npz')
+mode = 'xb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+&gt;       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/bucketed_case-cast-drift-large.npz'
+
+/opt/homebrew/Cellar/python@3.10/3.10.14/Frameworks/Python.framework/Versions/3.10/lib/python3.10/pathlib.py:1119: FileNotFoundError</failure></testcase><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_adapter_uses_metal_with_cpu_default_and_resets_pending_trials[bucketed_case]" time="0.003" /><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_network_matches_reference_phases[compiler2-rest-empty-case0-60-impulses0]" time="0.001"><error message="failed on setup with &quot;FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/bucketed_case-networks.json'&quot;">request = &lt;SubRequest 'harness' for &lt;Function test_factored_network_matches_reference_phases[bucketed_case-reset-weights-case1-60-impulses1]&gt;&gt;
+compiler = &lt;function bucketed_case at 0x12400d630&gt;, precision = '0'
+
+    @pytest.fixture(scope='module')
+    def harness(
+        request: pytest.FixtureRequest, compiler: Factory, precision: str
+    ) -&gt; Iterator[Harness]:
+        assert importlib.metadata.version('mlx') == '0.32.3'
+        assert importlib.metadata.version('mlx-metal') == '0.32.3'
+        assert np.__version__ == '1.26.4'
+        assert mx.metal.is_available()
+        mx.disable_compile()
+        path = cast(str | None, request.config.getoption('--artifact-output'))
+        output = Path(path) if path is not None else None
+        is_serial = compiler is serial
+        recorder = ArtifactRecorder(output, '' if is_serial else f'{compiler.__name__}-')
+        yield Harness(lambda case: compiler(case, precision), recorder)
+&gt;       recorder.finish(
+            'measurements.json' if is_serial else f'{compiler.__name__}-networks.json',
+            'uncompiled, explicit Metal stream, ordered edge/channel additions'
+            if is_serial
+            else f'Uncompiled {compiler.__name__} recurrent-input execution',
+        )
+
+tests/qualification/conftest.py:40: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/support/artifacts.py:54: in finish
+    with (self.output / filename).open('x') as destination:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('data/results/performance-remediation-exact-count-focused-20261005/bucketed_case-networks.json')
+mode = 'x', buffering = -1, encoding = 'locale', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+&gt;       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: 'data/results/performance-remediation-exact-count-focused-20261005/bucketed_case-networks.json'
+
+/opt/homebrew/Cellar/python@3.10/3.10.14/Frameworks/Python.framework/Versions/3.10/lib/python3.10/pathlib.py:1119: FileNotFoundError</error></testcase><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_network_matches_reference_phases[compiler2-reset-weights-case1-60-impulses1]" time="0.001"><error message="failed on setup with &quot;AttributeError: 'functools.partial' object has no attribute '__name__'. Did you mean: '__ne__'?&quot;">request = &lt;SubRequest 'harness' for &lt;Function test_factored_network_matches_reference_phases[compiler2-reset-weights-case1-60-impulses1]&gt;&gt;
+compiler = functools.partial(&lt;function bucketed_case at 0x12400d630&gt;, exact_counts=True)
+precision = '0'
+
+    @pytest.fixture(scope='module')
+    def harness(
+        request: pytest.FixtureRequest, compiler: Factory, precision: str
+    ) -&gt; Iterator[Harness]:
+        assert importlib.metadata.version('mlx') == '0.32.3'
+        assert importlib.metadata.version('mlx-metal') == '0.32.3'
+        assert np.__version__ == '1.26.4'
+        assert mx.metal.is_available()
+        mx.disable_compile()
+        path = cast(str | None, request.config.getoption('--artifact-output'))
+        output = Path(path) if path is not None else None
+        is_serial = compiler is serial
+&gt;       recorder = ArtifactRecorder(output, '' if is_serial else f'{compiler.__name__}-')
+E       AttributeError: 'functools.partial' object has no attribute '__name__'. Did you mean: '__ne__'?
+
+tests/qualification/conftest.py:38: AttributeError</error></testcase><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_network_matches_reference_phases[compiler2-positive-negative-case2-80-impulses2]" time="0.000"><error message="failed on setup with &quot;AttributeError: 'functools.partial' object has no attribute '__name__'. Did you mean: '__ne__'?&quot;">request = &lt;SubRequest 'harness' for &lt;Function test_factored_network_matches_reference_phases[compiler2-reset-weights-case1-60-impulses1]&gt;&gt;
+compiler = functools.partial(&lt;function bucketed_case at 0x12400d630&gt;, exact_counts=True)
+precision = '0'
+
+    @pytest.fixture(scope='module')
+    def harness(
+        request: pytest.FixtureRequest, compiler: Factory, precision: str
+    ) -&gt; Iterator[Harness]:
+        assert importlib.metadata.version('mlx') == '0.32.3'
+        assert importlib.metadata.version('mlx-metal') == '0.32.3'
+        assert np.__version__ == '1.26.4'
+        assert mx.metal.is_available()
+        mx.disable_compile()
+        path = cast(str | None, request.config.getoption('--artifact-output'))
+        output = Path(path) if path is not None else None
+        is_serial = compiler is serial
+&gt;       recorder = ArtifactRecorder(output, '' if is_serial else f'{compiler.__name__}-')
+E       AttributeError: 'functools.partial' object has no attribute '__name__'. Did you mean: '__ne__'?
+
+tests/qualification/conftest.py:38: AttributeError</error></testcase><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_network_matches_reference_phases[compiler2-balanced-duplicates-case3-80-impulses3]" time="0.000"><error message="failed on setup with &quot;AttributeError: 'functools.partial' object has no attribute '__name__'. Did you mean: '__ne__'?&quot;">request = &lt;SubRequest 'harness' for &lt;Function test_factored_network_matches_reference_phases[compiler2-reset-weights-case1-60-impulses1]&gt;&gt;
+compiler = functools.partial(&lt;function bucketed_case at 0x12400d630&gt;, exact_counts=True)
+precision = '0'
+
+    @pytest.fixture(scope='module')
+    def harness(
+        request: pytest.FixtureRequest, compiler: Factory, precision: str
+    ) -&gt; Iterator[Harness]:
+        assert importlib.metadata.version('mlx') == '0.32.3'
+        assert importlib.metadata.version('mlx-metal') == '0.32.3'
+        assert np.__version__ == '1.26.4'
+        assert mx.metal.is_available()
+        mx.disable_compile()
+        path = cast(str | None, request.config.getoption('--artifact-output'))
+        output = Path(path) if path is not None else None
+        is_serial = compiler is serial
+&gt;       recorder = ArtifactRecorder(output, '' if is_serial else f'{compiler.__name__}-')
+E       AttributeError: 'functools.partial' object has no attribute '__name__'. Did you mean: '__ne__'?
+
+tests/qualification/conftest.py:38: AttributeError</error></testcase><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_network_matches_reference_phases[compiler2-cast-drift-triplet-case4-60-impulses4]" time="0.000"><error message="failed on setup with &quot;AttributeError: 'functools.partial' object has no attribute '__name__'. Did you mean: '__ne__'?&quot;">request = &lt;SubRequest 'harness' for &lt;Function test_factored_network_matches_reference_phases[compiler2-reset-weights-case1-60-impulses1]&gt;&gt;
+compiler = functools.partial(&lt;function bucketed_case at 0x12400d630&gt;, exact_counts=True)
+precision = '0'
+
+    @pytest.fixture(scope='module')
+    def harness(
+        request: pytest.FixtureRequest, compiler: Factory, precision: str
+    ) -&gt; Iterator[Harness]:
+        assert importlib.metadata.version('mlx') == '0.32.3'
+        assert importlib.metadata.version('mlx-metal') == '0.32.3'
+        assert np.__version__ == '1.26.4'
+        assert mx.metal.is_available()
+        mx.disable_compile()
+        path = cast(str | None, request.config.getoption('--artifact-output'))
+        output = Path(path) if path is not None else None
+        is_serial = compiler is serial
+&gt;       recorder = ArtifactRecorder(output, '' if is_serial else f'{compiler.__name__}-')
+E       AttributeError: 'functools.partial' object has no attribute '__name__'. Did you mean: '__ne__'?
+
+tests/qualification/conftest.py:38: AttributeError</error></testcase><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_network_matches_reference_phases[compiler2-fanout-self-wrap-case5-160-impulses5]" time="0.000"><error message="failed on setup with &quot;AttributeError: 'functools.partial' object has no attribute '__name__'. Did you mean: '__ne__'?&quot;">request = &lt;SubRequest 'harness' for &lt;Function test_factored_network_matches_reference_phases[compiler2-reset-weights-case1-60-impulses1]&gt;&gt;
+compiler = functools.partial(&lt;function bucketed_case at 0x12400d630&gt;, exact_counts=True)
+precision = '0'
+
+    @pytest.fixture(scope='module')
+    def harness(
+        request: pytest.FixtureRequest, compiler: Factory, precision: str
+    ) -&gt; Iterator[Harness]:
+        assert importlib.metadata.version('mlx') == '0.32.3'
+        assert importlib.metadata.version('mlx-metal') == '0.32.3'
+        assert np.__version__ == '1.26.4'
+        assert mx.metal.is_available()
+        mx.disable_compile()
+        path = cast(str | None, request.config.getoption('--artifact-output'))
+        output = Path(path) if path is not None else None
+        is_serial = compiler is serial
+&gt;       recorder = ArtifactRecorder(output, '' if is_serial else f'{compiler.__name__}-')
+E       AttributeError: 'functools.partial' object has no attribute '__name__'. Did you mean: '__ne__'?
+
+tests/qualification/conftest.py:38: AttributeError</error></testcase><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_network_matches_reference_phases[compiler2-refractory-held-case6-40-impulses6]" time="0.000"><error message="failed on setup with &quot;AttributeError: 'functools.partial' object has no attribute '__name__'. Did you mean: '__ne__'?&quot;">request = &lt;SubRequest 'harness' for &lt;Function test_factored_network_matches_reference_phases[compiler2-reset-weights-case1-60-impulses1]&gt;&gt;
+compiler = functools.partial(&lt;function bucketed_case at 0x12400d630&gt;, exact_counts=True)
+precision = '0'
+
+    @pytest.fixture(scope='module')
+    def harness(
+        request: pytest.FixtureRequest, compiler: Factory, precision: str
+    ) -&gt; Iterator[Harness]:
+        assert importlib.metadata.version('mlx') == '0.32.3'
+        assert importlib.metadata.version('mlx-metal') == '0.32.3'
+        assert np.__version__ == '1.26.4'
+        assert mx.metal.is_available()
+        mx.disable_compile()
+        path = cast(str | None, request.config.getoption('--artifact-output'))
+        output = Path(path) if path is not None else None
+        is_serial = compiler is serial
+&gt;       recorder = ArtifactRecorder(output, '' if is_serial else f'{compiler.__name__}-')
+E       AttributeError: 'functools.partial' object has no attribute '__name__'. Did you mean: '__ne__'?
+
+tests/qualification/conftest.py:38: AttributeError</error></testcase><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_network_matches_reference_phases[compiler2-released-at-arrival-case7-50-impulses7]" time="0.000"><error message="failed on setup with &quot;AttributeError: 'functools.partial' object has no attribute '__name__'. Did you mean: '__ne__'?&quot;">request = &lt;SubRequest 'harness' for &lt;Function test_factored_network_matches_reference_phases[compiler2-reset-weights-case1-60-impulses1]&gt;&gt;
+compiler = functools.partial(&lt;function bucketed_case at 0x12400d630&gt;, exact_counts=True)
+precision = '0'
+
+    @pytest.fixture(scope='module')
+    def harness(
+        request: pytest.FixtureRequest, compiler: Factory, precision: str
+    ) -&gt; Iterator[Harness]:
+        assert importlib.metadata.version('mlx') == '0.32.3'
+        assert importlib.metadata.version('mlx-metal') == '0.32.3'
+        assert np.__version__ == '1.26.4'
+        assert mx.metal.is_available()
+        mx.disable_compile()
+        path = cast(str | None, request.config.getoption('--artifact-output'))
+        output = Path(path) if path is not None else None
+        is_serial = compiler is serial
+&gt;       recorder = ArtifactRecorder(output, '' if is_serial else f'{compiler.__name__}-')
+E       AttributeError: 'functools.partial' object has no attribute '__name__'. Did you mean: '__ne__'?
+
+tests/qualification/conftest.py:38: AttributeError</error></testcase><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_network_matches_reference_phases[compiler2-outgoing-silencing-case8-80-impulses8]" time="0.000"><error message="failed on setup with &quot;AttributeError: 'functools.partial' object has no attribute '__name__'. Did you mean: '__ne__'?&quot;">request = &lt;SubRequest 'harness' for &lt;Function test_factored_network_matches_reference_phases[compiler2-reset-weights-case1-60-impulses1]&gt;&gt;
+compiler = functools.partial(&lt;function bucketed_case at 0x12400d630&gt;, exact_counts=True)
+precision = '0'
+
+    @pytest.fixture(scope='module')
+    def harness(
+        request: pytest.FixtureRequest, compiler: Factory, precision: str
+    ) -&gt; Iterator[Harness]:
+        assert importlib.metadata.version('mlx') == '0.32.3'
+        assert importlib.metadata.version('mlx-metal') == '0.32.3'
+        assert np.__version__ == '1.26.4'
+        assert mx.metal.is_available()
+        mx.disable_compile()
+        path = cast(str | None, request.config.getoption('--artifact-output'))
+        output = Path(path) if path is not None else None
+        is_serial = compiler is serial
+&gt;       recorder = ArtifactRecorder(output, '' if is_serial else f'{compiler.__name__}-')
+E       AttributeError: 'functools.partial' object has no attribute '__name__'. Did you mean: '__ne__'?
+
+tests/qualification/conftest.py:38: AttributeError</error></testcase><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_network_matches_reference_phases[compiler2-overlapping-inputs-case9-80-impulses9]" time="0.000"><error message="failed on setup with &quot;AttributeError: 'functools.partial' object has no attribute '__name__'. Did you mean: '__ne__'?&quot;">request = &lt;SubRequest 'harness' for &lt;Function test_factored_network_matches_reference_phases[compiler2-reset-weights-case1-60-impulses1]&gt;&gt;
+compiler = functools.partial(&lt;function bucketed_case at 0x12400d630&gt;, exact_counts=True)
+precision = '0'
+
+    @pytest.fixture(scope='module')
+    def harness(
+        request: pytest.FixtureRequest, compiler: Factory, precision: str
+    ) -&gt; Iterator[Harness]:
+        assert importlib.metadata.version('mlx') == '0.32.3'
+        assert importlib.metadata.version('mlx-metal') == '0.32.3'
+        assert np.__version__ == '1.26.4'
+        assert mx.metal.is_available()
+        mx.disable_compile()
+        path = cast(str | None, request.config.getoption('--artifact-output'))
+        output = Path(path) if path is not None else None
+        is_serial = compiler is serial
+&gt;       recorder = ArtifactRecorder(output, '' if is_serial else f'{compiler.__name__}-')
+E       AttributeError: 'functools.partial' object has no attribute '__name__'. Did you mean: '__ne__'?
+
+tests/qualification/conftest.py:38: AttributeError</error></testcase><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_network_matches_reference_phases[compiler2-zero-refractory-loss-case10-12-impulses10]" time="0.000"><error message="failed on setup with &quot;AttributeError: 'functools.partial' object has no attribute '__name__'. Did you mean: '__ne__'?&quot;">request = &lt;SubRequest 'harness' for &lt;Function test_factored_network_matches_reference_phases[compiler2-reset-weights-case1-60-impulses1]&gt;&gt;
+compiler = functools.partial(&lt;function bucketed_case at 0x12400d630&gt;, exact_counts=True)
+precision = '0'
+
+    @pytest.fixture(scope='module')
+    def harness(
+        request: pytest.FixtureRequest, compiler: Factory, precision: str
+    ) -&gt; Iterator[Harness]:
+        assert importlib.metadata.version('mlx') == '0.32.3'
+        assert importlib.metadata.version('mlx-metal') == '0.32.3'
+        assert np.__version__ == '1.26.4'
+        assert mx.metal.is_available()
+        mx.disable_compile()
+        path = cast(str | None, request.config.getoption('--artifact-output'))
+        output = Path(path) if path is not None else None
+        is_serial = compiler is serial
+&gt;       recorder = ArtifactRecorder(output, '' if is_serial else f'{compiler.__name__}-')
+E       AttributeError: 'functools.partial' object has no attribute '__name__'. Did you mean: '__ne__'?
+
+tests/qualification/conftest.py:38: AttributeError</error></testcase><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_network_matches_reference_phases[compiler2-32-edge-fanin-case11-80-impulses11]" time="0.000"><error message="failed on setup with &quot;AttributeError: 'functools.partial' object has no attribute '__name__'. Did you mean: '__ne__'?&quot;">request = &lt;SubRequest 'harness' for &lt;Function test_factored_network_matches_reference_phases[compiler2-reset-weights-case1-60-impulses1]&gt;&gt;
+compiler = functools.partial(&lt;function bucketed_case at 0x12400d630&gt;, exact_counts=True)
+precision = '0'
+
+    @pytest.fixture(scope='module')
+    def harness(
+        request: pytest.FixtureRequest, compiler: Factory, precision: str
+    ) -&gt; Iterator[Harness]:
+        assert importlib.metadata.version('mlx') == '0.32.3'
+        assert importlib.metadata.version('mlx-metal') == '0.32.3'
+        assert np.__version__ == '1.26.4'
+        assert mx.metal.is_available()
+        mx.disable_compile()
+        path = cast(str | None, request.config.getoption('--artifact-output'))
+        output = Path(path) if path is not None else None
+        is_serial = compiler is serial
+&gt;       recorder = ArtifactRecorder(output, '' if is_serial else f'{compiler.__name__}-')
+E       AttributeError: 'functools.partial' object has no attribute '__name__'. Did you mean: '__ne__'?
+
+tests/qualification/conftest.py:38: AttributeError</error></testcase><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_refractory_boundary_and_firing_step_discard_events[compiler2]" time="0.000"><error message="failed on setup with &quot;AttributeError: 'functools.partial' object has no attribute '__name__'. Did you mean: '__ne__'?&quot;">request = &lt;SubRequest 'harness' for &lt;Function test_factored_network_matches_reference_phases[compiler2-reset-weights-case1-60-impulses1]&gt;&gt;
+compiler = functools.partial(&lt;function bucketed_case at 0x12400d630&gt;, exact_counts=True)
+precision = '0'
+
+    @pytest.fixture(scope='module')
+    def harness(
+        request: pytest.FixtureRequest, compiler: Factory, precision: str
+    ) -&gt; Iterator[Harness]:
+        assert importlib.metadata.version('mlx') == '0.32.3'
+        assert importlib.metadata.version('mlx-metal') == '0.32.3'
+        assert np.__version__ == '1.26.4'
+        assert mx.metal.is_available()
+        mx.disable_compile()
+        path = cast(str | None, request.config.getoption('--artifact-output'))
+        output = Path(path) if path is not None else None
+        is_serial = compiler is serial
+&gt;       recorder = ArtifactRecorder(output, '' if is_serial else f'{compiler.__name__}-')
+E       AttributeError: 'functools.partial' object has no attribute '__name__'. Did you mean: '__ne__'?
+
+tests/qualification/conftest.py:38: AttributeError</error></testcase><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_replay_preserves_reference_states_and_events[compiler2]" time="0.000"><error message="failed on setup with &quot;AttributeError: 'functools.partial' object has no attribute '__name__'. Did you mean: '__ne__'?&quot;">request = &lt;SubRequest 'harness' for &lt;Function test_factored_network_matches_reference_phases[compiler2-reset-weights-case1-60-impulses1]&gt;&gt;
+compiler = functools.partial(&lt;function bucketed_case at 0x12400d630&gt;, exact_counts=True)
+precision = '0'
+
+    @pytest.fixture(scope='module')
+    def harness(
+        request: pytest.FixtureRequest, compiler: Factory, precision: str
+    ) -&gt; Iterator[Harness]:
+        assert importlib.metadata.version('mlx') == '0.32.3'
+        assert importlib.metadata.version('mlx-metal') == '0.32.3'
+        assert np.__version__ == '1.26.4'
+        assert mx.metal.is_available()
+        mx.disable_compile()
+        path = cast(str | None, request.config.getoption('--artifact-output'))
+        output = Path(path) if path is not None else None
+        is_serial = compiler is serial
+&gt;       recorder = ArtifactRecorder(output, '' if is_serial else f'{compiler.__name__}-')
+E       AttributeError: 'functools.partial' object has no attribute '__name__'. Did you mean: '__ne__'?
+
+tests/qualification/conftest.py:38: AttributeError</error></testcase><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_batch_and_chunked_runs_preserve_complete_state[compiler2]" time="0.000"><error message="failed on setup with &quot;AttributeError: 'functools.partial' object has no attribute '__name__'. Did you mean: '__ne__'?&quot;">request = &lt;SubRequest 'harness' for &lt;Function test_factored_network_matches_reference_phases[compiler2-reset-weights-case1-60-impulses1]&gt;&gt;
+compiler = functools.partial(&lt;function bucketed_case at 0x12400d630&gt;, exact_counts=True)
+precision = '0'
+
+    @pytest.fixture(scope='module')
+    def harness(
+        request: pytest.FixtureRequest, compiler: Factory, precision: str
+    ) -&gt; Iterator[Harness]:
+        assert importlib.metadata.version('mlx') == '0.32.3'
+        assert importlib.metadata.version('mlx-metal') == '0.32.3'
+        assert np.__version__ == '1.26.4'
+        assert mx.metal.is_available()
+        mx.disable_compile()
+        path = cast(str | None, request.config.getoption('--artifact-output'))
+        output = Path(path) if path is not None else None
+        is_serial = compiler is serial
+&gt;       recorder = ArtifactRecorder(output, '' if is_serial else f'{compiler.__name__}-')
+E       AttributeError: 'functools.partial' object has no attribute '__name__'. Did you mean: '__ne__'?
+
+tests/qualification/conftest.py:38: AttributeError</error></testcase><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_large_fanin_meets_delayed_reference_trace[compiler2-retained-large-counts0]" time="0.000"><error message="failed on setup with &quot;AttributeError: 'functools.partial' object has no attribute '__name__'. Did you mean: '__ne__'?&quot;">request = &lt;SubRequest 'harness' for &lt;Function test_factored_network_matches_reference_phases[compiler2-reset-weights-case1-60-impulses1]&gt;&gt;
+compiler = functools.partial(&lt;function bucketed_case at 0x12400d630&gt;, exact_counts=True)
+precision = '0'
+
+    @pytest.fixture(scope='module')
+    def harness(
+        request: pytest.FixtureRequest, compiler: Factory, precision: str
+    ) -&gt; Iterator[Harness]:
+        assert importlib.metadata.version('mlx') == '0.32.3'
+        assert importlib.metadata.version('mlx-metal') == '0.32.3'
+        assert np.__version__ == '1.26.4'
+        assert mx.metal.is_available()
+        mx.disable_compile()
+        path = cast(str | None, request.config.getoption('--artifact-output'))
+        output = Path(path) if path is not None else None
+        is_serial = compiler is serial
+&gt;       recorder = ArtifactRecorder(output, '' if is_serial else f'{compiler.__name__}-')
+E       AttributeError: 'functools.partial' object has no attribute '__name__'. Did you mean: '__ne__'?
+
+tests/qualification/conftest.py:38: AttributeError</error></testcase><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_large_fanin_meets_delayed_reference_trace[compiler2-cast-drift-large-counts1]" time="0.000"><error message="failed on setup with &quot;AttributeError: 'functools.partial' object has no attribute '__name__'. Did you mean: '__ne__'?&quot;">request = &lt;SubRequest 'harness' for &lt;Function test_factored_network_matches_reference_phases[compiler2-reset-weights-case1-60-impulses1]&gt;&gt;
+compiler = functools.partial(&lt;function bucketed_case at 0x12400d630&gt;, exact_counts=True)
+precision = '0'
+
+    @pytest.fixture(scope='module')
+    def harness(
+        request: pytest.FixtureRequest, compiler: Factory, precision: str
+    ) -&gt; Iterator[Harness]:
+        assert importlib.metadata.version('mlx') == '0.32.3'
+        assert importlib.metadata.version('mlx-metal') == '0.32.3'
+        assert np.__version__ == '1.26.4'
+        assert mx.metal.is_available()
+        mx.disable_compile()
+        path = cast(str | None, request.config.getoption('--artifact-output'))
+        output = Path(path) if path is not None else None
+        is_serial = compiler is serial
+&gt;       recorder = ArtifactRecorder(output, '' if is_serial else f'{compiler.__name__}-')
+E       AttributeError: 'functools.partial' object has no attribute '__name__'. Did you mean: '__ne__'?
+
+tests/qualification/conftest.py:38: AttributeError</error></testcase><testcase classname="tests.qualification.test_factored_accumulation" name="test_factored_adapter_uses_metal_with_cpu_default_and_resets_pending_trials[compiler2]" time="0.001"><error message="failed on setup with &quot;AttributeError: 'functools.partial' object has no attribute '__name__'. Did you mean: '__ne__'?&quot;">request = &lt;SubRequest 'harness' for &lt;Function test_factored_network_matches_reference_phases[compiler2-reset-weights-case1-60-impulses1]&gt;&gt;
+compiler = functools.partial(&lt;function bucketed_case at 0x12400d630&gt;, exact_counts=True)
+precision = '0'
+
+    @pytest.fixture(scope='module')
+    def harness(
+        request: pytest.FixtureRequest, compiler: Factory, precision: str
+    ) -&gt; Iterator[Harness]:
+        assert importlib.metadata.version('mlx') == '0.32.3'
+        assert importlib.metadata.version('mlx-metal') == '0.32.3'
+        assert np.__version__ == '1.26.4'
+        assert mx.metal.is_available()
+        mx.disable_compile()
+        path = cast(str | None, request.config.getoption('--artifact-output'))
+        output = Path(path) if path is not None else None
+        is_serial = compiler is serial
+&gt;       recorder = ArtifactRecorder(output, '' if is_serial else f'{compiler.__name__}-')
+E       AttributeError: 'functools.partial' object has no attribute '__name__'. Did you mean: '__ne__'?
+
+tests/qualification/conftest.py:38: AttributeError</error></testcase></testsuite></testsuites>

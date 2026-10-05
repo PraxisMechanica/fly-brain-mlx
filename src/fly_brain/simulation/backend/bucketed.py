@@ -4,11 +4,15 @@ from functools import partial
 import mlx.core as mx
 import numpy as np
 
-from fly_brain.simulation.mapping import bucket_destinations, silence_sources
+from fly_brain.simulation.mapping import (
+    absolute_count_sums,
+    bucket_destinations,
+    silence_sources,
+)
 from fly_brain.simulation.models import Connectome
 
 from . import core
-from .accumulation import factored_sum
+from .accumulation import exact_count_sum, factored_sum
 from .arrays import boolean_input
 from .engines import Execution
 
@@ -25,9 +29,11 @@ class DeviceBucket:
 class Layout:
     buckets: tuple[DeviceBucket, ...]
     inverse_targets: mx.array
+    edges: int
+    exact_counts: bool
 
 
-def make_layout(connectome: Connectome) -> Layout:
+def make_layout(connectome: Connectome, *, exact_counts: bool = False) -> Layout:
     buckets = bucket_destinations(connectome)
     target_order = np.concatenate([bucket.targets for bucket in buckets])
     inverse = np.argsort(target_order).astype(np.int32)
@@ -43,12 +49,22 @@ def make_layout(connectome: Connectome) -> Layout:
                 for bucket in buckets
             ),
             mx.array(inverse),
+            connectome.sources.size,
+            exact_counts and bool(np.all(absolute_count_sums(connectome) <= 2**24)),
         )
 
 
 def accumulate(
     layout: Layout, accepted: mx.array, initial: mx.array
 ) -> tuple[mx.array, mx.array, mx.array]:
+    if (
+        accepted.dtype != mx.bool_
+        or accepted.ndim != 2
+        or accepted.shape[1] != layout.edges
+        or initial.shape != (accepted.shape[0], layout.inverse_targets.size)
+        or initial.dtype != mx.float32
+    ):
+        raise ValueError('Accumulation requires Boolean edges and native trial state')
     with mx.stream(mx.gpu):
         padded_events = mx.concatenate(
             [mx.zeros((accepted.shape[0], 1), dtype=mx.bool_), accepted], axis=1
@@ -59,7 +75,8 @@ def accumulate(
         for bucket in layout.buckets:
             active = padded_events[:, bucket.edge_ids + 1] & bucket.occupied
             counts = mx.where(active, bucket.counts, 0)
-            result, high, low = factored_sum(counts, initial[:, bucket.targets])
+            reduce_counts = exact_count_sum if layout.exact_counts else factored_sum
+            result, high, low = reduce_counts(counts, initial[:, bucket.targets])
             outputs.append(result)
             high_counts.append(high)
             low_counts.append(low)
@@ -132,6 +149,8 @@ def prepare(
     input_targets: tuple[int, ...],
     silenced: tuple[int, ...],
     precision: str,
+    *,
+    exact_counts: bool = False,
 ) -> Execution:
     mx.disable_compile()
     connectome = silence_sources(connectome, silenced)
@@ -143,5 +162,5 @@ def prepare(
         input_targets,
         precision=precision,
     )
-    layout = make_layout(connectome)
+    layout = make_layout(connectome, exact_counts=exact_counts)
     return Execution(network, partial(advance, network, layout))

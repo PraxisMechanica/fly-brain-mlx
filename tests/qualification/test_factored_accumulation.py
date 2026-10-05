@@ -11,14 +11,17 @@ from fly_brain.simulation.backend.accumulation import SCALE
 from fly_brain.simulation.backend.arrays import as_host
 from fly_brain.simulation.backend.engines import Factory, factored
 from fly_brain.simulation.models import NetworkCase as Case
-from tests.support.bucketed import bucketed_case
+from tests.support.bucketed import bucketed_case, exact_bucketed_case
 from tests.support.qualification import Harness, events_for, replay_events
 
 pytestmark = [pytest.mark.integration, pytest.mark.reference, pytest.mark.metal]
 INITIAL = core.INITIAL_LAST_SPIKE
 
 
-@pytest.fixture(scope='module', params=(factored, bucketed_case))
+@pytest.fixture(
+    scope='module',
+    params=(factored, bucketed_case, exact_bucketed_case),
+)
 def compiler(request: pytest.FixtureRequest) -> Factory:
     return cast(Factory, request.param)
 
