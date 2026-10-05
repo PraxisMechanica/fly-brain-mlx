@@ -687,6 +687,11 @@ Reusable case execution checkpoint (2026-10-05):
 - **Two live three-engine tests pass, zero failures/errors/skips**, across populated and silent networks, complete horizon and initial-state coverage, independent reference processes, and mandatory repeat evidence. [Report](data/results/milestone-4-case-execution-20261005-01.xml). The default application suite remains **208 passed, zero failures/errors/skips**; all 133 files pass Ruff checks, strict Pyright has zero errors/warnings, and all three dependency contracts pass (97 modules / 386 dependencies).
 - This closes reusable execution only. Validated spike normalization, frozen scoring/reporting, and full matrix cases remain open. The separately recorded 200-test full scientific regression is not rerun for this adapter-only unit. Commit this working state before the next change.
 
+Native case-coordinate loading checkpoint (2026-10-05):
+
+- At `664051b`, load actual single-case spike arrays and record their native dtype/shape/byte digests before conversion. Require native reference int32 neuron indices and exact float64 integer-clock times; require native int64 MLX/CPU coordinates and aligned CPU trial-zero indices. Reject duplicates and out-of-range coordinates before mapping through the pinned CSV neuron order.
+- Eight file-boundary cases verify correct identifier mapping/native descriptors and reject precision changes, off-clock times, wrong neuron bounds, nonzero/misaligned trials, and duplicate spikes. The default suite passes **216 tests, zero failures/errors/skips**. [Report](data/results/milestone-4-case-spikes-20261005-01.xml). All 135 files pass Ruff checks; strict Pyright has zero errors/warnings. No numerical method or reference changes. Commit this working state before frozen scoring/reporting.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.
