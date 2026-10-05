@@ -717,6 +717,13 @@ Validated parity command checkpoint (2026-10-05):
 - **286 application tests pass, zero failures/errors/skips**, including all 52 allowed cases, eight invalid combinations, and accepted/unaccepted dispatch statuses. [Report](data/results/milestone-4-parity-options-20261005-01.xml). All 141 files pass Ruff checks, strict Pyright has zero errors/warnings, and all three dependency contracts pass (101 modules / 436 dependencies). Installed command help succeeds. [Reproduction command](README.md#verify).
 - Next: complete-suite regression followed by P9 trial 0 at 0.1 seconds on the full pinned connectome. Existing acceptance remains **1/52 cases**. Commit this passing command before execution.
 
+Complete case-runner regression checkpoint (2026-10-05):
+
+- At `3fe804c`, the installed `qualify` command passes **203 scientific tests, zero failures/errors/skips**, with 533 dependency warnings in 174.29 seconds. [Result](docs/evidence/milestone-4/case-runner/result.json), [report](docs/evidence/milestone-4/case-runner/tests.xml), and [log](docs/evidence/milestone-4/case-runner/qualification.log). This verifies complete-suite coexistence of the three-engine executor, actual final pending checks, frozen reporter, prescribed driver, and all earlier numerical/reference/device tests.
+- The separate application report passes **286 tests, zero failures/errors/skips**. [Report](docs/evidence/milestone-4/case-runner/application-tests.xml). All 141 files pass Ruff formatting/lint; strict Pyright has zero errors/warnings; all three import contracts pass (101 modules / 436 dependencies); the offline lock check resolves 38 packages. [Quality record](docs/evidence/milestone-4/case-runner/quality.json).
+- All **72 generated trace files / 1,957 native arrays** are archived and every archived file hash is independently checked against its original. [Trace archive](docs/evidence/milestone-4/case-runner/traces.zip), [verification/source hashes](docs/evidence/milestone-4/case-runner/verification.json), and [executed verification](docs/evidence/milestone-4/case-runner/executed-verification.py). Production numerical sources, reference equations/setup, and dependencies remain unchanged since `7b70c29`.
+- Full local outputs remain preserved. Next is complete P9 trial 0 at 0.1 seconds through the installed command; acceptance remains **1/52 cases** until new results pass independent inspection. Commit this verified execution evidence before that run.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.

@@ -1,0 +1,20 @@
+{
+  "command": [
+    "/Users/ocasta/Code/fly-brain/.venv/bin/python3",
+    "-m",
+    "pytest",
+    "-q",
+    "tests/qualification",
+    "--disable-warnings",
+    "--artifact-output",
+    "/Users/ocasta/Code/fly-brain/data/results/milestone-4-case-runner-regression-20261005-01",
+    "--junitxml=/Users/ocasta/Code/fly-brain/data/results/milestone-4-case-runner-regression-20261005-01/tests.xml"
+  ],
+  "exit_code": 0,
+  "MLX_ENABLE_TF32": "0",
+  "accepted": true,
+  "tests": 203,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0
+}
