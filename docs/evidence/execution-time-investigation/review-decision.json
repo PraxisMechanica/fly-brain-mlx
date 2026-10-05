@@ -1,0 +1,51 @@
+{
+  "assignment_checkpoint": "ca64c6b2337f8a88826ae76b18e0818cff97a6ce",
+  "parent_verification_checkpoint": "8acba3ffcbc345988b9c167478483e03669b7dfe",
+  "agent": "/root/review_execution_strategy",
+  "model": "gpt-6-astra",
+  "reasoning_effort": "xhigh",
+  "fresh_context": true,
+  "review_completed": true,
+  "review_read_only": true,
+  "recommendation": "Correct qualification execution and measure costs before a broad C++ rewrite; retain Python orchestration and MLX production; use native kernels only for a measured bounded bottleneck.",
+  "confidence_in_recommended_next_phase_percent": 95,
+  "parent_independent_verification": [
+    "Read contract prefix authorization and complete causal/metric/repeat obligations.",
+    "Statically evaluate matrix source: 52 cases; 1231000 separate-duration steps; 1121000 after authorized sugar/P9 prefix sharing.",
+    "Read and calculate preserved reference/CPU/production timing comparisons and native descriptor repeat equality.",
+    "Parse actual P9 stack: 183/207 main-thread samples in native sparse matrix multiplication.",
+    "Inspect queue updates, ledger coverage, host hashing, phase widths, reference writer and case execution/scoring order.",
+    "Inspect original CPU proof: both compared modes already capture/hash state; 5.98 percent is not total observation overhead.",
+    "Verify installed MLX0.32.3 kernel signature/options and official Python/C++/kernel/precision documentation.",
+    "Confirm no application source, tests, pyproject.toml or uv.lock changes since a4920ef."
+  ],
+  "calculation_result_sha256": "929e249ed748c65d8763d31ff6409136629fefe8b99384cb4aa2411fff856164",
+  "unresolved_measurements": [
+    "whole-run CPU phase profile",
+    "GPU hotspot ranking",
+    "individual serialization/hash/ledger costs",
+    "ten-second case cost",
+    "batch cost",
+    "safe useful concurrency",
+    "replacement full-network correctness"
+  ],
+  "limits": [
+    "Logical scan/operation volumes are not measured physical memory traffic or speedups.",
+    "Two fresh maximal runs and actual native shorter-boundary witnesses are required for prefix reuse.",
+    "Reference reuse requires independent dependency/provenance proof and complete actual fresh repeats.",
+    "Detailed first-budget causal checks cannot be replaced by endpoint or cross-precision digest equality.",
+    "No representation or compiled/custom-kernel mode is approved by this review."
+  ],
+  "old_implementation_accepted_cases": 9,
+  "required_case_identities": 52,
+  "candidate_accepted_full_cases": 0,
+  "new_tests_simulations_or_benchmarks_started": false,
+  "production_changed": false,
+  "data_deleted": false,
+  "p9_pid": 62191,
+  "p9_session_id": 88326,
+  "p9_resume_authorized": false,
+  "goal_status": "paused",
+  "completion_forecast_supported": false,
+  "next_action_during_pause": "Commit the investigation and proposal, report the findings, and remain paused."
+}
