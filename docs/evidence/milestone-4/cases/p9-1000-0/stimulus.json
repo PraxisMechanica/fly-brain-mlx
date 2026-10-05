@@ -1,0 +1,53 @@
+{
+  "format_version": 1,
+  "layout": [
+    "trial",
+    "step",
+    "channel"
+  ],
+  "shape": [
+    1,
+    1000,
+    2
+  ],
+  "dtype": "|u1",
+  "dt_ms": 0.1,
+  "generator": "PCG64",
+  "numpy": "1.26.4",
+  "seed": 20261004,
+  "generator_code": 1,
+  "trial_indices": [
+    0
+  ],
+  "targets": [
+    83620,
+    119032
+  ],
+  "activated_ids": [
+    720575940627652358,
+    720575940635872101
+  ],
+  "rates_hz": [
+    100.0,
+    100.0
+  ],
+  "experiment": "p9",
+  "experiment_code": 1,
+  "silenced_ids": [],
+  "canonical_event_sha256": "4657cea6584dcd2167e23f230f96809a682673167bea9b6de5577ae2cb2a3e3b",
+  "per_trial_event_sha256": [
+    "4657cea6584dcd2167e23f230f96809a682673167bea9b6de5577ae2cb2a3e3b"
+  ],
+  "seed_tuples": [
+    [
+      20261004,
+      1,
+      0
+    ]
+  ],
+  "input_sha256": {
+    "completeness": "52b0ac6094cd32c546f8d4c341e094376f48f4e791f8db9b166de5dff8199ea4",
+    "connectivity": "efeb23fb99098e9c390f6869969b2a121a2ee92c833cfc45ecb2c1d8e1af0347"
+  },
+  "artifact_sha256": "c3ee39d89b9321058101d0e5b4ae1e7ef1dd9155d1796bb6e507ce6d86b712af"
+}
