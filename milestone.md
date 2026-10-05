@@ -22,6 +22,8 @@ At `74fd0f5`, implement buffered canonical Boolean rows and the system zlib `crc
 
 Dispatch `/root/review_active_cpu_adoption` at `74fd0f5` with fresh-context `gpt-6-astra` at `xhigh`. Its bounded read-only question is the prospective equivalence decision and decisive qualification for active-source CPU evaluation while preserving the original Torch model as oracle. The parent implements independent capture work while awaiting the review; no evaluator substitution occurs before the reviewed checks pass.
 
+At `4ae255a`, measure the adopted writer body against the preserved original using the same 261,751,204-byte payload and consumer. Three runs of each produce identical full hashes and independently verified checksums. Median wall time falls from **1.188 s to 0.177 s (6.71×)**; producer CPU time falls from **1.028 s to 0.028 s**. [Executed diagnostic, native source and measurements](docs/evidence/execution-time-investigation/reference-writer/adopted/result.json). The six payloads use repeated retained endpoint arrays; this is a serializer measurement, distinct from the complete-frame tests above and from whole-check timing.
+
 The following paragraphs preserve the investigation history and the limits that applied before resumption.
 
 The user requests an explanation for the successive 2–3-day, 10–14-day, and 14–21-day estimates; measured causes of slow progress; and a review of different approaches, including C/C++. Investigation may read existing source and evidence, inspect preserved process state, and record findings. Do not adopt the numerical prototype, start new tests or simulations, optimize the application, or relax acceptance gates during this hold.

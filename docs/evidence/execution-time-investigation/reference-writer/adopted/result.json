@@ -1,0 +1,73 @@
+{
+  "checkpoint": "4ae255a23dd025d1f1a9b086c151b055007efded",
+  "scope": "Adopted writer component only, using repeated retained endpoint arrays; complete physical frame qualification is separate.",
+  "measurements": {
+    "original": {
+      "samples": [
+        {
+          "wall_s": 1.4421194170136005,
+          "bytes": 261751204,
+          "sha256": "9ecbd2960574e9cba655f0c19746f00ea6d439409b2f775026e8c282fc4e9757",
+          "producer_wall_s": 1.28962,
+          "producer_cpu_s": 1.09372
+        },
+        {
+          "wall_s": 1.1559699170175008,
+          "bytes": 261751204,
+          "sha256": "9ecbd2960574e9cba655f0c19746f00ea6d439409b2f775026e8c282fc4e9757",
+          "producer_wall_s": 1.15105,
+          "producer_cpu_s": 1.01312
+        },
+        {
+          "wall_s": 1.187819374987157,
+          "bytes": 261751204,
+          "sha256": "9ecbd2960574e9cba655f0c19746f00ea6d439409b2f775026e8c282fc4e9757",
+          "producer_wall_s": 1.18183,
+          "producer_cpu_s": 1.02751
+        }
+      ],
+      "median_wall_s": 1.187819374987157,
+      "median_cpu_s": 1.02751
+    },
+    "adopted": {
+      "samples": [
+        {
+          "wall_s": 0.17698799999197945,
+          "bytes": 261751204,
+          "sha256": "9ecbd2960574e9cba655f0c19746f00ea6d439409b2f775026e8c282fc4e9757",
+          "producer_wall_s": 0.171902,
+          "producer_cpu_s": 0.028183
+        },
+        {
+          "wall_s": 0.17538054200122133,
+          "bytes": 261751204,
+          "sha256": "9ecbd2960574e9cba655f0c19746f00ea6d439409b2f775026e8c282fc4e9757",
+          "producer_wall_s": 0.169886,
+          "producer_cpu_s": 0.027966
+        },
+        {
+          "wall_s": 0.18558941700030118,
+          "bytes": 261751204,
+          "sha256": "9ecbd2960574e9cba655f0c19746f00ea6d439409b2f775026e8c282fc4e9757",
+          "producer_wall_s": 0.178719,
+          "producer_cpu_s": 0.030798
+        }
+      ],
+      "median_wall_s": 0.17698799999197945,
+      "median_cpu_s": 0.028183
+    }
+  },
+  "all_six_complete_payload_hashes_and_crc32_match": true,
+  "flags": [
+    "-std=c++17",
+    "-O3",
+    "-ffast-math",
+    "-fno-finite-math-only",
+    "-lz"
+  ],
+  "application_source_sha256": "1d9c15b87de2b602e387cb511542c462f36092fdb15bc2e074c71cad4f70cc7b",
+  "reference_artifact_sha256": "b861402a0b44c835756b478f885a34be81ac270d1d48d9fa6565d2ea6efd9f90",
+  "cpp_sha256": "88d52fe78caf0e8fcd8e27b536dd149798dbb7826fdc8c1e898bf8eb38d92b20",
+  "runner_sha256": "d43053a6d14a792d46f23c294d337479a2ee6281cbb6045a65144a3efc53e5f0",
+  "zlib_runtime": "1.2.12"
+}
