@@ -1,4 +1,5 @@
 import io
+from dataclasses import replace
 from pathlib import Path
 
 import numpy as np
@@ -23,7 +24,12 @@ def context() -> CauseContext:
         np.array([0, 2], dtype=np.int32),
         'actual-native-due-mask-hash',
     )
-    return CauseContext((1,), row, row)
+    previous = replace(
+        row,
+        reference={'pre_v': np.array([-0.046, -0.045], dtype=np.float64)},
+        mlx={'pre_v': np.array([-46, -45], dtype=np.float32)},
+    )
+    return CauseContext((1,), row, previous)
 
 
 def test_cause_archive_preserves_native_phases_and_all_actual_queue_slots(
@@ -35,15 +41,42 @@ def test_cause_archive_preserves_native_phases_and_all_actual_queue_slots(
     assert metadata['neurons'] == [1]
     with np.load(path, allow_pickle=False) as artifact:
         assert len(artifact.files) == 52
-        for position in ('current', 'previous'):
+        for position, observed in (
+            ('current', actual.current),
+            ('previous', actual.previous),
+        ):
+            assert observed is not None
             assert (
                 artifact[f'{position}_reference_pre_v'].tobytes()
-                == actual.current.reference['pre_v'].tobytes()
+                == observed.reference['pre_v'].tobytes()
             )
             assert (
                 artifact[f'{position}_mlx_pre_v'].tobytes()
-                == actual.current.mlx['pre_v'].tobytes()
+                == observed.mlx['pre_v'].tobytes()
             )
-            assert artifact[
-                f'{position}_reference_pathway_0_queue_0_slot_18'
-            ].tolist() == [0, 2]
+            for engine, fields in (
+                ('reference', observed.reference),
+                ('mlx', observed.mlx),
+            ):
+                for name, value in fields.items():
+                    saved = artifact[f'{position}_{engine}_{name}']
+                    assert (saved.dtype, saved.shape, saved.tobytes()) == (
+                        value.dtype,
+                        value.shape,
+                        value.tobytes(),
+                    )
+            for slot, value in enumerate(observed.snapshot.pathways[0].queues[0].slots):
+                saved = artifact[f'{position}_reference_pathway_0_queue_0_slot_{slot}']
+                assert (saved.dtype, saved.shape, saved.tobytes()) == (
+                    value.dtype,
+                    value.shape,
+                    value.tobytes(),
+                )
+
+
+def test_existing_cause_evidence_cannot_be_overwritten(tmp_path: Path) -> None:
+    path = tmp_path / 'retained.npz'
+    path.write_bytes(b'preserved evidence')
+    with pytest.raises(FileExistsError):
+        write_context(path, context())
+    assert path.read_bytes() == b'preserved evidence'

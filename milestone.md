@@ -636,6 +636,10 @@ Raw cause archive checkpoint (2026-10-05):
 - At `fe4185c`, the qualification-owned writer persists current/preceding native phase fields, actual recurrent/source spikes, delivery order, every physical queue slot/offset, and actual MLX due identities. Metadata retains the exact physical clock/cursor and native due-mask hash; no unit or precision conversion occurs. Files use exclusive creation.
 - An initial test expected the wrong fixture array count (54 instead of 52); it is corrected before this checkpoint. The default application suite passes **200 tests, zero failures/errors/skips**; full Ruff and strict Pyright pass. This qualifies basic raw serialization only; full-field/no-overwrite checks and actual device reduction-input capture are next. Commit this passing unit before extending it.
 
+Cause archive preservation checkpoint (2026-10-05):
+
+- At `2885990`, current and preceding native state differ in the file fixture; every dtype/shape/byte and all 19 actual queue-slot arrays survive unchanged. Existing evidence cannot be overwritten. The default application suite passes **201 tests, zero failures/errors/skips**; full Ruff and strict Pyright pass. No execution or numerical method changes. Commit this passing serialization qualification before actual device leaf capture.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.
