@@ -2,6 +2,14 @@
 
 This is the authoritative project plan, acceptance criteria, and progress record. Updated 2026-10-05 (Europe/Paris). It consolidates the supplied charter, milestone specification, startup evidence, and subsequent user amendments.
 
+## Pull-request cleanup — 2026-10-05
+
+Further development is held by the latest user instruction until the rejected pull-request series is cleaned up. PRs 1–4 are closed; their source commits, branches, incoming work, and evidence are preserved. The first replacement reapplies only the shared local commit/push checks and their source-only rejection fixtures, including the indexed-input guard. It starts from `2362fab5c2019b95d665669f13ff81b39a537b20` on `ocasta181/local-quality-checks`; confidence in this scope and dependency order is 99%.
+
+Continuous integration, documentation organization, and architecture-coverage characterization remain separate changes. Each replacement must target `main`; the earlier stacked-PR amendment is superseded. Do not add bulk generated metric reports to review diffs. Full structural-rule coverage remains incomplete; local checks do not establish complete architecture compliance or release scientific development.
+
+Verification of this reconstructed local-check scope: `just check` passes formatting, lint, strict typing, all three import contracts, 37 quality tests with no failures or skips, and staged metric comparisons. All fifteen retained tooling/evidence files match their preserved source bytes. Application/scientific suites were not rerun; no application or numerical source is changed. Required native commit and push hooks must also pass before delivery.
+
 ## Development resumed — measured performance remediation
 
 The user's 2026-10-05 follow-up supplies `origin = git@github.com:PraxisMechanica/fly-brain-mlx.git` and requests publishing the current work before installing static analysis and the reusable code-quality checks. **The first push is complete** at `02613c0`: GitHub's repository API exposes `src/fly_brain` and the remote `main` matches the local commit. The initial push failed because the imported upstream commit was a shallow history boundary with a missing parent; `git fetch --unshallow upstream` restores that history without changing project commits, then `git push --no-thin -u origin main` succeeds. Future incremental commits must push to this user-owned origin. Earlier pending-push statements below are historical.
