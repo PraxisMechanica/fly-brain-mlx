@@ -34,3 +34,37 @@ def test_physical_digest_includes_actual_clock_and_source_cursor(
     snapshot = next(read_frames(io.BytesIO(b''.join(parts)), shape))
     assert isinstance(snapshot, StepSnapshot)
     assert physical_hash(snapshot) != physical_hash(replace(snapshot, **{field: value}))
+
+
+def test_physical_digest_detects_ordered_spikes_delivery_and_every_queue_position() -> (
+    None
+):
+    shape, parts = queued_stream()
+    snapshot = next(read_frames(io.BytesIO(b''.join(parts)), shape))
+    assert isinstance(snapshot, StepSnapshot)
+    pathway = snapshot.pathways[0]
+    queue = pathway.queues[0]
+    pathway = replace(pathway, delivered=queue.slots[-1])
+    snapshot = replace(
+        snapshot,
+        spikes=np.array([0, 1], dtype=np.int32),
+        source_spikes=np.array([0, 1], dtype=np.int32),
+        pathways=(pathway,),
+    )
+    changed_queues = (
+        replace(queue, offset=1),
+        replace(queue, slots=queue.slots[::-1]),
+        replace(queue, slots=(*queue.slots[:-1], queue.slots[-1][::-1])),
+    )
+    changed = (
+        replace(snapshot, spikes=snapshot.spikes[::-1]),
+        replace(snapshot, source_spikes=snapshot.source_spikes[::-1]),
+        replace(
+            snapshot, pathways=(replace(pathway, delivered=pathway.delivered[::-1]),)
+        ),
+        *(
+            replace(snapshot, pathways=(replace(pathway, queues=(value,)),))
+            for value in changed_queues
+        ),
+    )
+    assert len({physical_hash(value) for value in (snapshot, *changed)}) == 7

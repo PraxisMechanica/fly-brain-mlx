@@ -627,6 +627,10 @@ Reusable observer evidence checkpoint (2026-10-05):
 - At `7b70c29`, the runner needs reusable evidence because cases vary while actual native state, physical queue order, clocks, and frozen gates must remain invariant. Keep orchestration and file/device work in qualification adapters; use the existing pure case plan and injected collaborators. No database, new framework, numerical method, or external endpoint is needed.
 - Add native array descriptors and actual reference physical-snapshot hashing with the same deterministic encoding used by the qualified full proof. Precision, shape, signed zero, step, clock, native time, and source cursor all affect evidence. The default application suite passes **198 tests, zero failures/errors/skips**; full Ruff and strict Pyright pass. Commit this working unit before queue/spike integrity checks and runner wiring.
 
+Physical-order evidence checkpoint (2026-10-05):
+
+- At `9208533`, actual recurrent/source spike order, delivered row order, queue offset, physical slot order, and original edge order within a slot each produce a distinct physical digest. The default application suite passes **199 tests, zero failures/errors/skips**; full Ruff and strict Pyright pass. This closes the reusable native/physical hashing boundary without changing observation or numerical execution. Commit this verified unit before cause-file writing.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.
