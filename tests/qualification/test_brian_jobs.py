@@ -1,4 +1,5 @@
 import os
+import re
 import struct
 import sys
 import zlib
@@ -157,6 +158,88 @@ def test_live_queues_follow_original_rows_and_canonical_input_bits(runs: Runs) -
                 ledger.check(frame)
                 assert len(ledger.pending) <= 19
         assert ledger.step == 101
+
+
+def test_phase_capture_preserves_ordinary_numerical_source_and_inputs(
+    runs: Runs,
+) -> None:
+    stock, observed = (runs.jobs[name].directory for name in ('ordinary', 'observed'))
+    for folder in ('code_objects', 'static_arrays'):
+        for file in (stock / folder).iterdir():
+            if folder == 'static_arrays' or file.suffix in ('.cpp', '.h'):
+                assert (
+                    file.read_bytes() == (observed / folder / file.name).read_bytes()
+                ), file.name
+    ordinary_main, observed_main = (
+        (path / 'main.cpp').read_text() for path in (stock, observed)
+    )
+    calls = r'reference_network.add\(&defaultclock, (\w+)\);'
+    core_calls = [
+        name
+        for name in re.findall(calls, observed_main)
+        if not name.startswith(
+            ('_run_reference_pre_', '_run_reference_before_', '_run_reference_end_')
+        )
+    ]
+    assert core_calls == re.findall(calls, ordinary_main)
+    assert (
+        len(re.findall(r'reference_network.run\(', ordinary_main))
+        == len(re.findall(r'reference_network.run\(', observed_main))
+        == 1
+    )
+    assert observed_main.index(
+        'reference_network.add(&defaultclock, +[]()'
+    ) > observed_main.index(
+        'reference_network.add(&defaultclock, _run_reference_end_codeobject);'
+    )
+    initialization = [
+        [
+            line.strip()
+            for line in main.split('reference_network.clear();')[0].splitlines()
+            if '_array_default_neurons_' in line and '=' in line
+        ]
+        for main in (ordinary_main, observed_main)
+    ]
+    assert initialization[0] == initialization[1]
+    for field in ('v', 'g', 'lastspike'):
+        assert any(
+            f'_array_default_neurons_{field}[i] =' in line for line in initialization[0]
+        )
+
+
+@pytest.mark.parametrize(
+    ('edges', 'channels'), ((True, False), (False, True), (False, False))
+)
+def test_silent_and_empty_edge_jobs_preserve_real_queue_geometry(
+    edges: bool, channels: bool, tmp_path: Path, request: pytest.FixtureRequest
+) -> None:
+    sources = np.array([0, 0] if edges else [], dtype=np.int32)
+    destinations = np.array([1, 2] if edges else [], dtype=np.int32)
+    counts = np.array([360, -1] if edges else [], dtype=np.int32)
+    connectome = Connectome(
+        np.arange(3, dtype=np.int64), sources, destinations, counts, counts * 0.275
+    )
+    events = np.zeros((39, int(channels)), dtype=np.uint8)
+    if channels:
+        events[::3, 0] = 1
+    destination = cast(str | None, request.config.getoption('--artifact-output'))
+    root = (
+        Path(destination) / f'brian-job-{edges}-{channels}' if destination else tmp_path
+    )
+    job = build(connectome, (0,) if channels else (), (), events, root / 'build')
+    ledger = ReferenceQueues(sources, 3, events)
+    final = None
+    for frame in run(job, root / 'results'):
+        if isinstance(frame, (StepSnapshot, FinalSnapshot)):
+            ledger.check(frame)
+        if isinstance(frame, FinalSnapshot):
+            final = frame
+    assert final is not None and len(final.step.pathways) == int(edges) + int(channels)
+    values = results(job, root / 'results')
+    if channels:
+        assert np.array_equal(np.rint(values['spike_t'] / 0.0001), np.arange(1, 39, 3))
+    else:
+        assert values['spike_i'].size == 0 and final.step.source_cursor == -1
 
 
 def program(directory: Path, body: str, observed: bool) -> BrianJob:

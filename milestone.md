@@ -433,6 +433,11 @@ Reference-ledger fault checkpoint (2026-10-05):
 - Retained-stream integration is committed at `cee1599`. Forty-four additional fault cases across all four actual transport modes reject changed source cursors/channels, invalid/duplicate spikes, shifted clocks, altered queue offsets/delivery/order, lost pending rows, changed replay queues, and changed final spike space. The **155-test application suite passes with zero failures/errors/skips**; full strict Pyright, Ruff, and formatting pass.
 - These failures are deliberately injected into decoded observations; the model and retained data are preserved. The independent checker is ready for complete-network queue validation. Scientific full-suite coexistence and complete-network observer transparency/memory remain open. Commit this passing unit before those executions.
 
+Reference setup/source checkpoint (2026-10-05):
+
+- Ledger fault coverage is committed at `3f1d6b0`. The complete reference-job module now passes **12 tests, zero failures/errors/skips**, in fresh output `data/results/milestone-4-reference-jobs-20261005-05`. Every ordinary numerical code object and original static input is byte-identical with phase capture enabled. Actual neuron initialization statements, core callback order, one continuous run, and the appended observer position agree. Silent input, empty recurrent edges, and no-pathway execution preserve their actual queue geometry and expected spikes.
+- I initially guessed the generated source's index name and scalar formatting in one assertion. The resulting eleven-pass/one-failure report and build directory `data/results/milestone-4-reference-jobs-20261005-04` remain preserved. The corrected test compares actual initialization statements exactly, without normalizing their values or changing the model. Full strict Pyright, Ruff, and formatting pass. Commit this passing setup unit before complete-network execution; complete regression/evidence follows separately.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.
