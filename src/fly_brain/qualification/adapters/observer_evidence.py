@@ -15,6 +15,24 @@ def array_record(value: NDArray[np.generic]) -> dict[str, object]:
     }
 
 
+def physical_arrays(
+    snapshot: StepSnapshot, prefix: str
+) -> dict[str, NDArray[np.generic]]:
+    arrays: dict[str, NDArray[np.generic]] = {
+        prefix + '_spikes': snapshot.spikes,
+        prefix + '_source_spikes': snapshot.source_spikes,
+    }
+    for index, pathway in enumerate(snapshot.pathways):
+        path_prefix = f'{prefix}_pathway_{index}'
+        arrays[path_prefix + '_delivered'] = pathway.delivered
+        for thread, queue in enumerate(pathway.queues):
+            queue_prefix = f'{path_prefix}_queue_{thread}'
+            arrays[queue_prefix + '_offset'] = np.asarray(queue.offset, dtype=np.int32)
+            for slot, values in enumerate(queue.slots):
+                arrays[f'{queue_prefix}_slot_{slot}'] = values
+    return arrays
+
+
 def physical_record(snapshot: StepSnapshot) -> dict[str, object]:
     return {
         'step': snapshot.step,

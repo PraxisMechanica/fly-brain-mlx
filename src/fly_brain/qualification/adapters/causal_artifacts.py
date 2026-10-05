@@ -4,7 +4,7 @@ import numpy as np
 from numpy.typing import NDArray
 
 from .causal_capture import CauseContext
-from .observer_evidence import array_record, physical_record
+from .observer_evidence import array_record, physical_arrays, physical_record
 
 
 def write_context(
@@ -28,18 +28,7 @@ def write_context(
                 {f'{position}_{engine}_{name}': value for name, value in fields.items()}
             )
         arrays[f'{position}_mlx_due_edges'] = observed.mlx_due_edges
-        arrays[f'{position}_reference_spikes'] = observed.snapshot.spikes
-        arrays[f'{position}_reference_source_spikes'] = observed.snapshot.source_spikes
-        for index, pathway in enumerate(observed.snapshot.pathways):
-            prefix = f'{position}_reference_pathway_{index}'
-            arrays[prefix + '_delivered'] = pathway.delivered
-            for thread, queue in enumerate(pathway.queues):
-                queue_prefix = f'{prefix}_queue_{thread}'
-                arrays[queue_prefix + '_offset'] = np.asarray(
-                    queue.offset, dtype=np.int32
-                )
-                for slot, values in enumerate(queue.slots):
-                    arrays[f'{queue_prefix}_slot_{slot}'] = values
+        arrays.update(physical_arrays(observed.snapshot, f'{position}_reference'))
         steps.append(
             {
                 'position': position,

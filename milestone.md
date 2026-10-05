@@ -651,6 +651,11 @@ Live paired collector checkpoint (2026-10-05):
 - **Two live reference/Metal tests pass, zero failures/errors/skips**, with populated and empty networks, partial final blocks, all 102 physical observations, native float64/float32 preservation, fresh-process replay, and no-overwrite checks. [Live test report](data/results/milestone-4-paired-collector-20261005-01.xml). The default application suite passes **201 tests, zero failures/errors/skips**; all 126 files pass Ruff checks, strict Pyright has zero errors/warnings, and all three dependency contracts pass (93 modules / 352 dependencies).
 - This closes basic live collection only. Actual final reference queue arrays, cause-file integration, and complete matrix execution remain next. No additional full-network case is accepted. Commit this passing working state before extending the collector.
 
+Final physical queue archive checkpoint (2026-10-05):
+
+- At `70b6ed7`, retain every actual final reference spike/channel array, delivered row array, queue offset, and ordered physical slot array, with native descriptors and exact clock/cursor metadata. The same physical-array helper now serves cause and final archives; existing cause filenames and bytes remain unchanged.
+- **Two live reference/Metal tests pass, zero failures/errors/skips**, verifying every retained array against its observed native descriptor and fresh-process repeat. [Report](data/results/milestone-4-paired-collector-20261005-02.xml). The default application suite remains **201 passed, zero failures/errors/skips**; full Ruff formatting/lint and strict Pyright pass. Cause-file integration and matrix execution remain open. Commit this working state before the next unit.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.

@@ -6,6 +6,7 @@ import numpy as np
 import pytest
 
 from fly_brain.qualification.adapters.brian_jobs import build
+from fly_brain.qualification.adapters.observer_evidence import array_record
 from fly_brain.qualification.adapters.paired_collect import collect
 from fly_brain.simulation.backend.bucketed import prepare
 from fly_brain.simulation.models import Stimulus
@@ -52,6 +53,22 @@ def test_live_collection_retains_complete_native_and_physical_replay(
         ]
         assert [row['step'] for row in physical] == list(range(102))
         assert all(len(row['sha256']) == 64 for row in physical)
+        metadata = json.loads((output / 'reference-final-physical.json').read_text())
+        assert metadata['step'] == metadata['clock_step'] == 101
+        with np.load(output / 'reference-final-physical.npz') as queues:
+            assert array_record(queues['reference_spikes']) == metadata['spikes']
+            assert (
+                array_record(queues['reference_source_spikes'])
+                == metadata['source_spikes']
+            )
+            for index, path in enumerate(metadata['pathways']):
+                prefix = f'reference_pathway_{index}'
+                assert array_record(queues[prefix + '_delivered']) == path['delivered']
+                for thread, queue in enumerate(path['queues']):
+                    name = f'{prefix}_queue_{thread}'
+                    assert queues[name + '_offset'].item() == queue['offset']
+                    for slot, descriptor in enumerate(queue['slots']):
+                        assert array_record(queues[f'{name}_slot_{slot}']) == descriptor
         with (
             np.load(output / 'reference-native.npz') as reference,
             np.load(output / 'mlx-native.npz') as mlx,
@@ -63,11 +80,19 @@ def test_live_collection_retains_complete_native_and_physical_replay(
             assert reference['clock_step'].tolist() == [101]
             assert reference['spike_i'].tolist() == mlx['spike_neurons'].tolist()
             assert np.array_equal(reference['spike_t'], mlx['spike_steps'] * 0.0001)
-    for filename in ('phase-digests.jsonl', 'physical-digests.jsonl'):
+    for filename in (
+        'phase-digests.jsonl',
+        'physical-digests.jsonl',
+        'reference-final-physical.json',
+    ):
         assert (outputs[0] / filename).read_bytes() == (
             outputs[1] / filename
         ).read_bytes()
-    for filename in ('reference-native.npz', 'mlx-native.npz'):
+    for filename in (
+        'reference-native.npz',
+        'mlx-native.npz',
+        'reference-final-physical.npz',
+    ):
         with (
             np.load(outputs[0] / filename) as first,
             np.load(outputs[1] / filename) as repeat,

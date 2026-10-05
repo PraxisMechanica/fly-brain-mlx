@@ -12,7 +12,7 @@ from .brian_jobs import BrianJob, results, run
 from .causal_capture import CausalCapture
 from .mlx_ledger import EventLedger
 from .mlx_observer import MLXBlock, observe
-from .observer_evidence import physical_hash
+from .observer_evidence import physical_arrays, physical_hash, physical_record
 from .observer_stream import FinalSnapshot
 from .paired_observer import pair_blocks
 from .reference_queues import ReferenceQueues
@@ -102,6 +102,10 @@ def collect(
             raise ValueError('Reference final observation differs from native output')
     with (output / 'reference-native.npz').open('xb') as artifact:
         np.savez_compressed(artifact, **native)
+    with (output / 'reference-final-physical.npz').open('xb') as artifact:
+        np.savez_compressed(artifact, **physical_arrays(final.step, 'reference'))
+    with (output / 'reference-final-physical.json').open('x') as metadata:
+        json.dump(physical_record(final.step), metadata)
     arrays = {name: value[-1, 0].copy() for name, value in last.fields.items()}
     arrays['queue'] = last.final_queue
     arrays['spike_steps'] = np.asarray(steps, dtype=np.int64)
