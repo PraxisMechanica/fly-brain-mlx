@@ -1,5 +1,5 @@
 import hashlib
-from collections.abc import Iterator
+from collections.abc import Generator
 from dataclasses import dataclass
 
 import mlx.core as mx
@@ -63,7 +63,7 @@ def observe(
     events: NDArray[np.uint8],
     ledger: EventLedger,
     block_size: int = 32,
-) -> Iterator[MLXBlock]:
+) -> Generator[MLXBlock, None, None]:
     if not 1 <= block_size <= 32:
         raise ValueError('MLX observer blocks must contain 1 to 32 steps')
     steps = events.shape[1]

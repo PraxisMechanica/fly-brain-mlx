@@ -645,6 +645,12 @@ Actual reduction-input capture checkpoint (2026-10-05):
 - At `e22812b`, capture the affected targets' actual device leaf row IDs, float32 signed counts, native occupancy/padding, and supplied original-row reference weights without conversion. Cause archives now include these reduction inputs. Missing targets fail explicitly; no reconstructed layout replaces actual device data.
 - **Two real Metal checks pass, zero failures/errors/skips**, across populated and empty layouts, every target, outgoing silencing, exact row order/counts, native dtypes/weights, and padding. The default application suite remains **201 passed, zero failures/errors/skips**; full Ruff and strict Pyright pass. This qualifies capture primitives only; live paired-run cause wiring and complete matrix execution remain open. Commit this passing working state before further integration.
 
+Live paired collector checkpoint (2026-10-05):
+
+- At `3f7eeb8`, add a qualification-owned collector that streams independent Brian2 and MLX observations, checks every common-history phase, retains native phase/actual queue/due hashes, and writes complete native final arrays and spike coordinates. The actual final reference observation must match its separately written native output. Output creation is exclusive; each owned generator closes on exit. Correct the MLX generator's return annotation without changing execution.
+- **Two live reference/Metal tests pass, zero failures/errors/skips**, with populated and empty networks, partial final blocks, all 102 physical observations, native float64/float32 preservation, fresh-process replay, and no-overwrite checks. [Live test report](data/results/milestone-4-paired-collector-20261005-01.xml). The default application suite passes **201 tests, zero failures/errors/skips**; all 126 files pass Ruff checks, strict Pyright has zero errors/warnings, and all three dependency contracts pass (93 modules / 352 dependencies).
+- This closes basic live collection only. Actual final reference queue arrays, cause-file integration, and complete matrix execution remain next. No additional full-network case is accepted. Commit this passing working state before extending the collector.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.
