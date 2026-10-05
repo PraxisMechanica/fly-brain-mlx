@@ -1,0 +1,41 @@
+{
+  "assignment_checkpoint": "1babf5c",
+  "parent_verification_checkpoint": "2d0d8d7",
+  "agent": "/root/review_one_second_timing_remediation",
+  "model": "gpt-6-astra",
+  "reasoning_effort": "xhigh",
+  "review_completed": true,
+  "parent_host_exit_code": 0,
+  "complete_host_output_reproduced_exactly": true,
+  "decision": "Qualify the bounded single-state float32 voltage increment prototype before production adoption or further full-case launches.",
+  "confidence_in_next_action_percent": 95,
+  "voltage_expression": "v + (d * (v + 52) + c * g)",
+  "d_construction": "float32(expm1(-0.1 / 20)), evaluated in host float64 and cast once",
+  "d": -0.004987520631402731,
+  "b": 0.9801986813545227,
+  "c": 0.004937935154885054,
+  "single_native_float32_voltage_and_synaptic_state": true,
+  "model_reference_threshold_and_all_gates_unchanged": true,
+  "production_numerical_source_changed": false,
+  "device_prototype_qualified": false,
+  "full_case_repair_demonstrated": false,
+  "full_matrix_accepted": false,
+  "new_full_case_launches_on_hold": true,
+  "existing_sugar_session": {
+    "id": 3625,
+    "exit_code": 1,
+    "elapsed_s": 6279.312376792019,
+    "case_accepted": false
+  },
+  "existing_p9_session": {
+    "id": 88326,
+    "running": true
+  },
+  "bound_artifact_sha256": {
+    "astra-review.md": "65d84afcbefc7935218f3ece93e7cb94b77ccc57f64d8be10cc5c1e3f640163f",
+    "executed-host-diagnostic.py": "505abc523d23b0de374f81af1c3593a78d9ac7c7d7dd96e8e0ed4893cc2519dd",
+    "reviewer-host-diagnostic.json": "3432022882ce03b7a77ac1179ba370d9cd3e885b7294ff92fdfb7499f87765cb",
+    "parent-host-diagnostic.json": "3432022882ce03b7a77ac1179ba370d9cd3e885b7294ff92fdfb7499f87765cb"
+  },
+  "remaining_checks": "Native local replay; unchanged scientific, scalar, cancellation and representative layout gates; exact fresh repeats, observer transparency, batching/chunking and queue/state/event evidence; explicit adoption decision before the complete new 52-case matrix and actual one-second batches."
+}
