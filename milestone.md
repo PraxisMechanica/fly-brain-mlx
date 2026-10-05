@@ -12,6 +12,8 @@ Status: **resumed by the user's 2026-10-05 instruction to document the approach,
 
 At `20f0b44`, install the standalone `@eng-metrics/code-quality` archive, with all runtime/documentation bytes bound to the unchanged source package at `ed7aea73`. [Archive provenance](tools/code-quality/provenance.json) records pnpm's removal of the metadata file's final newline and the corrected exact verification; no analyzer is changed. Add pinned development-only Radon 6.0.1 and pre-commit 3.2.2 via uv, and lock the metric package via pnpm. The scientific reference packages remain installed at their frozen versions. Actual full committed-snapshot analysis covers **223 supported files / 24,759 nonblank lines**, average/max cyclomatic complexity **5.46 / 28**, heuristic health/maintainability **68.90 / 68.90**. [Complete measured snapshot and unsupported-path inventory](docs/evidence/code-quality/bootstrap/initial-snapshot.json). The [exact staged-snapshot comparison](docs/evidence/code-quality/bootstrap/staged-check.json) passes all three unchanged metrics; its first sandboxed attempt could not write Git's temporary index lock, and the authorized execution passes. Ruff, formatting, strict Pyright and the existing three import contracts pass. This establishes the development toolchain only; hook installation, source-only rejection fixtures, continuous integration and expanded architecture-rule coverage remain required before claiming quality setup complete. Commit and push this verified dependency checkpoint before adding gate behavior.
 
+At `890465b1f2d5e020096690caa572ab5490502518`, follow the user's instruction to keep `AGENTS.md` project-specific. Confidence **99%** that the repeated general rules belong in the supplied user instructions. Reduce the file from 354 to 41 lines, retaining the authoritative plan/scientific-contract links, MLX-only runtime scope, data/evidence preservation, Sol/Astra settings and review ownership, and project remotes. Refer current holds to this record instead of repeating the released architecture hold. All three local links and the existing delegation anchor pass verification; `git diff --check` passes. General user rules remain in effect. This is a documentation change; application tests and scientific runs are not required for it. Quality-gate setup remains the next implementation work.
+
 The execution approach now separates candidate screening, reusable reference evidence and full acceptance. Preserve original runs and pinned comparator source. A completed-horizon absolute failure can stop a screen; it cannot count as a completed acceptance case. Reuse references only with independently verified engine-specific input/source/build/mode provenance and sufficient native values or digest-verified replay. Keep two real fresh runs and all 52 independently scored obligations.
 
 Implementation order and verification:
@@ -129,7 +131,7 @@ Develop a scientifically validated Apple MLX backend for the [Eon Systems fly-br
 
 Implementation owner: GPT-6.1 Sol at the user-selected reasoning effort; the updated goal requests `xhigh`. The user controls parent-model changes. Future bounded scientific, numerical, and difficult kernel-design reviews use GPT-6 Astra subagents at `xhigh`, following [the current delegation rule](AGENTS.md#active-project-specification). Keep the already assigned manual accumulation-design review with its current owner and recorded return procedure.
 
-Do not implement MaleCNS, new neuron models, plasticity, reinforcement learning, a user interface, or a generalized simulation framework. Keep the authorized MLX-only architecture; preserve model semantics and data contracts. Optimize only after correctness is established. No custom Metal kernel without profiling evidence. Honor [AGENTS.md](AGENTS.md), including schema approval and database preservation requirements.
+Do not implement MaleCNS, new neuron models, plasticity, reinforcement learning, a user interface, or a generalized simulation framework. Keep the authorized MLX-only architecture; preserve model semantics and data contracts. Optimize only after correctness is established. No custom Metal kernel without profiling evidence. Honor [AGENTS.md](AGENTS.md) and the user's standing schema-approval and database-preservation requirements.
 
 ## Implementation and evidence rules
 
@@ -386,7 +388,7 @@ Status: **complete on 2026-10-04**. The normal ten-package installation executes
 
 Acceptance: the normal command-line interface runs the shortest MLX experiment, consumes existing experiment definitions, uses the sole MLX execution backend, writes the existing spike schema, and produces outputs consumable by the analysis tools. Record initialization, compilation, simulation, and collection separately. Preserve device-resident state and avoid complete CPU-device transfers each timestep.
 
-Present and obtain explicit approval for any required application programming interface or database schema change before writing dependent code, as required by `AGENTS.md`.
+Present and obtain explicit approval for any required application programming interface or database schema change before writing dependent code, as required by the user's standing rules.
 
 Experiment/stimulus checkpoint (2026-10-04):
 
