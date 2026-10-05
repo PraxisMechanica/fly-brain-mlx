@@ -1,0 +1,14 @@
+{
+  "source_checkpoint": "0faec9b9f9ed21d09edee18591f8e455761a00a0",
+  "every_recorded_native_array_hash_and_dtype_verified": true,
+  "ordinary_observed_repeat_native_arrays_byte_identical": true,
+  "all_1001_physical_snapshots_and_32_phase_blocks_repeat_exactly": true,
+  "actual_final_neural_and_pending_queue_arrays_byte_identical": true,
+  "canonical_stimulus_and_final_cursor_verified": true,
+  "no_raw_stream_file_created": true,
+  "code_and_static_input_files_identical": 38,
+  "sampled_rss_sum_peak_bytes": 1515913216,
+  "memory_scope": "Sum of sampled resident set sizes for this Python proof process and its direct compiled reference child during ordinary/observed/repeat execution and capture. Loading, compilation, and source checking are excluded. Shared pages can be counted twice. This is not total unified memory, system peak, or MLX/concurrent/four-trial memory.",
+  "local_artifact_root": "/Users/ocasta/Code/fly-brain/data/results/milestone-4-full-reference-observer-20261005-01",
+  "scope": "Complete 0.1-second sugar reference observer transparency and fresh-process repeat only. No MLX/PyTorch paired parity, first-cause, or concurrent/four-trial memory acceptance."
+}
