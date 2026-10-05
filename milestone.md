@@ -423,6 +423,11 @@ Reusable reference-ledger checkpoint (2026-10-05):
 - Replay/scaling checks are committed at `a710bcd`. The [reference ledger](src/fly_brain/qualification/adapters/reference_queues.py) independently groups original outgoing rows and checks every actual recurrent/replay queue slot, ordered delivery, channel bit, cursor, and final spike space. Its pending expectations retain at most 19 due steps. Expectations are derived from actual spikes and original row identities; they do not replace the observed queue.
 - All eight live reference-job checks pass, zero failures/errors/skips, in fresh output `data/results/milestone-4-reference-jobs-20261005-03`. Full strict Pyright, Ruff, and three import contracts pass. Fault injection for this reusable checker and complete-network execution remain next. Commit this verified working state now; no numerical function changed.
 
+Retained reference-ledger proof checkpoint (2026-10-05):
+
+- The reusable ledger is committed at `0d482d7`. Four additional file-boundary checks consume the preserved actual reference streams for block sizes 0, 1, 17, and 32. Every original-row queue, delivery, replay cursor/channel, and final observation agrees, including the earlier stress fixture's zero/silenced rows and queue wraps. The **111-test application suite passes with zero failures/errors/skips**; full strict Pyright, Ruff, and formatting pass.
+- The stream reader now types the single byte-read operation its consumers need. Real pipes, compressed binary files, and in-memory streams satisfy that small interface directly; no runtime behavior or transport bytes change. Commit this working state before fault injection.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.

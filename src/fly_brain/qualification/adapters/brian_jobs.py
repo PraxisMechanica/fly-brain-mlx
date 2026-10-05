@@ -3,7 +3,6 @@ import subprocess
 from collections.abc import Generator
 from dataclasses import dataclass
 from pathlib import Path
-from typing import BinaryIO, cast
 
 import brian2 as b
 import numpy as np
@@ -188,7 +187,7 @@ def run(job: BrianJob, destination: Path) -> Generator[Frame, None, None]:
         assert process.stdout is not None
         try:
             if job.observed:
-                yield from read_frames(cast(BinaryIO, process.stdout), job.shape)
+                yield from read_frames(process.stdout, job.shape)
             elif process.stdout.read(1):
                 raise ValueError('Ordinary reference execution wrote unexpected stdout')
             returncode = process.wait()

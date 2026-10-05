@@ -2,7 +2,7 @@ import struct
 import zlib
 from collections.abc import Iterator
 from dataclasses import dataclass
-from typing import BinaryIO
+from typing import Protocol
 
 import numpy as np
 from numpy.typing import NDArray
@@ -14,6 +14,10 @@ PHASE_FIELDS = (
     ('end', ('v', 'g', 'lastspike', 'not_refractory')),
 )
 ObservationArray = NDArray[np.float64 | np.bool_]
+
+
+class ByteSource(Protocol):
+    def read(self, size: int = -1, /) -> bytes: ...
 
 
 @dataclass(frozen=True)
@@ -62,7 +66,7 @@ class FinalSnapshot:
 
 
 class Reader:
-    def __init__(self, source: BinaryIO, shape: StreamShape) -> None:
+    def __init__(self, source: ByteSource, shape: StreamShape) -> None:
         self.source = source
         self.shape = shape
         self.crc = 0
@@ -138,7 +142,7 @@ class Reader:
 
 
 def read_frames(
-    source: BinaryIO, shape: StreamShape
+    source: ByteSource, shape: StreamShape
 ) -> Iterator[StepSnapshot | PhaseBlock | FinalSnapshot]:
     reader = Reader(source, shape)
     if reader.take(len(MAGIC)) != MAGIC:
