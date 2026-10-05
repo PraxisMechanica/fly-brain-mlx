@@ -452,6 +452,11 @@ Complete shortest reference-observer checkpoint (2026-10-05):
 - Observed/repeated capture takes **51.045 / 51.648 seconds**, versus **1.879 seconds** for this ordinary execution. These are qualification overhead measurements, not an MLX benchmark. The sampled resident-size sum for the proof process and its direct reference child peaks at **1,515,913,216 bytes** during execution/capture. It excludes load/build/source checks, can double-count shared pages, and does not measure total unified memory or concurrent/four-trial MLX memory.
 - This closes the complete shortest reference observer transparency/repeat proof. The separately committed **128 scientific / 155 application tests, zero skips**, remain the unchanged-source qualification. Next: paired causal capture and complete MLX observation with actual repeat/ordinary evidence, followed by concurrent/four-trial memory and the frozen matrix. No paired MLX/PyTorch scientific case is accepted by this reference-only result. Commit this execution evidence before proceeding.
 
+Paired causal-audit implementation checkpoint (2026-10-05):
+
+- The complete reference observer proof is committed at `592b9c1`. The pure [causal audit](src/fly_brain/qualification/causality.py) records the earliest chronological trajectory-budget violation and first different spike step/identities. It checks every pre-threshold scalar through the first different step, and checks pre-reset/end state only while that step's spikes still agree. It retains finite-state and consecutive-step requirements after divergence, using the unchanged `1e-3 + 1e-5*abs(reference)` mV budget.
+- Three initial intent cases verify every neuron across all three phases. **158 application tests pass, zero failures/errors/skips**; full strict Pyright, Ruff, formatting, and all three import contracts pass. The new pure module is covered by the framework-dependency contract. This verifies the basic classifier; inclusive boundaries, first-divergence sequencing, fault cases, raw-context collection, and live paired-engine wiring remain next. Commit this working state before those checks.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.
