@@ -481,6 +481,11 @@ Live causal-comparison checkpoint (2026-10-05):
 - Paired transport is committed at `26b1463`. The paired adapter now checks real phase timestamps, compares all-neuron voltage/synaptic state after hashing native arrays, and requires exact refractory flags and last-spike clocks while history is common. The first different step retains inclusive pre-threshold coverage; later unforced discrete/state closeness is excluded while finite-state checks continue.
 - The independent live Brian2/MLX resting-state fixture completes all 101 steps with **no spike difference or state-budget violation**; its test passes with zero failures/errors/skips. Full strict Pyright, Ruff, and formatting pass. Raw first-cause context and fault injection remain next; no full-network acceptance follows from this small fixture. Commit this working state now.
 
+Paired-coverage fault checkpoint (2026-10-05):
+
+- Live causal comparison is committed at `1d17c0e`. Six injected faults reject an omitted MLX block, shifted block start, unequal row count, failed actual-queue check, missing final reference state, and extra reference output. The faults alter decoded evidence, not numerical execution or stored inputs.
+- The live paired module passes **seven tests, zero failures/errors/skips**; full strict Pyright, Ruff, and formatting pass. Commit this verified unit before causal-context implementation.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.
