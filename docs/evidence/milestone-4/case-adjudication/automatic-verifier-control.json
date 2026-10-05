@@ -1,0 +1,189 @@
+{
+  "execution_checkpoint": "5ae0cf9",
+  "parent_verification_checkpoint": "840e327425541e14fdc6878a872e3d733576f9e5",
+  "case_accepted": true,
+  "full_matrix_accepted": false,
+  "case": {
+    "experiment": "p9",
+    "steps": 1000,
+    "trial": 0
+  },
+  "scope": "One non-silent prescribed 1000-step full-network case; larger horizons and silence need separate verification.",
+  "all_recorded_executed_sources_equal_launch_checkpoint_and_current_source": true,
+  "pinned_inputs_mapping_and_regenerated_canonical_stimulus_verified": true,
+  "actual_reference_outgoing_silenced_weights_verified_original_rows_retained": null,
+  "actual_reference_weight_sha256": null,
+  "outgoing_silenced_original_row_count": null,
+  "every_native_phase_physical_queue_due_and_final_array_repeats": true,
+  "complete_32_block_paired_1001_physical_and_1001_cpu_digest_coverage": true,
+  "every_actual_final_pending_original_row_set_equal": true,
+  "pending_counts": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "complete_raw_mapped_mlx_reference_spikes_exact": true,
+  "all_19_metric_fields_and_11_gates_independently_verified": true,
+  "independent_scorer_sha256": "32405d9b474ab5c216e4d2e2f9d5d7e760e07d730aa8f37ead01089795bbb2ca",
+  "metrics_by_independent_counter_fraction_statistics_and_dynamic_program": {
+    "mlx": {
+      "reference_spikes": 67,
+      "candidate_spikes": 67,
+      "active_jaccard": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "count_error": {
+        "numerator": 0,
+        "denominator": 1,
+        "value": 0.0
+      },
+      "signed_count_ratio": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "neuron_count_error": {
+        "numerator": 0,
+        "denominator": 1,
+        "value": 0.0
+      },
+      "rate_correlation": 1.0,
+      "counts_equal": true,
+      "timing_matches": 67,
+      "timing_f1": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "timing_precision": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "timing_recall": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "exact_step_f1": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "one_step_f1": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "mean_timing_error_ms": 0.0,
+      "median_timing_error_ms": 0.0,
+      "shared_rate_correlation": 1.0,
+      "common_rate_mae_hz": 0.0,
+      "common_rate_rmse_hz": 0.0
+    },
+    "torch": {
+      "reference_spikes": 67,
+      "candidate_spikes": 67,
+      "active_jaccard": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "count_error": {
+        "numerator": 0,
+        "denominator": 1,
+        "value": 0.0
+      },
+      "signed_count_ratio": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "neuron_count_error": {
+        "numerator": 0,
+        "denominator": 1,
+        "value": 0.0
+      },
+      "rate_correlation": 1.0,
+      "counts_equal": true,
+      "timing_matches": 67,
+      "timing_f1": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "timing_precision": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "timing_recall": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "exact_step_f1": {
+        "numerator": 14,
+        "denominator": 67,
+        "value": 0.208955223880597
+      },
+      "one_step_f1": {
+        "numerator": 53,
+        "denominator": 67,
+        "value": 0.7910447761194029
+      },
+      "mean_timing_error_ms": 0.11492537313432837,
+      "median_timing_error_ms": 0.1,
+      "shared_rate_correlation": 1.0,
+      "common_rate_mae_hz": 0.0,
+      "common_rate_rmse_hz": 0.0
+    }
+  },
+  "archive_file_count": 24,
+  "archive_manifest_sha256": {
+    "case.json": "b174a469a59821b3991d6880a1a2c249e8b86093e8fa192de3f443cc46c38cff",
+    "environment.json": "5b22f9e5518fd1b5ca9cc5207a7129f2ce3275e15e43dd673311259762871cf4",
+    "normalized-spikes.npz": "e2369937c79dee6cee326917b2a977748fccd4b9873e82be9dd255fbf4556d35",
+    "observations/cpu-first/native-digests.jsonl": "be491edcde8339c1aa10771e7cf7a8bd062bfe6c3675af8e2d1b6b8cb8f8f1ec",
+    "observations/cpu-first/native.npz": "745d4e298080a515101bc6d0bb577aabe401448015461b05b5d27e168369b33c",
+    "observations/cpu-repeat/native-digests.jsonl": "be491edcde8339c1aa10771e7cf7a8bd062bfe6c3675af8e2d1b6b8cb8f8f1ec",
+    "observations/cpu-repeat/native.npz": "745d4e298080a515101bc6d0bb577aabe401448015461b05b5d27e168369b33c",
+    "observations/paired-first/causal.json": "13bebdac502ad919a125e2fc5de4f48aab063494796fd4dae463235d83f4ad6c",
+    "observations/paired-first/mlx-native.npz": "0382942117237eefdd385e452a3371cf7755cbadd6cf2a03f0af4b414e3ef7c1",
+    "observations/paired-first/phase-digests.jsonl": "c4744635797f4c423897e9db0421fd6d02c481c7189426549d8b2dba3cfa1e4c",
+    "observations/paired-first/physical-digests.jsonl": "72532d2579b0831b2875b138298a55da114d97f14cee74bb7dc0073e68d52dd6",
+    "observations/paired-first/reference-final-physical.json": "fe04e06df628bb9564fb8abfe948751c447dfd8896debd76ccb08abce1e00abc",
+    "observations/paired-first/reference-final-physical.npz": "04ff7e72a9768a7fbe5e2c5ad4389040e8371ccff147b88a4df21d666a12d90e",
+    "observations/paired-first/reference-native.npz": "9abe0161002f20724c0d27dd41ebdd28c6dc45090964dfcb610dc456172fb962",
+    "observations/paired-repeat/causal.json": "13bebdac502ad919a125e2fc5de4f48aab063494796fd4dae463235d83f4ad6c",
+    "observations/paired-repeat/mlx-native.npz": "0382942117237eefdd385e452a3371cf7755cbadd6cf2a03f0af4b414e3ef7c1",
+    "observations/paired-repeat/phase-digests.jsonl": "c4744635797f4c423897e9db0421fd6d02c481c7189426549d8b2dba3cfa1e4c",
+    "observations/paired-repeat/physical-digests.jsonl": "72532d2579b0831b2875b138298a55da114d97f14cee74bb7dc0073e68d52dd6",
+    "observations/paired-repeat/reference-final-physical.json": "fe04e06df628bb9564fb8abfe948751c447dfd8896debd76ccb08abce1e00abc",
+    "observations/paired-repeat/reference-final-physical.npz": "04ff7e72a9768a7fbe5e2c5ad4389040e8371ccff147b88a4df21d666a12d90e",
+    "observations/paired-repeat/reference-native.npz": "9abe0161002f20724c0d27dd41ebdd28c6dc45090964dfcb610dc456172fb962",
+    "reference-job.json": "f7345cb32a9f50bfe5fe014b9ce96e72575dce8fcd3ecdd4f0a4d5aa1b24f703",
+    "stimulus.json": "5c804235886ac4be865cf1089ce65561de8fb2d2bda73c177e77f376ceecdbd3",
+    "stimulus.npz": "c3ee39d89b9321058101d0e5b4ae1e7ef1dd9155d1796bb6e507ce6d86b712af"
+  },
+  "every_archive_file_matches_preserved_original": true,
+  "executed_program_sha256": "40858e233dc1cc3178bd77b9361adc90b700851221ff8de994255f1ff8930111",
+  "control_scope": "Re-verification of the previously accepted P9 case, no new execution or case count."
+}

@@ -906,6 +906,12 @@ Sugar trial-2 complete execution (2026-10-05):
 - At clean `743a859`, launch `MLX_ENABLE_TF32=0 uv run --locked --group qualification --no-sync fly-brain qualify-parity --experiment sugar --duration-s 0.1 --trial 2 --output data/results/milestone-4-parity-sugar-1000-2-20261005-01`. First launch check: 06:40:56 UTC. All verified source/evidence changes are committed before execution; each engine receives fresh first/repeat state.
 - This case is running and **not accepted**. Require every metric, native/physical repeat, common-history budget/first-cause check, actual queues, and independent parent verification before changing the **6/52** count. Preserve any first difference and obtain bounded interpretation if needed. Current full matrix/batch/performance requirements remain open; push remains pending without a user-owned remote.
 
+Complete automatic-case independent verifier (2026-10-05):
+
+- At `840e327`, extend the separate [automatic 1,000-step verifier](docs/evidence/milestone-4/case-adjudication/automatic-1000-step-verifier.py) to require the exact current nine/eleven check sets, full native/physical/due coverage and replay, actual-source native paths/precision/finiteness, canonical trial input, exact common-history final queues, and all **19 independently recomputed metric fields / 11 gates**. A first difference or silent reference is outside this verifier's scope and fails; no reviewed-case waiver is applied.
+- Execute it against the already accepted complete P9 trial-0 case launched at `5ae0cf9`. [Control verification](docs/evidence/milestone-4/case-adjudication/automatic-verifier-control.json) rechecks all 24 original hashes and reproduces the CPU timing diagnostics through separate matching windows. The original accepted P9 [raw archive](docs/evidence/milestone-4/cases/p9-1000-0/observations.zip) remains its versioned trace source. This is a verifier regression, not a new case execution or duplicate acceptance.
+- The script passes Ruff formatting/linting. Application/numerical sources and the existing 377 application / 203 scientific results remain unchanged. Commit this passing verifier before inspecting the running sugar trial-2 result; acceptance stays **6/52**. Complete longer horizons, prescribed batch checks, and performance remain open.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.
