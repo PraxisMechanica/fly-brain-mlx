@@ -4,9 +4,13 @@ from typing import Literal
 import pytest
 
 from fly_brain.qualification.batch_evidence import (
+    NativeDifference,
+    NativeDigest,
     PhaseDifference,
     PhaseDigest,
+    native_difference,
     phase_difference,
+    require_native_coverage,
     require_phase_coverage,
 )
 
@@ -97,3 +101,39 @@ def test_all_four_independent_trial_identities_are_required(missing: int) -> Non
     del one[missing]
     with pytest.raises(ValueError, match='zero through three'):
         phase_difference(blocks, one, 35)
+
+
+def test_cpu_batch_native_equality_requires_every_snapshot_and_its_actual_trial() -> (
+    None
+):
+    hashes = tuple(str(trial + 1) * 64 for trial in range(4))
+    many = [NativeDigest(step, hashes) for step in range(-1, 35)]
+    one = {
+        trial: [NativeDigest(step, (hashes[trial],)) for step in range(-1, 35)]
+        for trial in range(4)
+    }
+    assert native_difference(many, one, 35) is None
+    one[3][-1] = NativeDigest(34, ('f' * 64,))
+    assert native_difference(many, one, 35) == NativeDifference(3, 34)
+    one[0], one[1] = one[1], one[0]
+    assert native_difference(many, one, 35) == NativeDifference(0, -1)
+    del one[2]
+    with pytest.raises(ValueError, match='zero through three'):
+        native_difference(many, one, 35)
+
+
+@pytest.mark.parametrize('fault', ('initial', 'final', 'order', 'trial', 'hash'))
+def test_cpu_native_evidence_cannot_hide_an_omitted_or_invalid_snapshot(
+    fault: str,
+) -> None:
+    snapshots = [NativeDigest(step, ('a' * 64,) * 4) for step in range(-1, 35)]
+    if fault == 'initial':
+        snapshots.pop(0)
+    elif fault == 'final':
+        snapshots.pop()
+    elif fault == 'order':
+        snapshots[-1] = snapshots[0]
+    else:
+        snapshots[-1] = NativeDigest(34, () if fault == 'trial' else ('invalid',) * 4)
+    with pytest.raises(ValueError, match='initial and every|every trial digest'):
+        require_native_coverage(snapshots, 35, 4)

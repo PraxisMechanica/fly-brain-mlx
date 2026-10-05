@@ -21,6 +21,56 @@ class PhaseDifference:
     field: Literal['native', 'queues', 'due']
 
 
+@dataclass(frozen=True)
+class NativeDigest:
+    step: int
+    native: tuple[str, ...]
+
+
+@dataclass(frozen=True)
+class NativeDifference:
+    trial: int
+    step: int
+
+
+def require_native_coverage(
+    snapshots: Sequence[NativeDigest], steps: int, trials: int
+) -> None:
+    if steps < 1 or trials not in (1, 4):
+        raise ValueError(
+            'Native coverage requires a positive horizon and one/four trials'
+        )
+    if [snapshot.step for snapshot in snapshots] != list(range(-1, steps)):
+        raise ValueError('Native evidence requires the initial and every actual step')
+    if any(
+        len(snapshot.native) != trials
+        or any(
+            re.fullmatch('[0-9a-f]{64}', digest) is None for digest in snapshot.native
+        )
+        for snapshot in snapshots
+    ):
+        raise ValueError('Native evidence requires every trial digest')
+
+
+def native_difference(
+    batch: Sequence[NativeDigest],
+    singletons: Mapping[int, Sequence[NativeDigest]],
+    steps: int,
+) -> NativeDifference | None:
+    if set(singletons) != {0, 1, 2, 3}:
+        raise ValueError(
+            'Batch comparison requires independent trials zero through three'
+        )
+    require_native_coverage(batch, steps, 4)
+    for single in singletons.values():
+        require_native_coverage(single, steps, 1)
+    for position, many in enumerate(batch):
+        for trial in range(4):
+            if many.native[trial] != singletons[trial][position].native[0]:
+                return NativeDifference(trial, many.step)
+    return None
+
+
 def require_phase_coverage(
     blocks: Sequence[PhaseDigest], steps: int, trials: int
 ) -> None:

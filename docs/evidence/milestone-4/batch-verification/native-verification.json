@@ -1,0 +1,23 @@
+{
+  "implementation_parent_checkpoint": "85c3c75",
+  "application_tests": {
+    "tests": 401,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "new_native_snapshot_intent_tests": 6,
+  "ruff_checked_files": 160,
+  "strict_pyright_errors": 0,
+  "strict_pyright_warnings": 0,
+  "import_contracts_kept": 3,
+  "import_contracts_broken": 0,
+  "import_files": 111,
+  "import_dependencies": 476,
+  "source_sha256": {
+    "src/fly_brain/qualification/batch_evidence.py": "8dfd27f6addf992faa547e0ae30518dbe74a1e021badddac628de5825474c165",
+    "tests/unit/test_batch_evidence.py": "4b7d71a7bea31edde41f96e49c48c186d94248865fee4547a0489aac384fec94"
+  },
+  "batch_gate_accepted": false,
+  "scope": "Complete initial-through-final CPU native snapshot digest rules only. Digest differences remain unresolved. Final arrays, canonical identity, actual batch execution and fresh repetition remain required."
+}
