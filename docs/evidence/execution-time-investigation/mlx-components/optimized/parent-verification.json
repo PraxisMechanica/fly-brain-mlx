@@ -1,0 +1,12 @@
+{
+  "checkpoint": "16e78e6fda513e34fda462199f82f9dea923ee39",
+  "all_source_and_endpoint_digests_match": true,
+  "all_seven_sample_medians_recomputed": true,
+  "native_outputs_and_30_flags_compared_by_executed_driver": true,
+  "limits": "Single endpoint and seven samples per component; not full native trajectory qualification, acceptance or measured end-to-end speedup. Candidate remains disabled in normal execution.",
+  "artifact_sha256": {
+    "original-ledger.py": "ac0afd4d3a0ae80bb6c73e98016ac1857137444383e3c098f5eedc46005ad8f9",
+    "result.json": "f755fc2779e76a87af1b5ac1ed9f1d006ab34942d28859e5325b5cbb841b3ab6",
+    "executed-diagnostic.py": "cb6b22fb3e64051c544c297128a622778d8b90a52ed4bcd00dca681729251252"
+  }
+}
