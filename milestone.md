@@ -730,6 +730,12 @@ Matrix-diagnostic review assignment (2026-10-05):
 - Every individual fixed/paired/causal/replay gate remains mandatory. The review cannot change the model, references, precision, tolerances, schemas, or scope. Await its completed decision and independently verify it before dependent implementation. Existing manual reviews retain their owners.
 - Independently, the installed full P9 trial-0 / 1,000-step case launched at `5ae0cf9` is running in `data/results/milestone-4-parity-p9-1000-0-20261005-01`. Both paired executions report no spike difference or state-budget violation; CPU first/repeat and final acceptance remain pending. The tree was clean before dispatch; commit this assignment before further changes.
 
+Matrix-diagnostic review completion (2026-10-05):
+
+- Fresh-context Astra at explicit `xhigh` completes the [bounded decision](docs/evidence/milestone-4/matrix-diagnostics/astra-review.md). Pool counts only within common experiment/duration groups, normalize rates by actual included trial exposure, retain the common three-engine active support, and match timing independently within each trial. Use complete half-open integer 1,000-step bins for localization. Include valid failed cases and explicit missing/invalid coverage; never apply acceptance gates to pooled diagnostics.
+- Sol independently verifies trial-exchange and offset-boundary counterexamples, event-weighted timing, separate matching windows, silent-trial exposure, integer bin endpoints/zeros, all 52 cases / 12 groups, and the retained complete sugar score. [Parent verification](docs/evidence/milestone-4/matrix-diagnostics/parent-verification.json). No code, gates, physics, output contracts, or schemas change in this review.
+- Next: pure pooling/bin functions and focused tests after this decision is committed. Full P9 CPU replay is independent and still running. This review is not matrix, batch, or performance acceptance.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.

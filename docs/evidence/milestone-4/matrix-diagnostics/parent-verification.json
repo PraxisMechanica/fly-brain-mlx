@@ -1,0 +1,22 @@
+{
+  "checkpoint": "1f3ab53",
+  "reviewer": "/root/review_matrix_diagnostics",
+  "model": "gpt-6-astra",
+  "effort": "xhigh",
+  "trial_exchange_counterexample_verified": true,
+  "offset_trial_boundary_counterexample_verified": true,
+  "pooled_timing_is_weighted_match_sum_not_mean_f1": true,
+  "exposure_includes_valid_silent_trial_and_common_support_keeps_cpu_only_neuron": true,
+  "independent_zero_one_ten_step_matching_required": true,
+  "matched_timing_error_is_event_weighted": true,
+  "integer_half_open_bin_boundaries_zero_bins_and_invalid_endpoint_verified": true,
+  "frozen_matrix_52_cases_12_groups_verified": true,
+  "existing_full_sugar_scores_reproduced": true,
+  "schema_or_gate_changes_authorized": false,
+  "source_sha256": {
+    "src/fly_brain/comparison/acceptance.py": "94df8a038fe3a82b1a8bd31c3955dcbf0edd1fd6ac6db7f35c646866c483bd60",
+    "src/fly_brain/comparison/service.py": "71ba57d007f74433152c1ec6f8c2bd580bae4d70f97f3fee25a2830be2177c30",
+    "src/fly_brain/qualification/matrix.py": "fc8590202ae5fb038e9ffa767d78839fec25bea752da2b26bba560b5df49397f"
+  },
+  "scope": "Bounded diagnostic policy verification, not new full-network execution or acceptance."
+}
