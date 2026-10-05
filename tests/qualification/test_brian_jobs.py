@@ -24,6 +24,7 @@ from fly_brain.qualification.adapters.observer_stream import (
     StepSnapshot,
     StreamShape,
 )
+from fly_brain.qualification.adapters.reference_queues import ReferenceQueues
 from fly_brain.simulation.models import Connectome
 
 pytestmark = [pytest.mark.integration, pytest.mark.reference]
@@ -143,6 +144,19 @@ def test_reference_weights_keep_original_unit_scaling_and_silenced_rows(
             runs.root / (name + '-results') / job.files['weights'], dtype=np.float64
         )
         assert actual.tobytes() == expected.tobytes()
+
+
+def test_live_queues_follow_original_rows_and_canonical_input_bits(runs: Runs) -> None:
+    sources = np.array([0, 0, 0, 1, 2, 3, 4, 4], dtype=np.int32)
+    events = np.zeros((101, 3), dtype=np.uint8)
+    events[::3, 0] = events[::7, 1] = events[::4, 2] = 1
+    for name in ('observed', 'repeat'):
+        ledger = ReferenceQueues(sources, 6, events)
+        for frame in runs.frames[name]:
+            if isinstance(frame, (StepSnapshot, FinalSnapshot)):
+                ledger.check(frame)
+                assert len(ledger.pending) <= 19
+        assert ledger.step == 101
 
 
 def program(directory: Path, body: str, observed: bool) -> BrianJob:

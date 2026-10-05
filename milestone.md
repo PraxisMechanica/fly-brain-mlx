@@ -418,6 +418,11 @@ Live-pipe replay/scaling checkpoint (2026-10-05):
 - Process-lifecycle checks are committed at `c0b7ffe`. The seven-check reference-job module now passes together, zero failures/errors/skips, in fresh output `data/results/milestone-4-reference-jobs-20261005-02`. Every physical queue slot, ordered delivery, neural/source spike vector, raw clock, and source cursor repeats exactly through the live pipe, including the actual final pending queues. Native weights in all three result directories retain the original count-times-unit-scale operation and every zero/silenced row.
 - Full Ruff, formatting, and strict Pyright pass. This is small reference execution evidence; complete-network observer execution, measured memory, causal checks, and scientific parity remain open. Commit this verified unit before further implementation.
 
+Reusable reference-ledger checkpoint (2026-10-05):
+
+- Replay/scaling checks are committed at `a710bcd`. The [reference ledger](src/fly_brain/qualification/adapters/reference_queues.py) independently groups original outgoing rows and checks every actual recurrent/replay queue slot, ordered delivery, channel bit, cursor, and final spike space. Its pending expectations retain at most 19 due steps. Expectations are derived from actual spikes and original row identities; they do not replace the observed queue.
+- All eight live reference-job checks pass, zero failures/errors/skips, in fresh output `data/results/milestone-4-reference-jobs-20261005-03`. Full strict Pyright, Ruff, and three import contracts pass. Fault injection for this reusable checker and complete-network execution remain next. Commit this verified working state now; no numerical function changed.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.
