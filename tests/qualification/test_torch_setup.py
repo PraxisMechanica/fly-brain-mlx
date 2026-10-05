@@ -1,6 +1,7 @@
 import numpy as np
 import pytest
 import torch
+from numpy.typing import NDArray
 
 from fly_brain.qualification.adapters.torch_reference import (
     TorchModel,
@@ -70,3 +71,48 @@ def test_replay_matches_guaranteed_native_poisson_for_all_five_returned_tensors(
                 native_float(first).tobytes() == native_float(second).tobytes()
                 for first, second in zip(actual, expected, strict=True)
             )
+
+
+@pytest.mark.parametrize(
+    'events',
+    (
+        np.array([[2, 0]], dtype=np.uint8),
+        np.array([[1, 0]], dtype=np.int32),
+        np.array([[1]], dtype=np.uint8),
+        np.array([1, 0], dtype=np.uint8),
+    ),
+)
+def test_replay_rejects_noncanonical_or_mismatched_channels(
+    events: NDArray[np.uint8],
+) -> None:
+    with pytest.raises(ValueError, match='canonical uint8'):
+        replay_inputs(events, (0, 1), 6)
+
+
+@pytest.mark.parametrize('dtype', (torch.float64, torch.int32, torch.bool))
+def test_native_capture_refuses_silent_precision_conversion(dtype: torch.dtype) -> None:
+    with pytest.raises(ValueError, match='native CPU float32'):
+        native_float(torch.zeros(1, dtype=dtype))
+
+
+def test_comparator_refuses_a_changed_global_precision() -> None:
+    previous = torch.get_default_dtype()
+    try:
+        torch.set_default_dtype(torch.float64)
+        case = fixture(True)
+        with pytest.raises(RuntimeError, match='default float32'):
+            prepare(case.connectome, (), (), 1)
+    finally:
+        torch.set_default_dtype(previous)
+
+
+def test_empty_connectivity_and_channels_preserve_exact_silence() -> None:
+    case = fixture(True)
+    model = prepare(case.connectome, (), (), 4)
+    state = model.state_init()
+    counts = replay_inputs(np.empty((4, 0), dtype=np.uint8), (), 6)
+    with torch.no_grad():
+        for _ in range(25):
+            state = model.forward(counts, *state)
+    assert all(not np.any(native_float(value)) for value in state[:3])
+    assert np.all(native_float(state[3]) == -52)

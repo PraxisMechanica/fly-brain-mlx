@@ -554,6 +554,10 @@ Bounded first-difference review resolved (2026-10-05):
 - At `c8a9e01`, Sol independently reproduces the actual selected reduction and ordered reference addition byte for byte, the local MLX state update, all 38 saved physical reference queue slots, stimulus regeneration, and every saved all-neuron phase budget. [Parent verification](docs/evidence/milestone-4/four-trial-memory/astra-parent-verification.json). Most of the voltage difference is already present in the preceding end state; an exact global rounding decomposition and full first-spike replay are not claimed.
 - Confidence **99%**: record this classification and proceed with the independent CPU comparator observer. The missing spike remains in every required metric. All repeat/batch and frozen 52-case acceptance requirements remain open; no tolerance or initial-state exception changes. Commit this decision before further implementation.
 
+CPU comparator boundary checkpoint (2026-10-05):
+
+- At `1772f3f`, add intent checks for noncanonical stimulus bits/dtype/shape, native tensor precision, changed global float defaults, and exact empty-connectivity/channel silence. All **13 CPU setup tests pass, zero failures/errors/skips**, with 29 dependency warnings. Full Ruff and strict Pyright pass. No numerical source changes; commit this passing working state before state observation.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.
