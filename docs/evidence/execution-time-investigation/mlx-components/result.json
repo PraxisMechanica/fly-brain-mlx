@@ -1,0 +1,300 @@
+{
+  "checkpoint": "400ccb6de30fd0bae821b4207097633467e42e6e",
+  "scope": "Bounded components of unchanged MLX execution. Repeated single-step evaluation from retained final state at step 10000 with zero next inputs; not a new accepted case or model change.",
+  "decision_confidence_percent": 95,
+  "mlx_device": {
+    "device_name": "Apple M1 Max",
+    "max_recommended_working_set_size": 22906503168,
+    "memory_size": 34359738368,
+    "architecture": "applegpu_g13s",
+    "max_buffer_length": 17179869184,
+    "resource_limit": 499000
+  },
+  "precision": "MLX_ENABLE_TF32=0",
+  "compilation": "disabled",
+  "neurons": 138639,
+  "edges": 15091983,
+  "setup_s": 9.124188124987995,
+  "endpoint_step": 10000,
+  "endpoint_firing_neurons": 3,
+  "endpoint_due_edges": 379,
+  "all_thirty_independent_ledger_checks_pass_on_probed_step": true,
+  "separate_queue_expression_equals_unchanged_step_native_bytes": true,
+  "device_components": {
+    "unchanged_full_production_step": {
+      "samples": [
+        {
+          "graph_build_s": 0.0036116660048719496,
+          "synchronized_evaluation_s": 0.03268166698399,
+          "total_s": 0.03629333298886195
+        },
+        {
+          "graph_build_s": 0.0033320829970762134,
+          "synchronized_evaluation_s": 0.03414783300831914,
+          "total_s": 0.03747991600539535
+        },
+        {
+          "graph_build_s": 0.0035598749818746,
+          "synchronized_evaluation_s": 0.027013042010366917,
+          "total_s": 0.030572916992241517
+        },
+        {
+          "graph_build_s": 0.003166667011100799,
+          "synchronized_evaluation_s": 0.02820791699923575,
+          "total_s": 0.03137458401033655
+        },
+        {
+          "graph_build_s": 0.003437207982642576,
+          "synchronized_evaluation_s": 0.02870545900077559,
+          "total_s": 0.03214266698341817
+        }
+      ],
+      "median_graph_build_s": 0.003437207982642576,
+      "median_synchronized_evaluation_s": 0.02870545900077559,
+      "median_total_s": 0.03214266698341817
+    },
+    "unchanged_full_observed_step": {
+      "samples": [
+        {
+          "graph_build_s": 0.003562416008207947,
+          "synchronized_evaluation_s": 0.06536041700746864,
+          "total_s": 0.06892283301567659
+        },
+        {
+          "graph_build_s": 0.00347000002511777,
+          "synchronized_evaluation_s": 0.06968995899660513,
+          "total_s": 0.0731599590217229
+        },
+        {
+          "graph_build_s": 0.0035105420101899654,
+          "synchronized_evaluation_s": 0.07648979098303244,
+          "total_s": 0.0800003329932224
+        },
+        {
+          "graph_build_s": 0.005236625001998618,
+          "synchronized_evaluation_s": 0.07553729199571535,
+          "total_s": 0.08077391699771397
+        },
+        {
+          "graph_build_s": 0.0034779160050675273,
+          "synchronized_evaluation_s": 0.0700078750087414,
+          "total_s": 0.07348579101380892
+        }
+      ],
+      "median_graph_build_s": 0.0035105420101899654,
+      "median_synchronized_evaluation_s": 0.0700078750087414,
+      "median_total_s": 0.07348579101380892
+    },
+    "dense_two_selection_queue_update": {
+      "samples": [
+        {
+          "graph_build_s": 6.304198177531362e-05,
+          "synchronized_evaluation_s": 0.00594291600282304,
+          "total_s": 0.0060059579845983535
+        },
+        {
+          "graph_build_s": 3.0790979508310556e-05,
+          "synchronized_evaluation_s": 0.005925375007791445,
+          "total_s": 0.005956165987299755
+        },
+        {
+          "graph_build_s": 5.116700776852667e-05,
+          "synchronized_evaluation_s": 0.005930916988290846,
+          "total_s": 0.005982083996059373
+        },
+        {
+          "graph_build_s": 2.087498432956636e-05,
+          "synchronized_evaluation_s": 0.005905666999751702,
+          "total_s": 0.005926541984081268
+        },
+        {
+          "graph_build_s": 2.316600875928998e-05,
+          "synchronized_evaluation_s": 0.005915749992709607,
+          "total_s": 0.005938916001468897
+        }
+      ],
+      "median_graph_build_s": 3.0790979508310556e-05,
+      "median_synchronized_evaluation_s": 0.005925375007791445,
+      "median_total_s": 0.005956165987299755
+    },
+    "compensated_bucket_accumulation_output": {
+      "samples": [
+        {
+          "graph_build_s": 0.0033554589899722487,
+          "synchronized_evaluation_s": 0.02355041602277197,
+          "total_s": 0.026905875012744218
+        },
+        {
+          "graph_build_s": 0.0036495420208666474,
+          "synchronized_evaluation_s": 0.022773666976718232,
+          "total_s": 0.02642320899758488
+        },
+        {
+          "graph_build_s": 0.0031967090035323054,
+          "synchronized_evaluation_s": 0.021199915994657204,
+          "total_s": 0.02439662499818951
+        },
+        {
+          "graph_build_s": 0.0030009589972905815,
+          "synchronized_evaluation_s": 0.02094141600537114,
+          "total_s": 0.02394237500266172
+        },
+        {
+          "graph_build_s": 0.0028336659888736904,
+          "synchronized_evaluation_s": 0.022852374997455627,
+          "total_s": 0.025686040986329317
+        }
+      ],
+      "median_graph_build_s": 0.0031967090035323054,
+      "median_synchronized_evaluation_s": 0.022773666976718232,
+      "median_total_s": 0.025686040986329317
+    },
+    "independent_ledger_on_evaluated_step": {
+      "samples": [
+        {
+          "graph_build_s": 0.0002576670085545629,
+          "synchronized_evaluation_s": 0.03733691599336453,
+          "total_s": 0.03759458300191909
+        },
+        {
+          "graph_build_s": 0.000330834009218961,
+          "synchronized_evaluation_s": 0.04744570798357017,
+          "total_s": 0.047776541992789134
+        },
+        {
+          "graph_build_s": 0.0007996249769348651,
+          "synchronized_evaluation_s": 0.058127917000092566,
+          "total_s": 0.05892754197702743
+        },
+        {
+          "graph_build_s": 0.0005467089940793812,
+          "synchronized_evaluation_s": 0.03890245800721459,
+          "total_s": 0.03944916700129397
+        },
+        {
+          "graph_build_s": 0.0002819159999489784,
+          "synchronized_evaluation_s": 0.0389663340174593,
+          "total_s": 0.03924825001740828
+        }
+      ],
+      "median_graph_build_s": 0.000330834009218961,
+      "median_synchronized_evaluation_s": 0.0389663340174593,
+      "median_total_s": 0.03944916700129397
+    },
+    "twenty_one_full_neuron_input_channel_updates": {
+      "samples": [
+        {
+          "graph_build_s": 0.00015091701061464846,
+          "synchronized_evaluation_s": 0.0018388750031590462,
+          "total_s": 0.0019897920137736946
+        },
+        {
+          "graph_build_s": 0.0005111659993417561,
+          "synchronized_evaluation_s": 0.0016484590014442801,
+          "total_s": 0.0021596250007860363
+        },
+        {
+          "graph_build_s": 0.0012294590123929083,
+          "synchronized_evaluation_s": 0.0036637079901993275,
+          "total_s": 0.004893167002592236
+        },
+        {
+          "graph_build_s": 0.0006085830100346357,
+          "synchronized_evaluation_s": 0.0028241669933777303,
+          "total_s": 0.003432750003412366
+        },
+        {
+          "graph_build_s": 0.00042283302173018456,
+          "synchronized_evaluation_s": 0.0018998750019818544,
+          "total_s": 0.002322708023712039
+        }
+      ],
+      "median_graph_build_s": 0.0005111659993417561,
+      "median_synchronized_evaluation_s": 0.0018998750019818544,
+      "median_total_s": 0.002322708023712039
+    },
+    "neuron_integrate": {
+      "samples": [
+        {
+          "graph_build_s": 5.7249999372288585e-05,
+          "synchronized_evaluation_s": 0.000300416984828189,
+          "total_s": 0.0003576669842004776
+        },
+        {
+          "graph_build_s": 1.966700074262917e-05,
+          "synchronized_evaluation_s": 0.0003015830006916076,
+          "total_s": 0.00032125000143423676
+        },
+        {
+          "graph_build_s": 1.562500256113708e-05,
+          "synchronized_evaluation_s": 0.00036774997715838253,
+          "total_s": 0.0003833749797195196
+        },
+        {
+          "graph_build_s": 2.0791019778698683e-05,
+          "synchronized_evaluation_s": 0.0002947920002043247,
+          "total_s": 0.0003155830199830234
+        },
+        {
+          "graph_build_s": 3.279201337136328e-05,
+          "synchronized_evaluation_s": 0.0003348749887663871,
+          "total_s": 0.0003676670021377504
+        }
+      ],
+      "median_graph_build_s": 2.0791019778698683e-05,
+      "median_synchronized_evaluation_s": 0.0003015830006916076,
+      "median_total_s": 0.0003576669842004776
+    }
+  },
+  "host_components": {
+    "due_mask_hash_and_nonzero_scan": {
+      "seconds": [
+        0.01508929199189879,
+        0.009830041002715006,
+        0.011020290985470638,
+        0.008954749995609745,
+        0.008945583016611636
+      ],
+      "median_s": 0.009830041002715006
+    },
+    "complete_queue_hash": {
+      "seconds": [
+        0.12711137501173653,
+        0.12573991701356135,
+        0.12643737500184216,
+        0.1285281670279801,
+        0.12704858399229124
+      ],
+      "median_s": 0.12704858399229124
+    },
+    "native_phase_block_hash_including_tobytes": {
+      "seconds": [
+        0.10154762500314973,
+        0.09779995799181052,
+        0.09525600000051782,
+        0.08765629201661795,
+        0.08744274999480695
+      ],
+      "median_s": 0.09525600000051782
+    }
+  },
+  "host_logical_scan_bytes": {
+    "due": 15091983,
+    "queue": 286747677,
+    "phase_block": 141967008
+  },
+  "elapsed_s": 12.496948791987961,
+  "runner_sha256": "0ca1b3c5c829354fab8c8a5b6bb4ac423becc72c050cea2b62618e7ddfef0c97",
+  "source_sha256": {
+    "src/fly_brain/simulation/backend/bucketed.py": "0829f0cb3c67f08bb4dc861c1397548f8e66e4ce2262ef3471368ce772552747",
+    "src/fly_brain/simulation/backend/core.py": "c4079b5d32cb05e701fcb89856a8b48066185bb5c470203e56f4785316461132",
+    "src/fly_brain/qualification/adapters/mlx_ledger.py": "ac0afd4d3a0ae80bb6c73e98016ac1857137444383e3c098f5eedc46005ad8f9",
+    "src/fly_brain/qualification/adapters/mlx_observer.py": "169575bba57251e7c60c3299077379b2a2b0c21734100622748bf4fb4434958a",
+    "src/fly_brain/qualification/adapters/paired_observer.py": "8f0959b99177c6aa1a7dc13f6c6a46665ac4a136ccae26b060e181448b1d6848"
+  },
+  "input_artifact_sha256": "9f52548859f4d79a74983fc3ced4e5b642b092ded6f48972094b8763e29673e2",
+  "application_changed": false,
+  "new_full_case_or_matrix_run": false,
+  "p9_resumed": false,
+  "limits": "Synchronized component timings include frontend dispatch, allocation and execution. Components use evaluated inputs and cannot be summed into a whole-step profile. Five samples from one preserved endpoint are not a representative horizon, a GPU hardware trace, acceptance, or a measured whole-run speedup. Phase block hash uses 32 copies of this single endpoint solely for byte-volume timing."
+}

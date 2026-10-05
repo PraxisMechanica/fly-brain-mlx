@@ -1,0 +1,7 @@
+{
+  "checkpoint": "400ccb6de30fd0bae821b4207097633467e42e6e",
+  "archived_runner_application_source_and_retained_endpoint_hashes_verified": true,
+  "all_medians_recomputed_from_five_samples": true,
+  "queue_and_due_scan_byte_counts_independently_verified": true,
+  "limits": "Archive, timing arithmetic and executed diagnostic assertions verified. No new scientific trajectory or native hardware trace; no component times added into an exact whole-step profile."
+}
