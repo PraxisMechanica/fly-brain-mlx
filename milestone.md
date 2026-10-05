@@ -1104,6 +1104,13 @@ Timing remediation review dispatched (2026-10-05):
 - At clean `1babf5c`, dispatch `/root/review_one_second_timing_remediation` with fresh context, explicit `gpt-6-astra` and `xhigh`. [Assignment binding and dispatch](docs/evidence/milestone-4/one-second-sugar-metric-failure/dispatch.json). Its initial source inspection confirms the current two-stage float32 voltage rounding; it is evaluating bounded algebraically equivalent local host replays. That progress is not a completed recommendation or qualified remedy. Sol awaits the result and continues only independent evidence checks.
 - Commit the dispatch now. Both live executions remain preserved; new full-case launches and dependent numerical implementation remain on hold. No acceptance criterion is relaxed; acceptance stays **9/52**.
 
+Morning status reassessment after the timing failure (2026-10-05):
+
+- At clean `7763b15`, Milestones 0–3 remain complete within their recorded scope; Milestone 4 is active and Milestones 5–7 are not started. Estimated engineering work completed remains approximately **40% of Milestone 4 / 55% overall**. These are planning judgments, not measured acceptance percentages. The measured count remains **9/52 accepted cases (17.3%)**, with 43 still required.
+- The independently verified one-second sugar timing score is 0.7988149744142203 against the unchanged 0.95 floor. The fresh-context Astra `xhigh` remedy review remains active. Its local host calculations suggest a candidate arithmetic correction, but neither the recommendation nor a replacement full-case pass is complete. Preserve both live executions and the numerical-development hold pending the completed, independently verified review.
+- Revised provisional planning range: **two to three weeks of continuous machine availability**, conditional on a supported correction passing qualification. The previously estimated roughly nine days of remaining serial singleton verification excludes remedy/requalification, actual batches, benchmarking, installation reproduction and final review. Ten-second executions remain unmeasured. An 85%-confidence completion date is not supported yet; this range is a conditional planning estimate and must be revised after the remedy and longer runs are qualified.
+- The latest recorded application pass remains 488 tests with zero failures/errors/skips. The working tree is clean before this documentation-only checkpoint; no executing source, acceptance criterion or case disposition changes.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.
