@@ -1,0 +1,24 @@
+{
+  "implementation_parent_checkpoint": "c5cc980",
+  "application_tests": {
+    "tests": 434,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "new_saved_evidence_integration_tests": 2,
+  "ruff_checked_files": 164,
+  "strict_pyright_errors": 0,
+  "strict_pyright_warnings": 0,
+  "initial_test_typing_error_corrected": 1,
+  "import_contracts_kept": 3,
+  "import_contracts_broken": 0,
+  "import_files": 113,
+  "import_dependencies": 488,
+  "source_sha256": {
+    "src/fly_brain/qualification/adapters/batch_verify.py": "71db62e9e1c0047d3f30d72ad7c315bdfcee2a4ea1221a8e2ad9397b7ebeec6f",
+    "tests/integration/test_batch_verify.py": "c22b2f3b0f709f0e741c673cdd272f514ecad23fd574f07987d678df6ffe0466"
+  },
+  "batch_gate_accepted": false,
+  "scope": "Connect complete native phase/snapshot and final/raster rules to saved MLX/CPU batch and existing singleton formats. Synthetic integration checks do not grant scientific execution or canonical identity acceptance."
+}
