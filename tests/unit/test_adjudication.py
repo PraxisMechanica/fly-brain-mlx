@@ -5,6 +5,7 @@ from fly_brain.qualification.adjudication import (
     FIRST_SPIKE_CHECK,
     METRIC_CHECKS,
     require_reviewable,
+    require_same_cause,
 )
 from fly_brain.qualification.causality import BudgetViolation, CausalAudit
 from fly_brain.qualification.models import ParityCase
@@ -26,6 +27,29 @@ def test_explained_first_spike_cannot_waive_any_frozen_metric(
     else:
         with pytest.raises(ValueError, match='every frozen metric'):
             require_reviewable(case, checks, gates, audit)
+
+
+@pytest.mark.parametrize(
+    'fault', ('none', 'experiment', 'horizon', 'trial', 'step', 'neuron', 'omitted')
+)
+def test_a_review_for_another_case_or_first_cause_cannot_grant_acceptance(
+    fault: str,
+) -> None:
+    case = ParityCase('sugar', 1000, 1)
+    audit = CausalAudit()
+    audit.step, audit.first_spike_step, audit.first_spike_neurons = 1000, 999, (41514,)
+    reviewed = ParityCase(
+        'p9' if fault == 'experiment' else 'sugar',
+        10000 if fault == 'horizon' else 1000,
+        0 if fault == 'trial' else 1,
+    )
+    step = 998 if fault == 'step' else 999
+    neurons = () if fault == 'omitted' else (7,) if fault == 'neuron' else (41514,)
+    if fault == 'none':
+        require_same_cause(case, audit, reviewed, step, neurons)
+    else:
+        with pytest.raises(ValueError, match='this exact case and first cause'):
+            require_same_cause(case, audit, reviewed, step, neurons)
 
 
 @pytest.mark.parametrize('fault', (*sorted(CASE_CHECKS), 'missing', 'extra'))

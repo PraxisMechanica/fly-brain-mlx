@@ -59,3 +59,19 @@ def require_reviewable(
         or not audit.first_spike_neurons
     ):
         raise ValueError('Review requires an explicit first-spike cause')
+
+
+def require_same_cause(
+    case: ParityCase,
+    audit: CausalAudit,
+    reviewed_case: ParityCase,
+    reviewed_step: int,
+    reviewed_neurons: tuple[int, ...],
+) -> None:
+    if case != reviewed_case or (
+        audit.first_spike_step,
+        audit.first_spike_neurons,
+    ) != (reviewed_step, reviewed_neurons):
+        raise ValueError(
+            'Reviewed decision must identify this exact case and first cause'
+        )
