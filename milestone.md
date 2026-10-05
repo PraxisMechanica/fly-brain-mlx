@@ -563,6 +563,11 @@ Native CPU snapshot checkpoint (2026-10-05):
 - At `bb22f88`, the observer copies and hashes all five actual native float32 tensors, including every physical delay-buffer cell. Per-trial hashes include field names, dtype, shape, and bytes; no unit/precision conversion or buffer reconstruction occurs. Each snapshot owns its data and rejects invalid shape or nonfinite fields.
 - All **23 CPU setup/snapshot tests pass, zero failures/errors/skips**, with 29 dependency warnings. Every tensor's mutation changes the digest while saved bytes remain intact; a nonfinite value in each tensor fails. Full Ruff and strict Pyright pass. This qualifies the snapshot boundary; streamed execution, repeat/batch evidence, and complete comparator execution remain open. Commit this passing unit before adding the execution loop.
 
+Streamed CPU observer checkpoint (2026-10-05):
+
+- At `cf77810`, the CPU observer calls the unchanged model once per canonical event step and yields owned native snapshots, including initial state. It retains no tensor history; gradient suppression ends before each yield. The canonical input boundary validates trial/step/channel shape, dtype, and bits.
+- All **27 CPU setup/observer tests pass, zero failures/errors/skips**, with 29 dependency warnings. All five tensors at all 101 steps match ordinary execution byte for byte for populated/silent fixtures at one/four trials. Full Ruff and strict Pyright pass. Repeat/batch equivalence, boundary faults, and complete comparator execution remain open. Commit this passing loop before further qualification.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.

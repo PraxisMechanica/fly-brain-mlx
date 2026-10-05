@@ -1,11 +1,13 @@
+from collections.abc import Iterator
 from dataclasses import dataclass
 
 import numpy as np
+import torch
 from numpy.typing import NDArray
 
 from .paired_observer import phase_hash
-from .torch_reference import TensorState
-from .torch_setup import native_float
+from .torch_reference import TensorState, TorchModel
+from .torch_setup import native_float, replay_inputs
 
 
 @dataclass(frozen=True)
@@ -34,3 +36,25 @@ def capture(state: TensorState, step: int) -> TorchSnapshot:
         for trial in range(shape[0])
     )
     return TorchSnapshot(step, fields, hashes)
+
+
+def observe(
+    model: TorchModel, events: NDArray[np.uint8], targets: tuple[int, ...]
+) -> Iterator[TorchSnapshot]:
+    if (
+        events.ndim != 3
+        or events.shape[0] != model.neurons.neuron.batch
+        or not events.shape[1]
+        or events.shape[2] != len(targets)
+        or events.dtype != np.uint8
+        or np.any(events > 1)
+    ):
+        raise ValueError('CPU observer requires canonical trial-by-step channels')
+    with torch.no_grad():
+        state = model.state_init()
+    yield capture(state, -1)
+    for step in range(events.shape[1]):
+        counts = replay_inputs(events[:, step, :], targets, model.neurons.size)
+        with torch.no_grad():
+            state = model.forward(counts, *state)
+        yield capture(state, step)
