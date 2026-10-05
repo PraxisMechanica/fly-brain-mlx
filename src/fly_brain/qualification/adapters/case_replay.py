@@ -1,4 +1,5 @@
 import json
+import re
 from pathlib import Path
 
 from .replay_evidence import cpu, paired
@@ -22,6 +23,14 @@ def require_complete_replay(run: Path, steps: int) -> None:
             or len(row['mlx_queue_sha256']) != 1
             or len(row['mlx_due_sha256']) != row['rows']
             or any(len(due) != 1 for due in row['mlx_due_sha256'])
+            or any(
+                re.fullmatch('[0-9a-f]{64}', digest) is None
+                for digest in (
+                    *row['native_phase_sha256'],
+                    *row['mlx_queue_sha256'],
+                    *(due[0] for due in row['mlx_due_sha256']),
+                )
+            )
             for row in phases
         ):
             raise ValueError(
@@ -31,7 +40,9 @@ def require_complete_replay(run: Path, steps: int) -> None:
             json.loads(line)
             for line in (pair / 'physical-digests.jsonl').read_text().splitlines()
         ]
-        if [row['step'] for row in physical] != list(range(steps + 1)):
+        if [row['step'] for row in physical] != list(range(steps + 1)) or any(
+            re.fullmatch('[0-9a-f]{64}', row['sha256']) is None for row in physical
+        ):
             raise ValueError(
                 'Reference replay requires every actual physical queue step'
             )
@@ -45,6 +56,8 @@ def require_complete_replay(run: Path, steps: int) -> None:
             .splitlines()
         ]
         if [row['step'] for row in native] != list(range(-1, steps)) or any(
-            len(row['native_sha256']) != 1 for row in native
+            len(row['native_sha256']) != 1
+            or re.fullmatch('[0-9a-f]{64}', row['native_sha256'][0]) is None
+            for row in native
         ):
             raise ValueError('CPU replay requires its initial and every native state')

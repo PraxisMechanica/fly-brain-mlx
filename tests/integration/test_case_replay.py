@@ -20,6 +20,11 @@ pytestmark = pytest.mark.integration
         'phase',
         'queue',
         'causal',
+        'phase_value',
+        'queue_value',
+        'due_value',
+        'physical_value',
+        'cpu_value',
     ),
 )
 def test_identical_repeats_cannot_hide_incomplete_case_observation(
@@ -61,6 +66,16 @@ def test_identical_repeats_cannot_hide_incomplete_case_observation(
             phases[0]['mlx_queue_sha256'] = []
         if fault == 'causal':
             causal['steps'] = 34
+        if fault == 'phase_value':
+            phases[0]['native_phase_sha256'] = ['invalid'] * 2
+        if fault == 'queue_value':
+            phases[0]['mlx_queue_sha256'] = ['invalid']
+        if fault == 'due_value':
+            phases[0]['mlx_due_sha256'] = [['invalid'] for _ in range(32)]
+        if fault == 'physical_value':
+            physical[0]['sha256'] = 'invalid'
+        if fault == 'cpu_value':
+            native[0]['native_sha256'] = ['invalid']
         for path, rows in (
             (pair / 'phase-digests.jsonl', phases),
             (pair / 'physical-digests.jsonl', physical),
