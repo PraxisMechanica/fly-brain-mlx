@@ -1,6 +1,6 @@
 import gc
 import subprocess
-from collections.abc import Iterator
+from collections.abc import Generator
 from dataclasses import dataclass
 from pathlib import Path
 from typing import BinaryIO, cast
@@ -175,7 +175,7 @@ def build(
         b.set_device('runtime')
 
 
-def run(job: BrianJob, destination: Path) -> Iterator[Frame]:
+def run(job: BrianJob, destination: Path) -> Generator[Frame, None, None]:
     destination = destination.resolve()
     destination.mkdir(parents=True, exist_ok=False)
     with (destination / 'stderr.log').open('xb') as errors:

@@ -408,6 +408,11 @@ Streamed reference-job implementation checkpoint (2026-10-05):
 - Two [live job checks](tests/qualification/test_brian_jobs.py) pass, zero failures/errors/skips, in `data/results/milestone-4-reference-jobs-20261005-01`. Streamed final state and spikes match ordinary execution without phase monitors or an appended observer. Every raw phase and native final array repeats exactly through the reused binary; the partial final block is present and no raw stdout file is created. The compile-only result directories are empty before execution. **107 application tests pass, zero failures/errors/skips**; full Ruff, strict Pyright, and three import contracts pass.
 - This verifies small live-pipe execution and fresh-process reuse. Detailed queue/cursor replay, child-process fault handling, complete-network observer transparency/memory, paired causal capture, and the full matrix remain open. The complete 116-test scientific result is the prior checkpoint's evidence. Commit this verified working state before adding further checks.
 
+Reference-process failure checkpoint (2026-10-05):
+
+- The live-pipe implementation is committed at `d3f8e10`. Three focused real-process checks pass, zero failures/errors/skips: nonzero execution fails with its retained error log, a corrupt stream stops its owned child, and closing an incomplete stream stops its owned child. Each cleanup check verifies that the specific child no longer exists. The two model-run checks retain their preceding successful execution; they were deselected in this focused process check.
+- The adapter's generator type now exposes its supported close operation to callers. Full strict Pyright, Ruff, and format checks pass. This small verified process-lifecycle unit is committed before queue replay checks; no production or reference numerical function changes.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.

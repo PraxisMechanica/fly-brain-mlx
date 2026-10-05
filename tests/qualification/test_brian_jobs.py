@@ -1,3 +1,8 @@
+import os
+import struct
+import sys
+import zlib
+from contextlib import closing
 from dataclasses import dataclass
 from pathlib import Path
 from typing import cast
@@ -12,7 +17,13 @@ from fly_brain.qualification.adapters.brian_jobs import (
     results,
     run,
 )
-from fly_brain.qualification.adapters.observer_stream import FinalSnapshot, PhaseBlock
+from fly_brain.qualification.adapters.observer_stream import (
+    MAGIC,
+    FinalSnapshot,
+    PhaseBlock,
+    StepSnapshot,
+    StreamShape,
+)
 from fly_brain.simulation.models import Connectome
 
 pytestmark = [pytest.mark.integration, pytest.mark.reference]
@@ -95,3 +106,61 @@ def test_reused_binary_starts_each_repeat_from_fresh_state(runs: Runs) -> None:
     for left, right in zip(blocks, repeated, strict=True):
         for name, value in left.fields.items():
             assert value.tobytes() == right.fields[name].tobytes(), name
+
+
+def program(directory: Path, body: str, observed: bool) -> BrianJob:
+    directory.mkdir()
+    binary = directory / 'main'
+    binary.write_text('#!' + sys.executable + '\n' + body)
+    binary.chmod(0o700)
+    return BrianJob(directory, StreamShape(2, 2, 0, (), 2), observed, {})
+
+
+def slow_program(directory: Path, payload: bytes) -> BrianJob:
+    return program(
+        directory,
+        'import os, sys, time\n'
+        'from pathlib import Path\n'
+        f'Path({str(directory / "pid")!r}).write_text(str(os.getpid()))\n'
+        f'sys.stdout.buffer.write({payload!r})\n'
+        'sys.stdout.buffer.flush()\n'
+        'time.sleep(30)\n',
+        True,
+    )
+
+
+def assert_process_exited(job: BrianJob) -> None:
+    pid = int((job.directory / 'pid').read_text())
+    with pytest.raises(ProcessLookupError):
+        os.kill(pid, 0)
+
+
+def test_nonzero_process_exit_keeps_its_error_log(tmp_path: Path) -> None:
+    job = program(
+        tmp_path / 'failure',
+        'import sys\nsys.stderr.write("reference failed\\n")\nsys.exit(7)\n',
+        False,
+    )
+    with pytest.raises(RuntimeError, match='exited 7'):
+        tuple(run(job, tmp_path / 'results'))
+    assert (tmp_path / 'results/stderr.log').read_text() == 'reference failed\n'
+
+
+def test_transport_failure_stops_only_its_owned_process(tmp_path: Path) -> None:
+    job = slow_program(tmp_path / 'corrupt', b'garbled!')
+    with pytest.raises(ValueError, match='signature'):
+        tuple(run(job, tmp_path / 'results'))
+    assert_process_exited(job)
+
+
+def test_closing_a_partial_stream_stops_its_owned_process(tmp_path: Path) -> None:
+    header = MAGIC + struct.pack('<QQQQQ', 2, 2, 0, 0, 2)
+    step = struct.pack('<QQQdiQQ', 1, 0, 0, 0.0, -1, 0, 0)
+    payload = b''.join(
+        part + struct.pack('<I', zlib.crc32(part)) for part in (header, step)
+    )
+    job = slow_program(tmp_path / 'unfinished', payload)
+    with closing(run(job, tmp_path / 'results')) as frames:
+        first = next(frames)
+        assert isinstance(first, StepSnapshot) and first.step == 0
+    assert_process_exited(job)
