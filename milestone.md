@@ -803,6 +803,11 @@ Four-case diagnostic refresh (2026-10-05):
 - At clean `f95cbf8`, rerun the unchanged executed summary against all four retained complete cases. [Refreshed report](docs/evidence/milestone-4/matrix-diagnostics/partial-20261005-02/partial-matrix.json) includes **4 cases, 48 missing cases, and all 12 groups**; unavailable groups remain explicit. Every singleton pooled metric and bin sum equals the corresponding complete case result.
 - [Executed verification](docs/evidence/milestone-4/matrix-diagnostics/partial-20261005-02/executed-verification.py) records the current source and artifact hashes. This updates diagnostic evidence only; no model, gate, application code, or matrix-acceptance claim changes. Commit this verified refresh before the shortest silent control.
 
+Shortest silent-control execution (2026-10-05):
+
+- At clean launch checkpoint `f75cdb8`, start `MLX_ENABLE_TF32=0 uv run --locked --group qualification --no-sync fly-brain qualify-parity --experiment silent --duration-s 0.1 --trial 0 --output data/results/milestone-4-parity-silent-1000-0-20261005-01`. Preserve all fresh native/physical observations and each independent repeat. The control is running and is not yet accepted; current acceptance remains **4/52 cases**.
+- Next: inspect complete output, independently verify exact three-engine silence, empty canonical channel geometry, actual queues, full native replay/coverage, and unchanged empty/undefined metric rules. The existing non-silent 1,000-step verifier deliberately rejects an empty reference and must not be used to claim this control. Record its separate verification before acceptance, then continue remaining frozen trials/horizons and batch checks. All current source/evidence changes are committed; push remains pending without a user-owned remote.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.
