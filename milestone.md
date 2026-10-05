@@ -428,6 +428,11 @@ Retained reference-ledger proof checkpoint (2026-10-05):
 - The reusable ledger is committed at `0d482d7`. Four additional file-boundary checks consume the preserved actual reference streams for block sizes 0, 1, 17, and 32. Every original-row queue, delivery, replay cursor/channel, and final observation agrees, including the earlier stress fixture's zero/silenced rows and queue wraps. The **111-test application suite passes with zero failures/errors/skips**; full strict Pyright, Ruff, and formatting pass.
 - The stream reader now types the single byte-read operation its consumers need. Real pipes, compressed binary files, and in-memory streams satisfy that small interface directly; no runtime behavior or transport bytes change. Commit this working state before fault injection.
 
+Reference-ledger fault checkpoint (2026-10-05):
+
+- Retained-stream integration is committed at `cee1599`. Forty-four additional fault cases across all four actual transport modes reject changed source cursors/channels, invalid/duplicate spikes, shifted clocks, altered queue offsets/delivery/order, lost pending rows, changed replay queues, and changed final spike space. The **155-test application suite passes with zero failures/errors/skips**; full strict Pyright, Ruff, and formatting pass.
+- These failures are deliberately injected into decoded observations; the model and retained data are preserved. The independent checker is ready for complete-network queue validation. Scientific full-suite coexistence and complete-network observer transparency/memory remain open. Commit this passing unit before those executions.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.
