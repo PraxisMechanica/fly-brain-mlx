@@ -1,0 +1,124 @@
+{
+  "execution_checkpoint": "f75cdb8",
+  "parent_verification_checkpoint": "49f41b74fc8a458b4e61fb54b3e98adea4b6c1d7",
+  "case_accepted": true,
+  "full_matrix_accepted": false,
+  "case": {
+    "experiment": "silent",
+    "steps": 1000,
+    "trial": 0
+  },
+  "scope": "Full pinned-connectome silent control, 1000 steps, trial 0; one of 52 required cases only.",
+  "all_recorded_executed_sources_equal_launch_checkpoint_and_current_source": true,
+  "pinned_inputs_mapping_and_regenerated_canonical_stimulus_verified": true,
+  "empty_canonical_channel_geometry_and_actual_reference_pathways_verified": true,
+  "every_native_phase_physical_queue_due_and_final_array_repeats": true,
+  "complete_32_block_paired_1001_physical_and_1001_cpu_digest_coverage": true,
+  "every_actual_final_pending_original_row_set_equal": true,
+  "pending_counts": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "complete_raw_mapped_mlx_reference_spikes_exact": true,
+  "independently_verified_exact_silence_and_frozen_empty_metrics": {
+    "all_three_actual_native_rasters_are_empty": true,
+    "both_candidates_match_all_19_frozen_empty_metric_fields": true,
+    "expected_metrics": {
+      "reference_spikes": 0,
+      "candidate_spikes": 0,
+      "active_jaccard": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "count_error": {
+        "numerator": 0,
+        "denominator": 1,
+        "value": 0.0
+      },
+      "signed_count_ratio": null,
+      "neuron_count_error": {
+        "numerator": 0,
+        "denominator": 1,
+        "value": 0.0
+      },
+      "rate_correlation": null,
+      "counts_equal": true,
+      "timing_matches": 0,
+      "timing_f1": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "timing_precision": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "timing_recall": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "exact_step_f1": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "one_step_f1": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "mean_timing_error_ms": null,
+      "median_timing_error_ms": null,
+      "shared_rate_correlation": null,
+      "common_rate_mae_hz": null,
+      "common_rate_rmse_hz": null
+    }
+  },
+  "archive_file_count": 24,
+  "archive_manifest_sha256": {
+    "case.json": "1f25c8f83c64d0b6089bb40f2d738e5ce1b97905c60648134c0bf594759bc7af",
+    "environment.json": "5b22f9e5518fd1b5ca9cc5207a7129f2ce3275e15e43dd673311259762871cf4",
+    "normalized-spikes.npz": "d23e4819c4269bee10e19e12b4829ab7bb2150881cf58cee5764f70fc35651ee",
+    "observations/cpu-first/native-digests.jsonl": "1fb80612da71ef405320775d77fe5c656424ba407318bb24527cb141e441dfc7",
+    "observations/cpu-first/native.npz": "88a6fbe63576379e6fbf2ac283987bca81a59349a7405e4883d529e6ba790377",
+    "observations/cpu-repeat/native-digests.jsonl": "1fb80612da71ef405320775d77fe5c656424ba407318bb24527cb141e441dfc7",
+    "observations/cpu-repeat/native.npz": "88a6fbe63576379e6fbf2ac283987bca81a59349a7405e4883d529e6ba790377",
+    "observations/paired-first/causal.json": "13bebdac502ad919a125e2fc5de4f48aab063494796fd4dae463235d83f4ad6c",
+    "observations/paired-first/mlx-native.npz": "b3ff337f56629eed053598dc6801a9e9eeedd8b98c3cc2304b12c0d1c1e2e2f4",
+    "observations/paired-first/phase-digests.jsonl": "2ba2f4f3c0aea3e63bfde983990508edd2c98e570de7da338ab14eb2b6f0e132",
+    "observations/paired-first/physical-digests.jsonl": "fd79575aea0f37bb25ea5b1c9dead07aa4485396febd125085f9d0cb6f7a7f5a",
+    "observations/paired-first/reference-final-physical.json": "0d1165cf6228db6bbdc7a35f7f3650494806dc2579f0f11440f84bce40a0cf4e",
+    "observations/paired-first/reference-final-physical.npz": "97879ebb5c6e50b106b40490b95c47cbc5bbacdb8ac01ebccc7c7d455d81a29d",
+    "observations/paired-first/reference-native.npz": "774168f4246c192227231bdd4ccb7ea0c96874f3dbd013e97a32fd7ac2ee1b14",
+    "observations/paired-repeat/causal.json": "13bebdac502ad919a125e2fc5de4f48aab063494796fd4dae463235d83f4ad6c",
+    "observations/paired-repeat/mlx-native.npz": "b3ff337f56629eed053598dc6801a9e9eeedd8b98c3cc2304b12c0d1c1e2e2f4",
+    "observations/paired-repeat/phase-digests.jsonl": "2ba2f4f3c0aea3e63bfde983990508edd2c98e570de7da338ab14eb2b6f0e132",
+    "observations/paired-repeat/physical-digests.jsonl": "fd79575aea0f37bb25ea5b1c9dead07aa4485396febd125085f9d0cb6f7a7f5a",
+    "observations/paired-repeat/reference-final-physical.json": "0d1165cf6228db6bbdc7a35f7f3650494806dc2579f0f11440f84bce40a0cf4e",
+    "observations/paired-repeat/reference-final-physical.npz": "97879ebb5c6e50b106b40490b95c47cbc5bbacdb8ac01ebccc7c7d455d81a29d",
+    "observations/paired-repeat/reference-native.npz": "774168f4246c192227231bdd4ccb7ea0c96874f3dbd013e97a32fd7ac2ee1b14",
+    "reference-job.json": "0a8657a471a2ac8ccf550c90266a9620ca1746ec1c17dd70c2f6c5ad8fc9602d",
+    "stimulus.json": "69b82c68a64f4d3ff88e30039c9a312b626a4afa9eb5cf93402c93305338d341",
+    "stimulus.npz": "f88fe26f600bff6bd36f9ad6ffa08834e1995f1427cd7de794829bbf2ecc6069"
+  },
+  "every_archive_file_matches_preserved_original": true
+}
