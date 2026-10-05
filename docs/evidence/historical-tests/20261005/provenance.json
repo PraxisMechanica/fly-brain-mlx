@@ -1,0 +1,102 @@
+{
+  "purpose": "Preserve previously local-only historical report links for portable documentation. Original files remain unchanged in the shared checkout. These are prior execution reports; no new scientific acceptance is claimed.",
+  "source_documentation_commit": "1376e407c2ea183d8fbafa106f905f143923eb29",
+  "copies": [
+    {
+      "original_path": "data/results/milestone-4-paired-collector-20261005-01.xml",
+      "versioned_copy": "docs/evidence/historical-tests/20261005/milestone-4-paired-collector-20261005-01.xml",
+      "sha256": "5f9b2adfe76e1f6ec8224f0b35d9ada7c3dfa8d4c112a1af679a5082f76c2497",
+      "original_is_versioned": false
+    },
+    {
+      "original_path": "data/results/milestone-4-paired-collector-20261005-02.xml",
+      "versioned_copy": "docs/evidence/historical-tests/20261005/milestone-4-paired-collector-20261005-02.xml",
+      "sha256": "a0f2635f2e363e7281ad549d17065d40c9571fc86c8829363b20a89343f481d5",
+      "original_is_versioned": false
+    },
+    {
+      "original_path": "data/results/milestone-4-paired-collector-20261005-03.xml",
+      "versioned_copy": "docs/evidence/historical-tests/20261005/milestone-4-paired-collector-20261005-03.xml",
+      "sha256": "1bd24452bc487f27dcabeb5dcdf8500fc1d5385e3f9ec4a971628f32798feaf1",
+      "original_is_versioned": false
+    },
+    {
+      "original_path": "data/results/milestone-4-cpu-collector-20261005-02.xml",
+      "versioned_copy": "docs/evidence/historical-tests/20261005/milestone-4-cpu-collector-20261005-02.xml",
+      "sha256": "393d2b7cb29a5e45724a4d7f5e8ae8344ebc83f4786862d3342f83fd136f3b56",
+      "original_is_versioned": false
+    },
+    {
+      "original_path": "data/results/milestone-4-replay-evidence-20261005-01.xml",
+      "versioned_copy": "docs/evidence/historical-tests/20261005/milestone-4-replay-evidence-20261005-01.xml",
+      "sha256": "a05629d12905d9c3663fb5df0aaabd9217766918892e474a874e9d82e7bc10a6",
+      "original_is_versioned": false
+    },
+    {
+      "original_path": "data/results/milestone-4-case-execution-20261005-01.xml",
+      "versioned_copy": "docs/evidence/historical-tests/20261005/milestone-4-case-execution-20261005-01.xml",
+      "sha256": "a16891da558ae409fbd2238fd5cb12cce65e40402eed409d13c957df985d046b",
+      "original_is_versioned": false
+    },
+    {
+      "original_path": "data/results/milestone-4-case-spikes-20261005-01.xml",
+      "versioned_copy": "docs/evidence/historical-tests/20261005/milestone-4-case-spikes-20261005-01.xml",
+      "sha256": "dbc0004e4caa9862066300625eaba097e8c13ff1e884fecc0a6a691f1ebaacbf",
+      "original_is_versioned": false
+    },
+    {
+      "original_path": "data/results/milestone-4-final-pending-20261005-01.xml",
+      "versioned_copy": "docs/evidence/historical-tests/20261005/milestone-4-final-pending-20261005-01.xml",
+      "sha256": "cc37bc851618161343ca7add8c79a5d606efff53f191f2be6516c91c34f85751",
+      "original_is_versioned": false
+    },
+    {
+      "original_path": "data/results/milestone-4-case-report-20261005-01.xml",
+      "versioned_copy": "docs/evidence/historical-tests/20261005/milestone-4-case-report-20261005-01.xml",
+      "sha256": "ee3ea17b44e188d495c4d98c577dadc2f9df1c6f0d649912b17f3da81796062d",
+      "original_is_versioned": false
+    },
+    {
+      "original_path": "data/results/milestone-4-parity-driver-20261005-02.xml",
+      "versioned_copy": "docs/evidence/historical-tests/20261005/milestone-4-parity-driver-20261005-02.xml",
+      "sha256": "76c25040f4e04d75a51e7ac29e92ce1da4cc8f59dfa0836bae430ba019f5616a",
+      "original_is_versioned": false
+    },
+    {
+      "original_path": "data/results/milestone-4-parity-options-20261005-01.xml",
+      "versioned_copy": "docs/evidence/historical-tests/20261005/milestone-4-parity-options-20261005-01.xml",
+      "sha256": "229a150ef75858e5e0dc4d9d421ca35bbc081b063999b9bb4edd55fff461c46b",
+      "original_is_versioned": false
+    },
+    {
+      "original_path": "data/results/milestone-4-time-bins-20261005-01.xml",
+      "versioned_copy": "docs/evidence/historical-tests/20261005/milestone-4-time-bins-20261005-01.xml",
+      "sha256": "3885d2d38a8a9fb407adf748aa0429f8cf1b1431db241272996d5ec67c449549",
+      "original_is_versioned": false
+    },
+    {
+      "original_path": "data/results/milestone-4-trial-separated-pooling-20261005-02.xml",
+      "versioned_copy": "docs/evidence/historical-tests/20261005/milestone-4-trial-separated-pooling-20261005-02.xml",
+      "sha256": "2200034da0d85f4603f1e4655be540a71268bc555b358ff979210dc87a44f7e8",
+      "original_is_versioned": false
+    },
+    {
+      "original_path": "data/results/milestone-4-pooled-diagnostic-intent-20261005-01.xml",
+      "versioned_copy": "docs/evidence/historical-tests/20261005/milestone-4-pooled-diagnostic-intent-20261005-01.xml",
+      "sha256": "7dd0ace8f6aa8493a8dd198a684bd64abf4f703fbcbd9aa583f4eddb224567e9",
+      "original_is_versioned": false
+    },
+    {
+      "original_path": "data/results/milestone-4-matrix-coverage-20261005-01.xml",
+      "versioned_copy": "docs/evidence/historical-tests/20261005/milestone-4-matrix-coverage-20261005-01.xml",
+      "sha256": "6abf5e2f0be3bcd4a5b19a6a1a10eb71134bdce1e7477702f01fc3e5211d3630",
+      "original_is_versioned": false
+    },
+    {
+      "original_path": "data/results/milestone-4-combined-diagnostics-20261005-02.xml",
+      "versioned_copy": "docs/evidence/historical-tests/20261005/milestone-4-combined-diagnostics-20261005-02.xml",
+      "sha256": "4fbbcc967790c8f20e6104976d2b1efbb1b2215fcef4c4a2fbcef382c079ff2a",
+      "original_is_versioned": false
+    }
+  ]
+}

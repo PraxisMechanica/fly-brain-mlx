@@ -1,5 +1,7 @@
 # Architecture compliance audit
 
+Historical record. Holds, process states, model-switch instructions, package counts, and remote availability below describe the recorded checkpoint. For current work, read [milestone.md](../../../milestone.md) and [AGENTS.md](../../../AGENTS.md). Original review ownership and scientific evidence are preserved.
+
 Recorded 2026-10-04 (Europe/Paris). Audited checkpoint: `ab8637c885ee9e23e81c3d1596744a63695650f8` on `main`, plus the explicitly identified uncommitted review work. Historical audit status: **investigation complete; remediation was proposed and development was halted**. The subsequent authorized implementation and current checks are in the [remediation record](architecture-remediation.md).
 
 ## Conclusion and scope
@@ -10,13 +12,13 @@ I made numerical qualification the completion gate. I did not make application c
 
 This audit covers the root entrypoint, project-owned backend and comparison modules, authored probes, qualification tests, tooling configuration, milestone/handoff history, and relevant public session records. Static-check counts below cover nine committed authored files, not every inherited or vendored file. The unfinished factored-network test is reviewed structurally and is excluded from those counts. No simulations, benchmarks, dependency installations, application refactors, or data deletion were performed during this audit.
 
-Standards applied: [python-design](/Users/ocasta/.codex/skills/python-design/SKILL.md), [software-design](/Users/ocasta/.codex/skills/software-design/SKILL.md), their supporting architecture references, and [project rules](../AGENTS.md). These skills require the smallest architecture that fits the actual variation and failure modes; they do not require every enterprise pattern. The current application has file persistence and execution backends, but no database or HTTP service requiring a database repository, transaction unit of work, or web framework.
+Standards applied: [python-design](/Users/ocasta/.codex/skills/python-design/SKILL.md), [software-design](/Users/ocasta/.codex/skills/software-design/SKILL.md), their supporting architecture references, and [project rules](../../../AGENTS.md). These skills require the smallest architecture that fits the actual variation and failure modes; they do not require every enterprise pattern. The current application has file persistence and execution backends, but no database or HTTP service requiring a database repository, transaction unit of work, or web framework.
 
 Preserve the existing scientific evidence during repair. The small MLX core contains typed functions, a frozen dataclass, named tuples, and explicit Metal execution. Those local choices do not implement the required application architecture. Use of uv, Ruff, Pyright, and pytest also does not satisfy the complete specification.
 
 ## Audited technologies and approved target
 
-The [technology inventory](evidence/architecture-audit/technology-inventory.json) records installed versions, configuration files, and source imports. Installation and application integration are separate facts.
+The [technology inventory](../../evidence/architecture-audit/technology-inventory.json) records installed versions, configuration files, and source imports. Installation and application integration are separate facts.
 
 | Area | Current state | Required target for this application |
 | --- | --- | --- |
@@ -47,7 +49,7 @@ Brian2CUDA, NEST GPU, GeNN, and Brian2GeNN are outside the proposed MLX applicat
 
 There is no database infrastructure to remove. SQLModel and Alembic were listed as conditional approved tools in the initial audit. That was unnecessary for this application. They are now explicitly excluded from the proposed stack.
 
-The [dependency-scope check](evidence/dependency-scope-20261004.json) records the read-only environment check and database-import search. All 41 installed packages passed uv's compatibility check. This does not replace a clean installation test. No package installation, backend removal, or application change was performed.
+The [dependency-scope check](../../evidence/dependency-scope-20261004.json) records the read-only environment check and database-import search. All 41 installed packages passed uv's compatibility check. This does not replace a clean installation test. No package installation, backend removal, or application change was performed.
 
 ## Verified findings
 
@@ -63,7 +65,7 @@ MLX arrays and explicit device streams belong in the MLX backend; replacing them
 
 ### Reproduced static checks
 
-The [check record](evidence/architecture-audit/checks.json) contains exact commands, exit codes, source hashes, inventory, and diagnostic counts. Raw outputs are retained beside it. Exact Pyright stdout is preserved in `.json.gz` files. The readable JSON copies omit only the final empty terminal line.
+The [check record](../../evidence/architecture-audit/checks.json) contains exact commands, exit codes, source hashes, inventory, and diagnostic counts. Raw outputs are retained beside it. Exact Pyright stdout is preserved in `.json.gz` files. The readable JSON copies omit only the final empty terminal line.
 
 | Check | Scope | Result |
 | --- | --- | --- |
@@ -75,7 +77,7 @@ The 881 diagnostics include six missing-stub and eight missing-import reports, p
 
 ## How the oversight occurred
 
-Relevant public session/tool records and Git history are summarized in [process history](evidence/architecture-audit/process-history.json). Times here are Europe/Paris.
+Relevant public session/tool records and Git history are summarized in [process history](../../evidence/architecture-audit/process-history.json). Times here are Europe/Paris.
 
 1. Both design skills were read at 14:14:49 and again at 15:22:36, before MLX implementation. At 14:16:59 this chat publicly said it was using them to keep the port within the existing backend interface. The failure was in applying and enforcing their requirements, not discovering the skills.
 2. The imported source was preserved at `4466b37`. Subsequent reference helpers (`295994b`, `5489ae0`) repeated path injection and global operational overrides. These choices should have triggered a recorded architecture exception or correction before being extended.
@@ -111,7 +113,7 @@ No database, persisted-file, or public command/output schema modification is pro
 
 ## Acceptance checks for lifting the hold
 
-At the audit checkpoint all checks were **open**. Their implementation, verification, and release decision are now recorded in [milestone.md](../milestone.md) and the [remediation record](architecture-remediation.md).
+At the audit checkpoint all checks were **open**. Their implementation, verification, and release decision are now recorded in [milestone.md](../../../milestone.md) and the [remediation record](architecture-remediation.md).
 
 1. The ownership/import map covers every application-owned module and every finding above is resolved, or an explicit user-approved exception is recorded. Vendored exclusions are named and justified; no blanket legacy exemption applies to owned runners.
 2. A clean supported environment installs the package using uv and the recorded dependency resolution. Entrypoints and tests import normally without application path injection. Importing application domain/service modules performs no file writes, process configuration changes, or execution setup.

@@ -1,5 +1,7 @@
 # First one-second sugar cause review
 
+Historical review brief. Holds, process states, model-switch instructions, package counts, and remote availability below describe the recorded checkpoint. For current work, read [milestone.md](../../../milestone.md) and [AGENTS.md](../../../AGENTS.md). Original review ownership and scientific evidence are preserved.
+
 Review settings: fresh-context `gpt-6-astra`, reasoning effort `xhigh`. Sol remains the implementation owner. Workspace: `/Users/ocasta/Code/fly-brain`, main, preparation checkpoint `c71df83`. Record the assignment commit returned at dispatch.
 
 ## Bounded question
