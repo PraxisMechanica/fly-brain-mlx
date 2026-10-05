@@ -167,9 +167,9 @@ def test_phase_capture_preserves_ordinary_numerical_source_and_inputs(
     for folder in ('code_objects', 'static_arrays'):
         for file in (stock / folder).iterdir():
             if folder == 'static_arrays' or file.suffix in ('.cpp', '.h'):
-                assert (
-                    file.read_bytes() == (observed / folder / file.name).read_bytes()
-                ), file.name
+                assert file.read_bytes() == (
+                    observed / folder / file.name
+                ).read_bytes().replace(b'#include <zlib.h>\n', b''), file.name
     ordinary_main, observed_main = (
         (path / 'main.cpp').read_text() for path in (stock, observed)
     )

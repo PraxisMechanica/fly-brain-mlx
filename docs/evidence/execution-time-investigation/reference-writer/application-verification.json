@@ -1,0 +1,28 @@
+{
+  "base_checkpoint": "74fd0f5",
+  "change": "Canonical Boolean rows are buffered; system zlib crc32_z computes the identical CRC32 stream checksum.",
+  "package_changes": false,
+  "build_change": "Observer-only zlib header and -lz linking; original arithmetic compiler flags, numerical code, initialization and schedule preserved.",
+  "tests": {
+    "tests": 34,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "checks": {
+    "ruff": "passed",
+    "ruff_format": "passed",
+    "strict_pyright": "0 errors, 0 warnings",
+    "import_contracts": "3 kept, 0 broken"
+  },
+  "evidence": "Complete live frame parsing/checksums, native phase/final/spike equality against stock, every physical queue and cursor, independent original-row delivery ledger and fresh repeated executions; block sizes 0, 1, 17, 32 and final partial blocks.",
+  "source_sha256": {
+    "src/fly_brain/qualification/adapters/brian_observer.py": "1d9c15b87de2b602e387cb511542c462f36092fdb15bc2e074c71cad4f70cc7b",
+    "tests/qualification/test_brian_observer.py": "bd3a0bd7cd1d37d3f12b862976207596b0d0acdbfa062314a1c4a680040fbf58",
+    "tests/qualification/test_brian_jobs.py": "578752b4284c9089b12b7aeff486c909d14c1a86056f80d9e7ff422f8e5342a8",
+    "typings/brian2/__init__.pyi": "1c917bc53c9a780dd4fbf1d0062a5fe3746445c36df0f40f66693a5834fac3b1"
+  },
+  "report_sha256": "55615f0212f068db7b1b42f33e81932a9ed4427bfa2ec903b18f2de4e2762ad1",
+  "artifact_directory": "data/results/performance-remediation-reference-writer-20261005",
+  "scope": "Capture implementation qualification, not a full-network numerical acceptance or whole-check performance measurement."
+}

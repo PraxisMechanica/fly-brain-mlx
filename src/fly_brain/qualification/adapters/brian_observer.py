@@ -74,9 +74,9 @@ def phase_code(monitors: tuple[b.StateMonitor, ...], shape: StreamShape) -> str:
                 code.extend(
                     (
                         f'for(size_t neuron=0; neuron<{shape.neurons}; ++neuron) {{',
-                        f'const uint8_t value = {array}(row, neuron) ? 1 : 0;',
-                        'obs_write(&value, 1);',
+                        f'obs_booleans[neuron] = {array}(row, neuron) ? 1 : 0;',
                         '}',
+                        'obs_write(obs_booleans.data(), obs_booleans.size());',
                     )
                 )
             else:
@@ -97,20 +97,16 @@ def install(
     monitors: tuple[b.StateMonitor, ...],
     shape: StreamShape,
 ) -> None:
+    b.device.headers.append('<zlib.h>')
+    b.device.libraries.append('z')
     setup = """
 static_assert(sizeof(double)==8 && sizeof(int32_t)==4 && sizeof(uint64_t)==8, "Observer scalar widths differ");
 static uint32_t obs_crc = 0xffffffffu;
-static uint32_t obs_table[256];
-for(uint32_t i=0; i<256; ++i) {
-    uint32_t value=i;
-    for(int bit=0; bit<8; ++bit) value = (value>>1) ^ ((value&1) ? 0xedb88320u : 0u);
-    obs_table[i]=value;
-}
 static auto obs_write = [](const void* pointer, size_t size) {
     if(size) {
         const auto* data = static_cast<const unsigned char*>(pointer);
         std::cout.write(reinterpret_cast<const char*>(data), size);
-        for(size_t i=0; i<size; ++i) obs_crc = (obs_crc>>8) ^ obs_table[(obs_crc^data[i])&255u];
+        obs_crc = static_cast<uint32_t>(crc32_z(obs_crc ^ 0xffffffffu, data, size)) ^ 0xffffffffu;
     }
 };
 static auto obs_q = [](uint64_t value) { obs_write(&value, sizeof(value)); };
@@ -123,6 +119,7 @@ static auto obs_finish = []() {
 };
 static uint64_t obs_step = 0;
 """
+    setup += f'static std::vector<uint8_t> obs_booleans({shape.neurons});\n'
     header = (
         'obs_write("FBQOBS01", 8);\n'
         + '\n'.join(
@@ -155,9 +152,9 @@ static uint64_t obs_step = 0;
             final.extend(
                 (
                     f'for(size_t neuron=0; neuron<{shape.neurons}; ++neuron) {{',
-                    f'const uint8_t value = {array}[neuron] ? 1 : 0;',
-                    'obs_write(&value, 1);',
+                    f'obs_booleans[neuron] = {array}[neuron] ? 1 : 0;',
                     '}',
+                    'obs_write(obs_booleans.data(), obs_booleans.size());',
                 )
             )
         else:

@@ -362,8 +362,16 @@ def test_observer_preserves_generated_numerical_code_initialization_and_schedule
     for size in (0, 1, 17, 32):
         directory = runs[size].directory / 'standalone'
         for name in files:
-            assert (stock / name).read_bytes() == (directory / name).read_bytes(), name
+            actual = (directory / name).read_bytes()
+            if name.name == 'makefile':
+                assert b'-lz' in actual
+                actual = actual.replace(b' -lz', b'')
+            else:
+                actual = actual.replace(b'#include <zlib.h>\n', b'')
+            assert (stock / name).read_bytes() == actual, name
         observed = (directory / 'main.cpp').read_text()
+        assert '#include <zlib.h>\n' in observed
+        observed = observed.replace('#include <zlib.h>\n', '')
         observed_initialization = observed.split('observed_network.clear();')[0]
         assert clock_write in observed_initialization
         assert (

@@ -130,6 +130,8 @@ class Preferences:
 prefs: Preferences
 
 class Device:
+    headers: list[str]
+    libraries: list[str]
     def reinit(self) -> None: ...
     def build(
         self, *, directory: str, clean: bool, with_output: bool, run: bool = True
