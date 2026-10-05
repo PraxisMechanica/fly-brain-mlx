@@ -5,6 +5,7 @@ from pathlib import Path
 import numpy as np
 import pytest
 
+from fly_brain.qualification.adapters.replay_evidence import cpu as verify_repeat
 from fly_brain.qualification.adapters.torch_collect import collect
 from fly_brain.qualification.adapters.torch_observer import observe
 from fly_brain.qualification.adapters.torch_setup import prepare
@@ -68,3 +69,4 @@ def test_cpu_collection_preserves_all_native_state_hashes_and_trial_spikes(
     ).read_bytes()
     with pytest.raises(FileExistsError):
         collect(model, stimulus, outputs[0])
+    verify_repeat(*outputs)

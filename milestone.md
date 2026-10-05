@@ -668,6 +668,12 @@ Reusable CPU collector checkpoint (2026-10-05):
 - The first sandbox attempt stopped during shared Metal-fixture import before running tests. The rerun with device access passes **30 CPU collector/observer tests, zero failures/errors/skips**, including populated/silent four-trial collection, complete native array/hash preservation, fresh-state replay, and no-overwrite checks. [Report](data/results/milestone-4-cpu-collector-20261005-02.xml). The default application suite remains **201 passed, zero failures/errors/skips**; all 129 files pass Ruff checks, strict Pyright has zero errors/warnings, and all three dependency contracts pass (95 modules / 374 dependencies).
 - This qualifies reusable CPU evidence collection only. Persisted repeat checks, case execution/reporting, and the remaining matrix remain open. Commit this passing working state before the next unit.
 
+Persisted replay verification checkpoint (2026-10-05):
+
+- At `1476383`, compare the persisted native phase/state, actual physical queue/due, clock/cursor, final arrays, causal metadata, and any retained cause arrays across fresh paired runs. CPU replay compares every initial/per-step native digest and all final tensors/spike coordinates. Native dtype, shape, and bytes must match; missing evidence fails instead of passing from spike counts.
+- Seven file-boundary cases reject changed/missing digest coverage, changed fields, precision, shape, and signed-zero bytes. The default application suite passes **208 tests, zero failures/errors/skips**. Five live paired/CPU collector tests pass with the persisted verifier, **zero failures/errors/skips**. [Report](data/results/milestone-4-replay-evidence-20261005-01.xml). All 131 files pass Ruff checks; strict Pyright has zero errors/warnings.
+- Replay identity is one required check, not case acceptance. Frozen scoring, causal review when needed, complete case validity, and matrix execution remain open. Commit this working state before complete-suite qualification or further implementation.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.

@@ -11,6 +11,7 @@ from fly_brain.qualification.adapters.causal_capture import CausalCapture
 from fly_brain.qualification.adapters.observer_evidence import array_record
 from fly_brain.qualification.adapters.paired_collect import collect
 from fly_brain.qualification.adapters.paired_observer import PairedBlock
+from fly_brain.qualification.adapters.replay_evidence import paired as verify_repeat
 from fly_brain.simulation.backend.bucketed import prepare
 from fly_brain.simulation.models import Stimulus
 from tests.qualification.test_mlx_observer import fixture
@@ -115,6 +116,7 @@ def test_live_collection_retains_complete_native_and_physical_replay(
                 ), name
     with pytest.raises(FileExistsError):
         collect(job, execution, case.connectome, stimulus, outputs[0])
+    verify_repeat(*outputs)
 
 
 def test_injected_first_budget_fault_retains_actual_inputs_and_reference_weights(
