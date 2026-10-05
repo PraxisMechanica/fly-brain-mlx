@@ -595,6 +595,11 @@ Frozen matrix enumeration checkpoint (2026-10-05):
 - At `9f3cdc2`, add a pure typed enumeration of all **52** required experiment/duration/trial cases. Intent checks independently require every prescribed case, no duplicates, the 15/15/10/10/2 configuration counts, and **1,231,000 base steps per engine** before repeats and batch gates. Add the module to the enforced framework-free dependency boundary.
 - The default application suite passes **171 tests, zero failures/errors/skips**; full Ruff, strict Pyright, and all three import contracts pass. This defines the workload and does not execute or accept a case. The independent full CPU proof continues against unchanged numerical/observer sources. Commit this passing plan before runner wiring.
 
+Scoring coordinate boundary checkpoint (2026-10-05):
+
+- At `db5c999`, add a pure coordinate validator for the frozen case protocol. Aligned native integer vectors, pinned neuron/horizon bounds, and unique neuron/step events are required before scoring; real empty vectors remain valid silence. Nine intent cases cover empty/boundary coordinates, out-of-range events, duplicates, mismatched lengths, and missing dimensions.
+- The default application suite passes **180 tests, zero failures/errors/skips**; full Ruff and strict Pyright pass. The unchanged metric calculations and numerical engines retain their separately recorded results. The full CPU observation proof is independent and still running. Commit this passing boundary before input normalization/scoring.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.

@@ -7,6 +7,27 @@ from .models import MetricAcceptance, ParityMetrics, SpikeSteps
 from .service import pearson_or_none
 
 
+def validate_coordinates(spikes: SpikeSteps, neurons: int, steps: int) -> None:
+    if (
+        spikes.neurons.ndim != 1
+        or spikes.steps.ndim != 1
+        or spikes.neurons.shape != spikes.steps.shape
+        or spikes.neurons.dtype != np.int64
+        or spikes.steps.dtype != np.int64
+    ):
+        raise ValueError('Spike coordinates require aligned native int64 vectors')
+    if (
+        np.any(spikes.neurons < 0)
+        or np.any(spikes.neurons >= neurons)
+        or np.any(spikes.steps < 0)
+        or np.any(spikes.steps >= steps)
+    ):
+        raise ValueError('Spike coordinates exceed the pinned neuron/step bounds')
+    pairs = np.column_stack((spikes.neurons, spikes.steps))
+    if len(np.unique(pairs, axis=0)) != len(pairs):
+        raise ValueError('Duplicate neuron/step spikes invalidate the case')
+
+
 def common_support(
     reference: SpikeSteps, mlx: SpikeSteps, torch: SpikeSteps
 ) -> NDArray[np.int64]:
