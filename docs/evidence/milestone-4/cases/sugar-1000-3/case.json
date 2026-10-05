@@ -1,0 +1,257 @@
+{
+  "case": {
+    "experiment": "sugar",
+    "steps": 1000,
+    "trial": 3
+  },
+  "case_accepted": true,
+  "full_matrix_accepted": false,
+  "case_checks": {
+    "required_frozen_case": true,
+    "full_connectome_geometry": true,
+    "input_geometry_equals_pin": true,
+    "canonical_stimulus_hash": true,
+    "single_case_horizon_and_trial": true,
+    "prescribed_seed_generator_targets_and_rates": true,
+    "complete_common_history_budget_check": true,
+    "first_different_spike_explicitly_none": true,
+    "actual_final_pending_events_equal_when_history_is_common": true
+  },
+  "metric_acceptance": {
+    "mlx": {
+      "reference_spikes": 1584,
+      "candidate_spikes": 1584,
+      "active_jaccard": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "count_error": {
+        "numerator": 0,
+        "denominator": 1,
+        "value": 0.0
+      },
+      "signed_count_ratio": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "neuron_count_error": {
+        "numerator": 0,
+        "denominator": 1,
+        "value": 0.0
+      },
+      "rate_correlation": 1.0,
+      "counts_equal": true,
+      "timing_matches": 1584,
+      "timing_f1": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "timing_precision": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "timing_recall": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "exact_step_f1": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "one_step_f1": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "mean_timing_error_ms": 0.0,
+      "median_timing_error_ms": 0.0,
+      "shared_rate_correlation": 1.0,
+      "common_rate_mae_hz": 0.0,
+      "common_rate_rmse_hz": 0.0
+    },
+    "torch": {
+      "reference_spikes": 1584,
+      "candidate_spikes": 1558,
+      "active_jaccard": {
+        "numerator": 167,
+        "denominator": 180,
+        "value": 0.9277777777777778
+      },
+      "count_error": {
+        "numerator": 13,
+        "denominator": 792,
+        "value": 0.016414141414141416
+      },
+      "signed_count_ratio": {
+        "numerator": 779,
+        "denominator": 792,
+        "value": 0.9835858585858586
+      },
+      "neuron_count_error": {
+        "numerator": 23,
+        "denominator": 264,
+        "value": 0.08712121212121213
+      },
+      "rate_correlation": 0.9911242661219075,
+      "counts_equal": false,
+      "timing_matches": 1057,
+      "timing_f1": {
+        "numerator": 1057,
+        "denominator": 1571,
+        "value": 0.6728198599618078
+      },
+      "timing_precision": {
+        "numerator": 1057,
+        "denominator": 1558,
+        "value": 0.6784338896020539
+      },
+      "timing_recall": {
+        "numerator": 1057,
+        "denominator": 1584,
+        "value": 0.6672979797979798
+      },
+      "exact_step_f1": {
+        "numerator": 63,
+        "denominator": 1571,
+        "value": 0.04010184595798854
+      },
+      "one_step_f1": {
+        "numerator": 547,
+        "denominator": 1571,
+        "value": 0.3481858688733291
+      },
+      "mean_timing_error_ms": 0.295837275307474,
+      "median_timing_error_ms": 0.1,
+      "shared_rate_correlation": 0.9927757938837019,
+      "common_rate_mae_hz": 3.8333333333333335,
+      "common_rate_rmse_hz": 6.411794687223781
+    },
+    "checks": {
+      "silent_reference_exact": true,
+      "activity_floor": true,
+      "activity_paired": true,
+      "count_floor": true,
+      "count_paired": true,
+      "neuron_count_floor": true,
+      "neuron_count_paired": true,
+      "correlation_floor_or_exact_counts": true,
+      "correlation_paired": true,
+      "timing_floor": true,
+      "timing_paired": true
+    }
+  },
+  "native_inputs_before_conversion": {
+    "brian": {
+      "file": "/Users/ocasta/Code/fly-brain/data/results/milestone-4-parity-sugar-1000-3-20261005-01/observations/paired-first/reference-native.npz",
+      "arrays": {
+        "spike_i": {
+          "dtype": "<i4",
+          "shape": [
+            1584
+          ],
+          "sha256": "c15eaa8155a68716c2659ef5b7b78f01829fc4bb06ca8c23a929f1f2770ba75e"
+        },
+        "spike_t": {
+          "dtype": "<f8",
+          "shape": [
+            1584
+          ],
+          "sha256": "d9c21c2d5f9193696282179a225157e0824a2dc0da1af4d56f3b9e0e506d5d06"
+        }
+      }
+    },
+    "mlx": {
+      "file": "/Users/ocasta/Code/fly-brain/data/results/milestone-4-parity-sugar-1000-3-20261005-01/observations/paired-first/mlx-native.npz",
+      "arrays": {
+        "spike_neurons": {
+          "dtype": "<i8",
+          "shape": [
+            1584
+          ],
+          "sha256": "3272bf45deb57b01dc3272cb78b2780e6d087a28127710c09ea3b6d8e92172dd"
+        },
+        "spike_steps": {
+          "dtype": "<i8",
+          "shape": [
+            1584
+          ],
+          "sha256": "d3fbaf99db41c2d268650806026f70fd2e93b3c823a12ff897373901a18569d0"
+        }
+      }
+    },
+    "torch": {
+      "file": "/Users/ocasta/Code/fly-brain/data/results/milestone-4-parity-sugar-1000-3-20261005-01/observations/cpu-first/native.npz",
+      "arrays": {
+        "spike_neurons": {
+          "dtype": "<i8",
+          "shape": [
+            1558
+          ],
+          "sha256": "42d4036fc64f47a03895d9eaefd342f723664bf8cdfb3973126dfc4517e18716"
+        },
+        "spike_steps": {
+          "dtype": "<i8",
+          "shape": [
+            1558
+          ],
+          "sha256": "cc559b8fe842d2373eeebf7775592a4c394f0f7f73083bb3fd647b527dcbb6e7"
+        },
+        "spike_trials": {
+          "dtype": "<i8",
+          "shape": [
+            1558
+          ],
+          "sha256": "ae9f6296788bb8ffb6722d7e1c32cf56410f20c7cfcc7918ed2a1e6b1c2801e2"
+        }
+      }
+    }
+  },
+  "stimulus_sha256": "d13b20512b6d60cffb3938e5bb69fc06dd82b76f459d0ba83a0961b9487424c8",
+  "input_pins": {
+    "completeness_sha256": "52b0ac6094cd32c546f8d4c341e094376f48f4e791f8db9b166de5dff8199ea4",
+    "connectivity_sha256": "efeb23fb99098e9c390f6869969b2a121a2ee92c833cfc45ecb2c1d8e1af0347",
+    "neurons": 138639,
+    "edges": 15091983,
+    "scale_mv": 0.275
+  },
+  "neuron_mapping_sha256": "70200482b9fe6656f215a97b71332dd6725b80e2cb32e0052a4d47916ca1579b",
+  "causal": {
+    "steps": 1000,
+    "first_budget_violation": null,
+    "first_spike_step": null,
+    "first_spike_neurons": [],
+    "contexts": {
+      "budget": null,
+      "spike": null
+    },
+    "reduction_order": "Actual padded leaf order; adjacent-pair compensated integer-count tree; four high/low scale products; 16-leaf compensated final tree."
+  },
+  "final_pending_original_row_counts": [
+    301,
+    345,
+    88,
+    669,
+    269,
+    537,
+    0,
+    586,
+    751,
+    146,
+    427,
+    432,
+    150,
+    768,
+    318,
+    605,
+    80,
+    450
+  ],
+  "scientific_review_required": false,
+  "scope": "One prescribed three-engine case. Full matrix, batch checks, aggregate reports and performance remain separate gates."
+}

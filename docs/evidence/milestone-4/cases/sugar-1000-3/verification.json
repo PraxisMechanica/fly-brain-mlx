@@ -1,0 +1,193 @@
+{
+  "execution_checkpoint": "8b5cf1c",
+  "parent_verification_checkpoint": "c14311a9ae535ddaac38478a4e9b6d8ffd53bb50",
+  "case_accepted": true,
+  "full_matrix_accepted": false,
+  "case": {
+    "experiment": "sugar",
+    "steps": 1000,
+    "trial": 3
+  },
+  "scope": "One non-silent prescribed full-network case at its actual horizon; silence and reviewed differences need separate verification.",
+  "all_recorded_executed_sources_equal_launch_checkpoint_and_current_source": true,
+  "pinned_inputs_mapping_and_regenerated_canonical_stimulus_verified": true,
+  "actual_reference_outgoing_silenced_weights_verified_original_rows_retained": null,
+  "actual_reference_weight_sha256": null,
+  "outgoing_silenced_original_row_count": null,
+  "every_native_phase_physical_queue_due_and_final_array_repeats": true,
+  "complete_native_phase_physical_queue_and_cpu_digest_coverage": true,
+  "observation_coverage": {
+    "horizon_steps": 1000,
+    "paired_blocks": 32,
+    "reference_physical_snapshots": 1001,
+    "cpu_native_snapshots": 1001
+  },
+  "every_actual_final_pending_original_row_set_equal": true,
+  "pending_counts": [
+    301,
+    345,
+    88,
+    669,
+    269,
+    537,
+    0,
+    586,
+    751,
+    146,
+    427,
+    432,
+    150,
+    768,
+    318,
+    605,
+    80,
+    450
+  ],
+  "complete_raw_mapped_mlx_reference_spikes_exact": true,
+  "all_19_metric_fields_and_11_gates_independently_verified": true,
+  "independent_scorer_sha256": "32405d9b474ab5c216e4d2e2f9d5d7e760e07d730aa8f37ead01089795bbb2ca",
+  "metrics_by_independent_counter_fraction_statistics_and_dynamic_program": {
+    "mlx": {
+      "reference_spikes": 1584,
+      "candidate_spikes": 1584,
+      "active_jaccard": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "count_error": {
+        "numerator": 0,
+        "denominator": 1,
+        "value": 0.0
+      },
+      "signed_count_ratio": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "neuron_count_error": {
+        "numerator": 0,
+        "denominator": 1,
+        "value": 0.0
+      },
+      "rate_correlation": 1.0,
+      "counts_equal": true,
+      "timing_matches": 1584,
+      "timing_f1": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "timing_precision": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "timing_recall": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "exact_step_f1": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "one_step_f1": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "mean_timing_error_ms": 0.0,
+      "median_timing_error_ms": 0.0,
+      "shared_rate_correlation": 1.0,
+      "common_rate_mae_hz": 0.0,
+      "common_rate_rmse_hz": 0.0
+    },
+    "torch": {
+      "reference_spikes": 1584,
+      "candidate_spikes": 1558,
+      "active_jaccard": {
+        "numerator": 167,
+        "denominator": 180,
+        "value": 0.9277777777777778
+      },
+      "count_error": {
+        "numerator": 13,
+        "denominator": 792,
+        "value": 0.016414141414141416
+      },
+      "signed_count_ratio": {
+        "numerator": 779,
+        "denominator": 792,
+        "value": 0.9835858585858586
+      },
+      "neuron_count_error": {
+        "numerator": 23,
+        "denominator": 264,
+        "value": 0.08712121212121213
+      },
+      "rate_correlation": 0.9911242661219075,
+      "counts_equal": false,
+      "timing_matches": 1057,
+      "timing_f1": {
+        "numerator": 1057,
+        "denominator": 1571,
+        "value": 0.6728198599618078
+      },
+      "timing_precision": {
+        "numerator": 1057,
+        "denominator": 1558,
+        "value": 0.6784338896020539
+      },
+      "timing_recall": {
+        "numerator": 1057,
+        "denominator": 1584,
+        "value": 0.6672979797979798
+      },
+      "exact_step_f1": {
+        "numerator": 63,
+        "denominator": 1571,
+        "value": 0.04010184595798854
+      },
+      "one_step_f1": {
+        "numerator": 547,
+        "denominator": 1571,
+        "value": 0.3481858688733291
+      },
+      "mean_timing_error_ms": 0.295837275307474,
+      "median_timing_error_ms": 0.1,
+      "shared_rate_correlation": 0.9927757938837026,
+      "common_rate_mae_hz": 3.8333333333333335,
+      "common_rate_rmse_hz": 6.411794687223781
+    }
+  },
+  "archive_file_count": 24,
+  "archive_manifest_sha256": {
+    "case.json": "d744e91d0362d81a1a8ffb2717b31738b629593ef5878767f0492375b18e1c04",
+    "environment.json": "5b22f9e5518fd1b5ca9cc5207a7129f2ce3275e15e43dd673311259762871cf4",
+    "normalized-spikes.npz": "e78b55242167a6d27143d74e4466a4b296738c8dc9f4ad255b7e19db23f85b00",
+    "observations/cpu-first/native-digests.jsonl": "98ed4c8143125cffc06636c245295e363ccf1d4460d16dcb0e91a22965123cbb",
+    "observations/cpu-first/native.npz": "00ecac45ee6c41c843c1a62925b6e3bb447b18e06bde559847421742a52bd51f",
+    "observations/cpu-repeat/native-digests.jsonl": "98ed4c8143125cffc06636c245295e363ccf1d4460d16dcb0e91a22965123cbb",
+    "observations/cpu-repeat/native.npz": "00ecac45ee6c41c843c1a62925b6e3bb447b18e06bde559847421742a52bd51f",
+    "observations/paired-first/causal.json": "13bebdac502ad919a125e2fc5de4f48aab063494796fd4dae463235d83f4ad6c",
+    "observations/paired-first/mlx-native.npz": "461c4e75662a386843e21233e9b837ca4c9232393994d77d62ca2aac381752cb",
+    "observations/paired-first/phase-digests.jsonl": "f4be17f6401217a6733a40db007be60bca602f768dd3dbadc21429fd424392b5",
+    "observations/paired-first/physical-digests.jsonl": "d6bf12e9bdb45a017a6853847dc6ba743185d3221ec0a1516f1cc2735b48601b",
+    "observations/paired-first/reference-final-physical.json": "e872eb30ee2a6c92bbdfed4379e5059522ba5b3ba9a85fd985dbb5df98f0ec12",
+    "observations/paired-first/reference-final-physical.npz": "b622c942d47d696f2194f7fa160e2bd215c74ca1c41ce7efc603735c7554baa5",
+    "observations/paired-first/reference-native.npz": "a79afdfc7b88d7085822ae636fb49a8fb304bad3ba0e0af4b21509941757ed89",
+    "observations/paired-repeat/causal.json": "13bebdac502ad919a125e2fc5de4f48aab063494796fd4dae463235d83f4ad6c",
+    "observations/paired-repeat/mlx-native.npz": "461c4e75662a386843e21233e9b837ca4c9232393994d77d62ca2aac381752cb",
+    "observations/paired-repeat/phase-digests.jsonl": "f4be17f6401217a6733a40db007be60bca602f768dd3dbadc21429fd424392b5",
+    "observations/paired-repeat/physical-digests.jsonl": "d6bf12e9bdb45a017a6853847dc6ba743185d3221ec0a1516f1cc2735b48601b",
+    "observations/paired-repeat/reference-final-physical.json": "e872eb30ee2a6c92bbdfed4379e5059522ba5b3ba9a85fd985dbb5df98f0ec12",
+    "observations/paired-repeat/reference-final-physical.npz": "b622c942d47d696f2194f7fa160e2bd215c74ca1c41ce7efc603735c7554baa5",
+    "observations/paired-repeat/reference-native.npz": "a79afdfc7b88d7085822ae636fb49a8fb304bad3ba0e0af4b21509941757ed89",
+    "reference-job.json": "c0ea5b50c2dad582ed9a294bbbe140ab1496ae47b26de7241ab931ca15ce89cf",
+    "stimulus.json": "6f16c8597218639371277a759916a7ad723deeb2034d3f7c1c62bfe88d547ed5",
+    "stimulus.npz": "75cebecdac1f5038f371d4e8557112fc6646b313e703d0886c62c7e3fea64010"
+  },
+  "every_archive_file_matches_preserved_original": true
+}
