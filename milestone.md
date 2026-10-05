@@ -724,6 +724,12 @@ Complete case-runner regression checkpoint (2026-10-05):
 - All **72 generated trace files / 1,957 native arrays** are archived and every archived file hash is independently checked against its original. [Trace archive](docs/evidence/milestone-4/case-runner/traces.zip), [verification/source hashes](docs/evidence/milestone-4/case-runner/verification.json), and [executed verification](docs/evidence/milestone-4/case-runner/executed-verification.py). Production numerical sources, reference equations/setup, and dependencies remain unchanged since `7b70c29`.
 - Full local outputs remain preserved. Next is complete P9 trial 0 at 0.1 seconds through the installed command; acceptance remains **1/52 cases** until new results pass independent inspection. Commit this verified execution evidence before that run.
 
+Matrix-diagnostic review assignment (2026-10-05):
+
+- At clean checkpoint `5ae0cf9`, dispatch fresh-context `/root/review_matrix_diagnostics` to **GPT-6 Astra at explicit `xhigh`**, under the bounded subagent skill. Review only the required pooled summaries and 100 ms time-bin diagnostics: common experiment/duration grouping, trial-separated timing, rate normalization, integer bin boundaries, empty/incomplete coverage, and meaningful regression cases.
+- Every individual fixed/paired/causal/replay gate remains mandatory. The review cannot change the model, references, precision, tolerances, schemas, or scope. Await its completed decision and independently verify it before dependent implementation. Existing manual reviews retain their owners.
+- Independently, the installed full P9 trial-0 / 1,000-step case launched at `5ae0cf9` is running in `data/results/milestone-4-parity-p9-1000-0-20261005-01`. Both paired executions report no spike difference or state-budget violation; CPU first/repeat and final acceptance remain pending. The tree was clean before dispatch; commit this assignment before further changes.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.
