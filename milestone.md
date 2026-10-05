@@ -901,6 +901,11 @@ Two-trial sugar partial diagnostic verification (2026-10-05):
 - Preserve sugar trial 1 in `automatic_unaccepted_cases_preserved` while its exact case/cause identity and bound complete parent decision qualify it in `parent_reviewed_accepted_cases`. Every local review/verification/archive hash and external review hash is checked before using that disposition. Group failure coverage uses the verified scientific case disposition; no pooled metric grants acceptance or hides an automatic result.
 - Decision confidence **99%** at `7851afb`: retain these separate statuses and the fully verified multi-trial diagnostics. No application source, schema, case gate, or numerical method changes. Existing 377 application / 203 scientific tests remain their recorded unchanged-source results. Commit this verified report before sugar trial 2; acceptance remains **6/52**.
 
+Sugar trial-2 complete execution (2026-10-05):
+
+- At clean `743a859`, launch `MLX_ENABLE_TF32=0 uv run --locked --group qualification --no-sync fly-brain qualify-parity --experiment sugar --duration-s 0.1 --trial 2 --output data/results/milestone-4-parity-sugar-1000-2-20261005-01`. First launch check: 06:40:56 UTC. All verified source/evidence changes are committed before execution; each engine receives fresh first/repeat state.
+- This case is running and **not accepted**. Require every metric, native/physical repeat, common-history budget/first-cause check, actual queues, and independent parent verification before changing the **6/52** count. Preserve any first difference and obtain bounded interpretation if needed. Current full matrix/batch/performance requirements remain open; push remains pending without a user-owned remote.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.
