@@ -462,6 +462,10 @@ Causal-audit sequencing checkpoint (2026-10-05):
 - Basic auditing is committed at `8e90dc6`. Nine additional intent cases prove the first different step's inclusive pre-threshold coverage, exclusion of that step's later phases and all later unforced state comparisons, exact budget inclusivity without added slack, retention of the earliest phase/neuron error, continued nonfinite detection, and rejection of omitted steps. **167 application tests pass, zero failures/errors/skips**; full strict Pyright, Ruff, and formatting pass.
 - This qualifies the pure sequencing rules, not live paired-engine causal evidence. Raw-context capture, complete MLX observer proof, concurrent/four-trial memory, PyTorch observation, and the matrix remain open. Commit this passing unit before the next implementation or execution.
 
+Causal relative-budget checkpoint (2026-10-05):
+
+- Sequencing checks are committed at `a9ec01e`. Two additional cases require the unchanged relative budget term for both positive and negative reference state; removing that term would fail these tests. **169 application tests pass, zero failures/errors/skips**; full strict Pyright, Ruff, and formatting pass. The fourteen pure causal-audit cases now cover the fixed formula and chronology. Live paired wiring and full case evidence remain open. Commit this verified working state before proceeding.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.

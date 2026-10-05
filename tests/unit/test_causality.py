@@ -104,3 +104,14 @@ def test_a_missing_step_cannot_hide_the_first_cause() -> None:
     quiet = np.zeros(3, dtype=np.bool_)
     with pytest.raises(ValueError, match='consecutive'):
         CausalAudit().check(1, fields(), fields(), quiet, quiet)
+
+
+@pytest.mark.parametrize('reference_mv', (-100.0, 100.0))
+def test_relative_state_budget_applies_to_both_signs(reference_mv: float) -> None:
+    reference, mlx = fields(), fields()
+    reference['pre_g'][:] = mlx['pre_g'][:] = reference_mv
+    mlx['pre_g'][2] += 0.0015
+    quiet = np.zeros(3, dtype=np.bool_)
+    audit = CausalAudit()
+    audit.check(0, reference, mlx, quiet, quiet)
+    assert audit.first_budget_violation is None
