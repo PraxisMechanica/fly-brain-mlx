@@ -1,0 +1,10 @@
+{
+  "checkpoint": "f0af676da77038612beb7809207d37bdfc363d10",
+  "runner_application_source_and_retained_input_hashes_verified": true,
+  "native_output_hashes_independently_match_original_operation_probe": true,
+  "all_medians_recomputed": true,
+  "retained_raster_active_edge_work_independently_recomputed": true,
+  "busiest_saved_step_component_speedup_against_earlier_original_probe": 242.9503750537569,
+  "retained_raster_full_scan_to_active_edge_visit_ratio": 57769.66063539808,
+  "limits": "Native-byte comparisons cover selected operations; no full comparator execution-mode replacement or whole-trajectory qualification. Component speedup uses separately measured original and active probes. Dense/all-firing rows are slower with this simple prototype."
+}

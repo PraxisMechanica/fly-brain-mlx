@@ -1,0 +1,145 @@
+{
+  "checkpoint": "f0af676da77038612beb7809207d37bdfc363d10",
+  "scope": "Alternative active-source gather/bincount operation diagnostic using existing NumPy and original weights. No full model is run and no comparator evaluator is adopted.",
+  "decision_confidence_percent": 95,
+  "torch": "2.11.0",
+  "numpy": "1.26.4",
+  "cpu_threads": 1,
+  "neurons": 138639,
+  "edges": 15091983,
+  "setup_s": 3.705190709006274,
+  "integer_row_bound": 69948.0,
+  "accumulation_dtype": "float64 exact integer accumulation, cast to float32 before unchanged torch post-sum scale",
+  "patterns": {
+    "rest": {
+      "seconds": [
+        0.0004006669914815575,
+        0.0003604159865062684,
+        0.000534582999534905,
+        0.0005824590043630451,
+        0.0005582079757004976
+      ],
+      "median_s": 0.000534582999534905,
+      "input_shape": [
+        1,
+        138639
+      ],
+      "firing_neurons_per_row": [
+        0.0
+      ],
+      "selected_edge_visits_per_row": [
+        0
+      ],
+      "output_stride": [
+        138639,
+        1
+      ],
+      "exact_native_dtype_shape_and_bytes_equal": true,
+      "unchanged_post_sum_scale_bytes_equal": true,
+      "output_sha256": "82c552c9fcbde2dfc3dac3369eba2663bf27a29cb88aa6a1c8aab050e60495e8"
+    },
+    "actual_busiest_saved_step": {
+      "seconds": [
+        0.0007132089813239872,
+        0.0006282080139499158,
+        0.0006489999941550195,
+        0.0005993339873384684,
+        0.0007162079855334014
+      ],
+      "median_s": 0.0006489999941550195,
+      "input_shape": [
+        1,
+        138639
+      ],
+      "firing_neurons_per_row": [
+        9.0
+      ],
+      "selected_edge_visits_per_row": [
+        1906
+      ],
+      "output_stride": [
+        138639,
+        1
+      ],
+      "exact_native_dtype_shape_and_bytes_equal": true,
+      "unchanged_post_sum_scale_bytes_equal": true,
+      "output_sha256": "38967b01f8f5262b8427b5306d6be9050eae20e8dee8b63181a29251be170ed2"
+    },
+    "all_neurons_firing_arithmetic_envelope": {
+      "seconds": [
+        0.2961904170224443,
+        0.28785137500381097,
+        0.2593479579954874,
+        0.2638424590113573,
+        0.26854541699867696
+      ],
+      "median_s": 0.26854541699867696,
+      "input_shape": [
+        1,
+        138639
+      ],
+      "firing_neurons_per_row": [
+        138639.0
+      ],
+      "selected_edge_visits_per_row": [
+        15091983
+      ],
+      "output_stride": [
+        138639,
+        1
+      ],
+      "exact_native_dtype_shape_and_bytes_equal": true,
+      "unchanged_post_sum_scale_bytes_equal": true,
+      "output_sha256": "2d7412555afedadc4efcb39bfd716ef4122f7d85ca375e20ec5a1a640a08c08d"
+    },
+    "four_independent_rows": {
+      "seconds": [
+        0.558711374993436,
+        0.5981429170060437,
+        0.5799904580053408,
+        0.5772048329818062,
+        0.5597612920100801
+      ],
+      "median_s": 0.5772048329818062,
+      "input_shape": [
+        4,
+        138639
+      ],
+      "firing_neurons_per_row": [
+        0.0,
+        9.0,
+        138639.0,
+        138630.0
+      ],
+      "selected_edge_visits_per_row": [
+        0,
+        1906,
+        15091983,
+        15090077
+      ],
+      "output_stride": [
+        138639,
+        1
+      ],
+      "exact_native_dtype_shape_and_bytes_equal": true,
+      "unchanged_post_sum_scale_bytes_equal": true,
+      "output_sha256": "7a9890778a192bbbbbd1a2e75ffb37d154c056ee8eb3c94637f77fca370289fa"
+    }
+  },
+  "retained_cpu_one_second_spike_count": 17062,
+  "retained_cpu_one_second_average_firing_neurons_per_step": 1.7062,
+  "retained_cpu_one_second_active_outgoing_edge_visits": 2612441,
+  "dense_full_scan_edge_visits_per_10000_steps": 150919830000,
+  "runner_sha256": "cadbf8be5c6868b14d66d854fbc55f216a62b3abb8c1b4d1c4cd90ed6eeb68c4",
+  "input_artifact_sha256": "b9558134bf2367aed9971057a0d5467fa34824db9b64de10e53cca4721aad6a9",
+  "source_sha256": {
+    "src/fly_brain/qualification/adapters/torch_setup.py": "c7e284c2dfe19ed2ae24f32721d67ee4ff852b54c8eeeacd445a9aa677b5fb08",
+    "src/fly_brain/qualification/adapters/torch_reference.py": "bf52258041a464156ce05b267601dbefceb893356fbf8401b358b036a29ba6cb"
+  },
+  "elapsed_s": 9.566777500003809,
+  "application_changed": false,
+  "baseline_change_adopted": false,
+  "new_full_case_or_matrix_run": false,
+  "p9_resumed": false,
+  "limits": "Selected operation inputs only; output construction included in timings. Dense all-firing and near-all-firing batch rows expose poor worst-case cost. Exact integer arithmetic proof and matching samples do not qualify a replacement of the frozen comparator or every complete trajectory. This diagnostic does not change the MLX-only production objective."
+}
