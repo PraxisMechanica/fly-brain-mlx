@@ -14,6 +14,7 @@ from .mlx_ledger import EventLedger
 from .mlx_observer import MLXBlock, observe
 from .observer_evidence import physical_arrays, physical_hash, physical_record
 from .observer_stream import FinalSnapshot
+from .paired_causes import write as write_causes
 from .paired_observer import pair_blocks
 from .reference_queues import ReferenceQueues
 
@@ -112,4 +113,5 @@ def collect(
     arrays['spike_neurons'] = np.asarray(neurons, dtype=np.int64)
     with (output / 'mlx-native.npz').open('xb') as artifact:
         np.savez_compressed(artifact, **arrays)
+    write_causes(capture, job, execution, connectome, stimulus, output)
     return capture

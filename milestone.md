@@ -656,6 +656,12 @@ Final physical queue archive checkpoint (2026-10-05):
 - At `70b6ed7`, retain every actual final reference spike/channel array, delivered row array, queue offset, and ordered physical slot array, with native descriptors and exact clock/cursor metadata. The same physical-array helper now serves cause and final archives; existing cause filenames and bytes remain unchanged.
 - **Two live reference/Metal tests pass, zero failures/errors/skips**, verifying every retained array against its observed native descriptor and fresh-process repeat. [Report](data/results/milestone-4-paired-collector-20261005-02.xml). The default application suite remains **201 passed, zero failures/errors/skips**; full Ruff formatting/lint and strict Pyright pass. Cause-file integration and matrix execution remain open. Commit this working state before the next unit.
 
+Live cause-file integration checkpoint (2026-10-05):
+
+- At `568ceed`, the paired collector writes explicit no-difference/first-difference results and bounded current/preceding cause archives. Each found cause includes supplied stimulus bits/targets, mapped affected identifiers, actual device leaves/counts/padding, native weights read from the completed reference process, threshold margins, and every native phase/physical queue descriptor. The recorded reduction order is the approved uncompiled factored tree; no classification or tolerance waiver is inferred.
+- **Three live reference/Metal tests pass, zero failures/errors/skips**. An explicitly injected step-7 budget fault proves archive retention across subsequent blocks, checks all archived native descriptors, and compares selected weights directly with actual C++ output. The injected fault is a serialization test, not a naturally occurring numerical difference. [Report](data/results/milestone-4-paired-collector-20261005-03.xml). The default application suite remains **201 passed, zero failures/errors/skips**; all 127 files pass Ruff checks, strict Pyright has zero errors/warnings, and all three dependency contracts pass.
+- Full-network cause interpretation still requires the bounded review rule. CPU collection, repeat acceptance, and the remaining matrix remain open. Commit this working state before the next implementation.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.

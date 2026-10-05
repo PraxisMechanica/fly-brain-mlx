@@ -1,13 +1,16 @@
 import hashlib
 import json
+from dataclasses import replace
 from pathlib import Path
 
 import numpy as np
 import pytest
 
 from fly_brain.qualification.adapters.brian_jobs import build
+from fly_brain.qualification.adapters.causal_capture import CausalCapture
 from fly_brain.qualification.adapters.observer_evidence import array_record
 from fly_brain.qualification.adapters.paired_collect import collect
+from fly_brain.qualification.adapters.paired_observer import PairedBlock
 from fly_brain.simulation.backend.bucketed import prepare
 from fly_brain.simulation.models import Stimulus
 from tests.qualification.test_mlx_observer import fixture
@@ -37,6 +40,11 @@ def test_live_collection_retains_complete_native_and_physical_replay(
         capture = collect(job, execution, case.connectome, stimulus, output)
         assert capture.audit.step == 101
         assert capture.spike is None and capture.budget is None
+        summary = json.loads((output / 'causal.json').read_text())
+        assert summary['steps'] == 101 and summary['contexts'] == {
+            'budget': None,
+            'spike': None,
+        }
         phases = [
             json.loads(line)
             for line in (output / 'phase-digests.jsonl').read_text().splitlines()
@@ -107,3 +115,62 @@ def test_live_collection_retains_complete_native_and_physical_replay(
                 ), name
     with pytest.raises(FileExistsError):
         collect(job, execution, case.connectome, stimulus, outputs[0])
+
+
+def test_injected_first_budget_fault_retains_actual_inputs_and_reference_weights(
+    precision: str, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    case = fixture()
+    events = case.events[:1]
+    stimulus = Stimulus(
+        events,
+        case.targets,
+        (200.0,) * 3,
+        (0,),
+        0,
+        0,
+        hashlib.sha256(events.tobytes()).hexdigest(),
+    )
+    job = build(case.connectome, case.targets, (3,), events[0], tmp_path / 'build')
+    execution = prepare(case.connectome, case.targets, (3,), precision)
+    capture = CausalCapture()
+    check = capture.check
+
+    def inject_fault(block: PairedBlock) -> None:
+        if block.reference.begin == 0:
+            fields = dict(block.mlx.fields)
+            fields['pre_v'] = fields['pre_v'].copy()
+            fields['pre_v'][7, 0, 2] += 0.02
+            block = replace(block, mlx=replace(block.mlx, fields=fields))
+        check(block)
+
+    monkeypatch.setattr(capture, 'check', inject_fault)
+    monkeypatch.setattr(
+        'fly_brain.qualification.adapters.paired_collect.CausalCapture', lambda: capture
+    )
+    output = tmp_path / 'collected'
+    collect(job, execution, case.connectome, stimulus, output)
+    summary = json.loads((output / 'causal.json').read_text())
+    assert summary['first_budget_violation']['step'] == 7
+    assert summary['first_spike_step'] is None and summary['contexts']['spike'] is None
+    with np.load(output / 'budget-context.npz') as archive:
+        for position, step in (('current', 7), ('previous', 6)):
+            assert (
+                archive[position + '_stimulus_bits'].tobytes()
+                == events[0, step].tobytes()
+            )
+        assert archive['affected_neuron_ids'].tolist() == [2]
+        edges = archive['neuron_2_actual_mlx_leaf_edges']
+        occupied = archive['neuron_2_actual_mlx_leaf_occupied']
+        weights = np.fromfile(
+            output / 'reference-results' / job.files['weights'], dtype=np.float64
+        )
+        assert (
+            archive['neuron_2_reference_native_weight_si'].tobytes()
+            == weights[edges[occupied]].tobytes()
+        )
+        for name in archive.files:
+            assert (
+                array_record(archive[name])
+                == summary['contexts']['budget']['arrays'][name]
+            )
