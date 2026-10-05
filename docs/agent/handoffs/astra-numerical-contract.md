@@ -1,8 +1,10 @@
 # Bounded Astra numerical-contract review
 
-Current architecture note (2026-10-04): numerical statements and measured historical commands below retain their original scope. Source links now resolve to the installed package or the retired-source record. Use the current uv commands in [README](../../README.md) for reproduction; the standalone scripts and Conda workflows are retired. The architecture hold and later milestones are governed by [milestone.md](../../milestone.md). This note does not change scientific limits or the manual review's owner.
+Historical review brief. Holds, process states, model-switch instructions, package counts, and remote availability below describe the recorded checkpoint. For current work, read [milestone.md](../../../milestone.md) and [AGENTS.md](../../../AGENTS.md). Original review ownership and scientific evidence are preserved.
 
-Status: bounded review resolved on 2026-10-04. The numerical contract is approved for Milestone 1 implementation/qualification; no MLX implementation or full-network parity has been approved. Awaiting the user's return to GPT-6.1 Sol at `xhigh`. [milestone.md](../../milestone.md) remains authoritative for scope, acceptance, and progress.
+Current architecture note (2026-10-04): numerical statements and measured historical commands below retain their original scope. Source links now resolve to the installed package or the retired-source record. Use the current uv commands in [README](../../../README.md) for reproduction; the standalone scripts and Conda workflows are retired. The architecture hold and later milestones are governed by [milestone.md](../../../milestone.md). This note does not change scientific limits or the manual review's owner.
+
+Status: bounded review resolved on 2026-10-04. The numerical contract is approved for Milestone 1 implementation/qualification; no MLX implementation or full-network parity has been approved. Awaiting the user's return to GPT-6.1 Sol at `xhigh`. [milestone.md](../../../milestone.md) remains authoritative for scope, acceptance, and progress.
 
 ## Requested outcome and boundary
 
@@ -22,18 +24,18 @@ The user performs the model switch. Do not substitute another model or spawn a r
 
 ## Evidence to inspect
 
-Read the [working rules](../../AGENTS.md), [authoritative milestones](../../milestone.md), and [reference baseline](../mlx-port-baseline.md) first. The baseline links the relevant implementations and explains the measured disagreements.
+Read the [working rules](../../../AGENTS.md), [authoritative milestones](../../../milestone.md), and [reference baseline](../numerical-contract.md) first. The baseline links the relevant implementations and explains the measured disagreements.
 
 | Evidence | Purpose |
 | --- | --- |
-| [Brian2 runner](../../src/fly_brain/qualification/adapters/brian_reference.py), [original paper model](../architecture-remediation.md#retired-source), [orchestration](../architecture-remediation.md#retired-source) | Actual equations, parameters, scheduling declarations, experiment definitions, and silencing |
-| [PyTorch runner](../../src/fly_brain/qualification/adapters/torch_reference.py) | Existing comparison baseline and its differing integration, delay, stimulus, and refractory behavior |
-| [Focused tests](../../tests/qualification/test_reference_contract.py), [final test report](../evidence/milestone-0/reference-tests-final.xml) | Executable reference observations and verification results |
-| [Schedule and delay trace](../evidence/milestone-0/reference-schedule.json), [inspection harness](../../src/fly_brain/qualification/adapters/schedule_probe.py) | Generated integration/refractory/reset code, schedule, stimulus placement, and cross-backend delay observations |
-| [Baseline result](../evidence/milestone-0/brian2-baseline.json), [log](../evidence/milestone-0/brian2-baseline.log), [run harness](../architecture-remediation.md#retired-source) | Full-data execution, actual output schema, environment, timing boundaries, and reproducible command |
-| [Input counts and hashes](../evidence/milestone-0/input-summary.json) | Pinned v783 data size and ordering/weight evidence |
-| [Publication equations and provenance](../evidence/milestone-0/publication-source.json) | Continuous model and outgoing-output elimination; original publication used v630 |
-| [Spike comparator](../../src/fly_brain/comparison/service.py), [reference comparator](../architecture-remediation.md#retired-source), [ground-truth comparator](../architecture-remediation.md#retired-source) | Current metrics, time normalization, timing window, and undefined/empty-metric treatment |
+| [Brian2 runner](../../../src/fly_brain/qualification/adapters/brian_reference.py), [original paper model](../history/architecture-remediation.md#retired-source), [orchestration](../history/architecture-remediation.md#retired-source) | Actual equations, parameters, scheduling declarations, experiment definitions, and silencing |
+| [PyTorch runner](../../../src/fly_brain/qualification/adapters/torch_reference.py) | Existing comparison baseline and its differing integration, delay, stimulus, and refractory behavior |
+| [Focused tests](../../../tests/qualification/test_reference_contract.py), [final test report](../../evidence/milestone-0/reference-tests-final.xml) | Executable reference observations and verification results |
+| [Schedule and delay trace](../../evidence/milestone-0/reference-schedule.json), [inspection harness](../../../src/fly_brain/qualification/adapters/schedule_probe.py) | Generated integration/refractory/reset code, schedule, stimulus placement, and cross-backend delay observations |
+| [Baseline result](../../evidence/milestone-0/brian2-baseline.json), [log](../../evidence/milestone-0/brian2-baseline.log), [run harness](../history/architecture-remediation.md#retired-source) | Full-data execution, actual output schema, environment, timing boundaries, and reproducible command |
+| [Input counts and hashes](../../evidence/milestone-0/input-summary.json) | Pinned v783 data size and ordering/weight evidence |
+| [Publication equations and provenance](../../evidence/milestone-0/publication-source.json) | Continuous model and outgoing-output elimination; original publication used v630 |
+| [Spike comparator](../../../src/fly_brain/comparison/service.py), [reference comparator](../history/architecture-remediation.md#retired-source), [ground-truth comparator](../history/architecture-remediation.md#retired-source) | Current metrics, time normalization, timing window, and undefined/empty-metric treatment |
 
 Additional GeNN/NEST source links and licence notices are in the baseline. Review them where needed to resolve a disputed contract; porting those backends is outside this assignment.
 
@@ -50,7 +52,7 @@ Measured differences motivate this review: Brian2 integrates exactly and applies
 
 Review base: `main` at `6deca27`. Focused diagnostic/evidence commit: `4b7ea63` (`Probe numerical precision and deterministic replay`). All changes in this assignment are documentation, reference tests, and a standalone numerical diagnostic; no upstream backend, interface, output contract, or data has been modified.
 
-The durable specification is in the baseline's [reviewed discrete contract](../mlx-port-baseline.md#reviewed-discrete-contract), [precision policy](../mlx-port-baseline.md#reviewed-precision-and-state-acceptance), [stimulus protocol](../mlx-port-baseline.md#shared-stimuli-and-repeatability-protocol), and [full-network acceptance](../mlx-port-baseline.md#full-network-acceptance-fixed-before-validation). These sections supersede the earlier pending-review language and legacy comparator heuristics.
+The durable specification is in the baseline's [reviewed discrete contract](../numerical-contract.md#reviewed-discrete-contract), [precision policy](../numerical-contract.md#reviewed-precision-and-state-acceptance), [stimulus protocol](../numerical-contract.md#shared-stimuli-and-repeatability-protocol), and [full-network acceptance](../numerical-contract.md#full-network-acceptance-fixed-before-validation). These sections supersede the earlier pending-review language and legacy comparator heuristics.
 
 | Decision | Outcome and evidence |
 | --- | --- |
@@ -63,7 +65,7 @@ The durable specification is in the baseline's [reviewed discrete contract](../m
 | Stimulus | External per-channel Bernoulli bits from pinned NumPy PCG64 generation; fixed step/channel order, independent trial seeds, immutable byte hashes, duplicate-channel preservation, correct replay slot. Brian2 NumPy/C++ replay and native guaranteed-input equivalence are verified. |
 | Full-network gate | Freeze the 52-case paired matrix plus repeats/batch checks before results. Require Jaccard ≥0.95, count error ≤0.02, neuronwise normalized error ≤0.05, rate correlation ≥0.99, 1 ms timing F1 ≥0.95, **and** no worse than the pinned PyTorch core on every primary metric/case. Empty/undefined handling and earliest-divergence diagnosis are explicit. |
 
-The [new probe](../../src/fly_brain/qualification/adapters/replay_probe.py) is a finite diagnostic, not a candidate backend. It runs six uncoupled linear trajectories, a threshold predicate counterexample, a cancellation sum, and a three-neuron reference replay. It neither loads the connectome nor benchmarks it. [Raw numerical findings](../evidence/milestone-0/numerical-contract.json) and [compressed complete replay state/events](../evidence/milestone-0/numerical-contract-replay.npz) are retained. The original four JSON traces, schedule, and two fresh standalone builds remain under `data/results/mlx-numerical-review-20261004`.
+The [new probe](../../../src/fly_brain/qualification/adapters/replay_probe.py) is a finite diagnostic, not a candidate backend. It runs six uncoupled linear trajectories, a threshold predicate counterexample, a cancellation sum, and a three-neuron reference replay. It neither loads the connectome nor benchmarks it. [Raw numerical findings](../../evidence/milestone-0/numerical-contract.json) and [compressed complete replay state/events](../../evidence/milestone-0/numerical-contract-replay.npz) are retained. The original four JSON traces, schedule, and two fresh standalone builds remain under `data/results/mlx-numerical-review-20261004`.
 
 Executed verification:
 
@@ -75,7 +77,7 @@ git diff --check
 
 - All diagnostic assertions passed. Over 10,000 steps, maximum float32 voltage error was `0.000381470 mV` and synaptic-state error `0.000218289 mV`; these are NumPy precision measurements, not MLX device results.
 - Four reference replays were bit-identical across complete state and event traces, including two independently compiled C++ executions; 43 spikes per replay. Their raw trace hashes all equal `8c6bb12955fc88507cb360d3092f0d4b3fe89fd90d0d60de815aea4d8ec2fab2`.
-- [Final test report](../evidence/milestone-0/reference-tests-contract-final.xml): 12 passed, zero skipped/failures/errors, 162 dependency warnings, 17.97 seconds. Earlier 11-test and 12-test reports are retained; adding native Poisson input to the pre-reset gating test motivated the final run. Matplotlib cache/font warnings and the setuptools private-function warning appeared during the diagnostic process; neither prevented execution.
+- [Final test report](../../evidence/milestone-0/reference-tests-contract-final.xml): 12 passed, zero skipped/failures/errors, 162 dependency warnings, 17.97 seconds. Earlier 11-test and 12-test reports are retained; adding native Poisson input to the pre-reset gating test motivated the final run. Matplotlib cache/font warnings and the setuptools private-function warning appeared during the diagnostic process; neither prevented execution.
 - All 92 local document links/Markdown anchors passed verification. The compressed trace and stimulus match all four raw traces and their recorded hashes. Original upstream numerical source/data remain unchanged; `git diff --check` passed.
 - The source inspection confirmed Brian2's threshold flag write and integer `timestep` conversion. Official MLX documentation supplied the float64 device restriction and reduced-precision opt-out; links and access date are in the baseline. No MLX dependency was installed in this review.
 

@@ -7,8 +7,11 @@ current holds, acceptance criteria, progress, unresolved issues, and completion
 evidence. Follow its latest user amendments over historical checkpoints and
 keep it updated after significant work.
 
+Use the [agent documentation index](docs/agent/README.md) to find detailed
+contracts, review records, and historical evidence.
+
 Preserve the FlyWire v783 leaky integrate-and-fire model and the
-[reviewed numerical contract](docs/mlx-port-baseline.md), including pinned
+[reviewed numerical contract](docs/agent/numerical-contract.md), including pinned
 inputs, reference behavior, experiment definitions, and spike output contracts.
 Keep all scientific acceptance gates; changed arithmetic or execution modes
 require their recorded qualification before adoption.

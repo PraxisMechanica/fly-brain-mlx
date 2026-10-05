@@ -1,5 +1,7 @@
 # Bounded full-network evidence review
 
+Historical review brief. Holds, process states, model-switch instructions, package counts, and remote availability below describe the recorded checkpoint. For current work, read [milestone.md](../../../milestone.md) and [AGENTS.md](../../../AGENTS.md). Original review ownership and scientific evidence are preserved.
+
 Owner: fresh-context GPT-6 Astra at `xhigh`; parent remains GPT-6.1 Sol at the user's selected effort. Read-only review. The earlier manual accumulation assignment is complete and must not be duplicated.
 
 Checkpoint: `42c59f0` on `main`, clean tree before this assignment. Milestones 0–3 are complete within their recorded scope. The normal ten-package installation executes the complete shortest sugar experiment twice with byte-identical schedules and spike files; the complete silent control has zero events. Application/scientific suites have 66/80 passes, zero skips/failures/errors. Full-network scientific parity and complete state/queue repeatability remain open.

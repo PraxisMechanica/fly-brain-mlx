@@ -2,7 +2,7 @@
 
 This application targets Apple silicon and uses MLX for simulation. It is based on the FlyWire v783 leaky integrate-and-fire model from [Eon Systems](https://github.com/eonsystemspbc/fly-brain), pinned at `a3db62f9436074e485c0278290c2164ed6150808`.
 
-The numerical core, complete connectome mapping, device propagation, and controlled delivery are qualified. The normal installation runs the complete shortest sugar experiment twice with byte-identical outputs; the complete silent control produces zero spikes. Existing comparison tools consume populated and empty exports. Full-network scientific parity and performance remain open. See [the authoritative plan](milestone.md), [the numerical contract](docs/mlx-port-baseline.md), and [project rules](AGENTS.md).
+The numerical core, complete connectome mapping, device propagation, and controlled delivery are qualified. The normal installation runs the complete shortest sugar experiment twice with byte-identical outputs; the complete silent control produces zero spikes. Existing comparison tools consume populated and empty exports. Full-network scientific parity and performance remain open. See [the authoritative plan](milestone.md), [the numerical contract](docs/agent/numerical-contract.md), and [project rules](AGENTS.md).
 
 ## Install
 
@@ -126,12 +126,12 @@ Outputs retain `pairwise_summary.json`, `pairwise_summary.csv`, and `parity_rate
 - `src/fly_brain/cli.py`: argument parsing, one application call, and result presentation.
 - `tests`: unit, file/process integration, scientific qualification, and explicitly injected test support.
 
-Import-linter enforces domain and framework boundaries. Pyright checks every application module and test in strict mode. [Narrow third-party typing limits](typings/README.md) are documented. No application path injection, database scaffolding, global run paths, or runner-to-orchestrator imports remain.
+Import-linter enforces domain and framework boundaries. Pyright checks every application module and test in strict mode. [Narrow third-party typing limits](docs/agent/typing.md) are documented. No application path injection, database scaffolding, global run paths, or runner-to-orchestrator imports remain.
 
 ## Preserved source, data, and evidence
 
-The original application is retained in Git history. The [architecture record](docs/architecture-remediation.md#retired-source) lists retired workflows and recovery commands. Scientific evidence and local data remain preserved, including the incoming manual review archive.
+The original application is retained in Git history. The [architecture record](docs/agent/history/architecture-remediation.md#retired-source) lists retired workflows and recovery commands. Scientific evidence and local data remain preserved, including the incoming manual review archive.
 
 The historical `data/results/nature_2026_07/` bundle records earlier multi-framework results. Its metadata and checksums remain available; those recorded frameworks are not supported by this application. The original spike bundle is stored in [Google Drive](https://drive.google.com/drive/folders/1jiSfb5lNfm9gwP0YyyRz5ATIrDpBAcjs). After placing it in that historical folder, verify the supplied checksums with `shasum -a 256 -c checksums.sha256` from that folder.
 
-Source attribution and scientific references remain in the [baseline](docs/mlx-port-baseline.md) and Git history. The upstream and vendored license files are retained.
+Source attribution and scientific references remain in the [baseline](docs/agent/numerical-contract.md) and Git history. The upstream and vendored license files are retained.
