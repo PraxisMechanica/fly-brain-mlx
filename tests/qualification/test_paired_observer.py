@@ -8,8 +8,13 @@ from fly_brain.qualification.adapters.brian_jobs import build, run
 from fly_brain.qualification.adapters.mlx_ledger import EventLedger
 from fly_brain.qualification.adapters.mlx_observer import observe
 from fly_brain.qualification.adapters.observer_stream import FinalSnapshot
-from fly_brain.qualification.adapters.paired_observer import PairedBlock, pair_blocks
+from fly_brain.qualification.adapters.paired_observer import (
+    PairedBlock,
+    audit_block,
+    pair_blocks,
+)
 from fly_brain.qualification.adapters.reference_queues import ReferenceQueues
+from fly_brain.qualification.causality import CausalAudit
 from fly_brain.simulation.backend import core
 from fly_brain.simulation.backend.bucketed import prepare
 from tests.qualification.test_mlx_observer import fixture
@@ -41,8 +46,12 @@ def test_live_engines_pair_every_phase_and_final_partial_block(
         (96, 5),
     ]
     assert isinstance(frames[-1], FinalSnapshot) and ledger.step == 101
+    audit = CausalAudit()
     for block in blocks:
         assert len(block.snapshots) == block.reference.rows
         assert block.reference.fields['pre_v'].dtype == np.float64
         assert block.mlx.fields['pre_v'].dtype == np.float32
         assert all(len(digest) == 64 for digest in block.native_sha256)
+        audit_block(block, audit)
+    assert audit.step == 101
+    assert audit.first_spike_step is None and audit.first_budget_violation is None

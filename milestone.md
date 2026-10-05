@@ -476,6 +476,11 @@ Live paired-block checkpoint (2026-10-05):
 - From clean `aa1c9d8`, the [paired observer](src/fly_brain/qualification/adapters/paired_observer.py) consumes the live reference pipe and actual MLX blocks together, checks every reference physical queue and MLX ledger flag, hashes native phase arrays before conversion, and requires complete block/final coverage. Capture remains bounded to at most 32 steps.
 - The live six-neuron, 101-step test passes, zero failures/errors/skips, including the five-row final block and native float64/float32 observations. The unchanged application suite passes **169 tests, zero failures/errors/skips**; full Ruff, strict Pyright, and all three import contracts pass. This verifies transport alignment; live causal comparisons/context and complete MLX transparency remain next. Commit this working state before further changes.
 
+Live causal-comparison checkpoint (2026-10-05):
+
+- Paired transport is committed at `26b1463`. The paired adapter now checks real phase timestamps, compares all-neuron voltage/synaptic state after hashing native arrays, and requires exact refractory flags and last-spike clocks while history is common. The first different step retains inclusive pre-threshold coverage; later unforced discrete/state closeness is excluded while finite-state checks continue.
+- The independent live Brian2/MLX resting-state fixture completes all 101 steps with **no spike difference or state-budget violation**; its test passes with zero failures/errors/skips. Full strict Pyright, Ruff, and formatting pass. Raw first-cause context and fault injection remain next; no full-network acceptance follows from this small fixture. Commit this working state now.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.

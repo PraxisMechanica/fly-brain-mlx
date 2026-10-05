@@ -3,6 +3,10 @@ from collections.abc import Iterator, Mapping
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
+import numpy as np
+
+from fly_brain.qualification.causality import CausalAudit
+
 from .observer_stream import FinalSnapshot, PhaseBlock, StepSnapshot
 from .reference_queues import ReferenceQueues
 
@@ -67,3 +71,57 @@ def pair_blocks(
     if next(reference, None) is not None:
         raise ValueError('Paired observations contain extra reference frames')
     yield final
+
+
+def audit_block(block: PairedBlock, audit: CausalAudit) -> None:
+    reference, mlx = block.reference.fields, block.mlx.fields
+    neurons = reference['pre_v'].shape[1]
+    if mlx['pre_v'].shape != (block.reference.rows, 1, neurons):
+        raise ValueError('Each paired causal audit requires one independent trial')
+    names = tuple(
+        phase + '_' + field
+        for phase in ('pre', 'before', 'end')
+        for field in ('v', 'g')
+    )
+    for phase in ('pre', 'before', 'end'):
+        expected = (
+            np.arange(
+                block.reference.begin, block.reference.begin + block.reference.rows
+            )
+            * 0.0001
+        )
+        if not np.allclose(reference[phase + '_t'], expected, rtol=0, atol=1e-12):
+            raise ValueError('Reference phase clocks differ from the paired steps')
+    if not np.isfinite(reference['end_lastspike']).all():
+        raise ValueError('Reference last-spike clocks must remain finite')
+    for row, snapshot in enumerate(block.snapshots):
+        spikes = np.zeros(neurons, dtype=np.bool_)
+        spikes[snapshot.spikes] = True
+        actual_spikes = np.asarray(mlx['spikes'][row, 0], dtype=np.bool_)
+        if audit.first_spike_step is None:
+            phases = (
+                ('pre',)
+                if np.any(spikes != actual_spikes)
+                else ('pre', 'before', 'end')
+            )
+            for phase in phases:
+                if not np.array_equal(
+                    reference[phase + '_not_refractory'][row],
+                    mlx[phase + '_not_refractory'][row, 0],
+                ):
+                    raise ValueError('Common-history refractory observations differ')
+            if np.array_equal(spikes, actual_spikes) and not np.array_equal(
+                np.rint(reference['end_lastspike'][row] / 0.0001),
+                mlx['end_last_spike_step'][row, 0],
+            ):
+                raise ValueError('Common-history last-spike clocks differ')
+        audit.check(
+            snapshot.step,
+            {
+                name: np.asarray(reference[name][row], dtype=np.float64) * 1000
+                for name in names
+            },
+            {name: np.asarray(mlx[name][row, 0], dtype=np.float32) for name in names},
+            spikes,
+            actual_spikes,
+        )
