@@ -1,0 +1,49 @@
+{
+  "checkpoint": "c1145238d84836b924b5b4cc78bffc051dd88653",
+  "executed_program_sha256": "adbe2807b3f54390cd000c2edd1ad14d3856aa3c8a74c66c27f237ed11efb51b",
+  "steps": 1000,
+  "trials": [
+    {
+      "trial": 0,
+      "all_32_phase_queue_due_blocks_exact": true,
+      "all_13_actual_final_fields_exact": true
+    },
+    {
+      "trial": 1,
+      "all_32_phase_queue_due_blocks_exact": true,
+      "all_13_actual_final_fields_exact": true
+    },
+    {
+      "trial": 2,
+      "all_32_phase_queue_due_blocks_exact": true,
+      "all_13_actual_final_fields_exact": true
+    },
+    {
+      "trial": 3,
+      "all_32_phase_queue_due_blocks_exact": true,
+      "all_13_actual_final_fields_exact": true
+    }
+  ],
+  "input_pins": {
+    "neurons": 138639,
+    "edges": 15091983
+  },
+  "artifact_sha256": {
+    "docs/evidence/milestone-4/four-trial-memory/four-trial-memory.json": "ac463f15661fd41b08bad6930edf4e16ef86902d6d7ff5baea295ad5541c3adb",
+    "docs/evidence/milestone-4/four-trial-memory/batch-final.npz": "55698151a06e9481ad94e26345b95bafa7834f34c9c140191bace42e1baf384e",
+    "docs/evidence/milestone-4/four-trial-memory/stimulus.npz": "a871d9afa7d624c35980f5ffde5e9f58c25ddf98dea081316ac6eecf663a0e85",
+    "docs/evidence/milestone-4/full-paired-observer/observed.json": "757c065eb9402b1f742ce42d20e1b33d9a332ffe35f34bd5ac69374028e6f914",
+    "docs/evidence/milestone-4/full-paired-observer/observed-mlx-final.npz": "f06092552d16d7e8715647dbf41c0aab6807e034ae99e2f808881c05684c1f13",
+    "docs/evidence/milestone-4/cases/sugar-1000-1/observations.zip": "38e5156536c28d3dacda4c31b4364dc73a3c5234c6aaf86404c61f410acadbe1",
+    "docs/evidence/milestone-4/cases/sugar-1000-1/verification.json": "302d5a73ee853a6bcb88d40fb2814ae19d9c953c848ea20ca5ecb6ea115bf9df",
+    "docs/evidence/milestone-4/cases/sugar-1000-2/observations.zip": "9403856cc3b993add809390be8b056c58f1c5ef9721779552a6866a7bb0323e4",
+    "docs/evidence/milestone-4/cases/sugar-1000-2/verification.json": "9646fd2e96b1701228ecdebed7e67cc562b4a33548fc923c5bc5066a3d7cd321",
+    "docs/evidence/milestone-4/cases/sugar-1000-3/observations.zip": "4b2d169d3852a8405345bdc9348b461b1d89af0cd345dd509fd66c6aed1a1006",
+    "docs/evidence/milestone-4/cases/sugar-1000-3/verification.json": "14eb06b647cad417db6136671d8da7c9134d41725f17a080a569ba2c2d0f87c2"
+  },
+  "one_second_batch_gate_accepted": false,
+  "batch_repeat_verified": false,
+  "cpu_batch_verified": false,
+  "new_case_execution_or_acceptance": false,
+  "scope": "Verify the completed Astra method against retained actual 0.1-second MLX batch and four singleton native observations. No one-second, batch-repeat, CPU-batch, or matrix acceptance."
+}
