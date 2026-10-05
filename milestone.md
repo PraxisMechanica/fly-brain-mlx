@@ -622,6 +622,11 @@ First-case working-state checkpoint (2026-10-05):
 - Accepted case evidence is committed at `e07073e`. A fresh default-suite report records **193 passed tests, zero failures/errors/skips**; all 118 files pass Ruff formatting/lint, strict Pyright has zero errors/warnings, all three dependency contracts pass (88 modules / 324 dependencies), and the offline lock check resolves 38 packages. All local milestone links exist. [Application report](docs/evidence/milestone-4/matrix-boundaries/application-tests.xml), [quality log](docs/evidence/milestone-4/matrix-boundaries/quality.log), and [verification/source hashes](docs/evidence/milestone-4/matrix-boundaries/verification.json).
 - The separate complete 193-test scientific regression remains the unchanged numerical/observer result; it is not rerun for pure plan/coordinate/clock checks. Next: wire reproducible remaining-case execution and reporting, preserving all frozen cases, repeat/batch requirements, causal context, and incremental checkpoints. Push remains pending because only public reference `upstream` exists.
 
+Reusable observer evidence checkpoint (2026-10-05):
+
+- At `7b70c29`, the runner needs reusable evidence because cases vary while actual native state, physical queue order, clocks, and frozen gates must remain invariant. Keep orchestration and file/device work in qualification adapters; use the existing pure case plan and injected collaborators. No database, new framework, numerical method, or external endpoint is needed.
+- Add native array descriptors and actual reference physical-snapshot hashing with the same deterministic encoding used by the qualified full proof. Precision, shape, signed zero, step, clock, native time, and source cursor all affect evidence. The default application suite passes **198 tests, zero failures/errors/skips**; full Ruff and strict Pyright pass. Commit this working unit before queue/spike integrity checks and runner wiring.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.
