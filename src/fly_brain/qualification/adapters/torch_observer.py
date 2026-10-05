@@ -31,6 +31,15 @@ def capture(state: TensorState, step: int) -> TorchSnapshot:
         expected = (shape[0], 19, shape[1]) if name == 'delay_buffer' else shape
         if value.shape != expected or not np.isfinite(value).all():
             raise ValueError(f'Invalid native CPU reference field: {name}')
+    spikes, refractory = fields['spikes'], fields['refrac']
+    if (
+        np.any((spikes != 0) & (spikes != 1))
+        or np.any(refractory < 0)
+        or np.any(refractory != np.floor(refractory))
+    ):
+        raise ValueError(
+            'CPU reference spikes and refractory counters must be discrete'
+        )
     hashes = tuple(
         phase_hash({name: value[trial : trial + 1] for name, value in fields.items()})
         for trial in range(shape[0])

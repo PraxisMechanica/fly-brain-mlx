@@ -108,3 +108,33 @@ def test_observer_rejects_invalid_replay_before_yielding_state(
     model = prepare(case.connectome, case.targets, (), 1)
     with pytest.raises(ValueError, match='canonical trial-by-step channels'):
         next(observe(model, events, case.targets))
+
+
+@pytest.mark.parametrize('bad_delay', (False, True))
+def test_snapshot_rejects_missing_neuron_or_physical_delay_slots(
+    bad_delay: bool,
+) -> None:
+    case = fixture()
+    g, buffer, spikes, voltage, refrac = prepare(
+        case.connectome, case.targets, (), 1
+    ).state_init()
+    state = (
+        g,
+        buffer[:, :18] if bad_delay else buffer,
+        spikes,
+        voltage if bad_delay else voltage[0],
+        refrac,
+    )
+    with pytest.raises(ValueError):
+        capture(state, 0)
+
+
+@pytest.mark.parametrize('index,value', ((2, 0.5), (2, 2), (4, -1), (4, 0.5)))
+def test_snapshot_rejects_invalid_spikes_or_refractory_counters(
+    index: int, value: float
+) -> None:
+    case = fixture()
+    state = prepare(case.connectome, case.targets, (), 1).state_init()
+    state[index].fill_(value)
+    with pytest.raises(ValueError, match='must be discrete'):
+        capture(state, 0)

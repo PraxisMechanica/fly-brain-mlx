@@ -572,6 +572,11 @@ CPU replay/batch checkpoint (2026-10-05):
 
 - At `4486839`, all **35 CPU setup/observer tests pass, zero failures/errors/skips**, with 29 dependency warnings. Fresh populated/silent runs repeat every initial/per-step five-tensor digest; each of four actual batch trials matches independently initialized execution in every raw state and physical buffer byte. Invalid replay schedules fail before any observation is yielded. Full Ruff and strict Pyright pass. This is small-network evidence only; complete execution and the frozen matrix remain open. Commit this qualified unit before further work.
 
+CPU snapshot validity checkpoint (2026-10-05):
+
+- At `edac41b`, confidence **99%**: validate raw comparator output at the observation boundary before hashing/metric use. Missing neuron dimensions or physical delay slots, fractional/nonbinary spikes, and negative/fractional refractory counters fail explicitly. Numerical reference methods remain unchanged.
+- All **41 CPU setup/observer tests pass, zero failures/errors/skips**, with 29 dependency warnings; full Ruff and strict Pyright pass. Commit this passing boundary before the complete scientific regression and full-network comparator proof.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.
