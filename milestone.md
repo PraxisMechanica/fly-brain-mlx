@@ -924,6 +924,11 @@ Three-trial sugar partial diagnostic verification (2026-10-05):
 - At clean `8fa78ba`, rerun the committed multi-trial checker against all seven versioned cases. The [partial report](docs/evidence/milestone-4/matrix-diagnostics/partial-20261005-05/partial-matrix.json) records **7 included / 45 missing** cases in all 12 prescribed groups. [Executed verification](docs/evidence/milestone-4/matrix-diagnostics/partial-20261005-05/executed-verification.py) independently reproduces all nineteen pooled metric fields and every actual trial/pooled 100 ms bin. Sugar trials 0, 1, and 2 contribute; timing matches remain within each trial and neuron.
 - Sugar trial 1 remains explicitly listed as originally unaccepted automatically and separately accepted by its bound parent review. No pooled metric changes an individual gate or supplies matrix acceptance. Both copied files match the executed output; application and numerical sources remain unchanged. Commit this verified diagnostic before sugar trial 3; acceptance remains **7/52**.
 
+Sugar trial-3 complete execution (2026-10-05):
+
+- At clean `8b5cf1c`, launch `MLX_ENABLE_TF32=0 uv run --locked --group qualification --no-sync fly-brain qualify-parity --experiment sugar --duration-s 0.1 --trial 3 --output data/results/milestone-4-parity-sugar-1000-3-20261005-01`. First launch check: 06:55:37 UTC. All preceding verified work is committed; the output is fresh and each engine runs first/repeat state independently.
+- This case is running and remains unaccepted. Require all fixed/paired metrics, complete native replay/coverage, actual queues, common-history budgets, any first-cause interpretation, and independent parent verification before changing **7/52**. The remaining matrix, prescribed batch checks, full parity, and performance remain open. Push remains pending without a user-owned remote.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.
