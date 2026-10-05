@@ -1,0 +1,66 @@
+{
+  "checkpoint": "2e63105b4a939dae2923abd1b60ca5ea291c613d",
+  "executed_program_sha256": "69e402e47590d5349c1cd159015a2330d4d09384ee68de79d9a3deb1485cb371",
+  "controls": [
+    {
+      "case": {
+        "experiment": "p9",
+        "steps": 1000,
+        "trial": 0
+      },
+      "execution_checkpoint": "5ae0cf9",
+      "verification_output": "data/results/milestone-4-horizon-verifier-p9-1000-0-20261005-01",
+      "verification_sha256": "371384ab8041eb316551e3a7bb371e14c4e81d4319347cdecabcf73b4d5c6b69",
+      "all_19_metric_fields_and_11_gates_independently_verified": true,
+      "raw_manifest_matches_original_case": true,
+      "raw_file_count": 24,
+      "observation_coverage": {
+        "horizon_steps": 1000,
+        "paired_blocks": 32,
+        "reference_physical_snapshots": 1001,
+        "cpu_native_snapshots": 1001
+      }
+    },
+    {
+      "case": {
+        "experiment": "sugar",
+        "steps": 1000,
+        "trial": 2
+      },
+      "execution_checkpoint": "743a859",
+      "verification_output": "data/results/milestone-4-horizon-verifier-sugar-1000-2-20261005-01",
+      "verification_sha256": "ac70715fe6de690a91db8537e090f3be3a3c2f792825c053057a37bca0212488",
+      "all_19_metric_fields_and_11_gates_independently_verified": true,
+      "raw_manifest_matches_original_case": true,
+      "raw_file_count": 24,
+      "observation_coverage": {
+        "horizon_steps": 1000,
+        "paired_blocks": 32,
+        "reference_physical_snapshots": 1001,
+        "cpu_native_snapshots": 1001
+      }
+    },
+    {
+      "case": {
+        "experiment": "sugar-silenced",
+        "steps": 1000,
+        "trial": 0
+      },
+      "execution_checkpoint": "62d045b",
+      "verification_output": "data/results/milestone-4-horizon-verifier-sugar-silenced-1000-0-20261005-01",
+      "verification_sha256": "17ac6dfe7ec582156cb27bec6529b3b3a9443b30aa4d1c711cf7f183f65f431f",
+      "all_19_metric_fields_and_11_gates_independently_verified": true,
+      "raw_manifest_matches_original_case": true,
+      "raw_file_count": 24,
+      "observation_coverage": {
+        "horizon_steps": 1000,
+        "paired_blocks": 32,
+        "reference_physical_snapshots": 1001,
+        "cpu_native_snapshots": 1001
+      }
+    }
+  ],
+  "full_matrix_accepted": false,
+  "new_case_execution_or_acceptance": false,
+  "scope": "Verifier uses each prescribed case horizon. These regression controls are complete 1000-step executions; longer native cases remain unexecuted and unaccepted."
+}

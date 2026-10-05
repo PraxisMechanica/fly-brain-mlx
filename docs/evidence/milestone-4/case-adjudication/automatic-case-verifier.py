@@ -54,7 +54,8 @@ launch = sys.argv[3]
 report = read(run / 'case.json')
 environment = read(run / 'environment.json')
 case = ParityCase(**report['case'])
-assert case in required_cases() and case.steps == 1000 and case.experiment != 'silent'
+assert case in required_cases() and case.experiment != 'silent'
+horizon = case.steps
 experiment = EXPERIMENTS[case.experiment]
 assert (
     report['case_accepted']
@@ -65,7 +66,7 @@ assert (
     set(report['case_checks']) == CASE_CHECKS
     and set(report['metric_acceptance']['checks']) == METRIC_CHECKS
 )
-require_complete_replay(run, 1000)
+require_complete_replay(run, horizon)
 assert all(report['case_checks'].values()) and all(
     report['metric_acceptance']['checks'].values()
 )
@@ -96,12 +97,12 @@ assert asdict(pin) == report['input_pins'] and (pin.neurons, pin.edges) == (
     15091983,
 )
 assert sha(connectome.neuron_ids.tobytes()) == report['neuron_mapping_sha256']
-stimulus = generate(connectome, experiment, 1000, (case.trial,))
+stimulus = generate(connectome, experiment, horizon, (case.trial,))
 metadata = read(run / 'stimulus.json')
 with np.load(run / 'stimulus.npz', allow_pickle=False) as saved:
     assert saved['events'].dtype == np.uint8 and saved['events'].shape == (
         1,
-        1000,
+        horizon,
         len(experiment.activated_ids),
     )
     assert saved['events'].tobytes() == stimulus.events.tobytes()
@@ -117,7 +118,7 @@ assert metadata['seed_tuples'] == [
 ] and metadata['silenced_ids'] == list(experiment.silenced_ids)
 assert sha((run / 'stimulus.npz').read_bytes()) == metadata['artifact_sha256']
 if case.experiment == 'sugar-silenced':
-    sugar = generate(connectome, EXPERIMENTS['sugar'], 1000, (case.trial,))
+    sugar = generate(connectome, EXPERIMENTS['sugar'], horizon, (case.trial,))
     assert stimulus.sha256 == sugar.sha256 and np.array_equal(
         stimulus.events, sugar.events
     )
@@ -175,11 +176,11 @@ for prefix, texts, arrays in (
         equal_archives(first / name, repeat / name)
     records = [json.loads(line) for line in (first / texts[0]).read_text().splitlines()]
     if prefix == 'cpu':
-        assert [row['step'] for row in records] == list(range(-1, 1000))
+        assert [row['step'] for row in records] == list(range(-1, horizon))
         assert all(len(row['native_sha256']) == 1 for row in records)
     else:
         assert [(row['begin'], row['rows']) for row in records] == [
-            (step, min(32, 1000 - step)) for step in range(0, 1000, 32)
+            (step, min(32, horizon - step)) for step in range(0, horizon, 32)
         ]
         assert all(
             len(row['native_phase_sha256']) == 2
@@ -191,10 +192,10 @@ for prefix, texts, arrays in (
             json.loads(line)
             for line in (first / 'physical-digests.jsonl').read_text().splitlines()
         ]
-        assert [row['step'] for row in physical] == list(range(1001))
+        assert [row['step'] for row in physical] == list(range(horizon + 1))
         cause = read(first / 'causal.json')
         assert (
-            cause['steps'] == 1000
+            cause['steps'] == horizon
             and cause['first_budget_violation'] is None
             and cause['first_spike_step'] is None
         )
@@ -208,12 +209,14 @@ with (
 ):
     queue = m['queue']
     assert queue.dtype == np.bool_ and queue.shape == (19, 1, pin.edges)
-    assert not queue[999 % 19].any()
+    assert not queue[(horizon - 1) % 19].any()
     offset = b['reference_pathway_0_queue_0_offset']
-    assert offset.dtype == np.int32 and offset.shape == () and int(offset) == 1000 % 19
-    for future in range(1000, 1018):
+    assert (
+        offset.dtype == np.int32 and offset.shape == () and int(offset) == horizon % 19
+    )
+    for future in range(horizon, horizon + 18):
         native_ids = b[
-            f'reference_pathway_0_queue_0_slot_{(int(offset) + future - 999) % 19}'
+            f'reference_pathway_0_queue_0_slot_{(int(offset) + future - (horizon - 1)) % 19}'
         ]
         assert native_ids.dtype == np.int32 and native_ids.ndim == 1
         ids = set(map(int, native_ids))
@@ -258,7 +261,7 @@ with np.load(run / 'normalized-spikes.npz', allow_pickle=False) as normalized:
                     and not actual['spike_trials'].any()
                 )
             assert np.all((indices >= 0) & (indices < pin.neurons)) and np.all(
-                (steps >= 0) & (steps < 1000)
+                (steps >= 0) & (steps < horizon)
             )
             assert len(
                 set(zip(map(int, indices), map(int, steps), strict=True))
@@ -289,7 +292,9 @@ score_proof = read(score_path.with_name('independent-score-verification.json'))
 assert sha(score_path.read_bytes()) == score_proof['executed_program_sha256']
 support = sorted(set().union(*counts.values()))
 independent = {
-    engine: scorer.score(((spikes['brian'], spikes[engine]),), support, 0.1)
+    engine: scorer.score(
+        ((spikes['brian'], spikes[engine]),), support, horizon * 0.0001
+    )
     for engine in ('mlx', 'torch')
 }
 for engine in independent:
@@ -334,7 +339,7 @@ verification = {
     'case_accepted': True,
     'full_matrix_accepted': False,
     'case': asdict(case),
-    'scope': 'One non-silent prescribed 1000-step full-network case; larger horizons and silence need separate verification.',
+    'scope': 'One non-silent prescribed full-network case at its actual horizon; silence and reviewed differences need separate verification.',
     'all_recorded_executed_sources_equal_launch_checkpoint_and_current_source': True,
     'pinned_inputs_mapping_and_regenerated_canonical_stimulus_verified': True,
     'actual_reference_outgoing_silenced_weights_verified_original_rows_retained': True
@@ -345,7 +350,13 @@ verification = {
     else None,
     'outgoing_silenced_original_row_count': outgoing_count,
     'every_native_phase_physical_queue_due_and_final_array_repeats': True,
-    'complete_32_block_paired_1001_physical_and_1001_cpu_digest_coverage': True,
+    'complete_native_phase_physical_queue_and_cpu_digest_coverage': True,
+    'observation_coverage': {
+        'horizon_steps': horizon,
+        'paired_blocks': (horizon + 31) // 32,
+        'reference_physical_snapshots': horizon + 1,
+        'cpu_native_snapshots': horizon + 1,
+    },
     'every_actual_final_pending_original_row_set_equal': True,
     'pending_counts': pending_counts,
     'complete_raw_mapped_mlx_reference_spikes_exact': True,
