@@ -692,6 +692,12 @@ Native case-coordinate loading checkpoint (2026-10-05):
 - At `664051b`, load actual single-case spike arrays and record their native dtype/shape/byte digests before conversion. Require native reference int32 neuron indices and exact float64 integer-clock times; require native int64 MLX/CPU coordinates and aligned CPU trial-zero indices. Reject duplicates and out-of-range coordinates before mapping through the pinned CSV neuron order.
 - Eight file-boundary cases verify correct identifier mapping/native descriptors and reject precision changes, off-clock times, wrong neuron bounds, nonzero/misaligned trials, and duplicate spikes. The default suite passes **216 tests, zero failures/errors/skips**. [Report](data/results/milestone-4-case-spikes-20261005-01.xml). All 135 files pass Ruff checks; strict Pyright has zero errors/warnings. No numerical method or reference changes. Commit this working state before frozen scoring/reporting.
 
+Final pending-event verification checkpoint (2026-10-05):
+
+- At `61f1a3e`, compare the actual saved final queues by absolute due step under the already verified physical mapping: Brian2 retains its just-delivered slot; MLX clears that slot. Require all 18 future original-row sets to agree, native queue geometry/offsets to match the horizon, and MLX's delivered slot to be empty. Keep physical order preservation/replay as separate mandatory checks. No reconstructed ledger is substituted for actual final arrays.
+- Eight file-boundary cases verify the retained delivered history and reject changed future events, an uncleared slot, wrong offset/clock/precision, duplicates, and out-of-range original rows. The default suite passes **224 tests, zero failures/errors/skips**. Three live reference/Metal collector tests pass, **zero failures/errors/skips**, including actual populated/empty final queues. [Report](data/results/milestone-4-final-pending-20261005-01.xml). All 137 files pass Ruff checks; strict Pyright has zero errors/warnings after narrowing the validated native archive row type.
+- Invoke this cross-engine pending comparison while the full spike history is common. After a spike fork, each engine still requires its own actual queue ledger/replay; later queues are not forced to match across engines. Full-network scoring/reporting remains next. Commit this passing unit before proceeding.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.

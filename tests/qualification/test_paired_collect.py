@@ -11,6 +11,7 @@ from fly_brain.qualification.adapters.causal_capture import CausalCapture
 from fly_brain.qualification.adapters.observer_evidence import array_record
 from fly_brain.qualification.adapters.paired_collect import collect
 from fly_brain.qualification.adapters.paired_observer import PairedBlock
+from fly_brain.qualification.adapters.pending_queues import verify as verify_pending
 from fly_brain.qualification.adapters.replay_evidence import paired as verify_repeat
 from fly_brain.simulation.backend.bucketed import prepare
 from fly_brain.simulation.models import Stimulus
@@ -62,6 +63,8 @@ def test_live_collection_retains_complete_native_and_physical_replay(
         ]
         assert [row['step'] for row in physical] == list(range(102))
         assert all(len(row['sha256']) == 64 for row in physical)
+        pending = verify_pending(output, 101, len(case.connectome.sources))
+        assert len(pending) == 18
         metadata = json.loads((output / 'reference-final-physical.json').read_text())
         assert metadata['step'] == metadata['clock_step'] == 101
         with np.load(output / 'reference-final-physical.npz') as queues:
