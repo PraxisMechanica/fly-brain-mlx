@@ -2,9 +2,23 @@
 
 This is the authoritative project plan, acceptance criteria, and progress record. Updated 2026-10-05 (Europe/Paris). It consolidates the supplied charter, milestone specification, startup evidence, and subsequent user amendments.
 
-## Development paused — execution-time investigation
+## Development resumed — measured performance remediation
 
-Status: **paused at the user's request on 2026-10-05**. This hold supersedes all later instructions in this document to continue numerical implementation or qualification. The project goal is marked paused. Resume development only after a further user instruction.
+Status: **resumed by the user's 2026-10-05 instruction to document the approach, implement the optimizations, and continue**. At clean `4d8cac3`, confidence **98%** that this authorizes the recorded performance remediation and subsequent milestone work while preserving scientific gates and architecture. This instruction supersedes the historical investigation hold below. The app goal tracker still reports paused; agents cannot change that tracker to active, but the user's explicit instruction authorizes current work.
+
+The execution approach now separates candidate screening, reusable reference evidence and full acceptance. Preserve original runs and pinned comparator source. A completed-horizon absolute failure can stop a screen; it cannot count as a completed acceptance case. Reuse references only with independently verified engine-specific input/source/build/mode provenance and sufficient native values or digest-verified replay. Keep two real fresh runs and all 52 independently scored obligations.
+
+Implementation order and verification:
+
+1. Buffer reference Boolean output and use an equivalent native checksum. Verify complete frames, native states, queue evidence, repeat digests and useful measured savings before adoption.
+2. Implement engine-specific reference reuse and completed-horizon rejection without changing public file/output contracts. Existing records with missing raw reference coverage require verified replay; never infer tolerance from hashes.
+3. Qualify the measured active-source CPU operation against the pinned original core, including full native trajectory/digest equality, signed cancellation/zero, silencing, duplicate and batch cases. Keep the original evaluator and baseline until a prospective bounded scientific decision and required equivalence checks pass.
+4. Reduce expensive MLX proof/accumulation work only under a reviewed equivalent coverage/numerical contract. Retain the original execution mode as an oracle; profile before a custom Metal kernel and requalify changed modes.
+5. Measure an improved complete representative check, then finish the already reviewed numerical remedy prerequisites and screen the known failed one-second sugar case. Continue Milestone 4 only with qualified modes; old candidate acceptances do not transfer.
+
+Use the existing uv/MLX architecture and approved packages. Keep changes inside their owning domains, run Ruff, strict Pyright, import contracts and relevant scientific checks, and commit every verified working step on `main`. Preserve process 62191 suspended until its original-mode work can be safely continued or recorded as superseded; do not silently discard its evidence. Do not issue a new completion forecast from component speedups.
+
+The following paragraphs preserve the investigation history and the limits that applied before resumption.
 
 The user requests an explanation for the successive 2–3-day, 10–14-day, and 14–21-day estimates; measured causes of slow progress; and a review of different approaches, including C/C++. Investigation may read existing source and evidence, inspect preserved process state, and record findings. Do not adopt the numerical prototype, start new tests or simulations, optimize the application, or relax acceptance gates during this hold.
 
