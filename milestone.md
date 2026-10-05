@@ -471,6 +471,11 @@ Causal-audit evidence checkpoint (2026-10-05):
 - The classifier and its checks are committed at `8e90dc6`, `a9ec01e`, and `51a1186`. The [169-test application report](docs/evidence/milestone-4/causality/application-tests.xml) records zero failures/errors/skips, and [verification/source hashes](docs/evidence/milestone-4/causality/verification.json) fix the fourteen causal intent cases, unchanged budget, chronology, and bounded claim. Full strict Pyright, Ruff, formatting, and the new pure-module import boundary pass.
 - The scientific 128-test result and complete reference observer proof remain their separately recorded unchanged-source evidence. Next work is live paired reference/MLX block wiring and actual first-cause context, followed by complete MLX ordinary/repeat proof and measured concurrent/four-trial memory. No full-network parity case is accepted by this pure audit evidence. Commit this evidence before the next implementation.
 
+Live paired-block checkpoint (2026-10-05):
+
+- From clean `aa1c9d8`, the [paired observer](src/fly_brain/qualification/adapters/paired_observer.py) consumes the live reference pipe and actual MLX blocks together, checks every reference physical queue and MLX ledger flag, hashes native phase arrays before conversion, and requires complete block/final coverage. Capture remains bounded to at most 32 steps.
+- The live six-neuron, 101-step test passes, zero failures/errors/skips, including the five-row final block and native float64/float32 observations. The unchanged application suite passes **169 tests, zero failures/errors/skips**; full Ruff, strict Pyright, and all three import contracts pass. This verifies transport alignment; live causal comparisons/context and complete MLX transparency remain next. Commit this working state before further changes.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.
