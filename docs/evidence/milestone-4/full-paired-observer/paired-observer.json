@@ -1,0 +1,21 @@
+{
+  "implementation_commit": "c0e76e1cfd4525cc2f9dc59ad67fbff1bffead0f",
+  "scope": "Complete shortest sugar MLX observer transparency, fresh-state replay, live Brian2 causal audit, and sampled concurrent resident memory. No PyTorch comparison or full-matrix parity approval.",
+  "neurons": 138639,
+  "edges": 15091983,
+  "steps": 1000,
+  "trials": [
+    0
+  ],
+  "stimulus_sha256": "d7bb792f082eeca79d6e88a1e8ca0791dca210eb15c86ec70a34348b272a82b3",
+  "memory_scope": "Sampling starts after pinned-data loading, C++ compilation and prepare() return. It includes fresh-state allocation/evaluation, first-step work, execution/capture and collection for each mode. Sum of this proof process and its direct reference child RSS; shared pages can be counted twice. MLX allocator peaks are separate. This is not total system/unified memory or four-trial qualification.",
+  "sampled_rss_sum_peak_bytes": 3177136128,
+  "total_seconds": 385.0820929580077,
+  "record_files": {
+    "ordinary": "ordinary.json",
+    "observed": "observed.json",
+    "repeat": "repeat.json"
+  },
+  "memory_samples_file": "memory-samples.jsonl",
+  "original_local_report_sha256": "0f0efcd187657789efdb60b7ffa00679c20242bff51c6a464a6072cec63ae140"
+}

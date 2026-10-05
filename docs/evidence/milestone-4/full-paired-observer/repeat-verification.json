@@ -1,0 +1,32 @@
+{
+  "implementation_commit": "c0e76e1cfd4525cc2f9dc59ad67fbff1bffead0f",
+  "every_mlx_native_phase_boundary_queue_and_due_mask_hash_repeats_exactly": true,
+  "every_reference_native_phase_and_1001_physical_hashes_repeat_exactly": true,
+  "repeat_native_archives_independently_rehashed": true,
+  "first_budget_violation": null,
+  "first_spike_step": null,
+  "memory_sample_sums_and_peak_independently_verified": true,
+  "sampled_rss_sum_peak_bytes": 3177136128,
+  "records": {
+    "ordinary": {
+      "execution_s": 50.33075437499792,
+      "mlx_allocator_peak_bytes": 1973433342,
+      "spikes": 1612,
+      "active_neurons": 335
+    },
+    "observed": {
+      "execution_s": 158.67850608399021,
+      "mlx_allocator_peak_bytes": 2892619954,
+      "spikes": 1612,
+      "active_neurons": 335
+    },
+    "repeat": {
+      "execution_s": 157.05615833299817,
+      "mlx_allocator_peak_bytes": 3055327799,
+      "spikes": 1612,
+      "active_neurons": 335
+    }
+  },
+  "scope": "Complete shortest sugar MLX observer transparency, fresh-state replay, live Brian2 causal audit, and sampled concurrent resident memory. No PyTorch comparison or full-matrix parity approval.",
+  "memory_scope": "Sampling starts after pinned-data loading, C++ compilation and prepare() return. It includes fresh-state allocation/evaluation, first-step work, execution/capture and collection for each mode. Sum of this proof process and its direct reference child RSS; shared pages can be counted twice. MLX allocator peaks are separate. This is not total system/unified memory or four-trial qualification."
+}
