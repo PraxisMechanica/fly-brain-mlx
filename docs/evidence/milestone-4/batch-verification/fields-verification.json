@@ -1,0 +1,23 @@
+{
+  "implementation_parent_checkpoint": "73d369d",
+  "application_tests": {
+    "tests": 417,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "new_final_field_intent_tests": 16,
+  "ruff_checked_files": 162,
+  "strict_pyright_errors": 0,
+  "strict_pyright_warnings": 0,
+  "import_contracts_kept": 3,
+  "import_contracts_broken": 0,
+  "import_files": 112,
+  "import_dependencies": 479,
+  "source_sha256": {
+    "src/fly_brain/qualification/adapters/batch_native.py": "11cf432f3c9deddb6a19e629ae1928b9e597fb5e027da85461c61830cbaece8d",
+    "tests/unit/test_batch_native.py": "14cf8317d3bc71f51b38b7b61ea80de38fef5449a11e2eb1c0b9b3b2654c9501"
+  },
+  "batch_gate_accepted": false,
+  "scope": "Require complete native MLX/CPU final field precision, dimensions and finiteness. Exact trial equality, spike validation, input identity and actual fresh batch executions remain required."
+}
