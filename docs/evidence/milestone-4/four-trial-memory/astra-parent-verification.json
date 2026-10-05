@@ -1,0 +1,31 @@
+{
+  "checkpoint": "c8a9e01",
+  "classification": "Consistent with the prospectively approved roundoff condition; no case or metric waiver.",
+  "first_difference_step": 999,
+  "neuron": 41514,
+  "previous_actual_input_edge": 7516497,
+  "previous_actual_input_source": 69593,
+  "source_spike_step": 980,
+  "delivery_step": 998,
+  "signed_count": 34,
+  "native_weight_mv": 9.350000000000001,
+  "actual_device_factored_synaptic_result_mv": 23.155155181884766,
+  "actual_reference_ordered_synaptic_result_mv": 23.15515233840891,
+  "both_synaptic_reproductions_byte_identical": true,
+  "local_mlx_voltage_and_synaptic_update_byte_identical": true,
+  "all_38_saved_actual_reference_queue_slots_match_original_row_expectations": true,
+  "stimulus_regeneration_byte_identical": true,
+  "current_channel_target": 108426,
+  "all_neuron_context_budget_fractions": {
+    "previous_pre_v": 0.16675889890650347,
+    "previous_pre_g": 0.026166590125182337,
+    "previous_before_v": 0.16675889890650347,
+    "previous_before_g": 0.026166590125182337,
+    "previous_end_v": 0.16675889890650347,
+    "previous_end_g": 0.026166590125182337,
+    "current_pre_v": 0.16668525018021402,
+    "current_pre_g": 0.027302045822869967
+  },
+  "previous_end_voltage_error_mv": 2.909379899307396e-05,
+  "full_first_spike_replay_or_exact_error_decomposition": false
+}
