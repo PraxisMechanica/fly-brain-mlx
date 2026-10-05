@@ -457,6 +457,11 @@ Paired causal-audit implementation checkpoint (2026-10-05):
 - The complete reference observer proof is committed at `592b9c1`. The pure [causal audit](src/fly_brain/qualification/causality.py) records the earliest chronological trajectory-budget violation and first different spike step/identities. It checks every pre-threshold scalar through the first different step, and checks pre-reset/end state only while that step's spikes still agree. It retains finite-state and consecutive-step requirements after divergence, using the unchanged `1e-3 + 1e-5*abs(reference)` mV budget.
 - Three initial intent cases verify every neuron across all three phases. **158 application tests pass, zero failures/errors/skips**; full strict Pyright, Ruff, formatting, and all three import contracts pass. The new pure module is covered by the framework-dependency contract. This verifies the basic classifier; inclusive boundaries, first-divergence sequencing, fault cases, raw-context collection, and live paired-engine wiring remain next. Commit this working state before those checks.
 
+Causal-audit sequencing checkpoint (2026-10-05):
+
+- Basic auditing is committed at `8e90dc6`. Nine additional intent cases prove the first different step's inclusive pre-threshold coverage, exclusion of that step's later phases and all later unforced state comparisons, exact budget inclusivity without added slack, retention of the earliest phase/neuron error, continued nonfinite detection, and rejection of omitted steps. **167 application tests pass, zero failures/errors/skips**; full strict Pyright, Ruff, and formatting pass.
+- This qualifies the pure sequencing rules, not live paired-engine causal evidence. Raw-context capture, complete MLX observer proof, concurrent/four-trial memory, PyTorch observation, and the matrix remain open. Commit this passing unit before the next implementation or execution.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.
