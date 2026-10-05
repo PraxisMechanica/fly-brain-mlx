@@ -53,7 +53,11 @@ def pair_blocks(
             or not 1 <= frame.rows <= 32
         ):
             raise ValueError('Paired phase blocks have different coverage')
-        if not actual.checks.all():
+        if (
+            not actual.queue_sha256
+            or actual.checks.shape != (frame.rows, len(actual.queue_sha256), 30)
+            or not actual.checks.all()
+        ):
             raise ValueError(
                 'An actual MLX state or queue failed its independent ledger'
             )

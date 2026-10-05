@@ -16,6 +16,7 @@ from fly_brain.qualification.adapters.paired_observer import (
     PairedBlock,
     audit_block,
     pair_blocks,
+    phase_hash,
 )
 from fly_brain.qualification.adapters.reference_queues import ReferenceQueues
 from fly_brain.qualification.causality import CausalAudit
@@ -70,7 +71,7 @@ def test_live_engines_pair_every_phase_and_final_partial_block(
 
 
 @pytest.mark.parametrize(
-    'fault', ('missing', 'begin', 'rows', 'queue', 'final', 'extra')
+    'fault', ('missing', 'begin', 'rows', 'queue', 'checks', 'final', 'extra')
 )
 def test_incomplete_or_invalid_paired_evidence_cannot_pass(
     paired: tuple[PairedBlock | FinalSnapshot, ...], fault: str
@@ -93,6 +94,8 @@ def test_incomplete_or_invalid_paired_evidence_cannot_pass(
         flags = blocks[0].checks.copy()
         flags[0, 0, 29] = False
         blocks[0] = replace(blocks[0], checks=flags)
+    if fault == 'checks':
+        blocks[0] = replace(blocks[0], checks=np.empty((32, 1, 0), dtype=np.bool_))
     if fault == 'final':
         reference.pop()
     if fault == 'extra':
@@ -101,3 +104,52 @@ def test_incomplete_or_invalid_paired_evidence_cannot_pass(
     ledger = ReferenceQueues(case.connectome.sources, 6, case.events[0])
     with pytest.raises(ValueError, match='coverage|ledger|final|extra'):
         tuple(pair_blocks(iter(reference), iter(blocks), ledger))
+
+
+@pytest.mark.parametrize(
+    ('engine', 'field', 'value', 'reason'),
+    (
+        ('reference', 'pre_t', 0.0001, 'phase clocks'),
+        ('reference', 'end_lastspike', np.nan, 'remain finite'),
+        ('mlx', 'pre_not_refractory', False, 'refractory'),
+        ('mlx', 'end_not_refractory', False, 'refractory'),
+        ('mlx', 'end_last_spike_step', 9, 'last-spike clocks'),
+        ('mlx', 'pre_v', np.nan, 'must be finite'),
+    ),
+)
+def test_changed_actual_causal_fields_fail_without_a_parity_score(
+    paired: tuple[PairedBlock | FinalSnapshot, ...],
+    engine: str,
+    field: str,
+    value: float | bool,
+    reason: str,
+) -> None:
+    block = paired[0]
+    assert isinstance(block, PairedBlock)
+    if engine == 'reference':
+        fields = dict(block.reference.fields)
+        fields[field] = fields[field].copy()
+        fields[field][0] = value
+        block = replace(block, reference=replace(block.reference, fields=fields))
+    else:
+        fields_mlx = dict(block.mlx.fields)
+        fields_mlx[field] = fields_mlx[field].copy()
+        fields_mlx[field][0, 0, 0] = value
+        block = replace(block, mlx=replace(block.mlx, fields=fields_mlx))
+    with pytest.raises(ValueError, match=reason):
+        audit_block(block, CausalAudit())
+
+
+@pytest.mark.parametrize('change', ('dtype', 'shape', 'units'))
+def test_native_hash_identifies_precision_shape_and_unconverted_units(
+    change: str,
+) -> None:
+    raw = np.array([-0.052, -0.045], dtype=np.float64)
+    changed = (
+        raw.astype(np.float32)
+        if change == 'dtype'
+        else raw.reshape(1, 2)
+        if change == 'shape'
+        else raw * 1000
+    )
+    assert phase_hash({'v': raw}) != phase_hash({'v': changed})

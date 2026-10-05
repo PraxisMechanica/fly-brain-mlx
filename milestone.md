@@ -486,6 +486,11 @@ Paired-coverage fault checkpoint (2026-10-05):
 - Live causal comparison is committed at `1d17c0e`. Six injected faults reject an omitted MLX block, shifted block start, unequal row count, failed actual-queue check, missing final reference state, and extra reference output. The faults alter decoded evidence, not numerical execution or stored inputs.
 - The live paired module passes **seven tests, zero failures/errors/skips**; full strict Pyright, Ruff, and formatting pass. Commit this verified unit before causal-context implementation.
 
+Causal-field fault checkpoint (2026-10-05):
+
+- Coverage checks are committed at `5cb85c9`. Paired capture now rejects missing ledger flags instead of treating an empty Boolean array as a successful check. Six additional faults reject changed phase timestamps, nonfinite reference last-spike clocks, incorrect pre-threshold/end refractory state, changed MLX last-spike clocks, and nonfinite neural state.
+- Three raw-hash tests require precision, shape, and native units to affect the digest. The live paired module passes **17 tests, zero failures/errors/skips**; full strict Pyright, Ruff, and formatting pass. No numerical execution changes. Commit this verified working state before first-cause capture.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.
