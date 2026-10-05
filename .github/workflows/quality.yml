@@ -1,0 +1,67 @@
+name: Project quality
+
+on:
+  push:
+    branches: [main, 'ocasta181/**']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: quality-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    if: ${{ vars.QUALITY_CI_TEMP_DB_CACHE_APPROVED == 'true' }}
+    name: Project quality
+    runs-on: macos-15
+    timeout-minutes: 20
+    steps:
+      - name: Check out the submitted revision and complete history
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - name: Require Apple silicon
+        run: |
+          test "$(uname -m)" = arm64
+          printf 'PRE_COMMIT_HOME=%s/fly-brain-pre-commit-cache\n' "$RUNNER_TEMP" >> "$GITHUB_ENV"
+      - name: Install pinned just
+        run: |
+          curl --fail --location --output "$RUNNER_TEMP/just.tar.gz" https://github.com/casey/just/releases/download/1.50.0/just-1.50.0-aarch64-apple-darwin.tar.gz
+          printf '%s  %s\n' '891262207663bff1aa422dbe799a76deae4064eaa445f14eb28aef7a388222cd' "$RUNNER_TEMP/just.tar.gz" | shasum -a 256 -c -
+          mkdir "$RUNNER_TEMP/just-bin"
+          tar -xzf "$RUNNER_TEMP/just.tar.gz" -C "$RUNNER_TEMP/just-bin" just
+          printf '%s\n' "$RUNNER_TEMP/just-bin" >> "$GITHUB_PATH"
+      - name: Set up pinned pnpm
+        uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa
+        with:
+          version: 10.10.0
+      - name: Set up pinned Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 25.5.0
+          cache: pnpm
+      - name: Set up pinned uv
+        uses: astral-sh/setup-uv@d0d8abe699bfb85fec6de9f7adb5ae17292296ff
+        with:
+          version: 0.5.31
+          enable-cache: true
+      - name: Bootstrap locked development tools and both hooks
+        run: just bootstrap
+      - name: Select the actual commit range
+        run: uv run --locked --no-sync python -m tools.code_quality.ci_refs
+      - name: Run the shared full-snapshot quality gate
+        run: just check
+      - name: Save analysis evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: quality-evidence
+          path: .quality-reports/*.json
+          if-no-files-found: error
+          include-hidden-files: true
