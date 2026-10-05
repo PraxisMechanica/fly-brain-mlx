@@ -1,0 +1,43 @@
+{
+  "checkpoint": "ca64c6b",
+  "scope": "Preserve completed evidence from the process already running when the user paused development; no execution or adoption.",
+  "counts_independently_read_from_xml": {
+    "tests": 208,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "all_recorded_application_source_hashes_still_match": true,
+  "guarded_distinct_tests": 208,
+  "runner_and_prototype_hashes_verified": true,
+  "files": [
+    {
+      "source": "/Users/ocasta/Code/fly-brain/data/results/milestone-4-increment-scientific-20261005-01/result.json",
+      "archive": "docs/evidence/execution-time-investigation/already-running-suite/result.json",
+      "bytes": 37909,
+      "sha256": "bfc5371292f57a5958e6cc33b9a24a1d64f7f72d8d34d85832229bb1b0058c4d"
+    },
+    {
+      "source": "/Users/ocasta/Code/fly-brain/data/results/milestone-4-increment-scientific-20261005-01/tests.xml",
+      "archive": "docs/evidence/execution-time-investigation/already-running-suite/tests.xml",
+      "bytes": 33162,
+      "sha256": "4d845f3d72198d98051872d2418af9a7c863b571ff066ca09714b81d104423c1"
+    },
+    {
+      "source": "/Users/ocasta/Code/fly-brain/data/results/milestone-4-increment-scientific-20261005-01/qualification.log",
+      "archive": "docs/evidence/execution-time-investigation/already-running-suite/qualification.log",
+      "bytes": 286,
+      "sha256": "a83ca7de0065442d8fc2886f6d4f41655e419c553abfe062f6468c360368713b"
+    },
+    {
+      "source": "/private/tmp/fly-brain-increment-suite-20261005-01.py",
+      "archive": "docs/evidence/execution-time-investigation/already-running-suite/executed-runner.py",
+      "bytes": 3924,
+      "sha256": "92944b4a8507f8eccaeb4bc104bcc559934736b4d0041f368f74b49331ffedce"
+    }
+  ],
+  "raw_artifact_location_preserved": "/Users/ocasta/Code/fly-brain/data/results/milestone-4-increment-scientific-20261005-01",
+  "development_resumed": false,
+  "new_test_or_simulation_started": false,
+  "data_deleted": false
+}
