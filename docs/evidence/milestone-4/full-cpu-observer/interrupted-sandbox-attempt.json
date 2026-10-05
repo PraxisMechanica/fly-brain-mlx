@@ -1,0 +1,17 @@
+{
+  "checkpoint": "d0f5296",
+  "exit_code": 130,
+  "reason": "Sandbox denied ps access; zero memory samples. Owned process interrupted during observed mode and all outputs preserved.",
+  "completed_ordinary_observations": 1001,
+  "ordinary_spikes": 1609,
+  "ordinary_active_neurons": 326,
+  "local_artifact_root": "/Users/ocasta/Code/fly-brain/data/results/milestone-4-full-cpu-observer-20261005-01",
+  "preserved_files": {
+    "environment.json": "6193f49425aad526900b919d06c78be7ee02bc28b912ec1a9f25fa5906b9f761",
+    "memory-samples.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "ordinary-digests.json": "aed50d9e01d772f0eb799aef6d321ebdb8524fea533ea1e265820cecd0188be3",
+    "ordinary-final.npz": "358277e56df4131914d9218925eb6ccabf27d5c828869890e7bdd008f6d08334",
+    "stimulus.npz": "8b56372b13724c5b87a51c62da8e0681bf0a6cd5fcc53360a77f6ee9b88f8170"
+  },
+  "limits": "Ordinary execution completed; observer/repeat/memory proof not accepted. No numerical failure was observed. Restart with authorized system access and a fresh output."
+}

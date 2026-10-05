@@ -585,6 +585,11 @@ Complete CPU observer regression checkpoint (2026-10-05):
 - Archive correction at `ae78cc0`: the initial archive count check failed because recursive selection included six nested NPZ files beyond the expected 66 top-level traces. I committed the archive claims before inspecting that failed result. The archive and verification are now complete for all 72 files; test results were unaffected. No further execution began before correcting this checkpoint.
 - Confidence **99%** at `8f48b2e`: run the complete shortest CPU comparator proof using the exact existing sugar trial-0 stimulus, unchanged CSR/float32 numerical source, and one explicit CPU execution thread. Record the actual framework/thread/determinism settings; prove ordinary/observed/fresh-state repeated native bytes before using its metrics. Keep total unified memory and benchmark approval separate from sampled proof-process residency.
 
+Complete CPU proof environment checkpoint (2026-10-05):
+
+- At `d0f5296`, the full CPU proof's ordinary mode completes all 1,000 steps and 1,001 native observations. The sandbox denies `ps` access, leaving no memory samples. I interrupt the owned process during observed mode (exit 130) and preserve every output. [Interrupted attempt and limits](docs/evidence/milestone-4/full-cpu-observer/interrupted-sandbox-attempt.json) and [executed source](docs/evidence/milestone-4/full-cpu-observer/interrupted-proof.py). Observer/repeat/memory qualification remains open; no numerical failure was observed.
+- Confidence **99%**: use the same qualified numerical source and canonical inputs in a fresh run with authorized system access for residency sampling. Fail promptly if sampling breaks. Commit this environment checkpoint before restarting; do not overwrite the interrupted output.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.
