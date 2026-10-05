@@ -1,0 +1,23 @@
+{
+  "implementation_parent_checkpoint": "973f5ee",
+  "application_tests": {
+    "tests": 432,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "new_final_comparison_intent_tests": 7,
+  "ruff_checked_files": 162,
+  "strict_pyright_errors": 0,
+  "strict_pyright_warnings": 0,
+  "import_contracts_kept": 3,
+  "import_contracts_broken": 0,
+  "import_files": 112,
+  "import_dependencies": 481,
+  "source_sha256": {
+    "src/fly_brain/qualification/adapters/batch_native.py": "fd0c4d15baebca39633e1d77dbd3a7340f8f7afa54ccdf310e7331c640dc0b18",
+    "tests/unit/test_batch_native.py": "7b55c8a0f240b0bb39233515900027584c586aab6e3dfc5a984501a790122ddf"
+  },
+  "batch_gate_accepted": false,
+  "scope": "Exact actual-trial final native/raster comparison. Same-engine discrete/spike differences fail; continuous byte differences return unresolved field names without a tolerance claim. Canonical identity and actual fresh batch executions remain required."
+}

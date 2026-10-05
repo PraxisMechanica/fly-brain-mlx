@@ -4,6 +4,7 @@ from numpy.typing import NDArray
 
 from fly_brain.qualification.adapters.batch_native import (
     Engine,
+    compare_final_trial,
     require_fields,
     trial_spikes,
 )
@@ -118,3 +119,42 @@ def test_invalid_batch_spikes_cannot_hide_behind_equal_pooled_counts(
         arrays['spike_neurons'] = np.zeros((1, 1), dtype=np.int64)
     with pytest.raises(ValueError):
         trial_spikes(arrays, 4, 6, 35)
+
+
+@pytest.mark.parametrize('engine', ('mlx', 'cpu'))
+def test_final_native_comparison_separates_exact_spikes_from_unresolved_floats(
+    engine: Engine,
+) -> None:
+    batch, singleton = native(engine, 4), native(engine, 1)
+    for trial in range(4):
+        assert compare_final_trial(batch, singleton, engine, trial, 6, 3, 2, 35) == ()
+    state = 'end_v' if engine == 'mlx' else 'v'
+    batch[state][3, 2] += np.float32(0.0001)
+    assert compare_final_trial(batch, singleton, engine, 3, 6, 3, 2, 35) == (state,)
+    assert compare_final_trial(batch, singleton, engine, 2, 6, 3, 2, 35) == ()
+    batch['spike_trials'] = np.array([3], dtype=np.int64)
+    batch['spike_neurons'] = np.array([2], dtype=np.int64)
+    batch['spike_steps'] = np.array([4], dtype=np.int64)
+    with pytest.raises(ValueError, match='spike raster differs'):
+        compare_final_trial(batch, singleton, engine, 3, 6, 3, 2, 35)
+
+
+@pytest.mark.parametrize(
+    'field', ('queue', 'end_last_spike_step', 'accepted_inputs', 'refrac')
+)
+def test_same_engine_discrete_final_differences_cannot_use_a_tolerance(
+    field: str,
+) -> None:
+    engine: Engine = 'cpu' if field == 'refrac' else 'mlx'
+    batch, singleton = native(engine, 4), native(engine, 1)
+    batch[field].flat[-1] = 1
+    with pytest.raises(ValueError, match='discrete batch state differs'):
+        compare_final_trial(batch, singleton, engine, 3, 6, 3, 2, 35)
+
+
+def test_cpu_payload_queue_difference_is_unresolved_and_preserves_all_slots() -> None:
+    batch, singleton = native('cpu', 4), native('cpu', 1)
+    batch['delay_buffer'][3, 18, 5] = np.float32(-0.0)
+    assert compare_final_trial(batch, singleton, 'cpu', 3, 6, 3, 2, 35) == (
+        'delay_buffer',
+    )

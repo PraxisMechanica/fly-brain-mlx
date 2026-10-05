@@ -90,3 +90,44 @@ def trial_spikes(
         order = np.lexsort((spikes.neurons, spikes.steps))
         result.append(SpikeSteps(spikes.neurons[order], spikes.steps[order]))
     return tuple(result)
+
+
+def compare_final_trial(
+    batch: NativeArrays,
+    singleton: NativeArrays,
+    engine: Engine,
+    trial: int,
+    neurons: int,
+    edges: int,
+    channels: int,
+    steps: int,
+) -> tuple[str, ...]:
+    if not 0 <= trial < 4:
+        raise ValueError('Final comparison requires an actual batch trial')
+    require_fields(batch, engine, 4, neurons, edges, channels)
+    require_fields(singleton, engine, 1, neurons, edges, channels)
+    many = trial_spikes(batch, 4, neurons, steps)[trial]
+    one = trial_spikes(singleton, 1, neurons, steps)[0]
+    if (many.neurons.tobytes(), many.steps.tobytes()) != (
+        one.neurons.tobytes(),
+        one.steps.tobytes(),
+    ):
+        raise ValueError(f'Same-engine batch spike raster differs: trial {trial}')
+    differences: list[str] = []
+    for name, expected in singleton.items():
+        if name.startswith('spike_'):
+            continue
+        if engine == 'mlx' and name == 'queue':
+            actual, expected = batch[name][:, trial], expected[:, 0]
+        elif engine == 'mlx':
+            actual = batch[name][trial]
+        else:
+            actual, expected = batch[name][trial], expected[0]
+        if actual.tobytes() == expected.tobytes():
+            continue
+        if actual.dtype.kind in 'biu' or name in ('spikes', 'refrac'):
+            raise ValueError(
+                f'Same-engine discrete batch state differs: {trial}/{name}'
+            )
+        differences.append(name)
+    return tuple(sorted(differences))
