@@ -1,0 +1,26 @@
+{
+  "directory": "/Users/ocasta/Code/fly-brain/data/results/milestone-4-parity-two-class-1000-0-20261005-01/reference-build",
+  "shape": {
+    "neurons": 138639,
+    "steps": 1000,
+    "channels": 23,
+    "pathway_edges": [
+      15091983,
+      23
+    ],
+    "block_size": 32
+  },
+  "observed": true,
+  "files": {
+    "v": "_array_default_neurons_v_1510130924",
+    "g": "_array_default_neurons_g_817030174",
+    "lastspike": "_array_default_neurons_lastspike_4150403714",
+    "not_refractory": "_array_default_neurons_not_refractory_701150063",
+    "spike_i": "_dynamic_array_reference_spikes_i_3362823637",
+    "spike_t": "_dynamic_array_reference_spikes_t_2876698892",
+    "clock_step": "_array_defaultclock_timestep_144223508",
+    "clock_t": "_array_defaultclock_t_2669362164",
+    "source_cursor": "_array_replay_source__lastindex_4083790373",
+    "weights": "_dynamic_array_default_synapses_w_937324336"
+  }
+}
