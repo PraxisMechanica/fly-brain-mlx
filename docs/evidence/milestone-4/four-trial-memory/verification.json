@@ -1,0 +1,27 @@
+{
+  "implementation_commit": "dee8d93ec7dd3e0fb6f1db058284108cccc0aede",
+  "actual_full_four_trial_layout_and_all_1000_steps_verified": true,
+  "trial_0_native_phase_queues_due_masks_match_independent_execution": true,
+  "five_concurrent_processes_observed": true,
+  "memory_sums_peak_and_actual_final_arrays_independently_verified": true,
+  "sampled_rss_sum_peak_bytes": 5625659392,
+  "mlx_allocator_peak_bytes": 5895508577,
+  "cause": {
+    "step": 999,
+    "neuron": 41514,
+    "neuron_id": 720575940620025620,
+    "reference_pre_v_si": -0.04499998465934625,
+    "mlx_pre_v_mv": -45.00001525878906,
+    "reference_threshold_margin_mv": 1.5340653747308863e-05,
+    "mlx_threshold_margin_mv": -1.52587890625e-05,
+    "pre_voltage_error_mv": 3.0599442808920685e-05,
+    "trajectory_budget_mv": 0.0014499998465934626,
+    "both_pre_available": true,
+    "previous_last_spike_step": 773,
+    "actual_current_previous_due_membership_equal": true,
+    "actual_device_leaf_mapping_counts_native_reference_weights_match_pinned_rows": true,
+    "fixed_numeric_roundoff_conditions_satisfied": true,
+    "scientific_review": "pending bounded Astra xhigh adjudication; no tolerance or metric waiver"
+  },
+  "scope": "Complete 0.1-second four-trial sugar memory qualification with four independent continuously streamed references and actual device/queue auditing. Trial 0 matches its separately qualified sole execution exactly. No four-trial repeat or independent trials 1-3, one-second batch gate, PyTorch baseline, or full-matrix acceptance is implied."
+}
