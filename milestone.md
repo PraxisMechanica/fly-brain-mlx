@@ -808,6 +808,11 @@ Shortest silent-control execution (2026-10-05):
 - At clean launch checkpoint `f75cdb8`, start `MLX_ENABLE_TF32=0 uv run --locked --group qualification --no-sync fly-brain qualify-parity --experiment silent --duration-s 0.1 --trial 0 --output data/results/milestone-4-parity-silent-1000-0-20261005-01`. Preserve all fresh native/physical observations and each independent repeat. The control is running and is not yet accepted; current acceptance remains **4/52 cases**.
 - Next: inspect complete output, independently verify exact three-engine silence, empty canonical channel geometry, actual queues, full native replay/coverage, and unchanged empty/undefined metric rules. The existing non-silent 1,000-step verifier deliberately rejects an empty reference and must not be used to claim this control. Record its separate verification before acceptance, then continue remaining frozen trials/horizons and batch checks. All current source/evidence changes are committed; push remains pending without a user-owned remote.
 
+Per-case scientific adjudication review assignment (2026-10-05):
+
+- At clean `361c748`, dispatch fresh-context `/root/review_case_adjudication` to **GPT-6 Astra at explicit `xhigh`**. Resolve how a concrete completed case can receive recorded scientific adjudication when its first spike difference is explained by rounding but the automatic report conservatively blocks every difference. Preserve the automatic report, bind the actual review scope/evidence, require independent parent verification, and retain every frozen fixed/paired/causal/replay gate.
+- This review cannot alter model, precision, thresholds, references, physics, scope, or application/data contracts. It does not duplicate the completed four-trial first-difference classification or approve the not-yet-executed sugar trial-1 singleton. Await the completed review and verify/commit its decision before dependent implementation. Exact silent-control qualification remains independent running work.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.
