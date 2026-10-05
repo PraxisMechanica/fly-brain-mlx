@@ -1,0 +1,65 @@
+{
+  "checkpoint": "a41b8d45fafc7ef0d9aba7922f14e9ecede08444",
+  "elapsed_s": 28.401915124995867,
+  "complete_native_array_bytes_equal_retained_oracle": true,
+  "report": {
+    "accepted": true,
+    "neurons": 138639,
+    "edges": 15091983,
+    "patterns": [
+      "all-accepted",
+      "none-accepted-negative-zero",
+      "source-0.001-receiving-0.8",
+      "source-0.01-receiving-0.6",
+      "source-0.5-receiving-0.5"
+    ],
+    "seed": [
+      20261004,
+      785
+    ],
+    "accepted_events_per_trial": [
+      15091983,
+      0,
+      9879,
+      94545,
+      3820288
+    ],
+    "all_fields_round_trip_exactly": true,
+    "inverse_target_order_exact": true,
+    "every_gathered_event_and_padding_leaf_matches": true,
+    "integer_count_expansions_exact": true,
+    "repeat_and_standalone_bits_identical": true,
+    "zero_counts_copy_initial_bits": true,
+    "both_original_state_budgets_pass": true,
+    "max_one_step_budget_fraction": 0.02362013208363158,
+    "max_trajectory_budget_fraction": 0.004623383166716167,
+    "input_sha256": {
+      "completeness": "52b0ac6094cd32c546f8d4c341e094376f48f4e791f8db9b166de5dff8199ea4",
+      "connectivity": "efeb23fb99098e9c390f6869969b2a121a2ee92c833cfc45ecb2c1d8e1af0347"
+    },
+    "accepted_event_sha256": "1c5b8b3f931822a1e0f3a0f7509d996377144ca6bd46c4e147a4247d3a220915",
+    "artifact": "device-layout.npz",
+    "artifact_sha256": "d2a8dbf8a51c7cc5cf9b38700daa2dc96a576a70585cfeebf52b170a82a35bc2",
+    "MLX_ENABLE_TF32": "0",
+    "device": {
+      "device_name": "Apple M1 Max",
+      "max_recommended_working_set_size": 22906503168,
+      "memory_size": 34359738368,
+      "architecture": "applegpu_g13s",
+      "max_buffer_length": 17179869184,
+      "resource_limit": 499000
+    },
+    "compilation": "disabled",
+    "count_reduction": "exact-integer",
+    "source_sha256": {
+      "qualification/adapters/device_layout_probe.py": "e113d2db1fe610879e1edd919b39dc2242c68bd601cf9fa2ebf4fb5ee309a69d",
+      "simulation/backend/bucketed.py": "e8c9da8f27f9d6491ff1b68a7455235295696b788669d4937bf1c506eabd9434",
+      "simulation/backend/accumulation.py": "09d3c133de164163f5f9c0d552fe20b828e435334bc97ffc4fc4f7bfe5865d60",
+      "simulation/mapping.py": "409932868e8c52c337c75bd94e6c866c084a9a66053be7e9b717a4ca974ce52f"
+    },
+    "scope": "Complete pinned-device representation and isolated propagation; no full-network parity or performance claim."
+  },
+  "runner_sha256": "f73db19b5c2af41c0da82e2ac4cef70465590cedb4cc919c1699bd160904b30b",
+  "original_sha256": "d2a8dbf8a51c7cc5cf9b38700daa2dc96a576a70585cfeebf52b170a82a35bc2",
+  "candidate_sha256": "d2a8dbf8a51c7cc5cf9b38700daa2dc96a576a70585cfeebf52b170a82a35bc2"
+}

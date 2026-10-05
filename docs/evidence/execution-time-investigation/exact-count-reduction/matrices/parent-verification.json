@@ -1,0 +1,47 @@
+{
+  "checkpoint": "29aa42a4b7efeca69986e26f76a6b7330896ffc9",
+  "scalars": {
+    "cases": 157,
+    "fields_compared": 2355,
+    "all_native_inputs_references_outputs_repeat_and_standalone_bytes_match_oracle": true,
+    "exact_reduction_cases": 132,
+    "oracle_fallback_cases": 25
+  },
+  "pinned": {
+    "cases": 24576,
+    "targets": 31,
+    "fields_compared": 1302,
+    "all_complete_native_inputs_references_outputs_repeat_and_standalone_bytes_match_oracle": true,
+    "original_one_step_conversion_limitations": 99,
+    "dense_leaves_reconstructed_and_verified": true,
+    "local_originals_preserved": "/Users/ocasta/Code/fly-brain/data/results/performance-remediation-exact-count-matrices-20261005"
+  },
+  "layout": {
+    "buckets": 15,
+    "fields_compared": 15,
+    "all_native_arrays_match_retained_oracle": true
+  },
+  "execution_failures": [
+    "Initial parent diagnostic was stopped after identifying repeated decompression inside its row loop. Each array is decoded once in the corrected driver; no numerical assertion failed or output was removed.",
+    "Initial matrix driver completed scalar and pinned matrices, then failed before layout accumulation because a Boolean keyword reused a local array name. Corrected separate layout driver passed. No prior output was overwritten."
+  ],
+  "limits": "Candidate disabled in normal execution. Full-network closed trajectory and fresh-process repeat qualification remain open; these results confer no new case acceptance.",
+  "artifacts": {
+    "device-layout.npz": "d2a8dbf8a51c7cc5cf9b38700daa2dc96a576a70585cfeebf52b170a82a35bc2",
+    "executed-layout-driver.py": "f73db19b5c2af41c0da82e2ac4cef70465590cedb4cc919c1699bd160904b30b",
+    "executed-matrix-driver.py": "a8301b6302d2b29bcfab15ca557e166a1171b8e29ab0ffbd1ceffec00aadb883",
+    "executed-parent-verification.py": "947c1e0b7ea6ee3c321e739bcb369afd2f2e1fa319281e83a65ad76b5d3ad53e",
+    "interrupted-parent-driver.py": "a97f5c06ac22e263feb9e4b53f774eef213ab225fefcc26ab73db99ef34b5a1d",
+    "layout-report.json": "1415044ee0721872986d4ac86dde4ac6975a1ac6cdeaf99d55b7135ab30a3be1",
+    "layout-verification.json": "7624338d79915b2670385d23318b1dda4d1b4969bb7456a35b711cc6032437c5",
+    "pinned-inputs-results.npz": "cba163b04a703501b5f28babd61e6fead5f15fc8c586a34890ed430cbad3f179",
+    "pinned-report.json": "7be50c0fe828093f78d5ea90e5bb0c50aadf55c3cfaebcc619729483c6fcaf3e",
+    "scalar-report.json": "6c110e15ae49d2baf56128202da3fb77ede873de7a36d30a05a9a4e862e36a96",
+    "scalars.npz": "4cf6aed04ebf694d6e881361b2cb8e0471d03cf4892f484d3de0e39388dccef8"
+  },
+  "source_sha256": {
+    "src/fly_brain/simulation/backend/bucketed.py": "e8c9da8f27f9d6491ff1b68a7455235295696b788669d4937bf1c506eabd9434",
+    "src/fly_brain/simulation/backend/accumulation.py": "09d3c133de164163f5f9c0d552fe20b828e435334bc97ffc4fc4f7bfe5865d60",
+    "src/fly_brain/qualification/adapters/device_layout_probe.py": "e113d2db1fe610879e1edd919b39dc2242c68bd601cf9fa2ebf4fb5ee309a69d"
+  }
+}
