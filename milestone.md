@@ -935,6 +935,11 @@ Prescribed-horizon evidence verifier (2026-10-05):
 - The [three actual regression controls](docs/evidence/milestone-4/case-adjudication/automatic-horizon-verifier-controls.json) independently reverify P9 trial 0, sugar trial 2, and outgoing-silenced sugar trial 0. All original raw manifests, actual queue sets, coverage, metrics, and gates match. The earlier verifier remains byte-identical in the sugar trial-2 artifact, including the original control's program hash. Ruff formatting/linting pass; no application/numerical source changes.
 - Decision confidence **99%** at `2e63105`: commit this bounded verification-tool update before dependent use. These controls execute saved 1,000-step evidence; longer native cases remain unexecuted and unaccepted. No new case execution or acceptance is supplied by this regression. Sugar trial 3 is independently running; acceptance remains **7/52**.
 
+Required one-second batch evidence review (2026-10-05):
+
+- At clean `f3abcaf`, prepare the [bounded batch verification assignment](docs/handoffs/astra-full-batch-verification.md) for fresh-context GPT-6 Astra at explicit `xhigh`. Determine sufficient native/replay evidence for actual sugar/P9 four-trial one-second batches versus independent trials 0–3, including the unchanged original CPU comparator. The earlier 0.1-second memory proof qualifies neither the required duration nor all independent trials.
+- This is a read-only scientific evidence-method review. Await completion and parent source/evidence verification before dependent batch implementation. Sugar trial 3's existing CPU executions are independent and remain running; no source, metric, scope, or acceptance changes are authorized by dispatch. Acceptance remains **7/52**.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.
