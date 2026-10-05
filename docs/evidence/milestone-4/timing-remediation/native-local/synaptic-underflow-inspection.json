@@ -1,0 +1,64 @@
+{
+  "failed_assertion": "native_g.tobytes() == predicted_g.tobytes()",
+  "prototype_sha256": "b69907b52d3e3ca15bb3318d58b9b6755e1e6bfc51535e06c20f961b24dbd2ff",
+  "voltage_native_host_bytes_match": true,
+  "candidate_and_original_synaptic_native_bytes_match": true,
+  "candidate_and_recorded_original_synaptic_native_bytes_match": true,
+  "different_host_values": 37,
+  "maximum_absolute_difference": 1.1747691788669994e-38,
+  "all_host_differences_are_subnormal": true,
+  "every_native_differing_value_is_zero": true,
+  "first_differences": [
+    {
+      "neuron": 14939,
+      "input": -1.1985011492692652e-38,
+      "native": -0.0,
+      "host": -1.1747691788669994e-38
+    },
+    {
+      "neuron": 20034,
+      "input": -1.1788131861051944e-38,
+      "native": -0.0,
+      "host": -1.1554711970655502e-38
+    },
+    {
+      "neuron": 25588,
+      "input": -1.1788131861051944e-38,
+      "native": -0.0,
+      "host": -1.1554711970655502e-38
+    },
+    {
+      "neuron": 28856,
+      "input": -1.1788131861051944e-38,
+      "native": -0.0,
+      "host": -1.1554711970655502e-38
+    },
+    {
+      "neuron": 34004,
+      "input": -1.1788131861051944e-38,
+      "native": -0.0,
+      "host": -1.1554711970655502e-38
+    },
+    {
+      "neuron": 35056,
+      "input": -1.1788131861051944e-38,
+      "native": -0.0,
+      "host": -1.1554711970655502e-38
+    },
+    {
+      "neuron": 40432,
+      "input": -1.1788131861051944e-38,
+      "native": -0.0,
+      "host": -1.1554711970655502e-38
+    },
+    {
+      "neuron": 42449,
+      "input": -1.1788131861051944e-38,
+      "native": -0.0,
+      "host": -1.1554711970655502e-38
+    }
+  ],
+  "precision": "0",
+  "compilation": "disabled",
+  "case_accepted": false
+}
