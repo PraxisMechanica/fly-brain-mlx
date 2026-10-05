@@ -617,6 +617,11 @@ First accepted three-engine case (2026-10-05):
 - MLX matches all **1,612** reference events exactly: Jaccard/F1/correlation are 1, count/neuron errors are 0. CPU PyTorch has **1,609** events, Jaccard **318/343**, count error **3/1,612**, neuron error **141/1,612**, common-support correlation **0.990039783798138**, and timing F1 **2,060/3,221**. All **11 fixed/paired metric checks** and every per-case validity/causal/replay check pass; no one-spike allowance or tolerance change is used.
 - [Independent parent verification](docs/evidence/milestone-4/cases/sugar-1000-0/verification.json) checks exact complete MLX/reference rasters, all native file hashes, rational metrics, correlation via the standard statistics module, and **1,030** CPU timing matches using a separate dynamic program. This accepts **1/52 cases only**. The remaining cases, prescribed one-second sugar/P9 four-trial repeat/batch checks, pooled/time-bin reports, performance, and full Milestone 4 completion remain open. Commit this accepted evidence before runner wiring.
 
+First-case working-state checkpoint (2026-10-05):
+
+- Accepted case evidence is committed at `e07073e`. A fresh default-suite report records **193 passed tests, zero failures/errors/skips**; all 118 files pass Ruff formatting/lint, strict Pyright has zero errors/warnings, all three dependency contracts pass (88 modules / 324 dependencies), and the offline lock check resolves 38 packages. All local milestone links exist. [Application report](docs/evidence/milestone-4/matrix-boundaries/application-tests.xml), [quality log](docs/evidence/milestone-4/matrix-boundaries/quality.log), and [verification/source hashes](docs/evidence/milestone-4/matrix-boundaries/verification.json).
+- The separate complete 193-test scientific regression remains the unchanged numerical/observer result; it is not rerun for pure plan/coordinate/clock checks. Next: wire reproducible remaining-case execution and reporting, preserving all frozen cases, repeat/batch requirements, causal context, and incremental checkpoints. Push remains pending because only public reference `upstream` exists.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.

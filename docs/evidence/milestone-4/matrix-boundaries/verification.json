@@ -1,0 +1,32 @@
+{
+  "checkpoint": "e07073eb272b9da811db963c2f0df52aa7868363",
+  "application_tests": {
+    "tests": 193,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "quality": {
+    "ruff_format_files": 118,
+    "ruff_lint": true,
+    "strict_pyright_errors": 0,
+    "strict_pyright_warnings": 0,
+    "import_contracts_kept": 3,
+    "import_contracts_broken": 0,
+    "import_files": 88,
+    "import_dependencies": 324,
+    "offline_locked_packages": 38
+  },
+  "source_sha256": {
+    "src/fly_brain/qualification/models.py": "8574431797b4dc8a53a637d4f851ffb32076a35ab5ab5baeb4a4e3eca226c33b",
+    "src/fly_brain/qualification/matrix.py": "fc8590202ae5fb038e9ffa767d78839fec25bea752da2b26bba560b5df49397f",
+    "src/fly_brain/comparison/acceptance.py": "94df8a038fe3a82b1a8bd31c3955dcbf0edd1fd6ac6db7f35c646866c483bd60",
+    "tests/unit/test_matrix.py": "cf02f5e8a0b52466978c39565ca9c9e0d78c68eb2718a1b802ecda3cb9f5dc05",
+    "tests/unit/test_spike_coordinates.py": "3f7c365fe04cd365ad6aa5ce1f1bef4653c4a39e61c6a5ef07309a943ada56e6",
+    "pyproject.toml": "2c95cb7e134b542ab8bfbc71be6995e1d7108595b4856f5882a8b64d674b5584"
+  },
+  "all_local_milestone_links_exist": true,
+  "first_case_accepted": true,
+  "full_matrix_accepted": false,
+  "scientific_regression": "Separate unchanged numerical/observer source result: 193 passed at 8f48b2e; not rerun for these pure plan/coordinate/clock changes."
+}
