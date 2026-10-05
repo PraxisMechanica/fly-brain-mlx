@@ -1,0 +1,1032 @@
+{
+  "checkpoint": "0148592162d43694e3f745bbf4e51698fde3577e",
+  "included_cases": [
+    {
+      "experiment": "p9",
+      "steps": 1000,
+      "trial": 0
+    },
+    {
+      "experiment": "silent",
+      "steps": 1000,
+      "trial": 0
+    },
+    {
+      "experiment": "sugar",
+      "steps": 1000,
+      "trial": 0
+    },
+    {
+      "experiment": "sugar-silenced",
+      "steps": 1000,
+      "trial": 0
+    },
+    {
+      "experiment": "two-class",
+      "steps": 1000,
+      "trial": 0
+    }
+  ],
+  "included_count": 5,
+  "missing_count": 47,
+  "full_matrix_accepted": false,
+  "groups": [
+    {
+      "coverage": {
+        "experiment": "sugar",
+        "steps": 1000,
+        "expected": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "included": [
+          0
+        ],
+        "missing": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "invalid": [],
+        "failed": []
+      },
+      "metrics": {
+        "mlx": {
+          "reference_spikes": 1612,
+          "candidate_spikes": 1612,
+          "active_jaccard": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0
+          },
+          "count_error": {
+            "numerator": 0,
+            "denominator": 1,
+            "value": 0.0
+          },
+          "signed_count_ratio": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0
+          },
+          "neuron_count_error": {
+            "numerator": 0,
+            "denominator": 1,
+            "value": 0.0
+          },
+          "rate_correlation": 0.9999999999999998,
+          "counts_equal": true,
+          "timing_matches": 1612,
+          "timing_f1": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0
+          },
+          "timing_precision": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0
+          },
+          "timing_recall": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0
+          },
+          "exact_step_f1": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0
+          },
+          "one_step_f1": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0
+          },
+          "mean_timing_error_ms": 0.0,
+          "median_timing_error_ms": 0.0,
+          "shared_rate_correlation": 0.9999999999999998,
+          "common_rate_mae_hz": 0.0,
+          "common_rate_rmse_hz": 0.0
+        },
+        "torch": {
+          "reference_spikes": 1612,
+          "candidate_spikes": 1609,
+          "active_jaccard": {
+            "numerator": 318,
+            "denominator": 343,
+            "value": 0.9271137026239067
+          },
+          "count_error": {
+            "numerator": 3,
+            "denominator": 1612,
+            "value": 0.0018610421836228288
+          },
+          "signed_count_ratio": {
+            "numerator": 1609,
+            "denominator": 1612,
+            "value": 0.9981389578163772
+          },
+          "neuron_count_error": {
+            "numerator": 141,
+            "denominator": 1612,
+            "value": 0.08746898263027296
+          },
+          "rate_correlation": 0.9900397837981377,
+          "counts_equal": false,
+          "timing_matches": 1030,
+          "timing_f1": {
+            "numerator": 2060,
+            "denominator": 3221,
+            "value": 0.6395529338714685
+          },
+          "timing_precision": {
+            "numerator": 1030,
+            "denominator": 1609,
+            "value": 0.6401491609695463
+          },
+          "timing_recall": {
+            "numerator": 515,
+            "denominator": 806,
+            "value": 0.6389578163771712
+          },
+          "exact_step_f1": {
+            "numerator": 126,
+            "denominator": 3221,
+            "value": 0.039118286246507296
+          },
+          "one_step_f1": {
+            "numerator": 1104,
+            "denominator": 3221,
+            "value": 0.34275069854082585
+          },
+          "mean_timing_error_ms": 0.289126213592233,
+          "median_timing_error_ms": 0.1,
+          "shared_rate_correlation": 0.9911586315557606,
+          "common_rate_mae_hz": 4.110787172011662,
+          "common_rate_rmse_hz": 6.935773660394461
+        }
+      },
+      "trial_bin_counts": {
+        "0": {
+          "brian": [
+            1612
+          ],
+          "mlx": [
+            1612
+          ],
+          "torch": [
+            1609
+          ]
+        }
+      },
+      "pooled_bin_counts": {
+        "brian": [
+          1612
+        ],
+        "mlx": [
+          1612
+        ],
+        "torch": [
+          1609
+        ]
+      }
+    },
+    {
+      "coverage": {
+        "experiment": "sugar",
+        "steps": 10000,
+        "expected": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "included": [],
+        "missing": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "invalid": [],
+        "failed": []
+      },
+      "metrics": null,
+      "trial_bin_counts": {},
+      "pooled_bin_counts": null
+    },
+    {
+      "coverage": {
+        "experiment": "sugar",
+        "steps": 100000,
+        "expected": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "included": [],
+        "missing": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "invalid": [],
+        "failed": []
+      },
+      "metrics": null,
+      "trial_bin_counts": {},
+      "pooled_bin_counts": null
+    },
+    {
+      "coverage": {
+        "experiment": "p9",
+        "steps": 1000,
+        "expected": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "included": [
+          0
+        ],
+        "missing": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "invalid": [],
+        "failed": []
+      },
+      "metrics": {
+        "mlx": {
+          "reference_spikes": 67,
+          "candidate_spikes": 67,
+          "active_jaccard": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0
+          },
+          "count_error": {
+            "numerator": 0,
+            "denominator": 1,
+            "value": 0.0
+          },
+          "signed_count_ratio": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0
+          },
+          "neuron_count_error": {
+            "numerator": 0,
+            "denominator": 1,
+            "value": 0.0
+          },
+          "rate_correlation": 0.9999999999999998,
+          "counts_equal": true,
+          "timing_matches": 67,
+          "timing_f1": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0
+          },
+          "timing_precision": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0
+          },
+          "timing_recall": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0
+          },
+          "exact_step_f1": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0
+          },
+          "one_step_f1": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0
+          },
+          "mean_timing_error_ms": 0.0,
+          "median_timing_error_ms": 0.0,
+          "shared_rate_correlation": 0.9999999999999998,
+          "common_rate_mae_hz": 0.0,
+          "common_rate_rmse_hz": 0.0
+        },
+        "torch": {
+          "reference_spikes": 67,
+          "candidate_spikes": 67,
+          "active_jaccard": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0
+          },
+          "count_error": {
+            "numerator": 0,
+            "denominator": 1,
+            "value": 0.0
+          },
+          "signed_count_ratio": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0
+          },
+          "neuron_count_error": {
+            "numerator": 0,
+            "denominator": 1,
+            "value": 0.0
+          },
+          "rate_correlation": 0.9999999999999998,
+          "counts_equal": true,
+          "timing_matches": 67,
+          "timing_f1": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0
+          },
+          "timing_precision": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0
+          },
+          "timing_recall": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0
+          },
+          "exact_step_f1": {
+            "numerator": 14,
+            "denominator": 67,
+            "value": 0.208955223880597
+          },
+          "one_step_f1": {
+            "numerator": 53,
+            "denominator": 67,
+            "value": 0.7910447761194029
+          },
+          "mean_timing_error_ms": 0.11492537313432837,
+          "median_timing_error_ms": 0.1,
+          "shared_rate_correlation": 0.9999999999999998,
+          "common_rate_mae_hz": 0.0,
+          "common_rate_rmse_hz": 0.0
+        }
+      },
+      "trial_bin_counts": {
+        "0": {
+          "brian": [
+            67
+          ],
+          "mlx": [
+            67
+          ],
+          "torch": [
+            67
+          ]
+        }
+      },
+      "pooled_bin_counts": {
+        "brian": [
+          67
+        ],
+        "mlx": [
+          67
+        ],
+        "torch": [
+          67
+        ]
+      }
+    },
+    {
+      "coverage": {
+        "experiment": "p9",
+        "steps": 10000,
+        "expected": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "included": [],
+        "missing": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "invalid": [],
+        "failed": []
+      },
+      "metrics": null,
+      "trial_bin_counts": {},
+      "pooled_bin_counts": null
+    },
+    {
+      "coverage": {
+        "experiment": "p9",
+        "steps": 100000,
+        "expected": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "included": [],
+        "missing": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "invalid": [],
+        "failed": []
+      },
+      "metrics": null,
+      "trial_bin_counts": {},
+      "pooled_bin_counts": null
+    },
+    {
+      "coverage": {
+        "experiment": "sugar-silenced",
+        "steps": 1000,
+        "expected": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "included": [
+          0
+        ],
+        "missing": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "invalid": [],
+        "failed": []
+      },
+      "metrics": {
+        "mlx": {
+          "reference_spikes": 410,
+          "candidate_spikes": 410,
+          "active_jaccard": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0
+          },
+          "count_error": {
+            "numerator": 0,
+            "denominator": 1,
+            "value": 0.0
+          },
+          "signed_count_ratio": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0
+          },
+          "neuron_count_error": {
+            "numerator": 0,
+            "denominator": 1,
+            "value": 0.0
+          },
+          "rate_correlation": 1.0,
+          "counts_equal": true,
+          "timing_matches": 410,
+          "timing_f1": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0
+          },
+          "timing_precision": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0
+          },
+          "timing_recall": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0
+          },
+          "exact_step_f1": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0
+          },
+          "one_step_f1": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0
+          },
+          "mean_timing_error_ms": 0.0,
+          "median_timing_error_ms": 0.0,
+          "shared_rate_correlation": 1.0,
+          "common_rate_mae_hz": 0.0,
+          "common_rate_rmse_hz": 0.0
+        },
+        "torch": {
+          "reference_spikes": 410,
+          "candidate_spikes": 417,
+          "active_jaccard": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0
+          },
+          "count_error": {
+            "numerator": 7,
+            "denominator": 410,
+            "value": 0.01707317073170732
+          },
+          "signed_count_ratio": {
+            "numerator": 417,
+            "denominator": 410,
+            "value": 1.0170731707317073
+          },
+          "neuron_count_error": {
+            "numerator": 7,
+            "denominator": 410,
+            "value": 0.01707317073170732
+          },
+          "rate_correlation": 0.9900122232445104,
+          "counts_equal": false,
+          "timing_matches": 410,
+          "timing_f1": {
+            "numerator": 820,
+            "denominator": 827,
+            "value": 0.9915356711003628
+          },
+          "timing_precision": {
+            "numerator": 410,
+            "denominator": 417,
+            "value": 0.9832134292565947
+          },
+          "timing_recall": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0
+          },
+          "exact_step_f1": {
+            "numerator": 14,
+            "denominator": 827,
+            "value": 0.016928657799274487
+          },
+          "one_step_f1": {
+            "numerator": 820,
+            "denominator": 827,
+            "value": 0.9915356711003628
+          },
+          "mean_timing_error_ms": 0.1,
+          "median_timing_error_ms": 0.1,
+          "shared_rate_correlation": 0.9900122232445104,
+          "common_rate_mae_hz": 3.3333333333333335,
+          "common_rate_rmse_hz": 6.546536707079771
+        }
+      },
+      "trial_bin_counts": {
+        "0": {
+          "brian": [
+            410
+          ],
+          "mlx": [
+            410
+          ],
+          "torch": [
+            417
+          ]
+        }
+      },
+      "pooled_bin_counts": {
+        "brian": [
+          410
+        ],
+        "mlx": [
+          410
+        ],
+        "torch": [
+          417
+        ]
+      }
+    },
+    {
+      "coverage": {
+        "experiment": "sugar-silenced",
+        "steps": 10000,
+        "expected": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "included": [],
+        "missing": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "invalid": [],
+        "failed": []
+      },
+      "metrics": null,
+      "trial_bin_counts": {},
+      "pooled_bin_counts": null
+    },
+    {
+      "coverage": {
+        "experiment": "two-class",
+        "steps": 1000,
+        "expected": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "included": [
+          0
+        ],
+        "missing": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "invalid": [],
+        "failed": []
+      },
+      "metrics": {
+        "mlx": {
+          "reference_spikes": 1811,
+          "candidate_spikes": 1811,
+          "active_jaccard": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0
+          },
+          "count_error": {
+            "numerator": 0,
+            "denominator": 1,
+            "value": 0.0
+          },
+          "signed_count_ratio": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0
+          },
+          "neuron_count_error": {
+            "numerator": 0,
+            "denominator": 1,
+            "value": 0.0
+          },
+          "rate_correlation": 1.0,
+          "counts_equal": true,
+          "timing_matches": 1811,
+          "timing_f1": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0
+          },
+          "timing_precision": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0
+          },
+          "timing_recall": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0
+          },
+          "exact_step_f1": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0
+          },
+          "one_step_f1": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0
+          },
+          "mean_timing_error_ms": 0.0,
+          "median_timing_error_ms": 0.0,
+          "shared_rate_correlation": 1.0,
+          "common_rate_mae_hz": 0.0,
+          "common_rate_rmse_hz": 0.0
+        },
+        "torch": {
+          "reference_spikes": 1811,
+          "candidate_spikes": 1779,
+          "active_jaccard": {
+            "numerator": 364,
+            "denominator": 391,
+            "value": 0.9309462915601023
+          },
+          "count_error": {
+            "numerator": 32,
+            "denominator": 1811,
+            "value": 0.0176697956929873
+          },
+          "signed_count_ratio": {
+            "numerator": 1779,
+            "denominator": 1811,
+            "value": 0.9823302043070127
+          },
+          "neuron_count_error": {
+            "numerator": 218,
+            "denominator": 1811,
+            "value": 0.12037548315847597
+          },
+          "rate_correlation": 0.9849183597914548,
+          "counts_equal": false,
+          "timing_matches": 1135,
+          "timing_f1": {
+            "numerator": 227,
+            "denominator": 359,
+            "value": 0.6323119777158774
+          },
+          "timing_precision": {
+            "numerator": 1135,
+            "denominator": 1779,
+            "value": 0.6379988757729061
+          },
+          "timing_recall": {
+            "numerator": 1135,
+            "denominator": 1811,
+            "value": 0.6267255659856433
+          },
+          "exact_step_f1": {
+            "numerator": 93,
+            "denominator": 1795,
+            "value": 0.05181058495821727
+          },
+          "one_step_f1": {
+            "numerator": 134,
+            "denominator": 359,
+            "value": 0.3732590529247911
+          },
+          "mean_timing_error_ms": 0.23885462555066084,
+          "median_timing_error_ms": 0.1,
+          "shared_rate_correlation": 0.9861770089535377,
+          "common_rate_mae_hz": 5.57544757033248,
+          "common_rate_rmse_hz": 8.700765759873331
+        }
+      },
+      "trial_bin_counts": {
+        "0": {
+          "brian": [
+            1811
+          ],
+          "mlx": [
+            1811
+          ],
+          "torch": [
+            1779
+          ]
+        }
+      },
+      "pooled_bin_counts": {
+        "brian": [
+          1811
+        ],
+        "mlx": [
+          1811
+        ],
+        "torch": [
+          1779
+        ]
+      }
+    },
+    {
+      "coverage": {
+        "experiment": "two-class",
+        "steps": 10000,
+        "expected": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "included": [],
+        "missing": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "invalid": [],
+        "failed": []
+      },
+      "metrics": null,
+      "trial_bin_counts": {},
+      "pooled_bin_counts": null
+    },
+    {
+      "coverage": {
+        "experiment": "silent",
+        "steps": 1000,
+        "expected": [
+          0
+        ],
+        "included": [
+          0
+        ],
+        "missing": [],
+        "invalid": [],
+        "failed": []
+      },
+      "metrics": {
+        "mlx": {
+          "reference_spikes": 0,
+          "candidate_spikes": 0,
+          "active_jaccard": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0
+          },
+          "count_error": {
+            "numerator": 0,
+            "denominator": 1,
+            "value": 0.0
+          },
+          "signed_count_ratio": null,
+          "neuron_count_error": {
+            "numerator": 0,
+            "denominator": 1,
+            "value": 0.0
+          },
+          "rate_correlation": null,
+          "counts_equal": true,
+          "timing_matches": 0,
+          "timing_f1": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0
+          },
+          "timing_precision": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0
+          },
+          "timing_recall": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0
+          },
+          "exact_step_f1": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0
+          },
+          "one_step_f1": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0
+          },
+          "mean_timing_error_ms": null,
+          "median_timing_error_ms": null,
+          "shared_rate_correlation": null,
+          "common_rate_mae_hz": null,
+          "common_rate_rmse_hz": null
+        },
+        "torch": {
+          "reference_spikes": 0,
+          "candidate_spikes": 0,
+          "active_jaccard": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0
+          },
+          "count_error": {
+            "numerator": 0,
+            "denominator": 1,
+            "value": 0.0
+          },
+          "signed_count_ratio": null,
+          "neuron_count_error": {
+            "numerator": 0,
+            "denominator": 1,
+            "value": 0.0
+          },
+          "rate_correlation": null,
+          "counts_equal": true,
+          "timing_matches": 0,
+          "timing_f1": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0
+          },
+          "timing_precision": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0
+          },
+          "timing_recall": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0
+          },
+          "exact_step_f1": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0
+          },
+          "one_step_f1": {
+            "numerator": 1,
+            "denominator": 1,
+            "value": 1.0
+          },
+          "mean_timing_error_ms": null,
+          "median_timing_error_ms": null,
+          "shared_rate_correlation": null,
+          "common_rate_mae_hz": null,
+          "common_rate_rmse_hz": null
+        }
+      },
+      "trial_bin_counts": {
+        "0": {
+          "brian": [
+            0
+          ],
+          "mlx": [
+            0
+          ],
+          "torch": [
+            0
+          ]
+        }
+      },
+      "pooled_bin_counts": {
+        "brian": [
+          0
+        ],
+        "mlx": [
+          0
+        ],
+        "torch": [
+          0
+        ]
+      }
+    },
+    {
+      "coverage": {
+        "experiment": "silent",
+        "steps": 10000,
+        "expected": [
+          0
+        ],
+        "included": [],
+        "missing": [
+          0
+        ],
+        "invalid": [],
+        "failed": []
+      },
+      "metrics": null,
+      "trial_bin_counts": {},
+      "pooled_bin_counts": null
+    }
+  ],
+  "source_sha256": {
+    "src/fly_brain/qualification/matrix_diagnostics.py": "8e2b350f9946cc1937a081f7309b9de0f2598bfefa52ab75d0df7ae3bef6eb9c",
+    "src/fly_brain/comparison/pooling.py": "689596ba42548daf4e716d0c5c81419e987962562539277a3e9d1538ad90e0a2",
+    "src/fly_brain/comparison/diagnostics.py": "e530c0cec50fe736b77e74d983ad59362894cee84f48bc8569956541795366ae"
+  },
+  "case_evidence_sha256": {
+    "docs/evidence/milestone-4/cases/p9-1000-0/case.json": "b174a469a59821b3991d6880a1a2c249e8b86093e8fa192de3f443cc46c38cff",
+    "docs/evidence/milestone-4/cases/p9-1000-0/normalized-spikes.npz": "e2369937c79dee6cee326917b2a977748fccd4b9873e82be9dd255fbf4556d35",
+    "docs/evidence/milestone-4/cases/silent-1000-0/case.json": "1f25c8f83c64d0b6089bb40f2d738e5ce1b97905c60648134c0bf594759bc7af",
+    "docs/evidence/milestone-4/cases/silent-1000-0/normalized-spikes.npz": "d23e4819c4269bee10e19e12b4829ab7bb2150881cf58cee5764f70fc35651ee",
+    "docs/evidence/milestone-4/cases/sugar-1000-0/case.json": "601c7290e37a8102d4aa4f2e55fa7d56510e5172c2582b20edfcd8ab0279a29a",
+    "docs/evidence/milestone-4/cases/sugar-1000-0/normalized-spikes.npz": "6a9826ac4daf820e12009c653fa784aa04d824db414123e3ff2e2e39fe91c37c",
+    "docs/evidence/milestone-4/cases/sugar-silenced-1000-0/case.json": "8a3a956633b841f113083f4b9ca2ad54669602876729ce2730cb12bec04bf8c1",
+    "docs/evidence/milestone-4/cases/sugar-silenced-1000-0/normalized-spikes.npz": "02a24ddb524d7f92a497341b52c598273881daa414591d68df9850b7baf452c4",
+    "docs/evidence/milestone-4/cases/two-class-1000-0/case.json": "b8ae11d7e86cc0bd15a60367a431e75a86bdd4e6ce202877f2e3cc232832257d",
+    "docs/evidence/milestone-4/cases/two-class-1000-0/normalized-spikes.npz": "050cb2cc0ac71d85b137ca974f608748ce73062ea3705871e17b236ebd9d98aa"
+  },
+  "all_single_trial_pooled_metrics_equal_recorded_complete_case_metrics": true,
+  "all_bin_counts_equal_recorded_spike_counts": true,
+  "scope": "Partial frozen matrix evidence; missing groups remain unavailable. Pooled diagnostics do not determine individual or matrix acceptance."
+}

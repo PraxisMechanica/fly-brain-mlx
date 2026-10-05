@@ -877,6 +877,11 @@ Next full sugar trial execution (2026-10-05):
 - At clean `3b9e881`, launch `MLX_ENABLE_TF32=0 uv run --locked --group qualification --no-sync fly-brain qualify-parity --experiment sugar --duration-s 0.1 --trial 1 --output data/results/milestone-4-parity-sugar-1000-1-20261005-01`. First launch check: 06:20:01 UTC. Preserve each engine's fresh complete first/repeat evidence and the unchanged automatic report/status.
 - This trial is running and is **not accepted**. The earlier batch first-cause classification does not approve this singleton. On completion, independently recompute every metric/gate, verify complete native/physical/own-ledger replay, and inspect the entire first-cause context. Require explicit parent applicability or a new bounded cause review before a separate reviewed-case acceptance decision. Current acceptance remains **5/52**; all current work is committed before launch.
 
+Partial matrix diagnostics with exact silence (2026-10-05):
+
+- At clean `0148592`, execute the existing verified partial-matrix checker over all five accepted actual case rasters. [Report](docs/evidence/milestone-4/matrix-diagnostics/partial-20261005-03/partial-matrix.json) retains all 12 prescribed groups, **5 included / 47 missing** case identities, explicit unavailable groups, and the zero-event silent bin.
+- All 19 pooled metric fields of each included singleton equal its complete per-case record; every 100 ms bin count equals the actual spike count. [Executed verification](docs/evidence/milestone-4/matrix-diagnostics/partial-20261005-03/executed-verification.py) preserves source/artifact hashes. This is diagnostic evidence only; pooling never grants case acceptance. Commit the verified refresh while sugar trial 1 continues independently. No application source changes or new case pass.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.
