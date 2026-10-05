@@ -1,0 +1,23 @@
+{
+  "verified_checkpoint": "a9b45d9",
+  "branch": "main",
+  "verified_working_tree_clean": true,
+  "development_goal": "paused",
+  "application_source_tests_dependencies_unchanged_since": "a4920ef",
+  "p9_process_snapshot": "PID STAT  ELAPSED      TIME  %CPU\n62191 T    02:04:09  40:13.38   0.0",
+  "p9_still_suspended_and_cpu_time_unchanged": true,
+  "no_new_full_case_or_matrix": true,
+  "archive_source_input_hash_checks": "passed",
+  "diagnostic_native_byte_checks": "passed on the recorded selected inputs",
+  "unsupported_probe": "Nonempty CSR-by-CSR product failed in the installed CPU wheel; preserved explicitly",
+  "runtime_budget_arithmetic": "independently checked",
+  "report_local_link_targets_checked": 455,
+  "report_local_link_targets_valid": true,
+  "json_evidence_valid": true,
+  "astra_review": "completed; parent verified; gpt-6-astra xhigh",
+  "implementation_or_baseline_change_adopted": false,
+  "acceptance_gates_changed": false,
+  "push_status": "Pending: no user-owned remote. The only configured remote is the reference upstream; do not publish this work there.",
+  "configured_remotes": "upstream\thttps://github.com/eonsystemspbc/fly-brain.git (fetch)\nupstream\thttps://github.com/eonsystemspbc/fly-brain.git (push)",
+  "limits": "No measured improved complete check, new scientific acceptance or new project delivery estimate is claimed."
+}
