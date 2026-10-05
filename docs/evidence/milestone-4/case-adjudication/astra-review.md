@@ -1,0 +1,37 @@
+# Bounded per-case scientific adjudication policy
+
+Completed reviewer: `/root/review_case_adjudication`, fresh-context **GPT-6 Astra at `xhigh`**. Assignment checkpoint: `361c748`; recorded assignment: `49f41b7`. The reviewer made no file changes, device runs, or network calls and did not duplicate the existing first-cause classification. Parent integration checkpoint: `10abe44`.
+
+Decision: use a separate **parent-recorded reviewed-case decision** tied to one completed execution. Preserve the automatic `case.json` byte for byte, including a false automatic acceptance result, the true scientific-review requirement, and its actual first difference. Confidence: **99%**.
+
+The [frozen numerical contract](../../../mlx-port-baseline.md) permits an explained first spike difference without waiving another gate. The [automatic reporter](../../../../src/fly_brain/qualification/adapters/case_report.py) deliberately accepts only cases without a first difference. These decisions have distinct scopes; do not change the reporter to collapse them.
+
+## Required evidence and conjunction
+
+1. Bind the decision to the exact experiment, integer horizon, trial, execution directory, launch commit, mode, environment and executed-source hashes, pinned inputs, mapping, and canonical stimulus. Reference a hash manifest covering the original report, normalized/native spikes, first/repeat observations, phase/physical digests, final states/queues, causal report, and all cause archives. Include the completed review and independently executed parent verification. Existing manifests/native descriptors suffice.
+2. Record the exact first differing step and complete affected neuron positions/identifiers. Explain every affected neuron using actual spike decisions, native pre-threshold values/thresholds, margins, unchanged budgets, eligibility, preceding clocks, stimulus placement, delivered original rows/weights, and actual device leaves/reduction order. A classification string or a near-threshold voltage alone is insufficient. Distinguish saved native checks, completed live auditing, and checks not performed.
+3. Require all eleven frozen metric checks and all current validity checks. The **only permitted false case check** is `first_different_spike_explicitly_none`; retain its false value. Any common-history state-budget violation blocks acceptance, including the pre-threshold phase of the first different step. Missing, stale, or changed evidence blocks acceptance. Rational comparisons remain exact; only paired computed correlation has the existing `1e-12` slack.
+4. After the first different spike, cross-engine continuous-state and pending-queue equality are inapplicable. Finite state, each engine's own event/queue ledger, complete coverage, and exact native/physical repetition within the mode remain mandatory. Final raster agreement or process success cannot replace them.
+5. Use a small deterministic verifier for the current report format. Require the complete expected check names, independently recompute metrics from validated native coordinates, verify hashes/coverage, compare all first/repeat native fields and cause contexts, and verify the recorded review's numerical prerequisites. Do not infer scientific approval from prose or accept arbitrary waived-check lists. Test refusal of a failed metric, budget violation, incomplete replay, mismatched cause identity, missing evidence, and stale hashes.
+
+The [current cause capture](../../../../src/fly_brain/qualification/adapters/paired_causes.py), [causal audit](../../../../src/fly_brain/qualification/causality.py), [paired observer](../../../../src/fly_brain/qualification/adapters/paired_observer.py), and [replay checks](../../../../src/fly_brain/qualification/adapters/replay_evidence.py) preserve these obligations. Existing non-silent verification assumes exact cross-engine spikes and no first difference; do not reuse those assumptions for reviewed acceptance.
+
+## Existing batch classification and singleton applicability
+
+The [prior batch review](../four-trial-memory/astra-review.md) classifies a cause and expressly excludes case acceptance and a complete first-spike replay. It may inform the singleton without repeating that classification only after an explicit parent applicability check proves equivalent causal evidence: canonical trial input, relevant numerical path, complete first-difference set, native current/preceding states, clocks, eligibility, inputs and reduction leaves/order. The singleton also needs its own complete common-history audit and repeats.
+
+Compare native dtype, shape, and bytes where corresponding evidence permits. Document historical field-name or descriptor mappings. A shared step and neuron identifier alone is insufficient. If equivalence holds, state: “The prior batch review classified this cause; the parent verified its applicability to this singleton.” Do not claim that Astra reviewed or accepted the singleton. Materially different evidence or unresolved equivalence requires a fresh bounded cause review.
+
+Store the final disposition in a new internal evidence file under the case directory. Link the original report, review, verification, and outstanding matrix/batch requirements. Update acceptance counts only after verification and commit. Preserve the original command's status 1 when its automatic report rejects the case; that status does not imply evidence collection was incomplete.
+
+## Parent verification and limits
+
+The parent independently inspects the contract, current reporter's nine check names, all eleven metric check names, causal/replay implementation, all four current-format accepted reports, and the historical sugar report with its original explicit checks. [Executed policy verification](executed-verification.py) and [source/evidence hashes](parent-verification.json) record this inspection.
+
+Host-only inspection confirms the retained 108-array context, first-difference neuron 41,514, opposite actual threshold decisions, agreed eligibility and actual due-row identities, voltage error `0.0000305994428089 mV`, and budget `0.00144999984659346 mV`. This rechecks the cited evidence's prerequisites and scope; it is neither a new scientific classification nor singleton approval. Existing causal/replay refusal tests are rerun; no full device execution is rerun for this policy review.
+
+One initial parent verification assumed that the older sugar report used the later reporter's check names. It stopped before writing output. Inspection showed that the historical report has its own explicit checks. The successful verification preserves that report and checks the exact current format on the four later cases. No acceptance condition or historical evidence was rewritten.
+
+Engineering decision at `10abe44`, confidence **99%**: implement this evidence-only verifier, then run sugar trial 1. This changes no model, precision, tolerance, reference, numerical method, command, original output contract, database, or application programming interface schema. The schema rule's specified database/API approval does not apply to this new internal review artifact. No singleton, batch, complete matrix, or performance pass is granted by this policy.
+
+Next action: commit this verified policy before implementing the verifier. After the singleton completes, verify its own metrics/replay/audit and either establish explicit applicability or obtain a fresh bounded review before recording acceptance.
