@@ -12,6 +12,7 @@ readers who want to install, run, and compare simulations.
 | [AGENTS.md](../../AGENTS.md) | Project-specific agent policy, review settings, and repository remotes |
 | [milestone.md](../../milestone.md) | Current scope, holds, next work, milestone acceptance, and completion evidence |
 | [Numerical contract](numerical-contract.md) | Reference semantics, precision, canonical stimuli, repeatability, and the frozen full-network gates |
+| [Developer workflow](development.md) | Quality tools, application/scientific commands, diagnostic scope, and code ownership |
 | [Typing limits](typing.md) | Scope and reasons for local third-party stubs and narrow suppressions |
 | [Historical records](#historical-records) | Dated decisions, failures, measurements, and original qualification scope |
 | [Review briefs](#review-briefs) | Original bounded assignments and their return conditions |
@@ -24,6 +25,10 @@ recorded artifact paths and hashes retain their meaning.
 
 ## Historical records
 
+- [Milestone history](history/milestones.md): complete checkpoint log, including
+  original acceptance evidence and superseded work instructions.
+- [Reference baseline](history/reference-baseline.md): original source,
+  equations, input hashes, backend disagreements, measurements, and notices.
 - [Architecture audit](history/architecture-audit.md): findings before repair.
 - [Architecture remediation](history/architecture-remediation.md): implemented
   repair, retired-source recovery, checks, and release scope.
@@ -58,7 +63,15 @@ simplification, audience separation, and reasonable centralization.
 | Reports say development is paused or no push remote exists after resumption and publication | Mark them as historical; current status and remotes have one owner |
 | Old handoffs require manual model switches or use an earlier effort setting | Preserve the assignment record; current delegation comes from AGENTS |
 | Scientific formulas and decisions recur in handoffs and progress reports | Keep the numerical contract authoritative; treat other occurrences as historical evidence |
+| New quality work arrives during the audit, including a review-branch workflow amendment | Preserve incoming commits and the full updated log; derive current quality status from that checkpoint |
 
 Relocated document paths are recorded in Git. Original evidence manifests keep
 their original paths; resolve a historical source citation at its recorded
 commit, for example `git show <commit>:<original-path>`.
+
+The full milestone log before condensation is preserved in history with only relative-link
+updates and an explicit scope notice. The numerical reference history is split
+from the approved contract; equations, numeric tables, code examples, all
+scientific gates, and evidence stay intact. Quality-hook checks are separate from
+application/scientific qualification, and this documentation task grants no new
+case acceptance.
