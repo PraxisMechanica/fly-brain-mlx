@@ -501,6 +501,11 @@ Actual paired-event checkpoint (2026-10-05):
 - Sparse due capture is committed at `be11cd2`. Each actual MLX due mask is now hashed before its sparse conversion; raw hashes repeat exactly and agree between batch and independent execution. While spike history is common, paired auditing compares actual MLX original-row identities with the reference's actual delivered rows, preserving the reference's separate delivery order for diagnosis.
 - Injected missing, extra, and reordered MLX due rows are rejected. The MLX/paired modules pass **30 tests, zero failures/errors/skips**; full strict Pyright, Ruff, and formatting pass. First-cause context and complete-network observation remain next. Commit this verified unit now.
 
+Raw first-cause capture checkpoint (2026-10-05):
+
+- Actual paired-event checks are committed at `e7ff0bc`. The [causal capture](src/fly_brain/qualification/adapters/causal_capture.py) preserves the current and preceding raw observations for the first state-budget error and first spike difference. It retains actual reference snapshots/delivery order, raw neural/refractory/clock/input fields, and actual sparse MLX due identities/raw mask hashes. A single copied preceding row crosses block boundaries without retaining an earlier phase block.
+- A fault at the first row of block two records step 32 and its actual step-31 predecessor, preserving float64/float32 precision and owned raw clock arrays. The paired module passes **21 tests, zero failures/errors/skips**; full strict Pyright, Ruff, and formatting pass. Weight/reduction metadata, complete-network observation, and interpretation remain open. Commit this working state before additional capture checks.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.

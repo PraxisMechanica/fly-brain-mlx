@@ -5,6 +5,7 @@ import numpy as np
 import pytest
 
 from fly_brain.qualification.adapters.brian_jobs import build, run
+from fly_brain.qualification.adapters.causal_capture import CausalCapture
 from fly_brain.qualification.adapters.mlx_ledger import EventLedger
 from fly_brain.qualification.adapters.mlx_observer import observe
 from fly_brain.qualification.adapters.observer_stream import (
@@ -138,6 +139,30 @@ def test_changed_actual_causal_fields_fail_without_a_parity_score(
         block = replace(block, mlx=replace(block.mlx, fields=fields_mlx))
     with pytest.raises(ValueError, match=reason):
         audit_block(block, CausalAudit())
+
+
+def test_first_difference_keeps_the_actual_preceding_step_across_blocks(
+    paired: tuple[PairedBlock | FinalSnapshot, ...],
+) -> None:
+    first, second = paired[:2]
+    assert isinstance(first, PairedBlock) and isinstance(second, PairedBlock)
+    capture = CausalCapture()
+    capture.check(first)
+    fields = dict(second.mlx.fields)
+    fields['spikes'] = fields['spikes'].copy()
+    fields['spikes'][0, 0, 2] = True
+    capture.check(replace(second, mlx=replace(second.mlx, fields=fields)))
+    context = capture.spike
+    assert context is not None and context.neurons == (2,)
+    assert context.current.snapshot.step == 32
+    assert context.previous is not None and context.previous.snapshot.step == 31
+    assert context.current.reference['pre_v'].dtype == np.float64
+    assert context.current.mlx['pre_v'].dtype == np.float32
+    assert all(value.base is None for value in context.current.reference.values())
+    assert context.current.reference['pre_t'].shape == ()
+    assert (
+        context.previous.mlx_due_edges.tobytes() == first.mlx.due_edges[-1][0].tobytes()
+    )
 
 
 @pytest.mark.parametrize('change', ('dtype', 'shape', 'units'))
