@@ -1,0 +1,38 @@
+{
+  "checkpoint": "f3a6da9ca4697d250f8beefc07806cb4116328f8",
+  "archived_runner_and_source_hashes_verified": true,
+  "all_reported_native_output_hashes_agree": true,
+  "specialized_reduce_operator_present_in_native_profile": true,
+  "prepared_csr": {
+    "values": {
+      "shape": [
+        15091983
+      ],
+      "dtype": "float32",
+      "bytes": 60367932,
+      "sha256": "5a8d0531b219ac8cb5908a9d36711e956c0ed397fae748703324023a56e5948c"
+    },
+    "column_indices": {
+      "shape": [
+        15091983
+      ],
+      "dtype": "int64",
+      "bytes": 120735864,
+      "sha256": "df2c03c4a580639370604fce13f16335372f910ac44e7c015cbc1962b2b3f254"
+    },
+    "row_offsets": {
+      "shape": [
+        138640
+      ],
+      "dtype": "int64",
+      "bytes": 1109120,
+      "sha256": "f109ae03b95b300e8588b1896b932f6a6fd371f210a035ffa7f9c2f050fc3a9a"
+    }
+  },
+  "matrix_storage_bytes": 182212916,
+  "row_bound_independently_recomputed": 69948.0,
+  "actual_saved_step_component_speedup": 2.7639191658297566,
+  "two_10000_step_original_multiply_extrapolation_s": 3153.4958397969604,
+  "two_10000_step_explicit_sum_multiply_extrapolation_s": 1140.9508204087615,
+  "limits": "Independent archive, invariant and profile checks. Selected operation equivalence is not full comparator-mode or whole-trajectory qualification. Extrapolations are component arithmetic budgets, not measured full runs."
+}

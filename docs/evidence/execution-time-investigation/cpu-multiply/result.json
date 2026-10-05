@@ -1,0 +1,485 @@
+{
+  "scope": "Bounded component performance diagnosis using unchanged original comparator weights and selected saved/whole-binary-envelope inputs; no model replacement or full trajectory qualification.",
+  "checkpoint": "f3a6da9ca4697d250f8beefc07806cb4116328f8",
+  "torch": "2.11.0",
+  "numpy": "1.26.4",
+  "torch_git_version": "70d99e998b4955e0049d13a98d77ae1b14db1f45",
+  "torch_build": "PyTorch built with:\n  - GCC 4.2\n  - C++ Version: 201703\n  - clang 15.0.0\n  - OpenMP 201811\n  - LAPACK is enabled (usually provided by MKL)\n  - NNPACK is enabled\n  - CPU capability usage: DEFAULT\n  - Build settings: BLAS_INFO=accelerate, BUILD_TYPE=Release, COMMIT_SHA=70d99e998b4955e0049d13a98d77ae1b14db1f45, CXX_COMPILER=/usr/bin/c++, CXX_FLAGS= -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DLIBKINETO_NOCUPTI -DLIBKINETO_NOROCTRACER -DLIBKINETO_NOXPUPTI=ON -DUSE_PYTORCH_QNNPACK -DAT_BUILD_ARM_VEC256_WITH_SLEEF -DUSE_XNNPACK -DUSE_PYTORCH_METAL_EXPORT -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -DUSE_COREML_DELEGATE -O2 -fPIC -DC10_NODEPRECATED -Wall -Wextra -Werror=return-type -Werror=non-virtual-dtor -Werror=braced-scalar-init -Werror=range-loop-construct -Werror=bool-operation -Wnarrowing -Wno-missing-field-initializers -Wno-unknown-pragmas -Wno-unused-parameter -Wno-strict-overflow -Wno-strict-aliasing -Wvla-extension -Wsuggest-override -Wnewline-eof -Winconsistent-missing-override -Winconsistent-missing-destructor-override -Wno-pass-failed -Wno-error=old-style-cast -Wconstant-conversion -Qunused-arguments -faligned-new -fno-math-errno -fno-trapping-math -Werror=format -DUSE_MPS -Wno-missing-braces, LAPACK_INFO=accelerate, TORCH_VERSION=2.11.0, USE_CUDA=OFF, USE_CUDNN=OFF, USE_CUSPARSELT=OFF, USE_EIGEN_FOR_BLAS=ON, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_GLOO=ON, USE_MKL=OFF, USE_MKLDNN=OFF, USE_MPI=OFF, USE_NCCL=OFF, USE_NNPACK=ON, USE_OPENMP=ON, USE_ROCM=OFF, USE_ROCM_KERNEL_ASSERT=OFF, USE_XCCL=OFF, USE_XPU=OFF, \n",
+  "cpu_threads": 1,
+  "cpu_interop_threads": 10,
+  "weights_layout": "torch.sparse_csr",
+  "weights_dtype": "torch.float32",
+  "original_rows": 15091983,
+  "neurons": 138639,
+  "coalesced_csr_entries": 15091983,
+  "all_stored_weights_finite_integral_float32": true,
+  "maximum_stored_absolute_weight": 2405.0,
+  "maximum_original_row_absolute_count_sum": 69948.0,
+  "float32_exact_integer_bound": 16777216,
+  "native_busiest_step": 401,
+  "setup_s": 3.773355540994089,
+  "patterns": {
+    "rest": {
+      "input_shape": [
+        1,
+        138639
+      ],
+      "firing_neurons_per_row": [
+        0.0
+      ],
+      "measurements": {
+        "original_dense_times_csc": {
+          "seconds": [
+            0.15612220898037776,
+            0.15574645801098086,
+            0.152802625001641,
+            0.1630365840101149,
+            0.15378550000605173
+          ],
+          "median_s": 0.15574645801098086,
+          "exact_native_dtype_shape_and_bytes_equal": true,
+          "maximum_absolute_difference": 0.0,
+          "output_shape": [
+            1,
+            138639
+          ],
+          "output_stride": [
+            138639,
+            1
+          ],
+          "output_sha256": "82c552c9fcbde2dfc3dac3369eba2663bf27a29cb88aa6a1c8aab050e60495e8"
+        },
+        "csr_times_dense_default": {
+          "seconds": [
+            0.15480483300052583,
+            0.15136395799345337,
+            0.14770279100048356,
+            0.1469281250028871,
+            0.1470044589950703
+          ],
+          "median_s": 0.14770279100048356,
+          "exact_native_dtype_shape_and_bytes_equal": true,
+          "maximum_absolute_difference": 0.0,
+          "output_shape": [
+            1,
+            138639
+          ],
+          "output_stride": [
+            1,
+            1
+          ],
+          "output_sha256": "82c552c9fcbde2dfc3dac3369eba2663bf27a29cb88aa6a1c8aab050e60495e8"
+        },
+        "csr_times_dense_explicit_sum": {
+          "seconds": [
+            0.059142958984011784,
+            0.055306707974523306,
+            0.05525695800315589,
+            0.05416441601119004,
+            0.05392137501621619
+          ],
+          "median_s": 0.05525695800315589,
+          "exact_native_dtype_shape_and_bytes_equal": true,
+          "maximum_absolute_difference": 0.0,
+          "output_shape": [
+            1,
+            138639
+          ],
+          "output_stride": [
+            1,
+            1
+          ],
+          "output_sha256": "82c552c9fcbde2dfc3dac3369eba2663bf27a29cb88aa6a1c8aab050e60495e8"
+        }
+      }
+    },
+    "actual_busiest_saved_step": {
+      "input_shape": [
+        1,
+        138639
+      ],
+      "firing_neurons_per_row": [
+        9.0
+      ],
+      "measurements": {
+        "original_dense_times_csc": {
+          "seconds": [
+            0.14784441600204445,
+            0.14795237500220537,
+            0.18434579099994153,
+            0.15767479198984802,
+            0.15829470800235868
+          ],
+          "median_s": 0.15767479198984802,
+          "exact_native_dtype_shape_and_bytes_equal": true,
+          "maximum_absolute_difference": 0.0,
+          "output_shape": [
+            1,
+            138639
+          ],
+          "output_stride": [
+            138639,
+            1
+          ],
+          "output_sha256": "38967b01f8f5262b8427b5306d6be9050eae20e8dee8b63181a29251be170ed2"
+        },
+        "csr_times_dense_default": {
+          "seconds": [
+            0.14633891600533389,
+            0.1487451250141021,
+            0.17457854200620204,
+            0.15643716597696766,
+            0.1544567919918336
+          ],
+          "median_s": 0.1544567919918336,
+          "exact_native_dtype_shape_and_bytes_equal": true,
+          "maximum_absolute_difference": 0.0,
+          "output_shape": [
+            1,
+            138639
+          ],
+          "output_stride": [
+            1,
+            1
+          ],
+          "output_sha256": "38967b01f8f5262b8427b5306d6be9050eae20e8dee8b63181a29251be170ed2"
+        },
+        "csr_times_dense_explicit_sum": {
+          "seconds": [
+            0.056054666987620294,
+            0.057047541020438075,
+            0.05734312499407679,
+            0.06028662499738857,
+            0.05684433298301883
+          ],
+          "median_s": 0.057047541020438075,
+          "exact_native_dtype_shape_and_bytes_equal": true,
+          "maximum_absolute_difference": 0.0,
+          "output_shape": [
+            1,
+            138639
+          ],
+          "output_stride": [
+            1,
+            1
+          ],
+          "output_sha256": "38967b01f8f5262b8427b5306d6be9050eae20e8dee8b63181a29251be170ed2"
+        }
+      }
+    },
+    "all_neurons_firing_arithmetic_envelope": {
+      "input_shape": [
+        1,
+        138639
+      ],
+      "firing_neurons_per_row": [
+        138639.0
+      ],
+      "measurements": {
+        "original_dense_times_csc": {
+          "seconds": [
+            0.15618191700195894,
+            0.15482570900348946,
+            0.15869454201310873,
+            0.163951166003244,
+            0.15342725001391955
+          ],
+          "median_s": 0.15618191700195894,
+          "exact_native_dtype_shape_and_bytes_equal": true,
+          "maximum_absolute_difference": 0.0,
+          "output_shape": [
+            1,
+            138639
+          ],
+          "output_stride": [
+            138639,
+            1
+          ],
+          "output_sha256": "2d7412555afedadc4efcb39bfd716ef4122f7d85ca375e20ec5a1a640a08c08d"
+        },
+        "csr_times_dense_default": {
+          "seconds": [
+            0.15778004200547002,
+            0.15710766601841897,
+            0.15317050000885502,
+            0.1480844579928089,
+            0.14762875001179054
+          ],
+          "median_s": 0.15317050000885502,
+          "exact_native_dtype_shape_and_bytes_equal": true,
+          "maximum_absolute_difference": 0.0,
+          "output_shape": [
+            1,
+            138639
+          ],
+          "output_stride": [
+            1,
+            1
+          ],
+          "output_sha256": "2d7412555afedadc4efcb39bfd716ef4122f7d85ca375e20ec5a1a640a08c08d"
+        },
+        "csr_times_dense_explicit_sum": {
+          "seconds": [
+            0.0546285419841297,
+            0.054451792006148025,
+            0.058747958013555035,
+            0.07805208399076946,
+            0.05923533299937844
+          ],
+          "median_s": 0.058747958013555035,
+          "exact_native_dtype_shape_and_bytes_equal": true,
+          "maximum_absolute_difference": 0.0,
+          "output_shape": [
+            1,
+            138639
+          ],
+          "output_stride": [
+            1,
+            1
+          ],
+          "output_sha256": "2d7412555afedadc4efcb39bfd716ef4122f7d85ca375e20ec5a1a640a08c08d"
+        }
+      }
+    },
+    "four_independent_rows": {
+      "input_shape": [
+        4,
+        138639
+      ],
+      "firing_neurons_per_row": [
+        0.0,
+        9.0,
+        138639.0,
+        138630.0
+      ],
+      "measurements": {
+        "original_dense_times_csc": {
+          "seconds": [
+            0.17647729098098353,
+            0.16805120900971815,
+            0.17030425000120886,
+            0.17002016698825173,
+            0.1702714170096442
+          ],
+          "median_s": 0.1702714170096442,
+          "exact_native_dtype_shape_and_bytes_equal": true,
+          "maximum_absolute_difference": 0.0,
+          "output_shape": [
+            4,
+            138639
+          ],
+          "output_stride": [
+            138639,
+            1
+          ],
+          "output_sha256": "7a9890778a192bbbbbd1a2e75ffb37d154c056ee8eb3c94637f77fca370289fa"
+        },
+        "csr_times_dense_default": {
+          "seconds": [
+            0.16952004199265502,
+            0.17371970799285918,
+            0.21981670800596476,
+            0.18879733301582746,
+            0.18405449998681433
+          ],
+          "median_s": 0.18405449998681433,
+          "exact_native_dtype_shape_and_bytes_equal": true,
+          "maximum_absolute_difference": 0.0,
+          "output_shape": [
+            4,
+            138639
+          ],
+          "output_stride": [
+            1,
+            4
+          ],
+          "output_sha256": "7a9890778a192bbbbbd1a2e75ffb37d154c056ee8eb3c94637f77fca370289fa"
+        },
+        "csr_times_dense_explicit_sum": {
+          "seconds": [
+            0.06844929201179184,
+            0.07181087500066496,
+            0.06578633398748934,
+            0.06962929197470658,
+            0.0707176249998156
+          ],
+          "median_s": 0.06962929197470658,
+          "exact_native_dtype_shape_and_bytes_equal": true,
+          "maximum_absolute_difference": 0.0,
+          "output_shape": [
+            4,
+            138639
+          ],
+          "output_stride": [
+            1,
+            4
+          ],
+          "output_sha256": "7a9890778a192bbbbbd1a2e75ffb37d154c056ee8eb3c94637f77fca370289fa"
+        }
+      }
+    }
+  },
+  "profile": [
+    {
+      "name": "original_dense_times_csc",
+      "count": 1,
+      "self_cpu_time_us": 284.96199999999953,
+      "cpu_time_us": 156043.579
+    },
+    {
+      "name": "aten::transpose",
+      "count": 8,
+      "self_cpu_time_us": 348.0060000001058,
+      "cpu_time_us": 382.1740000000791
+    },
+    {
+      "name": "aten::crow_indices",
+      "count": 4,
+      "self_cpu_time_us": 7.208000000026459,
+      "cpu_time_us": 10.958000000013271
+    },
+    {
+      "name": "aten::alias",
+      "count": 16,
+      "self_cpu_time_us": 8.08400000000006,
+      "cpu_time_us": 8.08400000000006
+    },
+    {
+      "name": "aten::col_indices",
+      "count": 4,
+      "self_cpu_time_us": 1.3739999999972952,
+      "cpu_time_us": 2.165999999984024
+    },
+    {
+      "name": "aten::values",
+      "count": 6,
+      "self_cpu_time_us": 2.7489999999575048,
+      "cpu_time_us": 5.7489999999841075
+    },
+    {
+      "name": "aten::_sparse_compressed_tensor_unsafe",
+      "count": 2,
+      "self_cpu_time_us": 9.291999999999916,
+      "cpu_time_us": 13.291999999999916
+    },
+    {
+      "name": "aten::empty",
+      "count": 12,
+      "self_cpu_time_us": 15.33399999991525,
+      "cpu_time_us": 15.33399999991525
+    },
+    {
+      "name": "aten::matmul",
+      "count": 1,
+      "self_cpu_time_us": 4.166999999986729,
+      "cpu_time_us": 155438.195
+    },
+    {
+      "name": "aten::mm",
+      "count": 1,
+      "self_cpu_time_us": 14.375000000029104,
+      "cpu_time_us": 155434.02800000002
+    },
+    {
+      "name": "aten::zeros",
+      "count": 3,
+      "self_cpu_time_us": 14.16599999999994,
+      "cpu_time_us": 297.0049999999601
+    },
+    {
+      "name": "aten::zero_",
+      "count": 5,
+      "self_cpu_time_us": 182.17100000004257,
+      "cpu_time_us": 292.2120000000107
+    },
+    {
+      "name": "aten::fill_",
+      "count": 5,
+      "self_cpu_time_us": 110.04099999996811,
+      "cpu_time_us": 110.04099999996811
+    },
+    {
+      "name": "aten::addmm",
+      "count": 4,
+      "self_cpu_time_us": 308823.65300000005,
+      "cpu_time_us": 617962.346
+    },
+    {
+      "name": "aten::copy_",
+      "count": 2,
+      "self_cpu_time_us": 128.46000000000254,
+      "cpu_time_us": 128.46000000000254
+    },
+    {
+      "name": "aten::_nnz",
+      "count": 3,
+      "self_cpu_time_us": 1.0420000000026448,
+      "cpu_time_us": 1.0420000000026448
+    },
+    {
+      "name": "aten::ccol_indices",
+      "count": 1,
+      "self_cpu_time_us": 0.41600000000016735,
+      "cpu_time_us": 0.8330000000000837
+    },
+    {
+      "name": "aten::row_indices",
+      "count": 1,
+      "self_cpu_time_us": 0.25,
+      "cpu_time_us": 0.375
+    },
+    {
+      "name": "aten::as_strided",
+      "count": 6,
+      "self_cpu_time_us": 10.29299999997329,
+      "cpu_time_us": 10.29299999997329
+    },
+    {
+      "name": "csr_times_dense_default",
+      "count": 1,
+      "self_cpu_time_us": 128.04099999993923,
+      "cpu_time_us": 154012.04599999997
+    },
+    {
+      "name": "aten::_sparse_mm",
+      "count": 2,
+      "self_cpu_time_us": 225.46299999993062,
+      "cpu_time_us": 210822.42799999999
+    },
+    {
+      "name": "aten::_sparse_addmm",
+      "count": 1,
+      "self_cpu_time_us": 3.750000000029104,
+      "cpu_time_us": 153810.75300000003
+    },
+    {
+      "name": "csr_times_dense_explicit_sum",
+      "count": 1,
+      "self_cpu_time_us": 1324.7679999999818,
+      "cpu_time_us": 58311.90100000001
+    },
+    {
+      "name": "aten::_sparse_mm_reduce_impl",
+      "count": 1,
+      "self_cpu_time_us": 56718.79500000004,
+      "cpu_time_us": 56751.92000000004
+    },
+    {
+      "name": "aten::dense_dim",
+      "count": 1,
+      "self_cpu_time_us": 0.6660000000265427,
+      "cpu_time_us": 0.6660000000265427
+    }
+  ],
+  "elapsed_s": 15.666545082989614,
+  "source_sha256": {
+    "src/fly_brain/qualification/adapters/torch_reference.py": "bf52258041a464156ce05b267601dbefceb893356fbf8401b358b036a29ba6cb",
+    "src/fly_brain/qualification/adapters/torch_setup.py": "c7e284c2dfe19ed2ae24f32721d67ee4ff852b54c8eeeacd445a9aa677b5fb08"
+  },
+  "runner_sha256": "90708dcd23be674c46e37c40f3fa855d06fae8a9c4a8cbb8e61ac10a9f927ca2",
+  "application_changed": false,
+  "baseline_change_adopted": false,
+  "new_full_case_or_matrix_run": false,
+  "p9_resumed": false,
+  "limits": "Timing only selected standalone multiply operations. Full pipeline speed and a changed comparator mode remain unqualified."
+}
