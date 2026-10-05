@@ -97,6 +97,7 @@ def stock(case: Fixture, precision: str) -> dict[str, HostArray]:
             ('end_last_spike_step', state.last_spike_step),
             ('end_not_refractory', trace.receiving),
             ('accepted_inputs', trace.accepted_inputs),
+            ('due', trace.due),
         ):
             rows.setdefault(name, []).append(value)
         rows.setdefault('queue', []).append(state.queue)
@@ -133,6 +134,12 @@ def test_bounded_observation_preserves_every_ordinary_phase_and_queue_byte(
             hashlib.sha256(queues[:, trial].tobytes()).hexdigest() for trial in range(4)
         )
         assert (block.final_queue is not None) == (block is blocks[-1])
+        for row, trials in enumerate(block.due_edges):
+            for trial, edges in enumerate(trials):
+                assert np.array_equal(
+                    edges,
+                    np.flatnonzero(expected['due'][block.begin + row, trial]),
+                )
     final = blocks[-1].final_queue
     assert final is not None and final.tobytes() == expected['queue'][-1].tobytes()
     destination = cast(str | None, request.config.getoption('--artifact-output'))
@@ -161,6 +168,10 @@ def test_observed_state_and_physical_queues_repeat_bit_for_bit(precision: str) -
             second.queue_sha256,
         )
         assert first.checks.tobytes() == second.checks.tobytes()
+        for a, b in zip(first.due_edges, second.due_edges, strict=True):
+            assert tuple(edges.tobytes() for edges in a) == tuple(
+                edges.tobytes() for edges in b
+            )
         for name in first.fields:
             assert first.fields[name].tobytes() == second.fields[name].tobytes(), name
     first_final = batch[-1].final_queue
@@ -181,6 +192,8 @@ def test_observed_batched_trials_match_independent_execution(precision: str) -> 
         for one, many in zip(single, batch, strict=True):
             assert one.queue_sha256 == (many.queue_sha256[trial],)
             assert one.checks.tobytes() == many.checks[:, trial : trial + 1].tobytes()
+            for a, b in zip(one.due_edges, many.due_edges, strict=True):
+                assert a[0].tobytes() == b[trial].tobytes()
             for name, value in one.fields.items():
                 assert (
                     value.tobytes() == many.fields[name][:, trial : trial + 1].tobytes()

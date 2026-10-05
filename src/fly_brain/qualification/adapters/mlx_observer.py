@@ -26,6 +26,7 @@ class MLXBlock:
     checks: NDArray[np.bool_]
     queue_sha256: tuple[str, ...]
     final_queue: NDArray[np.bool_] | None
+    due_edges: tuple[tuple[NDArray[np.int32], ...], ...]
 
 
 def phase_fields(state: core.State, trace: core.StepTrace) -> dict[str, mx.array]:
@@ -69,6 +70,7 @@ def observe(
         end = min(begin + block_size, steps)
         rows: dict[str, list[mx.array]] = {}
         checks: list[mx.array] = []
+        due_edges: list[tuple[NDArray[np.int32], ...]] = []
         for step in range(begin, end):
             with mx.stream(mx.gpu):
                 inputs = boolean_input(events[:, step, :].astype(np.bool_))
@@ -76,6 +78,11 @@ def observe(
                 fields = phase_fields(state, trace)
                 flags = ledger.check(state, trace, inputs)
                 evaluate(*state[:-1], *fields.values(), flags)
+                due = np.asarray(trace.due, dtype=np.bool_)
+                due_edges.append(
+                    tuple(np.flatnonzero(trial).astype(np.int32) for trial in due)
+                )
+                del due
             checks.append(flags)
             for name, value in fields.items():
                 rows.setdefault(name, []).append(value)
@@ -90,5 +97,11 @@ def observe(
         final_queue = queue if end == steps else None
         del queue
         yield MLXBlock(
-            begin, end - begin, recorded, observed_checks, hashes, final_queue
+            begin,
+            end - begin,
+            recorded,
+            observed_checks,
+            hashes,
+            final_queue,
+            tuple(due_edges),
         )

@@ -491,6 +491,11 @@ Causal-field fault checkpoint (2026-10-05):
 - Coverage checks are committed at `5cb85c9`. Paired capture now rejects missing ledger flags instead of treating an empty Boolean array as a successful check. Six additional faults reject changed phase timestamps, nonfinite reference last-spike clocks, incorrect pre-threshold/end refractory state, changed MLX last-spike clocks, and nonfinite neural state.
 - Three raw-hash tests require precision, shape, and native units to affect the digest. The live paired module passes **17 tests, zero failures/errors/skips**; full strict Pyright, Ruff, and formatting pass. No numerical execution changes. Commit this verified working state before first-cause capture.
 
+Actual MLX due-event checkpoint (2026-10-05):
+
+- Decision at `28c5d43`, confidence **99%**: transfer each actual returned due-edge mask and immediately retain only its sparse original-row indices. This meets the approved first-cause requirement while avoiding full queue histories; numerical execution and device-resident propagation remain unchanged.
+- The bounded MLX observer now carries actual due identities for every step/trial. They match ordinary returned due masks, repeat byte for byte, and agree between four-trial and independent execution, including empty layouts and partial blocks. The MLX/paired observer modules pass **27 tests, zero failures/errors/skips**; full strict Pyright, Ruff, and formatting pass. Complete-network memory/capture remains unmeasured. Commit this working state before further context wiring.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.
