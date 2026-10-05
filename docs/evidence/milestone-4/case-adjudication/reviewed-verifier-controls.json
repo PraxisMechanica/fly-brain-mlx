@@ -1,0 +1,36 @@
+{
+  "parent_checkpoint": "f5d109125a67fb15068b386edd98ba3820ad42d7",
+  "program_sha256": "f66b5f883477f41d201138354053bdd85dca00264c3885149ad8791315fc79d7",
+  "process_refusal_controls": [
+    {
+      "fault": "wrong_cause",
+      "expected_refusal": "Reviewed decision must identify this exact case and first cause",
+      "exit_code": 1,
+      "acceptance_output_created": false
+    },
+    {
+      "fault": "metric",
+      "expected_refusal": "Review requires every frozen metric check",
+      "exit_code": 1,
+      "acceptance_output_created": false
+    },
+    {
+      "fault": "budget",
+      "expected_refusal": "AssertionError",
+      "exit_code": 1,
+      "acceptance_output_created": false
+    },
+    {
+      "fault": "horizon",
+      "expected_refusal": "Review requires complete common-history budget coverage",
+      "exit_code": 1,
+      "acceptance_output_created": false
+    }
+  ],
+  "ruff_lint_and_format_pass": true,
+  "syntax_pass": true,
+  "unchanged_application_test_record": "docs/evidence/milestone-4/case-adjudication/review-binding-verification.json",
+  "full_reviewed_case_executed": false,
+  "case_accepted": false,
+  "scope": "Generalize the recorded complete reviewed-case proof to the actual horizon and exact completed cause binding. These refusal controls do not accept a pending case."
+}
