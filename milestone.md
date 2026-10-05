@@ -640,6 +640,11 @@ Cause archive preservation checkpoint (2026-10-05):
 
 - At `2885990`, current and preceding native state differ in the file fixture; every dtype/shape/byte and all 19 actual queue-slot arrays survive unchanged. Existing evidence cannot be overwritten. The default application suite passes **201 tests, zero failures/errors/skips**; full Ruff and strict Pyright pass. No execution or numerical method changes. Commit this passing serialization qualification before actual device leaf capture.
 
+Actual reduction-input capture checkpoint (2026-10-05):
+
+- At `e22812b`, capture the affected targets' actual device leaf row IDs, float32 signed counts, native occupancy/padding, and supplied original-row reference weights without conversion. Cause archives now include these reduction inputs. Missing targets fail explicitly; no reconstructed layout replaces actual device data.
+- **Two real Metal checks pass, zero failures/errors/skips**, across populated and empty layouts, every target, outgoing silencing, exact row order/counts, native dtypes/weights, and padding. The default application suite remains **201 passed, zero failures/errors/skips**; full Ruff and strict Pyright pass. This qualifies capture primitives only; live paired-run cause wiring and complete matrix execution remain open. Commit this passing working state before further integration.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.

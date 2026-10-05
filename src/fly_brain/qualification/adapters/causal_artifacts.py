@@ -7,8 +7,12 @@ from .causal_capture import CauseContext
 from .observer_evidence import array_record, physical_record
 
 
-def write_context(path: Path, context: CauseContext) -> dict[str, object]:
-    arrays: dict[str, NDArray[np.generic]] = {}
+def write_context(
+    path: Path,
+    context: CauseContext,
+    reduction_inputs: dict[str, NDArray[np.generic]],
+) -> dict[str, object]:
+    arrays = dict(reduction_inputs)
     steps: list[dict[str, object]] = []
     for position, observed in (
         ('current', context.current),

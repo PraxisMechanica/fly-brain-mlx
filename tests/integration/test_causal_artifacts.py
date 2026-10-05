@@ -37,7 +37,7 @@ def test_cause_archive_preserves_native_phases_and_all_actual_queue_slots(
 ) -> None:
     path = tmp_path / 'context.npz'
     actual = context()
-    metadata = write_context(path, actual)
+    metadata = write_context(path, actual, {})
     assert metadata['neurons'] == [1]
     with np.load(path, allow_pickle=False) as artifact:
         assert len(artifact.files) == 52
@@ -78,5 +78,5 @@ def test_existing_cause_evidence_cannot_be_overwritten(tmp_path: Path) -> None:
     path = tmp_path / 'retained.npz'
     path.write_bytes(b'preserved evidence')
     with pytest.raises(FileExistsError):
-        write_context(path, context())
+        write_context(path, context(), {})
     assert path.read_bytes() == b'preserved evidence'
