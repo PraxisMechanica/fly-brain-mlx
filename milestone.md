@@ -948,6 +948,11 @@ Required one-second batch evidence review (2026-10-05):
 - This is a read-only scientific evidence-method review. Await completion and parent source/evidence verification before dependent batch implementation. Sugar trial 3's existing CPU executions are independent and remain running; no source, metric, scope, or acceptance changes are authorized by dispatch. Acceptance remains **7/52**.
 - Dispatched from `52a8784` to `/root/review_full_batch_verification`, fresh-context `gpt-6-astra` / `xhigh`. The child owns only this bounded read-only review; Sol retains all implementation and case verification.
 
+Sugar trial-4 complete execution (2026-10-05):
+
+- At clean `9a71a4c`, launch `MLX_ENABLE_TF32=0 uv run --locked --group qualification --no-sync fly-brain qualify-parity --experiment sugar --duration-s 0.1 --trial 4 --output data/results/milestone-4-parity-sugar-1000-4-20261005-01`. First launch check: 07:08:25 UTC. All preceding verified work is committed; this trial remains an independent singleton, as prescribed.
+- This case is running and unaccepted. Require all metric gates, complete native/physical replay and coverage, actual queues, source/input precision checks, common-history budgets, first-cause interpretation if needed, and independent parent verification. Acceptance remains **8/52**; full matrix/batch/performance requirements remain open.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.
