@@ -1,0 +1,40 @@
+{
+  "implementation_parent_checkpoint": "7e5d80b57bcb01adb9225b12961a35f797eb421f",
+  "application_tests": {
+    "tests": 461,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "new_review_binding_intent_tests": 13,
+  "ruff_checked_files": 169,
+  "strict_pyright_errors": 0,
+  "strict_pyright_warnings": 0,
+  "import_contracts_kept": 3,
+  "import_contracts_broken": 0,
+  "import_files": 115,
+  "import_dependencies": 497,
+  "actual_reviewed_execution": "data/results/milestone-4-parity-sugar-10000-0-20261005-01",
+  "actual_launch_checkpoint": "55ea35f",
+  "first_spike_step": 5719,
+  "first_spike_neurons": [
+    100750
+  ],
+  "every_bound_review_artifact_matches_committed_review_and_actual_first_observation": true,
+  "bound_review_sha256": {
+    "review-decision.json": "5a50dd443713814c9e9b1f25d9e407fc2caff19434676de73fa3a1f594668677",
+    "astra-review.md": "dc39cca9f18267e51a135065a95fb279b2fd257aac71a1903221fcc1459d7b10",
+    "first-cause-preflight.json": "4af4261eaf3687e20289a8a694c17401cc49675b1d1b16a586452dba749f7ce2",
+    "first-observation.zip": "4c1daf70d48e97b8924e3e92f9f964e3c6b54a36f3f6dd0082d35d4ae20c29de",
+    "executed-preflight.py": "f3bfb0e7d54d9a9c80013cce85e6bc457df3259302f02f6b5234aa19d759e97e",
+    "parent-host-proof.json": "bdcbbe27af61fb9330c7077b6c9d40bde93b42222a12bc4e03f698ec40acf178",
+    "executed-host-proof.py": "a2ef3c74aae6ff8ba94e82b2aca0ccb2ecc5e22e9a68f16ae9343fe033bbed27",
+    "dispatch.json": "ac0c172e1a9f7adfd3d4cde5f666191ae91883fb9909eb02c47c84ef3162656e"
+  },
+  "source_sha256": {
+    "src/fly_brain/qualification/adapters/case_binding.py": "e9871c3d508660f9b58cf3e90c8785285e3567de6c11aa68a9d853c49b1f2792",
+    "tests/integration/test_cause_binding.py": "9aed8e2299b24174f2c246d319e62baad48ac7ae600ea5a570f47be84fd32985"
+  },
+  "case_accepted": false,
+  "scope": "Bind a completed explained-roundoff classification to this exact native cause and first observation; all complete-case metrics, replay and own future queue checks remain mandatory."
+}
