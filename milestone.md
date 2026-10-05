@@ -413,6 +413,11 @@ Reference-process failure checkpoint (2026-10-05):
 - The live-pipe implementation is committed at `d3f8e10`. Three focused real-process checks pass, zero failures/errors/skips: nonzero execution fails with its retained error log, a corrupt stream stops its owned child, and closing an incomplete stream stops its owned child. Each cleanup check verifies that the specific child no longer exists. The two model-run checks retain their preceding successful execution; they were deselected in this focused process check.
 - The adapter's generator type now exposes its supported close operation to callers. Full strict Pyright, Ruff, and format checks pass. This small verified process-lifecycle unit is committed before queue replay checks; no production or reference numerical function changes.
 
+Live-pipe replay/scaling checkpoint (2026-10-05):
+
+- Process-lifecycle checks are committed at `c0b7ffe`. The seven-check reference-job module now passes together, zero failures/errors/skips, in fresh output `data/results/milestone-4-reference-jobs-20261005-02`. Every physical queue slot, ordered delivery, neural/source spike vector, raw clock, and source cursor repeats exactly through the live pipe, including the actual final pending queues. Native weights in all three result directories retain the original count-times-unit-scale operation and every zero/silenced row.
+- Full Ruff, formatting, and strict Pyright pass. This is small reference execution evidence; complete-network observer execution, measured memory, causal checks, and scientific parity remain open. Commit this verified unit before further implementation.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.

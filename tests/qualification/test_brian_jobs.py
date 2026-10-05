@@ -108,6 +108,43 @@ def test_reused_binary_starts_each_repeat_from_fresh_state(runs: Runs) -> None:
             assert value.tobytes() == right.fields[name].tobytes(), name
 
 
+def test_every_physical_queue_and_cursor_repeats_through_the_live_pipe(
+    runs: Runs,
+) -> None:
+    for left, right in zip(runs.frames['observed'], runs.frames['repeat'], strict=True):
+        assert type(left) is type(right)
+        if isinstance(left, FinalSnapshot) and isinstance(right, FinalSnapshot):
+            left, right = left.step, right.step
+        if not isinstance(left, StepSnapshot) or not isinstance(right, StepSnapshot):
+            continue
+        assert struct.pack(
+            '<QQdi', left.step, left.clock_step, left.time_s, left.source_cursor
+        ) == struct.pack(
+            '<QQdi', right.step, right.clock_step, right.time_s, right.source_cursor
+        )
+        assert left.spikes.tobytes() == right.spikes.tobytes()
+        assert left.source_spikes.tobytes() == right.source_spikes.tobytes()
+        for first, second in zip(left.pathways, right.pathways, strict=True):
+            assert first.delivered.tobytes() == second.delivered.tobytes()
+            for a, b in zip(first.queues, second.queues, strict=True):
+                assert a.offset == b.offset
+                assert tuple(slot.tobytes() for slot in a.slots) == tuple(
+                    slot.tobytes() for slot in b.slots
+                )
+
+
+def test_reference_weights_keep_original_unit_scaling_and_silenced_rows(
+    runs: Runs,
+) -> None:
+    expected = np.array([360, 0, 1, -2, 3, 0, -1, -1], dtype=np.int32) * (0.275 * 0.001)
+    for name in ('ordinary', 'observed', 'repeat'):
+        job = runs.jobs[name]
+        actual = np.fromfile(
+            runs.root / (name + '-results') / job.files['weights'], dtype=np.float64
+        )
+        assert actual.tobytes() == expected.tobytes()
+
+
 def program(directory: Path, body: str, observed: bool) -> BrianJob:
     directory.mkdir()
     binary = directory / 'main'
