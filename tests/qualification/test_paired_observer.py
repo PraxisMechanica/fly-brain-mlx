@@ -180,6 +180,51 @@ def test_native_hash_identifies_precision_shape_and_unconverted_units(
     assert phase_hash({'v': raw}) != phase_hash({'v': changed})
 
 
+def test_earliest_state_error_keeps_its_raw_context_on_later_blocks(
+    paired: tuple[PairedBlock | FinalSnapshot, ...],
+) -> None:
+    first, second = paired[:2]
+    assert isinstance(first, PairedBlock) and isinstance(second, PairedBlock)
+    fields = dict(first.mlx.fields)
+    fields['pre_v'] = fields['pre_v'].copy()
+    fields['pre_v'][7, 0, 2] += 0.02
+    fields['pre_v'][9, 0, 3] += 0.03
+    capture = CausalCapture()
+    capture.check(replace(first, mlx=replace(first.mlx, fields=fields)))
+    context = capture.budget
+    assert context is not None and context.neurons == (2,)
+    assert context.current.snapshot.step == 7
+    assert context.previous is not None and context.previous.snapshot.step == 6
+    assert context.current.mlx['pre_v'].tobytes() == fields['pre_v'][7, 0].tobytes()
+    capture.check(second)
+    assert capture.budget is context and capture.spike is None
+
+
+def test_capture_remains_finite_after_spike_history_diverges(
+    paired: tuple[PairedBlock | FinalSnapshot, ...],
+) -> None:
+    block = paired[0]
+    assert isinstance(block, PairedBlock)
+    fields = dict(block.mlx.fields)
+    fields['spikes'] = fields['spikes'].copy()
+    fields['spikes'][0, 0, 2] = True
+    fields['end_g'] = fields['end_g'].copy()
+    fields['end_g'][1, 0, 2] = np.nan
+    with pytest.raises(ValueError, match='must be finite'):
+        CausalCapture().check(replace(block, mlx=replace(block.mlx, fields=fields)))
+
+
+def test_complete_common_history_records_no_false_cause(
+    paired: tuple[PairedBlock | FinalSnapshot, ...],
+) -> None:
+    capture = CausalCapture()
+    for block in paired:
+        if isinstance(block, PairedBlock):
+            capture.check(block)
+    assert capture.audit.step == 101
+    assert capture.budget is None and capture.spike is None
+
+
 @pytest.mark.parametrize('fault', ('missing', 'extra', 'order'))
 def test_changed_actual_due_rows_fail_during_common_history(
     paired: tuple[PairedBlock | FinalSnapshot, ...],

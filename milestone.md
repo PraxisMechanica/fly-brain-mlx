@@ -506,6 +506,11 @@ Raw first-cause capture checkpoint (2026-10-05):
 - Actual paired-event checks are committed at `e7ff0bc`. The [causal capture](src/fly_brain/qualification/adapters/causal_capture.py) preserves the current and preceding raw observations for the first state-budget error and first spike difference. It retains actual reference snapshots/delivery order, raw neural/refractory/clock/input fields, and actual sparse MLX due identities/raw mask hashes. A single copied preceding row crosses block boundaries without retaining an earlier phase block.
 - A fault at the first row of block two records step 32 and its actual step-31 predecessor, preserving float64/float32 precision and owned raw clock arrays. The paired module passes **21 tests, zero failures/errors/skips**; full strict Pyright, Ruff, and formatting pass. Weight/reduction metadata, complete-network observation, and interpretation remain open. Commit this working state before additional capture checks.
 
+First-cause retention checkpoint (2026-10-05):
+
+- Raw capture is committed at `8a484a2`. Additional intent cases preserve the earliest error's exact raw context when later errors/blocks arrive, reject nonfinite state after spike divergence, and report no false cause for the complete common-history fixture. The paired module passes **24 tests, zero failures/errors/skips**; full strict Pyright, Ruff, and formatting pass.
+- Capture is ready for complete-network execution, with weight/reduction metadata still required if a cause is found. Commit this working state before execution or further changes.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.
