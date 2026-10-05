@@ -1,0 +1,257 @@
+{
+  "case": {
+    "experiment": "sugar-silenced",
+    "steps": 1000,
+    "trial": 0
+  },
+  "case_accepted": true,
+  "full_matrix_accepted": false,
+  "case_checks": {
+    "required_frozen_case": true,
+    "full_connectome_geometry": true,
+    "input_geometry_equals_pin": true,
+    "canonical_stimulus_hash": true,
+    "single_case_horizon_and_trial": true,
+    "prescribed_seed_generator_targets_and_rates": true,
+    "complete_common_history_budget_check": true,
+    "first_different_spike_explicitly_none": true,
+    "actual_final_pending_events_equal_when_history_is_common": true
+  },
+  "metric_acceptance": {
+    "mlx": {
+      "reference_spikes": 410,
+      "candidate_spikes": 410,
+      "active_jaccard": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "count_error": {
+        "numerator": 0,
+        "denominator": 1,
+        "value": 0.0
+      },
+      "signed_count_ratio": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "neuron_count_error": {
+        "numerator": 0,
+        "denominator": 1,
+        "value": 0.0
+      },
+      "rate_correlation": 1.0,
+      "counts_equal": true,
+      "timing_matches": 410,
+      "timing_f1": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "timing_precision": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "timing_recall": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "exact_step_f1": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "one_step_f1": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "mean_timing_error_ms": 0.0,
+      "median_timing_error_ms": 0.0,
+      "shared_rate_correlation": 1.0,
+      "common_rate_mae_hz": 0.0,
+      "common_rate_rmse_hz": 0.0
+    },
+    "torch": {
+      "reference_spikes": 410,
+      "candidate_spikes": 417,
+      "active_jaccard": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "count_error": {
+        "numerator": 7,
+        "denominator": 410,
+        "value": 0.01707317073170732
+      },
+      "signed_count_ratio": {
+        "numerator": 417,
+        "denominator": 410,
+        "value": 1.0170731707317073
+      },
+      "neuron_count_error": {
+        "numerator": 7,
+        "denominator": 410,
+        "value": 0.01707317073170732
+      },
+      "rate_correlation": 0.9900122232445104,
+      "counts_equal": false,
+      "timing_matches": 410,
+      "timing_f1": {
+        "numerator": 820,
+        "denominator": 827,
+        "value": 0.9915356711003628
+      },
+      "timing_precision": {
+        "numerator": 410,
+        "denominator": 417,
+        "value": 0.9832134292565947
+      },
+      "timing_recall": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "exact_step_f1": {
+        "numerator": 14,
+        "denominator": 827,
+        "value": 0.016928657799274487
+      },
+      "one_step_f1": {
+        "numerator": 820,
+        "denominator": 827,
+        "value": 0.9915356711003628
+      },
+      "mean_timing_error_ms": 0.1,
+      "median_timing_error_ms": 0.1,
+      "shared_rate_correlation": 0.9900122232445104,
+      "common_rate_mae_hz": 3.3333333333333335,
+      "common_rate_rmse_hz": 6.546536707079771
+    },
+    "checks": {
+      "silent_reference_exact": true,
+      "activity_floor": true,
+      "activity_paired": true,
+      "count_floor": true,
+      "count_paired": true,
+      "neuron_count_floor": true,
+      "neuron_count_paired": true,
+      "correlation_floor_or_exact_counts": true,
+      "correlation_paired": true,
+      "timing_floor": true,
+      "timing_paired": true
+    }
+  },
+  "native_inputs_before_conversion": {
+    "brian": {
+      "file": "/Users/ocasta/Code/fly-brain/data/results/milestone-4-parity-sugar-silenced-1000-0-20261005-01/observations/paired-first/reference-native.npz",
+      "arrays": {
+        "spike_i": {
+          "dtype": "<i4",
+          "shape": [
+            410
+          ],
+          "sha256": "83e8ea03d49b7089e72d72357d7172392a905b744bf0d2c4d25ac4db1b4ee77e"
+        },
+        "spike_t": {
+          "dtype": "<f8",
+          "shape": [
+            410
+          ],
+          "sha256": "9e32955a822be4ff39ecd68e216bbd1bb4dd9f398575489556573aade9d92235"
+        }
+      }
+    },
+    "mlx": {
+      "file": "/Users/ocasta/Code/fly-brain/data/results/milestone-4-parity-sugar-silenced-1000-0-20261005-01/observations/paired-first/mlx-native.npz",
+      "arrays": {
+        "spike_neurons": {
+          "dtype": "<i8",
+          "shape": [
+            410
+          ],
+          "sha256": "5a4ca1920c7ba43c983ce8261cae469c152df5f749cd038a51822eb42da49dc9"
+        },
+        "spike_steps": {
+          "dtype": "<i8",
+          "shape": [
+            410
+          ],
+          "sha256": "1ff1dbcb5512c9b86f8baa4f7d840ae3b9dea4259cf38e1f799752172baf6d14"
+        }
+      }
+    },
+    "torch": {
+      "file": "/Users/ocasta/Code/fly-brain/data/results/milestone-4-parity-sugar-silenced-1000-0-20261005-01/observations/cpu-first/native.npz",
+      "arrays": {
+        "spike_neurons": {
+          "dtype": "<i8",
+          "shape": [
+            417
+          ],
+          "sha256": "6b5c8d0684e1eab2b759e67e31c30e3d3af1c717743ffc50bedc4b1e679b47b4"
+        },
+        "spike_steps": {
+          "dtype": "<i8",
+          "shape": [
+            417
+          ],
+          "sha256": "cb50655551bf0181dd919f4a0ab28487df426da6161772815856d32c604f608e"
+        },
+        "spike_trials": {
+          "dtype": "<i8",
+          "shape": [
+            417
+          ],
+          "sha256": "e1a162587da12ecc43d92eaefeb12d96a215432376e1c4ac9856ed400c0e8359"
+        }
+      }
+    }
+  },
+  "stimulus_sha256": "d7bb792f082eeca79d6e88a1e8ca0791dca210eb15c86ec70a34348b272a82b3",
+  "input_pins": {
+    "completeness_sha256": "52b0ac6094cd32c546f8d4c341e094376f48f4e791f8db9b166de5dff8199ea4",
+    "connectivity_sha256": "efeb23fb99098e9c390f6869969b2a121a2ee92c833cfc45ecb2c1d8e1af0347",
+    "neurons": 138639,
+    "edges": 15091983,
+    "scale_mv": 0.275
+  },
+  "neuron_mapping_sha256": "70200482b9fe6656f215a97b71332dd6725b80e2cb32e0052a4d47916ca1579b",
+  "causal": {
+    "steps": 1000,
+    "first_budget_violation": null,
+    "first_spike_step": null,
+    "first_spike_neurons": [],
+    "contexts": {
+      "budget": null,
+      "spike": null
+    },
+    "reduction_order": "Actual padded leaf order; adjacent-pair compensated integer-count tree; four high/low scale products; 16-leaf compensated final tree."
+  },
+  "final_pending_original_row_counts": [
+    0,
+    0,
+    0,
+    64,
+    0,
+    67,
+    80,
+    0,
+    0,
+    0,
+    63,
+    0,
+    83,
+    79,
+    0,
+    0,
+    143,
+    0
+  ],
+  "scientific_review_required": false,
+  "scope": "One prescribed three-engine case. Full matrix, batch checks, aggregate reports and performance remain separate gates."
+}
