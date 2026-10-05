@@ -798,6 +798,11 @@ Complete two-class trial-0 acceptance (2026-10-05):
 - [Independent executed verification](docs/evidence/milestone-4/cases/two-class-1000-0/executed-verification.py) checks source hashes against launch/current sources, pinned data/mapping, the exact code-4 / 23-channel canonical schedule, every native repeat field, complete paired/reference/CPU digest coverage, actual final pending original-row sets, and separately recomputed exact metrics and dynamic-program timing matches. [Verification](docs/evidence/milestone-4/cases/two-class-1000-0/verification.json), [24-file native archive](docs/evidence/milestone-4/cases/two-class-1000-0/observations.zip); all archive hashes match preserved originals. Full local builds/results remain preserved.
 - Driver elapsed time is 637.168 seconds after input load, qualification timing only. This accepts **4/52 cases**. Next: refresh partial diagnostics and execute the shortest three-engine silent control. Commit this verified case before proceeding. The application remains at 312 passing tests, with its separately recorded 203-test scientific regression; numerical/reference sources are unchanged.
 
+Four-case diagnostic refresh (2026-10-05):
+
+- At clean `f95cbf8`, rerun the unchanged executed summary against all four retained complete cases. [Refreshed report](docs/evidence/milestone-4/matrix-diagnostics/partial-20261005-02/partial-matrix.json) includes **4 cases, 48 missing cases, and all 12 groups**; unavailable groups remain explicit. Every singleton pooled metric and bin sum equals the corresponding complete case result.
+- [Executed verification](docs/evidence/milestone-4/matrix-diagnostics/partial-20261005-02/executed-verification.py) records the current source and artifact hashes. This updates diagnostic evidence only; no model, gate, application code, or matrix-acceptance claim changes. Commit this verified refresh before the shortest silent control.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.
