@@ -8,9 +8,18 @@ import pytest
 
 from fly_brain.qualification.adapters.brian_jobs import build
 from fly_brain.qualification.adapters.causal_capture import CausalCapture
-from fly_brain.qualification.adapters.observer_evidence import array_record
+from fly_brain.qualification.adapters.observer_evidence import (
+    array_record,
+    physical_hash,
+)
+from fly_brain.qualification.adapters.observer_stream import (
+    FinalSnapshot,
+    PhaseBlock,
+    StepSnapshot,
+)
+from fly_brain.qualification.adapters.observer_tape import replay
 from fly_brain.qualification.adapters.paired_collect import collect
-from fly_brain.qualification.adapters.paired_observer import PairedBlock
+from fly_brain.qualification.adapters.paired_observer import PairedBlock, phase_hash
 from fly_brain.qualification.adapters.pending_queues import verify as verify_pending
 from fly_brain.qualification.adapters.replay_evidence import paired as verify_repeat
 from fly_brain.simulation.backend.bucketed import prepare
@@ -39,7 +48,14 @@ def test_live_collection_retains_complete_native_and_physical_replay(
     execution = prepare(case.connectome, case.targets, (3,), precision)
     outputs = (tmp_path / 'first', tmp_path / 'repeat')
     for output in outputs:
-        capture = collect(job, execution, case.connectome, stimulus, output)
+        capture = collect(
+            job,
+            execution,
+            case.connectome,
+            stimulus,
+            output,
+            record_reference=output == outputs[1],
+        )
         assert capture.audit.step == 101
         assert capture.spike is None and capture.budget is None
         summary = json.loads((output / 'causal.json').read_text())
@@ -63,6 +79,22 @@ def test_live_collection_retains_complete_native_and_physical_replay(
         ]
         assert [row['step'] for row in physical] == list(range(102))
         assert all(len(row['sha256']) == 64 for row in physical)
+        if output == outputs[1]:
+            recorded = tuple(replay(output / 'reference-wire.gz', job.shape))
+            recorded_phases = [
+                phase_hash(frame.fields)
+                for frame in recorded
+                if isinstance(frame, PhaseBlock)
+            ]
+            recorded_steps = [
+                frame.step if isinstance(frame, FinalSnapshot) else frame
+                for frame in recorded
+                if isinstance(frame, (StepSnapshot, FinalSnapshot))
+            ]
+            assert recorded_phases == [row['native_phase_sha256'][0] for row in phases]
+            assert [physical_hash(frame) for frame in recorded_steps] == [
+                row['sha256'] for row in physical
+            ]
         pending = verify_pending(output, 101, len(case.connectome.sources))
         assert len(pending) == 18
         metadata = json.loads((output / 'reference-final-physical.json').read_text())

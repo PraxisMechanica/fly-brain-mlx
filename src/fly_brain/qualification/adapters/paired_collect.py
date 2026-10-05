@@ -25,6 +25,8 @@ def collect(
     connectome: Connectome,
     stimulus: Stimulus,
     output: Path,
+    *,
+    record_reference: bool = False,
 ) -> CausalCapture:
     events = stimulus.events
     if (
@@ -44,7 +46,13 @@ def collect(
     last: MLXBlock | None = None
     final: FinalSnapshot | None = None
     with (
-        closing(run(job, output / 'reference-results')) as reference,
+        closing(
+            run(
+                job,
+                output / 'reference-results',
+                tape=output / 'reference-wire.gz' if record_reference else None,
+            )
+        ) as reference,
         closing(
             observe(
                 execution,
