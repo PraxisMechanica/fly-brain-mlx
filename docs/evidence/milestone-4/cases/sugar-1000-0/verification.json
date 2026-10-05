@@ -1,0 +1,29 @@
+{
+  "checkpoint": "1dcb201",
+  "case_accepted": true,
+  "matrix_accepted": false,
+  "exact_complete_mlx_reference_flywire_identifier_and_step_rasters": true,
+  "native_input_file_hashes_verified": true,
+  "all_case_checks_and_all_11_primary_metric_checks_pass": true,
+  "cpu_rational_metrics_independently_recomputed": {
+    "active_jaccard": {
+      "numerator": 318,
+      "denominator": 343
+    },
+    "count_error": {
+      "numerator": 3,
+      "denominator": 1612
+    },
+    "neuron_count_error": {
+      "numerator": 141,
+      "denominator": 1612
+    },
+    "timing_f1": {
+      "numerator": 2060,
+      "denominator": 3221
+    }
+  },
+  "cpu_timing_matches_by_independent_dynamic_program": 1030,
+  "cpu_common_support_correlation_by_statistics_module": 0.9900397837981376,
+  "scope": "Sugar trial 0 at 0.1 seconds: one of 52 required cases. All per-case fixed/paired/causal/replay gates pass. Prescribed one-second four-trial batches, remaining cases, pooled/time-bin matrix reports and performance remain open."
+}

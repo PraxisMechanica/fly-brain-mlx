@@ -1,0 +1,225 @@
+{
+  "checkpoint": "1dcb2014b31b740ea800faae894f43849c5ad316",
+  "case": {
+    "experiment": "sugar",
+    "steps": 1000,
+    "trial": 0
+  },
+  "case_accepted": true,
+  "full_matrix_accepted": false,
+  "case_checks": {
+    "required_frozen_case": true,
+    "pinned_inputs_and_unchanged_numerical_sources": true,
+    "identical_canonical_events_targets_and_common_sugar_setup": true,
+    "valid_unique_coordinates_and_exact_native_reference_clock": true,
+    "mlx_native_state_and_queues_repeat": true,
+    "reference_native_phases_and_physical_queues_repeat": true,
+    "cpu_native_five_tensors_and_physical_buffers_repeat": true,
+    "no_common_history_state_budget_violation": true,
+    "first_different_spike_explicitly_none": true
+  },
+  "metric_acceptance": {
+    "mlx": {
+      "reference_spikes": 1612,
+      "candidate_spikes": 1612,
+      "active_jaccard": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "count_error": {
+        "numerator": 0,
+        "denominator": 1,
+        "value": 0.0
+      },
+      "signed_count_ratio": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "neuron_count_error": {
+        "numerator": 0,
+        "denominator": 1,
+        "value": 0.0
+      },
+      "rate_correlation": 0.9999999999999998,
+      "counts_equal": true,
+      "timing_matches": 1612,
+      "timing_f1": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "timing_precision": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "timing_recall": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "exact_step_f1": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "one_step_f1": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "mean_timing_error_ms": 0.0,
+      "median_timing_error_ms": 0.0,
+      "shared_rate_correlation": 0.9999999999999998,
+      "common_rate_mae_hz": 0.0,
+      "common_rate_rmse_hz": 0.0
+    },
+    "torch": {
+      "reference_spikes": 1612,
+      "candidate_spikes": 1609,
+      "active_jaccard": {
+        "numerator": 318,
+        "denominator": 343,
+        "value": 0.9271137026239067
+      },
+      "count_error": {
+        "numerator": 3,
+        "denominator": 1612,
+        "value": 0.0018610421836228288
+      },
+      "signed_count_ratio": {
+        "numerator": 1609,
+        "denominator": 1612,
+        "value": 0.9981389578163772
+      },
+      "neuron_count_error": {
+        "numerator": 141,
+        "denominator": 1612,
+        "value": 0.08746898263027296
+      },
+      "rate_correlation": 0.9900397837981377,
+      "counts_equal": false,
+      "timing_matches": 1030,
+      "timing_f1": {
+        "numerator": 2060,
+        "denominator": 3221,
+        "value": 0.6395529338714685
+      },
+      "timing_precision": {
+        "numerator": 1030,
+        "denominator": 1609,
+        "value": 0.6401491609695463
+      },
+      "timing_recall": {
+        "numerator": 515,
+        "denominator": 806,
+        "value": 0.6389578163771712
+      },
+      "exact_step_f1": {
+        "numerator": 126,
+        "denominator": 3221,
+        "value": 0.039118286246507296
+      },
+      "one_step_f1": {
+        "numerator": 1104,
+        "denominator": 3221,
+        "value": 0.34275069854082585
+      },
+      "mean_timing_error_ms": 0.289126213592233,
+      "median_timing_error_ms": 0.1,
+      "shared_rate_correlation": 0.9911586315557606,
+      "common_rate_mae_hz": 4.110787172011662,
+      "common_rate_rmse_hz": 6.935773660394461
+    },
+    "checks": {
+      "silent_reference_exact": true,
+      "activity_floor": true,
+      "activity_paired": true,
+      "count_floor": true,
+      "count_paired": true,
+      "neuron_count_floor": true,
+      "neuron_count_paired": true,
+      "correlation_floor_or_exact_counts": true,
+      "correlation_paired": true,
+      "timing_floor": true,
+      "timing_paired": true
+    }
+  },
+  "native_inputs_before_conversion": {
+    "brian": {
+      "file": "docs/evidence/milestone-4/full-paired-observer/observed-reference-native.npz",
+      "file_sha256": "3c2466351efb65292adff1e7615b6d4a5dd89fcbbfa82c1032032b52fb2f4cf1",
+      "arrays": {
+        "spike_i": {
+          "dtype": "<i4",
+          "shape": [
+            1612
+          ],
+          "sha256": "48f4d548953a19f1c8bfcf40838b2b4539a05598642c4182c51eca8cef13f593"
+        },
+        "spike_t": {
+          "dtype": "<f8",
+          "shape": [
+            1612
+          ],
+          "sha256": "893d48256eff08383d46dbf3dc79460c1e54c1d9aab69a318a5b71f3c394246c"
+        }
+      }
+    },
+    "mlx": {
+      "file": "docs/evidence/milestone-4/full-paired-observer/observed-mlx-final.npz",
+      "file_sha256": "f06092552d16d7e8715647dbf41c0aab6807e034ae99e2f808881c05684c1f13",
+      "arrays": {
+        "spike_neurons": {
+          "dtype": "<i8",
+          "shape": [
+            1612
+          ],
+          "sha256": "ffe6a7e6d40bb25869a917518a4e2c3ee63acd5dea14f28421b2fe15adaaac18"
+        },
+        "spike_steps": {
+          "dtype": "<i8",
+          "shape": [
+            1612
+          ],
+          "sha256": "784e2190bf2dce3321839a86c5d2fb1fe9b67e6af1302287e5b56fba409259aa"
+        }
+      }
+    },
+    "torch": {
+      "file": "docs/evidence/milestone-4/full-cpu-observer/observed-final.npz",
+      "file_sha256": "358277e56df4131914d9218925eb6ccabf27d5c828869890e7bdd008f6d08334",
+      "arrays": {
+        "spike_neurons": {
+          "dtype": "<i8",
+          "shape": [
+            1609
+          ],
+          "sha256": "ff858048ad0d8af59e1eb69625f00bf8b27ef7acd6ea4af369ae5f7a7bc18747"
+        },
+        "spike_steps": {
+          "dtype": "<i8",
+          "shape": [
+            1609
+          ],
+          "sha256": "c7820d85cdbd7da6b35e8e440991f352e243473db91904075d9cbdcf8aeacfc4"
+        }
+      }
+    }
+  },
+  "stimulus_sha256": "d7bb792f082eeca79d6e88a1e8ca0791dca210eb15c86ec70a34348b272a82b3",
+  "input_pins": {
+    "completeness_sha256": "52b0ac6094cd32c546f8d4c341e094376f48f4e791f8db9b166de5dff8199ea4",
+    "connectivity_sha256": "efeb23fb99098e9c390f6869969b2a121a2ee92c833cfc45ecb2c1d8e1af0347",
+    "neurons": 138639,
+    "edges": 15091983,
+    "scale_mv": 0.275
+  },
+  "neuron_mapping_sha256": "70200482b9fe6656f215a97b71332dd6725b80e2cb32e0052a4d47916ca1579b",
+  "normalized_neurons": "Exact FlyWire identifiers from pinned CSV order; coordinates validated before mapping.",
+  "first_budget_violation": null,
+  "first_different_spike": null,
+  "scope": "Sugar trial 0 at 0.1 seconds: one of 52 required cases. All per-case fixed/paired/causal/replay gates pass. Prescribed one-second four-trial batches, remaining cases, pooled/time-bin matrix reports and performance remain open."
+}
