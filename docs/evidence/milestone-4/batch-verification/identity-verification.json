@@ -1,0 +1,25 @@
+{
+  "implementation_parent_checkpoint": "1cdf02c",
+  "application_tests": {
+    "tests": 448,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "new_canonical_identity_intent_tests": 14,
+  "ruff_checked_files": 168,
+  "strict_pyright_errors": 0,
+  "strict_pyright_warnings": 0,
+  "import_contracts_kept": 3,
+  "import_contracts_broken": 0,
+  "import_files": 114,
+  "import_dependencies": 492,
+  "locked_packages": 38,
+  "source_sha256": {
+    "src/fly_brain/qualification/batch_identity.py": "03c36cc53c9659865bd9db6437e840f5b08b55f25f7b629b0006f870c3c0f71e",
+    "tests/unit/test_batch_identity.py": "10e16dfab88a361327b3baf3088acde69b0738daca967e4a166a4d8828fb5850",
+    "pyproject.toml": "24f70233673ce2055ddfe2f994f61d2fb918696a6801fa61c3bf99423a6c0eec"
+  },
+  "one_second_batch_gate_accepted": false,
+  "scope": "Require recorded native batch/singleton event bytes and trial metadata to match independently supplied canonical generation. Input pins, neuron mapping, executed source/environment/case binding and actual one-second batches/repeats remain required."
+}

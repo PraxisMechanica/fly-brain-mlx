@@ -89,6 +89,7 @@ source_modules = [
     "fly_brain.qualification.adjudication",
     "fly_brain.qualification.rounding_review",
     "fly_brain.qualification.batch_evidence",
+    "fly_brain.qualification.batch_identity",
     "fly_brain.qualification.service",
     "fly_brain.comparison.models",
     "fly_brain.comparison.acceptance",
