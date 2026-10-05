@@ -57,6 +57,13 @@ and application programming interface or database schema changes still apply.
   5.37 / 28 and health/maintainability 69.05 / 69.05. Five additional real import
   fixtures reject aliases, type-only imports, indirect paths and re-exports;
   weakening transitive enforcement stops detecting the indirect defect.
+  Eight index-guard fixtures reject untracked/ignored source and typing stubs,
+  accept staging repairs and non-source evidence, and prove that disabling the
+  guard hides the defect. They use real source-only Git repositories; the
+  pipeline probe controls only the downstream metric exit.
+  The shared check now passes **49 quality tests**, zero failures/errors/skips;
+  formatting, lint, strict typing, all three import contracts, and staged/full
+  commit metric checks pass. [Test report](docs/evidence/code-quality/index-intent-tests.xml).
   [Complete coverage limits and definite clock finding](docs/agent/quality-coverage.md):
   the full 37-rule architecture result is **ANALYSIS FAILED (COV002)**.
   Keep feature/numerical work held while that required enforcement is incomplete.
