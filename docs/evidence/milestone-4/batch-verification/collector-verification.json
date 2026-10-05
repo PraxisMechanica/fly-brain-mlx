@@ -1,0 +1,29 @@
+{
+  "implementation_parent_checkpoint": "4119254",
+  "tests": {
+    "collector-tests.xml": {
+      "tests": 13,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "collector-application-tests.xml": {
+      "tests": 377,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "ruff_checked_files": 158,
+  "strict_pyright_errors": 0,
+  "strict_pyright_warnings": 0,
+  "import_contracts_kept": 3,
+  "import_contracts_broken": 0,
+  "import_files": 110,
+  "import_dependencies": 472,
+  "source_sha256": {
+    "src/fly_brain/qualification/adapters/mlx_batch_collect.py": "a121d2ad4b89834e36e3c9e9ee7cb709e462a5c74fd6858000ae40eb1e519591",
+    "tests/qualification/test_mlx_batch_collect.py": "6f4e623901476b93a772bb3266ae08fab5c343cc0a32652c8b89aa5fb924ef11"
+  },
+  "scope": "New internal collector and existing real Metal observer fixture tests; no one-second batch or full-network batch acceptance."
+}
