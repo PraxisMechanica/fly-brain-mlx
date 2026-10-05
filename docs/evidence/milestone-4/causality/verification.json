@@ -1,0 +1,23 @@
+{
+  "implementation_commit": "51a1186fe31c256c015a11d32811167e21247f3f",
+  "application_tests": {
+    "tests": 169,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "causal_intent_cases": 14,
+  "budgets": {
+    "absolute_mv": 0.001,
+    "relative": 1e-05,
+    "inclusive": true,
+    "extra_comparison_slack": 0
+  },
+  "chronology": "Pre-threshold state is compared through the first different spike step. Pre-reset/end state is compared only through preceding steps. Later state is checked for finiteness without unforced cross-engine closeness.",
+  "source_sha256": {
+    "src/fly_brain/qualification/causality.py": "56a9009c163cc31436775b0a357622f0035a846b3e84bbe92d641ef49e8c9a1e",
+    "tests/unit/test_causality.py": "d04b3742531505ea6901445ddfb796633ddeffafccc2235b8ac45dd4e709a87f",
+    "pyproject.toml": "323eeb01911a4515404d25044a4612d64cc99a82140ac4a59f594b99bd002df2"
+  },
+  "scope": "Pure causal formula and chronological scope qualification only. No live paired-engine first-cause, complete MLX observer, concurrent/four-trial memory, or full-network metric acceptance."
+}

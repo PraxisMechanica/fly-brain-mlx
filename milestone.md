@@ -466,6 +466,11 @@ Causal relative-budget checkpoint (2026-10-05):
 
 - Sequencing checks are committed at `a9ec01e`. Two additional cases require the unchanged relative budget term for both positive and negative reference state; removing that term would fail these tests. **169 application tests pass, zero failures/errors/skips**; full strict Pyright, Ruff, and formatting pass. The fourteen pure causal-audit cases now cover the fixed formula and chronology. Live paired wiring and full case evidence remain open. Commit this verified working state before proceeding.
 
+Causal-audit evidence checkpoint (2026-10-05):
+
+- The classifier and its checks are committed at `8e90dc6`, `a9ec01e`, and `51a1186`. The [169-test application report](docs/evidence/milestone-4/causality/application-tests.xml) records zero failures/errors/skips, and [verification/source hashes](docs/evidence/milestone-4/causality/verification.json) fix the fourteen causal intent cases, unchanged budget, chronology, and bounded claim. Full strict Pyright, Ruff, formatting, and the new pure-module import boundary pass.
+- The scientific 128-test result and complete reference observer proof remain their separately recorded unchanged-source evidence. Next work is live paired reference/MLX block wiring and actual first-cause context, followed by complete MLX ordinary/repeat proof and measured concurrent/four-trial memory. No full-network parity case is accepted by this pure audit evidence. Commit this evidence before the next implementation.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.
