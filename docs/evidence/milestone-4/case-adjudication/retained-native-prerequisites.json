@@ -1,0 +1,9 @@
+{
+  "checkpoint": "ef56d5c1c9583d8663af9cd8b8c94fa8a1c2d266",
+  "existing_native_context_sha256": "85f2873f48c0bd2a09cf38862bf821834ca96b134d92c8d7f23e500edc507ed2",
+  "complete_native_first_difference_set_and_strict_predicates_rechecked": true,
+  "native_dtype_shape_eligibility_finiteness_and_unchanged_budget_rechecked": true,
+  "scope": "Existing batch context prerequisites only; not a new classification or singleton acceptance.",
+  "new_device_execution": false,
+  "case_accepted": false
+}
