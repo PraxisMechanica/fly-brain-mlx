@@ -88,6 +88,7 @@ source_modules = [
     "fly_brain.qualification.service",
     "fly_brain.comparison.models",
     "fly_brain.comparison.acceptance",
+    "fly_brain.comparison.diagnostics",
     "fly_brain.comparison.service",
 ]
 forbidden_modules = [
