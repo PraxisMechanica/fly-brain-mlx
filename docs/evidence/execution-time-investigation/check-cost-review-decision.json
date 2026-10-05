@@ -1,0 +1,41 @@
+{
+  "checkpoint": "882c64e",
+  "reviewer": "/root/review_check_cost_equivalence",
+  "model": "gpt-6-astra",
+  "reasoning_effort": "xhigh",
+  "context": "fresh initial dispatch; bounded read-only follow-up",
+  "initial_review_checkpoint": "f3a6da9ca4697d250f8beefc07806cb4116328f8",
+  "status": "completed; parent independently verified and recorded findings",
+  "confidence_percent": 95,
+  "authorized_scope": "Read-only review of scientific evidence requirements, check frequency, alternative execution/proof methods, first-principles costs and exact integer operation equivalence. No edits, runs, process signals or nested delegation by the subagent.",
+  "decision": "The scientific acceptance evidence remains required. Repeating the present 105-minute pipeline for candidate screening is unnecessary. Keep all gates and native repeatability coverage; separate rejection screens from full acceptance, preserve/reuse immutable reference evidence with valid provenance, and reduce measured capture/native-operation waste before bulk runs.",
+  "parent_verified": [
+    "Read fixed full-network contract, its 52 cases, two actual fresh executions per engine, prescribed batches and authorized sugar/P9 prefixes.",
+    "Read execution order: both paired and both CPU runs complete before final scoring; a completed-horizon absolute F1 failure cannot be rescued by CPU comparison.",
+    "Read actual paired causal comparison: hashes do not reconstruct raw reference values or prove float64/float32 tolerance; old cause summaries do not transfer to a new candidate.",
+    "Verified unchanged prepared float32 CSR values are finite integers and independently recomputed original per-destination absolute incoming sum 69948, below 16777216.",
+    "Read official PyTorch 2.11 helper, specialized sum entry point/kernel and optional Eigen operand-index mutation; metadata retained in official-source-verification.json.",
+    "Measured original, transposed-default and explicit-sum operations with native-byte comparisons, singleton and four-row inputs and CPU operator trace.",
+    "Measured unchanged MLX full step and separate accumulation, queue, ledger and host-hash components at a retained endpoint; recorded one-endpoint and synchronization limits.",
+    "Measured extracted original reference writer against buffered/native-checksum variants; nine whole payload byte digests and independent checksums agree.",
+    "Preserved unsupported nonempty CSR-by-CSR probe without treating its empty-input result as a speedup.",
+    "Measured an existing-NumPy active-source alternative; selected raw/scaled output bytes match independently retained original operation hashes, but dense synthetic inputs are slower."
+  ],
+  "equivalence_argument": "For finite integral weights and binary recurrent spikes, each selected product is exactly represented. Original per-destination absolute sum 69948 bounds all intermediate partial sums below 2^24, so ordinary float32 reduction order cannot change nonzero sums. Exact integer float64 accumulation followed by float32 conversion preserves the same integers. Signed zero, duplicate/ordering/mapping, batch and surrounding state transition still need complete execution-mode evidence. Keep the 0.275 scale after the sum.",
+  "reference_reuse_conditions": "Retain the two actual original fresh executions. Bind exact ordered inputs, replay, initial state, parameters, relevant engine/setup and generated source, compiler/native build, device, threads/reduction and capture coverage. Current globally loaded-module hashes need a verified engine dependency boundary. For cross-engine state budgets, retain raw complete relevant-prefix reference values or regenerate them through digest-verified deterministic replay; existing phase digests alone are insufficient.",
+  "frequency": {
+    "focused_regression": "Each affected numerical/execution change before bulk work.",
+    "failure_screen": "Each plausible candidate at a complete relevant horizon; record rejection and unperformed gates explicitly.",
+    "reference_fresh_execution_pairs": "Once per complete immutable engine/input/configuration identity, invalidated only by relevant changes or missing/invalid evidence.",
+    "full_candidate_acceptance": "Stable changed numerical/execution configuration, two actual MLX runs for each prescribed case and required batch checks; no old candidate pass transfer.",
+    "metrics_and_reports": "Rescore retained native data when sufficient; rerun engines only when execution/evidence is invalid or missing.",
+    "performance": "Representative baseline and affected execution/performance changes; separate from scientific acceptance."
+  },
+  "limits": "Mathematical argument and selected component measurements are not full trajectory, signed-zero/silencing envelope, sparse Eigen binary, changed comparator mode or whole-check qualification. The frozen contract still disallows substituting another CPU path without a prospective decision and complete preservation evidence. No proposed optimization is adopted during the hold.",
+  "application_source_changed": false,
+  "acceptance_gates_changed": false,
+  "new_full_case_or_matrix_run": false,
+  "p9_resumed": false,
+  "goal_status": "paused",
+  "next_action_after_user_resumption": "Make reference provenance/reuse and completed-horizon rejection concrete; qualify an existing-format buffered writer; select the smallest measured proof/native-operation improvement. Keep numerical development and full bulk runs paused until the performance remedy is verified."
+}

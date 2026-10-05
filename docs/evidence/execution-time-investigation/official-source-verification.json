@@ -1,0 +1,46 @@
+{
+  "checkpoint": "882c64e",
+  "authority": "Official PyTorch v2.11.0 source; parent reads independently of the subagent",
+  "files": [
+    {
+      "url": "https://github.com/pytorch/pytorch/blob/v2.11.0/aten/src/ATen/native/cpu/SpmmReduceKernel.cpp",
+      "git_blob_sha": "9f535af4781c6ce032022f36b3333073efc7e31d",
+      "lines": [
+        26,
+        120
+      ]
+    },
+    {
+      "url": "https://github.com/pytorch/pytorch/blob/v2.11.0/aten/src/ATen/native/sparse/SparseCsrTensorMath.cpp",
+      "git_blob_sha": "edb95c23b98bad73f2637aaf28f4a2992ace78bb",
+      "lines": [
+        1376,
+        1424
+      ]
+    },
+    {
+      "url": "https://github.com/pytorch/pytorch/blob/v2.11.0/aten/src/ATen/native/sparse/eigen/SparseBlasImpl.cpp",
+      "git_blob_sha": "20738992a61d998b72dc74ff562d112329e8a5b4",
+      "lines": [
+        23,
+        50
+      ]
+    },
+    {
+      "url": "https://github.com/pytorch/pytorch/blob/v2.11.0/aten/src/ATen/native/sparse/eigen/SparseBlasImpl.cpp",
+      "git_blob_sha": "20738992a61d998b72dc74ff562d112329e8a5b4",
+      "lines": [
+        143,
+        180
+      ]
+    }
+  ],
+  "verified_findings": [
+    "Explicit CPU CSR sum initializes a zero output and dispatches to spmm_reduce_stub.",
+    "The specialized kernel makes its right-hand operand contiguous and accumulates inside CSR loops.",
+    "The default helper's per-entry cpublas::axpy and non-MKL transpose path were independently read through official GitHub source.",
+    "The optional Eigen sparse wrapper may replace operand index tensors; build-time availability must not be inferred from USE_EIGEN_FOR_BLAS.",
+    "The installed CPU wheel rejects the nonempty CSR-by-CSR probe; only the empty-input shortcut completed."
+  ],
+  "limits": "Source inspection explains dispatched algorithms; installed-operation profiles and probes supply measured behavior. No binary-level, whole-trajectory or new comparator-mode certification."
+}
