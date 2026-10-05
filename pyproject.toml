@@ -24,6 +24,8 @@ dev = [
     "pyright==1.1.414",
     "pytest==9.1.1",
     "import-linter>=2.3,<3",
+    "radon==6.0.1",
+    "pre-commit==3.2.2",
 ]
 qualification = [
     "brian2==2.8.0",

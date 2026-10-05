@@ -1,0 +1,17 @@
+{
+  "name": "fly-brain-mlx-quality-tools",
+  "private": true,
+  "packageManager": "pnpm@10.10.0",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "quality:analyze": "code-quality analyze",
+    "quality:staged": "code-quality check --staged",
+    "quality:check": "code-quality check"
+  },
+  "devDependencies": {
+    "@eng-metrics/code-quality": "file:tools/code-quality/vendor/eng-metrics-code-quality-0.1.0.tgz"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": ["@ast-grep/lang-go", "tree-sitter-c-sharp"]
+  }
+}

@@ -26,3 +26,5 @@ __pycache__/
 .uv-cache/
 .import_linter_cache/
 dist/
+node_modules/
+.quality-reports/
