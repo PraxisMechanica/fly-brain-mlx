@@ -1,0 +1,120 @@
+{
+  "checkpoint": "a5e797380a215f1f3a1075a51d0a3d1eac7550a2",
+  "scope": "Bounded serialization diagnostic. Synthetic 32-row phase payload repeats actual retained native reference endpoint arrays. It is not a physical trajectory or complete observer frame/model replay.",
+  "decision_confidence_percent": 95,
+  "neurons": 138639,
+  "rows": 32,
+  "all_nine_outputs_and_checksums_match_exactly": true,
+  "measurements": {
+    "original_tiny_boolean_writes_bytewise_crc": {
+      "samples": [
+        {
+          "wall_s": 1.57831787498435,
+          "output_bytes": 261751204,
+          "output_sha256": "9ecbd2960574e9cba655f0c19746f00ea6d439409b2f775026e8c282fc4e9757",
+          "stream_checksum_independently_matches": true,
+          "producer_wall_s": 1.16915,
+          "producer_cpu_s": 1.02643
+        },
+        {
+          "wall_s": 1.227662290999433,
+          "output_bytes": 261751204,
+          "output_sha256": "9ecbd2960574e9cba655f0c19746f00ea6d439409b2f775026e8c282fc4e9757",
+          "stream_checksum_independently_matches": true,
+          "producer_wall_s": 1.22083,
+          "producer_cpu_s": 1.04673
+        },
+        {
+          "wall_s": 1.2657364170008805,
+          "output_bytes": 261751204,
+          "output_sha256": "9ecbd2960574e9cba655f0c19746f00ea6d439409b2f775026e8c282fc4e9757",
+          "stream_checksum_independently_matches": true,
+          "producer_wall_s": 1.26,
+          "producer_cpu_s": 1.08478
+        }
+      ],
+      "median_wall_s": 1.2657364170008805,
+      "median_producer_cpu_s": 1.04673
+    },
+    "buffered_booleans_same_crc": {
+      "samples": [
+        {
+          "wall_s": 0.9090672910097055,
+          "output_bytes": 261751204,
+          "output_sha256": "9ecbd2960574e9cba655f0c19746f00ea6d439409b2f775026e8c282fc4e9757",
+          "stream_checksum_independently_matches": true,
+          "producer_wall_s": 0.903321,
+          "producer_cpu_s": 0.719499
+        },
+        {
+          "wall_s": 0.8764580829883926,
+          "output_bytes": 261751204,
+          "output_sha256": "9ecbd2960574e9cba655f0c19746f00ea6d439409b2f775026e8c282fc4e9757",
+          "stream_checksum_independently_matches": true,
+          "producer_wall_s": 0.870099,
+          "producer_cpu_s": 0.705528
+        },
+        {
+          "wall_s": 0.9149755840189755,
+          "output_bytes": 261751204,
+          "output_sha256": "9ecbd2960574e9cba655f0c19746f00ea6d439409b2f775026e8c282fc4e9757",
+          "stream_checksum_independently_matches": true,
+          "producer_wall_s": 0.909371,
+          "producer_cpu_s": 0.73225
+        }
+      ],
+      "median_wall_s": 0.9090672910097055,
+      "median_producer_cpu_s": 0.719499
+    },
+    "buffered_booleans_native_zlib_crc": {
+      "samples": [
+        {
+          "wall_s": 0.23416183298104443,
+          "output_bytes": 261751204,
+          "output_sha256": "9ecbd2960574e9cba655f0c19746f00ea6d439409b2f775026e8c282fc4e9757",
+          "stream_checksum_independently_matches": true,
+          "producer_wall_s": 0.228308,
+          "producer_cpu_s": 0.046957
+        },
+        {
+          "wall_s": 0.22817300001042895,
+          "output_bytes": 261751204,
+          "output_sha256": "9ecbd2960574e9cba655f0c19746f00ea6d439409b2f775026e8c282fc4e9757",
+          "stream_checksum_independently_matches": true,
+          "producer_wall_s": 0.221475,
+          "producer_cpu_s": 0.047759
+        },
+        {
+          "wall_s": 0.19356225000228733,
+          "output_bytes": 261751204,
+          "output_sha256": "9ecbd2960574e9cba655f0c19746f00ea6d439409b2f775026e8c282fc4e9757",
+          "stream_checksum_independently_matches": true,
+          "producer_wall_s": 0.187924,
+          "producer_cpu_s": 0.03345
+        }
+      ],
+      "median_wall_s": 0.22817300001042895,
+      "median_producer_cpu_s": 0.046957
+    }
+  },
+  "elapsed_s": 7.437504166999133,
+  "compiler": "Apple clang version 13.1.6 (clang-1316.0.21.2.3)\nTarget: arm64-apple-darwin24.3.0\nThread model: posix\nInstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin\n",
+  "flags": [
+    "-std=c++17",
+    "-O3",
+    "-ffast-math",
+    "-fno-finite-math-only",
+    "-lz"
+  ],
+  "compiler_stderr": "",
+  "system_zlib_version": "1.2.12",
+  "runner_sha256": "a521e250d6df4087537f3e989cbbcdf3695cc7afa76265b80f9cb00cafef3569",
+  "cpp_sha256": "89278963096a13cb67a86a72aff4fa82cf25146825900a9a54f1e80892266d33",
+  "input_sha256": "24c002196b7690834d19828ed92ab29fc7e1ebd138bfaea3ea230217b6b41f79",
+  "reference_artifact_sha256": "b861402a0b44c835756b478f885a34be81ac270d1d48d9fa6565d2ea6efd9f90",
+  "brian_observer_source_sha256": "c740345d93b699c46b117427ccda5342d590d7cca9ad4832aad2c125f2e192b9",
+  "limits": "The original obs_write and checksum setup are extracted unchanged from current source. Timings include a pipe consumer hashing and independently checking every byte; no full producer/consumer attribution. Both variants are standalone diagnostic probes, not production changes, complete frame-parser tests or new capture-mode qualification.",
+  "application_changed": false,
+  "new_full_case_or_matrix_run": false,
+  "p9_resumed": false
+}

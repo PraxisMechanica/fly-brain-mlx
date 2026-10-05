@@ -1,0 +1,11 @@
+{
+  "checkpoint": "a5e797380a215f1f3a1075a51d0a3d1eac7550a2",
+  "exact_original_writer_setup_present_in_executed_cpp": true,
+  "runner_cpp_application_source_endpoint_and_reconstructed_input_hashes_verified": true,
+  "all_nine_recorded_output_digests_agree": true,
+  "all_medians_recomputed": true,
+  "compiled_diagnostic_binary_sha256": "f26052beae6669ac2b96647c266fd1dc7357e33c3c5de572cfd91a7571856cd2",
+  "buffered_boolean_component_speedup": 1.3923462317019688,
+  "buffered_native_checksum_component_speedup": 5.547266402874259,
+  "limits": "Archive and diagnostic result assertions verified. Repeated native endpoint planes form only a serialization workload; no complete observer-frame or scientific capture-mode qualification."
+}
