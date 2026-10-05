@@ -786,6 +786,11 @@ Actual partial matrix-diagnostic evidence (2026-10-05):
 - [Executed verification](docs/evidence/milestone-4/matrix-diagnostics/partial-20261005-01/executed-verification.py) checks pinned input/mapping consistency, native mapped coordinates, unique/ranged spikes, source/artifact hashes, complete expected/included/missing coverage, and all bin sums. Every singleton pooled metric equals its independently verified complete case metric exactly. This is actual partial diagnostic execution, not evidence for five-trial pooling or full matrix acceptance.
 - Preserve the final **312-passed / zero-skipped** [application report](docs/evidence/milestone-4/matrix-diagnostics/partial-20261005-01/application-tests.xml) with this checkpoint. All recorded pure-unit quality/import checks remain valid; no application source changes here. Next: two-class trial 0 at 0.1 seconds, with all engine repeats and per-case gates. Commit this verified report before that execution.
 
+Next prescribed case execution (2026-10-05):
+
+- At clean launch checkpoint `1548295`, start the installed `qualify-parity --experiment two-class --duration-s 0.1 --trial 0` command with fixed Metal precision and fresh `data/results/milestone-4-parity-two-class-1000-0-20261005-01`. The reference build and both engine preparations finish; paired first observation is running. This case is pending and does not increase the accepted count.
+- All source work and verified evidence are committed before launch. Inspect complete repeats, cause files, actual queues, and every case gate before acceptance; obtain bounded Astra judgment if a first divergence needs interpretation. Current acceptance remains **3/52**. Push remains pending because only the public reference `upstream` remote exists.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.
