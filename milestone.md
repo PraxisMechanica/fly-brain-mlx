@@ -872,6 +872,11 @@ Independent complete-score verification (2026-10-05):
 - Every rational value and its encoded floating value matches exactly. Independently evaluated host diagnostic floats match within `1e-12`; that verification comparison never relaxes a case gate. All eleven independently recomputed fixed/paired gate booleans exactly match the recorded reports. A separate dynamic program verifies maximum matching cardinality at each 0/1/10-step window, and a trial-exchange counterexample refuses cross-trial matches despite equal pooled counts.
 - The executed script passes Ruff formatting/linting. Existing 377 application / 203 scientific tests remain their separately recorded unchanged-source results. Decision confidence **99%** at `2722175`: use this scorer with the tested prerequisite, native-cause, hash, identity, and replay checkers for the next complete singleton. Commit this working proof before launch. No new case acceptance or full-matrix approval is claimed; acceptance stays **5/52**.
 
+Next full sugar trial execution (2026-10-05):
+
+- At clean `3b9e881`, launch `MLX_ENABLE_TF32=0 uv run --locked --group qualification --no-sync fly-brain qualify-parity --experiment sugar --duration-s 0.1 --trial 1 --output data/results/milestone-4-parity-sugar-1000-1-20261005-01`. First launch check: 06:20:01 UTC. Preserve each engine's fresh complete first/repeat evidence and the unchanged automatic report/status.
+- This trial is running and is **not accepted**. The earlier batch first-cause classification does not approve this singleton. On completion, independently recompute every metric/gate, verify complete native/physical/own-ledger replay, and inspect the entire first-cause context. Require explicit parent applicability or a new bounded cause review before a separate reviewed-case acceptance decision. Current acceptance remains **5/52**; all current work is committed before launch.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.
