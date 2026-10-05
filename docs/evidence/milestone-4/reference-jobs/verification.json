@@ -1,0 +1,54 @@
+{
+  "implementation_commit": "e49d5b14e96be946c971ec882df2f24f8694d9f0",
+  "scientific_tests": {
+    "tests": 128,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "native_array_checks": [
+    {
+      "mode": "ordinary",
+      "native_arrays": 41,
+      "fresh_execution_arrays_byte_identical": true
+    },
+    {
+      "mode": "observed",
+      "native_arrays": 60,
+      "fresh_execution_arrays_byte_identical": true
+    },
+    {
+      "mode": "repeat",
+      "native_arrays": 60,
+      "fresh_execution_arrays_byte_identical": true
+    }
+  ],
+  "observed_repeat_and_common_ordinary_arrays_byte_identical": true,
+  "raw_trace_archives": 72,
+  "local_artifact_root": "/Users/ocasta/Code/fly-brain/data/results/milestone-4-reference-jobs-regression-20261005-01",
+  "source_sha256": {
+    "src/fly_brain/qualification/adapters/brian_jobs.py": "7118832b74a0478b7da23f9b2a5ac0091f3b452181983c716967a42ebf824910",
+    "src/fly_brain/qualification/adapters/reference_queues.py": "139c7f524371d9ad46985cde5685d27b2ce73f9a83fea9e8dae47fd68ecafed6",
+    "src/fly_brain/qualification/adapters/observer_stream.py": "2a555b5a91530ead64d94a51b295ad23667064e28c5d16f2ae945cc8ef5bcf71",
+    "tests/qualification/test_brian_jobs.py": "877b3e8b13c15278475dc60e26da914ec4dbe15a8c2705f732cb1324a3506d59",
+    "tests/integration/test_reference_queues.py": "676977e173fbcd6e2e60c8fa4e1ca378e6a8a6ae0c20789359c80303f53c5744",
+    "src/fly_brain/simulation/backend/core.py": "c4079b5d32cb05e701fcb89856a8b48066185bb5c470203e56f4785316461132",
+    "src/fly_brain/simulation/backend/bucketed.py": "0829f0cb3c67f08bb4dc861c1397548f8e66e4ce2262ef3471368ce772552747",
+    "src/fly_brain/simulation/backend/accumulation.py": "2ea94edfbae1852cdf269fe7169fa97a00c57bf8cb597879fd076abe0c17a894"
+  },
+  "scope": "Small live-pipe/reference setup, actual queues and repeats, source identity, failure cleanup, independent ledger fault detection, and complete scientific regression. Complete-network observer/memory, paired causal checks, the 52-case parity matrix, and performance remain open.",
+  "application_tests": {
+    "tests": 155,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "quality": {
+    "ruff_lint": true,
+    "ruff_format": true,
+    "pyright_errors": 0,
+    "pyright_warnings": 0,
+    "import_contracts_kept": 3,
+    "locked_offline_resolution_packages": 38
+  }
+}
