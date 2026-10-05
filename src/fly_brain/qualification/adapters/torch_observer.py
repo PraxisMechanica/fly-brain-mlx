@@ -1,4 +1,4 @@
-from collections.abc import Iterator
+from collections.abc import Generator
 from dataclasses import dataclass
 
 import numpy as np
@@ -49,7 +49,7 @@ def capture(state: TensorState, step: int) -> TorchSnapshot:
 
 def observe(
     model: TorchModel, events: NDArray[np.uint8], targets: tuple[int, ...]
-) -> Iterator[TorchSnapshot]:
+) -> Generator[TorchSnapshot, None, None]:
     if (
         events.ndim != 3
         or events.shape[0] != model.neurons.neuron.batch

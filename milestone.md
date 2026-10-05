@@ -662,6 +662,12 @@ Live cause-file integration checkpoint (2026-10-05):
 - **Three live reference/Metal tests pass, zero failures/errors/skips**. An explicitly injected step-7 budget fault proves archive retention across subsequent blocks, checks all archived native descriptors, and compares selected weights directly with actual C++ output. The injected fault is a serialization test, not a naturally occurring numerical difference. [Report](data/results/milestone-4-paired-collector-20261005-03.xml). The default application suite remains **201 passed, zero failures/errors/skips**; all 127 files pass Ruff checks, strict Pyright has zero errors/warnings, and all three dependency contracts pass.
 - Full-network cause interpretation still requires the bounded review rule. CPU collection, repeat acceptance, and the remaining matrix remain open. Commit this working state before the next implementation.
 
+Reusable CPU collector checkpoint (2026-10-05):
+
+- At `8030edd`, stream the pinned CPU comparator's actual five float32 tensors and full physical delay buffer from fresh state. Retain each trial's native digest at initial state and every step, complete final arrays, and aligned integer trial/neuron/step spike coordinates. Output creation is exclusive; the actual generator closes on exit. Its corrected return annotation changes no numerical behavior.
+- The first sandbox attempt stopped during shared Metal-fixture import before running tests. The rerun with device access passes **30 CPU collector/observer tests, zero failures/errors/skips**, including populated/silent four-trial collection, complete native array/hash preservation, fresh-state replay, and no-overwrite checks. [Report](data/results/milestone-4-cpu-collector-20261005-02.xml). The default application suite remains **201 passed, zero failures/errors/skips**; all 129 files pass Ruff checks, strict Pyright has zero errors/warnings, and all three dependency contracts pass (95 modules / 374 dependencies).
+- This qualifies reusable CPU evidence collection only. Persisted repeat checks, case execution/reporting, and the remaining matrix remain open. Commit this passing working state before the next unit.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.
