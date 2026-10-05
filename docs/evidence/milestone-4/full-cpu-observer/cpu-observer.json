@@ -1,0 +1,202 @@
+{
+  "checkpoint": "9f3cdc2cb35d9874852ab99851a2ee666202c47d",
+  "environment": "environment.json",
+  "modes": {
+    "ordinary": {
+      "execution_and_capture_s": 163.53838495799573,
+      "spikes": 1609,
+      "active_neurons": 326,
+      "observations": 1001,
+      "final": {
+        "g": {
+          "dtype": "<f4",
+          "shape": [
+            1,
+            138639
+          ],
+          "sha256": "2c8e7183df5846eb67cce228b5332c7e8f7c41da2c29e6869a4ac111c102ba56"
+        },
+        "delay_buffer": {
+          "dtype": "<f4",
+          "shape": [
+            1,
+            19,
+            138639
+          ],
+          "sha256": "153ae70e171fd286bb6831f6f953a219a0db01c5ac640f76a5cfffc442db3e80"
+        },
+        "spikes": {
+          "dtype": "<f4",
+          "shape": [
+            1,
+            138639
+          ],
+          "sha256": "82c552c9fcbde2dfc3dac3369eba2663bf27a29cb88aa6a1c8aab050e60495e8"
+        },
+        "v": {
+          "dtype": "<f4",
+          "shape": [
+            1,
+            138639
+          ],
+          "sha256": "ad9eabd1954bbe6f7416ce39950b53b634108149df0e7c844c149a59fb266b3d"
+        },
+        "refrac": {
+          "dtype": "<f4",
+          "shape": [
+            1,
+            138639
+          ],
+          "sha256": "d98e42ccfd613be932e1598ed5209bef5c9a0447a2ffe152f7760f049c12cdc7"
+        },
+        "spike_steps": {
+          "dtype": "<i8",
+          "shape": [
+            1609
+          ],
+          "sha256": "c7820d85cdbd7da6b35e8e440991f352e243473db91904075d9cbdcf8aeacfc4"
+        },
+        "spike_neurons": {
+          "dtype": "<i8",
+          "shape": [
+            1609
+          ],
+          "sha256": "ff858048ad0d8af59e1eb69625f00bf8b27ef7acd6ea4af369ae5f7a7bc18747"
+        }
+      }
+    },
+    "observed": {
+      "execution_and_capture_s": 173.31870666600298,
+      "spikes": 1609,
+      "active_neurons": 326,
+      "observations": 1001,
+      "final": {
+        "g": {
+          "dtype": "<f4",
+          "shape": [
+            1,
+            138639
+          ],
+          "sha256": "2c8e7183df5846eb67cce228b5332c7e8f7c41da2c29e6869a4ac111c102ba56"
+        },
+        "delay_buffer": {
+          "dtype": "<f4",
+          "shape": [
+            1,
+            19,
+            138639
+          ],
+          "sha256": "153ae70e171fd286bb6831f6f953a219a0db01c5ac640f76a5cfffc442db3e80"
+        },
+        "spikes": {
+          "dtype": "<f4",
+          "shape": [
+            1,
+            138639
+          ],
+          "sha256": "82c552c9fcbde2dfc3dac3369eba2663bf27a29cb88aa6a1c8aab050e60495e8"
+        },
+        "v": {
+          "dtype": "<f4",
+          "shape": [
+            1,
+            138639
+          ],
+          "sha256": "ad9eabd1954bbe6f7416ce39950b53b634108149df0e7c844c149a59fb266b3d"
+        },
+        "refrac": {
+          "dtype": "<f4",
+          "shape": [
+            1,
+            138639
+          ],
+          "sha256": "d98e42ccfd613be932e1598ed5209bef5c9a0447a2ffe152f7760f049c12cdc7"
+        },
+        "spike_steps": {
+          "dtype": "<i8",
+          "shape": [
+            1609
+          ],
+          "sha256": "c7820d85cdbd7da6b35e8e440991f352e243473db91904075d9cbdcf8aeacfc4"
+        },
+        "spike_neurons": {
+          "dtype": "<i8",
+          "shape": [
+            1609
+          ],
+          "sha256": "ff858048ad0d8af59e1eb69625f00bf8b27ef7acd6ea4af369ae5f7a7bc18747"
+        }
+      }
+    },
+    "repeat": {
+      "execution_and_capture_s": 172.8432370829978,
+      "spikes": 1609,
+      "active_neurons": 326,
+      "observations": 1001,
+      "final": {
+        "g": {
+          "dtype": "<f4",
+          "shape": [
+            1,
+            138639
+          ],
+          "sha256": "2c8e7183df5846eb67cce228b5332c7e8f7c41da2c29e6869a4ac111c102ba56"
+        },
+        "delay_buffer": {
+          "dtype": "<f4",
+          "shape": [
+            1,
+            19,
+            138639
+          ],
+          "sha256": "153ae70e171fd286bb6831f6f953a219a0db01c5ac640f76a5cfffc442db3e80"
+        },
+        "spikes": {
+          "dtype": "<f4",
+          "shape": [
+            1,
+            138639
+          ],
+          "sha256": "82c552c9fcbde2dfc3dac3369eba2663bf27a29cb88aa6a1c8aab050e60495e8"
+        },
+        "v": {
+          "dtype": "<f4",
+          "shape": [
+            1,
+            138639
+          ],
+          "sha256": "ad9eabd1954bbe6f7416ce39950b53b634108149df0e7c844c149a59fb266b3d"
+        },
+        "refrac": {
+          "dtype": "<f4",
+          "shape": [
+            1,
+            138639
+          ],
+          "sha256": "d98e42ccfd613be932e1598ed5209bef5c9a0447a2ffe152f7760f049c12cdc7"
+        },
+        "spike_steps": {
+          "dtype": "<i8",
+          "shape": [
+            1609
+          ],
+          "sha256": "c7820d85cdbd7da6b35e8e440991f352e243473db91904075d9cbdcf8aeacfc4"
+        },
+        "spike_neurons": {
+          "dtype": "<i8",
+          "shape": [
+            1609
+          ],
+          "sha256": "ff858048ad0d8af59e1eb69625f00bf8b27ef7acd6ea4af369ae5f7a7bc18747"
+        }
+      }
+    }
+  },
+  "all_five_actual_state_tensors_and_physical_buffers_ordinary_observed_repeat_byte_identical": true,
+  "memory": {
+    "sampled_process_rss_peak_bytes": 2519154688,
+    "samples_file": "memory-samples.jsonl",
+    "scope": "Proof process only; sampling begins after input loading and CSR prepare return; includes fresh-state allocation, execution, native hashing and collection. Not total system/unified memory."
+  },
+  "scope": "Complete 0.1-second sugar trial 0 CPU comparator observation/repeat proof. No four-trial/one-second gate, full three-engine matrix acceptance or benchmark approval."
+}

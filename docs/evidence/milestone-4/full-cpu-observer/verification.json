@@ -1,0 +1,26 @@
+{
+  "execution_checkpoint": "9f3cdc2cb35d9874852ab99851a2ee666202c47d",
+  "parent_verification_checkpoint": "17e3f6b",
+  "all_1001_observed_and_repeat_native_five_tensor_digests_match_ordinary": true,
+  "fresh_process_ordinary_matches_preserved_interrupted_ordinary": true,
+  "every_final_array_dtype_shape_and_native_hash_verified": true,
+  "stimulus_and_numerical_source_hashes_verified": true,
+  "observations_per_mode": 1001,
+  "spikes_per_mode": 1609,
+  "active_neurons_per_mode": 326,
+  "sampled_process_rss_peak_bytes": 2519154688,
+  "memory_sample_count": 1930,
+  "preserved_files": {
+    "cpu-observer.json": "893a23b3c65e7cedcb1ef01678d2a0e445eab9d00fc2a69c8a5b5c47da10f196",
+    "environment.json": "2003a858ee2603592babf789e926dc76a8b768b2f6bd9cece8c7078cd69068f9",
+    "memory-samples.jsonl": "804bcb60b4b3551bf55d4df33d351cf334d7bbfb55257391f0692586848e345e",
+    "observed-digests.json": "aed50d9e01d772f0eb799aef6d321ebdb8524fea533ea1e265820cecd0188be3",
+    "observed-final.npz": "358277e56df4131914d9218925eb6ccabf27d5c828869890e7bdd008f6d08334",
+    "ordinary-digests.json": "aed50d9e01d772f0eb799aef6d321ebdb8524fea533ea1e265820cecd0188be3",
+    "ordinary-final.npz": "358277e56df4131914d9218925eb6ccabf27d5c828869890e7bdd008f6d08334",
+    "repeat-digests.json": "aed50d9e01d772f0eb799aef6d321ebdb8524fea533ea1e265820cecd0188be3",
+    "repeat-final.npz": "358277e56df4131914d9218925eb6ccabf27d5c828869890e7bdd008f6d08334",
+    "stimulus.npz": "8b56372b13724c5b87a51c62da8e0681bf0a6cd5fcc53360a77f6ee9b88f8170"
+  },
+  "scope": "Complete 0.1-second sugar trial 0 CPU comparator observation/repeat proof. No four-trial/one-second gate, full three-engine matrix acceptance or benchmark approval."
+}
