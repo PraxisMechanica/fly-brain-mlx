@@ -1,0 +1,16 @@
+{
+  "assignment_checkpoint": "1babf5c",
+  "agent": "/root/review_one_second_timing_remediation",
+  "model": "gpt-6-astra",
+  "reasoning_effort": "xhigh",
+  "fork_turns": "none",
+  "assignment_sha256": "9c2c05141ad97ca1454922f76dcbe5e61aa3efffba86f3953d91a7d2e4eee837",
+  "scope": "Read-only failed one-second timing-gate remediation review and bounded host diagnostics; all gates/model/reference remain fixed.",
+  "review_completed": false,
+  "case_accepted": false,
+  "dependent_numerical_implementation_on_hold": true,
+  "existing_sugar_session": 3625,
+  "existing_p9_session": 88326,
+  "new_full_case_launches_on_hold": true,
+  "source_and_native_evidence_preserved": true
+}

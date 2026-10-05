@@ -1099,6 +1099,11 @@ One-second sugar timing failure and remediation handoff (2026-10-05):
 - **The timing floor fails:** MLX timing F1 **2966/3713 = 0.7988149744142203** against required **0.95**; 13,347 timing matches from 16,752 reference / 16,665 MLX spikes. The unchanged CPU baseline scores 0.3982965635535577. All other ten gates pass, including activity 409/413, count error 29/5584, neuron count error 347/16752 and correlation 0.9996497886766692. Better-than-CPU timing does not replace the absolute floor. The explained first fork cannot waive this failure; full case acceptance is blocked by this explicit fixed gate.
 - Prepare [the bounded remediation review](docs/handoffs/astra-one-second-timing-remediation.md) for fresh-context Astra at explicit `xhigh`, asking for the smallest scientifically supported correction or diagnostic under unchanged model/reference/gates, including an honest assessment of the current float32 representation. Preserve and finish both currently live runs; launch no additional full cases and make no dependent numerical changes before the completed review is independently verified. Commit this complete failure evidence and handoff before dispatch. Acceptance stays **9/52**; all 52 cases remain required. The earlier 10–14-day planning estimate excludes this newly required remediation and must be reassessed after the supported remedy is known.
 
+Timing remediation review dispatched (2026-10-05):
+
+- At clean `1babf5c`, dispatch `/root/review_one_second_timing_remediation` with fresh context, explicit `gpt-6-astra` and `xhigh`. [Assignment binding and dispatch](docs/evidence/milestone-4/one-second-sugar-metric-failure/dispatch.json). Its initial source inspection confirms the current two-stage float32 voltage rounding; it is evaluating bounded algebraically equivalent local host replays. That progress is not a completed recommendation or qualified remedy. Sol awaits the result and continues only independent evidence checks.
+- Commit the dispatch now. Both live executions remain preserved; new full-case launches and dependent numerical implementation remain on hold. No acceptance criterion is relaxed; acceptance stays **9/52**.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.
