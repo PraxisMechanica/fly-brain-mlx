@@ -49,8 +49,17 @@ and application programming interface or database schema changes still apply.
   unchanged boundary debt, staged defects, and actual push rejection.
   [Report](docs/evidence/code-quality/hook-intent-tests.xml). Apple-silicon
   [continuous integration](.github/workflows/quality.yml) is configured at
-  `c053f05`; its hosted result remains unverified here. Rejecting weakened checks
-  and complete architecture-rule coverage remain open.
+  `c053f05`. At `1376e40`, [hosted run 37328288754](https://github.com/PraxisMechanica/fly-brain-mlx/actions/runs/37328288754)
+  passes every step and uploads both [metric reports](docs/evidence/code-quality/ci-1376e40/).
+  The first hosted run passed its checks but excluded hidden evidence paths;
+  the corrected uploader preserves the two reports. Their nine comparisons
+  pass, covering 232 files / 25,207 nonblank lines, average/max complexity
+  5.37 / 28 and health/maintainability 69.05 / 69.05. Five additional real import
+  fixtures reject aliases, type-only imports, indirect paths and re-exports;
+  weakening transitive enforcement stops detecting the indirect defect.
+  [Complete coverage limits and definite clock finding](docs/agent/quality-coverage.md):
+  the full 37-rule architecture result is **ANALYSIS FAILED (COV002)**.
+  Keep feature/numerical work held while that required enforcement is incomplete.
 - The recorded 2026-10-05 workflow amendment uses coherent review branches and
   stacked pull requests. The incoming quality work is on `codex/quality-gates`.
   Preserve that assignment; publish verified increments to the user-owned
@@ -58,9 +67,10 @@ and application programming interface or database schema changes still apply.
 
 ## Next work
 
-1. Finish quality enforcement before further performance implementation. Verify
-   attempts to weaken checks beyond the completed controlled hook proof; qualify
-   the configured continuous integration and complete structural-rule coverage.
+1. Finish quality enforcement before further performance implementation. Complete
+   structural-rule ownership/type/call/effect coverage and rejection fixtures;
+   resolve recorded findings, including the simulation service's uninjected clock.
+   Verify remaining metric/index weakening cases and required merge enforcement.
    Use the pinned standalone
    metric package and existing uv/MLX architecture. [Tool provenance](tools/code-quality/provenance.json)
    and [developer commands](docs/agent/development.md).
