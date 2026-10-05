@@ -1,0 +1,215 @@
+{
+  "parent_checkpoint": "3b6290c8f1aadcf28eca971e9d0ef6284a1e60ce",
+  "launch_checkpoint": "55ea35f",
+  "case": {
+    "experiment": "sugar",
+    "steps": 10000,
+    "trial": 0
+  },
+  "all_19_fields_independently_recomputed_and_application_equal": true,
+  "checks": {
+    "silent_reference_exact": true,
+    "activity_floor": true,
+    "activity_paired": true,
+    "count_floor": true,
+    "count_paired": true,
+    "neuron_count_floor": true,
+    "neuron_count_paired": true,
+    "correlation_floor_or_exact_counts": true,
+    "correlation_paired": true,
+    "timing_floor": false,
+    "timing_paired": true
+  },
+  "all_11_metric_gates_pass": false,
+  "metrics": {
+    "mlx": {
+      "reference_spikes": 16752,
+      "candidate_spikes": 16665,
+      "active_jaccard": {
+        "numerator": 409,
+        "denominator": 413,
+        "value": 0.9903147699757869
+      },
+      "count_error": {
+        "numerator": 29,
+        "denominator": 5584,
+        "value": 0.005193409742120344
+      },
+      "signed_count_ratio": {
+        "numerator": 5555,
+        "denominator": 5584,
+        "value": 0.9948065902578797
+      },
+      "neuron_count_error": {
+        "numerator": 347,
+        "denominator": 16752,
+        "value": 0.02071394460362942
+      },
+      "rate_correlation": 0.9996497886766692,
+      "counts_equal": false,
+      "timing_matches": 13347,
+      "timing_f1": {
+        "numerator": 2966,
+        "denominator": 3713,
+        "value": 0.7988149744142203
+      },
+      "timing_precision": {
+        "numerator": 4449,
+        "denominator": 5555,
+        "value": 0.8009000900090009
+      },
+      "timing_recall": {
+        "numerator": 4449,
+        "denominator": 5584,
+        "value": 0.7967406876790831
+      },
+      "exact_step_f1": {
+        "numerator": 24646,
+        "denominator": 33417,
+        "value": 0.7375288027052099
+      },
+      "one_step_f1": {
+        "numerator": 25184,
+        "denominator": 33417,
+        "value": 0.7536283927342371
+      },
+      "mean_timing_error_ms": 0.032029669588671615,
+      "median_timing_error_ms": 0.0,
+      "shared_rate_correlation": 0.9996471278326035,
+      "common_rate_mae_hz": 0.8261904761904761,
+      "common_rate_rmse_hz": 1.2373166049772308
+    },
+    "torch": {
+      "reference_spikes": 16752,
+      "candidate_spikes": 17062,
+      "active_jaccard": {
+        "numerator": 388,
+        "denominator": 419,
+        "value": 0.9260143198090692
+      },
+      "count_error": {
+        "numerator": 155,
+        "denominator": 8376,
+        "value": 0.018505253104106972
+      },
+      "signed_count_ratio": {
+        "numerator": 8531,
+        "denominator": 8376,
+        "value": 1.018505253104107
+      },
+      "neuron_count_error": {
+        "numerator": 50,
+        "denominator": 1047,
+        "value": 0.04775549188156638
+      },
+      "rate_correlation": 0.9986154217528144,
+      "counts_equal": false,
+      "timing_matches": 6734,
+      "timing_f1": {
+        "numerator": 6734,
+        "denominator": 16907,
+        "value": 0.3982965635535577
+      },
+      "timing_precision": {
+        "numerator": 3367,
+        "denominator": 8531,
+        "value": 0.3946782323291525
+      },
+      "timing_recall": {
+        "numerator": 3367,
+        "denominator": 8376,
+        "value": 0.401981852913085
+      },
+      "exact_step_f1": {
+        "numerator": 280,
+        "denominator": 16907,
+        "value": 0.016561187673744603
+      },
+      "one_step_f1": {
+        "numerator": 4592,
+        "denominator": 16907,
+        "value": 0.27160347784941147
+      },
+      "mean_timing_error_ms": 0.24557469557469558,
+      "median_timing_error_ms": 0.1,
+      "shared_rate_correlation": 0.998586686618853,
+      "common_rate_mae_hz": 1.9047619047619047,
+      "common_rate_rmse_hz": 2.7524880519614388
+    }
+  },
+  "native_coordinate_descriptors": {
+    "brian": {
+      "spike_i": {
+        "dtype": "<i4",
+        "shape": [
+          16752
+        ],
+        "sha256": "0bc2229f5b39f3253788fa31f90335fab8485a76a6ebb5469c5f33c1650dffc1"
+      },
+      "spike_t": {
+        "dtype": "<f8",
+        "shape": [
+          16752
+        ],
+        "sha256": "c3ba00a8e38c7ccaa48e454470697dfe7fe3b995159466f2759ec2eeb76e2487"
+      }
+    },
+    "mlx": {
+      "spike_neurons": {
+        "dtype": "<i8",
+        "shape": [
+          16665
+        ],
+        "sha256": "b1d7f94aada7de81fb3cfeef9f13cddd9c6f8c9c6e360e04900eca00ca1dea9c"
+      },
+      "spike_steps": {
+        "dtype": "<i8",
+        "shape": [
+          16665
+        ],
+        "sha256": "6f0e3c24a623b51e88e76a3c7d11bf0946fda162b944a75e3b13220e0b590533"
+      }
+    },
+    "torch": {
+      "spike_neurons": {
+        "dtype": "<i8",
+        "shape": [
+          17062
+        ],
+        "sha256": "224496728bd8d90873c507b6895960d6291b1d36abc3ea9f7bd6308388697f53"
+      },
+      "spike_steps": {
+        "dtype": "<i8",
+        "shape": [
+          17062
+        ],
+        "sha256": "9c93cf44e34588cc480b72a6d60c7c241809afd27aa531d8ee0597b74c52edb5"
+      },
+      "spike_trials": {
+        "dtype": "<i8",
+        "shape": [
+          17062
+        ],
+        "sha256": "e4853ab2ff3c395c15677bbcb838c9ab95bde83a8a62c46e68d655ef94e3e4d3"
+      }
+    }
+  },
+  "original_native_file_sha256": {
+    "data/results/milestone-4-parity-sugar-10000-0-20261005-01/observations/paired-first/reference-native.npz": "b861402a0b44c835756b478f885a34be81ac270d1d48d9fa6565d2ea6efd9f90",
+    "data/results/milestone-4-parity-sugar-10000-0-20261005-01/observations/paired-first/mlx-native.npz": "9f52548859f4d79a74983fc3ced4e5b642b092ded6f48972094b8763e29673e2",
+    "data/results/milestone-4-parity-sugar-10000-0-20261005-01/observations/cpu-first/native.npz": "b9558134bf2367aed9971057a0d5467fa34824db9b64de10e53cca4721aad6a9"
+  },
+  "input_pins": {
+    "completeness_sha256": "52b0ac6094cd32c546f8d4c341e094376f48f4e791f8db9b166de5dff8199ea4",
+    "connectivity_sha256": "efeb23fb99098e9c390f6869969b2a121a2ee92c833cfc45ecb2c1d8e1af0347",
+    "neurons": 138639,
+    "edges": 15091983,
+    "scale_mv": 0.275
+  },
+  "neuron_mapping_sha256": "70200482b9fe6656f215a97b71332dd6725b80e2cb32e0052a4d47916ca1579b",
+  "saved_native_spikes_sha256": "6bb67da558892f81eb759596072bb06515a4987aadb9ff65bf05181143d55d5e",
+  "independent_scorer_sha256": "32405d9b474ab5c216e4d2e2f9d5d7e760e07d730aa8f37ead01089795bbb2ca",
+  "executed_program_sha256": "46dd7e7dc6f4417348723a5ad8386bf60cf9fcc1a0306a9ab720de62ad9109b6",
+  "case_accepted": false,
+  "scope": "Complete first-run native spikes and all frozen metric gates only; fresh CPU repeat, complete replay, own future queues and final reviewed-case verification remain required."
+}
