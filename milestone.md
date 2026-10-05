@@ -919,6 +919,11 @@ Complete sugar trial-2 case acceptance (2026-10-05):
 - Every native phase, physical queue, due-row digest, final array, and actual spike raster repeats exactly within each engine. Actual final future original-row queue sets agree across Brian2/MLX; source hashes, input pins, neuron mapping, canonical trial stimulus, native precision, and complete observation coverage pass. The [24-file raw archive](docs/evidence/milestone-4/cases/sugar-1000-2/observations.zip) matches every preserved original hash; all eight copied evidence files match the executed proof output.
 - This accepts **7/52 cases only**. Six cases have exact MLX/reference rasters; sugar trial 1 retains its separate reviewed decision and original automatic refusal. No application or numerical source changes. Existing 377 application / 203 scientific test results remain their separately recorded unchanged-source evidence. Commit this verified case before refreshing partial diagnostics or starting the next case; 45 cases, prescribed batch/repeat checks, full parity approval, and performance remain open.
 
+Three-trial sugar partial diagnostic verification (2026-10-05):
+
+- At clean `8fa78ba`, rerun the committed multi-trial checker against all seven versioned cases. The [partial report](docs/evidence/milestone-4/matrix-diagnostics/partial-20261005-05/partial-matrix.json) records **7 included / 45 missing** cases in all 12 prescribed groups. [Executed verification](docs/evidence/milestone-4/matrix-diagnostics/partial-20261005-05/executed-verification.py) independently reproduces all nineteen pooled metric fields and every actual trial/pooled 100 ms bin. Sugar trials 0, 1, and 2 contribute; timing matches remain within each trial and neuron.
+- Sugar trial 1 remains explicitly listed as originally unaccepted automatically and separately accepted by its bound parent review. No pooled metric changes an individual gate or supplies matrix acceptance. Both copied files match the executed output; application and numerical sources remain unchanged. Commit this verified diagnostic before sugar trial 3; acceptance remains **7/52**.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.
