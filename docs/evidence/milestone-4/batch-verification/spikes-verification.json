@@ -1,0 +1,24 @@
+{
+  "implementation_parent_checkpoint": "0406861",
+  "application_tests": {
+    "tests": 425,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "new_spike_intent_tests": 8,
+  "ruff_checked_files": 162,
+  "strict_pyright_errors": 0,
+  "strict_pyright_warnings": 0,
+  "initial_pyright_errors_corrected": 4,
+  "import_contracts_kept": 3,
+  "import_contracts_broken": 0,
+  "import_files": 112,
+  "import_dependencies": 481,
+  "source_sha256": {
+    "src/fly_brain/qualification/adapters/batch_native.py": "c4adfc96d16597fcdd1cb018396f2c968bba5351e2d60eab43c2f9d613caf513",
+    "tests/unit/test_batch_native.py": "77a73e810904d6bad3bcc70739988c8a37a5b5e1e93613dd18b7b9f2ac72d650"
+  },
+  "batch_gate_accepted": false,
+  "scope": "Validate actual native trial/neuron/step spike identities without pooling, casts, duplicates or out-of-bounds coordinates. Exact trial equality, canonical identity and actual fresh batch executions remain required."
+}

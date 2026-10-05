@@ -2,7 +2,11 @@ import numpy as np
 import pytest
 from numpy.typing import NDArray
 
-from fly_brain.qualification.adapters.batch_native import Engine, require_fields
+from fly_brain.qualification.adapters.batch_native import (
+    Engine,
+    require_fields,
+    trial_spikes,
+)
 
 pytestmark = pytest.mark.unit
 
@@ -68,3 +72,49 @@ def test_incomplete_native_final_evidence_cannot_pass(
         arrays['spike_trials'] = np.zeros(1, dtype=np.int64)
     with pytest.raises(ValueError):
         require_fields(arrays, engine, 4, 6, 3, 2)
+
+
+def test_identical_neuron_steps_in_different_trials_keep_their_own_identity() -> None:
+    arrays = native('mlx', 4)
+    arrays['spike_trials'] = np.array([3, 1, 0, 2], dtype=np.int64)
+    arrays['spike_neurons'] = np.array([2, 2, 2, 2], dtype=np.int64)
+    arrays['spike_steps'] = np.array([4, 4, 4, 4], dtype=np.int64)
+    result = trial_spikes(arrays, 4, 6, 35)
+    assert [(row.neurons.tolist(), row.steps.tolist()) for row in result] == [
+        ([2], [4])
+    ] * 4
+    assert trial_spikes(native('mlx', 1), 1, 6, 35)[0].steps.size == 0
+
+
+@pytest.mark.parametrize(
+    'fault', ('neuron', 'step', 'trial', 'duplicate', 'cast', 'missing', 'shape')
+)
+def test_invalid_batch_spikes_cannot_hide_behind_equal_pooled_counts(
+    fault: str,
+) -> None:
+    arrays = native('mlx', 4)
+    arrays.update(
+        {
+            name: np.array([0], dtype=np.int64)
+            for name in ('spike_trials', 'spike_neurons', 'spike_steps')
+        }
+    )
+    if fault == 'neuron':
+        arrays['spike_neurons'][0] = 6
+    elif fault == 'step':
+        arrays['spike_steps'][0] = 35
+    elif fault == 'trial':
+        arrays['spike_trials'][0] = 4
+    elif fault == 'duplicate':
+        arrays = {
+            name: np.repeat(value, 2) if name.startswith('spike_') else value
+            for name, value in arrays.items()
+        }
+    elif fault == 'cast':
+        arrays['spike_steps'] = arrays['spike_steps'].astype(np.int32)
+    elif fault == 'missing':
+        del arrays['spike_trials']
+    else:
+        arrays['spike_neurons'] = np.zeros((1, 1), dtype=np.int64)
+    with pytest.raises(ValueError):
+        trial_spikes(arrays, 4, 6, 35)

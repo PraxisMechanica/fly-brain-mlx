@@ -1,8 +1,11 @@
 from collections.abc import Mapping
-from typing import Literal
+from typing import Literal, cast
 
 import numpy as np
 from numpy.typing import NDArray
+
+from fly_brain.comparison.acceptance import validate_coordinates
+from fly_brain.comparison.models import SpikeSteps
 
 NativeArrays = Mapping[str, NDArray[np.generic]]
 Engine = Literal['mlx', 'cpu']
@@ -51,3 +54,39 @@ def require_fields(
             raise ValueError(f'Native field has wrong precision or dimensions: {name}')
         if not np.isfinite(value).all():
             raise ValueError(f'Native field contains nonfinite values: {name}')
+
+
+def trial_spikes(
+    arrays: NativeArrays, trials: int, neurons: int, steps: int
+) -> tuple[SpikeSteps, ...]:
+    if steps < 1 or neurons < 1 or trials not in (1, 4):
+        raise ValueError('Spike evidence requires valid trial/network dimensions')
+    indices, times = arrays['spike_neurons'], arrays['spike_steps']
+    positions = arrays.get('spike_trials')
+    if positions is None:
+        if trials != 1:
+            raise ValueError('Batch spike evidence requires actual trial coordinates')
+        positions = np.zeros(times.size, dtype=np.int64)
+    positions = cast(NDArray[np.int64], positions)
+    if (
+        positions.dtype != np.int64
+        or positions.ndim != 1
+        or indices.ndim != 1
+        or times.ndim != 1
+        or positions.shape != times.shape
+        or indices.shape != times.shape
+        or np.any(positions < 0)
+        or np.any(positions >= trials)
+    ):
+        raise ValueError('Spike trial coordinates must be aligned native int64')
+    result: list[SpikeSteps] = []
+    for trial in range(trials):
+        selected = positions == trial
+        spikes = SpikeSteps(
+            cast(NDArray[np.int64], indices[selected]),
+            cast(NDArray[np.int64], times[selected]),
+        )
+        validate_coordinates(spikes, neurons, steps)
+        order = np.lexsort((spikes.neurons, spikes.steps))
+        result.append(SpikeSteps(spikes.neurons[order], spikes.steps[order]))
+    return tuple(result)
