@@ -1,0 +1,20 @@
+{
+  "checkpoint": "a4920eff7e083476416d838f85402c04234291ad",
+  "files": [
+    {
+      "source": "/private/tmp/fly-brain-user-pause-20261005-01.json",
+      "archive": "docs/evidence/execution-time-investigation/pause.json",
+      "bytes": 1057,
+      "sha256": "ae614aa8a971a087362885bb1ccf67b90d0ebd25b6d6189841c8ff92322a4c55"
+    },
+    {
+      "source": "/private/tmp/fly-brain-p9-cpu-timing-sample-20261005-01.txt",
+      "archive": "docs/evidence/execution-time-investigation/p9-cpu-stack-sample.txt",
+      "bytes": 135446,
+      "sha256": "1e9f6112e370fddab8481efc00d880f06c2846f220d8ecf2be627b79288a153c"
+    }
+  ],
+  "source_and_archive_bytes_identical": true,
+  "development_resumed": false,
+  "data_deleted": false
+}

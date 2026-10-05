@@ -2,6 +2,16 @@
 
 This is the authoritative project plan, acceptance criteria, and progress record. Updated 2026-10-05 (Europe/Paris). It consolidates the supplied charter, milestone specification, startup evidence, and subsequent user amendments.
 
+## Development paused — execution-time investigation
+
+Status: **paused at the user's request on 2026-10-05**. This hold supersedes all later instructions in this document to continue numerical implementation or qualification. The project goal is marked paused. Resume development only after a further user instruction.
+
+The user requests an explanation for the successive 2–3-day, 10–14-day, and 14–21-day estimates; measured causes of slow progress; and a review of different approaches, including C/C++. Investigation may read existing source and evidence, inspect preserved process state, and record findings. Do not adopt the numerical prototype, start new tests or simulations, optimize the application, or relax acceptance gates during this hold.
+
+At checkpoint `a4920eff7e083476416d838f85402c04234291ad`, suspend the existing P9 Python process (PID 62191, session 88326) with `SIGSTOP`. Its source, data, output, and live state remain preserved; do not restart or resume it. A brief stack sample taken before suspension supports the timing investigation. [Pause decision and process record](docs/evidence/execution-time-investigation/pause.json) and [stack sample](docs/evidence/execution-time-investigation/p9-cpu-stack-sample.txt). Confidence in this interpretation of the user's pause request: 95%.
+
+The scientific suite already running before the pause finished with 208 passes and zero failures/errors/skips. This is isolated candidate evidence, not adoption or full-network acceptance. Production numerical source remains unchanged; the accepted full-network matrix remains 9/52. The earlier completion estimates are withdrawn as reliable forecasts pending this investigation.
+
 ## Architecture compliance — hold released
 
 Status: **architecture remediation complete on 2026-10-04; all seven acceptance checks pass**. The user authorized the MLX-only repair, removal of Conda and NVIDIA backends, and removal of unused packages. This release applies to application architecture. Full-connectome loading, integration, parity, and performance remain open milestones.

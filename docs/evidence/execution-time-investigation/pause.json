@@ -1,0 +1,17 @@
+{
+  "checkpoint": "a4920eff7e083476416d838f85402c04234291ad",
+  "user_request": "Pause further development while investigating the rapidly increasing estimates and alternative approaches.",
+  "decision": "Suspend the existing P9 Python process with SIGSTOP; preserve its process, data, source and session. Resume only after a user instruction.",
+  "confidence_percent": 95,
+  "session_id": 88326,
+  "pid": 62191,
+  "signal": "SIGSTOP",
+  "state_after": "62191 62190 T    01:05:17  87.9 316560 /opt/homebrew/Cellar/python@3.10/3.10.14/Frameworks/Python.framework/Versions/3.10/Resources/Python.app/Contents/MacOS/Python /Users/ocasta/Code/fly-brain/.venv/bin/fly-brain qualify-parity --experiment p9 --duration-s 1 --trial 0 --output data/results/milestone-4-parity-p9-10000-0-20261005-01",
+  "sample_exit_code": 0,
+  "sample_path": "/private/tmp/fly-brain-p9-cpu-timing-sample-20261005-01.txt",
+  "sample_created": true,
+  "data_deleted": false,
+  "new_test_or_simulation_started": false,
+  "goal_status": "paused",
+  "qualified_candidate_adopted": false
+}
