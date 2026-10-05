@@ -1,0 +1,23 @@
+{
+  "checkpoint": "4783babbce8e23ba9978504311adc24e938e29d5",
+  "reviewer": "/root/review_exact_count_reduction",
+  "model": "gpt-6-astra",
+  "effort": "xhigh",
+  "fresh_context": true,
+  "decision": "Implement and qualify guarded float32 leaf-axis mx.sum with +0 count low; preserve all split-scale products and final compensated operations.",
+  "confidence_percent": 98,
+  "guard": "All per-destination absolute original integer count sums after outgoing silencing <= 2**24, calculated with host int64. Boolean accepted masks and unchanged layout geometry.",
+  "verified_existing_count_pairs": 693195,
+  "original_high_exact_low_positive_zero_and_initial_bits_preserved": true,
+  "original_layout_archive_sha256": "d2a8dbf8a51c7cc5cf9b38700daa2dc96a576a70585cfeebf52b170a82a35bc2",
+  "qualification": [
+    "Boundary/signed-zero/cancellation/duplicate/padding/rejection checks",
+    "157 scalars with explicit 132 guarded/25 oracle selection",
+    "24576 pinned cases and all recorded conversion limitations",
+    "Every complete bucket/layout field and accepted mask; repeat/singleton/batch/fresh process",
+    "Complete scientific suite and two fresh full one-second native matches including queue and ledger"
+  ],
+  "adopted": false,
+  "existing_accepted_cases_transfer": false,
+  "original_reducer_preserved": true
+}
