@@ -1,0 +1,29 @@
+{
+  "checkpoint": "33c5381dd7f51db1986ded007120cdfbe386efaa",
+  "reviewer": "/root/review_active_cpu_adoption",
+  "model": "gpt-6-astra",
+  "effort": "xhigh",
+  "fresh_context": true,
+  "decision": "Implement a guarded exact active-source evaluator; adopt only after focused operation/state tests, two fresh free-running complete one-second matches and a retained silenced-case witness.",
+  "confidence_percent": 95,
+  "original_evaluator_unchanged": true,
+  "original_launch": "55ea35f",
+  "verified_original_snapshots_per_run": 10001,
+  "verified_original_pair_identical": true,
+  "verified_sha256": {
+    "observations/cpu-first/native-digests.jsonl": "140e38c6c94e0ef8bf6e24439b58ced742858f8a8356c9f6a92b6f5b98f05e7d",
+    "observations/cpu-first/native.npz": "b9558134bf2367aed9971057a0d5467fa34824db9b64de10e53cca4721aad6a9",
+    "observations/cpu-repeat/native-digests.jsonl": "140e38c6c94e0ef8bf6e24439b58ced742858f8a8356c9f6a92b6f5b98f05e7d",
+    "observations/cpu-repeat/native.npz": "b9558134bf2367aed9971057a0d5467fa34824db9b64de10e53cca4721aad6a9",
+    "src/fly_brain/qualification/adapters/torch_reference.py": "bf52258041a464156ce05b267601dbefceb893356fbf8401b358b036a29ba6cb",
+    "src/fly_brain/qualification/adapters/torch_setup.py": "c7e284c2dfe19ed2ae24f32721d67ee4ff852b54c8eeeacd445a9aa677b5fb08",
+    "src/fly_brain/qualification/adapters/torch_observer.py": "36193a258f01f31b81c054afc88dbb239a19700d39d3dec6c5f8a36ef64fe904",
+    "src/fly_brain/qualification/adapters/torch_collect.py": "47eea3f7295adb3662af14d8ed47601854e3f16438c099c8e15fca242f90960a",
+    "src/fly_brain/qualification/adapters/paired_observer.py": "8f0959b99177c6aa1a7dc13f6c6a46665ac4a136ccae26b060e181448b1d6848"
+  },
+  "native_binary_provenance": "Original environment lacks a binary fingerprint. Resolve via retained locked artifact and installation/build evidence; do not claim this historical field was measured.",
+  "gates_unchanged": true,
+  "adopted": false,
+  "requalify_mlx": "New MLX modes need complete relevant-prefix raw Brian2 values or digest-verified replay; CPU equality does not confer MLX acceptance.",
+  "metric_reuse": "Reuse native CPU raster and rescore every new three-engine case; support union can change."
+}
