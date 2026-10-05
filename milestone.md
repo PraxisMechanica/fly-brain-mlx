@@ -939,6 +939,7 @@ Required one-second batch evidence review (2026-10-05):
 
 - At clean `f3abcaf`, prepare the [bounded batch verification assignment](docs/handoffs/astra-full-batch-verification.md) for fresh-context GPT-6 Astra at explicit `xhigh`. Determine sufficient native/replay evidence for actual sugar/P9 four-trial one-second batches versus independent trials 0–3, including the unchanged original CPU comparator. The earlier 0.1-second memory proof qualifies neither the required duration nor all independent trials.
 - This is a read-only scientific evidence-method review. Await completion and parent source/evidence verification before dependent batch implementation. Sugar trial 3's existing CPU executions are independent and remain running; no source, metric, scope, or acceptance changes are authorized by dispatch. Acceptance remains **7/52**.
+- Dispatched from `52a8784` to `/root/review_full_batch_verification`, fresh-context `gpt-6-astra` / `xhigh`. The child owns only this bounded read-only review; Sol retains all implementation and case verification.
 
 ## Milestone 5 — Complete-brain benchmark and profiling
 
