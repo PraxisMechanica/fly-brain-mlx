@@ -1,0 +1,232 @@
+{
+  "source_commit": "aebad54218e2676469699c8c86f68267cd232faf",
+  "milestone_snapshot_commit": "b93229808ce40c5bdce58cf1bb288338ec4da82a",
+  "verification_head": "c053f055bef33bb69f95052a7ee3bfcbdae0c6a9",
+  "local_documents_checked": 19,
+  "local_links_and_anchors_checked": 755,
+  "link_errors": [],
+  "complete_milestone_history_preserved": true,
+  "reference_history_preserved": true,
+  "scientific_fenced_blocks_unchanged": 1,
+  "scientific_table_rows_unchanged": 20,
+  "scientific_numeric_inline_expressions_unchanged": 87,
+  "original_versioned_data_evidence_files_preserved": 831,
+  "original_documents": {
+    "README.md": {
+      "sha256": "18cfb8f44b2e4e9f5318999e1340b71d0835f506471bc1ed54765ffcff269879",
+      "lines": 137,
+      "words": 1289
+    },
+    "AGENTS.md": {
+      "sha256": "708b5fa0947ac76172188ed1978935ea5a400b096988ee89a51c8db10f159375",
+      "lines": 41,
+      "words": 240
+    },
+    "milestone.md": {
+      "sha256": "8fd01e708d9b1194b58c5151e1a4bc5acf9434a72e06c0613cbe083ca3514e4a",
+      "lines": 1260,
+      "words": 33633
+    },
+    "docs/architecture-audit.md": {
+      "sha256": "6fd7cc4a1f90ffdbb1443dcbaca65fe62d2b2c23acf4b63c331bc1c8667d4518",
+      "lines": 128,
+      "words": 2788
+    },
+    "docs/architecture-remediation.md": {
+      "sha256": "d9f096780df804a21955ca9d6cb410a751a3dbf0401e377dfdac47b80e9273b7",
+      "lines": 83,
+      "words": 1394
+    },
+    "docs/execution-time-investigation.md": {
+      "sha256": "87bf72d1a9dbca4d2b9163795ebe7d6f408599faa9e80a7929206eae5e7e522b",
+      "lines": 144,
+      "words": 3346
+    },
+    "docs/mlx-port-baseline.md": {
+      "sha256": "e81b49f64e7240dbb3d95f14e67b6137c9082b026655e97c0f1567df6d36c020",
+      "lines": 360,
+      "words": 7496
+    },
+    "docs/handoffs/astra-accumulation-design.md": {
+      "sha256": "06e86d8435068e2371b83a9ae2275a8964360bab093b484c1aede7a01c42bcbd",
+      "lines": 191,
+      "words": 4205
+    },
+    "docs/handoffs/astra-full-batch-verification.md": {
+      "sha256": "1541d6ad073cd4c7a64a068edf1c91ab8e8897f7cd0826deb100698765bd1f15",
+      "lines": 21,
+      "words": 362
+    },
+    "docs/handoffs/astra-full-network-evidence.md": {
+      "sha256": "f0d4946c5877938ff5d5d4f0a96f74129fb4ffc1b983df054e979080bb034d66",
+      "lines": 38,
+      "words": 678
+    },
+    "docs/handoffs/astra-initial-state-cast.md": {
+      "sha256": "ce481c652d9a34023f86a2299ca3810ded5d46dad2924816324d409f4694764d",
+      "lines": 28,
+      "words": 508
+    },
+    "docs/handoffs/astra-numerical-contract.md": {
+      "sha256": "423ff84d0ef5c86b69cf0b3506819366f072f36fe7277e9a3e2e8a6427fb180f",
+      "lines": 102,
+      "words": 2005
+    },
+    "docs/handoffs/astra-one-second-sugar-cause.md": {
+      "sha256": "394d4fa09c5cc7eae6dfe04c0111970b6ac9c19dbaec866e0f61359186b85b49",
+      "lines": 25,
+      "words": 506
+    },
+    "docs/handoffs/astra-one-second-timing-remediation.md": {
+      "sha256": "5d06d1edfe04f0c80c3fa00fff6e987407236442c86370253a82a793b945f35a",
+      "lines": 39,
+      "words": 977
+    },
+    "typings/README.md": {
+      "sha256": "f9ad6273f593f10d5516801a69acd4eac2bcb5bffeba86e37354ec99f1ce826e",
+      "lines": 9,
+      "words": 244
+    }
+  },
+  "path_moves": {
+    "docs/mlx-port-baseline.md": "docs/agent/numerical-contract.md",
+    "docs/architecture-audit.md": "docs/agent/history/architecture-audit.md",
+    "docs/architecture-remediation.md": "docs/agent/history/architecture-remediation.md",
+    "docs/execution-time-investigation.md": "docs/agent/history/execution-time-investigation.md",
+    "typings/README.md": "docs/agent/typing.md",
+    "docs/handoffs/astra-one-second-timing-remediation.md": "docs/agent/handoffs/astra-one-second-timing-remediation.md",
+    "docs/handoffs/astra-numerical-contract.md": "docs/agent/handoffs/astra-numerical-contract.md",
+    "docs/handoffs/astra-full-network-evidence.md": "docs/agent/handoffs/astra-full-network-evidence.md",
+    "docs/handoffs/astra-one-second-sugar-cause.md": "docs/agent/handoffs/astra-one-second-sugar-cause.md",
+    "docs/handoffs/astra-full-batch-verification.md": "docs/agent/handoffs/astra-full-batch-verification.md",
+    "docs/handoffs/astra-accumulation-design.md": "docs/agent/handoffs/astra-accumulation-design.md",
+    "docs/handoffs/astra-initial-state-cast.md": "docs/agent/handoffs/astra-initial-state-cast.md"
+  },
+  "current_documents": {
+    "README.md": {
+      "sha256": "db0e9afff581f0b4e97c3877f81bf96332a3557948ae23a826ebfe4da89b7e49",
+      "lines": 74,
+      "words": 343
+    },
+    "AGENTS.md": {
+      "sha256": "46656c4c539bc8af5ff6a83a95f5ca2fda853427ca2d1a28e55ffd1c0a45f2ce",
+      "lines": 44,
+      "words": 254
+    },
+    "milestone.md": {
+      "sha256": "343b1e2621b23d756ff3c3badc49880eb901802900b8048fe85c387f16628fc0",
+      "lines": 152,
+      "words": 1426
+    },
+    "docs/agent/README.md": {
+      "sha256": "bc8664e9148b2731a988446343c89ae4a1898b5d5ef53691ff57d13c3b2bbdfb",
+      "lines": 81,
+      "words": 668
+    },
+    "docs/agent/development.md": {
+      "sha256": "42c4efd3bb4b42c889df43db522392816474cc9407847e939cda77430bfbe8a9",
+      "lines": 108,
+      "words": 647
+    },
+    "docs/agent/handoffs/astra-accumulation-design.md": {
+      "sha256": "ad67ab671c345b85de642dfb372e27df68641eb0ef102d886f10838c229f344a",
+      "lines": 193,
+      "words": 4238
+    },
+    "docs/agent/handoffs/astra-full-batch-verification.md": {
+      "sha256": "93535034ee8b1783714b1f1e58cab63985db61eef8ddf2ff2c4c0900cc47ae19",
+      "lines": 23,
+      "words": 395
+    },
+    "docs/agent/handoffs/astra-full-network-evidence.md": {
+      "sha256": "6b510d042ec403748577cf6ea62ee5c4aba8e9103eedb57df69298fa98823f02",
+      "lines": 40,
+      "words": 711
+    },
+    "docs/agent/handoffs/astra-initial-state-cast.md": {
+      "sha256": "0599548f12f79e9c48dab13eefc842fba4cb97694d151885d6bf7d192d2ec08d",
+      "lines": 30,
+      "words": 541
+    },
+    "docs/agent/handoffs/astra-numerical-contract.md": {
+      "sha256": "25a74fa389baa76bcba47af6e64ec6ee393c102287f49ef3d93c690adfcb4739",
+      "lines": 104,
+      "words": 2038
+    },
+    "docs/agent/handoffs/astra-one-second-sugar-cause.md": {
+      "sha256": "9542e013941b58f9824fc77563c235dae7b9df6c488eeda42981df8e453af099",
+      "lines": 27,
+      "words": 539
+    },
+    "docs/agent/handoffs/astra-one-second-timing-remediation.md": {
+      "sha256": "87cd9f614bef96bad79d887586738707c265c4504d4c8d3c388c97014c8bb010",
+      "lines": 41,
+      "words": 1010
+    },
+    "docs/agent/history/architecture-audit.md": {
+      "sha256": "afa76a9d24089915db97246d2d2b765a67e44f68b25d6042aeca87f712f21ece",
+      "lines": 130,
+      "words": 2820
+    },
+    "docs/agent/history/architecture-remediation.md": {
+      "sha256": "a378c00f42be7580864b68e1f67c2a9d6db256083d9ea2bcb8cbc3e748c9d66d",
+      "lines": 85,
+      "words": 1426
+    },
+    "docs/agent/history/execution-time-investigation.md": {
+      "sha256": "e65b91af43d3bf9b095383a2f81655feaf342fae647310a955a52f34c0c614c0",
+      "lines": 146,
+      "words": 3378
+    },
+    "docs/agent/history/milestones.md": {
+      "sha256": "b506c9b2d2066e02b0f287659f68fdb5bafb67f787105c31734926bed129056e",
+      "lines": 1271,
+      "words": 33860
+    },
+    "docs/agent/history/reference-baseline.md": {
+      "sha256": "aa102c056cdf5babfe804efbaee0dcf7486bc8857e31c53de5ef226e4390d6d5",
+      "lines": 220,
+      "words": 3023
+    },
+    "docs/agent/numerical-contract.md": {
+      "sha256": "de49cc7838fab04bfe4e95c65b3d3e772b9f21f7cce8746c2c9f06d239126b1b",
+      "lines": 161,
+      "words": 4599
+    },
+    "docs/agent/typing.md": {
+      "sha256": "f9ad6273f593f10d5516801a69acd4eac2bcb5bffeba86e37354ec99f1ce826e",
+      "lines": 9,
+      "words": 244
+    }
+  },
+  "limits": [
+    "Local authored Markdown links and anchors only; external websites were not fetched.",
+    "Historical artifact source paths remain bound to their recorded commits.",
+    "Application and scientific suites are not rerun for this documentation change.",
+    "Incoming quality commits and evidence are preserved separately from documentation work."
+  ],
+  "documentation_implementation_commit": "a47cb1b77e49dc2d81fd9f2990b8e06f72823c72",
+  "first_consolidation_commit": "710a267",
+  "required_implementation_commit_hook": "passed; no hook bypass",
+  "documented_application_commands_parsed": 14,
+  "installed_application_help": "passed with task-specific UV_CACHE_DIR; no simulation",
+  "just_task_list": "passed",
+  "whitespace_check": "passed",
+  "verifier_sha256": "f8edfabc9e2d5bd3ce275187061a580ed96230ed0c44e895a223d4bb2e2eccdb",
+  "verified_incoming_quality_checkpoints": [
+    "aebad54",
+    "b932298",
+    "003ac89"
+  ],
+  "resolved_verification_findings": [
+    "Relocated the historical README#verify link to the developer-guide owner.",
+    "Used a task-specific uv cache after sandbox access to the default cache failed.",
+    "Parsed the hook report as the complete 29-test suite with its 12-hook subset."
+  ],
+  "audit_start_commit": "2362fab5c2019b95d665669f13ff81b39a537b20",
+  "incoming_ci_checkpoint": {
+    "commit": "c053f055bef33bb69f95052a7ee3bfcbdae0c6a9",
+    "configuration": ".github/workflows/quality.yml",
+    "hosted_result": "not verified by this documentation task"
+  }
+}

@@ -75,3 +75,7 @@ from the approved contract; equations, numeric tables, code examples, all
 scientific gates, and evidence stay intact. Quality-hook checks are separate from
 application/scientific qualification, and this documentation task grants no new
 case acceptance.
+
+[Verification record](../evidence/documentation/organization-20261005/verification.json)
+binds the original documents and path moves, preserved history, scientific
+expressions/tables, command checks, and untouched original data/evidence.

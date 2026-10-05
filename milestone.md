@@ -47,8 +47,10 @@ and application programming interface or database schema changes still apply.
   At `003ac89`, **29 quality tests** pass with zero failures, errors, or skips,
   including 12 controlled hook checks for child failures, missing tools,
   unchanged boundary debt, staged defects, and actual push rejection.
-  [Report](docs/evidence/code-quality/hook-intent-tests.xml). Rejecting weakened
-  checks, continuous integration, and complete architecture-rule coverage remain open.
+  [Report](docs/evidence/code-quality/hook-intent-tests.xml). Apple-silicon
+  [continuous integration](.github/workflows/quality.yml) is configured at
+  `c053f05`; its hosted result remains unverified here. Rejecting weakened checks
+  and complete architecture-rule coverage remain open.
 - The recorded 2026-10-05 workflow amendment uses coherent review branches and
   stacked pull requests. The incoming quality work is on `codex/quality-gates`.
   Preserve that assignment; publish verified increments to the user-owned
@@ -57,8 +59,9 @@ and application programming interface or database schema changes still apply.
 ## Next work
 
 1. Finish quality enforcement before further performance implementation. Verify
-   attempts to weaken checks beyond the completed controlled hook proof; add continuous
-   integration and complete structural-rule coverage. Use the pinned standalone
+   attempts to weaken checks beyond the completed controlled hook proof; qualify
+   the configured continuous integration and complete structural-rule coverage.
+   Use the pinned standalone
    metric package and existing uv/MLX architecture. [Tool provenance](tools/code-quality/provenance.json)
    and [developer commands](docs/agent/development.md).
 2. Complete reference identity, sealing, and reuse under the
@@ -134,9 +137,16 @@ The current documentation task separates the human README, active plan,
 scientific contract, developer workflow, and dated history. Source checkpoint
 `2362fab5c2019b95d665669f13ff81b39a537b20`; confidence in the organization
 choice is 98%. Scientific criteria and recorded artifacts remain unchanged.
-All 752 local links/anchors across nineteen authored documents pass. The full
+All 755 local links/anchors across nineteen authored documents pass. The full
 milestone/reference history, twenty scientific table rows, 87 numeric inline
 expressions, and the coefficient code block are preserved. All fourteen
 application command examples parse; help and task-list commands succeed. The
 831 original versioned data/evidence files retain their identity and working
-contents. Required hook evidence will be recorded after the commit.
+contents. The required commit hook passes at `a47cb1b` without bypass:
+formatting, lint, strict typing, all three import contracts, quality tests, and
+metric regression checks. Application/scientific suites were not rerun for this
+documentation change. [Final documentation verification](docs/evidence/documentation/organization-20261005/verification.json)
+records link, command, contract, history, and artifact preservation checks.
+The initial broken README verification anchor was redirected to the developer
+guide. The CLI help check's sandbox cache error was resolved with a task cache;
+no installation or simulation was needed.
