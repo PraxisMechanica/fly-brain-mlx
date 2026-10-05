@@ -140,6 +140,12 @@ def test_bounded_observation_preserves_every_ordinary_phase_and_queue_byte(
                     edges,
                     np.flatnonzero(expected['due'][block.begin + row, trial]),
                 )
+                assert (
+                    block.due_sha256[row][trial]
+                    == hashlib.sha256(
+                        expected['due'][block.begin + row, trial].tobytes()
+                    ).hexdigest()
+                )
     final = blocks[-1].final_queue
     assert final is not None and final.tobytes() == expected['queue'][-1].tobytes()
     destination = cast(str | None, request.config.getoption('--artifact-output'))
@@ -168,6 +174,7 @@ def test_observed_state_and_physical_queues_repeat_bit_for_bit(precision: str) -
             second.queue_sha256,
         )
         assert first.checks.tobytes() == second.checks.tobytes()
+        assert first.due_sha256 == second.due_sha256
         for a, b in zip(first.due_edges, second.due_edges, strict=True):
             assert tuple(edges.tobytes() for edges in a) == tuple(
                 edges.tobytes() for edges in b
@@ -194,6 +201,8 @@ def test_observed_batched_trials_match_independent_execution(precision: str) -> 
             assert one.checks.tobytes() == many.checks[:, trial : trial + 1].tobytes()
             for a, b in zip(one.due_edges, many.due_edges, strict=True):
                 assert a[0].tobytes() == b[trial].tobytes()
+            for a, b in zip(one.due_sha256, many.due_sha256, strict=True):
+                assert a[0] == b[trial]
             for name, value in one.fields.items():
                 assert (
                     value.tobytes() == many.fields[name][:, trial : trial + 1].tobytes()

@@ -496,6 +496,11 @@ Actual MLX due-event checkpoint (2026-10-05):
 - Decision at `28c5d43`, confidence **99%**: transfer each actual returned due-edge mask and immediately retain only its sparse original-row indices. This meets the approved first-cause requirement while avoiding full queue histories; numerical execution and device-resident propagation remain unchanged.
 - The bounded MLX observer now carries actual due identities for every step/trial. They match ordinary returned due masks, repeat byte for byte, and agree between four-trial and independent execution, including empty layouts and partial blocks. The MLX/paired observer modules pass **27 tests, zero failures/errors/skips**; full strict Pyright, Ruff, and formatting pass. Complete-network memory/capture remains unmeasured. Commit this working state before further context wiring.
 
+Actual paired-event checkpoint (2026-10-05):
+
+- Sparse due capture is committed at `be11cd2`. Each actual MLX due mask is now hashed before its sparse conversion; raw hashes repeat exactly and agree between batch and independent execution. While spike history is common, paired auditing compares actual MLX original-row identities with the reference's actual delivered rows, preserving the reference's separate delivery order for diagnosis.
+- Injected missing, extra, and reordered MLX due rows are rejected. The MLX/paired modules pass **30 tests, zero failures/errors/skips**; full strict Pyright, Ruff, and formatting pass. First-cause context and complete-network observation remain next. Commit this verified unit now.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.

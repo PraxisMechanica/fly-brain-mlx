@@ -153,3 +153,28 @@ def test_native_hash_identifies_precision_shape_and_unconverted_units(
         else raw * 1000
     )
     assert phase_hash({'v': raw}) != phase_hash({'v': changed})
+
+
+@pytest.mark.parametrize('fault', ('missing', 'extra', 'order'))
+def test_changed_actual_due_rows_fail_during_common_history(
+    paired: tuple[PairedBlock | FinalSnapshot, ...],
+    fault: str,
+) -> None:
+    block = paired[0]
+    assert isinstance(block, PairedBlock)
+    row = next(
+        index for index, trials in enumerate(block.mlx.due_edges) if len(trials[0]) > 1
+    )
+    due = list(block.mlx.due_edges)
+    original = due[row][0]
+    changed = (
+        original[1:]
+        if fault == 'missing'
+        else original[::-1]
+        if fault == 'order'
+        else np.append(original, np.int32(7))
+    )
+    due[row] = (changed,)
+    block = replace(block, mlx=replace(block.mlx, due_edges=tuple(due)))
+    with pytest.raises(ValueError, match='actual due-edge identities'):
+        audit_block(block, CausalAudit())

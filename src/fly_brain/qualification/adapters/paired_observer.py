@@ -103,6 +103,16 @@ def audit_block(block: PairedBlock, audit: CausalAudit) -> None:
         spikes[snapshot.spikes] = True
         actual_spikes = np.asarray(mlx['spikes'][row, 0], dtype=np.bool_)
         if audit.first_spike_step is None:
+            delivered = next(
+                (
+                    path.delivered
+                    for path in snapshot.pathways
+                    if len(path.queues[0].slots) == 19
+                ),
+                np.empty(0, dtype=np.int32),
+            )
+            if not np.array_equal(np.sort(delivered), block.mlx.due_edges[row][0]):
+                raise ValueError('Common-history actual due-edge identities differ')
             phases = (
                 ('pre',)
                 if np.any(spikes != actual_spikes)
