@@ -1,8 +1,10 @@
 from pathlib import Path
 
-from pydantic import BaseModel, ConfigDict, field_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
-from fly_brain.qualification.models import QualificationRequest
+from fly_brain.qualification.matrix import required_cases
+from fly_brain.qualification.models import ParityCase, QualificationRequest
+from fly_brain.simulation.models import ExperimentName
 
 
 class QualificationOptions(BaseModel):
@@ -30,3 +32,21 @@ class QualificationOptions(BaseModel):
 
     def to_request(self) -> QualificationRequest:
         return QualificationRequest(self.project, self.output)
+
+
+class ParityOptions(QualificationOptions):
+    experiment: ExperimentName = 'sugar'
+    duration_s: float = 0.1
+    trial: int = Field(default=0, ge=0, le=4)
+
+    @model_validator(mode='after')
+    def case_is_prescribed(self) -> 'ParityOptions':
+        if (
+            self.duration_s not in (0.1, 1.0, 10.0)
+            or self.to_case() not in required_cases()
+        ):
+            raise ValueError('Parity options must select one prescribed frozen case')
+        return self
+
+    def to_case(self) -> ParityCase:
+        return ParityCase(self.experiment, round(self.duration_s * 10000), self.trial)

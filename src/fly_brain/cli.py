@@ -6,7 +6,7 @@ from pathlib import Path
 
 from . import bootstrap
 from .comparison.schemas import ComparisonOptions
-from .qualification.schemas import QualificationOptions
+from .qualification.schemas import ParityOptions, QualificationOptions
 from .simulation.schemas import SimulationOptions
 
 
@@ -31,6 +31,18 @@ def parser() -> argparse.ArgumentParser:
         command = commands.add_parser(name)
         command.add_argument('--output', type=Path, required=True)
         command.add_argument('--project', type=Path, default=Path.cwd())
+    command = commands.add_parser('qualify-parity')
+    command.add_argument('--project', type=Path, default=Path.cwd())
+    command.add_argument('--output', type=Path, required=True)
+    command.add_argument(
+        '--experiment',
+        choices=('sugar', 'p9', 'sugar-silenced', 'two-class', 'silent'),
+        default='sugar',
+    )
+    command.add_argument(
+        '--duration-s', type=float, choices=(0.1, 1.0, 10.0), default=0.1
+    )
+    command.add_argument('--trial', type=int, choices=range(5), default=0)
     command = commands.add_parser('compare')
     command.add_argument('--first', type=Path, required=True)
     command.add_argument('--second', type=Path, required=True)
@@ -56,6 +68,31 @@ def parser() -> argparse.ArgumentParser:
 
 def main(argv: Sequence[str] | None = None) -> int:
     arguments = parser().parse_args(argv)
+    if arguments.command == 'qualify-parity':
+        parity_options = ParityOptions(
+            project=arguments.project,
+            output=arguments.output,
+            experiment=arguments.experiment,
+            duration_s=arguments.duration_s,
+            trial=arguments.trial,
+        )
+        parity_report = bootstrap.parity_case(
+            parity_options.project, parity_options.output, parity_options.to_case()
+        )
+        print(
+            json.dumps(
+                {
+                    'case': parity_report['case'],
+                    'case_accepted': parity_report['case_accepted'],
+                    'scientific_review_required': parity_report[
+                        'scientific_review_required'
+                    ],
+                    'report': str(parity_options.output / 'case.json'),
+                },
+                indent=2,
+            )
+        )
+        return 0 if parity_report['case_accepted'] else 1
     if arguments.command == 'simulate':
         output = (
             arguments.output

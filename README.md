@@ -53,6 +53,16 @@ uv run --locked --group qualification fly-brain qualify --output data/results/qu
 
 The default pytest selection covers unit tests and file/process integration tests. The `qualify` command runs the independent reference, serial MLX core, and factored qualification cases on a real Metal device. It records logs, the test report, measurements, and complete state/event arrays. A skipped test, missing report, empty suite, or failed test prevents acceptance.
 
+Run one prescribed full-connectome parity case:
+
+```sh
+uv run --locked --group qualification fly-brain qualify-parity \
+  --experiment p9 --duration-s 0.1 --trial 0 \
+  --output data/results/parity-p9-0.1-0-01
+```
+
+This command runs all three engines twice from fresh state with one persisted canonical schedule. It retains native state/queue replay evidence, first-cause context, validated spike coordinates, and exact frozen metric results in `case.json`. First differences require scientific review and prevent automatic acceptance. Only the 52 prescribed configurations are allowed; one accepted case does not establish full-matrix parity.
+
 Bootstrap sets `MLX_ENABLE_TF32=0` before loading MLX. An explicit unsafe setting is rejected. The core uses float32 arrays and explicit Metal streams; CPU fallback is unsupported. Complete destination layout and controlled full-connectome delivery are qualified; full experiment parity and performance acceptance remain separate gates.
 
 Existing scientific diagnostics are available through the installed command:
