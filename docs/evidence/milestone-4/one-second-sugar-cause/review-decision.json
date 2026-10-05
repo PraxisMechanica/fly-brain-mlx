@@ -1,0 +1,30 @@
+{
+  "review_assignment_checkpoint": "2c9fd6b",
+  "parent_verification_checkpoint": "9ab33d5",
+  "reviewer": "/root/review_one_second_sugar_cause",
+  "model": "gpt-6-astra",
+  "reasoning_effort": "xhigh",
+  "review_complete": true,
+  "classification": "Explained finite-precision trajectory roundoff under the existing policy.",
+  "confidence_percent": 99,
+  "case_identity": {
+    "experiment": "sugar",
+    "steps": 10000,
+    "trial": 0,
+    "first_spike_step": 5719,
+    "first_spike_neurons": [
+      100750
+    ]
+  },
+  "bound_artifact_sha256": {
+    "astra-review.md": "dc39cca9f18267e51a135065a95fb279b2fd257aac71a1903221fcc1459d7b10",
+    "first-cause-preflight.json": "4af4261eaf3687e20289a8a694c17401cc49675b1d1b16a586452dba749f7ce2",
+    "first-observation.zip": "4c1daf70d48e97b8924e3e92f9f964e3c6b54a36f3f6dd0082d35d4ae20c29de",
+    "executed-preflight.py": "f3bfb0e7d54d9a9c80013cce85e6bc457df3259302f02f6b5234aa19d759e97e",
+    "parent-host-proof.json": "bdcbbe27af61fb9330c7077b6c9d40bde93b42222a12bc4e03f698ec40acf178",
+    "executed-host-proof.py": "a2ef3c74aae6ff8ba94e82b2aca0ccb2ecc5e22e9a68f16ae9343fe033bbed27",
+    "dispatch.json": "ac0c172e1a9f7adfd3d4cde5f666191ae91883fb9909eb02c47c84ef3162656e"
+  },
+  "case_accepted": false,
+  "remaining_requirements": "All complete-case metrics, first/repeat native/physical/cause replay, own future queues and independent reviewed-case decision remain required."
+}
