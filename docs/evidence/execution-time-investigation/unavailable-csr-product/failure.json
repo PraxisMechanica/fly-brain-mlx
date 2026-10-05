@@ -1,0 +1,18 @@
+{
+  "checkpoint": "bf913b550726ee7dad8488ea7c77f901c1f212d2",
+  "status": "failed; nonempty sparse CSR-by-CSR operation unsupported in this installed CPU wheel",
+  "exception": "RuntimeError: addmm: computation on CPU is not implemented for SparseCsr + SparseCsr @ SparseCsr without MKL. PyTorch built with MKL has better support for addmm with sparse CPU tensors.",
+  "exit_code": 1,
+  "completed_only_empty_input_pattern": true,
+  "rest_component_median_s": 0.00026687499484978616,
+  "rest_output_sha256": "82c552c9fcbde2dfc3dac3369eba2663bf27a29cb88aa6a1c8aab050e60495e8",
+  "source_row_transpose_setup_s": 1.5427436250029132,
+  "torch_build_USE_MKL": "OFF",
+  "torch_build_USE_EIGEN_FOR_BLAS": "ON; this does not establish sparse Eigen support",
+  "runner_sha256": "c54a6ad70a2d9eed2cefab5abc266aad5b5b381e679ebe4269cbed78727a7640",
+  "application_changed": false,
+  "baseline_change_adopted": false,
+  "new_full_case_or_matrix_run": false,
+  "p9_resumed": false,
+  "limits": "No nonempty output or general sparse-by-sparse speedup was obtained. Empty-input shortcut does not qualify the operation. Failure preserved; no extra runtime, Intel dependency, package or framework installed."
+}
