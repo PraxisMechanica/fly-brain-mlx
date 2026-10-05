@@ -953,6 +953,11 @@ Sugar trial-4 complete execution (2026-10-05):
 - At clean `9a71a4c`, launch `MLX_ENABLE_TF32=0 uv run --locked --group qualification --no-sync fly-brain qualify-parity --experiment sugar --duration-s 0.1 --trial 4 --output data/results/milestone-4-parity-sugar-1000-4-20261005-01`. First launch check: 07:08:25 UTC. All preceding verified work is committed; this trial remains an independent singleton, as prescribed.
 - This case is running and unaccepted. Require all metric gates, complete native/physical replay and coverage, actual queues, source/input precision checks, common-history budgets, first-cause interpretation if needed, and independent parent verification. Acceptance remains **8/52**; full matrix/batch/performance requirements remain open.
 
+Four-trial sugar partial diagnostic verification (2026-10-05):
+
+- At clean `8427094`, the committed checker independently reproduces all nineteen pooled metric fields and all actual trial/pooled 100 ms bins for the eight versioned cases. [Partial report](docs/evidence/milestone-4/matrix-diagnostics/partial-20261005-06/partial-matrix.json) and [executed verification](docs/evidence/milestone-4/matrix-diagnostics/partial-20261005-06/executed-verification.py) preserve all 12 prescribed groups and **8 included / 44 missing** cases. Sugar trials 0–3 are independently executed singleton inputs to the diagnostic; this is not a batch execution.
+- Timing matches remain within each trial and neuron. Sugar trial 1 retains its original automatic refusal and separate bound parent acceptance; no pooled metric grants acceptance. Both copied files match the executed output. No application/numerical source changes; sugar trial 4 remains independently running and unaccepted. Commit this verified diagnostic now; acceptance remains **8/52**.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.
