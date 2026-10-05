@@ -1,0 +1,11 @@
+{
+  "elapsed_s": 719.6423168750189,
+  "complete_native_snapshots_match": 10000,
+  "complete_queue_boundaries_match": 313,
+  "all_30_ledger_flags_every_timestep": true,
+  "complete_final_native_fields_and_raster_match": true,
+  "native_sha256": "9f52548859f4d79a74983fc3ced4e5b642b092ded6f48972094b8763e29673e2",
+  "phase_sha256": "9c5c74b62f379799d1386e63750bf7b5ad62fb0095f20c6138070f45ff2fb5c6",
+  "original_native_sha256": "9f52548859f4d79a74983fc3ced4e5b642b092ded6f48972094b8763e29673e2",
+  "original_phase_sha256": "e58ed46b23e010aa2adab65e75d045e32cd8514290568fdb055808a2be85705c"
+}
