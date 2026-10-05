@@ -16,6 +16,7 @@ from .observer_evidence import physical_arrays, physical_hash, physical_record
 from .observer_stream import FinalSnapshot
 from .paired_causes import write as write_causes
 from .paired_observer import pair_blocks
+from .reference_native import verify as verify_native
 from .reference_queues import ReferenceQueues
 
 
@@ -43,6 +44,8 @@ def collect(
     capture = CausalCapture()
     steps: list[int] = []
     neurons: list[int] = []
+    reference_spikes: list[int] = []
+    reference_times: list[float] = []
     last: MLXBlock | None = None
     final: FinalSnapshot | None = None
     with (
@@ -92,6 +95,9 @@ def collect(
                 steps.extend((rows + last.begin).tolist())
                 neurons.extend(indices.tolist())
                 snapshots = frame.snapshots
+                for snapshot in snapshots:
+                    reference_spikes.extend(snapshot.spikes.tolist())
+                    reference_times.extend([snapshot.time_s] * snapshot.spikes.size)
             for snapshot in snapshots:
                 physical.write(
                     json.dumps(
@@ -102,13 +108,15 @@ def collect(
     if final is None or last is None or last.final_queue is None:
         raise ValueError('Paired collection is missing final actual state or queues')
     native = results(job, output / 'reference-results')
-    for name, value in final.fields.items():
-        if (value.dtype, value.shape, value.tobytes()) != (
-            native[name].dtype,
-            native[name].shape,
-            native[name].tobytes(),
-        ):
-            raise ValueError('Reference final observation differs from native output')
+    verify_native(
+        job,
+        output / 'reference-results',
+        final,
+        native,
+        reference_spikes,
+        reference_times,
+        connectome.sources.size,
+    )
     with (output / 'reference-native.npz').open('xb') as artifact:
         np.savez_compressed(artifact, **native)
     with (output / 'reference-final-physical.npz').open('xb') as artifact:
