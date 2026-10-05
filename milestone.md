@@ -983,6 +983,12 @@ Complete shortest sugar group diagnostic (2026-10-05):
 - Sugar's 0.1-second group now includes exactly trials 0–4 with no missing, invalid, or scientifically failed trial. Each has its own complete three-engine first/repeat evidence. Sugar trial 1 still retains its original automatic refusal and separate bound parent acceptance. Timing matches remain within their own trial/neuron; pooled diagnostics do not change any case gate. This is the first complete five-singleton group, not a batch pass or full-matrix acceptance.
 - Both copied artifacts match the executed output. Commit this verified report before the next case or batch-verifier implementation. Acceptance remains **9/52**; all longer horizons, remaining shortest trials, required batch/repeat checks, full parity, and performance remain open.
 
+First one-second sugar case execution (2026-10-05):
+
+- At clean `55ea35f`, launch `MLX_ENABLE_TF32=0 uv run --locked --group qualification --no-sync fly-brain qualify-parity --experiment sugar --duration-s 1 --trial 0 --output data/results/milestone-4-parity-sugar-10000-0-20261005-01`. First launch check: 07:23:30 UTC. All preceding working states are verified and committed. This is the prescribed **10,000-step** singleton with two fresh executions per engine, unchanged numerical sources, fixed precision, and a fresh output.
+- Engineering decision at `55ea35f`, confidence **99%**: advance the required sugar duration now that its five shortest trials are complete, while independently qualifying the reviewed batch-verification adapter. This tests the central experiment over the next required horizon before filling the other remaining shorter trial groups; the complete 52-case scope is unchanged.
+- This case is running and unaccepted. Require all fixed/paired metric gates, all-neuron common-history budgets and first-cause interpretation, every actual queue/native repeat, complete 313-block/10,001-snapshot coverage, canonical prefix/input/source/mapping/precision checks, and independent parent verification. Acceptance remains **9/52**; the remaining matrix, actual one-second batch/repeat checks, full parity approval, and performance remain open.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.
