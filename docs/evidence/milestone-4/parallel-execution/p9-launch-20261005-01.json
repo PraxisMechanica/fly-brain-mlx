@@ -1,0 +1,22 @@
+{
+  "launch_checkpoint": "59cd9b6",
+  "session_id": 88326,
+  "case": {
+    "experiment": "p9",
+    "steps": 10000,
+    "trial": 0
+  },
+  "execution": "data/results/milestone-4-parity-p9-10000-0-20261005-01",
+  "latest_verified_phase": "paired-first",
+  "environment_stimulus_reference_job_sha256": {
+    "environment.json": "5b22f9e5518fd1b5ca9cc5207a7129f2ce3275e15e43dd673311259762871cf4",
+    "stimulus.json": "07d24b7c5ba525859081973843bb9a10148815850d0a81be09ecd37e7bf948bd",
+    "stimulus.npz": "ef04ffcb601a67a10bcf113a3cf39cf6b4b892cab3b80ececf1fb0d3f9c5bb6c",
+    "reference-job.json": "4276ee30ad0ec2e59e1124233959c8439d5367075d939a111599b8c4837ef804"
+  },
+  "all_recorded_executed_sources_equal_launch_and_current_source": true,
+  "recorded_source_count": 52,
+  "paired_first_repeat_and_cpu_first_repeat_required": true,
+  "case_accepted": false,
+  "scope": "Confirmed live qualification launch; subsequent coverage, replay, metrics and case acceptance remain required."
+}

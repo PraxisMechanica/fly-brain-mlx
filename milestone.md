@@ -1076,6 +1076,11 @@ Bounded qualification overlap decision (2026-10-05):
 - At clean `786d334`, the existing sugar one-second session is confirmed live in `cpu-first`; all 52 recorded executed source hashes remain unchanged. The authorized process inspection shows the owned Python process at 950,960 KiB resident memory on this 32 GiB machine. Confidence **90%**: start the independent prescribed P9 one-second trial 0 while this CPU validation continues, with at most two owned full-network jobs. [Decision and evidence](docs/evidence/milestone-4/parallel-execution/decision-20261005-01.json). Both executions retain their canonical stimuli, fresh repeats, one CPU thread per process and every original gate. This changes qualification scheduling only; overlapping elapsed times are excluded from later performance measurements.
 - Commit this decision before launch. No source changes or new case acceptance occur; acceptance remains **9/52**.
 
+One-second P9 qualification launch (2026-10-05):
+
+- At clean `59cd9b6`, execute `MLX_ENABLE_TF32=0 UV_CACHE_DIR=/private/tmp/fly-brain-uv-remediation-cache uv run --locked --group qualification --no-sync fly-brain qualify-parity --experiment p9 --duration-s 1 --trial 0 --output data/results/milestone-4-parity-p9-10000-0-20261005-01`. Session `88326` is confirmed live in `paired-first`; its environment, canonical stimulus, reference job and all recorded sources match the launch/current checkpoint. [Launch binding](docs/evidence/milestone-4/parallel-execution/p9-launch-20261005-01.json). The existing sugar session continues its CPU validation unchanged.
+- Commit this verified launch record before further independent batch binding work. No new case acceptance is implied; acceptance remains **9/52**.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.
