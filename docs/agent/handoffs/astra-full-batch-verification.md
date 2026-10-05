@@ -1,5 +1,7 @@
 # Required full-network batch verification
 
+Historical review brief. Holds, process states, model-switch instructions, package counts, and remote availability below describe the recorded checkpoint. For current work, read [milestone.md](../../../milestone.md) and [AGENTS.md](../../../AGENTS.md). Original review ownership and scientific evidence are preserved.
+
 Assignment checkpoint: `f3abcaf` on clean `main`, 2026-10-05. Parent: GPT-6.1 Sol at the user-selected effort. Child: fresh-context GPT-6 Astra at explicit `xhigh`. Read-only review; no nested delegation, source changes, commits, model switches, or simulation execution.
 
 Review one question: define the minimum sufficient evidence method for the prescribed four-trial sugar and P9 batches at one second, with fresh-state repetition and comparison against independent trials 0–3. The frozen 52-case matrix, trial-4 independence, precision, thresholds, model, and original CPU comparator must remain unchanged.

@@ -1,5 +1,7 @@
 # One-second timing-gate remediation review
 
+Historical review brief. Holds, process states, model-switch instructions, package counts, and remote availability below describe the recorded checkpoint. For current work, read [milestone.md](../../../milestone.md) and [AGENTS.md](../../../AGENTS.md). Original review ownership and scientific evidence are preserved.
+
 Workspace: `/Users/ocasta/Code/fly-brain`, main. Preparation checkpoint `3b6290c`; record the assignment commit at dispatch. Fresh-context **GPT-6 Astra at `xhigh`**; Sol retains implementation ownership and its selected effort.
 
 ## Bounded question and required outcome
@@ -32,7 +34,7 @@ Finish with one supported engineering/scientific recommendation or a precise unr
 
 ## Completed bounded review and parent decision
 
-The assigned Astra `xhigh` subagent completed the review without project edits or device/full-network execution. Sol inspected and independently executed its exact host diagnostic at `2d0d8d7`; the complete structured output and recorded output hash reproduce exactly. The [archived review](../evidence/milestone-4/timing-remediation/astra-review.md), [executed diagnostic](../evidence/milestone-4/timing-remediation/executed-host-diagnostic.py), [parent result](../evidence/milestone-4/timing-remediation/parent-host-diagnostic.json) and [decision](../evidence/milestone-4/timing-remediation/review-decision.json) bind the evidence.
+The assigned Astra `xhigh` subagent completed the review without project edits or device/full-network execution. Sol inspected and independently executed its exact host diagnostic at `2d0d8d7`; the complete structured output and recorded output hash reproduce exactly. The [archived review](../../evidence/milestone-4/timing-remediation/astra-review.md), [executed diagnostic](../../evidence/milestone-4/timing-remediation/executed-host-diagnostic.py), [parent result](../../evidence/milestone-4/timing-remediation/parent-host-diagnostic.json) and [decision](../../evidence/milestone-4/timing-remediation/review-decision.json) bind the evidence.
 
 Decision: qualify the same single-state float32 coupled voltage solution in increment form, `v + (d*(v+52) + c*g)`, with `d=float32(expm1(-0.1/20))`. Confidence is 95% in this next action, not in full-matrix success. The prospective expression is recorded in the baseline before dependent implementation. The native prototype and all unchanged qualification gates remain required; no production source or acceptance threshold changes, repaired full case, or persistent-pair representation is approved by this completed host review.
 
