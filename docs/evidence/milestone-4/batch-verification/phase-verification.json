@@ -1,0 +1,25 @@
+{
+  "implementation_parent_checkpoint": "4cf2356",
+  "application_tests": {
+    "tests": 395,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "new_phase_intent_tests": 18,
+  "ruff_checked_files": 160,
+  "strict_pyright_errors": 0,
+  "strict_pyright_warnings": 0,
+  "import_contracts_kept": 3,
+  "import_contracts_broken": 0,
+  "import_files": 111,
+  "import_dependencies": 476,
+  "locked_packages": 38,
+  "source_sha256": {
+    "src/fly_brain/qualification/batch_evidence.py": "d3b1ee6d6c5f375b0611d38a5d10bbb68e5e5306e622b3d95bdf7f9b0640d074",
+    "tests/unit/test_batch_evidence.py": "b73a0150606ebc2e30b982ec9a1a62cd1ebf86b3e3bca04f61c4be9cc5d4dc82",
+    "pyproject.toml": "3a7e4349eb964024dd3c20a8884dd468f6b7c16ae5d5265fe7f8698a7bd612a4"
+  },
+  "batch_gate_accepted": false,
+  "scope": "Pure complete phase/digest rules only. Final native arrays, input identity, actual spikes, CPU snapshots, and full batch execution remain separate requirements."
+}
