@@ -995,6 +995,11 @@ Complete batch-phase rules checkpoint (2026-10-05):
 - **395 application tests pass, zero failures/errors/skips**, including eighteen new intent cases for complete 35/1,000/10,000/100,000-step coverage, identical truncated streams, missing/malformed field hashes, changed native/queue/due evidence, duplicate/wrong-size blocks, and missing singleton identities. [Test report](docs/evidence/milestone-4/batch-verification/phase-tests.xml) and [verification/source hashes](docs/evidence/milestone-4/batch-verification/phase-verification.json).
 - All 160 Python files pass Ruff formatting/linting; strict Pyright reports zero errors/warnings; three import contracts pass across 111 files / 476 dependencies; the unchanged lock resolves 38 packages offline. Commit this passing unit immediately. This is phase evidence only: canonical identity, final native arrays/spikes, CPU snapshots, and actual one-second batch/repeat execution remain required. No numerical or running singleton source changes; acceptance remains **9/52** and the one-second sugar case is still running.
 
+Actual batch-phase rule control (2026-10-05):
+
+- At clean `f4994c8`, run the committed pure phase rules on the retained actual 0.1-second four-trial MLX batch and the four matching singleton observations. [Control record](docs/evidence/milestone-4/batch-verification/actual-phase-control/actual-phase-control.json) and [executed verification](docs/evidence/milestone-4/batch-verification/actual-phase-control/executed-verification.py) revalidate every original artifact hash bound by the completed parent proof. All 32 native phase/queue/due blocks match for each trial.
+- Both copied files match the executed output and bind the exact committed phase-rule source. This is a saved-evidence regression, not a new execution or batch acceptance. The 395 application / 13 focused Metal results remain their separately recorded evidence; canonical identity/final-array/spike/CPU checks and actual one-second batch/repeats remain open. Commit this verified control now. The one-second sugar case remains running, and acceptance stays **9/52**.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.

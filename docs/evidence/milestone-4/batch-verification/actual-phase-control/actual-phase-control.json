@@ -1,0 +1,19 @@
+{
+  "checkpoint": "f4994c8203894ef0866bd18398c044dc0a39a32d",
+  "executed_program_sha256": "419856a99f401b24024f308e7afa9c4f396ec4918423322e3a8bff46b7f3d2a0",
+  "phase_rule_source_sha256": "d3b1ee6d6c5f375b0611d38a5d10bbb68e5e5306e622b3d95bdf7f9b0640d074",
+  "bound_parent_proof_sha256": "7967af9160afe7ace5e6c14c60acc97bce9b6980dfb369a02ba673e9130a3ea9",
+  "all_original_artifact_hashes_revalidated": true,
+  "actual_four_trial_native_queue_and_due_blocks_exact": true,
+  "steps": 1000,
+  "blocks_per_trial": 32,
+  "trials": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "new_case_execution_or_acceptance": false,
+  "one_second_batch_gate_accepted": false,
+  "scope": "Regression of the committed pure phase rules on the already verified retained actual short MLX batch and singleton observations. Other batch requirements remain open."
+}
