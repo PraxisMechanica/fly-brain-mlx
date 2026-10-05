@@ -698,6 +698,13 @@ Final pending-event verification checkpoint (2026-10-05):
 - Eight file-boundary cases verify the retained delivered history and reject changed future events, an uncleared slot, wrong offset/clock/precision, duplicates, and out-of-range original rows. The default suite passes **224 tests, zero failures/errors/skips**. Three live reference/Metal collector tests pass, **zero failures/errors/skips**, including actual populated/empty final queues. [Report](data/results/milestone-4-final-pending-20261005-01.xml). All 137 files pass Ruff checks; strict Pyright has zero errors/warnings after narrowing the validated native archive row type.
 - Invoke this cross-engine pending comparison while the full spike history is common. After a spike fork, each engine still requires its own actual queue ledger/replay; later queues are not forced to match across engines. Full-network scoring/reporting remains next. Commit this passing unit before proceeding.
 
+Frozen case reporting checkpoint (2026-10-05):
+
+- At `3b69144`, score the actual validated, identifier-mapped three-engine rasters with the unchanged frozen gates. Require saved native replay identity, prescribed case/trial/seed/generator/target/rate metadata, declared input geometry, complete common-history budget coverage, and actual common-history final pending events. Retain exact rational metrics, native input descriptors before conversion, normalized raw spike arrays, and complete causal results.
+- Any first different spike or state-budget violation remains marked for scientific review and cannot receive automatic case acceptance. Final cross-engine queues are explicitly inapplicable after a spike fork; each engine's actual queue ledger/replay remains required. No tolerance or metric changes.
+- **Two live three-engine execution/reporting tests pass, zero failures/errors/skips**. Their unprescribed 101-step fixture is rejected as a full case despite exact MLX/reference spikes; exact rational serialization, native identifier/step preservation, pending checks, and no-overwrite behavior pass. [Report](data/results/milestone-4-case-report-20261005-01.xml). The default suite remains **224 passed, zero failures/errors/skips**; all 138 files pass Ruff checks, strict Pyright has zero errors/warnings, and all three dependency contracts pass (100 modules / 411 dependencies).
+- Reproducible command wiring and the next complete-network case are next. Commit this passing state before proceeding.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.

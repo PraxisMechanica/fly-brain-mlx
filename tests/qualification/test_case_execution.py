@@ -7,9 +7,11 @@ import pytest
 
 from fly_brain.qualification.adapters.brian_jobs import build
 from fly_brain.qualification.adapters.case_execution import execute
+from fly_brain.qualification.adapters.case_report import write
 from fly_brain.qualification.adapters.torch_setup import prepare as prepare_cpu
+from fly_brain.qualification.models import ParityCase
 from fly_brain.simulation.backend.bucketed import prepare
-from fly_brain.simulation.models import Stimulus
+from fly_brain.simulation.models import InputPin, Stimulus
 from tests.qualification.test_mlx_observer import fixture
 
 pytestmark = [pytest.mark.integration, pytest.mark.reference, pytest.mark.metal]
@@ -59,3 +61,33 @@ def test_each_engine_replays_fresh_state_with_complete_retained_evidence(
         assert len(rows) == 102 and json.loads(rows[-1])['step'] == 100
     with pytest.raises(FileExistsError):
         execute(job, mlx, cpu, case.connectome, stimulus, output, progress.append)
+    pin = InputPin('fixture', 'fixture', 6, len(case.connectome.sources))
+    report = write(
+        ParityCase('sugar', 101, 0), case.connectome, pin, stimulus, output, tmp_path
+    )
+    assert (
+        report['case_accepted'] is False
+        and report['scientific_review_required'] is False
+    )
+    saved = json.loads((tmp_path / 'case.json').read_text())
+    assert saved['case_checks']['required_frozen_case'] is False
+    assert (
+        saved['case_checks']['actual_final_pending_events_equal_when_history_is_common']
+        is True
+    )
+    assert (
+        saved['metric_acceptance']['mlx']['active_jaccard']['numerator']
+        == saved['metric_acceptance']['mlx']['active_jaccard']['denominator']
+    )
+    with np.load(tmp_path / 'normalized-spikes.npz') as raster:
+        assert raster['brian_neurons'].tobytes() == raster['mlx_neurons'].tobytes()
+        assert raster['brian_steps'].tobytes() == raster['mlx_steps'].tobytes()
+    with pytest.raises(FileExistsError):
+        write(
+            ParityCase('sugar', 101, 0),
+            case.connectome,
+            pin,
+            stimulus,
+            output,
+            tmp_path,
+        )
