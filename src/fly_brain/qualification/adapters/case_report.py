@@ -49,6 +49,7 @@ def write(
     experiment = EXPERIMENTS[case.experiment]
     checks = {
         'required_frozen_case': case in required_cases(),
+        'full_connectome_geometry': pin.neurons == 138639 and pin.edges == 15091983,
         'input_geometry_equals_pin': len(connectome.neuron_ids) == pin.neurons
         and len(connectome.sources) == pin.edges,
         'canonical_stimulus_hash': hashlib.sha256(stimulus.events.tobytes()).hexdigest()

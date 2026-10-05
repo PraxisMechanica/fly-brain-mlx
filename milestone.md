@@ -705,6 +705,12 @@ Frozen case reporting checkpoint (2026-10-05):
 - **Two live three-engine execution/reporting tests pass, zero failures/errors/skips**. Their unprescribed 101-step fixture is rejected as a full case despite exact MLX/reference spikes; exact rational serialization, native identifier/step preservation, pending checks, and no-overwrite behavior pass. [Report](data/results/milestone-4-case-report-20261005-01.xml). The default suite remains **224 passed, zero failures/errors/skips**; all 138 files pass Ruff checks, strict Pyright has zero errors/warnings, and all three dependency contracts pass (100 modules / 411 dependencies).
 - Reproducible command wiring and the next complete-network case are next. Commit this passing state before proceeding.
 
+Prescribed parity driver checkpoint (2026-10-05):
+
+- At `ce818dd`, wire prescribed experiment generation and outgoing silencing to persisted canonical inputs, one pinned CPU reference thread, the independent C++ reference, the approved uncompiled MLX layout, complete repeated execution, and frozen reporting. Record actual installed versions, device/configuration, executed application-source hashes, and reference-job metadata. The composition root owns CPU thread configuration; domain imports retain their normal-runtime boundaries.
+- Require the fixed **138,639-neuron / 15,091,983-edge** geometry before full-case acceptance. The live six-neuron P9 driver fixture uses the prescribed 1,000-step seed/target/rate protocol and completes all three engines twice, but cannot claim a full-connectome case. Its corrected test passes **one test, zero failures/errors/skips**; the first attempt failed because the test restored CPU configuration before its final preservation check. [Corrected report](data/results/milestone-4-parity-driver-20261005-02.xml); the first report/build remain preserved.
+- The default suite remains **224 passed, zero failures/errors/skips**; all 140 files pass Ruff checks, strict Pyright has zero errors/warnings, and all three import contracts pass (101 modules / 434 dependencies). Command-boundary validation and a new complete-network case remain next. Commit this working state before exposing the command.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.

@@ -5,7 +5,11 @@ from pathlib import Path
 
 from fly_brain.comparison.models import ComparisonRequest, ComparisonResult
 from fly_brain.comparison.service import compare
-from fly_brain.qualification.models import QualificationRequest, QualificationResult
+from fly_brain.qualification.models import (
+    ParityCase,
+    QualificationRequest,
+    QualificationResult,
+)
 from fly_brain.qualification.service import qualify
 from fly_brain.simulation.models import (
     Connectome,
@@ -150,3 +154,14 @@ def simulation(request: SimulationRequest) -> SimulationResult:
         partial(run, precision=precision),
         write_run,
     )
+
+
+def parity_case(project: Path, output: Path, case: ParityCase) -> dict[str, object]:
+    precision = configure_mlx()
+    import torch
+
+    from fly_brain.qualification.adapters.parity_case import run
+
+    torch.set_num_threads(1)
+    connectome, pin = pinned_inputs(project)
+    return run(connectome, pin, case, output, precision)
