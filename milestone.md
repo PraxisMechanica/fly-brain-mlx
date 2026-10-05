@@ -535,6 +535,12 @@ Bounded four-trial wiring checkpoint (2026-10-05):
 - Complete paired replay/memory is committed at `a9eefcc`. The qualified reader now exposes one reference-block read and finalization, allowing one batched MLX block to be audited against four independent live reference processes without cached block histories. A per-trial view preserves raw fields, check flags, physical queue hashes, actual due identities, and mask hashes.
 - All **34 MLX/paired observer tests pass, zero failures/errors/skips**, including existing transport/causal faults and exact batch/independent view checks. Full strict Pyright, Ruff, and formatting pass. No numerical function changes. Commit this working state before actual four-trial execution.
 
+CPU comparator setup checkpoint (2026-10-05):
+
+- At `dee8d93`, confidence **99%**: retain the pinned comparator's original compressed sparse row (CSR) construction, signed count orientation, float32 model, and numerical methods; replace only its registered Poisson sampler with canonical count replay at the existing input slot. Original source inspection confirms CSR is the benchmark's selected representation. Common setup supplies outgoing-silenced counts and the activated union as approved by the frozen contract.
+- The optional [CPU setup adapter](src/fly_brain/qualification/adapters/torch_setup.py) uses immutable original data, explicit CPU weights, and typed native float32 tensor boundaries. Narrow upstream typing gaps are limited to NumPy/Torch conversions and the sparse constructor; no numerical reference method changes.
+- Four tests pass, zero failures/errors/skips: orientation/silencing/activation, overlapping input counts, and all five actual tensors byte-identical with guaranteed native Poisson input across 25 steps at one/four trials. Full strict Pyright, Ruff, and formatting pass. This qualifies small common setup/replay; full PyTorch observation and acceptance remain open. Commit this working state now.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.
