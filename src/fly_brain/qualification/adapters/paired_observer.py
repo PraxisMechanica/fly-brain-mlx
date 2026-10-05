@@ -1,6 +1,6 @@
 import hashlib
 from collections.abc import Iterator, Mapping
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from typing import TYPE_CHECKING
 
 import numpy as np
@@ -32,49 +32,77 @@ def phase_hash(fields: Mapping[str, 'HostArray']) -> str:
     return digest.hexdigest()
 
 
+def read_block(
+    reference: Iterator[StepSnapshot | PhaseBlock | FinalSnapshot],
+    actual: 'MLXBlock',
+    ledger: ReferenceQueues,
+) -> PairedBlock:
+    begin = ledger.step
+    snapshots: list[StepSnapshot] = []
+    while isinstance(frame := next(reference, None), StepSnapshot):
+        ledger.check(frame)
+        snapshots.append(frame)
+        if len(snapshots) > 32:
+            raise ValueError('Paired observation exceeds the block bound')
+    if not isinstance(frame, PhaseBlock) or (
+        frame.begin != begin
+        or actual.begin != begin
+        or frame.rows != actual.rows
+        or frame.rows != len(snapshots)
+        or not 1 <= frame.rows <= 32
+    ):
+        raise ValueError('Paired phase blocks have different coverage')
+    if (
+        not actual.queue_sha256
+        or actual.checks.shape != (frame.rows, len(actual.queue_sha256), 30)
+        or not actual.checks.all()
+    ):
+        raise ValueError('An actual MLX state or queue failed its independent ledger')
+    return PairedBlock(
+        frame,
+        actual,
+        tuple(snapshots),
+        (phase_hash(frame.fields), phase_hash(actual.fields)),
+    )
+
+
+def finish_reference(
+    reference: Iterator[StepSnapshot | PhaseBlock | FinalSnapshot],
+    ledger: ReferenceQueues,
+) -> FinalSnapshot:
+    final = next(reference, None)
+    if not isinstance(final, FinalSnapshot) or final.step.step != ledger.step:
+        raise ValueError('Paired observations are missing the reference final state')
+    ledger.check(final)
+    if next(reference, None) is not None:
+        raise ValueError('Paired observations contain extra reference frames')
+    return final
+
+
 def pair_blocks(
     reference: Iterator[StepSnapshot | PhaseBlock | FinalSnapshot],
     mlx: Iterator['MLXBlock'],
     ledger: ReferenceQueues,
 ) -> Iterator[PairedBlock | FinalSnapshot]:
-    begin = 0
     for actual in mlx:
-        snapshots: list[StepSnapshot] = []
-        while isinstance(frame := next(reference, None), StepSnapshot):
-            ledger.check(frame)
-            snapshots.append(frame)
-            if len(snapshots) > 32:
-                raise ValueError('Paired observation exceeds the block bound')
-        if not isinstance(frame, PhaseBlock) or (
-            frame.begin != begin
-            or actual.begin != begin
-            or frame.rows != actual.rows
-            or frame.rows != len(snapshots)
-            or not 1 <= frame.rows <= 32
-        ):
-            raise ValueError('Paired phase blocks have different coverage')
-        if (
-            not actual.queue_sha256
-            or actual.checks.shape != (frame.rows, len(actual.queue_sha256), 30)
-            or not actual.checks.all()
-        ):
-            raise ValueError(
-                'An actual MLX state or queue failed its independent ledger'
-            )
-        yield PairedBlock(
-            frame,
-            actual,
-            tuple(snapshots),
-            (phase_hash(frame.fields), phase_hash(actual.fields)),
-        )
-        begin += frame.rows
-    final = next(reference, None)
-    if not isinstance(final, FinalSnapshot) or final.step.step != begin:
-        raise ValueError('Paired observations are missing the reference final state')
-    ledger.check(final)
-    if next(reference, None) is not None:
-        raise ValueError('Paired observations contain extra reference frames')
-    yield final
+        yield read_block(reference, actual, ledger)
+    yield finish_reference(reference, ledger)
+
+
+def trial_block(block: 'MLXBlock', trial: int) -> 'MLXBlock':
+    return replace(
+        block,
+        fields={
+            name: value[:, trial : trial + 1] for name, value in block.fields.items()
+        },
+        checks=block.checks[:, trial : trial + 1],
+        queue_sha256=(block.queue_sha256[trial],),
+        final_queue=None
+        if block.final_queue is None
+        else block.final_queue[:, trial : trial + 1],
+        due_edges=tuple((row[trial],) for row in block.due_edges),
+        due_sha256=tuple((row[trial],) for row in block.due_sha256),
+    )
 
 
 def audit_block(block: PairedBlock, audit: CausalAudit) -> None:

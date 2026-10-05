@@ -530,6 +530,11 @@ Complete paired repeat/memory checkpoint (2026-10-05):
 - [Memory records and scope](docs/evidence/milestone-4/full-paired-observer/paired-observer.json) and [all samples](docs/evidence/milestone-4/full-paired-observer/memory-samples.jsonl) show a sampled proof-process/reference-child resident-size sum peak of **3,177,136,128 bytes**. Sampling begins after data loading, compilation and `prepare()` return, and includes each mode's fresh-state allocation/evaluation and execution/collection. Shared pages can be counted twice; MLX allocator peaks are separate. This does not measure total system/unified memory or four-trial execution. The original full local report is preserved; the compact version references its three mode records and clarifies sampling scope.
 - This closes complete shortest MLX observer transparency, raw state/queue repeat, and live common-history causal auditing. The separately committed 152 scientific / 169 application tests remain the unchanged-source regression. Next: actual four-trial concurrent memory, full PyTorch observation, and every frozen case/batch gate. No paired three-engine full-network case is accepted. Commit this completed evidence before proceeding.
 
+Bounded four-trial wiring checkpoint (2026-10-05):
+
+- Complete paired replay/memory is committed at `a9eefcc`. The qualified reader now exposes one reference-block read and finalization, allowing one batched MLX block to be audited against four independent live reference processes without cached block histories. A per-trial view preserves raw fields, check flags, physical queue hashes, actual due identities, and mask hashes.
+- All **34 MLX/paired observer tests pass, zero failures/errors/skips**, including existing transport/causal faults and exact batch/independent view checks. Full strict Pyright, Ruff, and formatting pass. No numerical function changes. Commit this working state before actual four-trial execution.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.

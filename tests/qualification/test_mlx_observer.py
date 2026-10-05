@@ -13,6 +13,7 @@ from fly_brain.qualification.adapters.mlx_observer import (
     MLXBlock,
     observe,
 )
+from fly_brain.qualification.adapters.paired_observer import trial_block
 from fly_brain.simulation.backend import core
 from fly_brain.simulation.backend.arrays import (
     HostArray,
@@ -197,6 +198,12 @@ def test_observed_batched_trials_match_independent_execution(precision: str) -> 
             32,
         )
         for one, many in zip(single, batch, strict=True):
+            sliced = trial_block(many, trial)
+            assert sliced.checks.tobytes() == one.checks.tobytes()
+            assert sliced.queue_sha256 == one.queue_sha256
+            assert sliced.due_sha256 == one.due_sha256
+            for name, value in one.fields.items():
+                assert sliced.fields[name].tobytes() == value.tobytes()
             assert one.queue_sha256 == (many.queue_sha256[trial],)
             assert one.checks.tobytes() == many.checks[:, trial : trial + 1].tobytes()
             for a, b in zip(one.due_edges, many.due_edges, strict=True):
