@@ -1,6 +1,7 @@
 import gc
 import subprocess
 from collections.abc import Generator
+from contextlib import ExitStack
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -20,6 +21,7 @@ from .observer_stream import (
     StreamShape,
     read_frames,
 )
+from .observer_tape import record
 
 Frame = StepSnapshot | PhaseBlock | FinalSnapshot
 ResultArrays = dict[str, NDArray[np.float64 | np.int32 | np.int64 | np.bool_]]
@@ -174,10 +176,15 @@ def build(
         b.set_device('runtime')
 
 
-def run(job: BrianJob, destination: Path) -> Generator[Frame, None, None]:
+def run(
+    job: BrianJob, destination: Path, *, tape: Path | None = None
+) -> Generator[Frame, None, None]:
+    if tape is not None and not job.observed:
+        raise ValueError('Reference tapes require a complete observed job')
     destination = destination.resolve()
     destination.mkdir(parents=True, exist_ok=False)
-    with (destination / 'stderr.log').open('xb') as errors:
+    with ExitStack() as stack:
+        errors = stack.enter_context((destination / 'stderr.log').open('xb'))
         process = subprocess.Popen(
             [str(job.directory / 'main'), '--results_dir', str(destination) + '/'],
             cwd=job.directory,
@@ -187,7 +194,12 @@ def run(job: BrianJob, destination: Path) -> Generator[Frame, None, None]:
         assert process.stdout is not None
         try:
             if job.observed:
-                yield from read_frames(process.stdout, job.shape)
+                source = (
+                    stack.enter_context(record(process.stdout, tape))
+                    if tape is not None
+                    else process.stdout
+                )
+                yield from read_frames(source, job.shape)
             elif process.stdout.read(1):
                 raise ValueError('Ordinary reference execution wrote unexpected stdout')
             returncode = process.wait()

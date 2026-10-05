@@ -25,6 +25,8 @@ from fly_brain.qualification.adapters.observer_stream import (
     StepSnapshot,
     StreamShape,
 )
+from fly_brain.qualification.adapters.observer_tape import replay
+from fly_brain.qualification.adapters.paired_observer import phase_hash
 from fly_brain.qualification.adapters.reference_queues import ReferenceQueues
 from fly_brain.simulation.models import Connectome
 
@@ -66,10 +68,37 @@ def runs(
     )
     jobs['repeat'] = jobs['observed']
     frames = {
-        name: tuple(run(job, output / (name + '-results')))
+        name: tuple(
+            run(
+                job,
+                output / (name + '-results'),
+                tape=output / (name + '.gz') if job.observed else None,
+            )
+        )
         for name, job in jobs.items()
     }
     return Runs(jobs, frames, output)
+
+
+def test_recorded_live_execution_replays_every_native_phase(runs: Runs) -> None:
+    for name in ('observed', 'repeat'):
+        recorded = tuple(replay(runs.root / (name + '.gz'), runs.jobs[name].shape))
+        assert len(recorded) == len(runs.frames[name])
+        for actual, expected in zip(recorded, runs.frames[name], strict=True):
+            assert type(actual) is type(expected)
+            if isinstance(actual, PhaseBlock) and isinstance(expected, PhaseBlock):
+                assert (actual.begin, actual.rows, phase_hash(actual.fields)) == (
+                    expected.begin,
+                    expected.rows,
+                    phase_hash(expected.fields),
+                )
+            if isinstance(actual, FinalSnapshot) and isinstance(
+                expected, FinalSnapshot
+            ):
+                assert phase_hash(actual.fields) == phase_hash(expected.fields)
+    assert (runs.root / 'observed.gz').read_bytes() == (
+        runs.root / 'repeat.gz'
+    ).read_bytes()
 
 
 def test_live_pipe_preserves_ordinary_final_state_and_spikes(runs: Runs) -> None:
