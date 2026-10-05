@@ -1,0 +1,56 @@
+{
+  "implementation_parent_checkpoint": "cac5b4bb04a14e3e06056d8161b831523586afdc",
+  "application_tests": {
+    "tests": 475,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "new_stored_stimulus_intent_tests": 14,
+  "ruff_checked_files": 171,
+  "strict_pyright_errors": 0,
+  "strict_pyright_warnings": 0,
+  "import_contracts_kept": 3,
+  "import_contracts_broken": 0,
+  "import_files": 116,
+  "import_dependencies": 503,
+  "actual_saved_one_second_inputs_read_without_conversion": [
+    {
+      "experiment": "sugar",
+      "steps": 10000,
+      "trial": 0,
+      "events_shape": [
+        1,
+        10000,
+        21
+      ],
+      "native_dtype": "|u1",
+      "canonical_event_sha256": "7d3f2b736f858110ceab0597e94e40e9b347190cd29f623d80bd23d05f4c64aa",
+      "readonly": true,
+      "saved_metadata_sha256": "5049a75ea9f1048ef21979cd2cb053caa6941538e32b1dac0c28fa9806fff773",
+      "saved_archive_sha256": "54008b4e235b1c50a08d40fd2493815952f32dd86ef9e74aacb0c582867dd42e"
+    },
+    {
+      "experiment": "p9",
+      "steps": 10000,
+      "trial": 0,
+      "events_shape": [
+        1,
+        10000,
+        2
+      ],
+      "native_dtype": "|u1",
+      "canonical_event_sha256": "2fc847870e3c4072e05e56bd8570cb2d34d49484bd93b3d2f0bda3ea96737340",
+      "readonly": true,
+      "saved_metadata_sha256": "07d24b7c5ba525859081973843bb9a10148815850d0a81be09ecd37e7bf948bd",
+      "saved_archive_sha256": "ef04ffcb601a67a10bcf113a3cf39cf6b4b892cab3b80ececf1fb0d3f9c5bb6c"
+    }
+  ],
+  "source_sha256": {
+    "src/fly_brain/qualification/adapters/batch_stimulus.py": "c3fe0c9cb34834eed89ea97b44ab185668e78071ee8b687e64a82848302cb622",
+    "tests/integration/test_batch_stimulus.py": "60cdedbe68eb0f615664d2aaa8e8aeb90b83b61df9ca43781d6ed039b6373b26"
+  },
+  "initial_typing_error_corrected": "Python Literal excludes floats; type dt_ms as float and require the exact frozen value explicitly. Added wrong-step-size refusal.",
+  "one_second_batch_gate_accepted": false,
+  "scope": "Read and validate existing saved native stimulus format and provenance. Canonical per-trial generation, mapping/source/environment/accepted-case binding and actual batch/repeat execution remain required."
+}
