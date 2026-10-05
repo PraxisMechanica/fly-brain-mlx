@@ -1,0 +1,51 @@
+{
+  "parent_checkpoint": "ee08474dd3640edb0e3d489a139df17207629be3",
+  "case": {
+    "experiment": "sugar",
+    "steps": 1000,
+    "trial": 1
+  },
+  "case_accepted": true,
+  "full_matrix_accepted": false,
+  "confidence_percent": 99,
+  "decision": "Accept this completed singleton under the prospectively recorded explained-roundoff condition; every other gate remains mandatory.",
+  "scientific_adjudication": "The prior batch review classified this cause; the parent verified its applicability to this singleton.",
+  "astra_reviewed_or_accepted_this_singleton": false,
+  "only_false_original_case_check": "first_different_spike_explicitly_none",
+  "original_automatic_report_accepted": false,
+  "original_automatic_exit_code": 1,
+  "first_difference": {
+    "step": 999,
+    "neurons": [
+      41514
+    ],
+    "neuron_ids": [
+      720575940620025620
+    ]
+  },
+  "all_108_corresponding_prior_native_context_arrays_and_snapshot_metadata_match": true,
+  "own_complete_common_history_audit_and_native_physical_repetitions_verified": true,
+  "all_19_metric_fields_and_11_frozen_gates_independently_verified": true,
+  "each_engine_actual_final_pending_rows_match_its_own_history": true,
+  "post_fork_cross_engine_continuous_state_and_queue_equality": "inapplicable; finiteness, own ledger, coverage, and repetition remain required",
+  "local_evidence_sha256": {
+    "case.json": "ecc970dc47b884dde16be0a09429ae0d54e6e5f2c0121f145a3c05c0ad8d89a6",
+    "normalized-spikes.npz": "1ba8ab83074a2498ea1e9584bdc0b07f5b8a1f09ddb9554cc05482c37f92dc61",
+    "verification.json": "302d5a73ee853a6bcb88d40fb2814ae19d9c953c848ea20ca5ecb6ea115bf9df",
+    "executed-verification.py": "9389574b675aea61e637179626edb9d8ef113b53641728bb7221fbaea31c10b4",
+    "observations.zip": "38e5156536c28d3dacda4c31b4364dc73a3c5234c6aaf86404c61f410acadbe1",
+    "context-equivalence-preflight.json": "24c72319cfa36a9fb302a03e64bb46f8ae17b7d70a4d3b9ea22cdfadfd890971",
+    "executed-context-equivalence.py": "b77b85b4e76331ff9d71c4ff2120b9f8ebfa4ad817afaf558fda2937f06df799",
+    "execution-status.json": "a23b47146d33af04d5bd658b8d9ebed7595bb6733999cb928706b76d650e395d"
+  },
+  "completed_review_policy_and_parent_applicability_sha256": {
+    "docs/evidence/milestone-4/four-trial-memory/astra-review.md": "bb51fd3f6596bc299c3266dc88e35c80fcecf79d7497ee9ce2e2e8a86bd01642",
+    "docs/evidence/milestone-4/four-trial-memory/astra-parent-verification.json": "2e4c014e17d6ec9c41c9d606109432cc43ce1f66f10d246de95bfa3ff9db0f3f",
+    "docs/evidence/milestone-4/case-adjudication/astra-review.md": "dc2b4f05f605c84c0a88c55b64ff197a7faa85bb95f8656b3918e4cadc5fae8a",
+    "docs/evidence/milestone-4/case-adjudication/parent-verification.json": "c2a0d01d43228b179941d676e0a1489a2ef05d416da2c691660a0f4baec5a6c5",
+    "docs/evidence/milestone-4/case-adjudication/independent-score.py": "32405d9b474ab5c216e4d2e2f9d5d7e760e07d730aa8f37ead01089795bbb2ca",
+    "docs/evidence/milestone-4/cases/sugar-1000-1/context-equivalence-preflight.json": "24c72319cfa36a9fb302a03e64bb46f8ae17b7d70a4d3b9ea22cdfadfd890971",
+    "docs/evidence/milestone-4/cases/sugar-1000-1/executed-context-equivalence.py": "b77b85b4e76331ff9d71c4ff2120b9f8ebfa4ad817afaf558fda2937f06df799"
+  },
+  "outstanding": "46 other prescribed cases, complete one-second four-trial/independent/repeat checks, complete matrix reporting, performance, reproducibility, and final review remain open."
+}

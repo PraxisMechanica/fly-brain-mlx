@@ -1,0 +1,221 @@
+{
+  "execution_checkpoint": "3b9e881",
+  "parent_verification_checkpoint": "ee08474dd3640edb0e3d489a139df17207629be3",
+  "case_accepted": true,
+  "full_matrix_accepted": false,
+  "case": {
+    "experiment": "sugar",
+    "steps": 1000,
+    "trial": 1
+  },
+  "scope": "Sugar trial 1 singleton, 1000 steps only; prior batch cause classification applies through independently verified equivalent native evidence and this complete own audit/replay/metric proof.",
+  "all_recorded_executed_sources_equal_launch_checkpoint_and_current_source": true,
+  "pinned_inputs_mapping_and_regenerated_canonical_stimulus_verified": true,
+  "every_native_phase_physical_queue_due_and_final_array_repeats": true,
+  "complete_32_block_paired_1001_physical_and_1001_cpu_digest_coverage": true,
+  "every_actual_final_pending_original_row_set_matches_its_own_spike_history": true,
+  "pending_counts": {
+    "brian": [
+      490,
+      407,
+      429,
+      407,
+      182,
+      112,
+      203,
+      1214,
+      242,
+      0,
+      422,
+      303,
+      281,
+      304,
+      344,
+      510,
+      332,
+      404
+    ],
+    "mlx": [
+      490,
+      407,
+      429,
+      407,
+      182,
+      112,
+      203,
+      1214,
+      242,
+      0,
+      422,
+      303,
+      281,
+      304,
+      344,
+      510,
+      332,
+      358
+    ]
+  },
+  "cross_engine_pending_equality_after_first_difference": "inapplicable",
+  "actual_native_coordinates_validated_and_mapped_before_independent_scoring": true,
+  "automatic_report_accepted": false,
+  "automatic_command_exit_code": 1,
+  "original_report_and_scientific_review_requirement_preserved": true,
+  "scientific_adjudication": "The prior batch review classified this cause; the parent verified its applicability to this singleton.",
+  "all_108_corresponding_native_context_arrays_match_prior_classification": true,
+  "completed_review_policy_parent_verification_and_applicability_sha256": {
+    "docs/evidence/milestone-4/four-trial-memory/astra-review.md": "bb51fd3f6596bc299c3266dc88e35c80fcecf79d7497ee9ce2e2e8a86bd01642",
+    "docs/evidence/milestone-4/four-trial-memory/astra-parent-verification.json": "2e4c014e17d6ec9c41c9d606109432cc43ce1f66f10d246de95bfa3ff9db0f3f",
+    "docs/evidence/milestone-4/case-adjudication/astra-review.md": "dc2b4f05f605c84c0a88c55b64ff197a7faa85bb95f8656b3918e4cadc5fae8a",
+    "docs/evidence/milestone-4/case-adjudication/parent-verification.json": "c2a0d01d43228b179941d676e0a1489a2ef05d416da2c691660a0f4baec5a6c5",
+    "docs/evidence/milestone-4/case-adjudication/independent-score.py": "32405d9b474ab5c216e4d2e2f9d5d7e760e07d730aa8f37ead01089795bbb2ca",
+    "docs/evidence/milestone-4/cases/sugar-1000-1/context-equivalence-preflight.json": "24c72319cfa36a9fb302a03e64bb46f8ae17b7d70a4d3b9ea22cdfadfd890971",
+    "docs/evidence/milestone-4/cases/sugar-1000-1/executed-context-equivalence.py": "b77b85b4e76331ff9d71c4ff2120b9f8ebfa4ad817afaf558fda2937f06df799"
+  },
+  "metrics_by_independent_counter_fraction_statistics_and_dynamic_program": {
+    "mlx": {
+      "reference_spikes": 1572,
+      "candidate_spikes": 1571,
+      "active_jaccard": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "count_error": {
+        "numerator": 1,
+        "denominator": 1572,
+        "value": 0.0006361323155216285
+      },
+      "signed_count_ratio": {
+        "numerator": 1571,
+        "denominator": 1572,
+        "value": 0.9993638676844784
+      },
+      "neuron_count_error": {
+        "numerator": 1,
+        "denominator": 1572,
+        "value": 0.0006361323155216285
+      },
+      "rate_correlation": 0.9999443982342285,
+      "counts_equal": false,
+      "timing_matches": 1571,
+      "timing_f1": {
+        "numerator": 3142,
+        "denominator": 3143,
+        "value": 0.9996818326439707
+      },
+      "timing_precision": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "timing_recall": {
+        "numerator": 1571,
+        "denominator": 1572,
+        "value": 0.9993638676844784
+      },
+      "exact_step_f1": {
+        "numerator": 3142,
+        "denominator": 3143,
+        "value": 0.9996818326439707
+      },
+      "one_step_f1": {
+        "numerator": 3142,
+        "denominator": 3143,
+        "value": 0.9996818326439707
+      },
+      "mean_timing_error_ms": 0.0,
+      "median_timing_error_ms": 0.0,
+      "shared_rate_correlation": 0.9999412921087321,
+      "common_rate_mae_hz": 0.030120481927710843,
+      "common_rate_rmse_hz": 0.5488212999484517
+    },
+    "torch": {
+      "reference_spikes": 1572,
+      "candidate_spikes": 1511,
+      "active_jaccard": {
+        "numerator": 301,
+        "denominator": 332,
+        "value": 0.9066265060240963
+      },
+      "count_error": {
+        "numerator": 61,
+        "denominator": 1572,
+        "value": 0.03880407124681934
+      },
+      "signed_count_ratio": {
+        "numerator": 1511,
+        "denominator": 1572,
+        "value": 0.9611959287531806
+      },
+      "neuron_count_error": {
+        "numerator": 187,
+        "denominator": 1572,
+        "value": 0.11895674300254452
+      },
+      "rate_correlation": 0.9832128367610405,
+      "counts_equal": false,
+      "timing_matches": 988,
+      "timing_f1": {
+        "numerator": 1976,
+        "denominator": 3083,
+        "value": 0.6409341550437885
+      },
+      "timing_precision": {
+        "numerator": 988,
+        "denominator": 1511,
+        "value": 0.6538716082064858
+      },
+      "timing_recall": {
+        "numerator": 247,
+        "denominator": 393,
+        "value": 0.628498727735369
+      },
+      "exact_step_f1": {
+        "numerator": 116,
+        "denominator": 3083,
+        "value": 0.03762568926370419
+      },
+      "one_step_f1": {
+        "numerator": 1160,
+        "denominator": 3083,
+        "value": 0.3762568926370418
+      },
+      "mean_timing_error_ms": 0.2601214574898786,
+      "median_timing_error_ms": 0.1,
+      "shared_rate_correlation": 0.9843896092508604,
+      "common_rate_mae_hz": 5.632530120481928,
+      "common_rate_rmse_hz": 9.678569046877783
+    }
+  },
+  "archive_file_count": 26,
+  "archive_manifest_sha256": {
+    "case.json": "ecc970dc47b884dde16be0a09429ae0d54e6e5f2c0121f145a3c05c0ad8d89a6",
+    "environment.json": "5b22f9e5518fd1b5ca9cc5207a7129f2ce3275e15e43dd673311259762871cf4",
+    "normalized-spikes.npz": "1ba8ab83074a2498ea1e9584bdc0b07f5b8a1f09ddb9554cc05482c37f92dc61",
+    "observations/cpu-first/native-digests.jsonl": "4fd9b842a057cbc0d1d917af62f9883bf5c6f2ed23342334f759dadfd773999a",
+    "observations/cpu-first/native.npz": "05f6127e315f4c66aa9c21377e0acdb538e1ef1c68eefc79e31475dbf6e104c3",
+    "observations/cpu-repeat/native-digests.jsonl": "4fd9b842a057cbc0d1d917af62f9883bf5c6f2ed23342334f759dadfd773999a",
+    "observations/cpu-repeat/native.npz": "05f6127e315f4c66aa9c21377e0acdb538e1ef1c68eefc79e31475dbf6e104c3",
+    "observations/paired-first/causal.json": "5c30935d75bdd3d070f1e77a840fa958887f8752536fc27a3d03b3d32303da38",
+    "observations/paired-first/mlx-native.npz": "def181c6ec692bc2aab4df4fc4e1eceee9a2ee7c89c45a0f8541808e36f1df68",
+    "observations/paired-first/phase-digests.jsonl": "9e2472f010fb3ac5e37fec2e85233de98881f5f136402f87359dd3a35984ec31",
+    "observations/paired-first/physical-digests.jsonl": "ad4d3931ded9ee163c09a737ea69f15250263500ab5946bb52e4639bb02efdae",
+    "observations/paired-first/reference-final-physical.json": "9513fa32404ff7f1754a9a8ccc64dcfe5c0706ef356b85c67dec102eef26fbb4",
+    "observations/paired-first/reference-final-physical.npz": "2e3e33f77cf825ecaf0da22beb4e96cfb7a01248c24c4dba806ca99101101b52",
+    "observations/paired-first/reference-native.npz": "c56b977134c1b94c3bd75f8e57c8be4f6aab684ed6a3414ad64ca946548bf95b",
+    "observations/paired-first/spike-context.npz": "e986c1d334163f0c5043885cd660753ff9655ff7cbf9ebacdf5a800f308062b9",
+    "observations/paired-repeat/causal.json": "5c30935d75bdd3d070f1e77a840fa958887f8752536fc27a3d03b3d32303da38",
+    "observations/paired-repeat/mlx-native.npz": "def181c6ec692bc2aab4df4fc4e1eceee9a2ee7c89c45a0f8541808e36f1df68",
+    "observations/paired-repeat/phase-digests.jsonl": "9e2472f010fb3ac5e37fec2e85233de98881f5f136402f87359dd3a35984ec31",
+    "observations/paired-repeat/physical-digests.jsonl": "ad4d3931ded9ee163c09a737ea69f15250263500ab5946bb52e4639bb02efdae",
+    "observations/paired-repeat/reference-final-physical.json": "9513fa32404ff7f1754a9a8ccc64dcfe5c0706ef356b85c67dec102eef26fbb4",
+    "observations/paired-repeat/reference-final-physical.npz": "2e3e33f77cf825ecaf0da22beb4e96cfb7a01248c24c4dba806ca99101101b52",
+    "observations/paired-repeat/reference-native.npz": "c56b977134c1b94c3bd75f8e57c8be4f6aab684ed6a3414ad64ca946548bf95b",
+    "observations/paired-repeat/spike-context.npz": "e986c1d334163f0c5043885cd660753ff9655ff7cbf9ebacdf5a800f308062b9",
+    "reference-job.json": "e26d890fc91fa83fcd93eed4928b8c32c1eaf571daf818f6457b91c12f9e8922",
+    "stimulus.json": "449585778471ce52f0a08b047c03c34e63d1258b60a2c11eaeca4586080c2840",
+    "stimulus.npz": "989c609d9e83782d17d8a92c36deab5bc12abda7f749b08ff16f85025ad266b1"
+  },
+  "every_archive_file_matches_preserved_original": true
+}

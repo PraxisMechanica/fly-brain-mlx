@@ -1,0 +1,12 @@
+{
+  "launch_checkpoint": "3b9e881",
+  "case": {
+    "experiment": "sugar",
+    "steps": 1000,
+    "trial": 1
+  },
+  "exit_code": 1,
+  "completed_evidence_collection": true,
+  "scope": "Original command automatic status; the separate parent reviewed decision is recorded independently.",
+  "final_output": "{\"phase\": \"replay-verified\", \"elapsed_s\": 645.3237200420117}\n{\"phase\": \"case-recorded\", \"elapsed_s\": 645.8475097500195}\n{\n  \"case\": {\n    \"experiment\": \"sugar\",\n    \"steps\": 1000,\n    \"trial\": 1\n  },\n  \"case_accepted\": false,\n  \"scientific_review_required\": true,\n  \"report\": \"/Users/ocasta/Code/fly-brain/data/results/milestone-4-parity-sugar-1000-1-20261005-01/case.json\"\n}\n"
+}
