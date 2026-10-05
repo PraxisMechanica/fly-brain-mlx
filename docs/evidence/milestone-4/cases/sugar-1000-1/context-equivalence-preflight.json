@@ -1,0 +1,1172 @@
+{
+  "checkpoint": "f39d48f92af99f8b3c890846a655a6b286b69322",
+  "scope": "First singleton execution context only; complete repeat, CPU metrics, and reviewed acceptance remain pending.",
+  "case_accepted": false,
+  "all_108_corresponding_native_context_arrays_equal": true,
+  "only_shape_mapping": "Legacy stored scalar int32 queue offsets in length-one arrays; singleton stores scalar shape. Native dtype and payload bytes remain identical.",
+  "native_field_mappings": {
+    "current_reference_pre_t": {
+      "singleton_field": "current_reference_pre_t",
+      "legacy_shape": [],
+      "singleton_shape": [],
+      "dtype": "<f8",
+      "sha256": "0fcc3daee0408a0dcb237cb350813139640f1d57adfddd844ab3f56391646eed"
+    },
+    "current_reference_pre_v": {
+      "singleton_field": "current_reference_pre_v",
+      "legacy_shape": [
+        138639
+      ],
+      "singleton_shape": [
+        138639
+      ],
+      "dtype": "<f8",
+      "sha256": "4bf69c72e197cc9755ff3e8dc9316d376e1f9b2603cff75fb12773fff7756ba0"
+    },
+    "current_reference_pre_g": {
+      "singleton_field": "current_reference_pre_g",
+      "legacy_shape": [
+        138639
+      ],
+      "singleton_shape": [
+        138639
+      ],
+      "dtype": "<f8",
+      "sha256": "27ed346b6b73c946e98e633ff98daadbd898aeefda41125ad8f5cf0aea48a186"
+    },
+    "current_reference_pre_not_refractory": {
+      "singleton_field": "current_reference_pre_not_refractory",
+      "legacy_shape": [
+        138639
+      ],
+      "singleton_shape": [
+        138639
+      ],
+      "dtype": "|b1",
+      "sha256": "835a5f2e73748c03312918390b0913852b3fd64ec97b957c3b003479247ad044"
+    },
+    "current_reference_before_t": {
+      "singleton_field": "current_reference_before_t",
+      "legacy_shape": [],
+      "singleton_shape": [],
+      "dtype": "<f8",
+      "sha256": "0fcc3daee0408a0dcb237cb350813139640f1d57adfddd844ab3f56391646eed"
+    },
+    "current_reference_before_v": {
+      "singleton_field": "current_reference_before_v",
+      "legacy_shape": [
+        138639
+      ],
+      "singleton_shape": [
+        138639
+      ],
+      "dtype": "<f8",
+      "sha256": "ca3ae2fcfbbe4a1f3af3099c74b84e773a249eeb838b53137fb79a0a60ddcacc"
+    },
+    "current_reference_before_g": {
+      "singleton_field": "current_reference_before_g",
+      "legacy_shape": [
+        138639
+      ],
+      "singleton_shape": [
+        138639
+      ],
+      "dtype": "<f8",
+      "sha256": "adce8ab2d90a103339b339bd92cb0aaae0e32eca5d0074acac6f6c51f30f62b1"
+    },
+    "current_reference_before_not_refractory": {
+      "singleton_field": "current_reference_before_not_refractory",
+      "legacy_shape": [
+        138639
+      ],
+      "singleton_shape": [
+        138639
+      ],
+      "dtype": "|b1",
+      "sha256": "d8c7c60c9480758ef46e84016f4759cefc20a198b35e40d5f6abd338fb873aca"
+    },
+    "current_reference_end_t": {
+      "singleton_field": "current_reference_end_t",
+      "legacy_shape": [],
+      "singleton_shape": [],
+      "dtype": "<f8",
+      "sha256": "0fcc3daee0408a0dcb237cb350813139640f1d57adfddd844ab3f56391646eed"
+    },
+    "current_reference_end_v": {
+      "singleton_field": "current_reference_end_v",
+      "legacy_shape": [
+        138639
+      ],
+      "singleton_shape": [
+        138639
+      ],
+      "dtype": "<f8",
+      "sha256": "829cc0a6951c2d86df6dcca83097070e563fc210ac7dd92889f6287786ee5e0b"
+    },
+    "current_reference_end_g": {
+      "singleton_field": "current_reference_end_g",
+      "legacy_shape": [
+        138639
+      ],
+      "singleton_shape": [
+        138639
+      ],
+      "dtype": "<f8",
+      "sha256": "6ce72ff13dcbc44fd20636870154862243fb79199b6e2f72aa52ed4dbe10f61f"
+    },
+    "current_reference_end_lastspike": {
+      "singleton_field": "current_reference_end_lastspike",
+      "legacy_shape": [
+        138639
+      ],
+      "singleton_shape": [
+        138639
+      ],
+      "dtype": "<f8",
+      "sha256": "11edfe44ce7f9b8cc63b1ba7f80ffe5dd3255571c0c9944876545150b5edc101"
+    },
+    "current_reference_end_not_refractory": {
+      "singleton_field": "current_reference_end_not_refractory",
+      "legacy_shape": [
+        138639
+      ],
+      "singleton_shape": [
+        138639
+      ],
+      "dtype": "|b1",
+      "sha256": "d8c7c60c9480758ef46e84016f4759cefc20a198b35e40d5f6abd338fb873aca"
+    },
+    "current_mlx_pre_v": {
+      "singleton_field": "current_mlx_pre_v",
+      "legacy_shape": [
+        138639
+      ],
+      "singleton_shape": [
+        138639
+      ],
+      "dtype": "<f4",
+      "sha256": "19ced9adabba812fb370c9e6807305f72ac69f9b4544201bfb3bede144a3d98b"
+    },
+    "current_mlx_pre_g": {
+      "singleton_field": "current_mlx_pre_g",
+      "legacy_shape": [
+        138639
+      ],
+      "singleton_shape": [
+        138639
+      ],
+      "dtype": "<f4",
+      "sha256": "1acad3b14444b5f0a01fd42ce1acab8c36265e4409ed6b758b78407175b470f7"
+    },
+    "current_mlx_pre_not_refractory": {
+      "singleton_field": "current_mlx_pre_not_refractory",
+      "legacy_shape": [
+        138639
+      ],
+      "singleton_shape": [
+        138639
+      ],
+      "dtype": "|b1",
+      "sha256": "835a5f2e73748c03312918390b0913852b3fd64ec97b957c3b003479247ad044"
+    },
+    "current_mlx_spikes": {
+      "singleton_field": "current_mlx_spikes",
+      "legacy_shape": [
+        138639
+      ],
+      "singleton_shape": [
+        138639
+      ],
+      "dtype": "|b1",
+      "sha256": "4256b0bb8ff1121a3be8367db8730a93edc866e9cfe1ac2a3244a3082e6b917c"
+    },
+    "current_mlx_before_v": {
+      "singleton_field": "current_mlx_before_v",
+      "legacy_shape": [
+        138639
+      ],
+      "singleton_shape": [
+        138639
+      ],
+      "dtype": "<f4",
+      "sha256": "22d7d3d5558e7fcf1ac4a6ba4317d3382d7fde7d72b9831c8f87d86bf744e29a"
+    },
+    "current_mlx_before_g": {
+      "singleton_field": "current_mlx_before_g",
+      "legacy_shape": [
+        138639
+      ],
+      "singleton_shape": [
+        138639
+      ],
+      "dtype": "<f4",
+      "sha256": "ee446ce504e8138500f3721404845f2b03cf5ac5fb17df33f0de53b30e1766e2"
+    },
+    "current_mlx_before_not_refractory": {
+      "singleton_field": "current_mlx_before_not_refractory",
+      "legacy_shape": [
+        138639
+      ],
+      "singleton_shape": [
+        138639
+      ],
+      "dtype": "|b1",
+      "sha256": "c480001e9a6c6a593e67ad862ba12c38a6742c61bd303c35a8bebe775a1fe6e6"
+    },
+    "current_mlx_end_v": {
+      "singleton_field": "current_mlx_end_v",
+      "legacy_shape": [
+        138639
+      ],
+      "singleton_shape": [
+        138639
+      ],
+      "dtype": "<f4",
+      "sha256": "613bacd4730bb47e0558dd96ec45ca60969b7ce17f59ef80e55a172fff273f73"
+    },
+    "current_mlx_end_g": {
+      "singleton_field": "current_mlx_end_g",
+      "legacy_shape": [
+        138639
+      ],
+      "singleton_shape": [
+        138639
+      ],
+      "dtype": "<f4",
+      "sha256": "ef964d4824ca0e1f3665ebb13e0e356c9247406236ec8d02322419e283798317"
+    },
+    "current_mlx_end_last_spike_step": {
+      "singleton_field": "current_mlx_end_last_spike_step",
+      "legacy_shape": [
+        138639
+      ],
+      "singleton_shape": [
+        138639
+      ],
+      "dtype": "<i4",
+      "sha256": "4ba341271a66f9e896f2f8fec1f565f984e1757f992391527e49dbda2163fb94"
+    },
+    "current_mlx_end_not_refractory": {
+      "singleton_field": "current_mlx_end_not_refractory",
+      "legacy_shape": [
+        138639
+      ],
+      "singleton_shape": [
+        138639
+      ],
+      "dtype": "|b1",
+      "sha256": "c480001e9a6c6a593e67ad862ba12c38a6742c61bd303c35a8bebe775a1fe6e6"
+    },
+    "current_mlx_accepted_inputs": {
+      "singleton_field": "current_mlx_accepted_inputs",
+      "legacy_shape": [
+        21
+      ],
+      "singleton_shape": [
+        21
+      ],
+      "dtype": "|b1",
+      "sha256": "ce72da5ebad247c3ff7067147fbaa1cec924204aacbd47a985477ab6296d8fbc"
+    },
+    "current_mlx_due_edges": {
+      "singleton_field": "current_mlx_due_edges",
+      "legacy_shape": [
+        795
+      ],
+      "singleton_shape": [
+        795
+      ],
+      "dtype": "<i4",
+      "sha256": "75c5e35cdb4c5eed00d97d8eaab953728b13989386b2b43bbcb7339b8c645e74"
+    },
+    "current_reference_spikes": {
+      "singleton_field": "current_reference_spikes",
+      "legacy_shape": [
+        3
+      ],
+      "singleton_shape": [
+        3
+      ],
+      "dtype": "<i4",
+      "sha256": "52d304b968b15880bd357a373a9e51cd4771e7ac18c5887f49bddc8c6f27e02c"
+    },
+    "current_reference_source_spikes": {
+      "singleton_field": "current_reference_source_spikes",
+      "legacy_shape": [
+        1
+      ],
+      "singleton_shape": [
+        1
+      ],
+      "dtype": "<i4",
+      "sha256": "972b8373b897c65c4f631c6bdf2443d0d817a88f224b54d8e593fdcf32488d60"
+    },
+    "current_reference_path_0_delivered": {
+      "singleton_field": "current_reference_pathway_0_delivered",
+      "legacy_shape": [
+        795
+      ],
+      "singleton_shape": [
+        795
+      ],
+      "dtype": "<i4",
+      "sha256": "75c5e35cdb4c5eed00d97d8eaab953728b13989386b2b43bbcb7339b8c645e74"
+    },
+    "current_reference_path_0_offset": {
+      "singleton_field": "current_reference_pathway_0_queue_0_offset",
+      "legacy_shape": [
+        1
+      ],
+      "singleton_shape": [],
+      "dtype": "<i4",
+      "sha256": "42f4aeb81c1ef81f771f3de8abca9dcf66901c575530e7672e4b1146474ae650"
+    },
+    "current_reference_path_0_slot_0": {
+      "singleton_field": "current_reference_pathway_0_queue_0_slot_0",
+      "legacy_shape": [
+        203
+      ],
+      "singleton_shape": [
+        203
+      ],
+      "dtype": "<i4",
+      "sha256": "02e5bfa7970aa242f3a735992df888358f680b0db1ca431d454c00b55a7321e1"
+    },
+    "current_reference_path_0_slot_1": {
+      "singleton_field": "current_reference_pathway_0_queue_0_slot_1",
+      "legacy_shape": [
+        1214
+      ],
+      "singleton_shape": [
+        1214
+      ],
+      "dtype": "<i4",
+      "sha256": "cacdac7f3f31c5d077664cc91779dc0b3e9ffcf3146b86b906ff7ab4308fa206"
+    },
+    "current_reference_path_0_slot_2": {
+      "singleton_field": "current_reference_pathway_0_queue_0_slot_2",
+      "legacy_shape": [
+        242
+      ],
+      "singleton_shape": [
+        242
+      ],
+      "dtype": "<i4",
+      "sha256": "a19b826893e4ac51f52e5a6bed3841b83b797ff5fe061d131bed16969c3c0aeb"
+    },
+    "current_reference_path_0_slot_3": {
+      "singleton_field": "current_reference_pathway_0_queue_0_slot_3",
+      "legacy_shape": [
+        0
+      ],
+      "singleton_shape": [
+        0
+      ],
+      "dtype": "<i4",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "current_reference_path_0_slot_4": {
+      "singleton_field": "current_reference_pathway_0_queue_0_slot_4",
+      "legacy_shape": [
+        422
+      ],
+      "singleton_shape": [
+        422
+      ],
+      "dtype": "<i4",
+      "sha256": "f4931c6a53ad404e133678aa024904ac0d78d0f98ea78b73a2069f60db6fa17d"
+    },
+    "current_reference_path_0_slot_5": {
+      "singleton_field": "current_reference_pathway_0_queue_0_slot_5",
+      "legacy_shape": [
+        303
+      ],
+      "singleton_shape": [
+        303
+      ],
+      "dtype": "<i4",
+      "sha256": "55116a119ae3a14e9f2bcd33ded43e07c3d1e8f7f33830bf941b4b8305cef1f8"
+    },
+    "current_reference_path_0_slot_6": {
+      "singleton_field": "current_reference_pathway_0_queue_0_slot_6",
+      "legacy_shape": [
+        281
+      ],
+      "singleton_shape": [
+        281
+      ],
+      "dtype": "<i4",
+      "sha256": "50c1d4c50d9ebe96425c601e2fc5ff07ec794a315a2e5d0aa8d2b978952e02a2"
+    },
+    "current_reference_path_0_slot_7": {
+      "singleton_field": "current_reference_pathway_0_queue_0_slot_7",
+      "legacy_shape": [
+        304
+      ],
+      "singleton_shape": [
+        304
+      ],
+      "dtype": "<i4",
+      "sha256": "40a885ab67080ca328f437592f7f6ef570487d19458c5811add6a297b411d395"
+    },
+    "current_reference_path_0_slot_8": {
+      "singleton_field": "current_reference_pathway_0_queue_0_slot_8",
+      "legacy_shape": [
+        344
+      ],
+      "singleton_shape": [
+        344
+      ],
+      "dtype": "<i4",
+      "sha256": "d8c340ccc3e40a3a8213c23d013295284beeb9b057a5ae244cbeab8ed7675fe3"
+    },
+    "current_reference_path_0_slot_9": {
+      "singleton_field": "current_reference_pathway_0_queue_0_slot_9",
+      "legacy_shape": [
+        510
+      ],
+      "singleton_shape": [
+        510
+      ],
+      "dtype": "<i4",
+      "sha256": "3566f966637208a2d5e423f2958b4e0fa82051a6e8e3401d31c37933a0eb1f6f"
+    },
+    "current_reference_path_0_slot_10": {
+      "singleton_field": "current_reference_pathway_0_queue_0_slot_10",
+      "legacy_shape": [
+        332
+      ],
+      "singleton_shape": [
+        332
+      ],
+      "dtype": "<i4",
+      "sha256": "0e1c0047882842aa6b41ead7871356644a98b5b0c37b282dde3a86040f440fff"
+    },
+    "current_reference_path_0_slot_11": {
+      "singleton_field": "current_reference_pathway_0_queue_0_slot_11",
+      "legacy_shape": [
+        404
+      ],
+      "singleton_shape": [
+        404
+      ],
+      "dtype": "<i4",
+      "sha256": "1e10b5b66a3c448707e4d867afd7f28ced21ea12787c1d23385032d7385ca554"
+    },
+    "current_reference_path_0_slot_12": {
+      "singleton_field": "current_reference_pathway_0_queue_0_slot_12",
+      "legacy_shape": [
+        795
+      ],
+      "singleton_shape": [
+        795
+      ],
+      "dtype": "<i4",
+      "sha256": "75c5e35cdb4c5eed00d97d8eaab953728b13989386b2b43bbcb7339b8c645e74"
+    },
+    "current_reference_path_0_slot_13": {
+      "singleton_field": "current_reference_pathway_0_queue_0_slot_13",
+      "legacy_shape": [
+        490
+      ],
+      "singleton_shape": [
+        490
+      ],
+      "dtype": "<i4",
+      "sha256": "aca43b7425e2aef992f3580b55b628e0ce9bb4ecb0f12feb54800f9274e11970"
+    },
+    "current_reference_path_0_slot_14": {
+      "singleton_field": "current_reference_pathway_0_queue_0_slot_14",
+      "legacy_shape": [
+        407
+      ],
+      "singleton_shape": [
+        407
+      ],
+      "dtype": "<i4",
+      "sha256": "858d0656c20ae0f2bd52e7da4a6a5fd6fa4faf77aab5585a12e43b57361a12c9"
+    },
+    "current_reference_path_0_slot_15": {
+      "singleton_field": "current_reference_pathway_0_queue_0_slot_15",
+      "legacy_shape": [
+        429
+      ],
+      "singleton_shape": [
+        429
+      ],
+      "dtype": "<i4",
+      "sha256": "afc4ffccd5ff6f01985449f56570177d40fa4d7f36b5372c7afb9ca80b4a405b"
+    },
+    "current_reference_path_0_slot_16": {
+      "singleton_field": "current_reference_pathway_0_queue_0_slot_16",
+      "legacy_shape": [
+        407
+      ],
+      "singleton_shape": [
+        407
+      ],
+      "dtype": "<i4",
+      "sha256": "9b51875b47d50e7e019f2c317bf888a1727a6b8fca32d4fa17ee5c3b33f1bb08"
+    },
+    "current_reference_path_0_slot_17": {
+      "singleton_field": "current_reference_pathway_0_queue_0_slot_17",
+      "legacy_shape": [
+        182
+      ],
+      "singleton_shape": [
+        182
+      ],
+      "dtype": "<i4",
+      "sha256": "f8136789933556da79c221f26e845fd4e54460af9a6dce9c85e337dbc05eedfc"
+    },
+    "current_reference_path_0_slot_18": {
+      "singleton_field": "current_reference_pathway_0_queue_0_slot_18",
+      "legacy_shape": [
+        112
+      ],
+      "singleton_shape": [
+        112
+      ],
+      "dtype": "<i4",
+      "sha256": "f1c5fd3449b35222de61ec4c0a546e491fd1fb40962467baef5ac59ff21f54c4"
+    },
+    "current_reference_path_1_delivered": {
+      "singleton_field": "current_reference_pathway_1_delivered",
+      "legacy_shape": [
+        1
+      ],
+      "singleton_shape": [
+        1
+      ],
+      "dtype": "<i4",
+      "sha256": "972b8373b897c65c4f631c6bdf2443d0d817a88f224b54d8e593fdcf32488d60"
+    },
+    "current_reference_path_1_offset": {
+      "singleton_field": "current_reference_pathway_1_queue_0_offset",
+      "legacy_shape": [
+        1
+      ],
+      "singleton_shape": [],
+      "dtype": "<i4",
+      "sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+    },
+    "current_reference_path_1_slot_0": {
+      "singleton_field": "current_reference_pathway_1_queue_0_slot_0",
+      "legacy_shape": [
+        1
+      ],
+      "singleton_shape": [
+        1
+      ],
+      "dtype": "<i4",
+      "sha256": "972b8373b897c65c4f631c6bdf2443d0d817a88f224b54d8e593fdcf32488d60"
+    },
+    "previous_reference_pre_t": {
+      "singleton_field": "previous_reference_pre_t",
+      "legacy_shape": [],
+      "singleton_shape": [],
+      "dtype": "<f8",
+      "sha256": "7065a605f54cf311f7b1675bef3c0f066971296668483bc320d74ee8a2acca48"
+    },
+    "previous_reference_pre_v": {
+      "singleton_field": "previous_reference_pre_v",
+      "legacy_shape": [
+        138639
+      ],
+      "singleton_shape": [
+        138639
+      ],
+      "dtype": "<f8",
+      "sha256": "882cfa39e081ad493be57645c6156ed0dffcd83650196f0d2cf3ff4e34659163"
+    },
+    "previous_reference_pre_g": {
+      "singleton_field": "previous_reference_pre_g",
+      "legacy_shape": [
+        138639
+      ],
+      "singleton_shape": [
+        138639
+      ],
+      "dtype": "<f8",
+      "sha256": "759cd490522e0147a1a0e048e273de2c8e43849fa6024062a040c44966fec9e7"
+    },
+    "previous_reference_pre_not_refractory": {
+      "singleton_field": "previous_reference_pre_not_refractory",
+      "legacy_shape": [
+        138639
+      ],
+      "singleton_shape": [
+        138639
+      ],
+      "dtype": "|b1",
+      "sha256": "b25ed81c61c57d2b601463db2abb13b524a34e3f0fcbc2ca13576f58e3f3ecdd"
+    },
+    "previous_reference_before_t": {
+      "singleton_field": "previous_reference_before_t",
+      "legacy_shape": [],
+      "singleton_shape": [],
+      "dtype": "<f8",
+      "sha256": "7065a605f54cf311f7b1675bef3c0f066971296668483bc320d74ee8a2acca48"
+    },
+    "previous_reference_before_v": {
+      "singleton_field": "previous_reference_before_v",
+      "legacy_shape": [
+        138639
+      ],
+      "singleton_shape": [
+        138639
+      ],
+      "dtype": "<f8",
+      "sha256": "882cfa39e081ad493be57645c6156ed0dffcd83650196f0d2cf3ff4e34659163"
+    },
+    "previous_reference_before_g": {
+      "singleton_field": "previous_reference_before_g",
+      "legacy_shape": [
+        138639
+      ],
+      "singleton_shape": [
+        138639
+      ],
+      "dtype": "<f8",
+      "sha256": "eb22caf891f902eda94c5ad14e9eedd778fccfd766bce01a16e684917d05b847"
+    },
+    "previous_reference_before_not_refractory": {
+      "singleton_field": "previous_reference_before_not_refractory",
+      "legacy_shape": [
+        138639
+      ],
+      "singleton_shape": [
+        138639
+      ],
+      "dtype": "|b1",
+      "sha256": "7db3753a46d1d7cc51d9f8ad067788eb1dd2d3724764f91af29434ce79cb001b"
+    },
+    "previous_reference_end_t": {
+      "singleton_field": "previous_reference_end_t",
+      "legacy_shape": [],
+      "singleton_shape": [],
+      "dtype": "<f8",
+      "sha256": "7065a605f54cf311f7b1675bef3c0f066971296668483bc320d74ee8a2acca48"
+    },
+    "previous_reference_end_v": {
+      "singleton_field": "previous_reference_end_v",
+      "legacy_shape": [
+        138639
+      ],
+      "singleton_shape": [
+        138639
+      ],
+      "dtype": "<f8",
+      "sha256": "b713ede2438d7e62bf1ff9e6e9e08910cde1d4365e00f4ab4d8203847b836fd2"
+    },
+    "previous_reference_end_g": {
+      "singleton_field": "previous_reference_end_g",
+      "legacy_shape": [
+        138639
+      ],
+      "singleton_shape": [
+        138639
+      ],
+      "dtype": "<f8",
+      "sha256": "0c47dd74fbd1ec6ba58e6596007fe05d6528ce1f1018c00ae30a1df803514948"
+    },
+    "previous_reference_end_lastspike": {
+      "singleton_field": "previous_reference_end_lastspike",
+      "legacy_shape": [
+        138639
+      ],
+      "singleton_shape": [
+        138639
+      ],
+      "dtype": "<f8",
+      "sha256": "b82cd9dfea5e84470a04797d703f80c5b9eb001fd9568e7e5145432804205173"
+    },
+    "previous_reference_end_not_refractory": {
+      "singleton_field": "previous_reference_end_not_refractory",
+      "legacy_shape": [
+        138639
+      ],
+      "singleton_shape": [
+        138639
+      ],
+      "dtype": "|b1",
+      "sha256": "7db3753a46d1d7cc51d9f8ad067788eb1dd2d3724764f91af29434ce79cb001b"
+    },
+    "previous_mlx_pre_v": {
+      "singleton_field": "previous_mlx_pre_v",
+      "legacy_shape": [
+        138639
+      ],
+      "singleton_shape": [
+        138639
+      ],
+      "dtype": "<f4",
+      "sha256": "c58f9daa5688c5e7e5b9709ebc5ae1ee4035c8f23f6361ae08e1944cf069ab65"
+    },
+    "previous_mlx_pre_g": {
+      "singleton_field": "previous_mlx_pre_g",
+      "legacy_shape": [
+        138639
+      ],
+      "singleton_shape": [
+        138639
+      ],
+      "dtype": "<f4",
+      "sha256": "0434ac6223d58fc3a111dec09aa9ee510bbc4bfe4b63c942e27602645abd7897"
+    },
+    "previous_mlx_pre_not_refractory": {
+      "singleton_field": "previous_mlx_pre_not_refractory",
+      "legacy_shape": [
+        138639
+      ],
+      "singleton_shape": [
+        138639
+      ],
+      "dtype": "|b1",
+      "sha256": "b25ed81c61c57d2b601463db2abb13b524a34e3f0fcbc2ca13576f58e3f3ecdd"
+    },
+    "previous_mlx_spikes": {
+      "singleton_field": "previous_mlx_spikes",
+      "legacy_shape": [
+        138639
+      ],
+      "singleton_shape": [
+        138639
+      ],
+      "dtype": "|b1",
+      "sha256": "ce12f2c1a3c77e30fc8e717718922c92d10bf3e19fd855e3044d79169e2cd63e"
+    },
+    "previous_mlx_before_v": {
+      "singleton_field": "previous_mlx_before_v",
+      "legacy_shape": [
+        138639
+      ],
+      "singleton_shape": [
+        138639
+      ],
+      "dtype": "<f4",
+      "sha256": "c58f9daa5688c5e7e5b9709ebc5ae1ee4035c8f23f6361ae08e1944cf069ab65"
+    },
+    "previous_mlx_before_g": {
+      "singleton_field": "previous_mlx_before_g",
+      "legacy_shape": [
+        138639
+      ],
+      "singleton_shape": [
+        138639
+      ],
+      "dtype": "<f4",
+      "sha256": "4cc0c72666d3b308de431780a46c1085baf56e154af9f693c1352f96a0043188"
+    },
+    "previous_mlx_before_not_refractory": {
+      "singleton_field": "previous_mlx_before_not_refractory",
+      "legacy_shape": [
+        138639
+      ],
+      "singleton_shape": [
+        138639
+      ],
+      "dtype": "|b1",
+      "sha256": "7db3753a46d1d7cc51d9f8ad067788eb1dd2d3724764f91af29434ce79cb001b"
+    },
+    "previous_mlx_end_v": {
+      "singleton_field": "previous_mlx_end_v",
+      "legacy_shape": [
+        138639
+      ],
+      "singleton_shape": [
+        138639
+      ],
+      "dtype": "<f4",
+      "sha256": "81c4babdbd690a080e61d102c483f63742aa321cb2905d546f4b0c892a8164df"
+    },
+    "previous_mlx_end_g": {
+      "singleton_field": "previous_mlx_end_g",
+      "legacy_shape": [
+        138639
+      ],
+      "singleton_shape": [
+        138639
+      ],
+      "dtype": "<f4",
+      "sha256": "aa6b47bcb82b748316159e3a6fb74d88479a29e178e285853643f731ebffc709"
+    },
+    "previous_mlx_end_last_spike_step": {
+      "singleton_field": "previous_mlx_end_last_spike_step",
+      "legacy_shape": [
+        138639
+      ],
+      "singleton_shape": [
+        138639
+      ],
+      "dtype": "<i4",
+      "sha256": "e881bbf3a19cbf5869f5ed5e8a68aca2ea6802cbd5d5bd0fa8cebb7c801e6dec"
+    },
+    "previous_mlx_end_not_refractory": {
+      "singleton_field": "previous_mlx_end_not_refractory",
+      "legacy_shape": [
+        138639
+      ],
+      "singleton_shape": [
+        138639
+      ],
+      "dtype": "|b1",
+      "sha256": "7db3753a46d1d7cc51d9f8ad067788eb1dd2d3724764f91af29434ce79cb001b"
+    },
+    "previous_mlx_accepted_inputs": {
+      "singleton_field": "previous_mlx_accepted_inputs",
+      "legacy_shape": [
+        21
+      ],
+      "singleton_shape": [
+        21
+      ],
+      "dtype": "|b1",
+      "sha256": "c90232586b801f9558a76f2f963eccd831d9fe6775e4c8f1446b2331aa2132f2"
+    },
+    "previous_mlx_due_edges": {
+      "singleton_field": "previous_mlx_due_edges",
+      "legacy_shape": [
+        120
+      ],
+      "singleton_shape": [
+        120
+      ],
+      "dtype": "<i4",
+      "sha256": "5bca12a162e1e3921699fafee83c5be7572c57bc123e835396df58dbe14d8c1c"
+    },
+    "previous_reference_spikes": {
+      "singleton_field": "previous_reference_spikes",
+      "legacy_shape": [
+        3
+      ],
+      "singleton_shape": [
+        3
+      ],
+      "dtype": "<i4",
+      "sha256": "a281bca7d53c49d5373b3835ce8bf4082662b93e9f6a754a7ed979311f28d7af"
+    },
+    "previous_reference_source_spikes": {
+      "singleton_field": "previous_reference_source_spikes",
+      "legacy_shape": [
+        0
+      ],
+      "singleton_shape": [
+        0
+      ],
+      "dtype": "<i4",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "previous_reference_path_0_delivered": {
+      "singleton_field": "previous_reference_pathway_0_delivered",
+      "legacy_shape": [
+        120
+      ],
+      "singleton_shape": [
+        120
+      ],
+      "dtype": "<i4",
+      "sha256": "5bca12a162e1e3921699fafee83c5be7572c57bc123e835396df58dbe14d8c1c"
+    },
+    "previous_reference_path_0_offset": {
+      "singleton_field": "previous_reference_pathway_0_queue_0_offset",
+      "legacy_shape": [
+        1
+      ],
+      "singleton_shape": [],
+      "dtype": "<i4",
+      "sha256": "cb30e91817239109ffd0a5870046e128f04619da80c7624d921162fdfe514f76"
+    },
+    "previous_reference_path_0_slot_0": {
+      "singleton_field": "previous_reference_pathway_0_queue_0_slot_0",
+      "legacy_shape": [
+        203
+      ],
+      "singleton_shape": [
+        203
+      ],
+      "dtype": "<i4",
+      "sha256": "02e5bfa7970aa242f3a735992df888358f680b0db1ca431d454c00b55a7321e1"
+    },
+    "previous_reference_path_0_slot_1": {
+      "singleton_field": "previous_reference_pathway_0_queue_0_slot_1",
+      "legacy_shape": [
+        1214
+      ],
+      "singleton_shape": [
+        1214
+      ],
+      "dtype": "<i4",
+      "sha256": "cacdac7f3f31c5d077664cc91779dc0b3e9ffcf3146b86b906ff7ab4308fa206"
+    },
+    "previous_reference_path_0_slot_2": {
+      "singleton_field": "previous_reference_pathway_0_queue_0_slot_2",
+      "legacy_shape": [
+        242
+      ],
+      "singleton_shape": [
+        242
+      ],
+      "dtype": "<i4",
+      "sha256": "a19b826893e4ac51f52e5a6bed3841b83b797ff5fe061d131bed16969c3c0aeb"
+    },
+    "previous_reference_path_0_slot_3": {
+      "singleton_field": "previous_reference_pathway_0_queue_0_slot_3",
+      "legacy_shape": [
+        0
+      ],
+      "singleton_shape": [
+        0
+      ],
+      "dtype": "<i4",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "previous_reference_path_0_slot_4": {
+      "singleton_field": "previous_reference_pathway_0_queue_0_slot_4",
+      "legacy_shape": [
+        422
+      ],
+      "singleton_shape": [
+        422
+      ],
+      "dtype": "<i4",
+      "sha256": "f4931c6a53ad404e133678aa024904ac0d78d0f98ea78b73a2069f60db6fa17d"
+    },
+    "previous_reference_path_0_slot_5": {
+      "singleton_field": "previous_reference_pathway_0_queue_0_slot_5",
+      "legacy_shape": [
+        303
+      ],
+      "singleton_shape": [
+        303
+      ],
+      "dtype": "<i4",
+      "sha256": "55116a119ae3a14e9f2bcd33ded43e07c3d1e8f7f33830bf941b4b8305cef1f8"
+    },
+    "previous_reference_path_0_slot_6": {
+      "singleton_field": "previous_reference_pathway_0_queue_0_slot_6",
+      "legacy_shape": [
+        281
+      ],
+      "singleton_shape": [
+        281
+      ],
+      "dtype": "<i4",
+      "sha256": "50c1d4c50d9ebe96425c601e2fc5ff07ec794a315a2e5d0aa8d2b978952e02a2"
+    },
+    "previous_reference_path_0_slot_7": {
+      "singleton_field": "previous_reference_pathway_0_queue_0_slot_7",
+      "legacy_shape": [
+        304
+      ],
+      "singleton_shape": [
+        304
+      ],
+      "dtype": "<i4",
+      "sha256": "40a885ab67080ca328f437592f7f6ef570487d19458c5811add6a297b411d395"
+    },
+    "previous_reference_path_0_slot_8": {
+      "singleton_field": "previous_reference_pathway_0_queue_0_slot_8",
+      "legacy_shape": [
+        344
+      ],
+      "singleton_shape": [
+        344
+      ],
+      "dtype": "<i4",
+      "sha256": "d8c340ccc3e40a3a8213c23d013295284beeb9b057a5ae244cbeab8ed7675fe3"
+    },
+    "previous_reference_path_0_slot_9": {
+      "singleton_field": "previous_reference_pathway_0_queue_0_slot_9",
+      "legacy_shape": [
+        510
+      ],
+      "singleton_shape": [
+        510
+      ],
+      "dtype": "<i4",
+      "sha256": "3566f966637208a2d5e423f2958b4e0fa82051a6e8e3401d31c37933a0eb1f6f"
+    },
+    "previous_reference_path_0_slot_10": {
+      "singleton_field": "previous_reference_pathway_0_queue_0_slot_10",
+      "legacy_shape": [
+        332
+      ],
+      "singleton_shape": [
+        332
+      ],
+      "dtype": "<i4",
+      "sha256": "0e1c0047882842aa6b41ead7871356644a98b5b0c37b282dde3a86040f440fff"
+    },
+    "previous_reference_path_0_slot_11": {
+      "singleton_field": "previous_reference_pathway_0_queue_0_slot_11",
+      "legacy_shape": [
+        120
+      ],
+      "singleton_shape": [
+        120
+      ],
+      "dtype": "<i4",
+      "sha256": "5bca12a162e1e3921699fafee83c5be7572c57bc123e835396df58dbe14d8c1c"
+    },
+    "previous_reference_path_0_slot_12": {
+      "singleton_field": "previous_reference_pathway_0_queue_0_slot_12",
+      "legacy_shape": [
+        795
+      ],
+      "singleton_shape": [
+        795
+      ],
+      "dtype": "<i4",
+      "sha256": "75c5e35cdb4c5eed00d97d8eaab953728b13989386b2b43bbcb7339b8c645e74"
+    },
+    "previous_reference_path_0_slot_13": {
+      "singleton_field": "previous_reference_pathway_0_queue_0_slot_13",
+      "legacy_shape": [
+        490
+      ],
+      "singleton_shape": [
+        490
+      ],
+      "dtype": "<i4",
+      "sha256": "aca43b7425e2aef992f3580b55b628e0ce9bb4ecb0f12feb54800f9274e11970"
+    },
+    "previous_reference_path_0_slot_14": {
+      "singleton_field": "previous_reference_pathway_0_queue_0_slot_14",
+      "legacy_shape": [
+        407
+      ],
+      "singleton_shape": [
+        407
+      ],
+      "dtype": "<i4",
+      "sha256": "858d0656c20ae0f2bd52e7da4a6a5fd6fa4faf77aab5585a12e43b57361a12c9"
+    },
+    "previous_reference_path_0_slot_15": {
+      "singleton_field": "previous_reference_pathway_0_queue_0_slot_15",
+      "legacy_shape": [
+        429
+      ],
+      "singleton_shape": [
+        429
+      ],
+      "dtype": "<i4",
+      "sha256": "afc4ffccd5ff6f01985449f56570177d40fa4d7f36b5372c7afb9ca80b4a405b"
+    },
+    "previous_reference_path_0_slot_16": {
+      "singleton_field": "previous_reference_pathway_0_queue_0_slot_16",
+      "legacy_shape": [
+        407
+      ],
+      "singleton_shape": [
+        407
+      ],
+      "dtype": "<i4",
+      "sha256": "9b51875b47d50e7e019f2c317bf888a1727a6b8fca32d4fa17ee5c3b33f1bb08"
+    },
+    "previous_reference_path_0_slot_17": {
+      "singleton_field": "previous_reference_pathway_0_queue_0_slot_17",
+      "legacy_shape": [
+        182
+      ],
+      "singleton_shape": [
+        182
+      ],
+      "dtype": "<i4",
+      "sha256": "f8136789933556da79c221f26e845fd4e54460af9a6dce9c85e337dbc05eedfc"
+    },
+    "previous_reference_path_0_slot_18": {
+      "singleton_field": "previous_reference_pathway_0_queue_0_slot_18",
+      "legacy_shape": [
+        112
+      ],
+      "singleton_shape": [
+        112
+      ],
+      "dtype": "<i4",
+      "sha256": "f1c5fd3449b35222de61ec4c0a546e491fd1fb40962467baef5ac59ff21f54c4"
+    },
+    "previous_reference_path_1_delivered": {
+      "singleton_field": "previous_reference_pathway_1_delivered",
+      "legacy_shape": [
+        0
+      ],
+      "singleton_shape": [
+        0
+      ],
+      "dtype": "<i4",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "previous_reference_path_1_offset": {
+      "singleton_field": "previous_reference_pathway_1_queue_0_offset",
+      "legacy_shape": [
+        1
+      ],
+      "singleton_shape": [],
+      "dtype": "<i4",
+      "sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+    },
+    "previous_reference_path_1_slot_0": {
+      "singleton_field": "previous_reference_pathway_1_queue_0_slot_0",
+      "legacy_shape": [
+        0
+      ],
+      "singleton_shape": [
+        0
+      ],
+      "dtype": "<i4",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "neuron_41514_actual_leaf_edges": {
+      "singleton_field": "neuron_41514_actual_mlx_leaf_edges",
+      "legacy_shape": [
+        128
+      ],
+      "singleton_shape": [
+        128
+      ],
+      "dtype": "<i4",
+      "sha256": "1270afb057da495166ae668eb39ba030385ff69f585c565fc5d9a40ed53b9d60"
+    },
+    "neuron_41514_actual_leaf_counts": {
+      "singleton_field": "neuron_41514_actual_mlx_leaf_counts",
+      "legacy_shape": [
+        128
+      ],
+      "singleton_shape": [
+        128
+      ],
+      "dtype": "<f4",
+      "sha256": "1c8582770bb1318275fc0a609b28f6e9df50ab0992c8a0d4d6ab4a7a7da8846d"
+    },
+    "neuron_41514_actual_leaf_occupied": {
+      "singleton_field": "neuron_41514_actual_mlx_leaf_occupied",
+      "legacy_shape": [
+        128
+      ],
+      "singleton_shape": [
+        128
+      ],
+      "dtype": "|b1",
+      "sha256": "318ef501de020becf64371a098cb5ea527b244c3dbba51683c3ee98f1affba60"
+    },
+    "neuron_41514_native_reference_weights_si": {
+      "singleton_field": "neuron_41514_reference_native_weight_si",
+      "legacy_shape": [
+        120
+      ],
+      "singleton_shape": [
+        120
+      ],
+      "dtype": "<f8",
+      "sha256": "09d63f27adbcd074ba842a9310b3e4a15370ac70e96d26704f179c8ac11b98cc"
+    }
+  },
+  "current_previous_actual_snapshot_clocks_cursors_due_hashes_equal": true,
+  "source_sha256": {
+    "docs/evidence/milestone-4/four-trial-memory/trial-1-spike-context.npz": "85f2873f48c0bd2a09cf38862bf821834ca96b134d92c8d7f23e500edc507ed2",
+    "docs/evidence/milestone-4/four-trial-memory/four-trial-memory.json": "ac463f15661fd41b08bad6930edf4e16ef86902d6d7ff5baea295ad5541c3adb",
+    "data/results/milestone-4-parity-sugar-1000-1-20261005-01/observations/paired-first/spike-context.npz": "e986c1d334163f0c5043885cd660753ff9655ff7cbf9ebacdf5a800f308062b9",
+    "data/results/milestone-4-parity-sugar-1000-1-20261005-01/observations/paired-first/causal.json": "5c30935d75bdd3d070f1e77a840fa958887f8752536fc27a3d03b3d32303da38"
+  }
+}
