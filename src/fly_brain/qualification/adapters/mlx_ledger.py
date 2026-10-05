@@ -45,7 +45,8 @@ class EventLedger:
             self.empty_edges = mx.zeros(
                 (trials, connectome.sources.size), dtype=mx.bool_
             )
-            self.history = [mx.zeros((trials, neurons), dtype=mx.bool_)] * 19
+            self.empty_neurons = mx.zeros((trials, neurons), dtype=mx.bool_)
+            self.history = [self.empty_neurons] * 19
 
     def check(self, state: State, trace: StepTrace, events: mx.array) -> mx.array:
         step = self.step
@@ -86,15 +87,18 @@ class EventLedger:
                     (state.voltage_mv, state.synaptic_mv),
                 )
             )
+            pending_slots: list[mx.array] = []
             for slot in range(19):
                 due_step = step + 1 + (slot - step - 1) % 19
                 source_step = due_step - 18
                 pending = (
-                    self.history[source_step % 19][:, self.sources]
+                    self.history[source_step % 19]
                     if 0 <= source_step <= step
-                    else self.empty_edges
+                    else self.empty_neurons
                 )
-                columns.append(mx.all(state.queue[slot] == pending, axis=1))
-            result = mx.stack(columns, axis=1)
+                pending_slots.append(pending)
+            pending_queue = mx.stack(pending_slots)[:, :, self.sources]
+            queue_checks = mx.all(state.queue == pending_queue, axis=2).T
+            result = mx.concatenate([mx.stack(columns, axis=1), queue_checks], axis=1)
         self.step += 1
         return result

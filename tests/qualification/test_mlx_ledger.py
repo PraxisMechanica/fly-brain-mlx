@@ -129,7 +129,7 @@ def test_ledger_detects_changed_discrete_state_and_delivery_bits(
     assert not flags[0, CHECK_NAMES.index(check)]
 
 
-@pytest.mark.parametrize('slot', [0, 18])
+@pytest.mark.parametrize('slot', range(19))
 def test_ledger_detects_changed_pending_and_consumed_queue_slots(
     precision: str, slot: int
 ) -> None:
