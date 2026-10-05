@@ -1042,6 +1042,11 @@ First one-second sugar cause review preparation (2026-10-05):
 - Actual strict predicates differ with agreed eligibility: Brian2 pre-voltage `-0.04499995946946667` volts, MLX exactly `-45.0` millivolts. Host-comparison error `0.00004053053332597756` millivolts is below the unchanged `0.0014499995946946668` millivolt budget. These are prerequisites only. No source or numerical change occurs; the full execution continues its fresh repeats/CPU checks. All three evidence copies match the executed output.
 - Prepare the [bounded cause assignment](docs/handoffs/astra-one-second-sugar-cause.md) for fresh-context Astra at explicit `xhigh`. Request scientific classification of this complete new cause, not case approval; the earlier sugar-trial-1 review cannot classify it. Commit this verified preparation before dispatch. Acceptance remains **9/52**; full metrics/replays/case acceptance and prescribed batch checks remain open.
 
+First one-second cause review dispatched (2026-10-05):
+
+- At clean `2c9fd6b`, dispatch `/root/review_one_second_sugar_cause` with fresh context, explicit `gpt-6-astra` and `xhigh`. [Dispatch and assignment hash](docs/evidence/milestone-4/one-second-sugar-cause/dispatch.json). The assignment is read-only and excludes dependent implementation, full-case acceptance and any tolerance/model/reference changes. Sol continues only independent batch identity work while awaiting the completed result.
+- The existing one-second execution and every current owner remain unchanged. The review is pending; no classification or acceptance is implied by dispatch. Commit this record now. Acceptance stays **9/52**.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.
