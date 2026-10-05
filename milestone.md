@@ -866,6 +866,12 @@ Reviewed decision case/cause identity binding (2026-10-05):
 - **377 application tests pass, zero failures/errors/skips**. [Report](docs/evidence/milestone-4/case-adjudication/cause-identity-tests.xml). Full Ruff formatting/linting and strict Pyright pass. One initial test insertion split an existing branch and failed collection; it was corrected before the successful run and commit. The failed report remains in `data/results/milestone-4-reviewed-cause-identity-20261005-01.xml`.
 - Commit this passing identity unit before composing the independent counter/fraction/correlation/timing proof and executing sugar trial 1. All original reports, numerical/reference functions, and the frozen acceptance gates remain unchanged. No review inference from prose or broad check waiver is implemented; acceptance stays **5/52**.
 
+Independent complete-score verification (2026-10-05):
+
+- At `2722175`, execute a separate [Python counter/fraction/statistics scorer](docs/evidence/milestone-4/case-adjudication/independent-score.py), using none of the application metric or gate functions. Recompute all **19 metric fields and 11 frozen checks** from the actual normalized native-coordinate records of all five accepted cases, including exact silence and CPU diagnostics. [Verified results and input hashes](docs/evidence/milestone-4/case-adjudication/independent-score-verification.json).
+- Every rational value and its encoded floating value matches exactly. Independently evaluated host diagnostic floats match within `1e-12`; that verification comparison never relaxes a case gate. All eleven independently recomputed fixed/paired gate booleans exactly match the recorded reports. A separate dynamic program verifies maximum matching cardinality at each 0/1/10-step window, and a trial-exchange counterexample refuses cross-trial matches despite equal pooled counts.
+- The executed script passes Ruff formatting/linting. Existing 377 application / 203 scientific tests remain their separately recorded unchanged-source results. Decision confidence **99%** at `2722175`: use this scorer with the tested prerequisite, native-cause, hash, identity, and replay checkers for the next complete singleton. Commit this working proof before launch. No new case acceptance or full-matrix approval is claimed; acceptance stays **5/52**.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.
