@@ -6,18 +6,26 @@ import numpy as np
 
 from fly_brain.simulation.models import Stimulus
 
+from .active_cpu import TorchStep
 from .torch_observer import TorchSnapshot, observe
 from .torch_reference import TorchModel
 
 
-def collect(model: TorchModel, stimulus: Stimulus, output: Path) -> None:
+def collect(
+    model: TorchModel,
+    stimulus: Stimulus,
+    output: Path,
+    advance: TorchStep | None = None,
+) -> None:
     output.mkdir(parents=True, exist_ok=False)
     trials: list[int] = []
     neurons: list[int] = []
     steps: list[int] = []
     final: TorchSnapshot | None = None
     with (
-        closing(observe(model, stimulus.events, stimulus.targets)) as snapshots,
+        closing(
+            observe(model, stimulus.events, stimulus.targets, advance)
+        ) as snapshots,
         (output / 'native-digests.jsonl').open('x') as digests,
     ):
         for snapshot in snapshots:

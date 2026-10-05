@@ -5,6 +5,7 @@ import numpy as np
 import torch
 from numpy.typing import NDArray
 
+from .active_cpu import TorchStep
 from .paired_observer import phase_hash
 from .torch_reference import TensorState, TorchModel
 from .torch_setup import native_float, replay_inputs
@@ -48,7 +49,10 @@ def capture(state: TensorState, step: int) -> TorchSnapshot:
 
 
 def observe(
-    model: TorchModel, events: NDArray[np.uint8], targets: tuple[int, ...]
+    model: TorchModel,
+    events: NDArray[np.uint8],
+    targets: tuple[int, ...],
+    advance: TorchStep | None = None,
 ) -> Generator[TorchSnapshot, None, None]:
     if (
         events.ndim != 3
@@ -59,11 +63,12 @@ def observe(
         or np.any(events > 1)
     ):
         raise ValueError('CPU observer requires canonical trial-by-step channels')
+    advance = model.forward if advance is None else advance
     with torch.no_grad():
         state = model.state_init()
     yield capture(state, -1)
     for step in range(events.shape[1]):
         counts = replay_inputs(events[:, step, :], targets, model.neurons.size)
         with torch.no_grad():
-            state = model.forward(counts, *state)
+            state = advance(counts, *state)
         yield capture(state, step)

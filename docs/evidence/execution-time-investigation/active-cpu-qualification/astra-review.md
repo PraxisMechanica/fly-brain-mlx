@@ -24,4 +24,4 @@ Reject same-comparator certification for any byte difference, missing step, tria
 
 Reuse the native CPU raster and rescore each new three-engine case. The union of active neurons depends on MLX output, so old metric scalars are insufficient. CPU digest equality cannot establish Brian2-to-MLX tolerance; preserve relevant raw Brian2 values or verified replay. All 52 case obligations and acceptance gates remain unchanged.
 
-Evidence: [parent checks](prospective-decision.json), [operation diagnostic](../active-source-rows/verification.json), [preserved full pair](../../../milestone-4/one-second-sugar-metric-failure/completed-case/verification.json). The requested `torch_trace.py` does not exist; `torch_observer.py` and `torch_collect.py` own the trace.
+Evidence: [parent checks](prospective-decision.json), [operation diagnostic](../active-source-rows/verification.json), [preserved full pair](../../milestone-4/one-second-sugar-metric-failure/completed-case/verification.json). The requested `torch_trace.py` does not exist; `torch_observer.py` and `torch_collect.py` own the trace.
