@@ -1,0 +1,69 @@
+{
+  "scope": "Read-only calculations from preserved evidence and source; no tests, simulations, benchmarks, or production changes.",
+  "checkpoint": "8292d1c89aff4d2cbf551361e06b91d1c3f0a6b8",
+  "matrix": {
+    "case_identities": 52,
+    "separate_duration_steps_per_engine_before_repeats": 1231000,
+    "expressly_authorized_sugar_p9_prefix_steps_per_engine_before_repeats": 1121000,
+    "avoided_steps": 110000,
+    "avoided_step_percent": 8.935824532900082,
+    "repeats_per_engine": 2,
+    "all_case_obligations_preserved": true,
+    "prefix_collector_not_implemented_or_qualified": true
+  },
+  "measured_seconds": {
+    "complete_one_second_sugar_case": 6279.312376792019,
+    "complete_one_second_sugar_case_minutes": 104.65520627986697,
+    "cpu_proof": {
+      "ordinary": 163.53838495799573,
+      "observed": 173.31870666600298,
+      "repeat": 172.8432370829978
+    },
+    "cpu_observer_wrapper_increment_percent": 5.980444108286442,
+    "cpu_proof_limit": "Both ordinary and observed modes already capture/check/hash state; their difference is not total observation overhead.",
+    "reference_proof": {
+      "ordinary": 1.879448332998436,
+      "observed": 51.04515425002319,
+      "repeat": 51.64796062500682
+    },
+    "reference_observed_to_ordinary_ratio": 27.159647516666087,
+    "production_mlx_total": 51.600718749978114,
+    "production_mlx_warm": 37.499550854670815,
+    "reference_and_cpu_native_descriptor_repeat_agreement": true
+  },
+  "short_cpu_sample": {
+    "main_thread_samples": 207,
+    "native_sparse_matmul_samples": 183,
+    "native_sparse_matmul_sample_percent": 88.40579710144928,
+    "limit": "One short snapshot of the P9 CPU phase, not a whole-run profile or a GPU profile."
+  },
+  "one_second_one_trial_logical_volumes": {
+    "neurons": 138639,
+    "original_edges": 15091983,
+    "steps": 10000,
+    "queue_slots": 19,
+    "blocks": 313,
+    "dense_bool_queue_bytes": 286747677,
+    "due_mask_bytes_hashed_on_host": 150919830000,
+    "boundary_queue_bytes_hashed_on_host": 89752022901,
+    "two_dense_queue_selection_output_elements": 5734953540000,
+    "ledger_queue_slot_element_comparisons": 2867476770000,
+    "reference_phase_bytes_excluding_times_queues_events": 81797010000,
+    "reference_one_byte_boolean_field_write_calls": 4159170000,
+    "possible_source_spike_ring_bytes": 2634141,
+    "source_ring_is_an_unapproved_representation_candidate": true,
+    "limit": "Logical volumes from source geometry, not measured copies, physical traffic, allocation, kernel time, or speedup."
+  },
+  "source_sha256": {
+    "src/fly_brain/qualification/matrix.py": "fc8590202ae5fb038e9ffa767d78839fec25bea752da2b26bba560b5df49397f",
+    "src/fly_brain/simulation/backend/bucketed.py": "0829f0cb3c67f08bb4dc861c1397548f8e66e4ce2262ef3471368ce772552747",
+    "src/fly_brain/qualification/adapters/mlx_observer.py": "169575bba57251e7c60c3299077379b2a2b0c21734100622748bf4fb4434958a",
+    "src/fly_brain/qualification/adapters/mlx_ledger.py": "ac0afd4d3a0ae80bb6c73e98016ac1857137444383e3c098f5eedc46005ad8f9",
+    "src/fly_brain/qualification/adapters/brian_observer.py": "c740345d93b699c46b117427ccda5342d590d7cca9ad4832aad2c125f2e192b9",
+    "src/fly_brain/qualification/adapters/observer_stream.py": "2a555b5a91530ead64d94a51b295ad23667064e28c5d16f2ae945cc8ef5bcf71",
+    "src/fly_brain/qualification/adapters/torch_reference.py": "bf52258041a464156ce05b267601dbefceb893356fbf8401b358b036a29ba6cb",
+    "src/fly_brain/qualification/adapters/case_execution.py": "32fbc22a1bc9c5c42d622c546f29de4ece8dc74d732e0dc9a793a0afffe128bd"
+  },
+  "development_resumed": false,
+  "completion_forecast_supported": false
+}
