@@ -124,6 +124,7 @@ class DevicePreferences:
     cpp_standalone: StandalonePreferences
 
 class Preferences:
+    as_file: str
     codegen: CodeGeneration
     devices: DevicePreferences
 

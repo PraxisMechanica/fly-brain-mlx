@@ -4,6 +4,7 @@ from collections.abc import Generator
 from contextlib import ExitStack
 from dataclasses import dataclass
 from pathlib import Path
+from time import time_ns
 
 import brian2 as b
 import numpy as np
@@ -22,6 +23,7 @@ from .observer_stream import (
     read_frames,
 )
 from .observer_tape import record
+from .reference_build import consumed_dependencies, snapshot
 
 Frame = StepSnapshot | PhaseBlock | FinalSnapshot
 ResultArrays = dict[str, NDArray[np.float64 | np.int32 | np.int64 | np.bool_]]
@@ -33,6 +35,7 @@ class BrianJob:
     shape: StreamShape
     observed: bool
     files: dict[str, str]
+    build_context: dict[str, object] | None = None
 
 
 def build(
@@ -42,6 +45,8 @@ def build(
     events: NDArray[np.uint8],
     directory: Path,
     block_size: int | None = 32,
+    *,
+    bind_build: bool = False,
 ) -> BrianJob:
     if events.ndim != 2 or events.shape[1] != len(targets) or not len(events):
         raise ValueError('Reference replay needs nonempty steps and matching channels')
@@ -160,9 +165,17 @@ def build(
             for name, variable in variables.items()
         }
         b.prefs.devices.cpp_standalone.extra_make_args_unix = ['-j2']
+        started_ns = time_ns()
+        context = snapshot() if bind_build else None
         b.device.build(
             directory=str(directory), clean=False, with_output=False, run=False
         )
+        if context is not None:
+            if context != snapshot():
+                raise ValueError(
+                    'Reference build environment changed during compilation'
+                )
+            context['dependencies'] = consumed_dependencies(directory, started_ns)
         if (
             '-O3 -ffast-math -fno-finite-math-only'
             not in (directory / 'makefile').read_text()
@@ -170,7 +183,7 @@ def build(
             raise RuntimeError(
                 'Reference compiler flags differ from the frozen baseline'
             )
-        return BrianJob(directory, shape, block_size is not None, files)
+        return BrianJob(directory, shape, block_size is not None, files, context)
     finally:
         b.device.reinit()
         b.set_device('runtime')

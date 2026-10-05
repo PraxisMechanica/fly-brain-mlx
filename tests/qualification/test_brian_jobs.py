@@ -3,6 +3,7 @@ import re
 import struct
 import sys
 import zlib
+from collections.abc import Mapping
 from contextlib import closing
 from dataclasses import dataclass
 from pathlib import Path
@@ -60,7 +61,15 @@ def runs(
     events = np.zeros((101, 3), dtype=np.uint8)
     events[::3, 0] = events[::7, 1] = events[::4, 2] = 1
     jobs = {
-        name: build(connectome, (0, 0, 1), (3,), events, output / name, size)
+        name: build(
+            connectome,
+            (0, 0, 1),
+            (3,),
+            events,
+            output / name,
+            size,
+            bind_build=name == 'observed',
+        )
         for name, size in (('ordinary', None), ('observed', 32))
     }
     assert all(
@@ -78,6 +87,27 @@ def runs(
         for name, job in jobs.items()
     }
     return Runs(jobs, frames, output)
+
+
+def test_bound_build_covers_effective_preferences_and_consumed_system_headers(
+    runs: Runs,
+) -> None:
+    context = runs.jobs['observed'].build_context
+    assert context is not None
+    assert 'refractory_timing = False' in str(context['preferences'])
+    assert 'zlib.h' in str(context['dependencies'])
+    assert set(cast(Mapping[str, object], context['packages'])) == {
+        'brian2',
+        'cython',
+        'numpy',
+        'sympy',
+        'mpmath',
+        'pyparsing',
+        'jinja2',
+        'markupsafe',
+        'setuptools',
+        'packaging',
+    }
 
 
 def test_recorded_live_execution_replays_every_native_phase(runs: Runs) -> None:
