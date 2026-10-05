@@ -44,6 +44,7 @@ class SynapticPathway:
     order: int
 
 class Synapses(BrianObject):
+    variables: dict[str, Variable]
     w: Quantity
     delay: Quantity
     pre: SynapticPathway
@@ -95,9 +96,10 @@ class StateMonitor(BrianObject):
     ) -> None: ...
 
 class SpikeMonitor(BrianObject):
+    variables: dict[str, Variable]
     i: Any
     t: Quantity
-    def __init__(self, source: NeuronGroup) -> None: ...
+    def __init__(self, source: NeuronGroup, *, name: str | None = None) -> None: ...
 
 class Network:
     name: str
@@ -107,6 +109,7 @@ class Network:
 
 class Clock:
     dt: Quantity
+    variables: dict[str, Variable]
 
 defaultclock: Clock
 
@@ -115,6 +118,7 @@ class CodeGeneration:
 
 class StandalonePreferences:
     extra_make_args_unix: list[str]
+    openmp_threads: int
 
 class DevicePreferences:
     cpp_standalone: StandalonePreferences
@@ -127,7 +131,10 @@ prefs: Preferences
 
 class Device:
     def reinit(self) -> None: ...
-    def build(self, *, directory: str, clean: bool, with_output: bool) -> None: ...
+    def build(
+        self, *, directory: str, clean: bool, with_output: bool, run: bool = True
+    ) -> None: ...
+    def get_array_filename(self, variable: Variable) -> str: ...
     def get_array_name(
         self, variable: Variable, *, access_data: bool = True
     ) -> str: ...
