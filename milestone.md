@@ -977,6 +977,12 @@ Complete sugar trial-4 case acceptance (2026-10-05):
 - Every engine's native phases/states, physical queues, due records, final arrays, and raster repeat exactly. Complete coverage, canonical stimulus, source/input/mapping/native precision checks pass; actual future original-row queue sets agree across Brian2/MLX. The [24-file raw archive](docs/evidence/milestone-4/cases/sugar-1000-4/observations.zip) matches every original hash and all eight evidence copies match the executed output. The case's executed sources match launch/current source; the separately committed batch collector was not used by this singleton run.
 - This accepts **9/52 cases only** and completes all five sugar singleton trials at 0.1 seconds. Eight accepted cases have exact MLX/reference rasters; sugar trial 1 retains its original automatic refusal and separately verified reviewed acceptance. Commit this verified case before the five-trial diagnostic or next case. All remaining 43 cases, required one-second batch/repeat checks, full parity approval, and performance remain open.
 
+Complete shortest sugar group diagnostic (2026-10-05):
+
+- At clean `501fc9b`, independently reproduce all nineteen pooled metric fields and actual per-trial/pooled 100 ms bins for all nine accepted cases. [Partial matrix report](docs/evidence/milestone-4/matrix-diagnostics/partial-20261005-07/partial-matrix.json) and [executed verification](docs/evidence/milestone-4/matrix-diagnostics/partial-20261005-07/executed-verification.py) preserve all 12 required groups and **9 included / 43 missing** cases.
+- Sugar's 0.1-second group now includes exactly trials 0–4 with no missing, invalid, or scientifically failed trial. Each has its own complete three-engine first/repeat evidence. Sugar trial 1 still retains its original automatic refusal and separate bound parent acceptance. Timing matches remain within their own trial/neuron; pooled diagnostics do not change any case gate. This is the first complete five-singleton group, not a batch pass or full-matrix acceptance.
+- Both copied artifacts match the executed output. Commit this verified report before the next case or batch-verifier implementation. Acceptance remains **9/52**; all longer horizons, remaining shortest trials, required batch/repeat checks, full parity, and performance remain open.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.
