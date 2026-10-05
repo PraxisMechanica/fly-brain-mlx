@@ -1,0 +1,24 @@
+{
+  "decision_checkpoint": "786d334c5a0ee960f64eabf304b8e2be9adc0f42",
+  "confidence_percent": 90,
+  "decision": "Overlap one required one-second P9 case with the existing sugar case in its CPU-only execution phase; cap concurrent owned full-network jobs at two.",
+  "existing_verified_live_session": 3625,
+  "existing_execution": "data/results/milestone-4-parity-sugar-10000-0-20261005-01",
+  "existing_phase": "cpu-first",
+  "next_prescribed_case": {
+    "experiment": "p9",
+    "steps": 10000,
+    "trial": 0
+  },
+  "next_output": "data/results/milestone-4-parity-p9-10000-0-20261005-01",
+  "machine_memory_bytes": 34359738368,
+  "observed_existing_python_rss_kib": 950960,
+  "observed_existing_python_pid": 48337,
+  "all_existing_executed_source_hashes_unchanged": true,
+  "fresh_state_and_independent_canonical_stimuli_remain_required": true,
+  "per_process_cpu_thread_requirement": 1,
+  "precision_compilation_and_all_acceptance_conditions_unchanged": true,
+  "performance_measurement": "Later benchmarks require isolated measurements; overlapping qualification elapsed times do not establish performance.",
+  "case_accepted": false,
+  "scope": "Qualification scheduling only; no source, model, observer, tolerance or contract change."
+}
