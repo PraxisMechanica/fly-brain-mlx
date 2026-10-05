@@ -1,6 +1,7 @@
 import numpy as np
 import pytest
 import torch
+from numpy.typing import NDArray
 
 from fly_brain.qualification.adapters.torch_observer import capture, observe
 from fly_brain.qualification.adapters.torch_setup import (
@@ -64,3 +65,46 @@ def test_streamed_observer_preserves_all_ordinary_state_and_buffer_bytes(
             actual.tobytes() == value.tobytes()
             for actual, value in zip(snapshot.fields.values(), ordinary, strict=True)
         )
+
+
+@pytest.mark.parametrize('empty', (False, True))
+def test_cpu_state_and_buffer_repeat_and_match_independent_trials(empty: bool) -> None:
+    case = fixture(empty)
+
+    def run(events: NDArray[np.uint8]):
+        model = prepare(case.connectome, case.targets, (3,), events.shape[0])
+        return list(observe(model, events, case.targets))
+
+    batch, repeated = run(case.events), run(case.events)
+    assert tuple(row.native_sha256 for row in batch) == tuple(
+        row.native_sha256 for row in repeated
+    )
+    for trial in range(4):
+        independent = run(case.events[trial : trial + 1])
+        for one, many in zip(independent, batch, strict=True):
+            assert one.step == many.step
+            assert one.native_sha256 == (many.native_sha256[trial],)
+            assert all(
+                value.tobytes() == many.fields[name][trial : trial + 1].tobytes()
+                for name, value in one.fields.items()
+            )
+
+
+@pytest.mark.parametrize(
+    'events',
+    (
+        np.zeros((1, 2), dtype=np.uint8),
+        np.zeros((4, 1, 3), dtype=np.uint8),
+        np.zeros((1, 0, 3), dtype=np.uint8),
+        np.zeros((1, 2, 2), dtype=np.uint8),
+        np.zeros((1, 2, 3), dtype=np.int32),
+        np.full((1, 2, 3), 2, dtype=np.uint8),
+    ),
+)
+def test_observer_rejects_invalid_replay_before_yielding_state(
+    events: NDArray[np.uint8],
+) -> None:
+    case = fixture()
+    model = prepare(case.connectome, case.targets, (), 1)
+    with pytest.raises(ValueError, match='canonical trial-by-step channels'):
+        next(observe(model, events, case.targets))

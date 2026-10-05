@@ -568,6 +568,10 @@ Streamed CPU observer checkpoint (2026-10-05):
 - At `cf77810`, the CPU observer calls the unchanged model once per canonical event step and yields owned native snapshots, including initial state. It retains no tensor history; gradient suppression ends before each yield. The canonical input boundary validates trial/step/channel shape, dtype, and bits.
 - All **27 CPU setup/observer tests pass, zero failures/errors/skips**, with 29 dependency warnings. All five tensors at all 101 steps match ordinary execution byte for byte for populated/silent fixtures at one/four trials. Full Ruff and strict Pyright pass. Repeat/batch equivalence, boundary faults, and complete comparator execution remain open. Commit this passing loop before further qualification.
 
+CPU replay/batch checkpoint (2026-10-05):
+
+- At `4486839`, all **35 CPU setup/observer tests pass, zero failures/errors/skips**, with 29 dependency warnings. Fresh populated/silent runs repeat every initial/per-step five-tensor digest; each of four actual batch trials matches independently initialized execution in every raw state and physical buffer byte. Invalid replay schedules fail before any observation is yielded. Full Ruff and strict Pyright pass. This is small-network evidence only; complete execution and the frozen matrix remain open. Commit this qualified unit before further work.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.
