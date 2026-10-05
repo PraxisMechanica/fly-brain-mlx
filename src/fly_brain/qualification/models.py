@@ -2,6 +2,15 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Protocol
 
+from fly_brain.simulation.models import ExperimentName
+
+
+@dataclass(frozen=True)
+class ParityCase:
+    experiment: ExperimentName
+    steps: int
+    trial: int
+
 
 @dataclass(frozen=True)
 class QualificationRequest:

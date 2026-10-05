@@ -590,6 +590,11 @@ Complete CPU proof environment checkpoint (2026-10-05):
 - At `d0f5296`, the full CPU proof's ordinary mode completes all 1,000 steps and 1,001 native observations. The sandbox denies `ps` access, leaving no memory samples. I interrupt the owned process during observed mode (exit 130) and preserve every output. [Interrupted attempt and limits](docs/evidence/milestone-4/full-cpu-observer/interrupted-sandbox-attempt.json) and [executed source](docs/evidence/milestone-4/full-cpu-observer/interrupted-proof.py). Observer/repeat/memory qualification remains open; no numerical failure was observed.
 - Confidence **99%**: use the same qualified numerical source and canonical inputs in a fresh run with authorized system access for residency sampling. Fail promptly if sampling breaks. Commit this environment checkpoint before restarting; do not overwrite the interrupted output.
 
+Frozen matrix enumeration checkpoint (2026-10-05):
+
+- At `9f3cdc2`, add a pure typed enumeration of all **52** required experiment/duration/trial cases. Intent checks independently require every prescribed case, no duplicates, the 15/15/10/10/2 configuration counts, and **1,231,000 base steps per engine** before repeats and batch gates. Add the module to the enforced framework-free dependency boundary.
+- The default application suite passes **171 tests, zero failures/errors/skips**; full Ruff, strict Pyright, and all three import contracts pass. This defines the workload and does not execute or accept a case. The independent full CPU proof continues against unchanged numerical/observer sources. Commit this passing plan before runner wiring.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.

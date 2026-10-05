@@ -81,6 +81,7 @@ source_modules = [
     "fly_brain.simulation.stimuli",
     "fly_brain.simulation.service",
     "fly_brain.qualification.models",
+    "fly_brain.qualification.matrix",
     "fly_brain.qualification.input_patterns",
     "fly_brain.qualification.fan_in",
     "fly_brain.qualification.causality",
