@@ -1,0 +1,66 @@
+{
+  "scope": "First-principles work counts and component extrapolation. None of these are a new measured complete one-second check or completion forecast.",
+  "biological_seconds": 1,
+  "step_ms": 0.1,
+  "steps_per_engine_run": 10000,
+  "complete_check_engine_runs": 6,
+  "complete_check_total_engine_steps": 60000,
+  "neuron_steps_per_trial": 1386390000,
+  "full_edge_visits_per_trial": 150919830000,
+  "reference_phase_payload_bytes_per_trial": 81797010000,
+  "reference_single_byte_boolean_calls_per_trial": 4159170000,
+  "cpu_matrix_storage_bytes": 182212916,
+  "cpu_matrix_logical_bytes_for_two_full_scans_per_step": 3644258320000,
+  "component_extrapolations_seconds": {
+    "original_cpu_multiply_two_runs_s": 3153.4958397969604,
+    "explicit_sum_cpu_multiply_two_runs_s": 1140.9508204087615,
+    "active_source_busy_input_operation_two_runs_s": 12.97999988310039,
+    "mlx_production_step_two_runs_s": 642.8533396683633,
+    "mlx_observed_step_two_runs_s": 1469.7158202761784,
+    "mlx_due_host_scan_two_runs_s": 196.60082005430013,
+    "mlx_queue_hash_boundaries_two_runs_s": 79.53241357917432,
+    "mlx_phase_hash_boundaries_two_runs_s": 59.63025600032415,
+    "reference_original_phase_writer_cpu_two_runs_s": 654.20625,
+    "reference_fast_phase_writer_cpu_two_runs_s": 29.348125,
+    "reference_original_phase_pipe_probe_two_runs_s": 791.0852606255503,
+    "reference_fast_phase_pipe_probe_two_runs_s": 142.6081250065181
+  },
+  "component_extrapolations_minutes": {
+    "original_cpu_multiply_two_runs": 52.558263996616006,
+    "explicit_sum_cpu_multiply_two_runs": 19.01584700681269,
+    "active_source_busy_input_operation_two_runs": 0.21633333138500652,
+    "mlx_production_step_two_runs": 10.714222327806056,
+    "mlx_observed_step_two_runs": 24.49526367126964,
+    "mlx_due_host_scan_two_runs": 3.2766803342383355,
+    "mlx_queue_hash_boundaries_two_runs": 1.325540226319572,
+    "mlx_phase_hash_boundaries_two_runs": 0.9938376000054026,
+    "reference_original_phase_writer_cpu_two_runs": 10.903437499999999,
+    "reference_fast_phase_writer_cpu_two_runs": 0.48913541666666666,
+    "reference_original_phase_pipe_probe_two_runs": 13.184754343759172,
+    "reference_fast_phase_pipe_probe_two_runs": 2.376802083441968
+  },
+  "mlx_dense_audit_coarse_two_run_accounting_minutes": 30.09132183183295,
+  "current_original_cpu_mlx_audit_writer_coarse_accounting_minutes": 93.55302332844896,
+  "ordinary_one_run_screen_core_component_minutes": 5.357111163903028,
+  "retained_full_cpu_raster_active_edge_visits": 2612441,
+  "retained_full_scan_to_active_edge_work_ratio": 57769.66063539808,
+  "provisional_planning_budgets_minutes": {
+    "one_candidate_spike_screen_with_current_uncompiled_mlx_and_verified_reference_spikes": [
+      5,
+      8
+    ],
+    "two_run_full_mlx_audit_after_immutable_reference_reuse_retaining_current_dense_checks": [
+      30,
+      40
+    ]
+  },
+  "budget_conditions": "Engineering budgets, not measured performance, statistical confidence intervals or delivery estimates. Screening rejects completed-horizon absolute failures only; it is not full acceptance. Reference reuse requires verified engine-specific provenance and complete raw common-prefix reference values or digest-verified replay; existing phase hashes alone are insufficient.",
+  "limits": "One preserved endpoint and selected component inputs cannot establish horizon-average costs. Producers/consumers overlap or wait, and memory/cache contention changes timings; extrapolated terms are not exclusive whole-run shares and their coarse sums are not exact wall-time attribution. Setup, remaining CPU state/capture, reference model/monitors, reference phase parsing/hashing, causal comparisons, output compression and broader workloads remain outside these terms. Do not project the 243-fold sparse-input component result onto the whole check.",
+  "source_sha256": {
+    "docs/evidence/execution-time-investigation/cpu-multiply/result.json": "68ffd724e11b464fec036a523bc8a442e9a1f0cf6ee0860aec98f09f1e983fa4",
+    "docs/evidence/execution-time-investigation/cpu-multiply/verification.json": "9f7b45fe30a3cca3b3372d5d9c481b787334ddb4bdf6f3b94b7bbe4ce5115fde",
+    "docs/evidence/execution-time-investigation/mlx-components/result.json": "a5c9ec6050d442658637220eaec1d92d5fab1995674a752f81395f8561596fdf",
+    "docs/evidence/execution-time-investigation/reference-writer/result.json": "f32a1c10e43f5f13a306198b3b1436f719608ee15282c519188dbba20f047b8e",
+    "docs/evidence/execution-time-investigation/active-source-rows/result.json": "2da0e137c04af98095f383c18317b1e78715eac00cc38d8323362ee958f21222"
+  }
+}
