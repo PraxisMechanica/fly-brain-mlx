@@ -1,0 +1,49 @@
+{
+  "checkpoint": "7e702c653eb4ce38cf3dffe460adabb6c1eb0575",
+  "lock_sha256": "041b0c7424f3e5e49aa04a6989464a0b44a4bcaf59516c5e5cdf2c70512f0835",
+  "torch_record_entries_verified": 12413,
+  "current_native_binary_sha256": {
+    "torch/lib/libc10.dylib": "2762156914809a636d98c336e80e894f0591006a275b3aa857459372776cac11",
+    "torch/lib/libomp.dylib": "a454b03947f69e123305eac313fd861a70f5a13d0e8142ccdb6b6a9957279eb5",
+    "torch/lib/libshm.dylib": "3a6fc248697b8809534e74d9e5fc784b385239d8c7aeef291c3968a73609f7d2",
+    "torch/lib/libtorch.dylib": "2178657b7eeffc0c0a989889ac3e2b2e3d216073b35f3a291ee89bd65c0fb406",
+    "torch/lib/libtorch_cpu.dylib": "1678cd74e33c65ae23a7f638361f87cbd660dba36c0572f358b9c44daa807a8a",
+    "torch/lib/libtorch_global_deps.dylib": "6ff1aedff89150170f225ce821dc9355a9d5f9c80a6cc1bb761c8d209638c2c7",
+    "torch/lib/libtorch_python.dylib": "2261dd6b96a0ebc880164c5a28e25aa6144993ab4c9f1adb316ede3314774bd4"
+  },
+  "torch_build": "PyTorch built with:\n  - GCC 4.2\n  - C++ Version: 201703\n  - clang 15.0.0\n  - OpenMP 201811\n  - LAPACK is enabled (usually provided by MKL)\n  - NNPACK is enabled\n  - CPU capability usage: DEFAULT\n  - Build settings: BLAS_INFO=accelerate, BUILD_TYPE=Release, COMMIT_SHA=70d99e998b4955e0049d13a98d77ae1b14db1f45, CXX_COMPILER=/usr/bin/c++, CXX_FLAGS= -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DLIBKINETO_NOCUPTI -DLIBKINETO_NOROCTRACER -DLIBKINETO_NOXPUPTI=ON -DUSE_PYTORCH_QNNPACK -DAT_BUILD_ARM_VEC256_WITH_SLEEF -DUSE_XNNPACK -DUSE_PYTORCH_METAL_EXPORT -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -DUSE_COREML_DELEGATE -O2 -fPIC -DC10_NODEPRECATED -Wall -Wextra -Werror=return-type -Werror=non-virtual-dtor -Werror=braced-scalar-init -Werror=range-loop-construct -Werror=bool-operation -Wnarrowing -Wno-missing-field-initializers -Wno-unknown-pragmas -Wno-unused-parameter -Wno-strict-overflow -Wno-strict-aliasing -Wvla-extension -Wsuggest-override -Wnewline-eof -Winconsistent-missing-override -Winconsistent-missing-destructor-override -Wno-pass-failed -Wno-error=old-style-cast -Wconstant-conversion -Qunused-arguments -faligned-new -fno-math-errno -fno-trapping-math -Werror=format -DUSE_MPS -Wno-missing-braces, LAPACK_INFO=accelerate, TORCH_VERSION=2.11.0, USE_CUDA=OFF, USE_CUDNN=OFF, USE_CUSPARSELT=OFF, USE_EIGEN_FOR_BLAS=ON, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_GLOO=ON, USE_MKL=OFF, USE_MKLDNN=OFF, USE_MPI=OFF, USE_NCCL=OFF, USE_NNPACK=ON, USE_OPENMP=ON, USE_ROCM=OFF, USE_ROCM_KERNEL_ASSERT=OFF, USE_XCCL=OFF, USE_XPU=OFF, \n",
+  "torch_git_version": "70d99e998b4955e0049d13a98d77ae1b14db1f45",
+  "cpu_threads": 1,
+  "cpu_interop_threads": 10,
+  "historical_identity": "Derived from identical retained locked artifact/install chain; original environment did not measure native binary hashes.",
+  "cases": {
+    "sugar": {
+      "steps": 10000,
+      "trial": 0,
+      "event_sha256": "7d3f2b736f858110ceab0597e94e40e9b347190cd29f623d80bd23d05f4c64aa",
+      "original": "/Users/ocasta/Code/fly-brain/data/results/milestone-4-parity-sugar-10000-0-20261005-01",
+      "runs": [
+        {
+          "mode": "first",
+          "elapsed_s": 155.1657275420148,
+          "native_snapshots": 10001,
+          "all_digests_raster_and_final_bytes_match": true,
+          "artifact_sha256": {
+            "native.npz": "b9558134bf2367aed9971057a0d5467fa34824db9b64de10e53cca4721aad6a9",
+            "native-digests.jsonl": "140e38c6c94e0ef8bf6e24439b58ced742858f8a8356c9f6a92b6f5b98f05e7d"
+          }
+        },
+        {
+          "mode": "repeat",
+          "elapsed_s": 153.686736750009,
+          "native_snapshots": 10001,
+          "all_digests_raster_and_final_bytes_match": true,
+          "artifact_sha256": {
+            "native.npz": "b9558134bf2367aed9971057a0d5467fa34824db9b64de10e53cca4721aad6a9",
+            "native-digests.jsonl": "140e38c6c94e0ef8bf6e24439b58ced742858f8a8356c9f6a92b6f5b98f05e7d"
+          }
+        }
+      ]
+    }
+  }
+}

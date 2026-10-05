@@ -1,0 +1,84 @@
+{
+  "checkpoint": "a41b8d45fafc7ef0d9aba7922f14e9ecede08444",
+  "original_torch_core_unchanged": true,
+  "historical_build_identity": "Derived from unchanged locked Torch artifact, retained installation/execution records, documented installation continuity and corroborating native build. No launch-time native binary hash was measured. Astra read-only follow-up at 7e702c6 supports this inference at 95% confidence.",
+  "current_identity_measured": {
+    "python": "3.10.14 (main, Mar 20 2024, 03:57:45) [Clang 14.0.0 (clang-1400.0.29.202)]",
+    "platform": "macOS-15.3.1-arm64-arm-64bit",
+    "torch_import": "/Users/ocasta/Code/fly-brain/.venv/lib/python3.10/site-packages/torch/__init__.py",
+    "native_extension": "/Users/ocasta/Code/fly-brain/.venv/lib/python3.10/site-packages/torch/_C.cpython-310-darwin.so",
+    "torch_build_matches_diagnostic": true,
+    "record_entries_verified": 12413,
+    "native_binary_sha256": {
+      "torch/lib/libc10.dylib": "2762156914809a636d98c336e80e894f0591006a275b3aa857459372776cac11",
+      "torch/lib/libomp.dylib": "a454b03947f69e123305eac313fd861a70f5a13d0e8142ccdb6b6a9957279eb5",
+      "torch/lib/libshm.dylib": "3a6fc248697b8809534e74d9e5fc784b385239d8c7aeef291c3968a73609f7d2",
+      "torch/lib/libtorch.dylib": "2178657b7eeffc0c0a989889ac3e2b2e3d216073b35f3a291ee89bd65c0fb406",
+      "torch/lib/libtorch_cpu.dylib": "1678cd74e33c65ae23a7f638361f87cbd660dba36c0572f358b9c44daa807a8a",
+      "torch/lib/libtorch_global_deps.dylib": "6ff1aedff89150170f225ce821dc9355a9d5f9c80a6cc1bb761c8d209638c2c7",
+      "torch/lib/libtorch_python.dylib": "2261dd6b96a0ebc880164c5a28e25aa6144993ab4c9f1adb316ede3314774bd4"
+    },
+    "lock_sha256": "041b0c7424f3e5e49aa04a6989464a0b44a4bcaf59516c5e5cdf2c70512f0835"
+  },
+  "execution_equality_measured": {
+    "sugar": {
+      "steps": 10000,
+      "trial": 0,
+      "event_sha256": "7d3f2b736f858110ceab0597e94e40e9b347190cd29f623d80bd23d05f4c64aa",
+      "original": "/Users/ocasta/Code/fly-brain/data/results/milestone-4-parity-sugar-10000-0-20261005-01",
+      "runs": [
+        {
+          "mode": "first",
+          "elapsed_s": 155.1657275420148,
+          "native_snapshots": 10001,
+          "all_digests_raster_and_final_bytes_match": true,
+          "artifact_sha256": {
+            "native.npz": "b9558134bf2367aed9971057a0d5467fa34824db9b64de10e53cca4721aad6a9",
+            "native-digests.jsonl": "140e38c6c94e0ef8bf6e24439b58ced742858f8a8356c9f6a92b6f5b98f05e7d"
+          }
+        },
+        {
+          "mode": "repeat",
+          "elapsed_s": 153.686736750009,
+          "native_snapshots": 10001,
+          "all_digests_raster_and_final_bytes_match": true,
+          "artifact_sha256": {
+            "native.npz": "b9558134bf2367aed9971057a0d5467fa34824db9b64de10e53cca4721aad6a9",
+            "native-digests.jsonl": "140e38c6c94e0ef8bf6e24439b58ced742858f8a8356c9f6a92b6f5b98f05e7d"
+          }
+        }
+      ]
+    },
+    "sugar-silenced": {
+      "steps": 1000,
+      "trial": 0,
+      "event_sha256": "d7bb792f082eeca79d6e88a1e8ca0791dca210eb15c86ec70a34348b272a82b3",
+      "original": "/Users/ocasta/Code/fly-brain/data/results/milestone-4-parity-sugar-silenced-1000-0-20261005-01",
+      "runs": [
+        {
+          "mode": "first",
+          "elapsed_s": 15.38955491699744,
+          "native_snapshots": 1001,
+          "all_digests_raster_and_final_bytes_match": true,
+          "artifact_sha256": {
+            "native.npz": "0970d6239398b07c24951d292b0852b330ceaba0f17d047dcffbe8a344474d98",
+            "native-digests.jsonl": "318ba7d67447398c0471c32ce47e85ad7425df4c0a0c73f52094fb3c276e68ea"
+          }
+        },
+        {
+          "mode": "repeat",
+          "elapsed_s": 15.407880667014979,
+          "native_snapshots": 1001,
+          "all_digests_raster_and_final_bytes_match": true,
+          "artifact_sha256": {
+            "native.npz": "0970d6239398b07c24951d292b0852b330ceaba0f17d047dcffbe8a344474d98",
+            "native-digests.jsonl": "318ba7d67447398c0471c32ce47e85ad7425df4c0a0c73f52094fb3c276e68ea"
+          }
+        }
+      ]
+    }
+  },
+  "initial_driver_failure": "After both sugar runs passed, driver failed on wrong date in silenced path. Original partial result preserved; only missing witness rerun at correct path.",
+  "scope": "Exact CPU qualification singleton evaluation mode; no MLX case acceptance, four-trial full-network certification or overall speedup claim.",
+  "adoption_allowed_after_focused_tests": true
+}

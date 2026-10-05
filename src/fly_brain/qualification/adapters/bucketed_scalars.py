@@ -30,7 +30,9 @@ def execute(
     return host[0][:, -1], host[1][:, -1], host[2][:, -1]
 
 
-def run(root: Path, output: Path, precision: str) -> dict[str, object]:
+def run(
+    root: Path, output: Path, precision: str, *, exact_counts: bool = False
+) -> dict[str, object]:
     output.mkdir(parents=True, exist_ok=False)
     assert precision == '0'
     assert mx.metal.is_available()
@@ -48,7 +50,7 @@ def run(root: Path, output: Path, precision: str) -> dict[str, object]:
             counts,
             case.weights,
         )
-        layout = make_layout(connectome)
+        layout = make_layout(connectome, exact_counts=exact_counts)
         actual, high, low = execute(layout, case, 3)
         repeated, repeat_high, repeat_low = execute(layout, case, 3)
         standalone, own_high, own_low = execute(layout, case, 1)
@@ -108,6 +110,9 @@ def run(root: Path, output: Path, precision: str) -> dict[str, object]:
                 'name': case.name,
                 'edges': int(counts.size),
                 'exact_counts': exact_count,
+                'count_reduction': 'exact-integer'
+                if layout.exact_counts
+                else 'compensated-tree',
                 'one_step_pass': one_step,
                 'trajectory_pass': trajectory,
                 'repeat_and_standalone_bits_identical': identical,

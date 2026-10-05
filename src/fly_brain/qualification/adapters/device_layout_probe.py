@@ -25,7 +25,12 @@ def execute(
 
 
 def run(
-    connectome: Connectome, pin: InputPin, output: Path, precision: str
+    connectome: Connectome,
+    pin: InputPin,
+    output: Path,
+    precision: str,
+    *,
+    exact_counts: bool = False,
 ) -> dict[str, object]:
     output.mkdir(parents=True, exist_ok=False)
     assert precision == '0' and mx.metal.is_available()
@@ -48,15 +53,15 @@ def run(
         np.array([0.0, -0.0, 1024.0, -1024.0, 0.0], dtype=np.float32)[:, None],
         (5, neurons),
     ).copy()
-    exact_counts = np.zeros((5, neurons), dtype=np.int64)
+    expected_counts = np.zeros((5, neurons), dtype=np.int64)
     for row in range(5):
         np.add.at(
-            exact_counts[row],
+            expected_counts[row],
             connectome.destinations,
             np.where(accepted[row], connectome.counts, 0).astype(np.int64),
         )
     host_buckets = bucket_destinations(connectome)
-    layout = make_layout(connectome)
+    layout = make_layout(connectome, exact_counts=exact_counts)
     inverse = np.argsort(np.concatenate([b.targets for b in host_buckets])).astype(
         np.int32
     )
@@ -147,9 +152,9 @@ def run(
     ):
         np.testing.assert_array_equal(left.view(np.uint32), right.view(np.uint32))
     np.testing.assert_array_equal(
-        high.astype(np.float64) + low.astype(np.float64), exact_counts
+        high.astype(np.float64) + low.astype(np.float64), expected_counts
     )
-    zero = exact_counts == 0
+    zero = expected_counts == 0
     np.testing.assert_array_equal(
         actual[zero].view(np.uint32), initial[zero].view(np.uint32)
     )
@@ -167,7 +172,7 @@ def run(
             source_spikes=source_spikes,
             receiving=receiving,
             initial32=initial,
-            exact_counts=exact_counts,
+            exact_counts=expected_counts,
             reference64=reference,
             result32=actual,
             count_high32=high,
@@ -212,6 +217,9 @@ def run(
         'MLX_ENABLE_TF32': precision,
         'device': mx.device_info(),
         'compilation': 'disabled',
+        'count_reduction': 'exact-integer'
+        if layout.exact_counts
+        else 'compensated-tree',
         'source_sha256': {
             str(path.relative_to(Path(__file__).resolve().parents[2])): hashlib.sha256(
                 path.read_bytes()

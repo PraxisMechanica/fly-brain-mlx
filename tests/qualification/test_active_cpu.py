@@ -5,8 +5,13 @@ import pytest
 import torch
 
 from fly_brain.qualification.adapters.active_cpu import ActiveSources, step
-from fly_brain.qualification.adapters.torch_observer import observe
-from fly_brain.qualification.adapters.torch_setup import native_float, prepare, tensor
+from fly_brain.qualification.adapters.torch_observer import capture, observe
+from fly_brain.qualification.adapters.torch_setup import (
+    native_float,
+    prepare,
+    replay_inputs,
+    tensor,
+)
 from fly_brain.simulation.models import Connectome
 from tests.qualification.test_mlx_observer import fixture
 
@@ -81,3 +86,33 @@ def test_active_setup_rejects_weights_outside_exact_integer_envelope(
     model.weights.values()[0] = value
     with pytest.raises(ValueError, match='exact integer envelope'):
         ActiveSources.from_model(model)
+
+
+@pytest.mark.parametrize('empty', [False, True])
+def test_active_chunked_ordinary_state_matches_observer_and_independent_trials(
+    empty: bool,
+) -> None:
+    case = fixture(empty)
+    model = prepare(case.connectome, case.targets, (3,), 4)
+    expected = list(observe(model, case.events, case.targets, step(model)))
+    advance = step(model)
+    with torch.no_grad():
+        state = model.state_init()
+        begin = 0
+        for size in (1, 17, 1, 18, 32, 32):
+            for index in range(begin, begin + size):
+                counts = replay_inputs(case.events[:, index], case.targets, 6)
+                state = advance(counts, *state)
+                assert (
+                    capture(state, index).native_sha256
+                    == expected[index + 1].native_sha256
+                )
+            begin += size
+    assert begin == case.events.shape[1]
+    for trial in range(4):
+        singleton = prepare(case.connectome, case.targets, (3,), 1)
+        actual = observe(
+            singleton, case.events[trial : trial + 1], case.targets, step(singleton)
+        )
+        for batch, single in zip(expected, actual, strict=True):
+            assert single.native_sha256 == (batch.native_sha256[trial],)

@@ -29,7 +29,12 @@ def execute(
 
 
 def evaluate_cases(
-    connectome: Connectome, target: int, edges: NDArray[np.int32], cases: FanInCases
+    connectome: Connectome,
+    target: int,
+    edges: NDArray[np.int32],
+    cases: FanInCases,
+    *,
+    exact_counts: bool = False,
 ) -> Evaluation:
     nodes = np.unique(np.append(connectome.sources[edges], np.int32(target)))
     local_target = int(np.searchsorted(nodes, target))
@@ -46,7 +51,7 @@ def evaluate_cases(
             connectome.counts[edges][order],
             connectome.weights_mv[edges][order],
         )
-        layout = make_layout(local)
+        layout = make_layout(local, exact_counts=exact_counts)
         rows = np.flatnonzero(cases.order_indices == order_index)
         accepted = cases.masks[cases.mask_indices[rows]][:, order]
         initial = np.zeros((rows.size, nodes.size), dtype=np.float32)
