@@ -1,0 +1,28 @@
+# Prospective reference-reuse review
+
+Reviewer: `/root/review_reference_reuse_contract`, fresh-context `gpt-6-astra` at `xhigh`. Requested at `99c335f`; optional paired recording at `198092b` also inspected. Read-only review: no edits, tests, simulations, process operations or nested delegation.
+
+Decision: **approve implementation and qualification with the following requirements**, confidence **97%**. This is not cache adoption or MLX acceptance.
+
+- Bind exact ordered input arrays, neuron mapping, canonical complete event bits, target order, silencing, horizon, timestep and initialization/parameters.
+- Bind engine-specific source actually used, capture format/fields/shape/coverage, installed generator dependency content, Python/native build, operating-system build, processor model/architecture, effective compiler/linker/SDK and linked runtime including zlib. Exclude unrelated MLX/Torch source from the Brian2 key.
+- Snapshot effective Brian2 preferences after the builder's explicit overrides, including schedule, legacy refractory timing, dtypes, compiler flags/macros/paths and denormal handling. Include relevant build/loader environment; unknown overrides invalidate reuse. Version/lock strings alone are insufficient.
+- Bind recursively generated sources/support headers, static inputs, makefile/dependencies, executable and native filename mapping by content hash and length.
+- Require two actual fresh native-process executions. Exhaust both generators, check zero process exits, close gzip writers, validate all files, and only then publish the completion record. `FinalSnapshot` precedes `process.wait()` in the current generator.
+- Validate complete tape spikes against native `spike_i`/`spike_t`, final clock/cursor against native fields, and final neural fields against native arrays. Require correctly sized recurrent native weights. Preserve physical queue/cursor, phase-clock and finite-value checks.
+- Require complete uncompressed wire hash/length and native scientific bytes to repeat. Gzip container identity is not the scientific criterion. Operational logs need not repeat. One compiled binary may be reused.
+- On a hit, verify the transitive inventory, reparse the original float64 wire through the unchanged reader/queue ledger and candidate-specific causal audit, restore native results by copies, and record selected execution plus manifest hash in candidate evidence. External paths alone do not bind evidence; `.gz`, builds and extensionless native files are outside the current case inventory.
+- Keep two actual fresh MLX runs and all candidate gates. Reference reuse cannot transfer old causal findings or numerical acceptance.
+
+Minimum decisive checks:
+
+1. Complete live-vs-reused scientific output equality with signed/zero/duplicate weights, overlapping inputs, silencing, queue wraps, partial blocks, empty edges and silent input.
+2. Input/source/preferences/dependency/build/runtime/coverage invalidation; MLX-only edits preserve reference eligibility while requiring new candidate auditing.
+3. Corrupt/incomplete/trailing tapes, missing native weights, altered native spike/clock/cursor, changed executable/static input and incomplete manifests fail. Valid final wire followed by nonzero process exit cannot seal.
+4. Recomputed transport checksums cannot hide semantic queue/cursor/clock errors or repeated native/tape disagreement.
+5. Two actual reference launches on capture, none on a valid hit, and two fresh MLX runs for acceptance. New injected candidate faults must produce new causal findings.
+6. Bound-artifact mutation invalidates candidate provenance; incomplete records remain preserved; result copies cannot mutate the cache.
+
+Scope: exact-horizon same-environment reuse. Duration-prefix reuse, cross-platform transfer, hash-only tolerance comparisons and new numerical acceptance remain outside this decision.
+
+Parent inspection at `198092b` independently confirms: effective `b.prefs.as_file` contains 14,502 characters on this installation; declared non-extra Brian2 generator closure includes NumPy, Cython, SymPy/mpmath, pyparsing, Jinja2/MarkupSafe, setuptools and packaging; the final frame is yielded before the zero-exit check; current paired collection compares final neuron fields but lacks complete native spike/clock/cursor binding. These requirements are retained before enabling reuse.
