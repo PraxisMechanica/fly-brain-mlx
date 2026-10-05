@@ -674,6 +674,13 @@ Persisted replay verification checkpoint (2026-10-05):
 - Seven file-boundary cases reject changed/missing digest coverage, changed fields, precision, shape, and signed-zero bytes. The default application suite passes **208 tests, zero failures/errors/skips**. Five live paired/CPU collector tests pass with the persisted verifier, **zero failures/errors/skips**. [Report](data/results/milestone-4-replay-evidence-20261005-01.xml). All 131 files pass Ruff checks; strict Pyright has zero errors/warnings.
 - Replay identity is one required check, not case acceptance. Frozen scoring, causal review when needed, complete case validity, and matrix execution remain open. Commit this working state before complete-suite qualification or further implementation.
 
+Complete collector regression checkpoint (2026-10-05):
+
+- At `1d596c9`, `MLX_ENABLE_TF32=0 uv run --locked --group qualification --no-sync fly-brain qualify --output data/results/milestone-4-collector-regression-20261005-01` passes **200 scientific tests, zero failures/errors/skips**, with 519 dependency warnings in 144.86 seconds. [Result](docs/evidence/milestone-4/collectors/result.json), [report](docs/evidence/milestone-4/collectors/tests.xml), and [log](docs/evidence/milestone-4/collectors/qualification.log). This proves complete-suite coexistence of the new native/physical/cause/replay collectors with the numerical, reference, ledger, and device tests.
+- A fresh default report passes **208 application tests, zero failures/errors/skips**. [Report](docs/evidence/milestone-4/collectors/application-tests.xml). All 131 files pass Ruff formatting/lint; strict Pyright has zero errors/warnings; all three import contracts pass (96 modules / 377 dependencies); the offline lock check resolves 38 packages. [Quality record](docs/evidence/milestone-4/collectors/quality.json).
+- Archive all **72 generated trace files / 1,957 native arrays** and independently verify every archived file hash against its original. [Trace archive](docs/evidence/milestone-4/collectors/traces.zip) and [executed verification, source hashes, and manifest](docs/evidence/milestone-4/collectors/verification.json). Production numerical sources, reference equations/setup, and dependencies are unchanged since `7b70c29`; observer execution bodies are unchanged, with only their generator return declarations corrected.
+- Full local outputs remain preserved. This closes collector regression; **1/52 full-network cases** remain accepted. Reusable complete-case execution/reporting, all remaining cases/batch gates, and later milestones remain open. Commit this verified execution evidence before proceeding.
+
 ## Milestone 5 — Complete-brain benchmark and profiling
 
 Status: not started.
