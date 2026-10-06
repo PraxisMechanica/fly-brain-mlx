@@ -1634,3 +1634,26 @@ zero gaps and seven recorded findings. Proof:
 No production activation/scientific acceptance; caller migration stays with
 its existing owner, including required test-only historical oracle and actual
 source-identity updates. Complete37-rule analysis still fails COV002.
+
+
+### Reference producer digest typing — 2026-10-07
+
+Worker `e58817ad551f84d1daca6a3a3b9b882cb7f2ca6b` introduces the owned
+`ReferenceProducerDigest` with only an import, return annotation and identity
+constructor around the existing hexdigest. Parent at `3a3b8da` verifies seven
+committed source/evidence hashes, 25 raw artifacts and the successful worker
+native-hook log and 328-case report. Parent's 94 focused preservation/type/policy
+cases pass without failures, errors or skips.
+
+The producer AST is exact after removing those type-only changes; three original
+assertions, 307 other source files and 62 frozen records remain unchanged.
+An initial parent provenance comparison incorrectly compared expanded model
+defaults with stored JSON; exact stored-record comparison corrects the check.
+Four exact file rows and one identifier record are joined without replacing
+concurrent metadata. Current reconciliation covers 311 files/4,226 declaration
+occurrences/279 neutral exports with zero gaps. Only the digest finding clears;
+six recorded findings and full37-rule COV002 remain. Explicit foreign-brand
+reconstruction still passes native typing and is recorded as a coverage limit.
+No reference sealing/cache reuse, native arithmetic, output bytes or scientific
+acceptance changes. Proof:
+`docs/evidence/code-quality/reference-digest-boundary-20261007/parent-integration.json`.

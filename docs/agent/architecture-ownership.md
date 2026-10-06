@@ -117,8 +117,11 @@ adoption remain separate debt; this decision grants no boundary exemption.
 
 FlyWire neuron identity, neuron-row identity, original edge-row identity and
 trial identity have distinct meanings but currently cross neutral contracts as
-unbranded integer/array values. The reference producer digest is an unbranded
-string. They stay in the identifier registry with recorded `VALUE001` findings.
+unbranded integer/array values. The reference producer digest now uses the
+qualification-owned `ReferenceProducerDigest` type. The four simulation identifiers retain recorded
+`VALUE001` findings. Native typing rejects primitive and foreign-brand consumers;
+explicit foreign-brand reconstruction and lawful conversion sites still require
+complete semantic enforcement.
 `ExperimentName` is an owned closed literal; `ParityCase` is a distinct compound
 value. A time step, numerical dimension, ordinary count or numeric voltage is a
 coordinate/fact, not an invented independent resource identifier.
@@ -157,10 +160,12 @@ files at that checkpoint. The immutable audit transition reconciles 300
 files at that checkpoint. The corrected metric/index component reconciles 302
 files at that checkpoint. The organized pinned proof reconciles 309 source
 files, 4,209 declaration occurrences and 278 neutral exports. All 62 frozen
-historical/reference records retain provenance. Reconciliation has zero gaps;
-Seven architecture/identifier findings remain after the three proved RNG
-acquisition repairs and immutable audit transition. Candidate neutral observation
-values/ports and local assembly sites have exact entries; private helper
+historical/reference records retain provenance. Reconciliation has zero gaps.
+The digest repair reconciles 311 source files, 4,226 declaration occurrences
+and 279 neutral exports, retaining all 62 frozen records with zero gaps.
+Six architecture/identifier findings remain after the three proved RNG
+acquisition repairs, immutable audit transition and digest typing repair.
+Candidate neutral observation values/ports and local assembly sites have exact entries; private helper
 functions are not silently promoted to public contracts. The typed-storage
 correction removes dynamic attribute/type shadowing and preserves array-facing
 constructors and values. Private snapshots remain private; removed interception

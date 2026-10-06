@@ -9,6 +9,7 @@ from packaging.requirements import Requirement
 
 from fly_brain.simulation.models import Connectome, Stimulus
 
+from ..reference_values import ReferenceProducerDigest
 from .observer_evidence import array_record
 from .observer_stream import StreamShape
 
@@ -70,7 +71,7 @@ def create(
     files: Mapping[str, str],
     directory: Path,
     context: Mapping[str, object],
-) -> tuple[str, dict[str, object]]:
+) -> tuple[ReferenceProducerDigest, dict[str, object]]:
     record: dict[str, object] = {
         'engine': 'brian2-cpp-standalone',
         'inputs': {
@@ -93,4 +94,4 @@ def create(
         'build_context': dict(context),
     }
     encoded = json.dumps(record, sort_keys=True, separators=(',', ':')).encode()
-    return hashlib.sha256(encoded).hexdigest(), record
+    return ReferenceProducerDigest(hashlib.sha256(encoded).hexdigest()), record

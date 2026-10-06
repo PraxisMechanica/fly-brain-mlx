@@ -274,6 +274,22 @@ remain separate. Production caller migration is assigned, with no activation
 in this evidence component. Compact proof:
 `docs/evidence/code-quality/qualification-session-pinned-20261006/parent-integration.json`.
 
+## Reference producer digest boundary — 2026-10-07
+
+`ReferenceProducerDigest` owns the qualification producer's return type without
+changing its canonical record or SHA-256 calculation. Parent checks pass 94
+preservation, native type and ownership cases. The worker's 32 before/after
+records preserve fields, key order, encoded bytes and digests; all three original
+assertions, 307 other parent sources and 62 frozen records remain exact.
+Primitive and foreign-brand consumers reject, repairs and neutral alias exports
+pass, and individual type weakening loses rejection.
+
+Only the reviewed reference identifier finding is cleared. Explicit rebranding
+still passes native typing; conversion-site, lifecycle, complete 37-rule analysis
+and reference sealing/reuse remain separate work. Six recorded findings and
+COV002 remain. Compact proof:
+`docs/evidence/code-quality/reference-digest-boundary-20261007/parent-integration.json`.
+
 ## Remaining work
 
 Maintain the reviewed inventory as source changes, complete all remaining

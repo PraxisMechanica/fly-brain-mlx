@@ -61,6 +61,8 @@
   }
 },
   "files": {
+    "tests/quality/test_reference_digest.py": {"owner":"architecture","role":"tooling","declaration_count":14,"declaration_sha256":"a8d1eeb2f252398b906ba4bdc950b75394eb103300ca3f8868dc3eb99befe257","binding_sha256":"21e8e982b2009a7528c59907ba267194c45f2ba954d16a8136caa3ed17360af1"},
+    "src/fly_brain/qualification/reference_values.py": {"owner":"qualification","role":"types","declaration_count":1,"declaration_sha256":"19f37de483015a81c5785815ee13ca25eba64500fca73665833d4e33a7c4ddcb","binding_sha256":"7b26e49d1fe26580e56ea79b2604d5de8691e1d144073e977177982ae0866777","public":["ReferenceProducerDigest"]},
     "docs/evidence/execution-time-investigation/active-cpu-qualification/full-native/executed-first-driver.py": {"owner":"scientific_evidence","role":"system_test","declaration_count":26,"declaration_sha256":"5b40fd7baa46b21bd0147063620c8062235cb1bcc98eedf6c7bd14b94672d8e1","binding_sha256":"6ba02e3ad7dfb8d2471ae323041537bb20d47fd4a2eb11ff7093131a474d27c8","frozen":{"kind":"historical_source","sha256":"4d3d8db9064a5d5a13b060ec991039570a25d48434f26fefb284df5e86ab2ecb","commit":"0a313d02b56d886542d130134346506106a5f926","origin":"docs/evidence/execution-time-investigation/active-cpu-qualification/full-native/executed-first-driver.py at reviewed_commit; retained handwritten executed/interrupted diagnostic or scientific verifier, not generated code."}},
     "docs/evidence/execution-time-investigation/active-cpu-qualification/full-native/executed-silenced-driver.py": {"owner":"scientific_evidence","role":"system_test","declaration_count":26,"declaration_sha256":"5b40fd7baa46b21bd0147063620c8062235cb1bcc98eedf6c7bd14b94672d8e1","binding_sha256":"6ba02e3ad7dfb8d2471ae323041537bb20d47fd4a2eb11ff7093131a474d27c8","frozen":{"kind":"historical_source","sha256":"c3d97f6a6053f299c64a362a318040b0602a37535a1853fdccc58e93d6b2f5c9","commit":"0a313d02b56d886542d130134346506106a5f926","origin":"docs/evidence/execution-time-investigation/active-cpu-qualification/full-native/executed-silenced-driver.py at reviewed_commit; retained handwritten executed/interrupted diagnostic or scientific verifier, not generated code."}},
     "docs/evidence/execution-time-investigation/active-source-rows/executed-diagnostic.py": {"owner":"scientific_evidence","role":"system_test","declaration_count":30,"declaration_sha256":"fd8c76e052b4c017ebfc33f77d3b9017f274743566a8d551b569f1e058529188","binding_sha256":"532c47ab696a698ba372c02a0b40e7d2c5ecb0febd43766fda6b219b03328165","frozen":{"kind":"historical_source","sha256":"cadbf8be5c6868b14d66d854fbc55f216a62b3abb8c1b4d1c4cd90ed6eeb68c4","commit":"0a313d02b56d886542d130134346506106a5f926","origin":"docs/evidence/execution-time-investigation/active-source-rows/executed-diagnostic.py at reviewed_commit; retained handwritten executed/interrupted diagnostic or scientific verifier, not generated code."},"symbols":{"original":{"owner":"qualification","role":"external_adapter"},"active_rows":{"owner":"qualification","role":"external_adapter"}}},
@@ -181,7 +183,7 @@
     "src/fly_brain/qualification/adapters/pending_queues.py": {"owner":"qualification","role":"repository","declaration_count":1,"declaration_sha256":"36eb557c4bb7fe34fd07ebae81bb836218466f04a2d369d24854257805fe3dfb","binding_sha256":"923e0760337e386218bf17ede1578524eb3535de1d69470edc246ce9000629ec"},
     "src/fly_brain/qualification/adapters/pytest_runner.py": {"owner":"qualification","role":"external_adapter","declaration_count":1,"declaration_sha256":"b994d3a395fdd18ca1c4f16043b8de67360da31c0f58333f22a561f4c2815c7f","binding_sha256":"8748a0e9a35ffd5ed645a993832e4e0c428165ea7171c6a594e9741082226218"},
     "src/fly_brain/qualification/adapters/reference_build.py": {"owner":"qualification","role":"external_adapter","declaration_count":3,"declaration_sha256":"527d2c81d053a8b8407c19db1f9d369b294512d971406f3dae6a909f31fcccb8","binding_sha256":"05e58c4c2fb64026106939cff7dc7af2275aafd55ab37eefb1fa58283fdab524"},
-    "src/fly_brain/qualification/adapters/reference_identity.py": {"owner":"qualification","role":"repository","declaration_count":4,"declaration_sha256":"17f54486905cf8c68214e520b706ff574d6e55d3fb03afe7af0574fdee7fd7b8","binding_sha256":"68557ab68e62364fc0e28f954a2019af76c87cf6dcdfe759c86c0f4abc90c037"},
+    "src/fly_brain/qualification/adapters/reference_identity.py": {"owner":"qualification","role":"repository","declaration_count":4,"declaration_sha256":"17f54486905cf8c68214e520b706ff574d6e55d3fb03afe7af0574fdee7fd7b8","binding_sha256":"58d066dff1830690325325a4443e132e7d151cfd7b198d7a2c7e563b5fde0035"},
     "src/fly_brain/qualification/adapters/reference_native.py": {"owner":"qualification","role":"repository","declaration_count":2,"declaration_sha256":"1b09befae6bd560ca219c5a21f5d1cdf6d5cc57f818aa8cc354abf55aec460d4","binding_sha256":"81e38f5ccdcc4af62cf530ca1c6bc15aedb5ef0e74698ac4e0aaefabb9d1c622","symbols":{"weights":{"owner":"qualification","role":"rules"}}},
     "src/fly_brain/qualification/adapters/reference_queues.py": {"owner":"qualification","role":"rules","declaration_count":3,"declaration_sha256":"fa3af6b2a8f05950aeecdae01cea0ca1e8520162d41b99debd0461949d594ff0","binding_sha256":"14ac93f319c9f1a97fa749179107ee8d1eb7027f808770699f05ec78aec07471"},
     "src/fly_brain/qualification/adapters/replay_evidence.py": {"owner":"qualification","role":"repository","declaration_count":3,"declaration_sha256":"63e11dac7d59e69a5d66566fd9b55e780d7fe2432512f709705262466207b6a7","binding_sha256":"8e7d4f3453d3230f4ca956012b0797eac9a3d3db65bb7296cdf6838d75ec2a66"},
@@ -254,7 +256,7 @@
     "tests/integration/test_observer_tape.py": {"owner":"qualification","role":"test","declaration_count":3,"declaration_sha256":"b78ab799356eb8f9e875c9a7bfd53fe52840286bc4c2c9c6a68087c31efc1dd0","binding_sha256":"4e18df1276f21fe2dfd52e64fe3a3db0294a2edcbfec8e92dad43b2a5d905bc3"},
     "tests/integration/test_package.py": {"owner":"system_tests","role":"system_test","declaration_count":3,"declaration_sha256":"db1cf235b8f5fe26a69737a756ec56a8c88db4ddf21b43962a423e2042ce0375","binding_sha256":"d6121a0bee1b8d191b031e237b8a02f639aacfd33673b09c02dc0ab70808f8a3"},
     "tests/integration/test_pending_queues.py": {"owner":"qualification","role":"test","declaration_count":2,"declaration_sha256":"b1f30939440559c5482f76c2c529aa1c3fd5c81fe61a56b18ac31bdd5a193408","binding_sha256":"2f4d762e42768e7ebe4ac31c9820c066711b2f0b9a67770aa16a9d1289d8089c"},
-    "tests/integration/test_reference_identity.py": {"owner":"qualification","role":"test","declaration_count":3,"declaration_sha256":"de46ce49fc8e24685a54998910a630b15b0cf3e7a4d4c1d8ba6d79c7dc7e80fe","binding_sha256":"1522ec33b432c3f49f7445942810f7ed2225758b5ec38d7eea421ab03c64a7a2"},
+    "tests/integration/test_reference_identity.py": {"owner":"qualification","role":"test","declaration_count":5,"declaration_sha256":"01f02f715e77639fa2e3056568df97fb14a1d06228cfc917024f284c4cad48ca","binding_sha256":"1ac7ddb575a4113b503bc6c0c2922bd61a236fe166d166c0205e22495b725f05"},
     "tests/integration/test_reference_native.py": {"owner":"qualification","role":"test","declaration_count":5,"declaration_sha256":"808a2ccd2b010f6ab8ab70b88677fdd1dce2fdbe660a6ce553c23f8cf4604792","binding_sha256":"93ea63b32a68a9132dc883c3f7c9d78ab56efa303fb26a8e8dea03102f575778"},
     "tests/integration/test_reference_queues.py": {"owner":"qualification","role":"test","declaration_count":7,"declaration_sha256":"46d9b3364c55b54e274b4e86d19e27cf282695009bfe5d00bf7b330f2a529a7e","binding_sha256":"0048547e124c67af8d1ec33fedcca4399c391ae97220684aefeaf0cfc5c87400"},
     "tests/integration/test_replay_evidence.py": {"owner":"qualification","role":"test","declaration_count":2,"declaration_sha256":"d903ec532a3d695c735629af91ddc963a21c6324c7f6c4def4f8f34dd99d2e7b","binding_sha256":"3713b2e82deadbffae26119613bcb31dead1b287fdfe2b76c818006dff113f08"},
@@ -622,14 +624,18 @@
   "reference_identity": {
     "owner": "qualification",
     "resource": "reference_build_execution",
-    "representation": "primitive",
+    "representation": "distinct_value",
     "evidence": [
+      {
+        "path": "src/fly_brain/qualification/reference_values.py",
+        "name": "ReferenceProducerDigest"
+      },
       {
         "path": "src/fly_brain/qualification/adapters/reference_identity.py",
         "name": "create"
       }
     ],
-    "decision": "The sealed producer digest is returned as an unbranded str. Distinct identity and consumer port/lifetime checks are still unresolved; source provenance and cache qualification are not waived."
+    "decision": "ReferenceProducerDigest is a qualification-owned NewType over str, returned by create without changing canonical record encoding or digest bytes. Native typed consumers reject primitives and foreign brands; explicit rebranding, lawful producer/conversion-site, lifetime and complete structural analysis remain COV002. This producer key is not an executable seal, successful-run proof or cache-reuse eligibility."
   }
 },
   "absences": {

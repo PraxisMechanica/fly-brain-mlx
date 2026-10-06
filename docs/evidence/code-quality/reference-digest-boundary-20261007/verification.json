@@ -1,0 +1,190 @@
+{
+  "base": "e923c316342978e03a74c1455336e43a651ef6b0",
+  "date": "2026-10-07",
+  "confidence_percent": 95,
+  "scope": "Independent reference_identity digest component only; no four-simulation-identifier migration, executable seal/cache reuse, session adoption or scientific acceptance.",
+  "api": {
+    "type": "fly_brain.qualification.reference_values.ReferenceProducerDigest = NewType(\"ReferenceProducerDigest\", str)",
+    "producer": "create(...) -> tuple[ReferenceProducerDigest, dict[str, object]]",
+    "production_diff": "One owned pure type; producer adds only its import, return annotation and identity constructor around the existing hexdigest.",
+    "consumers": "No current production digest consumers; two original integration test functions, one parametrized over 15 categories."
+  },
+  "preservation": {
+    "all_module_operations_equal_except_brand_import_annotation_constructor": true,
+    "assertions_unchanged": true,
+    "base": "e923c316342978e03a74c1455336e43a651ef6b0",
+    "byte_records_sha256": "b59a26119f23ef48c87aa78a320be21af29fc50983e9db14319b430298622004",
+    "changed_original_sources": [
+      "src/fly_brain/qualification/adapters/reference_identity.py",
+      "tests/integration/test_reference_identity.py"
+    ],
+    "final_byte_records_sha256": "b59a26119f23ef48c87aa78a320be21af29fc50983e9db14319b430298622004",
+    "final_source_sha256": {
+      "src/fly_brain/qualification/adapters/reference_identity.py": "1749412ab994202ea5991327b2426b21836936494ab6b5b5438b70c83003c378",
+      "src/fly_brain/qualification/reference_values.py": "ce9a4e5a472f2cc0d2142659312f5ac2079cf609ac91204a37b0397cf18d79a8",
+      "tests/integration/test_reference_identity.py": "7d3ef7b5d36b8a756ef218e0afda39a11186542b626a81fbeddde88022cb00b8",
+      "tests/quality/test_reference_digest.py": "126bfc6426283e2b7da3d4a434dd97b768e1d4b944391b90b26f014602c9347d"
+    },
+    "initial_and_final_preservation_records_equal": true,
+    "normalized_module_ast_sha256": "addd71261cfd06f8b2bcf6354a0183692b8aa44ea9e327f9c01d4d3fe0c4f0cf",
+    "old_new_record_comparisons": 32,
+    "old_source_sha256": "2d4cfa6bf4b57a6ff119855c817f1b103babbe5c739ceedf2589bfa8a780c3dc",
+    "original_assertion_ast_sha256": "4406170377de17e2c1de13e13bc90b7cd1e291f9b4883b7fe3891f797c0ca34a",
+    "original_assertion_count": 3,
+    "original_source_count": 302,
+    "unchanged_original_sources": 300
+  },
+  "verification": {
+    "focused": "27 passed, zero failures/errors/skips; final focused-05.xml/log",
+    "byte_record_run": "16 original integration cases pass; all 32 before/after records, insertion key order, canonical JSON bytes and hexdigests match frozen base; initial/final records equal.",
+    "native_type_cases": "Plain str/int/bytes and foreign NewType reject with reportArgumentType and exact source line; repairs and alias/re-exported actual brand pass. Native compiler resolves actual digest and producer declaration paths and branded producer signature. Empty fixture/unresolved target fails COV002.",
+    "weakening": "Erasing the copied actual brand and weakening only the consumer parameter each loses its original diagnostic.",
+    "limit_counterexample": "Explicit ReferenceProducerDigest(foreign_brand) passes native Python typing. No lawful producer/conversion-site guard, full semantic VALUE001/37-rule analyzer or seal is claimed.",
+    "full_gate": "just check exit 0; 328 quality cases pass in 211.52s; Pyright 0 errors/warnings/informations; Ruff passes; 4 import contracts kept, 155 files/674 dependencies; qualified native metrics pass.",
+    "metrics_before": {
+      "total_files": 299,
+      "total_loc": 34011,
+      "avg_cyclomatic_complexity": 20.89,
+      "max_cyclomatic_complexity": 129,
+      "code_health": 35.64,
+      "maintainability_index": 35.64
+    },
+    "metrics_after": {
+      "total_files": 301,
+      "total_loc": 34260,
+      "avg_cyclomatic_complexity": 20.81,
+      "max_cyclomatic_complexity": 129,
+      "code_health": 35.64,
+      "maintainability_index": 35.64
+    },
+    "first_attempts": "Two focused fixture failures retained: unused brand import after weakening, then overly broad replacement changed another function parameter. Both corrected without analyzer suppressions. First full gate passed 328 quality cases but rejected CQ001/CQ003 health and CQ002 integration-file complexity; preservation assertions moved to allocated new quality file and repeated assertions grouped by evidence concept. Final checks pass unchanged rules.",
+    "registry": "304 source files; 4 exact file-row changes, one new public neutral type, reference_identity representation distinct_value with explicit COV002/rebranding/sealing limits. Zero reconciliation findings; six other recorded findings, all resources/limitations/frozen references retained."
+  },
+  "commands": {
+    "focused": "env UV_CACHE_DIR=/private/tmp/fly-brain-documentation-uv-cache-20261005 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=/private/tmp/fly-brain-reference-digest-20261007-01/src:/private/tmp/fly-brain-reference-digest-20261007-01 uv run --locked --no-sync python -m pytest -q tests/integration/test_reference_identity.py tests/quality/test_reference_digest.py --basetemp=/private/tmp/fly-brain-reference-digest-tests-20261007-05 --junitxml=/private/tmp/fly-brain-reference-digest-raw-20261007-01/focused-05.xml",
+    "gate": "env -u QUALITY_BASE -u QUALITY_HEAD UV_CACHE_DIR=/private/tmp/fly-brain-documentation-uv-cache-20261005 PRE_COMMIT_HOME=/private/tmp/fly-brain-reference-digest-precommit-20261007-01 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=/private/tmp/fly-brain-reference-digest-20261007-01/src:/private/tmp/fly-brain-reference-digest-20261007-01 PYTEST_ADDOPTS=\"--basetemp=/private/tmp/fly-brain-reference-digest-gate-20261007-02 --junitxml=/private/tmp/fly-brain-reference-digest-raw-20261007-01/just-check-02.xml\" just check",
+    "native_commit": "Same unset QUALITY_BASE/QUALITY_HEAD, locked read-only dependencies and unique PRE_COMMIT_HOME; git commit -m \"Type the reference producer digest\". Native commit result/raw log is returned in the committed handoff; no bypass."
+  },
+  "installed_hooks": [
+    "pre-commit",
+    "pre-push"
+  ],
+  "required_native_commit_log": "/private/tmp/fly-brain-reference-digest-raw-20261007-01/native-commit.log",
+  "raw_outputs": {
+    "byte-records-final.json": {
+      "path": "/private/tmp/fly-brain-reference-digest-raw-20261007-01/byte-records-final.json",
+      "sha256": "b59a26119f23ef48c87aa78a320be21af29fc50983e9db14319b430298622004"
+    },
+    "byte-records.json": {
+      "path": "/private/tmp/fly-brain-reference-digest-raw-20261007-01/byte-records.json",
+      "sha256": "b59a26119f23ef48c87aa78a320be21af29fc50983e9db14319b430298622004"
+    },
+    "focused-01.log": {
+      "path": "/private/tmp/fly-brain-reference-digest-raw-20261007-01/focused-01.log",
+      "sha256": "bdcccb4b2c7c5c01620aeda7d342a62f35fb4e28b8c76cf7fecd027a2534823d"
+    },
+    "focused-01.xml": {
+      "path": "/private/tmp/fly-brain-reference-digest-raw-20261007-01/focused-01.xml",
+      "sha256": "7a8ab2856d5362eea080fb36e3b5e84792e6bca491a94793d384dade9ab794fa"
+    },
+    "focused-02.log": {
+      "path": "/private/tmp/fly-brain-reference-digest-raw-20261007-01/focused-02.log",
+      "sha256": "47481453312ecafc47ff354731e44f9439306b0a70ad7f03e897966e95c35e2d"
+    },
+    "focused-02.xml": {
+      "path": "/private/tmp/fly-brain-reference-digest-raw-20261007-01/focused-02.xml",
+      "sha256": "9bd1ce45391892d362b7b5f22110dd884aa5793467783f1f77f50d79e23f04d5"
+    },
+    "focused-03.log": {
+      "path": "/private/tmp/fly-brain-reference-digest-raw-20261007-01/focused-03.log",
+      "sha256": "a38d1da09981dbea9547fa31fb4424cf61b61dff44d8c5cae5222a99d91f7e2a"
+    },
+    "focused-03.xml": {
+      "path": "/private/tmp/fly-brain-reference-digest-raw-20261007-01/focused-03.xml",
+      "sha256": "beadb8ceb58d26e7b01ad61abf541df5fe00157d1834c78f8f55a66275cd1cba"
+    },
+    "focused-05.log": {
+      "path": "/private/tmp/fly-brain-reference-digest-raw-20261007-01/focused-05.log",
+      "sha256": "3bc2b80aae08d06e6dfbcdedd85c5a9092f8a6ed380c9b11b70408b7da8b90f7"
+    },
+    "focused-05.xml": {
+      "path": "/private/tmp/fly-brain-reference-digest-raw-20261007-01/focused-05.xml",
+      "sha256": "71fc64c273031309f1f9b6542371072383adb417a67dda55593e1cf94e023921"
+    },
+    "just-check-01.log": {
+      "path": "/private/tmp/fly-brain-reference-digest-raw-20261007-01/just-check-01.log",
+      "sha256": "08a2d4806b37b1f4bdd19448d8629806c6cd32c2ece2063390533288b70e1034"
+    },
+    "just-check-02.log": {
+      "path": "/private/tmp/fly-brain-reference-digest-raw-20261007-01/just-check-02.log",
+      "sha256": "219579699a35301d5ae9a0f79b36611a91e8ef52efa44a7fc58b53f3ab51c270"
+    },
+    "just-check-02.xml": {
+      "path": "/private/tmp/fly-brain-reference-digest-raw-20261007-01/just-check-02.xml",
+      "sha256": "53d31694453e0a0ede45a01b4c95c6e1af257f6a2994ee29041111650b751609"
+    },
+    "metrics-02.log": {
+      "path": "/private/tmp/fly-brain-reference-digest-raw-20261007-01/metrics-02.log",
+      "sha256": "42eb775f203e1e416e20b2fb25059c7db3f14c2eff855aeb31a3ed45a4358682"
+    },
+    "metrics-03.log": {
+      "path": "/private/tmp/fly-brain-reference-digest-raw-20261007-01/metrics-03.log",
+      "sha256": "b32bcd7e9eb05817530658f32c5b9395eb0d18843ad08935b2327baf1866605e"
+    },
+    "metrics-final.json": {
+      "path": "/private/tmp/fly-brain-reference-digest-raw-20261007-01/metrics-final.json",
+      "sha256": "284cfcfb91590dbf7b106f636686b64e6e5c2a1ce683fcac21014edd9c016976"
+    },
+    "preservation-01.log": {
+      "path": "/private/tmp/fly-brain-reference-digest-raw-20261007-01/preservation-01.log",
+      "sha256": "e08d203e2ad2ce09df0fdea4a827ec56efc6c7ac0bb06d42482096197dcf2cdd"
+    },
+    "preservation-01.xml": {
+      "path": "/private/tmp/fly-brain-reference-digest-raw-20261007-01/preservation-01.xml",
+      "sha256": "74ed85da5dcabd53b5abbd3b45ce067c93e416a39a0776b5374834a1c5536033"
+    },
+    "preservation-final.json": {
+      "path": "/private/tmp/fly-brain-reference-digest-raw-20261007-01/preservation-final.json",
+      "sha256": "be20fa9d5772a3b59a6231ad9c27088ba599977a7e15066c5fb0f48b59d7f816"
+    },
+    "preservation-final.log": {
+      "path": "/private/tmp/fly-brain-reference-digest-raw-20261007-01/preservation-final.log",
+      "sha256": "5cfd57bf9205345803d1266c47ebb1f299a1ce73705c538073555e9c04a92283"
+    },
+    "preservation-final.xml": {
+      "path": "/private/tmp/fly-brain-reference-digest-raw-20261007-01/preservation-final.xml",
+      "sha256": "e8ed11f4454307fbaa38732129b3505856e468501c44fa13c986a5583b5f85b8"
+    },
+    "preservation.json": {
+      "path": "/private/tmp/fly-brain-reference-digest-raw-20261007-01/preservation.json",
+      "sha256": "a21e5cb021606ea08630566380b9dec04ef2caf08fe60435c5fd6dfe51a1631e"
+    },
+    "pyright-01.log": {
+      "path": "/private/tmp/fly-brain-reference-digest-raw-20261007-01/pyright-01.log",
+      "sha256": "6d88a1b220adb7a3d62092b6e38431f0b3fe8babe9864fab90e5849766260332"
+    },
+    "ruff-01.log": {
+      "path": "/private/tmp/fly-brain-reference-digest-raw-20261007-01/ruff-01.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    "source-before.json": {
+      "path": "/private/tmp/fly-brain-reference-digest-raw-20261007-01/source-before.json",
+      "sha256": "926dcc650b46efc7db4050730002618ea95cc42dd5ee5f1b7942240bf111d769"
+    }
+  },
+  "source_and_delta_sha256": {
+    "src/fly_brain/qualification/reference_values.py": "ce9a4e5a472f2cc0d2142659312f5ac2079cf609ac91204a37b0397cf18d79a8",
+    "src/fly_brain/qualification/adapters/reference_identity.py": "1749412ab994202ea5991327b2426b21836936494ab6b5b5438b70c83003c378",
+    "tests/integration/test_reference_identity.py": "7d3ef7b5d36b8a756ef218e0afda39a11186542b626a81fbeddde88022cb00b8",
+    "tests/quality/test_reference_digest.py": "126bfc6426283e2b7da3d4a434dd97b768e1d4b944391b90b26f014602c9347d",
+    "tools/architecture/ownership.json": "a3714b0d4355822ff730b093fa1f02e0d5f51559eb143a87f5482bb4714508a7",
+    "docs/evidence/code-quality/reference-digest-boundary-20261007/registry-delta.json": "373270c788053bb5f9d15daa3b39b9766a28aa10cccfd72f1ab7746f14fced91"
+  },
+  "integration": "Parent joins only registry-delta.json rows and reference_identity; do not overwrite session/native/metric entries. Local main and origin/main base remain assigned; no push/rebase/new branch.",
+  "limits": [
+    "Full architecture remains ANALYSIS FAILED (COV002).",
+    "No application startup, Metal, reference build/run, full matrix, scientific adoption or data/process operations performed.",
+    "All original string serialization, SHA-256 algorithm, record fields and generated/static/build/native mapping behavior remain; main executable remains deliberately excluded from this identity key.",
+    "The other four primitive identifier findings remain; pinned 9/52 scope, failed one-second sugar, original scientific sources/settings and disabled reference cache reuse unchanged."
+  ]
+}

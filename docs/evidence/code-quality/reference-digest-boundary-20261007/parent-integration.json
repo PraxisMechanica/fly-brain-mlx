@@ -1,0 +1,52 @@
+{
+  "parent_base": "3a3b8da3bbca8573efb535a040c17847d5032c36",
+  "worker_commit": "e58817ad551f84d1daca6a3a3b9b882cb7f2ca6b",
+  "confidence_percent": 95,
+  "scope": "Type the qualification-owned reference producer digest; no sealing, reuse or scientific acceptance.",
+  "worker_artifacts_verified": {
+    "committed_files": 7,
+    "raw_outputs": 25,
+    "native_hook_log_and_xml": true,
+    "focused_cases": 27,
+    "frozen_record_comparisons": 32
+  },
+  "parent_checks": {
+    "cases": 94,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "command": "uv run --locked --no-sync python -m pytest -q tests/integration/test_reference_identity.py tests/quality/test_reference_digest.py tests/quality/test_architecture_policy.py",
+    "log": "/private/tmp/fly-brain-reference-digest-parent-tests-20261007-01.log",
+    "junit": "/private/tmp/fly-brain-reference-digest-parent-20261007-01.xml",
+    "log_sha256": "4815f520ec30e0a910311c03da9535d01499d3295671125dacfbc15f579344cf",
+    "junit_sha256": "389c3b9d0f248082e3dbea7f058ca5763f4f3dfffd349bb488c599e39d070ef6"
+  },
+  "preservation": {
+    "base": "3a3b8da3bbca8573efb535a040c17847d5032c36",
+    "producer_ast_equal_except_type": true,
+    "original_assertions": 3,
+    "unchanged_original_source_files": 307,
+    "frozen_exact": 62,
+    "source_files": 311,
+    "declarations": 4226,
+    "unique_symbols": 4124,
+    "neutral_exports": 279,
+    "reconciliation_findings": 0,
+    "recorded_findings": 6,
+    "full_result": "ANALYSIS FAILED COV002",
+    "initial_check_error": "Compared expanded model defaults against stored records; corrected exact stored JSON comparison."
+  },
+  "registry_join": "Only four exact file rows and reference_identity; all other policy inputs remain unchanged.",
+  "limits": [
+    "Explicit foreign-brand reconstruction still passes native typing; lawful conversion-site enforcement remains required.",
+    "Full 37-rule analysis remains ANALYSIS FAILED COV002; six recorded findings remain.",
+    "String encoding, digest bytes and scientific acceptance are unchanged.",
+    "No application startup, native/scientific run, schema or data operations."
+  ],
+  "source_sha256": {
+    "src/fly_brain/qualification/reference_values.py": "ce9a4e5a472f2cc0d2142659312f5ac2079cf609ac91204a37b0397cf18d79a8",
+    "src/fly_brain/qualification/adapters/reference_identity.py": "1749412ab994202ea5991327b2426b21836936494ab6b5b5438b70c83003c378",
+    "tests/integration/test_reference_identity.py": "7d3ef7b5d36b8a756ef218e0afda39a11186542b626a81fbeddde88022cb00b8",
+    "tests/quality/test_reference_digest.py": "126bfc6426283e2b7da3d4a434dd97b768e1d4b944391b90b26f014602c9347d"
+  }
+}
