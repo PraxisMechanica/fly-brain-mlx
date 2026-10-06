@@ -96,6 +96,35 @@ evidence, and assigned work.
   are retained. Full checker coverage remains incomplete; scientific/performance
   implementation is still held.
 
+- At `23dac175679b8cbc6b102c4ecc143e9a85a34487`, the clock repair is committed
+  and pushed with both configured hooks passing. The full source inventory
+  contains 238 Python/stub files, including 60 retained evidence-source records.
+  The bounded qualification-boundary reviewer used fresh `gpt-6-astra` at `xhigh`
+  and returned a 94%-confidence prospective decision. Parent source inspection
+  confirms its findings: retain qualification-owned independent expectations,
+  expose neutral actual native observations through narrow ports, and replace
+  private layout/closure introspection. The accepted review is recorded at
+  `docs/evidence/code-quality/qualification-boundary-20261006/astra-review.md`.
+  Start with the actual reduction-row capability; preserve core/ledger scheduling
+  and validate native bytes/ownership. A rewritten observer or ledger requires
+  the fresh transparency/integrity and complete-shortest-run proof in that review.
+  No new scientific case acceptance or arithmetic mode is approved.
+
+- The first boundary slice replaces private `partial.args[1]` layout recovery
+  with a qualification-owned typed actual-row reader. Neutral host observations
+  now live outside the concrete backend; row arrays preserve native bits in
+  immutable detached storage. The bound reduction descriptor reports the actual
+  exact-count guard/fallback choice. Eighteen native/value tests, seven real
+  paired/repeat/batch/singleton tests, and five source-only graph/hook tests pass
+  with no failures or skips. Four direct real-device comparisons reproduce all
+  96 old-reader arrays' dtype, shape, and bytes. Full typing and lint pass.
+  The core, reducer, and ledger files are byte-unchanged; existing layout,
+  accumulation, advance, and original preparation statements are preserved.
+  Fresh test outputs and `row-verification.json` in the boundary evidence folder
+  retain the proof and initial sandbox/caller failures. No full pinned-network
+  case was rerun, and no acceptance transferred. Remaining concrete execution,
+  state, and observation-policy dependencies still need the complete port slice.
+
 ## Next work
 
 1. Finish quality enforcement before further performance implementation. Complete

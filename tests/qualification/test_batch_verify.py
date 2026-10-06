@@ -13,7 +13,7 @@ from fly_brain.qualification.adapters.paired_collect import collect as collect_p
 from fly_brain.qualification.adapters.replay_evidence import verify
 from fly_brain.qualification.adapters.torch_collect import collect as collect_cpu
 from fly_brain.qualification.adapters.torch_setup import prepare as prepare_cpu
-from fly_brain.simulation.backend.bucketed import prepare
+from fly_brain.simulation.backend.bucketed import prepare_observed
 from fly_brain.simulation.models import Stimulus
 from tests.qualification.test_mlx_observer import fixture
 
@@ -41,7 +41,9 @@ def test_actual_batch_native_evidence_matches_fresh_independent_trial_collection
         Path(destination) / f'fixture-{empty}' if destination else tmp_path / 'fixture'
     )
     output.mkdir(parents=True, exist_ok=False)
-    execution = prepare(case.connectome, case.targets, (3,), precision)
+    execution, read_rows = prepare_observed(
+        case.connectome, case.targets, (3,), precision
+    )
     stimulus = Stimulus(
         case.events,
         case.targets,
@@ -83,7 +85,9 @@ def test_actual_batch_native_evidence_matches_fresh_independent_trial_collection
         job = build(
             case.connectome, case.targets, (3,), events[0], output / f'build-{trial}'
         )
-        capture = collect_paired(job, execution, case.connectome, one, path / 'paired')
+        capture = collect_paired(
+            job, execution, case.connectome, one, path / 'paired', read_rows=read_rows
+        )
         assert (
             capture.audit.step == 101
             and capture.spike is None

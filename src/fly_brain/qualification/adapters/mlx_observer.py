@@ -8,12 +8,12 @@ from numpy.typing import NDArray
 
 from fly_brain.simulation.backend import core
 from fly_brain.simulation.backend.arrays import (
-    HostArray,
     as_host,
     boolean_input,
     evaluate,
 )
 from fly_brain.simulation.backend.engines import Execution
+from fly_brain.simulation.observations import HostArray
 
 from .mlx_ledger import EventLedger
 

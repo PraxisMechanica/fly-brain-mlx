@@ -12,7 +12,7 @@ import torch
 
 from fly_brain.qualification.matrix import required_cases
 from fly_brain.qualification.models import ParityCase
-from fly_brain.simulation.backend.bucketed import prepare
+from fly_brain.simulation.backend.bucketed import prepare_observed
 from fly_brain.simulation.experiments import EXPERIMENTS
 from fly_brain.simulation.models import Connectome, InputPin
 from fly_brain.simulation.stimuli import generate, neuron_indices
@@ -101,9 +101,18 @@ def run(
             indent=2,
         )
     progress('preparing-engines')
-    mlx = prepare(connectome, stimulus.targets, silenced, precision)
+    mlx, read_rows = prepare_observed(connectome, stimulus.targets, silenced, precision)
     cpu = prepare_cpu(connectome, stimulus.targets, silenced, 1)
-    execute(job, mlx, cpu, connectome, stimulus, output / 'observations', progress)
+    execute(
+        job,
+        mlx,
+        cpu,
+        connectome,
+        stimulus,
+        output / 'observations',
+        progress,
+        read_rows=read_rows,
+    )
     report = write(case, connectome, pin, stimulus, output / 'observations', output)
     progress('case-recorded')
     return report

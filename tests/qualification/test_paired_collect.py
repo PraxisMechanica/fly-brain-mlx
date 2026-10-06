@@ -22,7 +22,7 @@ from fly_brain.qualification.adapters.paired_collect import collect
 from fly_brain.qualification.adapters.paired_observer import PairedBlock, phase_hash
 from fly_brain.qualification.adapters.pending_queues import verify as verify_pending
 from fly_brain.qualification.adapters.replay_evidence import paired as verify_repeat
-from fly_brain.simulation.backend.bucketed import prepare
+from fly_brain.simulation.backend.bucketed import prepare_observed
 from fly_brain.simulation.models import Stimulus
 from tests.qualification.test_mlx_observer import fixture
 
@@ -45,7 +45,9 @@ def test_live_collection_retains_complete_native_and_physical_replay(
         hashlib.sha256(events.tobytes()).hexdigest(),
     )
     job = build(case.connectome, case.targets, (3,), events[0], tmp_path / 'build')
-    execution = prepare(case.connectome, case.targets, (3,), precision)
+    execution, read_rows = prepare_observed(
+        case.connectome, case.targets, (3,), precision
+    )
     outputs = (tmp_path / 'first', tmp_path / 'repeat')
     for output in outputs:
         capture = collect(
@@ -54,6 +56,7 @@ def test_live_collection_retains_complete_native_and_physical_replay(
             case.connectome,
             stimulus,
             output,
+            read_rows=read_rows,
             record_reference=output == outputs[1],
         )
         assert capture.audit.step == 101
@@ -150,7 +153,9 @@ def test_live_collection_retains_complete_native_and_physical_replay(
                     b.tobytes(),
                 ), name
     with pytest.raises(FileExistsError):
-        collect(job, execution, case.connectome, stimulus, outputs[0])
+        collect(
+            job, execution, case.connectome, stimulus, outputs[0], read_rows=read_rows
+        )
     verify_repeat(*outputs)
 
 
@@ -169,7 +174,9 @@ def test_injected_first_budget_fault_retains_actual_inputs_and_reference_weights
         hashlib.sha256(events.tobytes()).hexdigest(),
     )
     job = build(case.connectome, case.targets, (3,), events[0], tmp_path / 'build')
-    execution = prepare(case.connectome, case.targets, (3,), precision)
+    execution, read_rows = prepare_observed(
+        case.connectome, case.targets, (3,), precision
+    )
     capture = CausalCapture()
     check = capture.check
 
@@ -186,7 +193,7 @@ def test_injected_first_budget_fault_retains_actual_inputs_and_reference_weights
         'fly_brain.qualification.adapters.paired_collect.CausalCapture', lambda: capture
     )
     output = tmp_path / 'collected'
-    collect(job, execution, case.connectome, stimulus, output)
+    collect(job, execution, case.connectome, stimulus, output, read_rows=read_rows)
     summary = json.loads((output / 'causal.json').read_text())
     assert summary['first_budget_violation']['step'] == 7
     assert summary['first_spike_step'] is None and summary['contexts']['spike'] is None

@@ -2,6 +2,7 @@ import json
 from collections.abc import Callable
 from pathlib import Path
 
+from fly_brain.qualification.ports import ReductionReader
 from fly_brain.simulation.backend.engines import Execution
 from fly_brain.simulation.models import Connectome, Stimulus
 
@@ -22,11 +23,20 @@ def execute(
     stimulus: Stimulus,
     output: Path,
     progress: Callable[[str], None],
+    *,
+    read_rows: ReductionReader,
 ) -> None:
     output.mkdir(parents=True, exist_ok=False)
     for mode in ('first', 'repeat'):
         progress('paired-' + mode)
-        collect_paired(job, mlx, connectome, stimulus, output / ('paired-' + mode))
+        collect_paired(
+            job,
+            mlx,
+            connectome,
+            stimulus,
+            output / ('paired-' + mode),
+            read_rows=read_rows,
+        )
     advance_cpu = active_cpu_step(cpu)
     with (output / 'cpu-evaluation.json').open('x') as artifact:
         json.dump(

@@ -1,15 +1,12 @@
 import json
 from dataclasses import asdict
-from functools import partial
 from pathlib import Path
 from typing import cast
 
 import numpy as np
 from numpy.typing import NDArray
 
-from fly_brain.simulation.backend import core
-from fly_brain.simulation.backend.bucketed import Layout
-from fly_brain.simulation.backend.engines import Execution
+from fly_brain.qualification.ports import ReductionReader
 from fly_brain.simulation.models import Connectome, Stimulus
 
 from .brian_jobs import BrianJob
@@ -21,7 +18,7 @@ from .causal_reduction import reduction_inputs
 def write(
     capture: CausalCapture,
     job: BrianJob,
-    execution: Execution,
+    read_rows: ReductionReader,
     connectome: Connectome,
     stimulus: Stimulus,
     output: Path,
@@ -31,10 +28,6 @@ def write(
         if context is None:
             contexts[label] = None
             continue
-        layout = cast(
-            Layout,
-            cast(partial[tuple[core.State, core.StepTrace]], execution.advance).args[1],
-        )
         weights = (
             cast(
                 NDArray[np.float64],
@@ -47,7 +40,7 @@ def write(
             if len(connectome.sources)
             else np.empty(0, dtype=np.float64)
         )
-        arrays = reduction_inputs(layout, context.neurons, weights)
+        arrays = reduction_inputs(read_rows, context.neurons, weights)
         arrays['stimulus_targets'] = np.asarray(stimulus.targets, dtype=np.int32)
         arrays['affected_neuron_ids'] = connectome.neuron_ids[
             list(context.neurons)
@@ -82,7 +75,7 @@ def write(
                 'first_spike_step': capture.audit.first_spike_step,
                 'first_spike_neurons': list(capture.audit.first_spike_neurons),
                 'contexts': contexts,
-                'reduction_order': 'Actual padded leaf order; adjacent-pair compensated integer-count tree; four high/low scale products; 16-leaf compensated final tree.',
+                'reduction_order': read_rows(()).order,
             },
             artifact,
             indent=2,

@@ -11,7 +11,7 @@ from .observer_stream import FinalSnapshot, PhaseBlock, StepSnapshot
 from .reference_queues import ReferenceQueues
 
 if TYPE_CHECKING:
-    from fly_brain.simulation.backend.arrays import HostArray
+    from fly_brain.simulation.observations import HostArray
 
     from .mlx_observer import MLXBlock
 

@@ -1,4 +1,3 @@
-from functools import partial
 from typing import cast
 
 import numpy as np
@@ -6,8 +5,7 @@ import pytest
 from numpy.typing import NDArray
 
 from fly_brain.qualification.adapters.causal_reduction import reduction_inputs
-from fly_brain.simulation.backend import core
-from fly_brain.simulation.backend.bucketed import Layout, prepare
+from fly_brain.simulation.backend.bucketed import prepare_observed
 from fly_brain.simulation.mapping import silence_sources
 from tests.qualification.test_mlx_observer import fixture
 
@@ -19,14 +17,10 @@ def test_actual_device_leaf_order_counts_padding_and_native_weights_are_retained
     precision: str, empty: bool
 ) -> None:
     case = fixture(empty)
-    execution = prepare(case.connectome, case.targets, (3,), precision)
-    layout = cast(
-        Layout,
-        cast(partial[tuple[core.State, core.StepTrace]], execution.advance).args[1],
-    )
+    _, read_rows = prepare_observed(case.connectome, case.targets, (3,), precision)
     original = silence_sources(case.connectome, (3,))
     weights = original.counts * (0.275 * 0.001)
-    arrays = reduction_inputs(layout, tuple(range(6)), weights)
+    arrays = reduction_inputs(read_rows, tuple(range(6)), weights)
     for neuron in range(6):
         prefix = f'neuron_{neuron}_'
         edges = cast(NDArray[np.int32], arrays[prefix + 'actual_mlx_leaf_edges'])

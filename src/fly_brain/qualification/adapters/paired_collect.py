@@ -4,6 +4,7 @@ from pathlib import Path
 
 import numpy as np
 
+from fly_brain.qualification.ports import ReductionReader
 from fly_brain.simulation.backend import core
 from fly_brain.simulation.backend.engines import Execution
 from fly_brain.simulation.models import Connectome, Stimulus
@@ -27,6 +28,7 @@ def collect(
     stimulus: Stimulus,
     output: Path,
     *,
+    read_rows: ReductionReader,
     record_reference: bool = False,
 ) -> CausalCapture:
     events = stimulus.events
@@ -129,5 +131,5 @@ def collect(
     arrays['spike_neurons'] = np.asarray(neurons, dtype=np.int64)
     with (output / 'mlx-native.npz').open('xb') as artifact:
         np.savez_compressed(artifact, **arrays)
-    write_causes(capture, job, execution, connectome, stimulus, output)
+    write_causes(capture, job, read_rows, connectome, stimulus, output)
     return capture

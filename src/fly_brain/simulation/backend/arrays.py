@@ -4,7 +4,7 @@ import mlx.core as mx
 import numpy as np
 from numpy.typing import NDArray
 
-HostArray = NDArray[np.float32 | np.float64 | np.int32 | np.int64 | np.bool_]
+from fly_brain.simulation.observations import HostArray
 
 
 def evaluate(*arrays: mx.array) -> None:

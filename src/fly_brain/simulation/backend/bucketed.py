@@ -10,11 +10,13 @@ from fly_brain.simulation.mapping import (
     silence_sources,
 )
 from fly_brain.simulation.models import Connectome
+from fly_brain.simulation.observations import ReductionReader
 
 from . import core
 from .accumulation import exact_count_sum, factored_sum
 from .arrays import boolean_input
 from .engines import Execution
+from .reduction_evidence import read_rows
 
 
 @dataclass(frozen=True)
@@ -144,14 +146,14 @@ def advance(
         return updated, trace
 
 
-def prepare(
+def _components(
     connectome: Connectome,
     input_targets: tuple[int, ...],
     silenced: tuple[int, ...],
     precision: str,
     *,
     exact_counts: bool = False,
-) -> Execution:
+) -> tuple[core.Network, Layout]:
     mx.disable_compile()
     connectome = silence_sources(connectome, silenced)
     network = core.make_network(
@@ -163,4 +165,34 @@ def prepare(
         precision=precision,
     )
     layout = make_layout(connectome, exact_counts=exact_counts)
+    return network, layout
+
+
+def prepare(
+    connectome: Connectome,
+    input_targets: tuple[int, ...],
+    silenced: tuple[int, ...],
+    precision: str,
+    *,
+    exact_counts: bool = False,
+) -> Execution:
+    network, layout = _components(
+        connectome, input_targets, silenced, precision, exact_counts=exact_counts
+    )
     return Execution(network, partial(advance, network, layout))
+
+
+def prepare_observed(
+    connectome: Connectome,
+    input_targets: tuple[int, ...],
+    silenced: tuple[int, ...],
+    precision: str,
+    *,
+    exact_counts: bool = False,
+) -> tuple[Execution, ReductionReader]:
+    network, layout = _components(
+        connectome, input_targets, silenced, precision, exact_counts=exact_counts
+    )
+    return Execution(network, partial(advance, network, layout)), partial(
+        read_rows, layout
+    )

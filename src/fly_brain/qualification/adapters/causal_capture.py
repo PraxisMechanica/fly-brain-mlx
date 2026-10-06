@@ -10,7 +10,7 @@ from .observer_stream import StepSnapshot
 from .paired_observer import PairedBlock, audit_block
 
 if TYPE_CHECKING:
-    from fly_brain.simulation.backend.arrays import HostArray
+    from fly_brain.simulation.observations import HostArray
 
 
 @dataclass(frozen=True)

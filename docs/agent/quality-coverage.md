@@ -27,7 +27,7 @@ cannot prove them all. No incomplete rule is treated as clean or inapplicable.
 | Rules | Working mechanism and limit |
 | --- | --- |
 | OWN001–OWN006 | Domain roots are documented. Complete file/symbol/resource role classification and deterministic placement checks are missing. |
-| DEP001 | Import Linter checks three configured domain/framework boundaries, including aliases, type-only imports, re-exports and transitive paths. Other role boundaries and same-module interactions are not covered. |
+| DEP001 | Import Linter checks three configured domain/framework boundaries, including the qualification-owned observation port, aliases, type-only imports, re-exports and transitive paths. Other role boundaries and same-module interactions are not covered. |
 | DEP002–DEP004 | Some forbidden paths fail existing contracts. Complete logical owner cycles, public-contract exports and resolved foreign symbol/type checks are missing. |
 | DI001–DI004 | Strict typing checks declared signatures. Collaborator identity, hidden construction, ambient dependencies and lifecycle analysis are missing. |
 | ROLE001–ROLE007 | Complete resolved call/control-flow, role, persistence and neutral-contract checks are missing. |
@@ -58,6 +58,23 @@ the deterministic service assertion. Test outputs are retained in a fresh
 
 This repairs the recorded clock dependency. It does not implement the missing
 full structural analyzer or establish new scientific case acceptance.
+
+## Actual reduction-row boundary — 2026-10-06
+
+The causal writer now receives a qualification-owned `ReductionReader` rather
+than discovering a private `Layout` in `partial.args`. The provider returns
+actual device leaf identities/counts/occupied padding and the bound reduction
+order through neutral immutable values. The independent reference-weight pairing
+stays in qualification. Alias-only host-array contracts no longer import the
+concrete backend. Concrete execution/state dependencies elsewhere remain open.
+
+Eighteen native/value cases, seven real paired/repeat/batch/singleton cases, and
+five real source-only commit-hook cases pass. The latter prove direct, aliased,
+type-only, transitive, and re-export implementation rejection, repair to neutral
+values, and loss of detection when the port scope is removed. Four original/new
+reader comparisons preserve all 96 native arrays' dtype, shape, and bytes. This
+is bounded forwarding/evidence preservation; the observer and ledger logic are
+unchanged. No complete application architectural approval is claimed.
 
 ## Remaining work
 

@@ -74,7 +74,7 @@ root_package = "fly_brain"
 include_external_packages = true
 
 [[tool.importlinter.contracts]]
-name = "Services and models have no framework or adapter dependencies"
+name = "DEP001/DEP004: Services and neutral contracts have no implementation dependencies"
 type = "forbidden"
 source_modules = [
     "fly_brain.simulation.models",
@@ -83,6 +83,7 @@ source_modules = [
     "fly_brain.simulation.stimuli",
     "fly_brain.simulation.service",
     "fly_brain.qualification.models",
+    "fly_brain.qualification.ports",
     "fly_brain.qualification.matrix",
     "fly_brain.qualification.matrix_diagnostics",
     "fly_brain.qualification.input_patterns",
