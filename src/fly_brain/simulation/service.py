@@ -1,6 +1,5 @@
 from collections.abc import Callable
 from pathlib import Path
-from time import perf_counter
 
 from .experiments import EXPERIMENTS
 from .models import (
@@ -32,11 +31,12 @@ def simulate(
         ],
         SimulationResult,
     ],
+    clock: Callable[[], float],
 ) -> SimulationResult:
-    started = perf_counter()
+    started = clock()
     connectome, pin = load(request.project)
-    timings = {'data_load_s': perf_counter() - started}
-    scheduled = perf_counter()
+    timings = {'data_load_s': clock() - started}
+    scheduled = clock()
     experiment = EXPERIMENTS[request.experiment]
     stimulus = generate(
         connectome,
@@ -46,9 +46,9 @@ def simulate(
         request.seed,
     )
     silenced = neuron_indices(connectome, experiment.silenced_ids)
-    timings['schedule_s'] = perf_counter() - scheduled
-    persisted = perf_counter()
+    timings['schedule_s'] = clock() - scheduled
+    persisted = clock()
     stimulus = persist(request.output, experiment, pin, stimulus)
-    timings['stimulus_io_s'] = perf_counter() - persisted
+    timings['stimulus_io_s'] = clock() - persisted
     run = execute(connectome, stimulus, silenced)
     return write(request, connectome, pin, stimulus, run, timings, started)

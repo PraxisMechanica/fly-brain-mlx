@@ -1,7 +1,6 @@
 import hashlib
 import json
 from pathlib import Path
-from time import perf_counter
 
 import numpy as np
 import pyarrow.parquet as pq
@@ -78,7 +77,8 @@ def test_spike_export_preserves_original_types_and_is_readable_when_empty(
         stimulus,
         SimulationRun(events, {}, 0, 'test'),
         {},
-        perf_counter(),
+        3.0,
+        iter((10.0, 12.0, 15.0)).__next__,
     )
     schema = pq.read_schema(result.spike_file)
     assert (
@@ -90,6 +90,38 @@ def test_spike_export_preserves_original_types_and_is_readable_when_empty(
     np.testing.assert_allclose(spikes.time_s, events.steps * 0.0001, rtol=0, atol=1e-18)
     assert result.spikes == count and result.active_neurons == bool(count)
     assert result.spike_file.name == 'mlx_t0.1s_n1.parquet'
+
+
+def test_export_timings_use_the_injected_clock(tmp_path: Path) -> None:
+    c = network()
+    experiment = Experiment('silent', 0, 0, (), ())
+    stimulus = generate(c, experiment, 10, (0,))
+    pin = InputPin('csv', 'parquet', 2, 0)
+    request = SimulationRequest(tmp_path, tmp_path / 'run', 'silent', 0.001, 1, 0)
+    persist_stimulus(request.output, experiment, pin, stimulus)
+    events = SpikeEvents(
+        np.array([], dtype=np.int64),
+        np.array([], dtype=np.int64),
+        np.array([], dtype=np.int64),
+    )
+    run = SimulationRun(events, {'warm_simulation_s': 4.0}, 0, 'test')
+    result = write_run(
+        request,
+        c,
+        pin,
+        stimulus,
+        run,
+        {'data_load_s': 2.0},
+        3.0,
+        iter((10.0, 12.0, 15.0)).__next__,
+    )
+    report = json.loads((request.output / 'simulation.json').read_text())
+    assert report['timings'] == {
+        'data_load_s': 2.0,
+        'warm_simulation_s': 4.0,
+        'spike_io_s': 2.0,
+    }
+    assert report['elapsed_s'] == result.elapsed_s == 12.0
 
 
 @pytest.mark.parametrize('duration', [0.0, 0.00015, float('inf'), float('nan')])

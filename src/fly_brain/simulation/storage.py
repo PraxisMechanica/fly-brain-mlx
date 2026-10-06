@@ -1,9 +1,9 @@
 import hashlib
 import importlib.metadata
 import json
+from collections.abc import Callable
 from dataclasses import replace
 from pathlib import Path
-from time import perf_counter
 
 import numpy as np
 import pyarrow as pa
@@ -92,8 +92,9 @@ def write_run(
     run: SimulationRun,
     timings: dict[str, float],
     started: float,
+    clock: Callable[[], float],
 ) -> SimulationResult:
-    spike_io = perf_counter()
+    spike_io = clock()
     name = f'mlx_t{request.duration_s:g}s_n{request.trials}'
     times = run.spikes.steps.astype(np.float64) * 0.0001
     table = pa.table(
@@ -109,8 +110,8 @@ def write_run(
     )
     path = request.output / f'{name}.parquet'
     pq.write_table(table, path, compression='brotli')
-    timings = {**timings, **run.timings, 'spike_io_s': perf_counter() - spike_io}
-    elapsed = perf_counter() - started
+    timings = {**timings, **run.timings, 'spike_io_s': clock() - spike_io}
+    elapsed = clock() - started
     spikes = int(times.size)
     active = int(np.unique(run.spikes.neurons).size)
     report = {

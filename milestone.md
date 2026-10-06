@@ -87,11 +87,20 @@ evidence, and assigned work.
   outside fixture cleanup. All three reconstructed layers passed their native
   commit/push hooks; hosted skips are not test passes.
 
+- Quality work resumed at `876cb157b403c6e65d96aa3d411ae8686988cf06` under the
+  user's instruction to continue and deliver through local hooks. Confidence in
+  this scope is 95%. The first repair injects the same typed timing clock into
+  the simulation service and result writer through bootstrap. Eleven focused
+  tests and strict typing pass; the ambient-clock control is rejected. Numerical
+  backend sources, spike schema, and report fields are unchanged. Test artifacts
+  are retained. Full checker coverage remains incomplete; scientific/performance
+  implementation is still held.
+
 ## Next work
 
 1. Finish quality enforcement before further performance implementation. Complete
    structural-rule ownership/type/call/effect coverage and rejection fixtures;
-   resolve recorded findings, including the simulation service's uninjected clock.
+   resolve remaining findings after the recorded clock repair below.
    Verify remaining metric/index weakening cases and required merge enforcement.
    Resolve the precise hosted-cache teardown approval before hosted qualification.
    Use the pinned standalone

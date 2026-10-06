@@ -40,19 +40,24 @@ cannot prove them all. No incomplete rule is treated as clean or inapplicable.
 | COV003 | Both installed hooks call `just check` with full scans, no filename list and unconditional execution. Real fixtures prove commit/push rejection. Hosted checks use the same command; required merge protection is not configured. |
 | COV004 | Native import and metric fixtures prove rejection and repair; hook probes prove child-error propagation and staged-source handling. Transitive/always-run weakening is demonstrated. Other predicates need their own negative, repaired, close, error and weakening cases. |
 
-## Definite application finding
+## Repaired clock finding — 2026-10-06
 
-`DI001 src/fly_brain/simulation/service.py:36`: `simulate` obtains its clock
-from the concrete imported `time.perf_counter`; the clock is absent from its
-injected collaborators. The strict contract requires a typed clock port.
-The service's imported clock and six direct reads are visible even though
-Ruff, Pyright and the three current import contracts pass.
+The original `DI001 src/fly_brain/simulation/service.py:36` finding identified
+six direct `time.perf_counter` reads in `simulate`. The service now requires a
+`Callable[[], float]` clock. Its result writer requires the same typed clock;
+bootstrap supplies `perf_counter` to both through explicit composition. Timer
+units, timing/report fields, spike schemas, and numerical operations are unchanged.
 
-Repair: inject a required `Callable[[], float]` into the service and supply
-`perf_counter` in composition. Inspect the writer's timing dependency at the
-same boundary; preserve timer units, result fields and all numerical operations.
-Verify with a deterministic injected clock and existing application checks.
-This report proposes the repair; it does not claim it is implemented.
+At base `876cb157b403c6e65d96aa3d411ae8686988cf06`, eleven focused tests pass
+with no failures or skips, and strict Pyright reports no errors or warnings.
+The service test checks deterministic stage durations. The real-file writer
+test checks its export duration and total elapsed time, alongside the existing
+empty/populated spike-format checks. An in-memory ambient-clock control fails
+the deterministic service assertion. Test outputs are retained in a fresh
+`/private/tmp/fly-brain-clock-tests-20261006-01` directory.
+
+This repairs the recorded clock dependency. It does not implement the missing
+full structural analyzer or establish new scientific case acceptance.
 
 ## Remaining work
 

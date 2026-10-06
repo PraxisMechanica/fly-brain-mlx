@@ -2,6 +2,7 @@ import os
 import platform
 from functools import partial
 from pathlib import Path
+from time import perf_counter
 
 from fly_brain.comparison.models import ComparisonRequest, ComparisonResult
 from fly_brain.comparison.service import compare
@@ -152,7 +153,8 @@ def simulation(request: SimulationRequest) -> SimulationResult:
         pinned_inputs,
         persist_stimulus,
         partial(run, precision=precision),
-        write_run,
+        partial(write_run, clock=perf_counter),
+        perf_counter,
     )
 
 
