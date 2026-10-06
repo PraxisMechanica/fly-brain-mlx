@@ -190,6 +190,29 @@ Completion requires:
   Compact proof: `docs/evidence/code-quality/comparison-rules-20261006/verification.json`.
   No case acceptance transfers; the full structural result remains COV002.
 
+## Parallel refactor ownership — 2026-10-06
+
+The user explicitly requested parallel implementation and committed handoffs.
+At `aaafbf60522e30f4ec2bd8d5ab098d12148b1297`, decision confidence is 97%.
+Three agents inherit GPT-6.1 Sol at `xhigh`, using separate local-main clones
+at `0a313d02b56d886542d130134346506106a5f926`:
+
+- `architecture_ownership` implements reviewed source/binding/resource/export
+  metadata and its typed loader; it does not change application or resolver code.
+- `architecture_symbols` implements native semantic references and graph
+  primitives; missing generic/alias/type-model capability fails COV002.
+- `composition_refactor` separates bootstrap assembly from owned runtime
+  commands/services, preserving CLI behavior, lazy imports, pin/load/clock order,
+  and every numerical/collector/reference source.
+
+The parent owns shared configuration, status/index documents, the comparison
+repair, registry reconciliation, and integration. Workers run required checks
+and commit before handoff; only the parent integrates and pushes sequentially
+on `origin/main`. The [assignment boundaries](docs/agent/handoffs/parallel-refactor-20261006.md)
+own exact file scopes, dependency interfaces, and conflict prevention. Source
+metadata and semantic IR can proceed independently; their joins and the final
+composition symbol reconciliation are serialized during integration.
+
 ## Next work for this agent
 
 1. Finish quality enforcement before further performance implementation. Complete
