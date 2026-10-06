@@ -1,0 +1,20 @@
+{
+  "parent_base": "471ab691a5f4ca012562c44afbe040820f4cc5ea",
+  "worker_commit": "ffbc2fec0db074754d3f457ac78a52728b4282bd",
+  "decision_confidence": 0.95,
+  "source_hashes_verified": 8,
+  "focused_parent_counts": {
+    "tests": 84,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "report": "/private/tmp/fly-brain-symbols-parent-tests-20261006-01.xml",
+  "report_sha256": "20927ec6faa95340cfb00604a641382b0df7ad9dad7aaf6f72de97d967fb7bad",
+  "invariants": [
+    "No application/numerical/reference/data source changes.",
+    "Native declaration identity, nominal class locations and explicit lexical targets are the only certified semantic capabilities.",
+    "Required structured type, alias ownership, control-flow, implicit/dynamic dispatch and effect capabilities fail COV002 until implemented.",
+    "A -32601 typeInfo response is evidence about the public server request only; private evaluator access is being investigated separately."
+  ]
+}

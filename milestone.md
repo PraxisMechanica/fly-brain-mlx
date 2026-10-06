@@ -213,6 +213,20 @@ Completion requires:
   No numerical, observer/ledger, reference or output-schema source changes and
   no new scientific case acceptance; full structural coverage remains COV002.
 
+- Composition integration is pushed as `471ab69` with both native hooks
+  passing. Previous main revision `db6be047c7cab56b4be7295b6ac78af50add0f63`
+  also passes every step of hosted run 37483019029. Integrate the committed native
+  semantic/graph component `ffbc2fec0db074754d3f457ac78a52728b4282bd` against
+  that composition revision: all eight source hashes match and 84 parent source
+  fixtures pass without failures/errors/skips. The resolver records native
+  declaration identities, nominal class locations and explicit lexical targets;
+  transitive paths and cycle witnesses retain exact source evidence. Missing
+  structured types, alias ownership, control flow, implicit/runtime dispatch and
+  effects still fail COV002. The native-types follow-up and independent opaque
+  qualification-session slice have explicit separate ownership in the assignment
+  record. Compact proof:
+  `docs/evidence/code-quality/architecture-symbols-20261006/parent-integration.json`.
+
 ## Parallel refactor ownership — 2026-10-06
 
 The user explicitly requested parallel implementation and committed handoffs.

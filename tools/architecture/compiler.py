@@ -43,6 +43,7 @@ class Compiler:
         self.process: subprocess.Popen[bytes] | None = None
         self.opened: dict[Path, str] = {}
         self.buffer = bytearray()
+        self.capabilities: dict[str, JsonValue] = {}
 
     def __enter__(self) -> 'Compiler':
         if self.process is not None:
@@ -66,7 +67,12 @@ class Compiler:
                     {
                         'processId': None,
                         'rootUri': self.root.as_uri(),
-                        'capabilities': {'workspace': {'configuration': True}},
+                        'capabilities': {
+                            'workspace': {'configuration': True},
+                            'textDocument': {
+                                'declaration': {'dynamicRegistration': True}
+                            },
+                        },
                         'workspaceFolders': [
                             {'uri': self.root.as_uri(), 'name': 'architecture'}
                         ],
@@ -74,6 +80,7 @@ class Compiler:
                 )
             )
             capabilities = object_value(result.get('capabilities'))
+            self.capabilities = capabilities
             for required in (
                 'definitionProvider',
                 'typeDefinitionProvider',
@@ -230,6 +237,7 @@ class Compiler:
                 self.process = None
         self.opened.clear()
         self.buffer.clear()
+        self.capabilities.clear()
 
     def __exit__(
         self,

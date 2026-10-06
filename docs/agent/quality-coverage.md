@@ -140,6 +140,22 @@ is repaired by selecting only the intended contract. Compact parent proof:
 `docs/evidence/code-quality/composition-refactor-20261006/parent-integration.json`.
 These source boundaries do not prove all role/call/effect rules; COV002 remains.
 
+## Native semantic identities and graph witnesses — 2026-10-06
+
+The reviewed native resolver links declarations through imports, re-exports,
+type-only references, captures, exact Unicode coordinates and its explicitly
+limited unconditional callable aliases. Source/call graphs retain resolved
+locations and source hashes for transitive paths and owner-cycle inputs. Eight
+source hashes and all 84 parent fixtures are verified; raw fixture output stays
+outside Git. Compact proof:
+`docs/evidence/code-quality/architecture-symbols-20261006/parent-integration.json`.
+
+Nominal locations and explicit lexical calls do not prove complete generics,
+Any/Unknown, overloads, implicit calls, runtime dispatch, alias ownership, control
+flow or effects. Every required missing capability raises COV002. Structured
+native evaluator export is a separate assigned follow-up; hover text is not a
+substitute. Whole-application structural enforcement remains incomplete.
+
 ## Remaining work
 
 Inventory every first-party file, declaration, owned resource, public export,
