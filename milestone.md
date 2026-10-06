@@ -87,9 +87,11 @@ Completion requires:
   owns working mechanisms and missing analysis; [source ownership](docs/agent/architecture-ownership.md)
   owns the reviewed classifications and remaining findings. Green component
   checks grant no new scientific acceptance.
-- Native structured-type export and the opaque observation-session candidate
-  remain assigned, unintegrated work. Session adoption requires the accepted
-  transparency/integrity and complete shortest pinned-run proof. The
+- Native structured-type export remains assigned, unintegrated work. The
+  committed inactive session candidate `6e111545` passes 106 parent Metal cases
+  and 64 value/package/canonical-hook cases. Its typed storage correction,
+  complete pinned-run/four-trial memory proof and collector migration remain
+  required before adoption. No new scientific acceptance is granted. The
   [checkpoint history](docs/agent/history/milestones.md#refactor-and-enforcement-checkpoint-2026-10-06)
   retains original test counts, failures, review decisions and delivery evidence.
 

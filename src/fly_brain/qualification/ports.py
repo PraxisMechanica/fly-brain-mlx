@@ -1,8 +1,19 @@
 from pathlib import Path
 from typing import Protocol
 
+import numpy as np
+from numpy.typing import NDArray
+
 from fly_brain.simulation.models import Connectome, InputPin
-from fly_brain.simulation.observations import ReductionEvidence
+from fly_brain.simulation.observations import (
+    NativeComparison,
+    NativeObservation,
+    ObservationConfiguration,
+    ObservationInitialState,
+    ObservationOperands,
+    PhysicalQueueObservation,
+    ReductionEvidence,
+)
 
 from .models import ParityCase, QualificationRequest, QualificationResult
 
@@ -59,3 +70,20 @@ class DiagnosticCommand(Protocol):
 
 class ParityCommand(Protocol):
     def __call__(self, project: Path, output: Path, case: ParityCase, /) -> int: ...
+
+
+class ObservationSession(Protocol):
+    @property
+    def configuration(self) -> ObservationConfiguration: ...
+
+    def advance(self, events: NDArray[np.bool_], /) -> NativeObservation: ...
+
+    def compare(self, operands: ObservationOperands, /) -> NativeComparison: ...
+
+    def physical_queue(self) -> PhysicalQueueObservation: ...
+
+
+class ObservationSessionFactory(Protocol):
+    def __call__(
+        self, trial_indices: tuple[int, ...], initial: ObservationInitialState | None, /
+    ) -> ObservationSession: ...

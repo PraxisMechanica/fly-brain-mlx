@@ -1,0 +1,67 @@
+{
+  "parent_base": "90cc61b1aecd0a49844a901f3080b3989c421edd",
+  "worker_commit": "6e111545d853279359c9bb904c2cddec52947528",
+  "confidence": 0.95,
+  "source_hashes_verified": 16,
+  "raw_hashes_verified": 8,
+  "protected_worker_files_matching_parent": 127,
+  "previous_parent_changes": [
+    "milestone.md",
+    "pyproject.toml",
+    "comparison/acceptance.py",
+    "comparison/pooling.py",
+    "comparison/service.py"
+  ],
+  "parent_checks": {
+    "native": {
+      "report": "/private/tmp/fly-brain-session-parent-native-tests-20261006-01.xml",
+      "counts": {
+        "tests": 106,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "sha256": "11cb5d82d7c3b89e4b8ba454747dbb3a415dd57571b73907feb5091cb0f45fc9",
+      "warnings": 27
+    },
+    "cpu_package_and_canonical_hook": {
+      "report": "/private/tmp/fly-brain-session-parent-cpu-tests-20261006-02.xml",
+      "counts": {
+        "tests": 64,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "sha256": "c010e02031709e5a2ed4dd7c6efe415e830fddf1866671a4637e2a1fb419c2d2"
+    },
+    "contracts": {
+      "kept": 4,
+      "broken": 0,
+      "files": 148,
+      "dependencies": 650
+    }
+  },
+  "scope": "Inactive session forwarding/expectation candidate; original collector/ledger/case/bootstrap/CLI and numerical sources preserved.",
+  "canonical_consumer_scopes": [
+    "qualification.session_expectations",
+    "qualification.session_observer",
+    "qualification.session_blocks",
+    "simulation.observation_ports",
+    "simulation.observations"
+  ],
+  "parent_fixture_repair": "Expanded observations-module negative initially overwrote its own violating bytes; retain that source and repair to a local neutral constant. All five canonical scopes now reject with located paths and pass repair; no policy injected only by fixtures.",
+  "registry": {
+    "files": 288,
+    "declarations": 3958,
+    "unique_symbols": 3856,
+    "public_exports": 279,
+    "reconciliation_findings": 0,
+    "recorded_findings": 11
+  },
+  "remaining": [
+    "Explicit typed snapshot storage/properties are assigned before the full pinned proof; current interception/type-shadowing is not complete alias/type analysis.",
+    "Complete shortest pinned ordinary/legacy/new/repeat and actual four-trial transient/retained-memory proof before collector activation.",
+    "Migrate all required collectors/reference/probe consumers and complete every applicable structural rule without weakening."
+  ],
+  "whole_architecture_result": "ANALYSIS FAILED (COV002)"
+}

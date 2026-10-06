@@ -175,6 +175,24 @@ parent policy cases pass at the subsequent resource checkpoint. Proof:
 counts, exports, resource decisions, provenance and remaining debt. These guards
 do not prove complete type/call/alias/effect/control-flow or historical analysis.
 
+## Inactive observation-session consumers — 2026-10-06
+
+The canonical import contract protects independent expectations, observation
+orchestration, block values, simulation observation ports and neutral observations.
+Five actual configured scopes reject implementation dependencies and accept
+repair; alias/type-only/transitive/factory/re-export and weakening controls remain.
+The first expanded fixture overwrote its own violating observations module;
+that setup is repaired without changing the gate. Parent checks pass 106 real
+Metal cases and 64 value/package/hook cases, retaining 27 upstream warnings.
+Compact proof:
+`docs/evidence/code-quality/qualification-session-boundary-20261006/parent-integration.json`.
+
+Descriptor-backed views protect bytes/dtype/shape, but the current type-shadowing
+attribute implementation still needs explicit typed storage for full analysis.
+The old collector remains active. Pinned transparency and four-trial memory,
+all consumer migrations and complete alias/type/effect/control-flow enforcement
+remain pending; this component is not an architecture or adoption certificate.
+
 ## Remaining work
 
 Maintain the reviewed inventory as source changes, complete all remaining

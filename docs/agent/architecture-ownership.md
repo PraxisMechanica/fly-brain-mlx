@@ -1,8 +1,8 @@
 # Reviewed Python ownership registry
 
 Scope: combined parent source at
-`c5296da3fd66ff3d48348a919bd1a44e5b01b496` plus the reviewed runtime-child
-relationships and their registry controls. Parent reconciliation confidence: 95%. The original
+`90cc61b1aecd0a49844a901f3080b3989c421edd` plus the inactive observation-session
+component and its canonical consumer controls. Parent reconciliation confidence: 95%. The original
 worker record retains its `0a313d0` base and 90% classification confidence. This
 registry records responsibilities; it does not certify application architecture
 or change scientific behavior.
@@ -149,14 +149,15 @@ The Brian2/PyArrow stubs are handwritten, checked source contracts and have no
 generator provenance. The separately pinned JavaScript metric tool's provenance
 is outside this Python/stub registry; its existing native gate remains required.
 
-The parent reconciled 35 exact changed/new files from the comparison,
-composition, metric-control and native-resolver slices, plus the indexed-policy
-controls. The combined inventory covers 274 source/stub files, 3,771 declaration
-occurrences and 198 neutral exports. All 62 frozen historical/reference records
-retain their exact provenance. Reconciliation has zero gaps; eleven recorded
-architecture/identifier findings remain visible after the two runtime ownership
-uncertainties are resolved. This result proves
-named-declaration and syntactic-binding coverage only.
+The current parent integration reviews sixteen exact inactive-session
+source/test changes and reconciles the combined inventory: 288 source/stub
+files, 3,958 declaration occurrences and 279 neutral exports. All 62 frozen
+historical/reference records retain provenance. Reconciliation has zero gaps;
+eleven architecture/identifier findings remain. Candidate neutral observation
+values/ports and local assembly sites have exact entries; private helper
+functions are not silently promoted to public contracts. Current dynamic
+attribute/type-shadowing and historical/type/alias/effect coverage stay explicit
+limits until their assigned corrections and complete analyzer are verified.
 
 `ownership.json` is now a canonical indexed check input. Source-only controls
 reject missing-index and ignored policy inputs, accept explicit staging, permit
