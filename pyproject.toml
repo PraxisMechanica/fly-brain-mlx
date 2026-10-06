@@ -81,6 +81,8 @@ source_modules = [
     "fly_brain.simulation.mapping",
     "fly_brain.simulation.experiments",
     "fly_brain.simulation.stimuli",
+    "fly_brain.simulation.input_service",
+    "fly_brain.simulation.ports",
     "fly_brain.simulation.service",
     "fly_brain.qualification.models",
     "fly_brain.qualification.ports",
@@ -99,6 +101,8 @@ source_modules = [
     "fly_brain.comparison.diagnostics",
     "fly_brain.comparison.pooling",
     "fly_brain.comparison.metrics",
+    "fly_brain.comparison.reporting",
+    "fly_brain.comparison.ports",
     "fly_brain.comparison.service",
 ]
 forbidden_modules = [
@@ -134,6 +138,9 @@ source_modules = [
     "fly_brain.comparison.pooling",
 ]
 forbidden_modules = [
+    "fly_brain.comparison.reporting",
+    "fly_brain.comparison.commands",
+    "fly_brain.comparison.module",
     "fly_brain.comparison.service",
     "fly_brain.comparison.schemas",
     "fly_brain.comparison.storage",

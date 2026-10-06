@@ -1,5 +1,4 @@
 import argparse
-import json
 import time
 from collections.abc import Sequence
 from pathlib import Path
@@ -76,23 +75,10 @@ def main(argv: Sequence[str] | None = None) -> int:
             duration_s=arguments.duration_s,
             trial=arguments.trial,
         )
-        parity_report = bootstrap.parity_case(
-            parity_options.project, parity_options.output, parity_options.to_case()
+        case = parity_options.to_case()
+        return bootstrap.parity_case()(
+            parity_options.project, parity_options.output, case
         )
-        print(
-            json.dumps(
-                {
-                    'case': parity_report['case'],
-                    'case_accepted': parity_report['case_accepted'],
-                    'scientific_review_required': parity_report[
-                        'scientific_review_required'
-                    ],
-                    'report': str(parity_options.output / 'case.json'),
-                },
-                indent=2,
-            )
-        )
-        return 0 if parity_report['case_accepted'] else 1
     if arguments.command == 'simulate':
         output = (
             arguments.output
@@ -106,19 +92,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             trials=arguments.trials,
             seed=arguments.seed,
         ).to_request()
-        result = bootstrap.simulation(request)
-        print(
-            json.dumps(
-                {
-                    'spike_file': str(result.spike_file),
-                    'spikes': result.spikes,
-                    'active_neurons': result.active_neurons,
-                    'elapsed_s': result.elapsed_s,
-                },
-                indent=2,
-            )
-        )
-        return 0
+        return bootstrap.simulation()(request)
     if arguments.command == 'compare':
         options = ComparisonOptions(
             first=arguments.first,
@@ -129,44 +103,31 @@ def main(argv: Sequence[str] | None = None) -> int:
             first_label=arguments.first_label,
             second_label=arguments.second_label,
         )
-        result = bootstrap.comparison(
-            options.to_request(), Path(arguments.output).resolve()
-        )
-        print(json.dumps(result.summary, indent=2))
-        return 0
+        request = options.to_request()
+        output = Path(arguments.output).resolve()
+        return bootstrap.comparison()(request, output)
     options = QualificationOptions(project=arguments.project, output=arguments.output)
     request = options.to_request()
     if arguments.command == 'qualify':
-        qualification = bootstrap.qualification(request)
-        print(
-            json.dumps(
-                {
-                    'accepted': qualification.accepted,
-                    'exit_code': qualification.exit_code,
-                },
-                indent=2,
-            )
-        )
-        return 0 if qualification.accepted else 1
+        return bootstrap.qualification()(request)
     if arguments.command == 'probe-accumulation':
-        report = bootstrap.accumulation(request.project, request.output)
+        command = bootstrap.accumulation()
     elif arguments.command == 'probe-factored':
-        report = bootstrap.factored(request.project, request.output)
+        command = bootstrap.factored()
     elif arguments.command == 'probe-bucketed':
-        report = bootstrap.bucketed_scalars(request.project, request.output)
+        command = bootstrap.bucketed_scalars()
     elif arguments.command == 'probe-replay':
-        report = bootstrap.replay(request.output)
+        command = bootstrap.replay()
     elif arguments.command == 'audit-inputs':
-        report = bootstrap.input_audit(request.project, request.output)
+        command = bootstrap.input_audit()
     elif arguments.command == 'qualify-fan-in':
-        report = bootstrap.fan_in_audit(request.project, request.output)
+        command = bootstrap.fan_in_audit()
     elif arguments.command == 'qualify-layout-fan-in':
-        report = bootstrap.layout_fan_in_audit(request.project, request.output)
+        command = bootstrap.layout_fan_in_audit()
     elif arguments.command == 'qualify-device-layout':
-        report = bootstrap.device_layout_audit(request.project, request.output)
+        command = bootstrap.device_layout_audit()
     elif arguments.command == 'qualify-connectome-pulse':
-        report = bootstrap.connectome_pulse(request.project, request.output)
+        command = bootstrap.connectome_pulse()
     else:
-        report = bootstrap.schedule(request.output)
-    print(json.dumps(report, indent=2))
-    return 0 if report.get('accepted', True) else 1
+        command = bootstrap.schedule()
+    return command(request)

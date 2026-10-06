@@ -201,6 +201,18 @@ Completion requires:
   maintainability remain the same heuristic, not independent architecture proof.
   Compact evidence: `docs/evidence/code-quality/metric-weakening-20261006/verification.json`.
 
+- Integrate the composition worker `05dd2202b99a8a5d97acc3119176e92769326dd2`
+  against parent `db6be047c7cab56b4be7295b6ac78af50add0f63`. Bootstrap now only
+  assembles typed owned commands; domain services execute workflows. All 150
+  combined behavior/file/CLI/boundary cases pass with no failures/errors/skips.
+  Source and raw-record hashes plus three preserved function ASTs are verified.
+  Four new source scopes reject concrete dependencies and prove scope weakening.
+  The initial duplicate-entry test assertion is repaired; evidence and outputs
+  remain preserved. Compact proof:
+  `docs/evidence/code-quality/composition-refactor-20261006/parent-integration.json`.
+  No numerical, observer/ledger, reference or output-schema source changes and
+  no new scientific case acceptance; full structural coverage remains COV002.
+
 ## Parallel refactor ownership — 2026-10-06
 
 The user explicitly requested parallel implementation and committed handoffs.

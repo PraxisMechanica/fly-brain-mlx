@@ -1,22 +1,18 @@
 import os
 import platform
 from functools import partial
-from pathlib import Path
 from time import perf_counter
 
-from fly_brain.comparison.models import ComparisonRequest, ComparisonResult
-from fly_brain.comparison.service import compare
-from fly_brain.qualification.models import (
-    ParityCase,
-    QualificationRequest,
-    QualificationResult,
+from fly_brain.comparison.ports import ComparisonCommand
+from fly_brain.qualification.ports import (
+    DiagnosticCommand,
+    ParityCommand,
+    QualificationCommand,
 )
-from fly_brain.qualification.service import qualify
-from fly_brain.simulation.models import (
-    Connectome,
-    InputPin,
-    SimulationRequest,
-    SimulationResult,
+from fly_brain.simulation.ports import (
+    ConnectomeReader,
+    PinnedInputs,
+    SimulationCommand,
 )
 
 
@@ -29,128 +25,129 @@ def configure_mlx() -> str:
     return precision
 
 
-def qualification(request: QualificationRequest) -> QualificationResult:
+def qualification() -> QualificationCommand:
     from fly_brain.qualification.adapters.pytest_runner import run_tests
     from fly_brain.qualification.adapters.results import write_result
 
     configure_mlx()
-    return qualify(request, run_tests, write_result)
+    from fly_brain.qualification.module import build_qualification
+
+    return build_qualification(run_tests, write_result)
 
 
-def comparison(request: ComparisonRequest, output: Path) -> ComparisonResult:
+def comparison() -> ComparisonCommand:
+    from fly_brain.comparison.module import build_comparison
     from fly_brain.comparison.storage import read_spikes, write_comparison
 
-    result = compare(request, read_spikes)
-    write_comparison(output, result)
-    return result
+    return build_comparison(read_spikes, write_comparison)
 
 
-def accumulation(project: Path, output: Path) -> dict[str, object]:
+def accumulation() -> DiagnosticCommand:
     precision = configure_mlx()
     from fly_brain.qualification.adapters.accumulation_probe import run
+    from fly_brain.qualification.module import build_project_probe
 
-    return run(project, output, precision)
+    return build_project_probe(partial(run, precision=precision))
 
 
-def factored(project: Path, output: Path) -> dict[str, object]:
+def factored() -> DiagnosticCommand:
     precision = configure_mlx()
     from fly_brain.qualification.adapters.factored_probe import run
+    from fly_brain.qualification.module import build_project_probe
 
-    return run(project, output, precision)
+    return build_project_probe(partial(run, precision=precision))
 
 
-def bucketed_scalars(project: Path, output: Path) -> dict[str, object]:
+def bucketed_scalars() -> DiagnosticCommand:
     precision = configure_mlx()
     from fly_brain.qualification.adapters.bucketed_scalars import run
+    from fly_brain.qualification.module import build_project_probe
 
-    return run(project, output, precision)
+    return build_project_probe(partial(run, precision=precision))
 
 
-def replay(output: Path) -> dict[str, object]:
+def replay() -> DiagnosticCommand:
     from fly_brain.qualification.adapters.replay_probe import run
+    from fly_brain.qualification.module import build_output_probe
 
-    return run(output)
+    return build_output_probe(run)
 
 
-def schedule(output: Path) -> dict[str, object]:
+def schedule() -> DiagnosticCommand:
     from fly_brain.qualification.adapters.schedule_probe import run
+    from fly_brain.qualification.module import build_output_probe
 
-    return run(output)
+    return build_output_probe(run)
 
 
-def pinned_inputs(project: Path) -> tuple[Connectome, InputPin]:
+def build_connectome_reader() -> ConnectomeReader:
     from fly_brain.simulation.inputs import load_connectome
 
-    pin = InputPin(
-        '52b0ac6094cd32c546f8d4c341e094376f48f4e791f8db9b166de5dff8199ea4',
-        'efeb23fb99098e9c390f6869969b2a121a2ee92c833cfc45ecb2c1d8e1af0347',
-        138639,
-        15091983,
-    )
-    connectome = load_connectome(
-        project / 'data/2025_Completeness_783.csv',
-        project / 'data/2025_Connectivity_783.parquet',
-        pin,
-    )
-    return connectome, pin
+    return load_connectome
 
 
-def input_audit(project: Path, output: Path) -> dict[str, object]:
+def pinned_inputs() -> PinnedInputs:
+    from fly_brain.simulation.module import build_pinned_inputs
+
+    return build_pinned_inputs(build_connectome_reader)
+
+
+def input_audit() -> DiagnosticCommand:
     from fly_brain.qualification.adapters.connectome_probe import run
+    from fly_brain.qualification.module import build_input_probe
 
-    connectome, pin = pinned_inputs(project)
-    return run(connectome, pin, output)
+    return build_input_probe(pinned_inputs(), run)
 
 
-def fan_in_audit(project: Path, output: Path) -> dict[str, object]:
+def fan_in_audit() -> DiagnosticCommand:
     precision = configure_mlx()
     from fly_brain.qualification.adapters.fan_in_probe import run
+    from fly_brain.qualification.module import build_input_probe
 
-    connectome, pin = pinned_inputs(project)
-    return run(connectome, pin, output, precision)
+    return build_input_probe(pinned_inputs(), partial(run, precision=precision))
 
 
-def layout_fan_in_audit(project: Path, output: Path) -> dict[str, object]:
+def layout_fan_in_audit() -> DiagnosticCommand:
     precision = configure_mlx()
     from fly_brain.qualification.adapters.bucketed_fan_in import evaluate_cases
     from fly_brain.qualification.adapters.fan_in_probe import run
+    from fly_brain.qualification.module import build_input_probe
 
-    connectome, pin = pinned_inputs(project)
-    return run(
-        connectome,
-        pin,
-        output,
-        precision,
-        evaluator=evaluate_cases,
-        scope='All prescribed pinned fan-in cases through production layout; not full-network dynamics.',
+    return build_input_probe(
+        pinned_inputs(),
+        partial(
+            run,
+            precision=precision,
+            evaluator=evaluate_cases,
+            scope='All prescribed pinned fan-in cases through production layout; not full-network dynamics.',
+        ),
     )
 
 
-def device_layout_audit(project: Path, output: Path) -> dict[str, object]:
+def device_layout_audit() -> DiagnosticCommand:
     precision = configure_mlx()
     from fly_brain.qualification.adapters.device_layout_probe import run
+    from fly_brain.qualification.module import build_input_probe
 
-    connectome, pin = pinned_inputs(project)
-    return run(connectome, pin, output, precision)
+    return build_input_probe(pinned_inputs(), partial(run, precision=precision))
 
 
-def connectome_pulse(project: Path, output: Path) -> dict[str, object]:
+def connectome_pulse() -> DiagnosticCommand:
     precision = configure_mlx()
     from fly_brain.qualification.adapters.connectome_pulse import run
+    from fly_brain.qualification.module import build_input_probe
 
-    connectome, pin = pinned_inputs(project)
-    return run(connectome, pin, output, precision)
+    return build_input_probe(pinned_inputs(), partial(run, precision=precision))
 
 
-def simulation(request: SimulationRequest) -> SimulationResult:
+def simulation() -> SimulationCommand:
     precision = configure_mlx()
     from fly_brain.simulation.backend.runner import run
-    from fly_brain.simulation.service import simulate
+    from fly_brain.simulation.module import build_simulation
     from fly_brain.simulation.storage import persist_stimulus, write_run
 
-    return simulate(
-        request,
-        pinned_inputs,
+    return build_simulation(
+        pinned_inputs(),
         persist_stimulus,
         partial(run, precision=precision),
         partial(write_run, clock=perf_counter),
@@ -158,12 +155,12 @@ def simulation(request: SimulationRequest) -> SimulationResult:
     )
 
 
-def parity_case(project: Path, output: Path, case: ParityCase) -> dict[str, object]:
+def parity_case() -> ParityCommand:
     precision = configure_mlx()
     import torch
 
     from fly_brain.qualification.adapters.parity_case import run
+    from fly_brain.qualification.module import build_parity_case
 
     torch.set_num_threads(1)
-    connectome, pin = pinned_inputs(project)
-    return run(connectome, pin, case, output, precision)
+    return build_parity_case(pinned_inputs(), partial(run, precision=precision))

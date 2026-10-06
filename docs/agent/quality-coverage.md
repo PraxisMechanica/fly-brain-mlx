@@ -124,6 +124,22 @@ pass. CQ002 retains the actual file path. The installed package is unchanged.
 `docs/evidence/code-quality/metric-weakening-20261006/verification.json` records
 the executed proof. Coupled health/maintainability formulas remain one heuristic.
 
+## Composition boundaries — 2026-10-06
+
+Bootstrap factories return typed owned command adapters without loading pinned
+inputs or executing workflows. Domain services sequence input/probe/report
+ports. Parent integration preserves configuration, pin/load/clock order and CLI
+output/exit behavior; 150 focused behavior/file/CLI/boundary cases pass.
+
+The first import contract also covers simulation input orchestration and the
+new simulation/comparison ports and reporting service. Pure comparison rules
+cannot reach reporting, commands or module assembly. Four native-hook controls
+reject implementation dependencies, accept neutral repair, and lose rejection
+when their exact source scope is removed. The initial duplicate-entry assertion
+is repaired by selecting only the intended contract. Compact parent proof:
+`docs/evidence/code-quality/composition-refactor-20261006/parent-integration.json`.
+These source boundaries do not prove all role/call/effect rules; COV002 remains.
+
 ## Remaining work
 
 Inventory every first-party file, declaration, owned resource, public export,

@@ -7,6 +7,7 @@ from fly_brain import bootstrap
 from fly_brain.cli import main
 from fly_brain.qualification.matrix import required_cases
 from fly_brain.qualification.models import ParityCase
+from fly_brain.qualification.ports import ParityCommand
 from fly_brain.qualification.schemas import ParityOptions
 
 pytestmark = pytest.mark.unit
@@ -61,7 +62,7 @@ def test_command_dispatches_validated_case_and_reports_its_exit_status(
     (tmp_path / 'tests/qualification').mkdir(parents=True)
     calls: list[tuple[Path, Path, ParityCase]] = []
 
-    def run(project: Path, output: Path, case: ParityCase) -> dict[str, object]:
+    def use_case(project: Path, output: Path, case: ParityCase) -> dict[str, object]:
         calls.append((project, output, case))
         return {
             'case': {
@@ -73,7 +74,14 @@ def test_command_dispatches_validated_case_and_reports_its_exit_status(
             'scientific_review_required': not accepted,
         }
 
-    monkeypatch.setattr(bootstrap, 'parity_case', run)
+    def compose() -> ParityCommand:
+        from functools import partial
+
+        from fly_brain.qualification.commands import parity_case
+
+        return partial(parity_case, use_case=use_case)
+
+    monkeypatch.setattr(bootstrap, 'parity_case', compose)
     code = main(
         [
             'qualify-parity',

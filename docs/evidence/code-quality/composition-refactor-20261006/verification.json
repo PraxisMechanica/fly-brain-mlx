@@ -1,0 +1,119 @@
+{
+  "base": "0a313d02b56d886542d130134346506106a5f926",
+  "decision_confidence": 0.95,
+  "scope": "Separate bootstrap composition from owned runtime command/use-case execution.",
+  "architecture": [
+    "Bootstrap configures imports/resources and constructs typed command adapters; it performs no workflows or pinned reads.",
+    "Each domain command invokes one injected use case and formats the existing report/exit status.",
+    "Domain modules construct partials from typed ports without invoking runtime collaborators.",
+    "The injected ConnectomeReaderFactory preserves the original reader import, pin construction and read stage.",
+    "Qualification probes coordinate typed input/probe ports; comparison report orchestration sequences compare then write."
+  ],
+  "preservation": {
+    "protected_source_config_files_byte_unchanged": 120,
+    "unchanged_function_asts": [
+      "bootstrap.configure_mlx",
+      "cli.parser",
+      "qualification.service.qualify"
+    ],
+    "pin_literals_counts_scale_and_read_operands_unchanged": true,
+    "test_function_asts_preserved_across_cli_split": 17,
+    "final_source_sha256": {
+      "src/fly_brain/bootstrap.py": "04f5c7a4e3c22ca36f64c9f2fa4afea56391e5181d609b238bab55a3c5914cfb",
+      "src/fly_brain/cli.py": "d5680b11c17e0032e652d3b744b8bed2a075e47a2eb8f2d79340d94d0502d244",
+      "src/fly_brain/comparison/commands.py": "f788aafe3d8970898832f136e4ec1211908984f708f8dfc5a2aa05088f36a713",
+      "src/fly_brain/comparison/module.py": "c913dbd6935148d4b84dabf3f878656085c238b537a62ef62db88e112298723c",
+      "src/fly_brain/comparison/ports.py": "6292df6d642aa48697188cdd1909d15f354024c8882591726fc59ba2f872413d",
+      "src/fly_brain/comparison/reporting.py": "a4c3404f9096677fb4ddadc5a2bcc99b5bad3936999d719dd8415e2da1f62656",
+      "src/fly_brain/qualification/commands.py": "20a799b97c7895372655e4fc3d9c528d76e6233d8b7fcb64f869a1c2a95aeed1",
+      "src/fly_brain/qualification/module.py": "9e0822ac0033c57e0152ba331630a446e401b2d90b9984c4d35a08540df4c568",
+      "src/fly_brain/qualification/ports.py": "8b3962ed9a32c84578271310ec4a4af0221fcde2b0cf7910d2fcf4ead0406c95",
+      "src/fly_brain/qualification/service.py": "a1fb51a3b071d2ca8ac4723eba44cdd14b2758194b7bdc607828459b7e2f9c9b",
+      "src/fly_brain/simulation/commands.py": "5fdd0fe20a14f5bf2dadfb315cfce95d6d59d2d2c47eddad6337bfa4ce875435",
+      "src/fly_brain/simulation/input_service.py": "05406e1127fbfc9321832cf25532fc583e66a72ae3807e8dc8de71d5153fcdd4",
+      "src/fly_brain/simulation/module.py": "31fd32b8a7bfa9956c0e6a09001b1d2dccac15177541adc5aec770e70c40c88f",
+      "src/fly_brain/simulation/ports.py": "4fd28594b48cc7da70d90f414388c4973eb918bcef614d6763e59ffdf86c3d18",
+      "tests/integration/test_package.py": "5622e481839a1386bdb65f09f64a5f0b77f89eef310f340c0f86e303ded4b2d6",
+      "tests/unit/test_cli_composition.py": "84d2beedd8bb1ac8bf35ae81436509acf272e94a4c3354075d287f3993e42e30",
+      "tests/unit/test_composition.py": "84362c082705d3db325984c81a2654cbe3c6c304c7d2e50bd81f814ab6a0c7b6",
+      "tests/unit/test_parity_options.py": "da78e008301a65495d5103011fe8848ec937a14f3b3dcfacc6d3865627242eb4"
+    }
+  },
+  "checks": {
+    "focused_command": "uv run --locked --no-sync python -m pytest -q tests/unit/test_composition.py tests/unit/test_cli_composition.py tests/unit/test_bootstrap.py tests/unit/test_parity_options.py tests/unit/test_qualification.py tests/unit/test_simulation_service.py tests/integration/test_package.py tests/integration/test_storage.py tests/integration/test_simulation_storage.py --basetemp=/private/tmp/fly-brain-composition-raw-evidence-20261006-01/pytest-delivery --junitxml=/private/tmp/fly-brain-composition-raw-evidence-20261006-01/focused-delivery.xml",
+    "focused_counts": {
+      "tests": 137,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "native_gate_command": "just check",
+    "native_gate_result": "PASS: Ruff formatting/lint, strict Pyright, 3 import contracts, 95 quality tests, full staged metrics.",
+    "staged_metrics": {
+      "files_before_after": [
+        246,
+        258
+      ],
+      "loc_before_after": [
+        26509,
+        27397
+      ],
+      "average_complexity_before_after": [
+        5.24,
+        5.08
+      ],
+      "max_complexity_before_after": [
+        28,
+        28
+      ],
+      "health_and_maintainability_before_after": [
+        69.49,
+        69.62
+      ]
+    },
+    "installed_hooks": [
+      "pre-commit",
+      "pre-push"
+    ]
+  },
+  "development_failures_preserved": [
+    "Initial pytest attempt: 38 passes / 87 setup errors from a missing evidence parent directory; fresh reruns pass.",
+    "Sparse checkout initially staged only existing files; all new source/tests were staged with --sparse before final gate.",
+    "One full staged check rejected health/maintainability 69.49 -> 69.48; splitting CLI/wiring tests preserved 17 exact function ASTs and current gate passes at 69.62."
+  ],
+  "raw_evidence_directory": "/private/tmp/fly-brain-composition-raw-evidence-20261006-01",
+  "raw_records": {
+    "source-preservation-final.json": {
+      "path": "/private/tmp/fly-brain-composition-raw-evidence-20261006-01/source-preservation-final.json",
+      "sha256": "806943be224ad9e4dac5671da7b8eee483ba92af67ba81a47240a457a3f9f9a9"
+    },
+    "focused-delivery.xml": {
+      "path": "/private/tmp/fly-brain-composition-raw-evidence-20261006-01/focused-delivery.xml",
+      "sha256": "a13072eb88eba12616d706983253f47465772e03687ad0270b94e8628ecff276"
+    },
+    "just-check-delivery.txt": {
+      "path": "/private/tmp/fly-brain-composition-raw-evidence-20261006-01/just-check-delivery.txt",
+      "sha256": "1c0b8860acb668198cf7c097ff6c61af2f07f7f3a834919b9aba13dade586bec"
+    },
+    "staged-delivery.json": {
+      "path": "/private/tmp/fly-brain-composition-raw-evidence-20261006-01/staged-delivery.json",
+      "sha256": "f13ce01a582aa3b81d526b1f9581f6d133f14208a3d8a5c387546687121596d5"
+    },
+    "runs/preservation.json": {
+      "path": "/private/tmp/fly-brain-composition-raw-evidence-20261006-01/runs/preservation.json",
+      "sha256": "3ea965c68aba3172d131e6dbe77e9e6d9a3eda1ab0187a5934aec7bc3948a4f9"
+    },
+    "test_composition-before-cli-split.txt": {
+      "path": "/private/tmp/fly-brain-composition-raw-evidence-20261006-01/test_composition-before-cli-split.txt",
+      "sha256": "91aa280e9a5ce25e8b0a06298f91447bce4bf760ea995d87b0f236e5e843437e"
+    }
+  },
+  "raw_artifact_retention": "All prior reports, pytest trees, ZIPs, generated Parquet/NPZ/CSV/JSON fixtures and symlinks were moved intact to raw_evidence_directory/runs; final fixture tree is raw_evidence_directory/pytest-delivery. ZIPs retain exact CSV bytes before Git text normalization.",
+  "limits": [
+    "Import/configuration/no-workflow fixtures use controlled native Python adapter modules; no engines were executed.",
+    "No numerical/backend, observer/ledger, reference, arithmetic, output schema or evaluation scheduling source changed.",
+    "No complete pinned-network/scientific matrix was run and no case acceptance transfers.",
+    "Whole-application structural catalog enforcement remains separate and incomplete; existing just check is not a 37-rule compliance certificate.",
+    "Local commit only; parent owns integration, push and hosted verification."
+  ]
+}
