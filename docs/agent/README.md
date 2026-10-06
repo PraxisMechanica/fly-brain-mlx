@@ -14,7 +14,7 @@ readers who want to install, run, and compare simulations.
 | [Numerical contract](numerical-contract.md) | Reference semantics, precision, canonical stimuli, repeatability, and the frozen full-network gates |
 | [Developer workflow](development.md) | Quality tools, application/scientific commands, diagnostic scope, and code ownership |
 | [Typing limits](typing.md) | Scope and reasons for local third-party stubs and narrow suppressions |
-| [Quality coverage](quality-coverage.md) | Implemented rejection probes, missing structural mechanisms, and the recorded clock finding |
+| [Quality coverage](quality-coverage.md) | Executable rejection/weakening mechanisms, required gate coverage and missing analysis |
 | [Source ownership](architecture-ownership.md) | Reviewed file/symbol/resource/export classifications, frozen provenance and remaining debt |
 | [Parallel refactor assignments](handoffs/parallel-refactor-20261006.md) | Bounded worker scopes, committed handoffs, and serial integration |
 | [Historical records](#historical-records) | Dated decisions, failures, measurements, and original qualification scope |

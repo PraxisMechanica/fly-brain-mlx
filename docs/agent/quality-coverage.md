@@ -26,7 +26,7 @@ cannot prove them all. No incomplete rule is treated as clean or inapplicable.
 
 | Rules | Working mechanism and limit |
 | --- | --- |
-| OWN001–OWN006 | Domain roots are documented. Complete file/symbol/resource role classification and deterministic placement checks are missing. |
+| OWN001–OWN006 | The reviewed registry/loader reconcile exact Python files, named declarations, binding sets and frozen provenance. Complete binding/type/effect classification and deterministic role placement remain missing. |
 | DEP001 | Import Linter checks four configured domain/framework/role boundaries, including the qualification-owned observation port, aliases, type-only imports, re-exports and transitive paths. Other role boundaries and same-module interactions are not covered. |
 | DEP002–DEP004 | Some forbidden paths fail existing contracts. Complete logical owner cycles, public-contract exports and resolved foreign symbol/type checks are missing. |
 | DI001–DI004 | Strict typing checks declared signatures. Collaborator identity, hidden construction, ambient dependencies and lifecycle analysis are missing. |
@@ -34,8 +34,8 @@ cannot prove them all. No incomplete rule is treated as clean or inapplicable.
 | STATE001–STATE003 | Effect summaries and ownership/alias analysis are missing. |
 | ISP001, OCP001, LSP001, VALUE001, COMP001, ERR001 | Type checking covers native structural compatibility. Complete consumer-capability, dispatch, unsupported implementation, identifier, inheritance and failure-flow predicates are missing. |
 | TYPE001 | Strict Pyright runs across configured application, tests and tools, using the recorded third-party typing limits. This does not resolve all architectural call/effect identities. |
-| CODE001, STYLE001 | Ruff detects configured unused bindings/syntax failures and checks formatting. Full ownership reconciliation, archived-source provenance and contract/stub scope still need catalog analysis. |
-| COV001 | Hook mode rejects unindexed configured Python/check inputs. Eight source-only Git fixtures cover untracked/ignored source and stubs, staging repairs, nearby evidence, and guard weakening with a controlled downstream metric. Complete symbol, role, resource and build-variant reconciliation is missing. |
+| CODE001, STYLE001 | Ruff detects configured unused bindings/syntax failures and checks formatting. Named-declaration/binding reconciliation and frozen provenance guards are implemented. Complete historical-resolution, contract/stub and semantic catalog coverage remain missing. |
+| COV001 | Hook mode rejects unindexed Python/check inputs, including the canonical policy. The loader rejects missing/changed file/declaration/binding inputs and frozen provenance. Source fixtures prove repair and weakening; complete semantic bindings, source languages, roles/resources and build variants still require coverage. |
 | COV002 | This report names missing coverage. A complete required executable coverage/error analyzer remains to be implemented. |
 | COV003 | Both installed hooks call `just check` with full scans, no filename list and unconditional execution. Real fixtures prove commit/push rejection. Hosted checks use the same command; required merge protection is not configured. |
 | COV004 | Native import and metric fixtures prove rejection and repair; hook probes prove child-error propagation and staged-source handling. Transitive/always-run weakening is demonstrated. Other predicates need their own negative, repaired, close, error and weakening cases. |
@@ -64,7 +64,8 @@ full structural analyzer or establish new scientific case acceptance.
 The causal writer now receives a qualification-owned `ReductionReader` rather
 than discovering a private `Layout` in `partial.args`. The provider returns
 actual device leaf identities/counts/occupied padding and the bound reduction
-order through neutral immutable values. The independent reference-weight pairing
+order through neutral values with detached immutable byte storage. This alone
+does not prove complete metadata/alias immutability. The independent weight pairing
 stays in qualification. Alias-only host-array contracts no longer import the
 concrete backend. Concrete execution/state dependencies elsewhere remain open.
 
@@ -158,39 +159,26 @@ substitute. Whole-application structural enforcement remains incomplete.
 
 ## Reviewed source ownership and policy inputs — 2026-10-06
 
-The exact registry reconciles 274 Python/stub files and 3,770 named declaration
-occurrences after 35 incoming-source reviews. It records 198 neutral exports,
-resources, identifier meanings and composition sites. Declaration/binding
-tripwires, typed policy validation and frozen provenance reject missing or
-changed review inputs. All sixty historical and two adapted reference records
-retain their hashes. Only two proven mixed-role findings are cleared; thirteen
-architecture/resource/identifier findings remain explicitly recorded.
-
-Seventy-six parent policy/index fixtures pass. The index guard now requires the
-canonical policy file; untracked/ignored policy fails, staging repairs it,
-measurement JSON stays allowed and exact policy-input weakening loses detection.
-Its content/semantic checks remain separate. Compact proof:
+The reviewed loader rejects duplicate/invalid metadata, changed declaration or
+binding sets, missing mappings, broken resource/export/composition links and
+changed frozen provenance. Source-only fixtures prove rejection, neutral repair,
+close cases and detection loss when each guard is weakened. The canonical policy
+requires indexing; untracked/ignored policy fails, staging repairs it, nearby
+measurement JSON stays allowed and exact input weakening loses detection.
+Seventy-six parent policy/index cases pass at the ownership checkpoint. Proof:
 `docs/evidence/code-quality/architecture-ownership-20261006/parent-integration.json`.
-The ownership document owns classification decisions; this registry is not
-complete effect/type/alias/control-flow or historical-revision analysis.
 
-## Runtime child ownership — 2026-10-06
-
-Source-grounded review confirms native execution/state belong to simulation_run;
-reference builds and fresh processes belong to qualification_case. Their
-registry relationships are storage-only runtime children, not new independently
-operated domains. Ninety-five source hashes, current policy and the accepted
-scheduling record are verified. Sixty-seven parent policy cases pass after the
-live registry assertion is updated. Only the two attribution uncertainties are
-removed: eleven other recorded findings remain. Concrete consumer access,
-provider lifetime, aliases, reference seams and full session adoption are still
-open. Compact proof:
+The runtime-parent contract has two dedicated source cases; all sixty-seven
+parent policy cases pass at the subsequent resource checkpoint. Proof:
 `docs/evidence/code-quality/resource-ownership-review-20261006/parent-integration.json`.
+[Source ownership](architecture-ownership.md) owns current classifications,
+counts, exports, resource decisions, provenance and remaining debt. These guards
+do not prove complete type/call/alias/effect/control-flow or historical analysis.
 
 ## Remaining work
 
-Inventory every first-party file, declaration, owned resource, public export,
-effect and composition site. Bind all 37 rules to that inventory. Use the
+Maintain the reviewed inventory as source changes, complete all remaining
+binding/resource/effect/composition coverage, and bind all 37 rules to it. Use the
 resolved import graph and a type/call/alias layer for the missing predicates;
 unknown targets and absent mechanisms must fail separately from violations.
 Integrate the complete analyzer into `just check`, prove each new predicate,

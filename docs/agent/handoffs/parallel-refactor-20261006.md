@@ -9,6 +9,8 @@ clones share installed dependencies read-only, have separate Git metadata and
 pre-commit caches, and retain their source/evidence. No feature branch or
 competing origin/main push is created. The parent integrates and pushes serially.
 
+## Initial assignments at 0a313d0
+
 | Agent | Component | Exclusive file scope |
 | --- | --- | --- |
 | architecture_ownership | Reviewed owners/roles, binding fingerprints, resources/public exports and typed metadata loader | New tools/architecture/policy.py, compact ownership metadata, its dedicated test, ownership evidence and optional architecture-ownership.md |
@@ -39,22 +41,32 @@ checks the combined snapshot, and pushes to origin/main in sequence. Native
 resolution limits and missing applicable mechanisms remain COV002; green
 component checks do not establish all 37 rules or new scientific acceptance.
 
-## Committed handoffs and follow-ups
+## Initial handoff checkpoint at 471ab69
 
 At parent `471ab69`, composition worker commit `05dd220` is integrated and pushed
 with both hooks and 150 parent behavior/boundary cases passing. Native resolver
 worker commit `ffbc2fe` passes 84 parent source fixtures and is being integrated.
 Ownership worker commit `d6e8d43` remains preserved for the next serial join.
 
-Decision confidence for the two independent follow-ups: 93%. Implementation
-settings remain inherited GPT-6.1 Sol at xhigh; the accepted scientific review
-remains with its existing fresh-context GPT-6 Astra reviewer.
+## Current integration and assignments
 
-| Owner | Bounded follow-up | Exclusive scope and finishing condition |
+At `f2de8f01a2e5311a94ac4e520572925d23ce6f78`, all original worker components
+are integrated: composition at `471ab69`, native identities/graphs at `a9453aa`,
+reviewed ownership at `c5296da`, runtime-parent decisions at `f2de8f0`. Each passed
+native commit/push hooks and its configured hosted job. Resource review `3613b96`
+is complete. Documentation audit `e48aa9e` is a committed read-only handoff;
+the parent implements its six-document corrections.
+
+Implementation settings remain inherited GPT-6.1 Sol at xhigh. The accepted
+scientific review stays with its existing fresh-context GPT-6 Astra reviewer.
+Unmerged native-type and session results remain provisional; no collector
+adoption or case acceptance follows from worker progress messages.
+
+| Owner | Current bounded component | Exclusive scope and finishing condition |
 | --- | --- | --- |
-| architecture_ownership | Resolve two runtime-resource ownership decisions | Read current combined source; write only a compact committed resource review in its independent clone. Determine actual use cases/lifetime/public consumers and smallest repair scopes; leave parent metadata and session/type implementation owners unchanged. |
-| architecture_symbols | Export actual structured native Pyright types | New native_types Python/JS bridge, its dedicated fixtures and compact evidence; preserve the committed resolver files. Verify native categories/signatures/generic identities and fail closed on unsupported data; commit before handoff. |
-| composition_refactor | Opaque native sessions and independent qualification expectations | Neutral simulation observations/session provider and qualification ports/observer/ledger/paired/case/batch callers plus dedicated tests/evidence. Preserve engine arithmetic, reference/build sources, bootstrap/CLI and other domains. Complete the accepted transparency/integrity and shortest pinned-run adoption qualification; commit checked slices before handoff. |
+| architecture_symbols | Native structured types | New native_types.py, native_types.mjs, native_types_node.d.ts, dedicated fixtures and compact evidence. Preserve committed resolver files; check native categories/signatures/identities with installed TypeScript and fail closed on unsupported data. Commit before handoff. |
+| composition_refactor | Opaque sessions and independent expectations | Neutral simulation observations/session provider, qualification ports/observer/ledger/paired/case/batch callers, dedicated tests/evidence. Preserve engine math, reference/build/weight-reader sources and bootstrap/CLI. Commit the inactive provider first; complete accepted transparency/integrity and shortest pinned-run/memory proof before collector adoption. |
+| parent | Shared reconciliation and delivery | Apply documentation corrections, verify committed evidence, own shared configuration/policy/status/index, reconcile exact source mappings and push serially. Allocate reference/probe seams after the committed session contract is known. |
 
 The exact session assignment is retained in the worker conversation. Additional
 caller allocation comes from the parent before an edit. No worker changes

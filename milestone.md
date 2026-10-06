@@ -73,226 +73,42 @@ Completion requires:
   holds remain historical. The preserved P9
   process 62191 remains designated suspended; do not resume or discard it
   without resolving its original-mode evidence. [Pause record](docs/evidence/execution-time-investigation/pause.json).
-- Quality tooling and the shared commit/push hooks are installed. At `b932298`,
-  the standalone metric engine has **17 source-only passes**, zero failures,
-  errors, or skips. [Report](docs/evidence/code-quality/metric-intent-tests.xml).
-  At `003ac89`, **29 quality tests** pass with zero failures, errors, or skips,
-  including 12 controlled hook checks for child failures, missing tools,
-  unchanged boundary debt, staged defects, and actual push rejection.
-  [Report](docs/evidence/code-quality/hook-intent-tests.xml). Apple-silicon
-  [continuous integration](.github/workflows/quality.yml) is configured at
-  `c053f05`. At `1376e40`, [hosted run 37328288754](https://github.com/PraxisMechanica/fly-brain-mlx/actions/runs/37328288754)
-  passes every step and uploads both [metric reports](https://github.com/PraxisMechanica/fly-brain-mlx/tree/edfbb9dcfb477bf788740ca9096165518d21231a/docs/evidence/code-quality/ci-1376e40).
-  The first hosted run passed its checks but excluded hidden evidence paths;
-  the corrected uploader preserves the two reports. Their nine comparisons
-  pass, covering 232 files / 25,207 nonblank lines, average/max complexity
-  5.37 / 28 and health/maintainability 69.05 / 69.05. Five additional real import
-  fixtures reject aliases, type-only imports, indirect paths and re-exports;
-  weakening transitive enforcement stops detecting the indirect defect.
-  Eight index-guard fixtures reject untracked/ignored source and typing stubs,
-  accept staging repairs and non-source evidence, and prove that disabling the
-  guard hides the defect. They use real source-only Git repositories; the
-  pipeline probe controls only the downstream metric exit.
-  The shared check now passes **49 quality tests**, zero failures/errors/skips;
-  formatting, lint, strict typing, all three import contracts, and staged/full
-  commit metric checks pass. [Test report](docs/evidence/code-quality/index-intent-tests.xml).
-  [Recorded coverage limits and definite clock finding](https://github.com/PraxisMechanica/fly-brain-mlx/blob/edfbb9dcfb477bf788740ca9096165518d21231a/docs/agent/quality-coverage.md):
-  the full 37-rule architecture result is **ANALYSIS FAILED (COV002)**.
-  Keep feature/numerical work held while that required enforcement is incomplete.
-- The user approved native GitHub stacking on 2026-10-06. Stack #7 merged
-  into `main`: [local checks](https://github.com/PraxisMechanica/fly-brain-mlx/pull/5),
-  [hosted checks](https://github.com/PraxisMechanica/fly-brain-mlx/pull/6), and
-  [boundary coverage](https://github.com/PraxisMechanica/fly-brain-mlx/pull/8).
-  The merged head is `5efda389aabf5fa46b176dffb7fef6c69572685d`.
-  Original PRs 1–4 are closed; all original refs, incoming work, and evidence
-  remain preserved. Bulk metric dumps are excluded from the review diffs.
-- The latest 2026-10-06 instruction requests direct commits when the commit
-  and push hooks can run the checks. Deliver the authorized refactor/cleanup
-  changes directly to `main` with both hooks. Confidence in this delivery choice
-  is 99% at `5efda389aabf5fa46b176dffb7fef6c69572685d`. The earlier proposed fourth PR
-  is superseded. PR cleanup no longer requires waiting for the merged layers.
-- The complete structural analyzer is still missing, so feature/numerical work
-  remains held. The latest user amendment on 2026-10-06 releases the hosted-cache
-  approval hold through the non-production authorization in `AGENTS.md`.
-  Repository variable `QUALITY_CI_TEMP_DB_CACHE_APPROVED` is now verified true;
-  hosted run 37468037333 passed every job step at
-  `68bc087a56884cf0cff4f62c956806bec228cbad`. Its saved staged and actual-commit
-  metric reports both pass. This proves the configured gate at that revision;
-  it does not complete the structural catalog. Prior skips are not passes.
-  Local checks preserve their cache outside fixture cleanup. All three
-  reconstructed layers passed their
-  native commit/push hooks.
-
-- Quality work resumed at `876cb157b403c6e65d96aa3d411ae8686988cf06` under the
-  user's instruction to continue and deliver through local hooks. Confidence in
-  this scope is 95%. The first repair injects the same typed timing clock into
-  the simulation service and result writer through bootstrap. Eleven focused
-  tests and strict typing pass; the ambient-clock control is rejected. Numerical
-  backend sources, spike schema, and report fields are unchanged. Test artifacts
-  are retained. Full checker coverage remains incomplete; scientific/performance
-  implementation is still held.
-
-- At `23dac175679b8cbc6b102c4ecc143e9a85a34487`, the clock repair is committed
-  and pushed with both configured hooks passing. The full source inventory
-  contains 238 Python/stub files, including 60 retained evidence-source records.
-  The bounded qualification-boundary reviewer used fresh `gpt-6-astra` at `xhigh`
-  and returned a 94%-confidence prospective decision. Parent source inspection
-  confirms its findings: retain qualification-owned independent expectations,
-  expose neutral actual native observations through narrow ports, and replace
-  private layout/closure introspection. The accepted review is recorded at
-  `docs/evidence/code-quality/qualification-boundary-20261006/astra-review.md`.
-  Start with the actual reduction-row capability; preserve core/ledger scheduling
-  and validate native bytes/ownership. A rewritten observer or ledger requires
-  the fresh transparency/integrity and complete-shortest-run proof in that review.
-  No new scientific case acceptance or arithmetic mode is approved.
-
-- The first boundary slice replaces private `partial.args[1]` layout recovery
-  with a qualification-owned typed actual-row reader. Neutral host observations
-  now live outside the concrete backend; row arrays preserve native bits in
-  immutable detached storage. The bound reduction descriptor reports the actual
-  exact-count guard/fallback choice. Eighteen native/value tests, seven real
-  paired/repeat/batch/singleton tests, and five source-only graph/hook tests pass
-  with no failures or skips. Four direct real-device comparisons reproduce all
-  96 old-reader arrays' dtype, shape, and bytes. Full typing and lint pass.
-  The core, reducer, and ledger files are byte-unchanged; existing layout,
-  accumulation, advance, and original preparation statements are preserved.
-  Fresh test outputs and `row-verification.json` in the boundary evidence folder
-  retain the proof and initial sandbox/caller failures. No full pinned-network
-  case was rerun, and no acceptance transferred. Remaining concrete execution,
-  state, and observation-policy dependencies still need the complete port slice.
-
-- At `68bc087a56884cf0cff4f62c956806bec228cbad`, finish the analyzer's Python
-  declaration-inventory and native Pyright resolver foundations. Forty-one
-  source-only fixtures pass with no failures/errors/skips; strict typing,
-  formatting, and lint pass. Actual aliased/re-exported/type-only protocol calls
-  resolve to their defining method. Coverage/framing/resolution weakening loses
-  detection of the same defects. Discovery parses 249 Python/stub files and
-  3,332 named declarations across the six explicit roots, including all sixty
-  retained evidence-source files. The compact component proof is recorded at
-  `docs/evidence/code-quality/architecture-foundations-20261006/verification.json`.
-  These are foundations, not complete symbol/role/resource/effect classification
-  or whole-application enforcement. The 37-rule result remains COV002.
-
-- At `0a313d02b56d886542d130134346506106a5f926`, the analyzer foundations are
-  committed and pushed with both native hooks passing. Hosted run 37471806648
-  completes every job step successfully. Its scope is the configured gate,
-  not complete structural enforcement.
-- Separate pure comparison scoring/result construction from reader orchestration.
-  The four scoring function ASTs, result body, and first-read/prepare ordering
-  remain unchanged. All 81 original/new serialized fixture pairs match; the
-  shared-buffer regression detects an intentionally reordered reader control.
-  Seventy-nine focused application/file/CLI cases and six source-only hook cases
-  pass with no failures/errors/skips. A fourth import contract rejects direct,
-  aliased, type-only, transitive, and re-exported rule-to-service dependencies;
-  weakening scope/transitive enforcement loses detection. Strict typing,
-  formatting, lint, and all four import contracts pass. Numerical backend,
-  qualification adapters, scientific contract, and data remain unchanged.
-  Compact proof: `docs/evidence/code-quality/comparison-rules-20261006/verification.json`.
-  No case acceptance transfers; the full structural result remains COV002.
-
-- Both the comparison repair `aaafbf60522e30f4ec2bd8d5ab098d12148b1297` and
-  parallel assignment record `f0d8116d0e0bd640a78ce918d273fe931e583647` are pushed
-  with native hooks passing. Hosted runs 37479774365 and 37480391382 succeed.
-- Three new source-only metric controls pass. They measure a real staged source
-  regression, individually reverse CQ001/CQ002/CQ003 in an isolated comparator
-  copy, and prove the corresponding diagnostic disappears from the unchanged
-  native snapshots. Equal/repaired source passes. The installed analyzer stays
-  unchanged; other rules still reject the shared regression. Health and
-  maintainability remain the same heuristic, not independent architecture proof.
-  Compact evidence: `docs/evidence/code-quality/metric-weakening-20261006/verification.json`.
-
-- Integrate the composition worker `05dd2202b99a8a5d97acc3119176e92769326dd2`
-  against parent `db6be047c7cab56b4be7295b6ac78af50add0f63`. Bootstrap now only
-  assembles typed owned commands; domain services execute workflows. All 150
-  combined behavior/file/CLI/boundary cases pass with no failures/errors/skips.
-  Source and raw-record hashes plus three preserved function ASTs are verified.
-  Four new source scopes reject concrete dependencies and prove scope weakening.
-  The initial duplicate-entry test assertion is repaired; evidence and outputs
-  remain preserved. Compact proof:
-  `docs/evidence/code-quality/composition-refactor-20261006/parent-integration.json`.
-  No numerical, observer/ledger, reference or output-schema source changes and
-  no new scientific case acceptance; full structural coverage remains COV002.
-
-- Composition integration is pushed as `471ab69` with both native hooks
-  passing. Previous main revision `db6be047c7cab56b4be7295b6ac78af50add0f63`
-  also passes every step of hosted run 37483019029. Integrate the committed native
-  semantic/graph component `ffbc2fec0db074754d3f457ac78a52728b4282bd` against
-  that composition revision: all eight source hashes match and 84 parent source
-  fixtures pass without failures/errors/skips. The resolver records native
-  declaration identities, nominal class locations and explicit lexical targets;
-  transitive paths and cycle witnesses retain exact source evidence. Missing
-  structured types, alias ownership, control flow, implicit/runtime dispatch and
-  effects still fail COV002. The native-types follow-up and independent opaque
-  qualification-session slice have explicit separate ownership in the assignment
-  record. Compact proof:
-  `docs/evidence/code-quality/architecture-symbols-20261006/parent-integration.json`.
-
-- Native resolver integration is pushed as `a9453aa` with both native hooks
-  passing; composition revision `471ab69` passes hosted run 37506222834. Integrate
-  ownership worker `d6e8d43d8cd756d1a7d260bffd419da0ab1bd449` against that combined
-  source. Thirty-five exact changed/new files are reviewed and reconciled:
-  274 files, 3,770 declaration occurrences and 198 neutral exports; all 62 frozen
-  historical/reference provenance records are preserved. Reconciliation has
-  zero gaps. Only the proved bootstrap/comparison mixed-role findings are removed;
-  thirteen other recorded findings remain. Seventy-six parent policy/index cases
-  pass without failures/errors/skips. The canonical policy now requires indexing;
-  omitting its exact input loses detection, while nearby measurement JSON stays
-  allowed. Compact proof:
-  `docs/evidence/code-quality/architecture-ownership-20261006/parent-integration.json`.
-  The first parent hook passes 219 quality cases but rejects a test-file
-  complexity regression; typed literal helpers repair it without rule changes.
-  Complete structural enforcement remains COV002; the live registry fixture is
-  reconciliation evidence, not an application-compliance certificate.
-
-- Ownership registry integration is pushed as
-  `c5296da3fd66ff3d48348a919bd1a44e5b01b496` with both full native hooks passing.
-  Review `3613b96dac3c6c9bcc411301de3f828d25846839` resolves the two actual runtime
-  parents after 95 source hashes and the current registry/scheduling record are
-  verified. Native execution/state are simulation-run children; reference
-  builds/fresh processes are qualification-case children. The two attribution
-  uncertainties are cleared; eleven other recorded findings remain. Sixty-seven
-  parent policy cases pass. Initial prose count and old live-registry expectation
-  are corrected without app/scientific source changes. Reference and remaining
-  probe repairs wait for the assigned session contract; native reducer probes
-  retain their separate consumer boundaries. Compact proof:
-  `docs/evidence/code-quality/resource-ownership-review-20261006/parent-integration.json`.
-  The first parent hook rejects a small health regression after 219 source
-  cases pass; separate runtime-parent cases preserve all checks and repair it.
-  Full rule/alias/effect/control-flow and historical resolution remain COV002.
+- The latest delivered refactor checkpoint is
+  `f2de8f01a2e5311a94ac4e520572925d23ce6f78` on `origin/main`. Clock and actual-row
+  repairs, pure comparison rules, owned command composition, native symbol/graph
+  foundations, reviewed ownership and runtime-parent decisions are delivered.
+  Required local commit/push hooks and each configured hosted job passed.
+- Deliver small coherent commits directly to `main` through both installed hooks,
+  under the user's latest delivery instruction. Preserve original refs and all
+  incoming work. The non-production authorization in `AGENTS.md` covers the
+  hosted cache; `QUALITY_CI_TEMP_DB_CACHE_APPROVED` is verified true.
+- Complete 37-rule enforcement remains **ANALYSIS FAILED (COV002)**. Feature and
+  numerical development remain held. The [quality coverage](docs/agent/quality-coverage.md)
+  owns working mechanisms and missing analysis; [source ownership](docs/agent/architecture-ownership.md)
+  owns the reviewed classifications and remaining findings. Green component
+  checks grant no new scientific acceptance.
+- Native structured-type export and the opaque observation-session candidate
+  remain assigned, unintegrated work. Session adoption requires the accepted
+  transparency/integrity and complete shortest pinned-run proof. The
+  [checkpoint history](docs/agent/history/milestones.md#refactor-and-enforcement-checkpoint-2026-10-06)
+  retains original test counts, failures, review decisions and delivery evidence.
 
 ## Parallel refactor ownership — 2026-10-06
 
-The user explicitly requested parallel implementation and committed handoffs.
-At `aaafbf60522e30f4ec2bd8d5ab098d12148b1297`, decision confidence is 97%.
-Three agents inherit GPT-6.1 Sol at `xhigh`, using separate local-main clones
-at `0a313d02b56d886542d130134346506106a5f926`:
-
-- `architecture_ownership` implements reviewed source/binding/resource/export
-  metadata and its typed loader; it does not change application or resolver code.
-- `architecture_symbols` implements native semantic references and graph
-  primitives; missing generic/alias/type-model capability fails COV002.
-- `composition_refactor` separates bootstrap assembly from owned runtime
-  commands/services, preserving CLI behavior, lazy imports, pin/load/clock order,
-  and every numerical/collector/reference source.
-
-The parent owns shared configuration, status/index documents, the comparison
-repair, registry reconciliation, and integration. Workers run required checks
-and commit before handoff; only the parent integrates and pushes sequentially
-on `origin/main`. The [assignment boundaries](docs/agent/handoffs/parallel-refactor-20261006.md)
-own exact file scopes, dependency interfaces, and conflict prevention. Source
-metadata and semantic IR can proceed independently; their joins and the final
-composition symbol reconciliation are serialized during integration.
+The [assignment record](docs/agent/handoffs/parallel-refactor-20261006.md) owns
+current worker scopes, committed handoffs and dependent integration order.
+Independent components run concurrently; one writer owns each file. Workers
+commit verified changes before handoff; the parent reconciles and pushes serially.
 
 ## Next work for this agent
 
-1. Finish quality enforcement before further performance implementation. Complete
-   structural-rule ownership/type/call/effect coverage and rejection fixtures;
-   resolve remaining findings after the recorded clock repair below.
-   Verify remaining metric/index weakening cases and required merge enforcement.
-   Verify each delivered revision through the configured hosted gate.
-   Use the pinned standalone
-   metric package and existing uv/MLX architecture. [Tool provenance](tools/code-quality/provenance.json)
-   and [developer commands](docs/agent/development.md).
+1. Finish structural enforcement and its rejection/error/weakening fixtures.
+   Complete native type/call/alias/effect/control-flow coverage, maintain exact
+   reviewed inputs, and repair remaining findings. Preserve all existing metric,
+   index and hook controls. Complete required gate/merge enforcement and verify
+   each delivered revision through the hosted gate. Use the pinned
+   [tool provenance](tools/code-quality/provenance.json) and
+   [developer commands](docs/agent/development.md).
 2. Complete the remaining qualification/execution boundary and other recorded
    ownership repairs, using the accepted boundary review and preservation gates.
    Do not change numerical policy or transfer scientific case acceptance.
@@ -364,28 +180,10 @@ workflow in `AGENTS.md`.
 
 ## Documentation checkpoint
 
-At `710a267`, centralize twelve agent documents and preserve their original text
-apart from link rebasing and historical notices. During that edit, incoming
-quality work commits `aebad54`, `b932298`, and `003ac89` remain preserved on their assigned
-branch. The first documentation push is blocked by then-unindexed incoming test
-files; the owner subsequently commits them. No hook is bypassed.
-
-The reconstructed documentation layer separates the human README, active plan,
-scientific contract, developer workflow, and dated history. Source checkpoint
-`5efda389aabf5fa46b176dffb7fef6c69572685d`; confidence in this scope is 98%.
-Current preservation checks cover twenty authored documents and 738 local
-links/anchors with zero errors. Linked local contents and 43 exact external
-destinations were opened and reviewed; historical citations retain their scope. Complete milestone/reference history, twenty
-scientific table rows, 87 numeric inline expressions, and the coefficient code
-block remain unchanged. All 831 original versioned data/evidence files retain
-their identity and working contents. Native commit/push checks are required
-before delivery. The former hosted-cache approval hold is released by the latest
-user amendment; hosted verification results retain the revision scope above.
-
-[Original documentation verification](https://github.com/PraxisMechanica/fly-brain-mlx/blob/edfbb9dcfb477bf788740ca9096165518d21231a/docs/evidence/documentation/organization-20261005/verification.json)
-records the earlier 755-link check, fourteen parsed command examples, successful
-help/task-list checks, and required hook pass at `a47cb1b`. Those results retain
-their original checkpoint scope. The initial broken README anchor was repaired;
-the CLI help check used a task cache after a sandbox cache error. No installation
-or simulation was needed. Application/scientific suites were not rerun for this
-documentation-only reapplication.
+The human README, active plan, contracts, workflow and checkpoint history have
+separate owners in the agent index. Earlier preservation counts and commands
+remain in the [dated documentation record](docs/agent/history/milestones.md#documentation-checkpoint).
+The refactor audit at `f2de8f0` verifies 743 local paths/anchors across 22 authored
+documents; its four corrections keep current state separate from history.
+Scientific contract, acceptance table, numeric limits and original evidence are
+preserved. Application/scientific suites are not rerun for prose-only corrections.

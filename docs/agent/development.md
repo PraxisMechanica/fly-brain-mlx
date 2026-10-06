@@ -20,7 +20,8 @@ just check
 pre-commit configuration, and installs commit/push hooks. `just check` runs
 formatting, lint, strict typing, import boundaries, source-only quality tests,
 and staged/commit metric regression checks. It does not run the complete
-application or scientific suite. Current enforcement coverage is in `milestone.md`.
+application or scientific suite. Current executable coverage and limits are in
+[quality-coverage.md](quality-coverage.md).
 The [metric provenance](../../tools/code-quality/provenance.json) binds the
 vendored standalone package to its source.
 
@@ -47,7 +48,8 @@ uv run --locked --group qualification pytest
 uv run --locked --group qualification fly-brain qualify --output data/results/qualification-01
 ```
 
-Default pytest selection covers unit and file/process integration tests.
+Default pytest selection covers unit, file/process integration and source-only
+quality tests.
 `qualify` exercises the independent reference and MLX scientific suites on a
 real Metal device and retains logs, reports, measurements, and state/event
 arrays. Skipped, missing, empty, or failed required results prevent acceptance.
@@ -95,12 +97,16 @@ not replace full-network experiment parity.
 
 | Path | Owns |
 | --- | --- |
-| `src/fly_brain/simulation` | Immutable network cases, MLX core, accumulation, propagation, input/output adapters |
-| `src/fly_brain/qualification` | Requests, acceptance, orchestration, independent references, diagnostics, process/file adapters |
-| `src/fly_brain/comparison` | Spike types, pure comparison rules, request validation, Parquet/report adapters |
+| `src/fly_brain/simulation` | Network/stimulus values, MLX core, accumulation, propagation, input/output and owned command adapters |
+| `src/fly_brain/qualification` | Requests, acceptance, orchestration, independent references, diagnostics, process/file and owned command adapters |
+| `src/fly_brain/comparison` | Spike values, pure comparison rules, request validation, Parquet/report and owned command adapters |
 | `src/fly_brain/bootstrap.py` | Dependency composition and process configuration |
-| `src/fly_brain/cli.py` | Argument parsing, one application call, and result presentation |
+| `src/fly_brain/cli.py` | Argument parsing, validated request/command selection, one composed owned command call, and exit propagation |
 | `tests` | Unit, integration, scientific qualification, source-only quality checks, and injected support |
+
+Owned command adapters print results and map command exit status. Detailed
+classifications and representation limits belong to
+[Source ownership](architecture-ownership.md).
 
 Import-linter enforces the configured domain/framework boundaries. Pyright
 checks owned code in strict mode. [Typing limits](typing.md) own the rationale
