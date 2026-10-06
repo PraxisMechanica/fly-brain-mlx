@@ -24,11 +24,12 @@ application or scientific suite. Current enforcement coverage is in `milestone.m
 The [metric provenance](../../tools/code-quality/provenance.json) binds the
 vendored standalone package to its source.
 
-Hosted execution uses the same command, but is held while repository variable
-`QUALITY_CI_TEMP_DB_CACHE_APPROVED` is false. The hosted job creates a pre-commit
-SQLite metadata cache under `$RUNNER_TEMP`; its automatic runner teardown needs
-the specific approval recorded in `milestone.md`. Local fixtures retain their
-cache at `/private/tmp/fly-brain-pre-commit-cache` outside fixture cleanup.
+Hosted execution uses the same command when repository variable
+`QUALITY_CI_TEMP_DB_CACHE_APPROVED` is true. The project authorization in
+`AGENTS.md` covers the hosted pre-commit SQLite cache and its automatic runner
+teardown. `milestone.md` records current verification status. Local fixtures
+retain their cache at `/private/tmp/fly-brain-pre-commit-cache` outside fixture
+cleanup.
 
 Brian2 and PyTorch are qualification references; their central processing unit
 (CPU) execution is separate from the MLX production runtime. Apple's command

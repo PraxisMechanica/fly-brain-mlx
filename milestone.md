@@ -45,7 +45,7 @@ Completion requires:
   for each instruction, decision, and next action.
 - Pass the required local commit/push checks and behavior-preservation checks
   appropriate to each refactor. Record actual coverage, failures, skipped checks,
-  and approval constraints, including the existing hosted-cache hold.
+  and any remaining approval constraints.
 - Push small coherent commits to `origin/main`; leave a clean working tree and
   preserve data, scientific evidence, incoming work, and suspended runs.
 - Provide a concise handoff with delivered commits, architecture boundaries,
@@ -112,12 +112,13 @@ Completion requires:
   is 99% at `5efda389aabf5fa46b176dffb7fef6c69572685d`. The earlier proposed fourth PR
   is superseded. PR cleanup no longer requires waiting for the merged layers.
 - The complete structural analyzer is still missing, so feature/numerical work
-  remains held. Hosted execution is separately held: repository variable
-  `QUALITY_CI_TEMP_DB_CACHE_APPROVED` is explicitly false. The job's temporary
-  pre-commit SQLite metadata store needs specific human approval for removal
-  during GitHub runner teardown. Local checks preserve their existing cache
-  outside fixture cleanup. All three reconstructed layers passed their native
-  commit/push hooks; hosted skips are not test passes.
+  remains held. The latest user amendment on 2026-10-06 releases the hosted-cache
+  approval hold through the non-production authorization in `AGENTS.md`.
+  Repository variable `QUALITY_CI_TEMP_DB_CACHE_APPROVED` is now verified true;
+  a fresh hosted run remains to be verified. Prior hosted skips are not passes.
+  Local checks preserve their existing
+  cache outside fixture cleanup. All three reconstructed layers passed their
+  native commit/push hooks.
 
 - Quality work resumed at `876cb157b403c6e65d96aa3d411ae8686988cf06` under the
   user's instruction to continue and deliver through local hooks. Confidence in
@@ -163,7 +164,7 @@ Completion requires:
    structural-rule ownership/type/call/effect coverage and rejection fixtures;
    resolve remaining findings after the recorded clock repair below.
    Verify remaining metric/index weakening cases and required merge enforcement.
-   Resolve the precise hosted-cache teardown approval before hosted qualification.
+   Verify hosted qualification under the recorded project authorization.
    Use the pinned standalone
    metric package and existing uv/MLX architecture. [Tool provenance](tools/code-quality/provenance.json)
    and [developer commands](docs/agent/development.md).
@@ -254,7 +255,8 @@ destinations were opened and reviewed; historical citations retain their scope. 
 scientific table rows, 87 numeric inline expressions, and the coefficient code
 block remain unchanged. All 831 original versioned data/evidence files retain
 their identity and working contents. Native commit/push checks are required
-before delivery; hosted execution remains under the approval hold above.
+before delivery. The former hosted-cache approval hold is released by the latest
+user amendment; fresh hosted verification remains required.
 
 [Original documentation verification](https://github.com/PraxisMechanica/fly-brain-mlx/blob/edfbb9dcfb477bf788740ca9096165518d21231a/docs/evidence/documentation/organization-20261005/verification.json)
 records the earlier 755-link check, fourteen parsed command examples, successful
