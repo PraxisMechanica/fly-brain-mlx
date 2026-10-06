@@ -1,0 +1,314 @@
+{
+  "base_commit": "0a313d02b56d886542d130134346506106a5f926",
+  "decision_confidence": 0.9,
+  "component": "Reviewed exact Python/stub file and named-declaration ownership, syntactic binding review, resources/identifiers, neutral exports and assembly-site metadata; typed fail-closed loader.",
+  "coverage": {
+    "files": 251,
+    "declaration_occurrences": 3452,
+    "unique_symbol_identities": 3350,
+    "historical_source_files": 60,
+    "frozen_reference_files": 2,
+    "handwritten_typing_contracts": 3,
+    "source_roots": [
+      "src",
+      "tests",
+      "tools",
+      "typings",
+      "main.py",
+      "docs/evidence"
+    ],
+    "file_owners": {
+      "scientific_evidence": 60,
+      "application": 4,
+      "composition": 2,
+      "comparison": 15,
+      "qualification": 100,
+      "simulation": 25,
+      "system_tests": 23,
+      "quality_gate": 12,
+      "architecture": 7,
+      "brian2_contract": 1,
+      "pyarrow_contract": 2
+    },
+    "symbol_roles": {
+      "system_test": 1885,
+      "external_adapter": 111,
+      "rules": 131,
+      "composition": 1,
+      "service": 47,
+      "repository": 80,
+      "command_adapter": 38,
+      "types": 340,
+      "ports": 22,
+      "test": 452,
+      "tooling": 143,
+      "typing_contract": 100
+    },
+    "neutral_exports": 150,
+    "composition_sites": [
+      [
+        "src/fly_brain/bootstrap.py",
+        [
+          "configure_mlx"
+        ]
+      ]
+    ],
+    "resources": [
+      "simulation_run",
+      "pinned_connectome",
+      "experiment_stimulus",
+      "simulation_spike_output",
+      "comparison_report",
+      "qualification_case",
+      "reference_build_execution",
+      "native_execution_state"
+    ],
+    "identifiers": [
+      "flywire_neuron",
+      "neuron_row",
+      "edge_row",
+      "trial",
+      "experiment_name",
+      "parity_case",
+      "reference_identity"
+    ],
+    "reconciliation_findings": 0
+  },
+  "recorded_debt": [
+    {
+      "rule": "OWN003",
+      "path": "src/fly_brain/bootstrap.py",
+      "line": 81,
+      "message": "The composition file contains owned input loading and use-case execution; exact overrides preserve that debt until the bootstrap worker moves the complete slice."
+    },
+    {
+      "rule": "OWN003",
+      "path": "src/fly_brain/comparison/service.py",
+      "line": 64,
+      "message": "Pure metric calculations share the service file. Incoming parent repair moves all four calculations to comparison/metrics.py and adds compare_metrics."
+    },
+    {
+      "rule": "STATE001",
+      "path": "src/fly_brain/simulation/stimuli.py",
+      "line": 20,
+      "message": "A fixed seed makes results reproducible but does not turn the NumPy random generator into an injected value or a proved pure callback."
+    },
+    {
+      "rule": "STATE001",
+      "path": "src/fly_brain/qualification/fan_in.py",
+      "line": 39,
+      "message": "The qualification case builder constructs a random generator; fixed scientific seeds are preserved, with pure-effect classification unresolved."
+    },
+    {
+      "rule": "STATE001",
+      "path": "src/fly_brain/qualification/input_patterns.py",
+      "line": 67,
+      "message": "The prescribed source-mask generator uses NumPy randomness; no ambient-effect exemption is granted for determinism."
+    },
+    {
+      "rule": "STATE002",
+      "path": "src/fly_brain/qualification/causality.py",
+      "line": 28,
+      "message": "The audit updates receiver state. Its stateful observation lifecycle is explicit; a rules classification is not a proof of external-state purity."
+    },
+    {
+      "rule": "ROLE006",
+      "path": "src/fly_brain/simulation/backend/engines.py",
+      "line": 13,
+      "message": "The callback/Execution contract names concrete core.State and MLX arrays. It is a local implementation contract, excluded from neutral public exports."
+    },
+    {
+      "rule": "OWN005",
+      "path": "src/fly_brain/qualification/adapters/torch_reference.py",
+      "line": 212,
+      "message": "The frozen adapted scientific reference contains framework implementation and model rules. Preserve it as analyzed handwritten reference source; relocation or exact reviewed deviation remains separate."
+    },
+    {
+      "rule": "COV001",
+      "path": "src/fly_brain/qualification/adapters/brian_jobs.py",
+      "line": 33,
+      "message": "Unresolved resource ownership: reference_build_execution. BrianJob can build, execute, read and identify an independently reusable standalone reference producer. Its resource ownership/lifetime and a complete separate service boundary are not yet resolved; the existing qualification attribution is factual, not OWN002 approval."
+    },
+    {
+      "rule": "COV001",
+      "path": "src/fly_brain/simulation/backend/core.py",
+      "line": 34,
+      "message": "Unresolved resource ownership: native_execution_state. MLX Network/State/Layout/Execution contain vendor device arrays and callbacks. Numeric arrays are data, not automatically collaborator handles, but execution/stream/allocation ownership and neutral representation need full typed/effect qualification. No exemption is recorded."
+    },
+    {
+      "rule": "VALUE001",
+      "path": "src/fly_brain/simulation/models.py",
+      "line": 33,
+      "message": "Reviewed primitive resource identifier: flywire_neuron. Exact pinned FlyWire identity is carried as unbranded int64/tuple[int] values at public boundaries. Keep VALUE001 visible; do not change scientific identity bytes here."
+    },
+    {
+      "rule": "VALUE001",
+      "path": "src/fly_brain/simulation/models.py",
+      "line": 15,
+      "message": "Reviewed primitive resource identifier: neuron_row. Row positions identify neurons within the pin and differ from FlyWire identifiers. Existing int/int32 values are not distinct identifier types."
+    },
+    {
+      "rule": "VALUE001",
+      "path": "src/fly_brain/simulation/models.py",
+      "line": 42,
+      "message": "Reviewed primitive resource identifier: edge_row. Original row positions identify retained connections, including zero and duplicate edges. The int32 representation must not be reinterpreted as a neuron identity."
+    },
+    {
+      "rule": "VALUE001",
+      "path": "src/fly_brain/simulation/models.py",
+      "line": 73,
+      "message": "Reviewed primitive resource identifier: trial. Zero-based trial identity crosses simulation and qualification boundaries as unbranded integers. Time steps and numeric dimensions are coordinate facts and are not invented independent resources."
+    },
+    {
+      "rule": "VALUE001",
+      "path": "src/fly_brain/qualification/adapters/reference_identity.py",
+      "line": 65,
+      "message": "Reviewed primitive resource identifier: reference_identity. The sealed producer digest is returned as an unbranded str. Distinct identity and consumer port/lifetime checks are still unresolved; source provenance and cache qualification are not waived."
+    }
+  ],
+  "limitations": [
+    "ANALYSIS FAILED (COV002): This registry and loader are not the complete 37-rule analyzer.",
+    "Declaration fingerprints cover inventory.py named functions/classes/module and class assignments, including duplicate overload records; they do not classify every use or effect.",
+    "Binding fingerprints are conservative reviewed AST-binding-set tripwires for imports, parameters, stored/deleted names and attributes, global/nonlocal, exception and match names. They do not establish resolved identity, lambda/comprehension scope, capture ownership, call targets, alias flow or effect purity.",
+    "Host NumPy arrays are numeric data rather than collaborator implementations. Writable aliases inside frozen records remain unresolved; only ReductionRow has detached immutable-byte evidence in the retained qualification.",
+    "MLX device arrays/State/Layout and concrete execution callbacks are not neutral public exports. Representation, lifecycle, array-library effects and scientific admissibility are not waived or changed.",
+    "No implicit public permission is granted by Python visibility, package roots or re-exported imports. Only exact registered types/ports and their named fields/properties are public neutral contracts; foreign direct pure-rule calls need separate contract analysis.",
+    "All 60 retained evidence Python files are discovered and source-hash frozen; they are handwritten historical source with actual algorithm overrides, not generated/vendor exclusions. Their original environments and imports require historical-resolution coverage before any full pass.",
+    "Handwritten Brian2/PyArrow stubs stay first-party checked contract inputs. Adapted Brian2/PyTorch references have exact local and upstream provenance and retain scientific scope; none has a generated-code exemption.",
+    "Independent reference-build/execution and native execution-state resource decisions remain unresolved (OWN002/COV001). Primitive registered identifiers remain VALUE001 findings until real distinct neutral contracts are reviewed.",
+    "Production declaration role overrides record existing mixed-role/owner responsibilities; they do not authorize incompatible co-location or effect calls. Full placement, graph, call, resource and control-flow checks are not implemented here.",
+    "After parent integration, review every incoming comparison/bootstrap/port/module/command declaration and binding set, update only its exact entries and recorded findings, and rerun full policy reconciliation. No build-time auto-classification is provided."
+  ],
+  "environment": {
+    "UV_CACHE_DIR": "/private/tmp/fly-brain-documentation-uv-cache-20261005",
+    "PRE_COMMIT_HOME": "/private/tmp/fly-brain-ownership-precommit-20261006-01",
+    "PYTHONPATH": "/private/tmp/fly-brain-ownership-20261006-01/src:/private/tmp/fly-brain-ownership-20261006-01",
+    "dependency_mutation": "No sync/install; existing runtime symlinks retained.",
+    "application_startup": "No application/database lifecycle; parser and source fixtures only."
+  },
+  "verification": {
+    "hook_install": {
+      "command": "uv run --locked --no-sync pre-commit install --hook-type pre-commit --hook-type pre-push",
+      "result": "exit 0; both native hook files installed"
+    },
+    "focused_policy_tests": {
+      "command": "uv run --locked --no-sync python -m pytest -q tests/quality/test_architecture_policy.py --basetemp=/private/tmp/fly-brain-ownership-policy-tests-20261006-03 --junitxml=docs/evidence/code-quality/architecture-ownership-20261006/policy-tests-final.xml",
+      "passed": 65,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "duration_s": 0.93
+    },
+    "weakening": {
+      "tripwires": [
+        "declaration kind/set",
+        "non-declaration bindings"
+      ],
+      "guards": [
+        "duplicate JSON keys",
+        "file export/assembly roles",
+        "resource relationships",
+        "identifier ownership",
+        "required absence inventory"
+      ],
+      "result": "Each strict source/policy fixture rejects; disabling its named mechanism loses detection of that same defect."
+    },
+    "typing": "Full strict Pyright: 0 errors, 0 warnings, 0 informations.",
+    "ruff": "All 188 configured Python files formatted; all lint checks pass.",
+    "full_gate": {
+      "command": "env -u QUALITY_BASE -u QUALITY_HEAD UV_CACHE_DIR=/private/tmp/fly-brain-documentation-uv-cache-20261005 PRE_COMMIT_HOME=/private/tmp/fly-brain-ownership-precommit-20261006-01 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=/private/tmp/fly-brain-ownership-20261006-01/src:/private/tmp/fly-brain-ownership-20261006-01 just check",
+      "result": "exit 0",
+      "quality_tests": 160,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "duration_s": 33.2,
+      "import_contracts": {
+        "kept": 3,
+        "broken": 0,
+        "files": 130,
+        "dependencies": 568
+      },
+      "before_metrics": {
+        "total_files": 246,
+        "total_loc": 26509,
+        "avg_cyclomatic_complexity": 5.24,
+        "max_cyclomatic_complexity": 28,
+        "code_health": 69.49,
+        "maintainability_index": 69.49
+      },
+      "after_metrics": {
+        "total_files": 248,
+        "total_loc": 27363,
+        "avg_cyclomatic_complexity": 5.23,
+        "max_cyclomatic_complexity": 28,
+        "code_health": 69.49,
+        "maintainability_index": 69.49
+      },
+      "metric_findings": [],
+      "stdout_stderr": "docs/evidence/code-quality/architecture-ownership-20261006/just-check-release.log",
+      "exit_code": 0,
+      "documentation_log_normalization": "Trailing console whitespace only; source, diagnostics, status and numerical report values preserved. Original bytes/hashes retained in raw_logs."
+    },
+    "initial_failure": "First staged check rejected health/maintainability 69.49 -> 69.47. Duplicate resource/identifier fixture setup was simplified; no threshold, exclusion, gate, analyzer or application change. A further valid-rule-identifier guard retained final 69.49 -> 69.49, complexity 5.24 -> 5.23 and max 28."
+  },
+  "source_sha256": {
+    "tools/architecture/policy.py": "473ab7c56a7b919c16497eef9feb316f1b23c7cfcb7e846dd3ec48acbbe914ee",
+    "tests/quality/test_architecture_policy.py": "73964e1f8aa4ecc74ac564fe4ee35232248b98a50eac327f8a5e593af634f0e5",
+    "tools/architecture/ownership.json": "0d9ba4106aca4167fb3f2ed558ab9d0f83b1721a17212ab5de7b8a88ee27d57c",
+    "docs/agent/architecture-ownership.md": "6ba74db0dd99f76f48359d36a06c3bc707dfb15120cee152f8abc3cdc362b2ac"
+  },
+  "preservation": {
+    "base_python_and_stub_files_byte_unchanged": 249,
+    "data_scientific_inputs_numerical_contract_and_original_evidence": "No writes; only assigned new component files/docs/evidence.",
+    "new_scientific_acceptance": false
+  },
+  "integration": {
+    "comparison_commit": "aaafbf60522e30f4ec2bd8d5ab098d12148b1297",
+    "required_updates": [
+      "Review exact comparison/metrics.py, service.py, acceptance.py, pooling.py and the changed/new comparison tests. Remove only its repaired recorded finding.",
+      "Review the composition worker committed new ports/module/commands/input_service/reporting files and its changed bootstrap/CLI/qualification files and tests.",
+      "Review parent tests/quality/test_metric_weakening.py and native semantics worker source.",
+      "Add ownership.json to the canonical indexed policy/check-input set when wiring the complete analyzer. Reconcile all source/declarations/bindings/exports/resources/sites after integration; report reconciliation and recorded debt separately."
+    ],
+    "remote_delivery": "No push from this component. Parent owns sequential integration/push and shared status/configuration/index updates."
+  },
+  "raw_logs": {
+    "just-check-final.log": {
+      "path": "/private/tmp/fly-brain-ownership-raw-logs-20261006-01/just-check-final.log",
+      "sha256": "446fdfe7e32e4a4d4806373007ee92403b17dd5886656177111fb3d0652cb000",
+      "normalization": "Tracked text removes trailing console whitespace only; raw bytes retained at path."
+    },
+    "just-check-initial-metric-failure.log": {
+      "path": "/private/tmp/fly-brain-ownership-raw-logs-20261006-01/just-check-initial-metric-failure.log",
+      "sha256": "f0a58303f0f7a52ccc115a39efbc564ad660a4af333b2dc7de4d1c0a22c1968a",
+      "normalization": "Tracked text removes trailing console whitespace only; raw bytes retained at path."
+    },
+    "just-check-release.log": {
+      "path": "/private/tmp/fly-brain-ownership-raw-logs-20261006-01/just-check-release.log",
+      "sha256": "1001c6331a434ca434fdf479550c1e7f204ebe1cf336b9308b51b0ac978eb5cc",
+      "normalization": "Tracked text removes trailing console whitespace only; raw bytes retained at path."
+    },
+    "just-check.log": {
+      "path": "/private/tmp/fly-brain-ownership-raw-logs-20261006-01/just-check.log",
+      "sha256": "f0a58303f0f7a52ccc115a39efbc564ad660a4af333b2dc7de4d1c0a22c1968a",
+      "normalization": "Tracked text removes trailing console whitespace only; raw bytes retained at path."
+    },
+    "pyright.log": {
+      "path": "/private/tmp/fly-brain-ownership-raw-logs-20261006-01/pyright.log",
+      "sha256": "6d88a1b220adb7a3d62092b6e38431f0b3fe8babe9864fab90e5849766260332",
+      "normalization": "Tracked text removes trailing console whitespace only; raw bytes retained at path."
+    },
+    "ruff-format.log": {
+      "path": "/private/tmp/fly-brain-ownership-raw-logs-20261006-01/ruff-format.log",
+      "sha256": "3c448ff64c39d91f9364166de72351b444adc30471c8a6a84034efdecadb4740",
+      "normalization": "Tracked text removes trailing console whitespace only; raw bytes retained at path."
+    },
+    "ruff.log": {
+      "path": "/private/tmp/fly-brain-ownership-raw-logs-20261006-01/ruff.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "normalization": "Tracked text removes trailing console whitespace only; raw bytes retained at path."
+    }
+  },
+  "full_architecture_result": "ANALYSIS FAILED (COV002): complete 37-rule native call/type/effect/alias/control-flow/resource and gate analysis is still incomplete."
+}

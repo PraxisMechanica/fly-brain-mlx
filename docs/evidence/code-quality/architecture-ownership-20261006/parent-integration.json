@@ -1,0 +1,72 @@
+{
+  "parent_base": "a9453aa1c3c6a0f7ddbb27b16303dd0441233ecc",
+  "worker_commit": "d6e8d43d8cd756d1a7d260bffd419da0ab1bd449",
+  "decision_confidence": 0.95,
+  "reviewed_source_files": 35,
+  "coverage": {
+    "files": 274,
+    "declaration_occurrences": 3770,
+    "unique_symbol_identities": 3668,
+    "neutral_exports": 198,
+    "frozen_sources": 62,
+    "reconciliation_findings": 0,
+    "recorded_findings": 13
+  },
+  "removed_proven_findings": [
+    {
+      "rule": "OWN003",
+      "symbol": {
+        "path": "src/fly_brain/bootstrap.py",
+        "name": "pinned_inputs"
+      },
+      "message": "The composition file contains owned input loading and use-case execution; exact overrides preserve that debt until the bootstrap worker moves the complete slice."
+    },
+    {
+      "rule": "OWN003",
+      "symbol": {
+        "path": "src/fly_brain/comparison/service.py",
+        "name": "compare_pair"
+      },
+      "message": "Pure metric calculations share the service file. Incoming parent repair moves all four calculations to comparison/metrics.py and adds compare_metrics."
+    }
+  ],
+  "checks": {
+    "focused_parent_counts": {
+      "tests": 76,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "report": "/private/tmp/fly-brain-ownership-parent-tests-20261006-03.xml",
+    "report_sha256": "a6947e710bbd72df2f9f4ddda880ff66594b0749a77e97bb94c721d88fc6c3a7",
+    "tripwire": "Canonical ownership.json is required in Git index; untracked/ignored policy fails COV001, staging repairs it, nearby measurement JSON stays allowed, omitting only that policy input loses the same defect."
+  },
+  "raw_reconciliation": {
+    "path": "/private/tmp/fly-brain-ownership-parent-reconciliation-20261006-01.json",
+    "sha256": "e453d3b3d31051d2531f4ed885aebf3b09959f8a5b23cfeee0b735a2c2d23b4f",
+    "stage": "Initial combined-source review before two typed test helpers were extracted; final counts are in final_reconciliation."
+  },
+  "source_sha256": {
+    "tools/architecture/policy.py": "473ab7c56a7b919c16497eef9feb316f1b23c7cfcb7e846dd3ec48acbbe914ee",
+    "tools/architecture/ownership.json": "dcf449e0379f12dabb2a76284ee981e69e852bb6445e03c617912c5dac96ff18",
+    "tools/code_quality/gate.py": "8cd674e151c5fb0a06587570cea2caca6a9795b40611223ce98ad06970d34b76",
+    "tests/quality/test_architecture_policy.py": "73964e1f8aa4ecc74ac564fe4ee35232248b98a50eac327f8a5e593af634f0e5",
+    "tests/quality/test_indexed_inputs.py": "569608bcacf475f0c521e5b601dddf2602216a057ad5baaaf5d4b0e751efe18d"
+  },
+  "whole_architecture_result": "ANALYSIS FAILED (COV002)",
+  "limits": [
+    "Named declaration/binding reconciliation is not complete type/call/effect/alias/control-flow coverage.",
+    "All thirteen remaining reviewed findings are retained, not a baseline or waiver.",
+    "All sixty historical Python and two adapted reference source provenance records remain exact.",
+    "No application/scientific/data source changes by this component."
+  ],
+  "parent_commit_failure": "Native hook passed formatting/lint/strict typing/four import contracts/all 219 quality tests, then CQ002 rejected test_indexed_inputs rounded per-file complexity 2->3. Extract typed AST selection/predicate helpers; preserve all assertions, rules and thresholds. Repaired staged metrics pass: average 5.04->5.03, max 28 unchanged, health/maintainability 69.71->69.73.",
+  "preserved_failure_reports": [
+    "/private/tmp/fly-brain-ownership-parent-first-staged-failure-20261006-01.json",
+    "/private/tmp/fly-brain-ownership-parent-second-staged-failure-20261006-01.json"
+  ],
+  "final_reconciliation": {
+    "path": "/private/tmp/fly-brain-ownership-parent-reconciliation-final-20261006-01.json",
+    "sha256": "2fafc53391e7a0c3e452a9118e1fa0ff6d4ae81425fbebcf8795e6cdf1d6a844"
+  }
+}

@@ -227,6 +227,23 @@ Completion requires:
   record. Compact proof:
   `docs/evidence/code-quality/architecture-symbols-20261006/parent-integration.json`.
 
+- Native resolver integration is pushed as `a9453aa` with both native hooks
+  passing; composition revision `471ab69` passes hosted run 37506222834. Integrate
+  ownership worker `d6e8d43d8cd756d1a7d260bffd419da0ab1bd449` against that combined
+  source. Thirty-five exact changed/new files are reviewed and reconciled:
+  274 files, 3,770 declaration occurrences and 198 neutral exports; all 62 frozen
+  historical/reference provenance records are preserved. Reconciliation has
+  zero gaps. Only the proved bootstrap/comparison mixed-role findings are removed;
+  thirteen other recorded findings remain. Seventy-six parent policy/index cases
+  pass without failures/errors/skips. The canonical policy now requires indexing;
+  omitting its exact input loses detection, while nearby measurement JSON stays
+  allowed. Compact proof:
+  `docs/evidence/code-quality/architecture-ownership-20261006/parent-integration.json`.
+  The first parent hook passes 219 quality cases but rejects a test-file
+  complexity regression; typed literal helpers repair it without rule changes.
+  Complete structural enforcement remains COV002; the live registry fixture is
+  reconciliation evidence, not an application-compliance certificate.
+
 ## Parallel refactor ownership — 2026-10-06
 
 The user explicitly requested parallel implementation and committed handoffs.

@@ -1,0 +1,44 @@
+uv run --locked --no-sync ruff format --check src tests tools main.py
+188 files already formatted
+uv run --locked --no-sync ruff check src tests tools main.py
+All checks passed!
+uv run --locked --no-sync pyright
+0 errors, 0 warnings, 0 informations
+uv run --locked --no-sync lint-imports --no-cache
+
+╔══╗─────────▶╔╗ ╔╗      ╔╗◀───┐
+╚╣╠╝◀─────┐  ╔╝╚╗║║────▶╔╝╚╗   │
+ ║║   ╔══╦══╦╩╗╔╝║║  ╔╦═╩╗╔╝╔═╦══╗
+ ║║╔══╣╔╗║╔╗║╔╣║ ║║ ╔╬╣╔╗║║ ║│║╔═╝
+╔╣╠╣║║║╚╝║╚╝║║║╚╗║╚═╝║║║║║╚╗║═╣║
+╚══╩╩╩╣╔═╩══╩╝╚═╝╚═══╩╩╝╚╩═╩╩═╩╝
+  └──▶║║                    ▲
+      ╚╝────────────────────┘
+
+
+---------
+Contracts
+---------
+
+Analyzed 130 files, 568 dependencies.
+-------------------------------------
+
+DEP001/DEP004: Services and neutral contracts have no implementation
+dependencies KEPT
+MLX simulation has no reference or comparison framework KEPT
+Spike comparison has no execution framework KEPT
+
+Contracts: 3 kept, 0 broken.
+uv run --locked --no-sync python -m pytest -q tests/quality
+........................................................................ [ 45%]
+........................................................................ [ 90%]
+................                                                         [100%]
+160 passed in 33.20s
+uv run --locked --no-sync python -m tools.code_quality.gate
+f47506f767644b8c98b5e4fe543eec8a75ef101b: PASS
+┌─────────┬─────────────┬───────────┬───────────────────────────┬───────────────────────────┬─────────────┬───────────────────────┐
+│ (index) │ total_files │ total_loc │ avg_cyclomatic_complexity │ max_cyclomatic_complexity │ code_health │ maintainability_index │
+├─────────┼─────────────┼───────────┼───────────────────────────┼───────────────────────────┼─────────────┼───────────────────────┤
+│ before  │ 246         │ 26509     │ 5.24                      │ 28                        │ 69.49       │ 69.49                 │
+│ after   │ 248         │ 27363     │ 5.23                      │ 28                        │ 69.49       │ 69.49                 │
+└─────────┴─────────────┴───────────┴───────────────────────────┴───────────────────────────┴─────────────┴───────────────────────┘

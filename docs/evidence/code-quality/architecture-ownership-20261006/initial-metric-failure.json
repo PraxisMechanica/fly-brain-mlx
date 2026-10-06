@@ -1,0 +1,35 @@
+{
+  "passed": false,
+  "findings": [
+    {
+      "rule": "CQ001",
+      "path": "<repository>",
+      "metric": "code_health",
+      "before": 69.49,
+      "after": 69.47
+    },
+    {
+      "rule": "CQ003",
+      "path": "<repository>",
+      "metric": "maintainability_index",
+      "before": 69.49,
+      "after": 69.47
+    }
+  ],
+  "before": {
+    "total_files": 246,
+    "total_loc": 26509,
+    "avg_cyclomatic_complexity": 5.24,
+    "max_cyclomatic_complexity": 28,
+    "code_health": 69.49,
+    "maintainability_index": 69.49
+  },
+  "after": {
+    "total_files": 248,
+    "total_loc": 27386,
+    "avg_cyclomatic_complexity": 5.23,
+    "max_cyclomatic_complexity": 28,
+    "code_health": 69.47,
+    "maintainability_index": 69.47
+  }
+}

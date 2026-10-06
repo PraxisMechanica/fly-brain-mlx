@@ -156,6 +156,24 @@ flow or effects. Every required missing capability raises COV002. Structured
 native evaluator export is a separate assigned follow-up; hover text is not a
 substitute. Whole-application structural enforcement remains incomplete.
 
+## Reviewed source ownership and policy inputs — 2026-10-06
+
+The exact registry reconciles 274 Python/stub files and 3,770 named declaration
+occurrences after 35 incoming-source reviews. It records 198 neutral exports,
+resources, identifier meanings and composition sites. Declaration/binding
+tripwires, typed policy validation and frozen provenance reject missing or
+changed review inputs. All sixty historical and two adapted reference records
+retain their hashes. Only two proven mixed-role findings are cleared; thirteen
+architecture/resource/identifier findings remain explicitly recorded.
+
+Seventy-six parent policy/index fixtures pass. The index guard now requires the
+canonical policy file; untracked/ignored policy fails, staging repairs it,
+measurement JSON stays allowed and exact policy-input weakening loses detection.
+Its content/semantic checks remain separate. Compact proof:
+`docs/evidence/code-quality/architecture-ownership-20261006/parent-integration.json`.
+The ownership document owns classification decisions; this registry is not
+complete effect/type/alias/control-flow or historical-revision analysis.
+
 ## Remaining work
 
 Inventory every first-party file, declaration, owned resource, public export,

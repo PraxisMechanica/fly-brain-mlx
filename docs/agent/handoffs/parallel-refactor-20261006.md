@@ -52,6 +52,7 @@ remains with its existing fresh-context GPT-6 Astra reviewer.
 
 | Owner | Bounded follow-up | Exclusive scope and finishing condition |
 | --- | --- | --- |
+| architecture_ownership | Resolve two runtime-resource ownership decisions | Read current combined source; write only a compact committed resource review in its independent clone. Determine actual use cases/lifetime/public consumers and smallest repair scopes; leave parent metadata and session/type implementation owners unchanged. |
 | architecture_symbols | Export actual structured native Pyright types | New native_types Python/JS bridge, its dedicated fixtures and compact evidence; preserve the committed resolver files. Verify native categories/signatures/generic identities and fail closed on unsupported data; commit before handoff. |
 | composition_refactor | Opaque native sessions and independent qualification expectations | Neutral simulation observations/session provider and qualification ports/observer/ledger/paired/case/batch callers plus dedicated tests/evidence. Preserve engine arithmetic, reference/build sources, bootstrap/CLI and other domains. Complete the accepted transparency/integrity and shortest pinned-run adoption qualification; commit checked slices before handoff. |
 

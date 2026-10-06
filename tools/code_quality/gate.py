@@ -39,6 +39,7 @@ def require_indexed_inputs() -> None:
             'pnpm-lock.yaml',
             'justfile',
             '.pre-commit-config.yaml',
+            'tools/architecture/ownership.json',
         )
     )
     if missing := sorted(inputs - indexed):
