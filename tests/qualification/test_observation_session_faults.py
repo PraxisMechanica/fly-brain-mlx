@@ -56,6 +56,30 @@ def fault_factory(execution: Execution) -> ObservationSessionFactory:
     return create
 
 
+def corrupt_operands(operands: ObservationOperands, field: str) -> ObservationOperands:
+    return ObservationOperands(
+        operands.sources,
+        operands.destinations,
+        ~operands.available if field == 'available' else operands.available,
+        ~operands.spikes if field == 'spikes' else operands.spikes,
+        ~operands.receiving if field == 'receiving' else operands.receiving,
+        ~operands.due_sources if field == 'due_sources' else operands.due_sources,
+        ~operands.accepted_destinations
+        if field == 'accepted_destinations'
+        else operands.accepted_destinations,
+        ~operands.discarded_destinations
+        if field == 'discarded_destinations'
+        else operands.discarded_destinations,
+        operands.accepted_inputs,
+        operands.last_spike_step + np.int32(1)
+        if field == 'last_spike_step'
+        else operands.last_spike_step,
+        ~operands.pending_sources
+        if field == 'pending_sources'
+        else operands.pending_sources,
+    )
+
+
 @pytest.mark.parametrize(
     'field,check',
     (
@@ -169,14 +193,7 @@ def test_wrong_supplied_operands_block_further_native_advance(
         case.connectome,
         case.targets,
     )
-    if field == 'last_spike_step':
-        changed = replace(
-            operands, last_spike_step=operands.last_spike_step + np.int32(1)
-        )
-    elif field == 'pending_sources':
-        changed = replace(operands, pending_sources=~operands.pending_sources)
-    else:
-        changed = replace(operands, **{field: ~getattr(operands, field)})
+    changed = corrupt_operands(operands, field)
     comparison = session.compare(changed)
     assert not (comparison.gates_equal.all() and comparison.queue_equal.all())
     with pytest.raises(ValueError, match='complete matching comparison'):
@@ -203,7 +220,7 @@ def test_supplied_source_and_destination_factors_are_used_without_policy_reconst
         if step < 18:
             assert observation_checks(actual, session.compare(operands), operands).all()
     assert operands is not None
-    changed = replace(operands, **{factor: ~getattr(operands, factor)})
+    changed = corrupt_operands(operands, factor)
     comparison = session.compare(changed)
     assert not comparison.gates_equal.all()
     with pytest.raises(ValueError, match='complete matching comparison'):

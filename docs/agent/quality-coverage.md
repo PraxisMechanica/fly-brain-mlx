@@ -187,8 +187,12 @@ Metal cases and 64 value/package/hook cases, retaining 27 upstream warnings.
 Compact proof:
 `docs/evidence/code-quality/qualification-session-boundary-20261006/parent-integration.json`.
 
-Descriptor-backed views protect bytes/dtype/shape, but the current type-shadowing
-attribute implementation still needs explicit typed storage for full analysis.
+The verified storage correction replaces type-shadowing interception with nine
+frozen records, explicit private snapshot fields and 36 typed view properties.
+Parent checks pass 106 Metal and 66 value/alias/package/canonical-port cases;
+constructor signatures, 55 public values, 31 dtype outcomes and all 30 existing
+fixture assertion ASTs are preserved. Compact proof:
+`docs/evidence/code-quality/session-storage-transparency-20261006/parent-integration.json`.
 The old collector remains active. Pinned transparency and four-trial memory,
 all consumer migrations and complete alias/type/effect/control-flow enforcement
 remain pending; this component is not an architecture or adoption certificate.

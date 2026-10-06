@@ -1,5 +1,4 @@
 import hashlib
-from dataclasses import replace
 
 import numpy as np
 import pytest
@@ -135,8 +134,20 @@ def test_native_comparison_cannot_hide_corrupt_due_identities_or_digest() -> Non
         1, (0,), np.ones((1, 8), dtype=np.bool_), np.ones((1, 19), dtype=np.bool_)
     )
     for changed in (
-        replace(actual, due_edges=(np.array([0], dtype=np.int32),)),
-        replace(actual, due_sha256=('0' * 64,)),
+        NativeObservation(
+            actual.completed_steps,
+            actual.trial_indices,
+            actual.fields,
+            (np.array([0], dtype=np.int32),),
+            actual.due_sha256,
+        ),
+        NativeObservation(
+            actual.completed_steps,
+            actual.trial_indices,
+            actual.fields,
+            actual.due_edges,
+            ('0' * 64,),
+        ),
     ):
         flags = observation_checks(changed, comparison, operands)
         assert not flags[0, CHECK_NAMES.index('due')]
@@ -150,7 +161,13 @@ def test_qualification_rejects_nonfinite_values_in_each_actual_phase(
     actual = observation(1, (-52, -52))
     fields = dict(actual.fields)
     fields[phase + '_g'] = np.full((1, 2), np.nan, dtype=np.float32)
-    actual = replace(actual, fields=fields)
+    actual = NativeObservation(
+        actual.completed_steps,
+        actual.trial_indices,
+        fields,
+        actual.due_edges,
+        actual.due_sha256,
+    )
     _, operands = expect_step(
         initial_ledger(network, (), 1, None),
         actual,

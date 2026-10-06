@@ -150,14 +150,17 @@ generator provenance. The separately pinned JavaScript metric tool's provenance
 is outside this Python/stub registry; its existing native gate remains required.
 
 The current parent integration reviews sixteen exact inactive-session
-source/test changes and reconciles the combined inventory: 288 source/stub
-files, 3,958 declaration occurrences and 279 neutral exports. All 62 frozen
+source/test changes. The subsequent typed-storage correction reviews eight
+exact source/test rows and reconciles the combined inventory: 289 source/stub
+files, 3,989 declaration occurrences and 266 neutral exports. All 62 frozen
 historical/reference records retain provenance. Reconciliation has zero gaps;
 eleven architecture/identifier findings remain. Candidate neutral observation
 values/ports and local assembly sites have exact entries; private helper
-functions are not silently promoted to public contracts. Current dynamic
-attribute/type-shadowing and historical/type/alias/effect coverage stay explicit
-limits until their assigned corrections and complete analyzer are verified.
+functions are not silently promoted to public contracts. The typed-storage
+correction removes dynamic attribute/type shadowing and preserves array-facing
+constructors and values. Private snapshots remain private; removed interception
+members are no longer public exports. Historical/type/alias/effect coverage stays
+incomplete until the complete analyzer is verified.
 
 `ownership.json` is now a canonical indexed check input. Source-only controls
 reject missing-index and ignored policy inputs, accept explicit staging, permit

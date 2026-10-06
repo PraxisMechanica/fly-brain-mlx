@@ -1,0 +1,316 @@
+{
+  "scope": "Inactive observation representation transparency only; no numerical, scheduling, provider or collector adoption change.",
+  "base_commit": "6e111545d853279359c9bb904c2cddec52947528",
+  "decision": {
+    "confidence_percent": 95,
+    "owner_authorization": "Parent allocated these three model files, dedicated fixtures, and mechanical fault operand cloning. No nested delegation.",
+    "approach": "Frozen records have explicit typed snapshot storage plus individual typed fresh read-only view properties. No __getattribute__ interception, dynamic attribute catch-all, cast, or typing suppression."
+  },
+  "files": [
+    "src/fly_brain/simulation/observations.py",
+    "src/fly_brain/qualification/session_expectations.py",
+    "src/fly_brain/qualification/session_blocks.py",
+    "tests/unit/test_session_storage_transparency.py",
+    "tests/unit/test_session_values.py",
+    "tests/unit/test_session_expectations.py",
+    "tests/unit/test_session_observer_faults.py",
+    "tests/qualification/test_observation_session_faults.py",
+    "docs/evidence/code-quality/session-storage-transparency-20261006/verification.json"
+  ],
+  "source_and_test_sha256": {
+    "src/fly_brain/simulation/observations.py": "9eda0e80c53516a5cf7e5b1c3cf7d24d53ed0ecc246c3f7e842cfc479e4322b9",
+    "src/fly_brain/qualification/session_expectations.py": "7e1b2290a823f293381511338510610150c3af3597c9249db4b69dc631be5a86",
+    "src/fly_brain/qualification/session_blocks.py": "fbbcf26ad1469d6b805a42def88d8892e6cfca4b7552246f1d87839305cacf03",
+    "tests/unit/test_session_storage_transparency.py": "8c91ddc406341df7de97a54b14c28c60bb7c6016ff3146ba12f245e8d701427f",
+    "tests/unit/test_session_values.py": "72614b9073739f8753add8534135dc6362a5e67a9aa71014224043df6b7762a7",
+    "tests/unit/test_session_expectations.py": "89aa3ce529e6ee567733c580c83dc10997af2e6e42b7791e9c32387b41c25b45",
+    "tests/unit/test_session_observer_faults.py": "3a232cb4ab5491b5734bab6e2221ef1a56b0af2d51b171562f091be479107cbe",
+    "tests/qualification/test_observation_session_faults.py": "eb6cc83c0215add78b4ec8f184391aa3375c33464858f0af7697e054508910a2"
+  },
+  "storage_contract": {
+    "snapshot_fields": 36,
+    "typed_view_properties": 36,
+    "records": [
+      {
+        "record": "ReductionRow",
+        "constructor_arguments": [
+          "neuron",
+          "edges",
+          "counts",
+          "occupied"
+        ],
+        "stored_fields": {
+          "_edges_snapshot": "HostSnapshot[np.int32]",
+          "_counts_snapshot": "HostSnapshot[np.float32]",
+          "_occupied_snapshot": "HostSnapshot[np.bool_]"
+        }
+      },
+      {
+        "record": "ObservationInitialState",
+        "constructor_arguments": [
+          "voltage_mv",
+          "synaptic_mv",
+          "last_spike_step"
+        ],
+        "stored_fields": {
+          "_voltage_mv_snapshot": "HostSnapshot[np.float64]",
+          "_synaptic_mv_snapshot": "HostSnapshot[np.float64]",
+          "_last_spike_step_snapshot": "HostSnapshot[np.int32]"
+        }
+      },
+      {
+        "record": "ObservationConfiguration",
+        "constructor_arguments": [
+          "neurons",
+          "queue_slots",
+          "initial_step",
+          "trial_indices",
+          "sources",
+          "destinations",
+          "targets",
+          "refractory_steps",
+          "initial_voltage_mv",
+          "initial_synaptic_mv",
+          "initial_last_spike_step"
+        ],
+        "stored_fields": {
+          "_sources_snapshot": "HostSnapshot[np.int32]",
+          "_destinations_snapshot": "HostSnapshot[np.int32]",
+          "_targets_snapshot": "HostSnapshot[np.int32]",
+          "_refractory_steps_snapshot": "HostSnapshot[np.int32]",
+          "_initial_voltage_mv_snapshot": "HostSnapshot[np.float32]",
+          "_initial_synaptic_mv_snapshot": "HostSnapshot[np.float32]",
+          "_initial_last_spike_step_snapshot": "HostSnapshot[np.int32]"
+        }
+      },
+      {
+        "record": "NativeObservation",
+        "constructor_arguments": [
+          "completed_steps",
+          "trial_indices",
+          "fields",
+          "due_edges",
+          "due_sha256"
+        ],
+        "stored_fields": {
+          "_fields_snapshot": "HostFieldSnapshots",
+          "_due_edges_snapshot": "tuple[HostSnapshot[np.int32], ...]"
+        }
+      },
+      {
+        "record": "ObservationOperands",
+        "constructor_arguments": [
+          "sources",
+          "destinations",
+          "available",
+          "spikes",
+          "receiving",
+          "due_sources",
+          "accepted_destinations",
+          "discarded_destinations",
+          "accepted_inputs",
+          "last_spike_step",
+          "pending_sources"
+        ],
+        "stored_fields": {
+          "_sources_snapshot": "HostSnapshot[np.int32]",
+          "_destinations_snapshot": "HostSnapshot[np.int32]",
+          "_available_snapshot": "HostSnapshot[np.bool_]",
+          "_spikes_snapshot": "HostSnapshot[np.bool_]",
+          "_receiving_snapshot": "HostSnapshot[np.bool_]",
+          "_due_sources_snapshot": "HostSnapshot[np.bool_]",
+          "_accepted_destinations_snapshot": "HostSnapshot[np.bool_]",
+          "_discarded_destinations_snapshot": "HostSnapshot[np.bool_]",
+          "_accepted_inputs_snapshot": "HostSnapshot[np.bool_]",
+          "_last_spike_step_snapshot": "HostSnapshot[np.int32]",
+          "_pending_sources_snapshot": "HostSnapshot[np.bool_]"
+        }
+      },
+      {
+        "record": "NativeComparison",
+        "constructor_arguments": [
+          "completed_steps",
+          "trial_indices",
+          "gates_equal",
+          "queue_equal"
+        ],
+        "stored_fields": {
+          "_gates_equal_snapshot": "HostSnapshot[np.bool_]",
+          "_queue_equal_snapshot": "HostSnapshot[np.bool_]"
+        }
+      },
+      {
+        "record": "PhysicalQueueObservation",
+        "constructor_arguments": [
+          "completed_steps",
+          "trial_indices",
+          "queue"
+        ],
+        "stored_fields": {
+          "_queue_snapshot": "HostSnapshot[np.bool_]"
+        }
+      },
+      {
+        "record": "LedgerState",
+        "constructor_arguments": [
+          "step",
+          "last_spike_step",
+          "refractory_steps",
+          "history"
+        ],
+        "stored_fields": {
+          "_last_spike_step_snapshot": "HostSnapshot[np.int32]",
+          "_refractory_steps_snapshot": "HostSnapshot[np.int32]",
+          "_history_snapshot": "tuple[HostSnapshot[np.bool_], ...]"
+        }
+      },
+      {
+        "record": "SessionBlock",
+        "constructor_arguments": [
+          "begin",
+          "rows",
+          "trial_indices",
+          "fields",
+          "checks",
+          "queue_sha256",
+          "queue_slot_sha256",
+          "final_queue",
+          "due_edges",
+          "due_sha256"
+        ],
+        "stored_fields": {
+          "_fields_snapshot": "HostFieldSnapshots",
+          "_checks_snapshot": "HostSnapshot[np.bool_]",
+          "_final_queue_snapshot": "HostSnapshot[np.bool_] | None",
+          "_due_edges_snapshot": "tuple[tuple[HostSnapshot[np.int32], ...], ...]"
+        }
+      }
+    ],
+    "descriptor_fields": {
+      "HostSnapshot": [
+        "payload: bytes",
+        "dtype: numpy.dtype[Scalar]",
+        "shape: tuple[int, ...]"
+      ],
+      "HostFieldSnapshots": "tuple[tuple[str, HostSnapshot[float32 | float64 | int32 | int64 | bool_]], ...]"
+    },
+    "array_view": "np.ndarray(snapshot.shape, dtype=snapshot.dtype, buffer=snapshot.payload); a fresh read-only metadata view over the same immutable bytes at every access.",
+    "metadata_alias_controls": "Returned array shape/dtype mutations leave stored descriptors and subsequent reads unchanged; input mutations do not change stored bytes; nested phase/due/history/block/queue values remain detached. Existing alias assertions were unchanged."
+  },
+  "preservation": {
+    "unchanged_source_files_outside_owned_models": 107,
+    "source_files_checked": 110,
+    "constructor_names_types_order_and_requiredness_exact": 9,
+    "runtime_old_new_public_values_bytes_dtype_shape_strides_mode_exact": 55,
+    "runtime_native_dtype_guard_outcomes_exact": 31,
+    "pure_snapshot_and_digest_source_bodies_exact": [
+      "initial_ledger",
+      "require_configuration",
+      "expect_step",
+      "observation_checks",
+      "require_physical_queue",
+      "HostSnapshot",
+      "HostFieldSnapshots",
+      "ReductionEvidence",
+      "PhysicalQueueObservation.sha256",
+      "PhysicalQueueObservation.slot_sha256"
+    ],
+    "preexisting_fixture_assertion_asts_exact": 30,
+    "provider_arithmetic_engines_layout_collectors_reference_readers_bootstrap_cli": "All source outside the three models matches base bytes exactly.",
+    "production_dataclass_operations": "Inspected all production dataclass imports and replace/asdict/fields calls. None use these nine observation records. dataclasses.fields/asdict now truthfully report stored snapshots; dataclasses.replace does not support array-facing property operands. Only dedicated fault fixture cloning used replace on these records and was changed to public constructor calls. Existing production uses on Stimulus, legacy MLXBlock, Case, shape, violation, acceptance and pins are untouched."
+  },
+  "verification": {
+    "native_metal": {
+      "command": "env UV_CACHE_DIR=/private/tmp/fly-brain-documentation-uv-cache-20261005 PYTHONPATH=/private/tmp/fly-brain-composition-20261006-01/src:/private/tmp/fly-brain-composition-20261006-01 MLX_ENABLE_TF32=0 uv run --locked --no-sync python -m pytest -q --disable-warnings tests/qualification/test_observation_session.py tests/qualification/test_observation_session_faults.py tests/qualification/test_mlx_observer.py tests/qualification/test_mlx_ledger.py tests/qualification/test_reduction_evidence.py --artifact-output=/private/tmp/fly-brain-session-storage-transparency-raw-20261006-01/native-delivery --junitxml=/private/tmp/fly-brain-session-storage-transparency-raw-20261006-01/native-delivery.xml",
+      "junit": "/private/tmp/fly-brain-session-storage-transparency-raw-20261006-01/native-delivery.xml",
+      "result": {
+        "tests": 106,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "warnings": "27 existing Brian2/pyparsing import warnings; no reference engine/build ran."
+    },
+    "values_alias_package": {
+      "command": "env UV_CACHE_DIR=/private/tmp/fly-brain-documentation-uv-cache-20261005 PYTHONPATH=/private/tmp/fly-brain-composition-20261006-01/src:/private/tmp/fly-brain-composition-20261006-01 uv run --locked --no-sync python -m pytest -q tests/unit/test_session_storage_transparency.py tests/unit/test_session_metadata_aliases.py tests/unit/test_session_expectations.py tests/unit/test_session_values.py tests/unit/test_session_observer_faults.py tests/unit/test_reduction_evidence.py tests/integration/test_session_package.py tests/integration/test_package.py --basetemp=/private/tmp/fly-brain-session-storage-transparency-raw-20261006-01/cpu-final --junitxml=/private/tmp/fly-brain-session-storage-transparency-raw-20261006-01/cpu-final.xml",
+      "junit": "/private/tmp/fly-brain-session-storage-transparency-raw-20261006-01/cpu-final.xml",
+      "result": {
+        "tests": 55,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    "source_preservation": {
+      "command": "uv run --locked --no-sync python /private/tmp/fly-brain-session-storage-transparency-raw-20261006-01/check-preservation.py",
+      "path": "/private/tmp/fly-brain-session-storage-transparency-raw-20261006-01/preservation.json",
+      "sha256": "d14c3ebab8fef682ce75ea620137c2833a08d2a304c835072eb1ea317dd431d3"
+    },
+    "runtime_public_comparison": {
+      "command": "uv run --locked --no-sync python /private/tmp/fly-brain-session-storage-transparency-raw-20261006-01/compare-public-values.py",
+      "path": "/private/tmp/fly-brain-session-storage-transparency-raw-20261006-01/public-values-preservation.json",
+      "sha256": "cd46a8fff442934e97d8712fcea3537954ba5d738a7281e3a7dfef455a8b6710"
+    },
+    "repository_gate": {
+      "command": "env -u QUALITY_BASE -u QUALITY_HEAD UV_CACHE_DIR=/private/tmp/fly-brain-documentation-uv-cache-20261005 PYTHONPATH=/private/tmp/fly-brain-composition-20261006-01/src:/private/tmp/fly-brain-composition-20261006-01 PRE_COMMIT_HOME=/private/tmp/fly-brain-composition-precommit-20261006-01 just check",
+      "result": "PASS",
+      "log": "/private/tmp/fly-brain-session-storage-transparency-raw-20261006-01/just-check.txt",
+      "format": "213 files already formatted",
+      "ruff": "PASS",
+      "strict_pyright": {
+        "errors": 0,
+        "warnings": 0,
+        "information": 0
+      },
+      "import_contracts": {
+        "kept": 3,
+        "broken": 0
+      },
+      "quality_tests_passed": 104,
+      "metric_staged_snapshot": "e29ccbe55c863b999e1e472f4ac378372bb4bba5",
+      "metrics": {
+        "status": "PASS",
+        "before": {
+          "files": 272,
+          "loc": 29402,
+          "average_cyclomatic_complexity": 5.04,
+          "maximum_cyclomatic_complexity": 28,
+          "code_health": 69.88
+        },
+        "after": {
+          "files": 273,
+          "loc": 29748,
+          "average_cyclomatic_complexity": 5.04,
+          "maximum_cyclomatic_complexity": 28,
+          "code_health": 69.88
+        }
+      },
+      "prior_composition_and_inactive_commits": "Both existing unpushed commits passed the per-commit gate."
+    },
+    "diff_whitespace": "git diff --check and git diff --cached --check PASS"
+  },
+  "hooks_and_handoff": {
+    "pre_commit_and_pre_push": "Both native hooks remain installed. Committing must run the full pre-commit gate without QUALITY_BASE/QUALITY_HEAD overrides or bypass.",
+    "commit_hook_log": "/private/tmp/fly-brain-session-storage-transparency-raw-20261006-01/commit-hook-delivery.txt",
+    "final_delivery_manifest": "/private/tmp/fly-brain-session-storage-transparency-raw-20261006-01/delivery-manifest.json",
+    "final_commit_result": "Recorded by the actual committing hook and the bounded handoff after this versioned verification was staged.",
+    "push": "Parent-owned; no push, fetch, rebase or new branch in this clone."
+  },
+  "retained_raw_evidence": {
+    "directory": "/private/tmp/fly-brain-session-storage-transparency-raw-20261006-01",
+    "precommit_manifest": "/private/tmp/fly-brain-session-storage-transparency-raw-20261006-01/precommit-raw-manifest.json",
+    "precommit_manifest_sha256": "9a4596d50f18d62c8108d682edeff36a3857d5a4fdfe2b8d5c5e22c546494716",
+    "manifest_members": 38,
+    "versioned_policy": "Only this compact summary is versioned; all raw tests, arrays, source copies, probes and logs remain external. Previous composition and inactive-session evidence is preserved."
+  },
+  "failed_or_limited_checks": [
+    "An exploratory InitVar plus property design was rejected by strict Pyright with five errors; the delivered explicit typed constructor/property approach passes.",
+    "The sandbox Apple Git 2.32 staging command rejected --sparse; ordinary git add staged all eight allocated source/test files successfully. The full repository gate subsequently passed against their staged snapshot.",
+    "The first mandatory commit hook passed format, lint, strict typing, all 3 import contracts and 104 quality cases, then failed metrics because an explicitly narrowed PATH omitted installed pnpm. No commit was created. The delivered retry restores the same inherited environment that passed just check, without installing dependencies or bypassing hooks. Failed log: /private/tmp/fly-brain-session-storage-transparency-raw-20261006-01/commit-hook.txt"
+  ],
+  "not_executed_or_adopted": [
+    "No full pinned-network ordinary/legacy/new/fresh-repeat proof or pinned four-trial transient-memory proof.",
+    "No collector activation, remaining matrix, numerical remedy, performance optimization or new scientific case acceptance.",
+    "Native static resource enforcement and remaining caller migration stay with their allocated owners; this correction exposes storage facts for that analysis."
+  ]
+}

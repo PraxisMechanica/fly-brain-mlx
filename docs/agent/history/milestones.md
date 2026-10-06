@@ -1501,3 +1501,27 @@ their original checkpoint scope. The initial broken README anchor was repaired;
 the CLI help check used a task cache after a sandbox cache error. No installation
 or simulation was needed. Application/scientific suites were not rerun for this
 documentation-only reapplication.
+
+
+### Typed observation storage correction — 2026-10-06
+
+Worker `a58be25e17edf9e800edd85692db46adfcce783f` replaces dynamic
+attribute interception/type-shadowed arrays with truthful private snapshots and
+36 typed properties across nine frozen records. Parent integration at `54aea507`
+verifies eight source/test hashes, all 43 raw artifact hashes and the actual
+committing-hook result. Fresh parent checks pass 106 native Metal cases (27
+upstream warnings) and 66 value/alias/package/canonical-port cases with no
+failures/errors/skips. Independent source/value probes preserve 108 other source
+files, nine constructor signatures, 55 public values, 31 native dtype guard
+outcomes, ten pure/snapshot/digest bodies and all 30 prior fixture assertion
+ASTs. The initial review script incorrectly expected a qualification-only owner
+for the Metal fault fixture; its existing system-test owner is preserved.
+
+Exact metadata reconciles 289 files, 3,989 declaration occurrences and 266
+neutral exports with zero gaps, retaining all 62 frozen provenance records and
+eleven recorded findings. Compact evidence is
+`docs/evidence/code-quality/session-storage-transparency-20261006/parent-integration.json`.
+Array-facing dataclass reflection now exposes actual snapshots; no production
+consumer uses the former representation. Legacy collectors remain active.
+Complete pinned transparency/four-trial transient-memory proof, caller migration
+and full 37-rule enforcement remain required; no new scientific acceptance.

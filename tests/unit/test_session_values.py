@@ -1,5 +1,4 @@
 import inspect
-from dataclasses import replace
 
 import numpy as np
 import pytest
@@ -42,7 +41,13 @@ def test_actual_phase_snapshots_reject_missing_native_fields(field: str) -> None
     fields = dict(actual.fields)
     fields.pop(field)
     with pytest.raises(ValueError, match='every actual phase'):
-        replace(actual, fields=fields)
+        NativeObservation(
+            actual.completed_steps,
+            actual.trial_indices,
+            fields,
+            actual.due_edges,
+            actual.due_sha256,
+        )
 
 
 def test_actual_snapshot_rejects_changed_native_dtype() -> None:
@@ -50,7 +55,13 @@ def test_actual_snapshot_rejects_changed_native_dtype() -> None:
     fields = dict(actual.fields)
     fields['pre_v'] = fields['pre_v'].astype(np.float64)
     with pytest.raises(ValueError, match='dtype or phase'):
-        replace(actual, fields=fields)
+        NativeObservation(
+            actual.completed_steps,
+            actual.trial_indices,
+            fields,
+            actual.due_edges,
+            actual.due_sha256,
+        )
 
 
 @pytest.mark.parametrize('columns', (0, 7, 9))

@@ -1,5 +1,3 @@
-from dataclasses import replace
-
 import numpy as np
 import pytest
 from numpy.typing import NDArray
@@ -51,9 +49,21 @@ class Session:
         self.step += 1
         actual = observation(self.step, (-52, -52))
         if self.fault == 'clock':
-            return replace(actual, completed_steps=self.step + 1)
+            return NativeObservation(
+                self.step + 1,
+                actual.trial_indices,
+                actual.fields,
+                actual.due_edges,
+                actual.due_sha256,
+            )
         if self.fault == 'trial':
-            return replace(actual, trial_indices=(1,))
+            return NativeObservation(
+                actual.completed_steps,
+                (1,),
+                actual.fields,
+                actual.due_edges,
+                actual.due_sha256,
+            )
         return actual
 
     def compare(self, operands: ObservationOperands) -> NativeComparison:
@@ -135,27 +145,25 @@ def test_qualification_pins_actual_maps_clocks_trials_and_every_queue_slot(
 ) -> None:
     network = connectome()
     configuration = Session('').configuration
-    if field == 'sources':
-        actual = replace(configuration, sources=configuration.sources[::-1])
-    elif field == 'destinations':
-        actual = replace(configuration, destinations=configuration.destinations[::-1])
-    elif field == 'targets':
-        actual = replace(configuration, targets=np.array([0], dtype=np.int32))
-    elif field == 'refractory_steps':
-        actual = replace(
-            configuration, refractory_steps=np.array([0, 0], dtype=np.int32)
-        )
-    elif field == 'initial_last_spike_step':
-        actual = replace(
-            configuration,
-            initial_last_spike_step=configuration.initial_last_spike_step + np.int32(1),
-        )
-    elif field == 'initial_step':
-        actual = replace(configuration, initial_step=1)
-    elif field == 'trial_indices':
-        actual = replace(configuration, trial_indices=(1,))
-    else:
-        actual = replace(configuration, queue_slots=18)
+    actual = ObservationConfiguration(
+        configuration.neurons,
+        18 if field == 'queue_slots' else configuration.queue_slots,
+        1 if field == 'initial_step' else configuration.initial_step,
+        (1,) if field == 'trial_indices' else configuration.trial_indices,
+        configuration.sources[::-1] if field == 'sources' else configuration.sources,
+        configuration.destinations[::-1]
+        if field == 'destinations'
+        else configuration.destinations,
+        np.array([0], dtype=np.int32) if field == 'targets' else configuration.targets,
+        np.array([0, 0], dtype=np.int32)
+        if field == 'refractory_steps'
+        else configuration.refractory_steps,
+        configuration.initial_voltage_mv,
+        configuration.initial_synaptic_mv,
+        configuration.initial_last_spike_step + np.int32(1)
+        if field == 'initial_last_spike_step'
+        else configuration.initial_last_spike_step,
+    )
     with pytest.raises(ValueError, match='independent pinned inputs'):
         require_configuration(
             actual, network, (), (0,), None, initial_ledger(network, (), 1, None)

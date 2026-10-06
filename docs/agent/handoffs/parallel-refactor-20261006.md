@@ -68,19 +68,24 @@ adoption or case acceptance follows from worker progress messages.
 | composition_refactor | Opaque sessions and independent expectations | Neutral simulation observations/session provider, qualification ports/observer/ledger/paired/case/batch callers, dedicated tests/evidence. Preserve engine math, reference/build/weight-reader sources and bootstrap/CLI. Commit the inactive provider first; complete accepted transparency/integrity and shortest pinned-run/memory proof before collector adoption. |
 | parent | Shared reconciliation and delivery | Apply documentation corrections, verify committed evidence, own shared configuration/policy/status/index, reconcile exact source mappings and push serially. Allocate reference/probe seams after the committed session contract is known. |
 
-The inactive session handoff `6e111545` is received and parent checks preserve
-native bytes and the original active collectors. Its same owner now corrects
-snapshot storage to explicit typed fields/properties while preserving public
-constructors and array-facing behavior. Only dedicated operand-clone test setup
-is mechanically adjusted; every fault/assertion remains. No pinned run or
-collector activation begins before that committed correction is verified.
+The inactive session handoff `6e111545` and storage correction `a58be25e` are
+verified against the combined parent source. Checks pass 106 Metal and 66
+value/alias/package/canonical-port cases. Nine public constructors and all
+existing fault assertions are preserved. The same session owner will complete
+pinned-run/four-trial memory qualification before caller migration. RNG and
+shared assembly writes remain with the ownership worker; no collector is active.
 
 The ownership agent's committed purity review `a6fade0` bounds the three
 seeded-random acquisition seams and immutable audit-state transition. It is a
 read-only plan; all four findings remain until concrete repairs are checked.
 Shared ports/bootstrap/capture/case writes must be serialized with the session
-owner. Native bridge splitting remains exclusive to the symbols owner; every
-new native_types_*.mjs module needs source/index/type coverage on integration.
+owner. The ownership worker now implements the complete RNG acquisition/pure-transform
+slice in an independent clone at `54aea507`; only its proved three RNG findings
+may be cleared. Native bridge splitting remains exclusive to the symbols owner;
+every new native_types_*.mjs module needs source/index/type coverage on
+integration. An independent read-only metric review checks the documented
+aggregation discrepancy before any tool correction; no threshold or guard is
+weakened.
 
 The exact session assignment is retained in the worker conversation. Additional
 caller allocation comes from the parent before an edit. No worker changes

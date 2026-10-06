@@ -1,5 +1,5 @@
 import hashlib
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 import numpy as np
 from numpy.typing import NDArray
@@ -13,7 +13,6 @@ from fly_brain.simulation.observations import (
     ObservationInitialState,
     ObservationOperands,
     PhysicalQueueObservation,
-    snapshot_view,
 )
 
 CHECK_NAMES = (
@@ -32,43 +31,60 @@ CHECK_NAMES = (
 )
 
 
-@dataclass(frozen=True)
+def capture_history(
+    history: tuple[NDArray[np.bool_], ...],
+) -> tuple[HostSnapshot[np.bool_], ...]:
+    return tuple(HostSnapshot.capture(value) for value in history)
+
+
+@dataclass(frozen=True, init=False)
 class LedgerState:
     step: int
-    last_spike_step: NDArray[np.int32]
-    refractory_steps: NDArray[np.int32]
-    history: tuple[NDArray[np.bool_], ...]
+    _last_spike_step_snapshot: HostSnapshot[np.int32] = field(init=False, repr=False)
+    _refractory_steps_snapshot: HostSnapshot[np.int32] = field(init=False, repr=False)
+    _history_snapshot: tuple[HostSnapshot[np.bool_], ...] = field(
+        init=False, repr=False
+    )
 
-    def __getattribute__(self, name: str) -> object:
-        return snapshot_view(object.__getattribute__(self, name))
-
-    def __post_init__(self) -> None:
-        shape = self.last_spike_step.shape
+    def __init__(
+        self,
+        step: int,
+        last_spike_step: NDArray[np.int32],
+        refractory_steps: NDArray[np.int32],
+        history: tuple[NDArray[np.bool_], ...],
+    ) -> None:
+        shape = last_spike_step.shape
         if (
-            self.last_spike_step.dtype != np.int32
+            last_spike_step.dtype != np.int32
             or len(shape) != 2
-            or self.refractory_steps.dtype != np.int32
-            or self.refractory_steps.shape != (shape[1],)
-            or len(self.history) != 19
-            or any(
-                value.dtype != np.bool_ or value.shape != shape
-                for value in self.history
-            )
+            or refractory_steps.dtype != np.int32
+            or refractory_steps.shape != (shape[1],)
+            or len(history) != 19
+            or any(value.dtype != np.bool_ or value.shape != shape for value in history)
         ):
             raise ValueError(
                 'Qualification history requires every trial, neuron and slot'
             )
+        object.__setattr__(self, 'step', step)
         object.__setattr__(
-            self, 'last_spike_step', HostSnapshot.capture(self.last_spike_step)
+            self, '_last_spike_step_snapshot', HostSnapshot.capture(last_spike_step)
         )
         object.__setattr__(
-            self, 'refractory_steps', HostSnapshot.capture(self.refractory_steps)
+            self, '_refractory_steps_snapshot', HostSnapshot.capture(refractory_steps)
         )
-        object.__setattr__(
-            self,
-            'history',
-            tuple(HostSnapshot.capture(value) for value in self.history),
-        )
+        object.__setattr__(self, '_history_snapshot', capture_history(history))
+
+    @property
+    def last_spike_step(self) -> NDArray[np.int32]:
+        return self._last_spike_step_snapshot.array
+
+    @property
+    def refractory_steps(self) -> NDArray[np.int32]:
+        return self._refractory_steps_snapshot.array
+
+    @property
+    def history(self) -> tuple[NDArray[np.bool_], ...]:
+        return tuple(value.array for value in self._history_snapshot)
 
 
 def initial_ledger(
