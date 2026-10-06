@@ -74,8 +74,8 @@ Completion requires:
   process 62191 remains designated suspended; do not resume or discard it
   without resolving its original-mode evidence. [Pause record](docs/evidence/execution-time-investigation/pause.json).
 - The latest delivered refactor checkpoint is
-  `e9c62fd48c6d36eb1c11502e89191f3cd5836f3d` on `origin/main`, followed by the
-  verified Python metric correction in this source. Clock and actual-row repairs,
+  `e923c316342978e03a74c1455336e43a651ef6b0` on `origin/main`, followed by the
+  verified pinned-preservation evidence in this source. Clock and actual-row repairs,
   pure comparison rules, owned command composition, native symbol/graph
   foundations, reviewed ownership and runtime-parent decisions are delivered.
   Required local commit/push hooks and each configured hosted job passed. The
@@ -92,9 +92,11 @@ Completion requires:
   checks grant no new scientific acceptance.
 - Native structured-type export remains assigned, unintegrated work. The
   committed inactive session candidate `6e111545` and typed correction `a58be25e`
-  pass 106 parent Metal cases and 66 value/package/canonical-hook cases. Complete
-  pinned-run/four-trial memory proof and collector migration remain required
-  before adoption. No new scientific acceptance is granted. The
+  pass 106 parent Metal cases and 66 value/package/canonical-hook cases. The
+  committed full pinned 1,000-step proof preserves 5,664 native arrays across
+  ordinary/legacy/session/repeat and actual four-trial execution, with bounded
+  memory evidence. Parent array/integrity checks preserve it. Active caller
+  migration remains assigned before adoption. No new scientific acceptance is granted. The
   [checkpoint history](docs/agent/history/milestones.md#refactor-and-enforcement-checkpoint-2026-10-06)
   retains original test counts, failures, review decisions and delivery evidence.
 

@@ -1,0 +1,104 @@
+{
+  "base": "e923c316342978e03a74c1455336e43a651ef6b0",
+  "worker": "c11065cf827946923976726a47814f32d0bb75f2",
+  "confidence_percent": 95,
+  "committed_hashes_verified": 3,
+  "raw_hashes_and_lengths_verified": 485,
+  "raw_manifest_sha256": "69cc27a4d4c18516bfe7f8f1c65d848b8f4e417cdbdd4e061269db15da9ab049",
+  "original_production_source_files_unchanged": 110,
+  "worker_completed_modes": [
+    "ordinary",
+    "legacy",
+    "session",
+    "repeat",
+    "four-session"
+  ],
+  "native_arrays_compared": 5664,
+  "independent_check_successes": 180000,
+  "all7reports_zero_fail_error_skip": true,
+  "proof_api_adaptation": "Only regenerate through current schedule(...seed20261004,draw_uniforms=uniforms); actual old executed source hashes/arrays stay intact. Existing assertion ASTs exact.",
+  "assertion_asts_preserved": 30,
+  "helper_sha256_unchanged": "d851409268a99cb48c35f38c9ea85ccdf475da7451fb7ff5343536af6481f6c6",
+  "registry": {
+    "files": 309,
+    "declarations": 4209,
+    "unique_symbols": 4107,
+    "gaps": 0,
+    "recorded_findings": 7
+  },
+  "limits": [
+    "Evidence integration only; no collector activation or new scientific acceptance.",
+    "Pinned0.1s fullmode trial0 preservation+actual4trialindependentchecks/memory; no1s/matrix/singletontrials1-3claim.",
+    "MLXactive/cache/RSS/tracedhostoverlap; do not sum; sampled active+cache is no absolute instant peak.",
+    "Whole37 structural enforcement still ANALYSIS FAILED COV002."
+  ],
+  "organization_repair": {
+    "before_helper_sha256": "d851409268a99cb48c35f38c9ea85ccdf475da7451fb7ff5343536af6481f6c6",
+    "before_test_sha256": "af8bb25e5e9b4cab21cbc06fb55e6a99a5eadfd6542755cc15c61277a2352664",
+    "top_level_class_function_ASTs_preserved": 24,
+    "assertion_asts_preserved": 30,
+    "responsibilities": [
+      "neutral proof values and identity/integrity comparison",
+      "artifact/memory recording",
+      "native mode/session taps and phase forwarding",
+      "mode orchestration",
+      "complete pinned execution",
+      "artifact-integrity faults and actual small-network control",
+      "retained artifact byte comparison"
+    ],
+    "files": [
+      "tests/support/session_proof_values.py",
+      "tests/support/session_proof_recorder.py",
+      "tests/support/session_proof_modes.py",
+      "tests/support/session_pinned.py",
+      "tests/qualification/test_observation_session_pinned.py",
+      "tests/qualification/test_session_proof_integrity.py",
+      "tests/integration/test_session_proof_artifacts.py"
+    ],
+    "limits": "Original executed versions/artifacts remain preserved; this is source organization only, no guard/math/assertion/body changes.",
+    "after_hashes": {
+      "tests/support/session_proof_values.py": "71b3a13e563b239f5930cb5b3796904d43f7989a4ea9261726d8b015203a9bfe",
+      "tests/support/session_proof_recorder.py": "1e383c3e636484df95a0c6f60e4581f82cf363e9e7b3f8bda17b6f776c84e6f2",
+      "tests/support/session_proof_modes.py": "679ac93da57b09feec4d3d2b0a6a73ce76250ce2867772727be3a59ab0c34226",
+      "tests/support/session_pinned.py": "d6ace6e265e2b8428203eeea07f0a20362ca72f61cbbf9de0f4eced88c921f2e",
+      "tests/qualification/test_observation_session_pinned.py": "425d11a19bbc23a0235c969f49225979ef159daafa64bbac5bc378895b025e76",
+      "tests/qualification/test_session_proof_integrity.py": "aede65b2e9af6bf2b41393d059b2309727719d5e828d1ec252c62b86d73bd6bc",
+      "tests/integration/test_session_proof_artifacts.py": "db25d70c46fac121519d438ebcc679e5414b7295b4f927e13e9a17103733212e"
+    }
+  },
+  "organization_ASTs_reverified_after_formatting": true,
+  "preserved_parent_failures": [
+    "First10controlrun:9pass1missingfreshartifactparent;precreatedfresh02thenretry.",
+    "Firstwhole-filemetricsrejectcombinedhelper/test;responsibilitysplitretainsall24ASTs/30assertions.",
+    "Ruffaftermechanicalextractionfoundmissinghashlibimport;correctedstandardimportbeforechecks."
+  ],
+  "parent_checks": {
+    "integrity_native": {
+      "tests": 10,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "path": "/private/tmp/fly-brain-pinned-parent-controls-20261007-03.xml",
+      "sha256": "e4a280cf30cd1eede23a1bcbdad9becbeeed394827fc01c48445bf47054f623d"
+    },
+    "retained_bytes": {
+      "tests": 1,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "path": "/private/tmp/fly-brain-pinned-parent-bytes-20261007-02.xml",
+      "sha256": "009661beb4d9a1e9fb0a25e8dbfaed62ae020f702f4d0f36e49a2b03a6583338"
+    }
+  },
+  "parent_strict_pyright": "0errors/0warnings",
+  "parent_exact_arrays_recompared": 5664,
+  "parent_control_warnings": 27,
+  "memory_report": {
+    "four_trial_mlx_peak_used_bytes": 5009460504,
+    "sampled_simultaneous_active_plus_cache_max_bytes": 9512195175,
+    "full_block_active_plus_cache_spread_bytes": 168352,
+    "rss_peak_bytes": 6495158272,
+    "traced_host_peak_bytes": 4299970697,
+    "interpretation": "Counters overlap; no sum or instantaneous unified-memory peak claimed; fixed1000step/M1Max horizon only."
+  }
+}

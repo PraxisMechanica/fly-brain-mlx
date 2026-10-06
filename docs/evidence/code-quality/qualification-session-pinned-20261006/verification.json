@@ -1,0 +1,585 @@
+{
+  "base_commit": "a58be25e17edf9e800edd85692db46adfcce783f",
+  "decision_confidence": 0.95,
+  "scope": "Observation-session preservation qualification only. No production change, active collector adoption, new scientific acceptance, arithmetic/reducer/reference change, RNG integration or remaining matrix.",
+  "files": [
+    "tests/qualification/test_observation_session_pinned.py",
+    "tests/support/session_pinned.py",
+    "docs/evidence/code-quality/qualification-session-pinned-20261006/verification.json"
+  ],
+  "pinned_inputs": {
+    "read_only_root": "/Users/ocasta/.codex/worktrees/pr-split/fly-brain",
+    "paths": {
+      "completeness": "/Users/ocasta/.codex/worktrees/pr-split/fly-brain/data/2025_Completeness_783.csv",
+      "connectivity": "/Users/ocasta/.codex/worktrees/pr-split/fly-brain/data/2025_Connectivity_783.parquet"
+    },
+    "sha256": {
+      "completeness": "52b0ac6094cd32c546f8d4c341e094376f48f4e791f8db9b166de5dff8199ea4",
+      "connectivity": "efeb23fb99098e9c390f6869969b2a121a2ee92c833cfc45ecb2c1d8e1af0347"
+    },
+    "neurons": 138639,
+    "original_edges": 15091983,
+    "canonical_host_array_hashes": {
+      "neuron_ids": "70200482b9fe6656f215a97b71332dd6725b80e2cb32e0052a4d47916ca1579b",
+      "sources": "8ec65c761057a2b000dcc246d6dc94a586b31596b8331c1db1ada61691d67f17",
+      "destinations": "302786e9dacecf6f04683f7e46a6c3aa223b136b42b44880ccae0f0487dcd5f3",
+      "counts": "2d30bb197223a4ec6a602bfa91decc81c89e31138448dba47935bb7ab3d8484e",
+      "weights_mv": "c0ce774e14b6481860adaced8ea552940d4b6eb81b81109bc5e6e0591bc497f5"
+    }
+  },
+  "execution": {
+    "experiment": "sugar",
+    "steps": 1000,
+    "duration_s": 0.1,
+    "dt_ms": 0.1,
+    "block_size": 32,
+    "blocks": 32,
+    "final_block_rows": 8,
+    "single_trial": [
+      0
+    ],
+    "four_trials": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "device": {
+      "device_name": "Apple M1 Max",
+      "max_recommended_working_set_size": 22906503168,
+      "memory_size": 34359738368,
+      "architecture": "applegpu_g13s",
+      "max_buffer_length": 17179869184,
+      "resource_limit": 499000
+    },
+    "versions": {
+      "mlx": "0.32.3",
+      "mlx-metal": "0.32.3",
+      "numpy": "1.26.4",
+      "pyarrow": "25.0.1",
+      "pydantic": "2.13.5",
+      "pytest": "9.1.1"
+    },
+    "python": "3.10.14",
+    "precision": "TF32=0",
+    "compilation": "disabled",
+    "reducer": "unchanged original compensated count tree; exact_counts=False",
+    "frozen_event_sha256": "444385040e153d7666e83f345707d998e22b541a39fa753d87d1a6e94f5705c2",
+    "per_trial_event_sha256": [
+      "d7bb792f082eeca79d6e88a1e8ca0791dca210eb15c86ec70a34348b272a82b3",
+      "681632b7e9dab75d40a8cf81f605b4377aa533e17ee5374a2ff9d5a2bd416598",
+      "2c07087506781cefd0ceb2394ef7c9733f080eaae82fa4eb062139f05d10244a",
+      "d13b20512b6d60cffb3938e5bb69fc06dd82b76f459d0ba83a0961b9487424c8"
+    ],
+    "frozen_event_file": "/private/tmp/fly-brain-session-pinned-20261006-01/frozen-stimulus/stimulus.npz",
+    "frozen_metadata_file": "/private/tmp/fly-brain-session-pinned-20261006-01/frozen-stimulus/stimulus.json",
+    "rng_fixture_manifest": "/private/tmp/fly-brain-session-pinned-20261006-01/rng-fixture-manifest.json",
+    "rng_fixture_manifest_sha256": "3eb9f8c7cf07e1a3d7fb2e5bea49a7bcf82755b0e2f4d09ebb70573c05bde783"
+  },
+  "preservation": {
+    "production_source_files_byte_unchanged": 110,
+    "source_manifest": "/private/tmp/fly-brain-session-pinned-20261006-01/preflight.json",
+    "source_manifest_sha256": "f98ab78f84105810f326f6a434b79d2ff9dd0a2f85787de4bf265b5243a802f5",
+    "all_mode_identity_files": {
+      "ordinary": {
+        "path": "/private/tmp/fly-brain-session-pinned-20261006-01/ordinary/identity.json",
+        "sha256": "231d1f3877b5fbc12353747b27cf819755fc52b3fcd7be9916a1eb227b2445a2"
+      },
+      "legacy": {
+        "path": "/private/tmp/fly-brain-session-pinned-20261006-01/legacy/identity.json",
+        "sha256": "cdb0500f1bdfb6f0ba09d06e7c7bd71ed4d3de58fc90beae2c0ca2e932e8743d"
+      },
+      "session": {
+        "path": "/private/tmp/fly-brain-session-pinned-20261006-01/session/identity.json",
+        "sha256": "b8a6ecc934fc3c8d9052de56f5e9fd8689a26f8c7713b94bc66b2dbd77887116"
+      },
+      "repeat": {
+        "path": "/private/tmp/fly-brain-session-pinned-20261006-01/repeat/identity.json",
+        "sha256": "5647d4bce3b0651ad1f69cda37f99155fad977594419857b98a6b063e5c8a3a3"
+      },
+      "four-session": {
+        "path": "/private/tmp/fly-brain-session-pinned-20261006-01/four-session/identity.json",
+        "sha256": "b969ac21afe370fc8f8c603e0f285326920283f25f86990593c135425fed5a89"
+      }
+    },
+    "exact_native_arrays_compared": 5664,
+    "comparison_modes": [
+      "legacy",
+      "session",
+      "repeat",
+      "four-session trial0"
+    ],
+    "phase_fields": 12,
+    "actual_due_masks": "Complete per-step Boolean SHA256 and exact int32 original-edge identity arrays; 1000 per singleton and 4000 across four trials",
+    "complete_physical_queues": "All 19 slots, original edges and trials at each of 32 boundaries; complete final actual queue retained in every mode",
+    "native_dtype_shape_units_trial_order_equal": true,
+    "final_state_and_dense_spikes_bytes_equal": true,
+    "integer_trial0_spike_coordinates_equal": true,
+    "spikes_per_trial": {
+      "ordinary": {
+        "0": 1612
+      },
+      "legacy": {
+        "0": 1612
+      },
+      "session": {
+        "0": 1612
+      },
+      "repeat": {
+        "0": 1612
+      },
+      "four-session": {
+        "0": 1612,
+        "1": 1571,
+        "2": 1535,
+        "3": 1584
+      }
+    },
+    "new_independent_checks_true": 180000,
+    "unchanged_legacy_checks_true": 30000,
+    "probe_versions": "/private/tmp/fly-brain-session-pinned-20261006-01/probe-source-version-preservation.json",
+    "probe_versions_sha256": "493636eb8416ce0042c2cb4a261a548c2e1b663769a5986c8b8fd5fcc2fbd6fd",
+    "early_probe_changes": "Only additional frozen metadata assertions and richer completed-run identity; exact retained source versions bind each mode. No production source changed.",
+    "ordinary_probe_difference": "Only two scalar diagnostic streaming writes were added after ordinary; all helper AST otherwise identical. Exact earlier source copies and mode identities retained.",
+    "base_blob_verification": "/private/tmp/fly-brain-session-pinned-20261006-01/source-preservation.json",
+    "base_blob_verification_sha256": "a75fbd6e14c46913ac3d4e19262502f6323de55760d0bb839e608157b2792306"
+  },
+  "capacity": {
+    "before_native": "/private/tmp/fly-brain-session-pinned-20261006-01/capacity-before-native.txt",
+    "before_four_trial": "/private/tmp/fly-brain-session-pinned-20261006-01/capacity-before-four.json",
+    "before_four_trial_sha256": "82c40fbc55324f16aa33e4cbe752d91bd1f83fb1870b71f3be36a29e514ded2e",
+    "source_geometry": {
+      "connectome_host_bytes": 302948772,
+      "configuration_and_operand_edge_maps_per_copy_bytes": 120735864,
+      "original_device_layout_payload_bytes": 196991628,
+      "queue_per_trial_bytes": 286747677,
+      "four_trial_queue_bytes": 1146990708,
+      "phase_block32_per_trial_bytes": 141967008,
+      "four_trial_phase_block32_bytes": 567868032,
+      "four_trial_independent_history_bytes": 10536564,
+      "four_trial_pending_operand_history_bytes": 10536564,
+      "four_trial_reducer_leaf_float32_buffer_bytes": 348235584,
+      "possible_coexistent_queues_and_boolean_comparison_bytes": "Several multiples of four_trial_queue_bytes during advance, comparison, physical copy and final-block capture; actual MLX/host/OS peaks must be measured. Do not add counters as disjoint unified-memory totals."
+    }
+  },
+  "memory": {
+    "ordinary": {
+      "collection_elapsed_s": 119.37712324998574,
+      "peaks": {
+        "resident_bytes": 2497085440,
+        "process_peak_resident_bytes": 2498592768,
+        "mlx_active_bytes": 977818069,
+        "mlx_cache_bytes": 2457148858,
+        "mlx_peak_bytes": 1664757962,
+        "traced_host_current_bytes": 288505712,
+        "traced_host_peak_bytes": 501192733,
+        "sampled_mlx_active_plus_cache_bytes": 2457148858
+      },
+      "retained_full_block_window": {
+        "resident_bytes": [
+          921944064,
+          2496757760
+        ],
+        "process_peak_resident_bytes": [
+          2491449344,
+          2498592768
+        ],
+        "mlx_active_bytes": [
+          977818069,
+          977818069
+        ],
+        "mlx_cache_bytes": [
+          1461794913,
+          1466010597
+        ],
+        "mlx_peak_bytes": [
+          1651667158,
+          1664757962
+        ],
+        "traced_host_current_bytes": [
+          240129,
+          1746066
+        ],
+        "traced_host_peak_bytes": [
+          501192733,
+          501192733
+        ],
+        "sampled_mlx_active_plus_cache_bytes": [
+          2439612982,
+          2443828666
+        ]
+      },
+      "completed": {
+        "stage": "collector-complete",
+        "step": 1000,
+        "elapsed_s": 119.37712324998574,
+        "resident_bytes": 988004352,
+        "process_peak_resident_bytes": 2498592768,
+        "mlx_active_bytes": 0,
+        "mlx_cache_bytes": 2457148858,
+        "mlx_peak_bytes": 1664757962,
+        "traced_host_current_bytes": 1697173,
+        "traced_host_peak_bytes": 501192733,
+        "sampled_mlx_active_plus_cache_bytes": 2457148858
+      }
+    },
+    "legacy": {
+      "collection_elapsed_s": 151.71112483297475,
+      "peaks": {
+        "resident_bytes": 2398175232,
+        "process_peak_resident_bytes": 3322396672,
+        "mlx_active_bytes": 1418452089,
+        "mlx_cache_bytes": 3978984783,
+        "mlx_peak_bytes": 2518540145,
+        "traced_host_current_bytes": 288522467,
+        "traced_host_peak_bytes": 501193459,
+        "sampled_mlx_active_plus_cache_bytes": 3978984783
+      },
+      "retained_full_block_window": {
+        "resident_bytes": [
+          1600995328,
+          1988935680
+        ],
+        "process_peak_resident_bytes": [
+          3322396672,
+          3322396672
+        ],
+        "mlx_active_bytes": [
+          1418452089,
+          1418452089
+        ],
+        "mlx_cache_bytes": [
+          2545969428,
+          2547212502
+        ],
+        "mlx_peak_bytes": [
+          2518540145,
+          2518540145
+        ],
+        "traced_host_current_bytes": [
+          252030,
+          1761791
+        ],
+        "traced_host_peak_bytes": [
+          501193459,
+          501193459
+        ],
+        "sampled_mlx_active_plus_cache_bytes": [
+          3964421517,
+          3965664591
+        ]
+      },
+      "completed": {
+        "stage": "collector-complete",
+        "step": 1000,
+        "elapsed_s": 151.71112483297475,
+        "resident_bytes": 1637105664,
+        "process_peak_resident_bytes": 3322396672,
+        "mlx_active_bytes": 0,
+        "mlx_cache_bytes": 3978984783,
+        "mlx_peak_bytes": 2518540145,
+        "traced_host_current_bytes": 1707361,
+        "traced_host_peak_bytes": 501193459,
+        "sampled_mlx_active_plus_cache_bytes": 3978984783
+      }
+    },
+    "session": {
+      "collection_elapsed_s": 312.4890362910228,
+      "peaks": {
+        "resident_bytes": 2665824256,
+        "process_peak_resident_bytes": 2844098560,
+        "mlx_active_bytes": 1503497239,
+        "mlx_cache_bytes": 3300558743,
+        "mlx_peak_bytes": 1989200959,
+        "traced_host_current_bytes": 1188810141,
+        "traced_host_peak_bytes": 1190619946,
+        "sampled_mlx_active_plus_cache_bytes": 3300558743
+      },
+      "retained_full_block_window": {
+        "resident_bytes": [
+          2263826432,
+          2665775104
+        ],
+        "process_peak_resident_bytes": [
+          2844098560,
+          2844098560
+        ],
+        "mlx_active_bytes": [
+          669026944,
+          669059712
+        ],
+        "mlx_cache_bytes": [
+          2631466263,
+          2631531799
+        ],
+        "mlx_peak_bytes": [
+          1989200959,
+          1989200959
+        ],
+        "traced_host_current_bytes": [
+          822770042,
+          828293449
+        ],
+        "traced_host_peak_bytes": [
+          1110910399,
+          1122306240
+        ],
+        "sampled_mlx_active_plus_cache_bytes": [
+          3300493207,
+          3300558743
+        ]
+      },
+      "completed": {
+        "stage": "collector-complete",
+        "step": 1000,
+        "elapsed_s": 312.4890362910228,
+        "resident_bytes": 2398486528,
+        "process_peak_resident_bytes": 2844098560,
+        "mlx_active_bytes": 0,
+        "mlx_cache_bytes": 3300558743,
+        "mlx_peak_bytes": 1989200959,
+        "traced_host_current_bytes": 6044626,
+        "traced_host_peak_bytes": 1190619946,
+        "sampled_mlx_active_plus_cache_bytes": 3300558743
+      }
+    },
+    "repeat": {
+      "collection_elapsed_s": 316.7681863750331,
+      "peaks": {
+        "resident_bytes": 3271770112,
+        "process_peak_resident_bytes": 3396714496,
+        "mlx_active_bytes": 1563872283,
+        "mlx_cache_bytes": 3300771819,
+        "mlx_peak_bytes": 1989200959,
+        "traced_host_current_bytes": 1188814192,
+        "traced_host_peak_bytes": 1190624008,
+        "sampled_mlx_active_plus_cache_bytes": 3300771819
+      },
+      "retained_full_block_window": {
+        "resident_bytes": [
+          2138177536,
+          3170861056
+        ],
+        "process_peak_resident_bytes": [
+          3396714496,
+          3396714496
+        ],
+        "mlx_active_bytes": [
+          669026944,
+          669059712
+        ],
+        "mlx_cache_bytes": [
+          2631548203,
+          2631744875
+        ],
+        "mlx_peak_bytes": [
+          1989200959,
+          1989200959
+        ],
+        "traced_host_current_bytes": [
+          822784568,
+          828297453
+        ],
+        "traced_host_peak_bytes": [
+          1110925595,
+          1122310366
+        ],
+        "sampled_mlx_active_plus_cache_bytes": [
+          3300607915,
+          3300771819
+        ]
+      },
+      "completed": {
+        "stage": "collector-complete",
+        "step": 1000,
+        "elapsed_s": 316.7681863750331,
+        "resident_bytes": 2576334848,
+        "process_peak_resident_bytes": 3396714496,
+        "mlx_active_bytes": 0,
+        "mlx_cache_bytes": 3300771819,
+        "mlx_peak_bytes": 1989200959,
+        "traced_host_current_bytes": 6048614,
+        "traced_host_peak_bytes": 1190624008,
+        "sampled_mlx_active_plus_cache_bytes": 3300771819
+      }
+    },
+    "four-session": {
+      "collection_elapsed_s": 1274.0648712500115,
+      "peaks": {
+        "resident_bytes": 6445776896,
+        "process_peak_resident_bytes": 6495158272,
+        "mlx_active_bytes": 1731005160,
+        "mlx_cache_bytes": 9512195175,
+        "mlx_peak_bytes": 5009460504,
+        "traced_host_current_bytes": 4013228657,
+        "traced_host_peak_bytes": 4299970697,
+        "sampled_mlx_active_plus_cache_bytes": 9512195175
+      },
+      "retained_full_block_window": {
+        "resident_bytes": [
+          3024617472,
+          5371379712
+        ],
+        "process_peak_resident_bytes": [
+          6246907904,
+          6495158272
+        ],
+        "mlx_active_bytes": [
+          1539295872,
+          1539295872
+        ],
+        "mlx_cache_bytes": [
+          7972730951,
+          7972899303
+        ],
+        "mlx_peak_bytes": [
+          5009460504,
+          5009460504
+        ],
+        "traced_host_current_bytes": [
+          2561769561,
+          2571174739
+        ],
+        "traced_host_peak_bytes": [
+          3995596779,
+          4005002318
+        ],
+        "sampled_mlx_active_plus_cache_bytes": [
+          9512026823,
+          9512195175
+        ]
+      },
+      "completed": {
+        "stage": "collector-complete",
+        "step": 1000,
+        "elapsed_s": 1274.0648712500115,
+        "resident_bytes": 1813561344,
+        "process_peak_resident_bytes": 6495158272,
+        "mlx_active_bytes": 0,
+        "mlx_cache_bytes": 9512195175,
+        "mlx_peak_bytes": 5009460504,
+        "traced_host_current_bytes": 10055585,
+        "traced_host_peak_bytes": 4299970697,
+        "sampled_mlx_active_plus_cache_bytes": 9512195175
+      }
+    }
+  },
+  "memory_limits": [
+    "MLX allocator, traced host and OS resident counters overlap and must not be summed.",
+    "tracemalloc begins after the pinned inputs/stimulus are loaded; base host input geometry is reported separately.",
+    "Measurements include real native trace, comparison, immutable snapshots, queue copies, artifact compression/hashing and scalar proof records.",
+    "The released-block sample includes the one block retained by a paused generator; advancing the iterator clears/replaces that block. Final snapshot and comparison lifetimes are included.",
+    "This proves a bounded fixed 1000-step horizon on the measured M1 Max machine, not universal capacity or performance and not scientific acceptance.",
+    "Installed MLX docs define active memory as excluding cached buffers and cache as unused buffers not yet returned to the system allocator. get_peak_memory reports peak used memory; it is not a total including this cache.",
+    "The sum of simultaneous active and cache readings is reported only within the same allocator and at recorded post-stage samples. Separate maxima are not summed; no absolute instantaneous active-plus-cache peak or cross-counter unified-memory total is claimed.",
+    "Full-block four-trial retained active plus cache spans only 168352 bytes from steps64 through992. At completion active becomes zero, remaining cached memory persists until the fresh process exits."
+  ],
+  "tests": {
+    "probe-integrity-streamed": {
+      "tests": 10,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "elapsed_s": 2.522,
+      "xml": "/private/tmp/fly-brain-session-pinned-20261006-01/probe-integrity-streamed.xml",
+      "sha256": "4cb85498848b2387a1b454faac96d652c77ea16a9d4631a0cb9b5ff6576ebe64"
+    },
+    "ordinary": {
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "elapsed_s": 120.287,
+      "xml": "/private/tmp/fly-brain-session-pinned-20261006-01/ordinary.xml",
+      "sha256": "3d37c05de35fe439d27b37ca4fba3e186179932a95e8be31c58b4ad9061c7091"
+    },
+    "legacy": {
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "elapsed_s": 152.434,
+      "xml": "/private/tmp/fly-brain-session-pinned-20261006-01/legacy.xml",
+      "sha256": "e82dfc7b27e35ed07c05fe507fa6da322488f053c64eb9b4d3ee6e975aa4b614"
+    },
+    "session": {
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "elapsed_s": 313.588,
+      "xml": "/private/tmp/fly-brain-session-pinned-20261006-01/session.xml",
+      "sha256": "616d9f5b978c20f0a39d674ed4d0c9f3f58ab3f4bb81cd2fdb442364d3cac9ba"
+    },
+    "repeat": {
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "elapsed_s": 317.627,
+      "xml": "/private/tmp/fly-brain-session-pinned-20261006-01/repeat.xml",
+      "sha256": "1b333e218c16a41649e7a6205069d755146b50c369721caf654e271747904f6e"
+    },
+    "four-session": {
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "elapsed_s": 1275.029,
+      "xml": "/private/tmp/fly-brain-session-pinned-20261006-01/four-session.xml",
+      "sha256": "b9a6c3edec28698cc788fa7b06f62dc6ce2c618ce1ab08d353b426e2803c5e01"
+    },
+    "native-byte-comparison": {
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "elapsed_s": 126.405,
+      "xml": "/private/tmp/fly-brain-session-pinned-20261006-01/native-byte-comparison.xml",
+      "sha256": "710236c25d17848876bd5d78e02cce374eb70c98baf4738f5f33eb2f266e1ee2"
+    }
+  },
+  "commands": {
+    "native_modes": "env UV_CACHE_DIR=/private/tmp/fly-brain-documentation-uv-cache-20261005 PYTHONPATH=/private/tmp/fly-brain-composition-20261006-01/src:/private/tmp/fly-brain-composition-20261006-01 MLX_ENABLE_TF32=0 FLY_BRAIN_PINNED_PROJECT=/Users/ocasta/.codex/worktrees/pr-split/fly-brain uv run --locked --no-sync python -m pytest -q -s --disable-warnings 'tests/qualification/test_observation_session_pinned.py::test_complete_shortest_pinned_observation_preservation[MODE]' --artifact-output=/private/tmp/fly-brain-session-pinned-20261006-01 --junitxml=/private/tmp/fly-brain-session-pinned-20261006-01/MODE.xml",
+    "focused_controls": "same locked no-sync environment; python -m pytest tests/qualification/test_observation_session_pinned.py -k \"artifact_integrity or actual_small_network\" --artifact-output=/private/tmp/fly-brain-session-pinned-20261006-01/probe-streamed --junitxml=/private/tmp/fly-brain-session-pinned-20261006-01/probe-integrity-streamed.xml",
+    "exact_bytes": "same locked no-sync environment; python -m pytest tests/qualification/test_observation_session_pinned.py::test_retained_pinned_artifacts_prove_all_native_bytes_and_final_state --artifact-output=/private/tmp/fly-brain-session-pinned-20261006-01 --junitxml=/private/tmp/fly-brain-session-pinned-20261006-01/native-byte-comparison.xml",
+    "required_gate": "env -u QUALITY_BASE -u QUALITY_HEAD UV_CACHE_DIR=/private/tmp/fly-brain-documentation-uv-cache-20261005 PYTHONPATH=/private/tmp/fly-brain-composition-20261006-01/src:/private/tmp/fly-brain-composition-20261006-01 PRE_COMMIT_HOME=/private/tmp/fly-brain-composition-precommit-20261006-01 just check"
+  },
+  "required_gate": {
+    "result": "PASS",
+    "ruff_format": "PASS",
+    "ruff_lint": "PASS",
+    "strict_pyright_errors": 0,
+    "import_contracts_kept": 3,
+    "quality_tests_passed": 104,
+    "native_metrics": "PASS (nonregression)",
+    "log": "/private/tmp/fly-brain-session-pinned-20261006-01/just-check-pinned-identities.txt",
+    "sha256": "329e38b24e714c05be70858ba73705e28f552a4edbe418255eb06162ddc64f4c",
+    "commit_hook": "Required native full hook executes on the final staged repair; actual result and full SHA are bound afterward in retained delivery.json. No bypass or push."
+  },
+  "failures_and_limits": [
+    "No native preservation or independent-check failure occurred in these five complete modes.",
+    "The first raw manifest also captured its still-open stdout file before completion. That original envelope and log are retained; the authoritative fresh bound manifest was generated only after all its input files closed and all hashes are reverified.",
+    "Initial strict Pyright rejected generic memoryview typing and a possibly-unbound deletion; both fixed before native runs; original failed typing log retained.",
+    "A transient misplaced import produced Ruff E402 during test-header editing; fixed before the final gate and later native runs.",
+    "A sandboxed installed-MLX doc query failed at import without a Metal device; the authorized read-only native doc query succeeded. Both the failure explanation and counter definitions are retained.",
+    "Existing 27 Brian2/pyparsing import deprecation warnings occurred per pytest process; no reference simulation or build was run. The identity call also reported mx.metal.device_info deprecation.",
+    "Four-trial proof covers actual full 0.1-second run and trial0 native equality against the singleton; the other three trial facts and independent checks are complete, but their separate full-network ordinary singleton runs are not claimed.",
+    "Prescribed one-second full-network batch obligations, all313 MLX blocks, active caller/reduction-reader/reference/causal migration and combined parent-source integration qualification remain separate requirements.",
+    "Counters measure this actual fixed-horizon instrumented run. They overlap and must not be summed; no universal footprint limit or performance improvement is claimed."
+  ],
+  "raw_artifacts": {
+    "root": "/private/tmp/fly-brain-session-pinned-20261006-01",
+    "all_retained": true,
+    "bulk_arrays_logs_and_scripts_not_versioned": true,
+    "precommit_manifest": "/private/tmp/fly-brain-session-pinned-20261006-01/raw-manifest-precommit-bound.json",
+    "precommit_manifest_sha256": "78bd6dc7a8b1f85a3d9581743dad112a14051f51c77258d49c893c95ceacb02b",
+    "postcommit_manifest": "/private/tmp/fly-brain-session-pinned-20261006-01/raw-manifest-delivery.json",
+    "postcommit_delivery": "/private/tmp/fly-brain-session-pinned-20261006-01/delivery.json"
+  },
+  "preserved_process": "No operation on suspended62191; no old output reuse or cleanup.",
+  "memory_counter_definitions": {
+    "path": "/private/tmp/fly-brain-session-pinned-20261006-01/mlx-memory-counter-docs.json",
+    "sha256": "4ef51bc310d95d1e2bbbb438835bfe0c81240c1dace4f443353016e4fcda284e"
+  }
+}

@@ -1604,3 +1604,33 @@ SHA checks within one provenance invariant stay recorded. Full structural
 coverage remains COV002 with seven recorded findings, and no bridge/scientific
 acceptance is granted. Compact proof:
 `docs/evidence/code-quality/python-metric-aggregation-20261006/parent-integration.json`.
+
+
+### Complete pinned observation preservation — 2026-10-07
+
+Worker `c11065cf827946923976726a47814f32d0bb75f2` completes all five pinned
+1,000-step modes at a58be25e: ordinary, legacy, session, fresh repeat and actual
+four-trial session. Parent at e923c31 verifies all485 raw hashes/lengths and
+three committed file hashes, all seven pytest reports,180,000 independent
+checks and5,664 native array comparisons. Full source/instrumentation identities
+stay retained. Parent updates only the proof regeneration API to current
+schedule with explicit uniforms; all30 assertion ASTs stay exact.
+
+First parent controls pass9 then fail on missing fresh artifact parent, corrected
+without source changes. Corrected whole-file metric rejects combined helper/test;
+separation by proof value, artifact/memory recorder, native mode, orchestration
+and test responsibilities preserves all24 top-level class/function ASTs and
+all30 assertions. Missing hashlib and unmerged import group during extraction
+are fixed before verification. Parent separated controls pass10 (27 upstream
+warnings), pure retained comparer repeats all5,664 arrays, and strict Pyright
+has no errors/warnings. Original bulk arrays/source copies remain untouched.
+
+Measured four-trial MLX used peak5,009,460,504bytes and sampled simultaneous
+active+cache max9,512,195,175bytes are separate from traced host/RSS counters.
+Full-block active+cache varies only168,352bytes; no summed/instantaneous/universal
+capacity claim. Exact policy covers309 source files/4,209 declarations with
+zero gaps and seven recorded findings. Proof:
+`docs/evidence/code-quality/qualification-session-pinned-20261006/parent-integration.json`.
+No production activation/scientific acceptance; caller migration stays with
+its existing owner, including required test-only historical oracle and actual
+source-identity updates. Complete37-rule analysis still fails COV002.

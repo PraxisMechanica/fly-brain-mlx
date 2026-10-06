@@ -193,9 +193,10 @@ Parent checks pass 106 Metal and 66 value/alias/package/canonical-port cases;
 constructor signatures, 55 public values, 31 dtype outcomes and all 30 existing
 fixture assertion ASTs are preserved. Compact proof:
 `docs/evidence/code-quality/session-storage-transparency-20261006/parent-integration.json`.
-The old collector remains active. Pinned transparency and four-trial memory,
-all consumer migrations and complete alias/type/effect/control-flow enforcement
-remain pending; this component is not an architecture or adoption certificate.
+The old collector remains active. The subsequently committed full pinned
+proof establishes bounded transparency/four-trial memory at its recorded
+source; all consumer migrations and complete alias/type/effect/control-flow
+enforcement remain pending. No architecture or adoption certificate is granted.
 
 ## Seeded acquisition and pure input transformations — 2026-10-06
 
@@ -252,6 +253,26 @@ The combined staged comparison passes with the same new analyzer on both sides;
 historical numbers retain their original identities. No bridge, structural or
 scientific pass follows. Compact proof:
 `docs/evidence/code-quality/python-metric-aggregation-20261006/parent-integration.json`.
+
+## Complete pinned observation preservation — 2026-10-07
+
+The committed proof completes the pinned 1,000-step sugar ordinary, legacy
+observed, session, fresh repeat and actual four-trial modes. Parent verifies
+485 raw hashes and independently repeats 5,664 native dtype/shape/byte phase,
+due and complete19-slot queue comparisons. Ten integrity/native controls and
+strict typing pass. All24 class/function bodies and30 assertions remain exact
+when organized into proof values, artifact/memory recording, native modes,
+orchestration and separate run/integrity/retained-array tests. Only regeneration
+uses the current composed RNG seam; executed source identities remain intact.
+
+Four-trial MLX peak used memory is5,009,460,504bytes; sampled simultaneous
+active+cache reaches9,512,195,175bytes. The full-block sampled range spans
+168,352bytes. Traced host and resident counters overlap allocator readings;
+no combined peak is claimed. This proves the measured fixed horizon and
+source only. Other singleton trials/one-second/scientific-matrix obligations
+remain separate. Production caller migration is assigned, with no activation
+in this evidence component. Compact proof:
+`docs/evidence/code-quality/qualification-session-pinned-20261006/parent-integration.json`.
 
 ## Remaining work
 

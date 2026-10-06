@@ -155,7 +155,8 @@ exact source/test rows and reconciles the combined inventory: 289 source/stub
 files at that checkpoint. The subsequent RNG slice reconciles 299 source/stub
 files at that checkpoint. The immutable audit transition reconciles 300
 files at that checkpoint. The corrected metric/index component reconciles 302
-files, 4,137 declaration occurrences and 278 neutral exports. All 62 frozen
+files at that checkpoint. The organized pinned proof reconciles 309 source
+files, 4,209 declaration occurrences and 278 neutral exports. All 62 frozen
 historical/reference records retain provenance. Reconciliation has zero gaps;
 Seven architecture/identifier findings remain after the three proved RNG
 acquisition repairs and immutable audit transition. Candidate neutral observation
