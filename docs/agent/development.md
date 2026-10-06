@@ -23,7 +23,10 @@ and staged/commit metric regression checks. It does not run the complete
 application or scientific suite. Current executable coverage and limits are in
 [quality-coverage.md](quality-coverage.md).
 The [metric provenance](../../tools/code-quality/provenance.json) binds the
-vendored standalone package to its source.
+vendored standalone package to its original source plus the exact qualified
+Python aggregation patch. Version 0.1.1 counts whole-file native decisions;
+older metric numbers retain their original 0.1.0 identity. Both archives remain
+versioned, and provenance/archives/patch are canonical indexed gate inputs.
 
 Hosted execution uses the same command when repository variable
 `QUALITY_CI_TEMP_DB_CACHE_APPROVED` is true. The project authorization in

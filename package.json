@@ -9,7 +9,7 @@
     "quality:check": "code-quality check"
   },
   "devDependencies": {
-    "@eng-metrics/code-quality": "file:tools/code-quality/vendor/eng-metrics-code-quality-0.1.0.tgz"
+    "@eng-metrics/code-quality": "file:tools/code-quality/vendor/eng-metrics-code-quality-0.1.1.tgz"
   },
   "pnpm": {
     "onlyBuiltDependencies": ["@ast-grep/lang-go", "tree-sitter-c-sharp"]

@@ -25,8 +25,14 @@ def indexed_repository(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
         'pnpm-lock.yaml',
         'justfile',
         '.pre-commit-config.yaml',
+        'tools/code-quality/provenance.json',
+        'tools/code-quality/vendor/eng-metrics-code-quality-0.1.0.tgz',
+        'tools/code-quality/vendor/eng-metrics-code-quality-0.1.1.tgz',
+        'tools/code-quality/python-aggregation.patch',
     ):
-        (repo / name).touch()
+        target = repo / name
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.touch()
     policy = repo / 'tools/architecture/ownership.json'
     policy.parent.mkdir(parents=True)
     policy.write_text('{}\n')
@@ -89,11 +95,20 @@ def test_disabling_index_guard_hides_uncommitted_source(
     assert gate.main() == 0
 
 
+@pytest.mark.parametrize(
+    'name',
+    (
+        'tools/architecture/ownership.json',
+        'tools/code-quality/provenance.json',
+        'tools/code-quality/vendor/eng-metrics-code-quality-0.1.0.tgz',
+        'tools/code-quality/vendor/eng-metrics-code-quality-0.1.1.tgz',
+        'tools/code-quality/python-aggregation.patch',
+    ),
+)
 @pytest.mark.parametrize('ignored', (False, True))
-def test_canonical_policy_is_required_until_explicitly_staged(
-    indexed_repository: Path, ignored: bool
+def test_canonical_check_input_is_required_until_explicitly_staged(
+    indexed_repository: Path, name: str, ignored: bool
 ) -> None:
-    name = 'tools/architecture/ownership.json'
     git(indexed_repository, 'rm', '--cached', name)
     if ignored:
         (indexed_repository / '.gitignore').write_text(name + '\n')
@@ -112,10 +127,20 @@ def matching_literals(tree: ast.AST, value: str) -> list[ast.Constant]:
     return [node for node in ast.walk(tree) if matching_literal(node, value)]
 
 
-def test_removing_only_policy_input_loses_the_same_unindexed_metadata_defect(
+@pytest.mark.parametrize(
+    'name',
+    (
+        'tools/architecture/ownership.json',
+        'tools/code-quality/provenance.json',
+        'tools/code-quality/vendor/eng-metrics-code-quality-0.1.0.tgz',
+        'tools/code-quality/vendor/eng-metrics-code-quality-0.1.1.tgz',
+        'tools/code-quality/python-aggregation.patch',
+    ),
+)
+def test_removing_one_canonical_input_loses_its_unindexed_defect(
     indexed_repository: Path,
+    name: str,
 ) -> None:
-    name = 'tools/architecture/ownership.json'
     git(indexed_repository, 'rm', '--cached', name)
     with pytest.raises(ValueError, match='COV001'):
         gate.require_indexed_inputs()

@@ -40,6 +40,10 @@ def require_indexed_inputs() -> None:
             'justfile',
             '.pre-commit-config.yaml',
             'tools/architecture/ownership.json',
+            'tools/code-quality/provenance.json',
+            'tools/code-quality/vendor/eng-metrics-code-quality-0.1.0.tgz',
+            'tools/code-quality/vendor/eng-metrics-code-quality-0.1.1.tgz',
+            'tools/code-quality/python-aggregation.patch',
         )
     )
     if missing := sorted(inputs - indexed):

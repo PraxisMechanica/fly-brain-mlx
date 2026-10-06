@@ -1,0 +1,45 @@
+--- a/package.json
++++ b/package.json
+@@ -1,6 +1,6 @@
+ {
+   "name": "@eng-metrics/code-quality",
+-  "version": "0.1.0",
++  "version": "0.1.1",
+   "type": "module",
+   "description": "Code quality measurements and Git regression gates used by the code-quality application",
+   "engines": {
+\ No newline at end of file
+--- a/src/analyzers.mjs
++++ b/src/analyzers.mjs
+@@ -9,13 +9,14 @@
+ /** @param {string} filePath */
+ export async function analyzePythonComplexity(filePath) {
+     const content = await fs.readFile(filePath, 'utf8');
+-    const { stdout } = await execa('radon', ['cc', '-s', '-j', '-'], { input: content.replace(/^\uFEFF/, '') });
+-    const results = JSON.parse(stdout);
+-    const items = results['-'] ?? [];
+-    if (!Array.isArray(items)) throw new Error(`Radon could not analyze ${filePath}: ${JSON.stringify(items)}`);
++    const program = "import sys\nimport radon\nfrom radon.visitors import ComplexityVisitor\nif radon.__version__ != '6.0.1':\n    raise RuntimeError('Required Radon 6.0.1 is unavailable')\nclass FileDecisionVisitor(ComplexityVisitor):\n    visit_FunctionDef = ComplexityVisitor.generic_visit\n    visit_ClassDef = ComplexityVisitor.generic_visit\nsource = sys.stdin.read()\nprint(str(FileDecisionVisitor.from_code(source).complexity) + ':' + str(len(ComplexityVisitor.from_code(source).blocks)))\n";
++    const { stdout } = await execa('python', ['-c', program], { input: content.replace(/^\uFEFF/, '') });
++    const fields = stdout.trim().split(':');
++    const [cyclomatic, blocks] = fields.map(Number);
++    if (!/^[1-9]\d*:\d+$/.test(stdout.trim()) || fields.length !== 2 || !Number.isSafeInteger(cyclomatic) || cyclomatic < 1 || !Number.isSafeInteger(blocks) || blocks < 0) throw new Error(`Radon could not analyze ${filePath}: ${stdout}`);
+     return {
+-        cyclomatic_complexity: items.length === 0 ? 1 : Math.round(items.reduce((sum, item) => sum + item.complexity, 0) / items.length),
+-        cognitive_complexity: items.length === 0 ? 1 : calculateCognitiveComplexityPython(content),
++        cyclomatic_complexity: cyclomatic,
++        cognitive_complexity: blocks === 0 ? 1 : calculateCognitiveComplexityPython(content),
+         lines_of_code: content.split('\n').filter(line => line.trim() !== '').length,
+     };
+ }
+--- a/src/manifest.mjs
++++ b/src/manifest.mjs
+@@ -37,7 +37,7 @@
+     languages: {
+       javascript: fingerprint({ algorithm: 'javascript-v2', typescript: '5.9.3' }),
+       typescript: fingerprint({ algorithm: 'javascript-v1', language: 'typescript' }),
+-      python: fingerprint({ algorithm: 'python-v2', radon: '6.0.1' }),
++      python: fingerprint({ algorithm: 'python-v3-whole-file', radon: '6.0.1' }),
+       csharp: fingerprint({ algorithm: 'csharp-v3', parser: CSHARP_GRAMMAR_REVISION, astGrep: '0.45.3', symbols: configuredCSharpSymbols() }),
+       go: fingerprint({ algorithm: 'go-v1', parser: '0.0.6', astGrep: '0.45.3' }),
+     },

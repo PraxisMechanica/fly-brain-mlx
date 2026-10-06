@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewed_commit": "fe614726a09252890303c91c8516cc7f840de354",
+  "reviewed_commit": "e9c62fd48c6d36eb1c11502e89191f3cd5836f3d",
   "coverage": "named_declarations_and_syntactic_binding_review",
   "source_roots": [
   "src",
@@ -288,6 +288,7 @@
     "tests/qualification/test_torch_setup.py": {"owner":"qualification","role":"test","declaration_count":8,"declaration_sha256":"d179994c3166087650adcc5e9830a419ab273241e206c2067a11d9adcb7abc9f","binding_sha256":"91745cb899ed70c8a0055190b0194ba463f22d9e8920da0f488b85258b027dba"},
     "tests/quality/__init__.py": {"owner":"quality_gate","role":"package","declaration_count":0,"declaration_sha256":"4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945","binding_sha256":"4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"},
     "tests/quality/hook_fixture.py": {"owner":"quality_gate","role":"test","declaration_count":5,"declaration_sha256":"65b945cbfc71db406cc4d192179bc96bf6c4b44b2463be95e29528ab583a2d21","binding_sha256":"e6a8852a8693a541fc884a1acccaec5b3b6c2ab1759d9894a3a88f2ed71697d0"},
+    "tests/quality/python_metric_fixture.py": {"owner":"quality_gate","role":"test","declaration_count":15,"declaration_sha256":"8e6f4f77bf8095b40d58c3fc8f736e8ea077fcca4bd4c15131f66f9c0a5524d5","binding_sha256":"d6a457c4a7ba3077a2b8fffd7e201d0ca23056d6fd4f0752085c9068a2659dcf"},
     "tests/quality/support.py": {"owner":"quality_gate","role":"test","declaration_count":8,"declaration_sha256":"0debe41fdfbc451854e29075d95cd10435605c099677b28cbc8d022a490baf1c","binding_sha256":"b0d41ed0ff3e77a905393cb2ce1c4b3d4a487f045ab0db5b6cb044b14682734b"},
     "tests/quality/test_architecture_compiler.py": {"owner":"architecture","role":"test","declaration_count":17,"declaration_sha256":"493bbab79c27e387e07a0d481523eab62eb7dfa687d0d579cb6e663aeed7d9df","binding_sha256":"96abfd50f1bea502a10aa1a2552a38a5cbf1a86a52152f6943ec5db24880eb39"},
     "tests/quality/test_architecture_graph.py": {"owner":"architecture","role":"tooling","declaration_count":9,"declaration_sha256":"fe9f6c6858e9e4298f0484d522182a49debd20d44473bd332e96cbcd130756ea","binding_sha256":"acc660ea8866465573dc67abae20bf8470833cd29cad7e23ee798732ebdf9db5"},
@@ -299,10 +300,11 @@
     "tests/quality/test_comparison_rules.py": {"owner":"quality_gate","role":"tooling","declaration_count":9,"declaration_sha256":"4c1063576d868573ccd9251df241790afc01c960b20dc8860e70b65936b95665","binding_sha256":"7af7c0738bbd5fa78fd234e3e1a7c43e171105be3f5cc6e79ec6ba1ea2743444"},
     "tests/quality/test_composition_boundaries.py": {"owner":"quality_gate","role":"tooling","declaration_count":2,"declaration_sha256":"e03990e1dabe9e13ad14b492770c2fa51e03eb344c014126dc6096fb007a9409","binding_sha256":"db8b27612c3920ff1fc7ec2991735646c4407bf857ee5b8445f866f431f4dc62"},
     "tests/quality/test_hooks.py": {"owner":"quality_gate","role":"test","declaration_count":8,"declaration_sha256":"3d2afaeee2ac9f65ad4ef6497f12d5ec38e8aa7777aa5d27747ff6bedba028a0","binding_sha256":"8c55b295bc33f4f5e6d0525185733b2f1dd2e6bfe64994664dd8a04d73ba9ad1"},
-    "tests/quality/test_indexed_inputs.py": {"owner":"quality_gate","role":"test","declaration_count":10,"declaration_sha256":"fef39db978aec5ecc22400eef452964b0ca901cfd10c4d246caeb4510cf4091a","binding_sha256":"b48324afa1c2de931884f571c1e7a0dbd3afefc69800fcb6d8ddf9056bbb3aba"},
+    "tests/quality/test_indexed_inputs.py": {"owner":"quality_gate","role":"test","declaration_count":10,"declaration_sha256":"84bcd4a10525e8760073ab2b63d1a4418a69ce05ce1028af0f94771dbddf1d27","binding_sha256":"d2efd4f19c5f1fac8bfed28d2bfffc8e53106effb6a2261c7450d6476ba32e57"},
     "tests/quality/test_metric_weakening.py": {"owner":"quality_gate","role":"tooling","declaration_count":6,"declaration_sha256":"da6025ada1b7d28dfbc4adfa2063eebc96c6511d77fe0650068de3ef775a1685","binding_sha256":"df255edd345c63d51c1e51d02f0a843089d413bdad68f06cf37a23de145b3051"},
     "tests/quality/test_metrics.py": {"owner":"quality_gate","role":"test","declaration_count":6,"declaration_sha256":"67bfc0821e83e8327088635fedf802d92c58290a97a719c977675705016c8b91","binding_sha256":"3970fd2c19a145d90e5815795eef23be24766dd3fe18718ce8d5c22b01057991"},
     "tests/quality/test_observation_ports.py": {"owner":"quality_gate","role":"test","declaration_count":6,"declaration_sha256":"6856ea22a632859b479d756136b277bbbeb6bf2f89d9d45923d5c830ce639cd2","binding_sha256":"cd970d1400a6059ab731d09ec0c114f880d77541352ee22bef3fde97e56a257c"},
+    "tests/quality/test_python_metrics.py": {"owner":"quality_gate","role":"test","declaration_count":13,"declaration_sha256":"e80f9320b193cd491fdf9b329ee79a08c2dfa7abf12dc1c7a5347e5a344c4d15","binding_sha256":"2c4117fe79d6de924b6ae2c51e1134be60ecbe8671bbfa45ea4e2ae51bf13333"},
     "tests/quality/test_references.py": {"owner":"quality_gate","role":"test","declaration_count":5,"declaration_sha256":"8686df058b706dbad6cf20cfa60dc3a958cb2be4f6997f8a5390e9d0301dfe9d","binding_sha256":"fdbb0d26ca3f4384b2dee2ea46357424fd6799db205ff95a16c4abdcd0652dbe"},
     "tests/quality/test_seeded_inputs.py": {"owner":"architecture","role":"tooling","declaration_count":15,"declaration_sha256":"e0356d74b2b5071fa3f5148b1adbaf19ccaf18bd25a488dca01cab7db0d0f493","binding_sha256":"0e609f4ce829e5119c43d8b30fda4f72f2d1e51fe70303432703a6b9c8b4f433"},
     "tests/quality/test_session_ports.py": {"owner":"quality_gate","role":"tooling","declaration_count":8,"declaration_sha256":"b8de85319b2c91888f13b58dbdd28c837541fe52cdce236e67a676b6969cdac4","binding_sha256":"d4520ddea83274171c4ce2599eed24d26ecf03bdc53b0b0441589d8899a38083"},

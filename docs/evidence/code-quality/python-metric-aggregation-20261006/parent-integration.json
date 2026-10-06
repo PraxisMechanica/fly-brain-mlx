@@ -1,0 +1,64 @@
+{
+  "base": "e9c62fd48c6d36eb1c11502e89191f3cd5836f3d",
+  "worker": "88c6eaa2e8a22db51396393b263d61f20de81870",
+  "confidence_percent": 95,
+  "qualified_source_hashes": 8,
+  "archive_runtime_files_verified": 20,
+  "original_runtime_preserved": true,
+  "isolated_runtime": "/private/tmp/fly-brain-parent-metric-runtime-20261006-01",
+  "new_canonical_inputs": [
+    "tools/code-quality/provenance.json",
+    "tools/code-quality/vendor/eng-metrics-code-quality-0.1.0.tgz",
+    "tools/code-quality/vendor/eng-metrics-code-quality-0.1.1.tgz",
+    "tools/code-quality/python-aggregation.patch"
+  ],
+  "exact_policy_rows": [
+    "tests/quality/python_metric_fixture.py",
+    "tests/quality/test_python_metrics.py",
+    "tools/code_quality/gate.py",
+    "tests/quality/test_indexed_inputs.py"
+  ],
+  "registry": {
+    "files": 302,
+    "declarations": 4137,
+    "unique_symbols": 4035,
+    "gaps": 0,
+    "recorded_findings": 7
+  },
+  "limits": [
+    "Qualified metric identity differs; remeasure both revisions with same new analyzer; preserve prior numbers/reports.",
+    "JS/otherlanguages/health/summary/CQ001-3 unchanged.",
+    "Complete structural enforcement remains ANALYSIS FAILED COV002; no scientific acceptance."
+  ],
+  "parent_tests": {
+    "tests": 85,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "xml": "/private/tmp/fly-brain-metric-parent-tests-20261006-01.xml",
+    "sha256": "c2b4b1420b69bd7c14251c62d90f91db682784f1d2846b368cfdb609d28d5927"
+  },
+  "parent_staged_metrics": {
+    "path": "/private/tmp/fly-brain-metric-parent-staged-20261006-01.json",
+    "sha256": "7bd41b26e77e06effcefedf991653bcc6fed78f8224aa9df3c57ab491cdafa9f",
+    "before": {
+      "total_files": 297,
+      "total_loc": 33593,
+      "avg_cyclomatic_complexity": 20.93,
+      "max_cyclomatic_complexity": 129,
+      "code_health": 35.62,
+      "maintainability_index": 35.62
+    },
+    "after": {
+      "total_files": 299,
+      "total_loc": 34011,
+      "avg_cyclomatic_complexity": 20.89,
+      "max_cyclomatic_complexity": 129,
+      "code_health": 35.64,
+      "maintainability_index": 35.64
+    },
+    "passed": true,
+    "findings": []
+  },
+  "initial_parent_patch_error": "First text diff omitted binary data; git apply rejected archive atomically. Retained failure and reapplied full-index/binary patch; exact authored archive verified."
+}

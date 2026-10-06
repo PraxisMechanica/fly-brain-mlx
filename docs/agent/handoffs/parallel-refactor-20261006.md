@@ -84,9 +84,10 @@ migration waits for verified audit integration and complete pinned proof.
 The session owner currently writes pinned-proof tests/evidence only. Shared
 ports/bootstrap/parity source is no longer concurrently edited. Native bridge splitting remains exclusive to the symbols owner;
 every new native_types_*.mjs module needs source/index/type coverage on
-integration. The verified metric review finds a Python undercount; its same owner now
-qualifies a Python-only correction in an isolated clone/runtime. Original
-packages/reports and JavaScript/health/summary/CQ001–3 rules stay preserved.
+integration. The qualified Python-only metric correction is committed as `88c6eaa`; parent
+measurement/index tests pass on combined source with an isolated runtime.
+Original packages/reports and JavaScript/health/summary/CQ001–3 rules remain
+preserved. The metric owner has finished its bounded handoff.
 The bridge candidate remains metric-rejected and uncommitted; no threshold
 or guard is weakened.
 

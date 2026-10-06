@@ -1,0 +1,18 @@
+[
+  {
+    "field": "cyclomatic",
+    "invalid_output": "9007199254740992:0",
+    "strong_exit": 2,
+    "weakened_exit": 0,
+    "close_output": "9007199254740991:0",
+    "close_exit": 0
+  },
+  {
+    "field": "blocks",
+    "invalid_output": "1:9007199254740992",
+    "strong_exit": 2,
+    "weakened_exit": 0,
+    "close_output": "1:9007199254740991",
+    "close_exit": 0
+  }
+]

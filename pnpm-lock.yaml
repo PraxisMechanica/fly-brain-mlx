@@ -9,8 +9,8 @@ importers:
   .:
     devDependencies:
       '@eng-metrics/code-quality':
-        specifier: file:tools/code-quality/vendor/eng-metrics-code-quality-0.1.0.tgz
-        version: file:tools/code-quality/vendor/eng-metrics-code-quality-0.1.0.tgz
+        specifier: file:tools/code-quality/vendor/eng-metrics-code-quality-0.1.1.tgz
+        version: file:tools/code-quality/vendor/eng-metrics-code-quality-0.1.1.tgz
 
 packages:
 
@@ -83,9 +83,9 @@ packages:
   '@ast-grep/setup-lang@0.0.6':
     resolution: {integrity: sha512-aSYZNF5nGQMxnwiA3Lcc8zi0AtpGlug47ADgqCgP/2n7p922FbnW7vo1rbW4kKjW72B/3mDdN7uvYidv8JnPnw==}
 
-  '@eng-metrics/code-quality@file:tools/code-quality/vendor/eng-metrics-code-quality-0.1.0.tgz':
-    resolution: {integrity: sha512-KgxK6g3UUOEqUKdcrDs6Ndrt6T+Crv5uZRt1BF0OI4Vs+p1IneG3DztnDTkPauiyKH1mDGiRZRfZ3lPi6Aquwg==, tarball: file:tools/code-quality/vendor/eng-metrics-code-quality-0.1.0.tgz}
-    version: 0.1.0
+  '@eng-metrics/code-quality@file:tools/code-quality/vendor/eng-metrics-code-quality-0.1.1.tgz':
+    resolution: {integrity: sha512-gZ6QgYtEzF5eG3ME+l/a497MHEYSRrmjrLIIpx66rSlmLVSEawi/etD5osB61aa8ggS814rrXvK6kOUa2c2iIQ==, tarball: file:tools/code-quality/vendor/eng-metrics-code-quality-0.1.1.tgz}
+    version: 0.1.1
     engines: {node: '>=22'}
     hasBin: true
 
@@ -264,7 +264,7 @@ snapshots:
 
   '@ast-grep/setup-lang@0.0.6': {}
 
-  '@eng-metrics/code-quality@file:tools/code-quality/vendor/eng-metrics-code-quality-0.1.0.tgz':
+  '@eng-metrics/code-quality@file:tools/code-quality/vendor/eng-metrics-code-quality-0.1.1.tgz':
     dependencies:
       '@ast-grep/lang-go': 0.0.6
       '@ast-grep/napi': 0.45.3

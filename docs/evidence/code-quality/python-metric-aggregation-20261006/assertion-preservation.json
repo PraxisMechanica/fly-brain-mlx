@@ -1,0 +1,15 @@
+{
+  "approval": "Parent approved one provenance invariant; retain both raw and metadata SHA comparisons and every prior tuple comparison.",
+  "before_sha256": "780b3ea4240149147d14323304fbac13265664024767f605f4cc5bb316f21e61",
+  "after_sha256": "6c83e872004a474e5ad7287a3ce581d7a3861e63381d463163228a1e7fae7dc3",
+  "before_assertions": [
+    "assert (hashlib.sha256(BASE_ARCHIVE.read_bytes()).hexdigest(), hashlib.sha256(ARCHIVE.read_bytes()).hexdigest(), hashlib.sha256(PATCH.read_bytes()).hexdigest(), applied.returncode, {name: (original / name).read_bytes() for name in before}, {name: (ENGINE.parent.parent / name).read_bytes() for name in after}, {name: hashlib.sha256(value).hexdigest() for (name, value) in after.items()}, sorted((name for name in before if before[name] != after[name]))) == ('57e0ff1d7aa9d8ae627b5385795470b46ea29dcae8ff186f5432c58a410956a7', provenance['archive_sha256'], patch['sha256'], 0, after, after, {name: object_value(value)['sha256'] for (name, value) in files.items()}, ['package.json', 'src/analyzers.mjs', 'src/manifest.mjs'])",
+    "assert base['archive_sha256'] == '57e0ff1d7aa9d8ae627b5385795470b46ea29dcae8ff186f5432c58a410956a7'"
+  ],
+  "after_assertions": [
+    "assert (hashlib.sha256(BASE_ARCHIVE.read_bytes()).hexdigest(), base['archive_sha256'], hashlib.sha256(ARCHIVE.read_bytes()).hexdigest(), hashlib.sha256(PATCH.read_bytes()).hexdigest(), applied.returncode, {name: (original / name).read_bytes() for name in before}, {name: (ENGINE.parent.parent / name).read_bytes() for name in after}, {name: hashlib.sha256(value).hexdigest() for (name, value) in after.items()}, sorted((name for name in before if before[name] != after[name]))) == ('57e0ff1d7aa9d8ae627b5385795470b46ea29dcae8ff186f5432c58a410956a7', '57e0ff1d7aa9d8ae627b5385795470b46ea29dcae8ff186f5432c58a410956a7', provenance['archive_sha256'], patch['sha256'], 0, after, after, {name: object_value(value)['sha256'] for (name, value) in files.items()}, ['package.json', 'src/analyzers.mjs', 'src/manifest.mjs'])"
+  ],
+  "all_original_tuple_comparisons_preserved": true,
+  "separate_base_metadata_comparison_preserved": true,
+  "independent_fixture_cases_removed": 0
+}

@@ -233,6 +233,26 @@ STATE002 finding is cleared. Complete alias/effect/control-flow and historical
 coverage remain COV002. Compact proof:
 `docs/evidence/code-quality/immutable-audit-transition-20261006/parent-integration.json`.
 
+## Corrected Python metric aggregation — 2026-10-06
+
+The pinned metric specification counts one file baseline plus native decisions.
+Python formerly averaged top-level Radon block records and missed module/nested
+decisions; a 21-to-22 decision regression could report 2-to-2. The qualified
+0.1.1 package fixes only Python aggregation, preserves native decision weights,
+cognitive/line fields, other languages, health/summary and CQ001–3 predicates,
+and changes the Python cache identity. Original archives/reports stay retained.
+
+Parent verification passes 85 measurement/index/predicate cases. Missing or
+ignored provenance, both archives and the authored patch fail COV001 until
+staged; omitting each exact input loses its own diagnostic. Masked regressions,
+staging/every-parent repair, scope/error/version/protocol/numeric weakening and
+old/new cache/manifest rejection remain independently verified. All 20 installed
+files match the qualified archive; original shared dependencies remain intact.
+The combined staged comparison passes with the same new analyzer on both sides;
+historical numbers retain their original identities. No bridge, structural or
+scientific pass follows. Compact proof:
+`docs/evidence/code-quality/python-metric-aggregation-20261006/parent-integration.json`.
+
 ## Remaining work
 
 Maintain the reviewed inventory as source changes, complete all remaining

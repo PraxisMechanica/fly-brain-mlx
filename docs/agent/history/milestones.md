@@ -1578,3 +1578,29 @@ and complete37-rule COV002 remain. Compact proof:
 No numerical mode, backend/reference/queue/ledger/provider/RNG/serialization or
 scientific acceptance changes. Identifier boundary review remains read-only;
 collector migration waits for complete committed pinned preservation evidence.
+
+
+### Python whole-file metric correction — 2026-10-06
+
+Worker `88c6eaa2e8a22db51396393b263d61f20de81870` corrects the documented
+whole-file Radon aggregation, changing only Python algorithm/cache identity and
+package version to 0.1.1. Original package archive/reports and shared runtime
+remain unchanged. The exact authored patch reconstructs all 20 installed files;
+36 native dependency version pairs and lock resolutions remain equal. A fresh
+frozen offline runtime install reuses 37 packages with zero downloads.
+
+Parent at `e9c62fd` verifies eight committed input hashes, all 20 archive/runtime
+files and original 20 shared runtime files. Only its own dependency link moves
+to the independently verified runtime. The first application failed atomically
+because a text diff omitted binary archive data; the corrected full-index/binary
+patch is applied and verified. Exact policy merge adds two quality fixture rows
+and updates the canonical input guards. Parent tests pass 85 cases with no
+failures/errors/skips; same qualified analyzer on both staged sides passes
+mean/max 20.93/129 to 20.89/129 and health/maintainability 35.62 to 35.64.
+Missing/ignored provenance, both archives and patch reject until staged; each
+individual weakening loses its diagnostic. No baseline/threshold/source-padding
+change. Worker initial health rejection and genuine preservation of both archive
+SHA checks within one provenance invariant stay recorded. Full structural
+coverage remains COV002 with seven recorded findings, and no bridge/scientific
+acceptance is granted. Compact proof:
+`docs/evidence/code-quality/python-metric-aggregation-20261006/parent-integration.json`.

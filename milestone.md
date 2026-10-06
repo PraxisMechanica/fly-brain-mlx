@@ -74,8 +74,8 @@ Completion requires:
   process 62191 remains designated suspended; do not resume or discard it
   without resolving its original-mode evidence. [Pause record](docs/evidence/execution-time-investigation/pause.json).
 - The latest delivered refactor checkpoint is
-  `fe614726a09252890303c91c8516cc7f840de354` on `origin/main`, followed by the
-  verified immutable-audit correction in this source. Clock and actual-row repairs,
+  `e9c62fd48c6d36eb1c11502e89191f3cd5836f3d` on `origin/main`, followed by the
+  verified Python metric correction in this source. Clock and actual-row repairs,
   pure comparison rules, owned command composition, native symbol/graph
   foundations, reviewed ownership and runtime-parent decisions are delivered.
   Required local commit/push hooks and each configured hosted job passed. The
