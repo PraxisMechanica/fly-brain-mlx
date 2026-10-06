@@ -4,17 +4,20 @@ from pathlib import Path
 
 import numpy as np
 
-from fly_brain.simulation.backend import core
-from fly_brain.simulation.backend.engines import Execution
+from fly_brain.qualification.ports import ObservationSessionFactory
+from fly_brain.qualification.session_blocks import SessionBlock
+from fly_brain.qualification.session_expectations import CHECK_NAMES
+from fly_brain.qualification.session_observer import observe_session
 from fly_brain.simulation.models import Connectome, Stimulus
 
-from .mlx_ledger import CHECK_NAMES, EventLedger
-from .mlx_observer import MLXBlock, observe
 from .paired_observer import phase_hash, trial_block
 
 
 def collect(
-    execution: Execution, connectome: Connectome, stimulus: Stimulus, output: Path
+    factory: ObservationSessionFactory,
+    connectome: Connectome,
+    stimulus: Stimulus,
+    output: Path,
 ) -> None:
     events = stimulus.events
     if (
@@ -25,22 +28,22 @@ def collect(
         or events.dtype != np.uint8
         or np.any(events > 1)
         or stimulus.trial_indices != (0, 1, 2, 3)
-        or execution.network.neurons != len(connectome.neuron_ids)
     ):
         raise ValueError('MLX batch collection requires four complete canonical trials')
     output.mkdir(parents=True, exist_ok=False)
     trials: list[int] = []
     neurons: list[int] = []
     steps: list[int] = []
-    last: MLXBlock | None = None
+    last: SessionBlock | None = None
     completed = 0
     with (
         closing(
-            observe(
-                execution,
-                core.initial_state(execution.network, 4),
+            observe_session(
+                factory,
+                connectome,
+                stimulus.targets,
+                stimulus.trial_indices,
                 events,
-                EventLedger(connectome, stimulus.targets, 4),
             )
         ) as blocks,
         (output / 'phase-digests.jsonl').open('x') as phases,

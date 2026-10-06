@@ -1,0 +1,217 @@
+{
+  "base_commit": "e923c316342978e03a74c1455336e43a651ef6b0",
+  "confidence": 0.95,
+  "scope": "Activate the already-qualified opaque session boundary through all assigned MLX observation callers, preserving numerical/scientific/output behavior. No remaining matrix, new numerical mode, performance change, reference reuse or case acceptance.",
+  "owned_files": [
+    "src/fly_brain/bootstrap.py",
+    "src/fly_brain/qualification/adapters/batch_environment.py",
+    "src/fly_brain/qualification/adapters/case_execution.py",
+    "src/fly_brain/qualification/adapters/mlx_batch_collect.py",
+    "src/fly_brain/qualification/adapters/paired_collect.py",
+    "src/fly_brain/qualification/adapters/paired_observer.py",
+    "src/fly_brain/qualification/adapters/parity_case.py",
+    "src/fly_brain/qualification/ports.py",
+    "src/fly_brain/simulation/observation_module.py",
+    "tests/integration/test_batch_environment.py",
+    "tests/qualification/test_batch_verify.py",
+    "tests/qualification/test_case_execution.py",
+    "tests/qualification/test_mlx_batch_collect.py",
+    "tests/qualification/test_mlx_ledger.py",
+    "tests/qualification/test_mlx_observer.py",
+    "tests/qualification/test_paired_collect.py",
+    "tests/qualification/test_paired_observer.py",
+    "tests/qualification/test_parity_case.py",
+    "tests/unit/test_audit_transition.py",
+    "tests/unit/test_composition.py",
+    "tests/support/legacy_mlx_ledger.py",
+    "tests/support/legacy_mlx_observer.py",
+    "tests/support/session_block_values.py",
+    "tests/quality/test_active_session_boundary.py",
+    "src/fly_brain/qualification/adapters/mlx_ledger.py",
+    "src/fly_brain/qualification/adapters/mlx_observer.py"
+  ],
+  "api": {
+    "required_consumer_port": "qualification.ports.ObservationAssembly(connectome, targets, silenced, precision) -> (ObservationSessionFactory, ReductionReader)",
+    "paired_and_case_execution": "Required ObservationSessionFactory instead of concrete Execution; fresh session per first/repeat; no native state/network/trace/device access.",
+    "batch": "Required ObservationSessionFactory; canonical0/1/2/3 and all30 checks, native phases/due/19queues/final arrays retained.",
+    "neutral_values": "SessionBlock with typed immutable snapshots; trial_block uses its explicit public constructor and carries trial/slot identities.",
+    "simulation_assembly": "build_observation_assembly preloads/constructs only owned constructors and returns a typed binding factory; it prepares at the existing preparing-engines stage, creates fresh state per session, and returns the actual unchanged ReductionReader. Importing observation_module alone remains engine-free.",
+    "retirement": "Production mlx_observer/mlx_ledger removed. Exact historical ledger and observer with only its peer import changed remain test-only; no production fallback/import.",
+    "immutable_audit": "audit_block returns/rebinds remain AST-exact; causal_capture stores new audit before contexts and remains byte-exact."
+  },
+  "preservation": {
+    "production_unchanged": 106,
+    "changed_production": [
+      "src/fly_brain/bootstrap.py",
+      "src/fly_brain/qualification/adapters/batch_environment.py",
+      "src/fly_brain/qualification/adapters/case_execution.py",
+      "src/fly_brain/qualification/adapters/mlx_batch_collect.py",
+      "src/fly_brain/qualification/adapters/mlx_ledger.py",
+      "src/fly_brain/qualification/adapters/mlx_observer.py",
+      "src/fly_brain/qualification/adapters/paired_collect.py",
+      "src/fly_brain/qualification/adapters/paired_observer.py",
+      "src/fly_brain/qualification/adapters/parity_case.py",
+      "src/fly_brain/qualification/ports.py",
+      "src/fly_brain/simulation/observation_module.py"
+    ],
+    "backend_reducer_reference_torch_weight_reader_session_expectations_values_blocks_capture_bytes_unchanged": true,
+    "audit_block_and_environment_predicate_AST_exact": true,
+    "all_original_test_assertion_AST_exact": true,
+    "native_array_dtype_shape_byte_comparisons": 1288,
+    "serialized_phase_physical_causal_records_equal": 77,
+    "path_normalization": "Only different fresh output root prefixes in context artifact paths; no numerical/digest/key/value normalization.",
+    "new_scientific_acceptances": 0,
+    "original_checks_and_thresholds_unchanged": true
+  },
+  "tests": {
+    "baseline": {
+      "tests": 79,
+      "elapsed_s": 126.024,
+      "path": "/private/tmp/fly-brain-active-session-migration-20261007-01/baseline.xml",
+      "sha256": "761b64f4c6815c64b52e701fef9122257901d604ac9fa387b485ec1cd5be1b87",
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "candidate": {
+      "tests": 135,
+      "elapsed_s": 134.993,
+      "path": "/private/tmp/fly-brain-active-session-migration-20261007-01/candidate.xml",
+      "sha256": "c319eb285d39677678361bca81d47b478ee66feebf7509b97a4052239c3c7bfc",
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "cpu-fixed": {
+      "tests": 128,
+      "elapsed_s": 1.488,
+      "path": "/private/tmp/fly-brain-active-session-migration-20261007-01/cpu-fixed.xml",
+      "sha256": "af4209b64830c08e939a7e0516651b36fc185712a95d42644789a6104831074f",
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "boundary": {
+      "tests": 26,
+      "elapsed_s": 36.747,
+      "path": "/private/tmp/fly-brain-active-session-migration-20261007-01/boundary.xml",
+      "sha256": "22686d3f7b423500ad5f5a5db141e4363fe61ef9dfaa4fc99b33cc6d5968403a",
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "projection-native": {
+      "tests": 5,
+      "elapsed_s": 67.406,
+      "path": "/private/tmp/fly-brain-active-session-migration-20261007-01/projection-native.xml",
+      "sha256": "91dcfe631bdbf737fbb33be0c593c5076d8dedc475ffb67ff457450739b8fa6e",
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "source_boundary": {
+    "native_graph_contract": "DEP001/DEP003: Active qualification uses injected observation sessions",
+    "scopes": [
+      "paired_collect",
+      "mlx_batch_collect",
+      "case_execution",
+      "paired_observer",
+      "paired_causes",
+      "parity_case"
+    ],
+    "forbidden": [
+      "fly_brain.simulation.backend",
+      "fly_brain.simulation.observation_module"
+    ],
+    "rejection_repair_and_weakening_cases": 26,
+    "coverage": "Import/source paths including aliases, type-only, transitive helper, reexport, captured use and factory-return dependency; not complete type/alias/effect/37-rule enforcement. Actual source tested with canonical-derived temporary contract; parent owns final shared pyproject join.",
+    "shared_pyproject_changed": false
+  },
+  "source_identity": {
+    "required_actual_execution_modules": 43,
+    "candidate_real_environment_contains_every_required_module": true,
+    "version_launch_hash_reuse_error_predicates_unchanged": true,
+    "no_old_cache_or_acceptance_transferred": true
+  },
+  "policy_delta": {
+    "exact_owned_rows": 26,
+    "top_level_resources_identifiers_findings_absences_limits_unchanged": true,
+    "path": "/private/tmp/fly-brain-active-session-migration-20261007-01/ownership-delta.json",
+    "sha256": "41f691b825fcf76f3fb569a48321a24ae8128ea01efb5ed7aa3e488d9eca61a1",
+    "parent_merges_serially": true
+  },
+  "raw_evidence": {
+    "root": "/private/tmp/fly-brain-active-session-migration-20261007-01",
+    "source_preflight": {
+      "path": "/private/tmp/fly-brain-active-session-migration-20261007-01/preflight.json",
+      "sha256": "7add44d18889f0a55afa0cd112dbdb1e844a6503a412ce419538044eb4e635ce"
+    },
+    "source_preservation": {
+      "path": "/private/tmp/fly-brain-active-session-migration-20261007-01/source-preservation.json",
+      "sha256": "9c42307d4484d320b2353100ed11e40b94b9e28688cb52618035c4110f8bf300"
+    },
+    "output_preservation": {
+      "path": "/private/tmp/fly-brain-active-session-migration-20261007-01/output-preservation.json",
+      "sha256": "b94c1057318d243f78bae0c5a0e42bd69a338476bac18d4a298def4b05812387"
+    },
+    "old_pinned_proof_preserved": "/private/tmp/fly-brain-session-pinned-20261006-01 and original a58/c110 clone unchanged; parent integrated separated proof artifacts independently.",
+    "manifest": {
+      "path": "/private/tmp/fly-brain-active-session-migration-20261007-01/raw-manifest-precommit.json",
+      "sha256": "9523b16d264447b607823b1060b648819b1580c3ef318c38c2411f18c86f7856",
+      "files": 9643,
+      "bytes": 135989292,
+      "postcommit": "raw-manifest-delivery.json and delivery.json retain actual hook/commit identity; bulk/raws remain external."
+    }
+  },
+  "commands": {
+    "baseline": "uv run --locked --no-sync python -m pytest -q --disable-warnings tests/qualification/{test_mlx_observer,test_mlx_ledger,test_paired_observer,test_paired_collect,test_mlx_batch_collect,test_case_execution,test_batch_verify}.py --basetemp=RAW/baseline-pytest --artifact-output=RAW/baseline-native --junitxml=RAW/baseline.xml",
+    "candidate": "same seven modules plus test_observation_session.py test_observation_session_faults.py test_parity_case.py with fresh candidate-pytest/candidate-native and candidate.xml; MLX_ENABLE_TF32=0",
+    "cpu": "python -m pytest -q tests/unit/{test_audit_transition,test_composition,test_parity_options}.py tests/integration/{test_session_package,test_package,test_batch_environment}.py, fresh cpu-fixed directory and XML",
+    "boundaries": "python -m pytest -q tests/quality/test_active_session_boundary.py, fresh boundary directory and XML",
+    "required_gate": "env -u QUALITY_BASE -u QUALITY_HEAD UV_CACHE_DIR=/private/tmp/fly-brain-documentation-uv-cache-20261005 PYTHONPATH=/private/tmp/fly-brain-session-migration-20261006-01/src:/private/tmp/fly-brain-session-migration-20261006-01 PRE_COMMIT_HOME=/private/tmp/fly-brain-session-migration-precommit-20261007-01 just check"
+  },
+  "failures_and_limits": [
+    "Initial fixture float32 arrays violated the existing neutral initial-value float64 type contract; changed only their exact integer-valued test inputs to float64; native values remain original float32 and native comparisons pass.",
+    "Initial CPU composition fixture did not stub the injected observation assembly and failed at sandboxed Metal import; fixed only the mock constructor seam, preserving every original ordering/assertion.",
+    "Ruff simplified a constant setattr into unsupported ModuleType attribute access; the test module dictionary seam passes both Ruff and strict Pyright.",
+    "First owned-policy row writer and its re-run rejected an invalid delimiter/missing retired row before writing; a later final-row refresh introduced a trailing delimiter, causing three live-registry failures in the first full gate (340 passed). Fixed JSON; zero review findings across304 sources; full gate is rerun.",
+    "The next full gate passed343quality cases but rejected four local test-only slicing-helper branching nodes (CQ00218\u219222). The approved projection moved to neutral test-value ownership, all assertions/slice behavior remain exact, affected5realcases and18metadata/value cases pass, and full metrics now pass unchanged.",
+    "Existing Brian2/pyparsing warnings retained; no scientific/native output mismatch in tested scope.",
+    "43-source required minimum must be reconciled by parent with its separately allocated exact digest type and separated pinned-proof helpers; no edits to those files here.",
+    "Source-only contract remains prospective until parent merges final shared pyproject configuration. Complete37-rule coverage stays separate.",
+    "Prior pinned proof is separately accepted; no new full pinned/one-second313-block/scientific matrix or separate new cache/acceptance claim. Suspended62191 and original data/evidence untouched."
+  ],
+  "required_gate": {
+    "result": "PASS",
+    "ruff_format": "PASS",
+    "ruff_lint": "PASS",
+    "strict_pyright_errors": 0,
+    "canonical_import_contracts_kept": 4,
+    "quality_cases_passed": 343,
+    "metrics": "PASS, no rule/config weakening",
+    "before": {
+      "files": 299,
+      "lines": 34011,
+      "average_complexity": 20.89,
+      "max_complexity": 129,
+      "code_health": 35.64
+    },
+    "after": {
+      "files": 301,
+      "lines": 34317,
+      "average_complexity": 20.82,
+      "max_complexity": 129,
+      "code_health": 35.69
+    },
+    "path": "/private/tmp/fly-brain-active-session-migration-20261007-01/just-check-projection.txt",
+    "sha256": "3c35c1a7ec59abdb8e3a7f264988e5200d1c0af6fc8c21f12c5ed8a8cdb44416",
+    "native_commit_hook": "Required full hook will run before committed handoff; postcommit delivery binds actual result and SHA."
+  },
+  "trial_projection": {
+    "role": "Test-only neutral trial-axis projection plus immutable capture, no new branch/policy/device/cast/padding. Original assertion AST unchanged.",
+    "typed_alias_value_cases": 18,
+    "path": "/private/tmp/fly-brain-active-session-migration-20261007-01/trial-field-varied-preservation.json",
+    "sha256": "f2978e004442d739a5a7447892eaa8fd1974d230eafd8169767fbaebfccad2a6"
+  }
+}

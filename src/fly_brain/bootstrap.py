@@ -165,12 +165,21 @@ def parity_case() -> ParityCommand:
     precision = configure_mlx()
     import torch
 
+    from fly_brain.simulation.observation_module import build_observation_assembly
+
+    assemble_observations = build_observation_assembly()
     from fly_brain.qualification.adapters.parity_case import run
     from fly_brain.qualification.module import build_parity_case
 
     torch.set_num_threads(1)
     return build_parity_case(
-        pinned_inputs(), partial(run, precision=precision, generate=stimulus())
+        pinned_inputs(),
+        partial(
+            run,
+            precision=precision,
+            generate=stimulus(),
+            assemble_observations=assemble_observations,
+        ),
     )
 
 

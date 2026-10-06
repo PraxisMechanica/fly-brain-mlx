@@ -1,10 +1,10 @@
 import subprocess
 import sys
 from collections.abc import Callable
-from dataclasses import FrozenInstanceError, asdict, dataclass, replace
+from dataclasses import FrozenInstanceError, asdict, replace
 from pathlib import Path
 from types import ModuleType
-from typing import TYPE_CHECKING, Protocol, cast
+from typing import Protocol, cast
 
 import numpy as np
 import pytest
@@ -23,26 +23,13 @@ from fly_brain.qualification.causality import (
     StateFields,
     advance_audit,
 )
+from fly_brain.qualification.session_blocks import SessionBlock
 from fly_brain.simulation.observations import HostArray
-
-if TYPE_CHECKING:
-    from fly_brain.qualification.adapters.mlx_observer import MLXBlock
+from tests.support.session_block_values import replace_block
 
 pytestmark = pytest.mark.unit
 BASE = 'b8d490a35b75d7b4fea9f8799a7554bae1888e49'
 ROOT = Path(__file__).resolve().parents[2]
-
-
-@dataclass(frozen=True)
-class HostBlock:
-    begin: int
-    rows: int
-    fields: dict[str, HostArray]
-    checks: NDArray[np.bool_]
-    queue_sha256: tuple[str, ...]
-    final_queue: NDArray[np.bool_] | None
-    due_edges: tuple[tuple[NDArray[np.int32], ...], ...]
-    due_sha256: tuple[tuple[str, ...], ...]
 
 
 class Legacy(Protocol):
@@ -164,19 +151,21 @@ def block(
         )
         for step in range(begin, begin + rows)
     )
-    mlx = HostBlock(
+    mlx = SessionBlock(
         begin,
         rows,
+        (0,),
         actual,
         np.ones((rows, 1, 30), dtype=np.bool_),
         ('queue',),
+        (('slot',) * 19,),
         None,
         tuple((np.array([], dtype=np.int32),) for _ in range(rows)),
         tuple(('due',) for _ in range(rows)),
     )
     return PairedBlock(
         PhaseBlock(begin, rows, reference),
-        cast('MLXBlock', mlx),
+        mlx,
         snapshots,
         ('reference', 'actual'),
     )
@@ -245,7 +234,10 @@ def test_missing_field_exposes_old_partial_mutation_but_new_retry_is_clean(
 def test_failed_block_does_not_publish_partial_audit_or_capture_context() -> None:
     capture = CausalCapture()
     broken = block(0, 2)
-    cast(NDArray[np.float32], broken.mlx.fields['pre_g'])[1, 0, 0] = np.nan
+    fields = dict(broken.mlx.fields)
+    fields['pre_g'] = fields['pre_g'].copy()
+    cast(NDArray[np.float32], fields['pre_g'])[1, 0, 0] = np.nan
+    broken = replace(broken, mlx=replace_block(broken.mlx, fields=fields))
     with pytest.raises(ValueError, match='finite'):
         capture.check(broken)
     assert capture.audit == CausalAudit() and capture.previous is None

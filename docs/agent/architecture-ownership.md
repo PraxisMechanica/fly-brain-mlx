@@ -163,6 +163,8 @@ files, 4,209 declaration occurrences and 278 neutral exports. All 62 frozen
 historical/reference records retain provenance. Reconciliation has zero gaps.
 The digest repair reconciles 311 source files, 4,226 declaration occurrences
 and 279 neutral exports, retaining all 62 frozen records with zero gaps.
+The active session join reconciles 314 source files, 4,241 declaration
+occurrences, 281 neutral exports and 64 frozen records with zero mapping gaps.
 Six architecture/identifier findings remain after the three proved RNG
 acquisition repairs, immutable audit transition and digest typing repair.
 Candidate neutral observation values/ports and local assembly sites have exact entries; private helper

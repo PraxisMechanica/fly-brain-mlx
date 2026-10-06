@@ -193,7 +193,7 @@ Parent checks pass 106 Metal and 66 value/alias/package/canonical-port cases;
 constructor signatures, 55 public values, 31 dtype outcomes and all 30 existing
 fixture assertion ASTs are preserved. Compact proof:
 `docs/evidence/code-quality/session-storage-transparency-20261006/parent-integration.json`.
-The old collector remains active. The subsequently committed full pinned
+The old collector remained active at that checkpoint. The subsequently committed full pinned
 proof establishes bounded transparency/four-trial memory at its recorded
 source; all consumer migrations and complete alias/type/effect/control-flow
 enforcement remain pending. No architecture or adoption certificate is granted.
@@ -270,8 +270,8 @@ active+cache reaches9,512,195,175bytes. The full-block sampled range spans
 168,352bytes. Traced host and resident counters overlap allocator readings;
 no combined peak is claimed. This proves the measured fixed horizon and
 source only. Other singleton trials/one-second/scientific-matrix obligations
-remain separate. Production caller migration is assigned, with no activation
-in this evidence component. Compact proof:
+remain separate. This evidence component did not activate production callers;
+the later active-caller section records their verified migration. Compact proof:
 `docs/evidence/code-quality/qualification-session-pinned-20261006/parent-integration.json`.
 
 ## Reference producer digest boundary — 2026-10-07
@@ -289,6 +289,25 @@ still passes native typing; conversion-site, lifecycle, complete 37-rule analysi
 and reference sealing/reuse remain separate work. Six recorded findings and
 COV002 remain. Compact proof:
 `docs/evidence/code-quality/reference-digest-boundary-20261007/parent-integration.json`.
+
+## Active observation-session callers — 2026-10-07
+
+Paired, batch, case and parity observation consumers now require neutral session
+factories/blocks; bootstrap supplies the simulation-owned assembly and actual
+reduction reader. Former production observer/ledger code remains only as exact
+historical test oracles. Parent passes 234 package/source/ownership cases and
+145 real native/reference/integrity cases, retaining 156 upstream warnings.
+Independent retained comparison repeats 1,288 native dtype/shape/byte arrays and
+77 serialized phase/physical/causal records, normalizing only fresh output roots.
+
+The canonical fifth import contract protects six actual consumer scopes from
+backend and observation-module paths. Thirteen native hook controls exercise the
+actual configured scopes, neutral repairs and individual scope/transitivity
+weakening; the worker's 26 alias/type/re-export/capture/factory controls remain.
+The exact 43-source numerical/observer minimum, two frozen test oracles, all
+original assertions, 107 other production sources and six proof bodies remain
+preserved. No acceptance/cache transfers or complete37-rule pass follows. Proof:
+`docs/evidence/code-quality/active-session-migration-20261006/parent-integration.json`.
 
 ## Remaining work
 

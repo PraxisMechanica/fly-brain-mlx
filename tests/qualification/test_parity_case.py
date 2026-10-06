@@ -12,6 +12,7 @@ from fly_brain.qualification.models import ParityCase
 from fly_brain.simulation.experiments import P9_IDS
 from fly_brain.simulation.models import InputPin
 from fly_brain.simulation.module import build_stimulus
+from fly_brain.simulation.observation_module import build_observation_assembly
 from tests.qualification.test_mlx_observer import fixture
 
 pytestmark = [pytest.mark.integration, pytest.mark.reference, pytest.mark.metal]
@@ -34,6 +35,7 @@ def test_driver_runs_prescribed_p9_protocol_without_accepting_a_small_connectome
             tmp_path / 'case',
             precision,
             generate=build_stimulus(uniforms),
+            assemble_observations=build_observation_assembly(),
         )
         with pytest.raises(FileExistsError):
             run(
@@ -43,6 +45,7 @@ def test_driver_runs_prescribed_p9_protocol_without_accepting_a_small_connectome
                 tmp_path / 'case',
                 precision,
                 generate=build_stimulus(uniforms),
+                assemble_observations=build_observation_assembly(),
             )
     finally:
         torch.set_num_threads(threads)

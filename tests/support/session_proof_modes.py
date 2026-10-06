@@ -5,8 +5,6 @@ import mlx.core as mx
 import numpy as np
 from numpy.typing import NDArray
 
-from fly_brain.qualification.adapters.mlx_ledger import EventLedger
-from fly_brain.qualification.adapters.mlx_observer import observe, phase_fields
 from fly_brain.qualification.ports import (
     ObservationSession,
     ObservationSessionFactory,
@@ -26,6 +24,8 @@ from fly_brain.simulation.observations import (
     ObservationOperands,
     PhysicalQueueObservation,
 )
+from tests.support.legacy_mlx_ledger import EventLedger
+from tests.support.legacy_mlx_observer import observe, phase_fields
 from tests.support.session_proof_recorder import Recorder
 from tests.support.session_proof_values import Frame
 

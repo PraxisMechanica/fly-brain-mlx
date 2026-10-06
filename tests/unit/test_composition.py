@@ -403,6 +403,10 @@ def test_bootstrap_factories_preserve_configuration_order_without_workflow_effec
             )
         monkeypatch.setitem(sys.modules, name, module)
 
+    observations = ModuleType('fly_brain.simulation.observation_module')
+    observations.__dict__['build_observation_assembly'] = lambda: forbidden
+    monkeypatch.setitem(sys.modules, observations.__name__, observations)
+
     importing = builtins.__import__
 
     def observe_import(

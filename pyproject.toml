@@ -155,3 +155,20 @@ forbidden_modules = [
     "fly_brain.comparison.schemas",
     "fly_brain.comparison.storage",
 ]
+
+[[tool.importlinter.contracts]]
+name = "DEP001/DEP003: Active qualification uses injected observation sessions"
+type = "forbidden"
+source_modules = [
+    "fly_brain.qualification.adapters.paired_collect",
+    "fly_brain.qualification.adapters.mlx_batch_collect",
+    "fly_brain.qualification.adapters.case_execution",
+    "fly_brain.qualification.adapters.paired_observer",
+    "fly_brain.qualification.adapters.paired_causes",
+    "fly_brain.qualification.adapters.parity_case",
+]
+forbidden_modules = [
+    "fly_brain.simulation.backend",
+    "fly_brain.simulation.observation_module",
+]
+allow_indirect_imports = false

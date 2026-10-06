@@ -5,11 +5,11 @@ import mlx.core as mx
 import numpy as np
 import pytest
 
-from fly_brain.qualification.adapters.mlx_ledger import CHECK_NAMES, EventLedger
 from fly_brain.simulation.backend import core
 from fly_brain.simulation.backend.arrays import as_host, boolean_input, evaluate
 from fly_brain.simulation.backend.bucketed import prepare
 from fly_brain.simulation.models import Connectome
+from tests.support.legacy_mlx_ledger import CHECK_NAMES, EventLedger
 
 pytestmark = [pytest.mark.integration, pytest.mark.metal]
 

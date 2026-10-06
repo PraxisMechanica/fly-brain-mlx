@@ -1773,3 +1773,40 @@ Reference producer/build/weight-reader bytes remain protected. Reference seams
 and the remaining layout/pulse/scalar/reducer probes are allocated only after
 the session's committed contract is known; their exclusive scopes do not move
 silently to the session worker.
+
+
+### Active observation-session caller migration — 2026-10-07
+
+Worker `7989ade9076ee806e26cf3aad0610831819bf15b` commits required session
+factory/block consumers, owned assembly injection and test-only historical
+oracle retirement through the full native hook. Parent at `b64c140` verifies
+28 changed/retired paths, all 9,648 final raw lengths/hashes (141,545,676 bytes),
+the actual hook log and all recorded test reports. Independent retained compare
+matches 1,288 arrays and 77 serialized records with only fresh output roots
+normalized, preserving key order, numeric values and digests.
+
+Parent joins 26 exact rows, the actual fifth contract, one canonical fixture row
+and one import-only proof helper row. Actual scope/transitivity controls reject,
+repair and lose rejection when only their configured mechanism is weakened.
+Parent passes 234 CPU/package/source cases and 145 native/reference/integrity
+cases, with 156 retained upstream warnings. Original assertions in twelve
+changed tests, six proof class/function bodies, 107 other production sources,
+unchanged numerical/reference/provider/expectation/capture bodies, the old ledger
+bytes and observer AST after only its relative peer import remain exact.
+The first parent peer-import normalizer assumed an absolute import; its check
+is corrected to the actual relative import with no source change.
+
+Current reconciliation is 314 files/4,241 declaration occurrences/281 neutral
+exports/64 frozen records, zero gaps and six recorded findings. Complete37-rule
+analysis remains COV002. The 43-source minimum covers actual production numerical
+and observer dependencies; the separate digest brand/proof helpers grant no
+cache or acceptance transfer. No new scientific case, mode or broader matrix
+claim. Exact limits and evidence:
+`docs/evidence/code-quality/active-session-migration-20261006/parent-integration.json`.
+
+The first combined native commit hook passes 366 quality cases but rejects one
+older comparison weakening fixture: it appends its override to the final
+contract, which is now the fifth contract and already defines that setting.
+The fixture is corrected to select only its own comparison block. All original
+assertions and canonical rules remain exact; 19 corrected comparison/active
+contract cases pass. The failing hook log remains retained before full rerun.

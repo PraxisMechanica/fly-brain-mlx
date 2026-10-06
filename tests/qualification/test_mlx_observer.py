@@ -8,12 +8,9 @@ import numpy as np
 import pytest
 from numpy.typing import NDArray
 
-from fly_brain.qualification.adapters.mlx_ledger import EventLedger
-from fly_brain.qualification.adapters.mlx_observer import (
-    MLXBlock,
-    observe,
-)
 from fly_brain.qualification.adapters.paired_observer import trial_block
+from fly_brain.qualification.session_blocks import SessionBlock
+from fly_brain.qualification.session_observer import observe_session
 from fly_brain.simulation.backend import core
 from fly_brain.simulation.backend.arrays import (
     HostArray,
@@ -23,6 +20,13 @@ from fly_brain.simulation.backend.arrays import (
 )
 from fly_brain.simulation.backend.bucketed import prepare
 from fly_brain.simulation.models import Connectome
+from fly_brain.simulation.observation_module import build_observation_sessions
+from fly_brain.simulation.observations import ObservationInitialState
+from tests.support.legacy_mlx_ledger import EventLedger
+from tests.support.legacy_mlx_observer import (
+    MLXBlock,
+    observe,
+)
 
 pytestmark = [pytest.mark.integration, pytest.mark.metal]
 
@@ -76,6 +80,33 @@ def observed(case: Fixture, precision: str, block_size: int) -> list[MLXBlock]:
     )
 
 
+def active_observed(
+    case: Fixture, precision: str, block_size: int
+) -> list[SessionBlock]:
+    factory, _ = build_observation_sessions(
+        case.connectome, case.targets, (3,), precision
+    )
+    trials = case.events.shape[0]
+    initial_values = ObservationInitialState(
+        np.broadcast_to(
+            np.array((-52, -52, -44, -44, -44, -52), dtype=np.float64), (trials, 6)
+        ),
+        np.broadcast_to(np.array((0, 0, 100, 0, 0, 0), dtype=np.float64), (trials, 6)),
+        np.full((trials, 6), -100000000, dtype=np.int32),
+    )
+    return list(
+        observe_session(
+            factory,
+            case.connectome,
+            case.targets,
+            tuple(range(trials)),
+            case.events,
+            initial_values,
+            block_size,
+        )
+    )
+
+
 def stock(case: Fixture, precision: str) -> dict[str, HostArray]:
     execution = prepare(case.connectome, case.targets, (3,), precision)
     state = initial(execution.network, case.events.shape[0])
@@ -115,7 +146,7 @@ def test_bounded_observation_preserves_every_ordinary_phase_and_queue_byte(
 ) -> None:
     case = fixture(empty)
     expected = stock(case, precision)
-    blocks = observed(case, precision, block_size)
+    blocks = active_observed(case, precision, block_size)
     assert sum(block.rows for block in blocks) == 101
     assert blocks[-1].rows == (101 % block_size or block_size)
     actual = {
@@ -166,8 +197,8 @@ def test_bounded_observation_preserves_every_ordinary_phase_and_queue_byte(
 
 def test_observed_state_and_physical_queues_repeat_bit_for_bit(precision: str) -> None:
     case = fixture()
-    batch = observed(case, precision, 32)
-    repeat = observed(case, precision, 32)
+    batch = active_observed(case, precision, 32)
+    repeat = active_observed(case, precision, 32)
     for first, second in zip(batch, repeat, strict=True):
         assert (first.begin, first.rows, first.queue_sha256) == (
             second.begin,
@@ -190,9 +221,9 @@ def test_observed_state_and_physical_queues_repeat_bit_for_bit(precision: str) -
 
 def test_observed_batched_trials_match_independent_execution(precision: str) -> None:
     case = fixture()
-    batch = observed(case, precision, 32)
+    batch = active_observed(case, precision, 32)
     for trial in range(4):
-        single = observed(
+        single = active_observed(
             Fixture(case.connectome, case.targets, case.events[trial : trial + 1]),
             precision,
             32,
@@ -225,4 +256,4 @@ def test_observer_refuses_unbounded_or_empty_capture_blocks(
     precision: str, block_size: int
 ) -> None:
     with pytest.raises(ValueError, match='1 to 32'):
-        observed(fixture(True), precision, block_size)
+        active_observed(fixture(True), precision, block_size)

@@ -4,15 +4,13 @@ from pathlib import Path
 
 import numpy as np
 
-from fly_brain.qualification.ports import ReductionReader
-from fly_brain.simulation.backend import core
-from fly_brain.simulation.backend.engines import Execution
+from fly_brain.qualification.ports import ObservationSessionFactory, ReductionReader
+from fly_brain.qualification.session_blocks import SessionBlock
+from fly_brain.qualification.session_observer import observe_session
 from fly_brain.simulation.models import Connectome, Stimulus
 
 from .brian_jobs import BrianJob, results, run
 from .causal_capture import CausalCapture
-from .mlx_ledger import EventLedger
-from .mlx_observer import MLXBlock, observe
 from .observer_evidence import physical_arrays, physical_hash, physical_record
 from .observer_stream import FinalSnapshot
 from .paired_causes import write as write_causes
@@ -23,7 +21,7 @@ from .reference_queues import ReferenceQueues
 
 def collect(
     job: BrianJob,
-    execution: Execution,
+    factory: ObservationSessionFactory,
     connectome: Connectome,
     stimulus: Stimulus,
     output: Path,
@@ -38,7 +36,6 @@ def collect(
         or events.dtype != np.uint8
         or np.any(events > 1)
         or job.shape.neurons != len(connectome.neuron_ids)
-        or execution.network.neurons != job.shape.neurons
         or not job.observed
     ):
         raise ValueError('Paired collection requires one complete canonical trial')
@@ -48,7 +45,7 @@ def collect(
     neurons: list[int] = []
     reference_spikes: list[int] = []
     reference_times: list[float] = []
-    last: MLXBlock | None = None
+    last: SessionBlock | None = None
     final: FinalSnapshot | None = None
     with (
         closing(
@@ -59,12 +56,13 @@ def collect(
             )
         ) as reference,
         closing(
-            observe(
-                execution,
-                core.initial_state(execution.network),
+            observe_session(
+                factory,
+                connectome,
+                stimulus.targets,
+                stimulus.trial_indices,
                 events,
-                EventLedger(connectome, stimulus.targets, 1),
-                job.shape.block_size,
+                block_size=job.shape.block_size,
             )
         ) as mlx,
         (output / 'phase-digests.jsonl').open('x') as phases,

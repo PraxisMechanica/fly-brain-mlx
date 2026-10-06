@@ -15,7 +15,7 @@ from fly_brain.simulation.backend.arrays import (
 from fly_brain.simulation.backend.engines import Execution
 from fly_brain.simulation.observations import HostArray
 
-from .mlx_ledger import EventLedger
+from .legacy_mlx_ledger import EventLedger
 
 
 @dataclass(frozen=True)

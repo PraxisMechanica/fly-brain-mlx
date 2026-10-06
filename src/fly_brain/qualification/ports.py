@@ -87,3 +87,14 @@ class ObservationSessionFactory(Protocol):
     def __call__(
         self, trial_indices: tuple[int, ...], initial: ObservationInitialState | None, /
     ) -> ObservationSession: ...
+
+
+class ObservationAssembly(Protocol):
+    def __call__(
+        self,
+        connectome: Connectome,
+        targets: tuple[int, ...],
+        silenced: tuple[int, ...],
+        precision: str,
+        /,
+    ) -> tuple[ObservationSessionFactory, ReductionReader]: ...

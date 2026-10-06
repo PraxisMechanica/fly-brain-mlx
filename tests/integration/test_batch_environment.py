@@ -31,25 +31,49 @@ def test_batch_cannot_reuse_evidence_with_changed_execution_settings_or_source(
     tmp_path: Path, fault: str
 ) -> None:
     names = [
-        *(
-            f'fly_brain.simulation.backend.{name}'
-            for name in ('core', 'arrays', 'engines', 'bucketed', 'accumulation')
-        ),
-        *(
-            f'fly_brain.simulation.{name}'
-            for name in ('mapping', 'stimuli', 'experiments')
-        ),
-        *(
-            f'fly_brain.qualification.adapters.{name}'
-            for name in (
-                'mlx_observer',
-                'mlx_ledger',
-                'torch_reference',
-                'torch_setup',
-                'torch_observer',
-                'torch_collect',
-            )
-        ),
+        'fly_brain.simulation.backend.core',
+        'fly_brain.simulation.backend.arrays',
+        'fly_brain.simulation.backend.engines',
+        'fly_brain.simulation.backend.bucketed',
+        'fly_brain.simulation.backend.accumulation',
+        'fly_brain.simulation.backend.observation_session',
+        'fly_brain.simulation.backend.reduction_evidence',
+        'fly_brain.simulation.mapping',
+        'fly_brain.simulation.models',
+        'fly_brain.simulation.stimuli',
+        'fly_brain.simulation.stimulus_service',
+        'fly_brain.simulation.ports',
+        'fly_brain.simulation.module',
+        'fly_brain.simulation.experiments',
+        'fly_brain.simulation.observations',
+        'fly_brain.simulation.observation_ports',
+        'fly_brain.simulation.observation_module',
+        'fly_brain.qualification.models',
+        'fly_brain.qualification.ports',
+        'fly_brain.qualification.stimulus_ports',
+        'fly_brain.qualification.session_observer',
+        'fly_brain.qualification.session_expectations',
+        'fly_brain.qualification.session_blocks',
+        'fly_brain.qualification.causality',
+        'fly_brain.qualification.adapters.active_cpu',
+        'fly_brain.qualification.adapters.brian_jobs',
+        'fly_brain.qualification.adapters.reference_build',
+        'fly_brain.qualification.adapters.reference_native',
+        'fly_brain.qualification.adapters.reference_queues',
+        'fly_brain.qualification.adapters.observer_stream',
+        'fly_brain.qualification.adapters.observer_evidence',
+        'fly_brain.qualification.adapters.causal_capture',
+        'fly_brain.qualification.adapters.causal_reduction',
+        'fly_brain.qualification.adapters.paired_collect',
+        'fly_brain.qualification.adapters.paired_observer',
+        'fly_brain.qualification.adapters.paired_causes',
+        'fly_brain.qualification.adapters.case_execution',
+        'fly_brain.qualification.adapters.parity_case',
+        'fly_brain.qualification.adapters.torch_reference',
+        'fly_brain.qualification.adapters.torch_setup',
+        'fly_brain.qualification.adapters.torch_observer',
+        'fly_brain.qualification.adapters.torch_collect',
+        'fly_brain.infrastructure.seeded_random',
     ]
     project = tmp_path / 'project'
     originals: dict[str, bytes] = {}

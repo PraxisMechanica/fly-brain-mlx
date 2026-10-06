@@ -13,8 +13,8 @@ from fly_brain.qualification.adapters.paired_collect import collect as collect_p
 from fly_brain.qualification.adapters.replay_evidence import verify
 from fly_brain.qualification.adapters.torch_collect import collect as collect_cpu
 from fly_brain.qualification.adapters.torch_setup import prepare as prepare_cpu
-from fly_brain.simulation.backend.bucketed import prepare_observed
 from fly_brain.simulation.models import Stimulus
+from fly_brain.simulation.observation_module import build_observation_sessions
 from tests.qualification.test_mlx_observer import fixture
 
 pytestmark = [pytest.mark.integration, pytest.mark.reference, pytest.mark.metal]
@@ -41,7 +41,7 @@ def test_actual_batch_native_evidence_matches_fresh_independent_trial_collection
         Path(destination) / f'fixture-{empty}' if destination else tmp_path / 'fixture'
     )
     output.mkdir(parents=True, exist_ok=False)
-    execution, read_rows = prepare_observed(
+    execution, read_rows = build_observation_sessions(
         case.connectome, case.targets, (3,), precision
     )
     stimulus = Stimulus(

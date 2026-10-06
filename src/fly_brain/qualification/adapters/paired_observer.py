@@ -1,11 +1,12 @@
 import hashlib
 from collections.abc import Iterator, Mapping
-from dataclasses import dataclass, replace
+from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
 import numpy as np
 
 from fly_brain.qualification.causality import CausalAudit, advance_audit
+from fly_brain.qualification.session_blocks import SessionBlock
 
 from .observer_stream import FinalSnapshot, PhaseBlock, StepSnapshot
 from .reference_queues import ReferenceQueues
@@ -13,13 +14,11 @@ from .reference_queues import ReferenceQueues
 if TYPE_CHECKING:
     from fly_brain.simulation.observations import HostArray
 
-    from .mlx_observer import MLXBlock
-
 
 @dataclass(frozen=True)
 class PairedBlock:
     reference: PhaseBlock
-    mlx: 'MLXBlock'
+    mlx: SessionBlock
     snapshots: tuple[StepSnapshot, ...]
     native_sha256: tuple[str, str]
 
@@ -34,7 +33,7 @@ def phase_hash(fields: Mapping[str, 'HostArray']) -> str:
 
 def read_block(
     reference: Iterator[StepSnapshot | PhaseBlock | FinalSnapshot],
-    actual: 'MLXBlock',
+    actual: SessionBlock,
     ledger: ReferenceQueues,
 ) -> PairedBlock:
     begin = ledger.step
@@ -81,7 +80,7 @@ def finish_reference(
 
 def pair_blocks(
     reference: Iterator[StepSnapshot | PhaseBlock | FinalSnapshot],
-    mlx: Iterator['MLXBlock'],
+    mlx: Iterator[SessionBlock],
     ledger: ReferenceQueues,
 ) -> Iterator[PairedBlock | FinalSnapshot]:
     for actual in mlx:
@@ -89,19 +88,18 @@ def pair_blocks(
     yield finish_reference(reference, ledger)
 
 
-def trial_block(block: 'MLXBlock', trial: int) -> 'MLXBlock':
-    return replace(
-        block,
-        fields={
-            name: value[:, trial : trial + 1] for name, value in block.fields.items()
-        },
-        checks=block.checks[:, trial : trial + 1],
-        queue_sha256=(block.queue_sha256[trial],),
-        final_queue=None
-        if block.final_queue is None
-        else block.final_queue[:, trial : trial + 1],
-        due_edges=tuple((row[trial],) for row in block.due_edges),
-        due_sha256=tuple((row[trial],) for row in block.due_sha256),
+def trial_block(block: SessionBlock, trial: int) -> SessionBlock:
+    return SessionBlock(
+        block.begin,
+        block.rows,
+        (block.trial_indices[trial],),
+        {name: value[:, trial : trial + 1] for name, value in block.fields.items()},
+        block.checks[:, trial : trial + 1],
+        (block.queue_sha256[trial],),
+        (block.queue_slot_sha256[trial],),
+        None if block.final_queue is None else block.final_queue[:, trial : trial + 1],
+        tuple((row[trial],) for row in block.due_edges),
+        tuple((row[trial],) for row in block.due_sha256),
     )
 
 

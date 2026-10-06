@@ -12,8 +12,8 @@ import torch
 
 from fly_brain.qualification.matrix import required_cases
 from fly_brain.qualification.models import ParityCase
+from fly_brain.qualification.ports import ObservationAssembly
 from fly_brain.qualification.stimulus_ports import StimulusGenerator
-from fly_brain.simulation.backend.bucketed import prepare_observed
 from fly_brain.simulation.experiments import EXPERIMENTS
 from fly_brain.simulation.models import Connectome, InputPin
 from fly_brain.simulation.stimuli import neuron_indices
@@ -33,6 +33,7 @@ def run(
     precision: str,
     *,
     generate: StimulusGenerator,
+    assemble_observations: ObservationAssembly,
 ) -> dict[str, object]:
     if case not in required_cases():
         raise ValueError('Qualification requires a prescribed frozen case')
@@ -104,11 +105,13 @@ def run(
             indent=2,
         )
     progress('preparing-engines')
-    mlx, read_rows = prepare_observed(connectome, stimulus.targets, silenced, precision)
+    factory, read_rows = assemble_observations(
+        connectome, stimulus.targets, silenced, precision
+    )
     cpu = prepare_cpu(connectome, stimulus.targets, silenced, 1)
     execute(
         job,
-        mlx,
+        factory,
         cpu,
         connectome,
         stimulus,

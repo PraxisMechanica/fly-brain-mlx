@@ -77,7 +77,19 @@ def test_disabling_transitive_rule_paths_hides_the_same_indirect_service_depende
     sources(repo, INDIRECT)
     assert commit_document(repo, environment).returncode != 0
     policy = repo / 'pyproject.toml'
-    policy.write_text(policy.read_text() + '\nallow_indirect_imports = true\n')
+    name = 'name = "DEP001: Comparison rules have no orchestration dependencies"'
+    prefix, boundary = policy.read_text().split(name, 1)
+    selected, delimiter, remaining = boundary.partition(
+        '[[tool.importlinter.contracts]]'
+    )
+    policy.write_text(
+        prefix
+        + name
+        + selected
+        + '\nallow_indirect_imports = true\n'
+        + delimiter
+        + remaining
+    )
     git(repo, 'add', 'pyproject.toml')
     weakened = commit_document(repo, environment)
     assert weakened.returncode == 0, weakened.stdout + weakened.stderr

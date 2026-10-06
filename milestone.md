@@ -74,12 +74,13 @@ Completion requires:
   process 62191 remains designated suspended; do not resume or discard it
   without resolving its original-mode evidence. [Pause record](docs/evidence/execution-time-investigation/pause.json).
 - The latest delivered refactor checkpoint is
-  `e8d2919cb277ae2512c102dbac325290957b1bfa` on `origin/main`. Clock and actual-row repairs,
+  `b64c140b4cf28a7c6df1ac0ece42a263e8fd6e91` on `origin/main`, followed by
+  the verified active observation-session migration in this source. Clock and
+  actual-row repairs,
   pure comparison rules, owned command composition, native symbol/graph
   foundations, reviewed ownership and runtime-parent decisions are delivered.
-  Required local commit/push hooks and the pinned-proof hosted job passed.
-  The digest hosted check is recorded separately after delivery. The RNG slice
-  is delivered; the audit correction passes 86 CPU and 24 real paired
+  Required local commit/push hooks and hosted jobs passed for that delivered
+  checkpoint. The RNG slice is delivered; the audit correction passes 86 CPU and 24 real paired
   cases. The reference-digest repair passes 94 parent preservation/type/policy
   cases and clears only its primitive-identifier finding; six findings remain.
   Exact delivery evidence stays in dated history and component records.
@@ -97,8 +98,10 @@ Completion requires:
   pass 106 parent Metal cases and 66 value/package/canonical-hook cases. The
   committed full pinned 1,000-step proof preserves 5,664 native arrays across
   ordinary/legacy/session/repeat and actual four-trial execution, with bounded
-  memory evidence. Parent array/integrity checks preserve it. Active caller
-  migration remains assigned before adoption. No new scientific acceptance is granted. The
+  memory evidence. Parent array/integrity checks preserve it. The active caller
+  migration passes 234 parent package/source cases and 145
+  native/reference/integrity cases, preserving retained arrays and serialized
+  records. No new scientific acceptance is granted. The
   [checkpoint history](docs/agent/history/milestones.md#refactor-and-enforcement-checkpoint-2026-10-06)
   retains original test counts, failures, review decisions and delivery evidence.
 

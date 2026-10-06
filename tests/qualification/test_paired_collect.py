@@ -22,9 +22,10 @@ from fly_brain.qualification.adapters.paired_collect import collect
 from fly_brain.qualification.adapters.paired_observer import PairedBlock, phase_hash
 from fly_brain.qualification.adapters.pending_queues import verify as verify_pending
 from fly_brain.qualification.adapters.replay_evidence import paired as verify_repeat
-from fly_brain.simulation.backend.bucketed import prepare_observed
 from fly_brain.simulation.models import Stimulus
+from fly_brain.simulation.observation_module import build_observation_sessions
 from tests.qualification.test_mlx_observer import fixture
+from tests.support.session_block_values import replace_block
 
 pytestmark = [pytest.mark.integration, pytest.mark.reference, pytest.mark.metal]
 
@@ -45,7 +46,7 @@ def test_live_collection_retains_complete_native_and_physical_replay(
         hashlib.sha256(events.tobytes()).hexdigest(),
     )
     job = build(case.connectome, case.targets, (3,), events[0], tmp_path / 'build')
-    execution, read_rows = prepare_observed(
+    execution, read_rows = build_observation_sessions(
         case.connectome, case.targets, (3,), precision
     )
     outputs = (tmp_path / 'first', tmp_path / 'repeat')
@@ -174,7 +175,7 @@ def test_injected_first_budget_fault_retains_actual_inputs_and_reference_weights
         hashlib.sha256(events.tobytes()).hexdigest(),
     )
     job = build(case.connectome, case.targets, (3,), events[0], tmp_path / 'build')
-    execution, read_rows = prepare_observed(
+    execution, read_rows = build_observation_sessions(
         case.connectome, case.targets, (3,), precision
     )
     capture = CausalCapture()
@@ -185,7 +186,7 @@ def test_injected_first_budget_fault_retains_actual_inputs_and_reference_weights
             fields = dict(block.mlx.fields)
             fields['pre_v'] = fields['pre_v'].copy()
             fields['pre_v'][7, 0, 2] += 0.02
-            block = replace(block, mlx=replace(block.mlx, fields=fields))
+            block = replace(block, mlx=replace_block(block.mlx, fields=fields))
         check(block)
 
     monkeypatch.setattr(capture, 'check', inject_fault)

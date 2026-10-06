@@ -6,8 +6,6 @@ import pytest
 
 from fly_brain.qualification.adapters.brian_jobs import build, run
 from fly_brain.qualification.adapters.causal_capture import CausalCapture
-from fly_brain.qualification.adapters.mlx_ledger import EventLedger
-from fly_brain.qualification.adapters.mlx_observer import observe
 from fly_brain.qualification.adapters.observer_stream import (
     FinalSnapshot,
     PhaseBlock,
@@ -21,9 +19,10 @@ from fly_brain.qualification.adapters.paired_observer import (
 )
 from fly_brain.qualification.adapters.reference_queues import ReferenceQueues
 from fly_brain.qualification.causality import CausalAudit
-from fly_brain.simulation.backend import core
-from fly_brain.simulation.backend.bucketed import prepare
+from fly_brain.qualification.session_observer import observe_session
+from fly_brain.simulation.observation_module import build_observation_sessions
 from tests.qualification.test_mlx_observer import fixture
+from tests.support.session_block_values import replace_block
 
 pytestmark = [pytest.mark.integration, pytest.mark.reference, pytest.mark.metal]
 
@@ -36,12 +35,15 @@ def paired(
     case = fixture()
     events = case.events[:1]
     job = build(case.connectome, case.targets, (3,), events[0], tmp_path / 'build')
-    execution = prepare(case.connectome, case.targets, (3,), precision)
-    mlx = observe(
-        execution,
-        core.initial_state(execution.network),
+    factory, _ = build_observation_sessions(
+        case.connectome, case.targets, (3,), precision
+    )
+    mlx = observe_session(
+        factory,
+        case.connectome,
+        case.targets,
+        (0,),
         events,
-        EventLedger(case.connectome, case.targets, 1),
     )
     ledger = ReferenceQueues(case.connectome.sources, 6, events[0])
     with closing(run(job, tmp_path / 'results')) as reference:
@@ -88,15 +90,17 @@ def test_incomplete_or_invalid_paired_evidence_cannot_pass(
     if fault == 'missing':
         blocks.pop()
     if fault == 'begin':
-        blocks[0] = replace(blocks[0], begin=1)
+        blocks[0] = replace_block(blocks[0], begin=1)
     if fault == 'rows':
-        blocks[0] = replace(blocks[0], rows=31)
+        blocks[0] = replace_block(blocks[0], rows=31)
     if fault == 'queue':
         flags = blocks[0].checks.copy()
         flags[0, 0, 29] = False
-        blocks[0] = replace(blocks[0], checks=flags)
+        blocks[0] = replace_block(blocks[0], checks=flags)
     if fault == 'checks':
-        blocks[0] = replace(blocks[0], checks=np.empty((32, 1, 0), dtype=np.bool_))
+        blocks[0] = replace_block(
+            blocks[0], checks=np.empty((32, 1, 0), dtype=np.bool_)
+        )
     if fault == 'final':
         reference.pop()
     if fault == 'extra':
@@ -136,7 +140,7 @@ def test_changed_actual_causal_fields_fail_without_a_parity_score(
         fields_mlx = dict(block.mlx.fields)
         fields_mlx[field] = fields_mlx[field].copy()
         fields_mlx[field][0, 0, 0] = value
-        block = replace(block, mlx=replace(block.mlx, fields=fields_mlx))
+        block = replace(block, mlx=replace_block(block.mlx, fields=fields_mlx))
     with pytest.raises(ValueError, match=reason):
         audit_block(block, CausalAudit())
 
@@ -151,7 +155,7 @@ def test_first_difference_keeps_the_actual_preceding_step_across_blocks(
     fields = dict(second.mlx.fields)
     fields['spikes'] = fields['spikes'].copy()
     fields['spikes'][0, 0, 2] = True
-    capture.check(replace(second, mlx=replace(second.mlx, fields=fields)))
+    capture.check(replace(second, mlx=replace_block(second.mlx, fields=fields)))
     context = capture.spike
     assert context is not None and context.neurons == (2,)
     assert context.current.snapshot.step == 32
@@ -190,7 +194,7 @@ def test_earliest_state_error_keeps_its_raw_context_on_later_blocks(
     fields['pre_v'][7, 0, 2] += 0.02
     fields['pre_v'][9, 0, 3] += 0.03
     capture = CausalCapture()
-    capture.check(replace(first, mlx=replace(first.mlx, fields=fields)))
+    capture.check(replace(first, mlx=replace_block(first.mlx, fields=fields)))
     context = capture.budget
     assert context is not None and context.neurons == (2,)
     assert context.current.snapshot.step == 7
@@ -211,7 +215,9 @@ def test_capture_remains_finite_after_spike_history_diverges(
     fields['end_g'] = fields['end_g'].copy()
     fields['end_g'][1, 0, 2] = np.nan
     with pytest.raises(ValueError, match='must be finite'):
-        CausalCapture().check(replace(block, mlx=replace(block.mlx, fields=fields)))
+        CausalCapture().check(
+            replace(block, mlx=replace_block(block.mlx, fields=fields))
+        )
 
 
 def test_complete_common_history_records_no_false_cause(
@@ -245,6 +251,6 @@ def test_changed_actual_due_rows_fail_during_common_history(
         else np.append(original, np.int32(7))
     )
     due[row] = (changed,)
-    block = replace(block, mlx=replace(block.mlx, due_edges=tuple(due)))
+    block = replace(block, mlx=replace_block(block.mlx, due_edges=tuple(due)))
     with pytest.raises(ValueError, match='actual due-edge identities'):
         audit_block(block, CausalAudit())

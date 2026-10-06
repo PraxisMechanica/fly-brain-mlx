@@ -2,8 +2,7 @@ import json
 from collections.abc import Callable
 from pathlib import Path
 
-from fly_brain.qualification.ports import ReductionReader
-from fly_brain.simulation.backend.engines import Execution
+from fly_brain.qualification.ports import ObservationSessionFactory, ReductionReader
 from fly_brain.simulation.models import Connectome, Stimulus
 
 from .active_cpu import step as active_cpu_step
@@ -17,7 +16,7 @@ from .torch_reference import TorchModel
 
 def execute(
     job: BrianJob,
-    mlx: Execution,
+    factory: ObservationSessionFactory,
     cpu: TorchModel,
     connectome: Connectome,
     stimulus: Stimulus,
@@ -31,7 +30,7 @@ def execute(
         progress('paired-' + mode)
         collect_paired(
             job,
-            mlx,
+            factory,
             connectome,
             stimulus,
             output / ('paired-' + mode),
