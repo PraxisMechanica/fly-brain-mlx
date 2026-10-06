@@ -499,10 +499,6 @@ def test_live_registry_reconciles_all_source_and_retains_actual_debt_and_limits(
     assert not result.findings
     assert set(policy.files) == {s.path for s in result.sources}
     assert len([s for s in result.sources if s.path.startswith('docs/evidence/')]) == 60
-    assert (
-        policy.document.resources['reference_build_execution'].relationship
-        == 'unresolved'
-    )
     assert policy.document.identifiers['flywire_neuron'].representation == 'primitive'
     assert result.recorded_findings
     assert any('COV002' in limitation for limitation in result.limitations)
@@ -510,3 +506,21 @@ def test_live_registry_reconciles_all_source_and_retains_actual_debt_and_limits(
         'Advance'
         not in policy.files['src/fly_brain/simulation/backend/engines.py'].public
     )
+
+
+@pytest.mark.parametrize(
+    'name,parent',
+    (
+        ('reference_build_execution', 'qualification_case'),
+        ('native_execution_state', 'simulation_run'),
+    ),
+)
+def test_runtime_resource_is_a_child_of_its_producing_workflow(
+    name: str,
+    parent: str,
+) -> None:
+    root = Path(__file__).resolve().parents[2]
+    resource = load_policy(
+        root / 'tools/architecture/ownership.json'
+    ).document.resources[name]
+    assert (resource.relationship, resource.parent) == ('storage_only', parent)

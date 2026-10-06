@@ -63,3 +63,11 @@ other workers' code, branches or remote refs. The parent reconciles final
 committed declarations after application and analyzer integration. The native
 structured-type component and opaque observation boundary do not touch each
 other's files; their checks and parent policy joins are serialized.
+
+Parent allocation after the committed runtime-resource review: the existing
+session worker also owns minimal native-session/evidence-type wiring in
+qualification/adapters/parity_case.py, paired_observer.py and paired_causes.py.
+Reference producer/build/weight-reader bytes remain protected. Reference seams
+and the remaining layout/pulse/scalar/reducer probes are allocated only after
+the session's committed contract is known; their exclusive scopes do not move
+silently to the session worker.

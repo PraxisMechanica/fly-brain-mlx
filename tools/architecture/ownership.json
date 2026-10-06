@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewed_commit": "a9453aa1c3c6a0f7ddbb27b16303dd0441233ecc",
+  "reviewed_commit": "c5296da3fd66ff3d48348a919bd1a44e5b01b496",
   "coverage": "named_declarations_and_syntactic_binding_review",
   "source_roots": [
   "src",
@@ -273,7 +273,7 @@
     "tests/quality/test_architecture_compiler.py": {"owner":"architecture","role":"test","declaration_count":17,"declaration_sha256":"493bbab79c27e387e07a0d481523eab62eb7dfa687d0d579cb6e663aeed7d9df","binding_sha256":"96abfd50f1bea502a10aa1a2552a38a5cbf1a86a52152f6943ec5db24880eb39"},
     "tests/quality/test_architecture_graph.py": {"owner":"architecture","role":"tooling","declaration_count":9,"declaration_sha256":"fe9f6c6858e9e4298f0484d522182a49debd20d44473bd332e96cbcd130756ea","binding_sha256":"acc660ea8866465573dc67abae20bf8470833cd29cad7e23ee798732ebdf9db5"},
     "tests/quality/test_architecture_inventory.py": {"owner":"architecture","role":"test","declaration_count":16,"declaration_sha256":"23a6bb675c8b33cf34bb90908153f6a90b159a1f991db32dfafb924dc9c13435","binding_sha256":"99429bcd7d622a489053c1438d5fc0d5a2db4603cd3e140a1d4f38adf46de808"},
-    "tests/quality/test_architecture_policy.py": {"owner":"architecture","role":"test","declaration_count":31,"declaration_sha256":"4a51d9ebf24b22bc24822f8b9d4464e7a0521ba180b7ec95d268a8e28bdb0087","binding_sha256":"17e959bd92829057b97ee2ffaf72f6f60eb30bc0a22296e17bc6ddac8228c6bf"},
+    "tests/quality/test_architecture_policy.py": {"owner":"architecture","role":"test","declaration_count":32,"declaration_sha256":"00bc34b1aa130a84af3d7bbb5c130a32a3c40fbcf75151f00aad84ce374ed12e","binding_sha256":"12656b9dd3cba9d33f0ed290fc1e6f8bd7e56cf5d4848356851999ce461edc2a"},
     "tests/quality/test_architecture_symbols.py": {"owner":"architecture","role":"tooling","declaration_count":30,"declaration_sha256":"1df123fd545f42bc636c9fc6401567efe5c42bf9d87b40497631fa08468f34e3","binding_sha256":"68813757b3219fe8662a545fdd99d6f20ac0b6254e48a1c67b2900c81d6e2db0"},
     "tests/quality/test_boundaries.py": {"owner":"quality_gate","role":"test","declaration_count":4,"declaration_sha256":"1b4ce8dc3ca48b86ef0a44e06303b548024a9e0620a176f8fe79d43b1e1ba7f6","binding_sha256":"9534620fe1e0728482b54d26645dda112bc4b52bf6dcb77bf22d0d8e04c19df0"},
     "tests/quality/test_ci_refs.py": {"owner":"quality_gate","role":"test","declaration_count":13,"declaration_sha256":"d2a9f00073a31bdb40d0d69198a4abedf4d4b0d39cb817e70060fa8e298e2ac9","binding_sha256":"18e106b515efa6613c36e5f384b264e118fed3315c0b7f697e594890c05562b0"},
@@ -439,7 +439,7 @@
   "reference_build_execution": {
     "owner": "qualification",
     "kind": "runtime",
-    "relationship": "unresolved",
+    "relationship": "storage_only",
     "evidence": [
       {
         "path": "src/fly_brain/qualification/adapters/brian_jobs.py",
@@ -454,12 +454,13 @@
         "name": "create"
       }
     ],
-    "decision": "BrianJob can build, execute, read and identify an independently reusable standalone reference producer. Its resource ownership/lifetime and a complete separate service boundary are not yet resolved; the existing qualification attribution is factual, not OWN002 approval."
+    "decision": "The current qualification case builds one frozen reference producer and runs it in fresh scoped processes. No independent lifecycle/reuse policy/service is implemented; build/read/run mechanics and retained artifacts are a non-independent runtime child of qualification_case. Concrete role/injection/lifetime and scientific reuse obligations remain separate debt. Source review: resource-ownership-review-20261006/decision.md.",
+    "parent": "qualification_case"
   },
   "native_execution_state": {
     "owner": "simulation",
     "kind": "runtime",
-    "relationship": "unresolved",
+    "relationship": "storage_only",
     "evidence": [
       {
         "path": "src/fly_brain/simulation/backend/core.py",
@@ -474,7 +475,8 @@
         "name": "Layout"
       }
     ],
-    "decision": "MLX Network/State/Layout/Execution contain vendor device arrays and callbacks. Numeric arrays are data, not automatically collaborator handles, but execution/stream/allocation ownership and neutral representation need full typed/effect qualification. No exemption is recorded."
+    "decision": "Native network/layout/state implement the simulation run and have no independent public operation service. Qualification consumes actual evidence through its assigned opaque-session boundary. Device representation, allocation/evaluation/stream lifetime, mutable observations and complete adoption qualification remain separate debt. Source review: resource-ownership-review-20261006/decision.md.",
+    "parent": "simulation_run"
   }
 },
   "identifiers": {
@@ -622,7 +624,7 @@
   "No implicit public permission is granted by Python visibility, package roots or re-exported imports. Only exact registered types/ports and their named fields/properties are public neutral contracts; foreign direct pure-rule calls need separate contract analysis.",
   "All 60 retained evidence Python files are discovered and source-hash frozen; they are handwritten historical source with actual algorithm overrides, not generated/vendor exclusions. Their original environments and imports require historical-resolution coverage before any full pass.",
   "Handwritten Brian2/PyArrow stubs stay first-party checked contract inputs. Adapted Brian2/PyTorch references have exact local and upstream provenance and retain scientific scope; none has a generated-code exemption.",
-  "Independent reference-build/execution and native execution-state resource decisions remain unresolved (OWN002/COV001). Primitive registered identifiers remain VALUE001 findings until real distinct neutral contracts are reviewed.",
+  "Reference-build/execution and native execution-state belong to their existing qualification-case/simulation-run workflows as storage-only runtime children. Source ownership is resolved; concrete accesses, lifecycle/representation/alias effects, scientific adoption and primitive identifier contracts remain separate findings or COV002 coverage gaps.",
   "Production declaration role overrides record existing mixed-role/owner responsibilities; they do not authorize incompatible co-location or effect calls. Full placement, graph, call, resource and control-flow checks are not implemented here.",
   "After parent integration, review every incoming comparison/bootstrap/port/module/command declaration and binding set, update only its exact entries and recorded findings, and rerun full policy reconciliation. No build-time auto-classification is provided."
 ],

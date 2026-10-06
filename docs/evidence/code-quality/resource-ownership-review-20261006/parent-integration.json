@@ -1,0 +1,51 @@
+{
+  "parent_base": "c5296da3fd66ff3d48348a919bd1a44e5b01b496",
+  "worker_commit": "3613b96dac3c6c9bcc411301de3f828d25846839",
+  "source_hashes_verified": 95,
+  "policy_before_sha256": "dcf449e0379f12dabb2a76284ee981e69e852bb6445e03c617912c5dac96ff18",
+  "policy_after_sha256": "2aed7a2ef507c0c56d331a8fd2118f0d02d6b39287ea62953be408f65d0e6f9a",
+  "decisions": {
+    "reference_build_execution": {
+      "parent": "qualification_case",
+      "relationship": "storage_only",
+      "confidence": 0.96
+    },
+    "native_execution_state": {
+      "parent": "simulation_run",
+      "relationship": "storage_only",
+      "confidence": 0.98
+    }
+  },
+  "reconciliation_findings": 0,
+  "recorded_findings_before_after": [
+    13,
+    11
+  ],
+  "parent_tests": {
+    "counts": {
+      "tests": 67,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "report": "/private/tmp/fly-brain-resource-ownership-parent-tests-20261006-03.xml",
+    "sha256": "b233288516348a9b6c1003f834cb4a096ce3713ff61f61990d41c69d54a77a61"
+  },
+  "parent_corrections": [
+    "Decision prose had 3,769 declarations; its raw source manifest proves 3,770, corrected during integration.",
+    "Initial live-policy fixture retained the former unresolved-resource assertion; update it to the two reviewed runtime parents and preserve other debt/coverage assertions.",
+    "The full hook passed all 219 source cases but rejected health/maintainability 69.73->69.72 after parent assertions were appended to the general live-registry test. Separate the runtime-parent contract into its own two parameterized cases; preserve assertions and thresholds. Repaired staged health/maintainability 69.73->69.77 and unchanged average/max complexity 5.03/28."
+  ],
+  "limits": [
+    "Ownership classification only; no app/scientific source change or case acceptance.",
+    "Reference producer lifetimes, private native consumers, array aliases and complete session qualification remain separate repairs.",
+    "Full architecture remains ANALYSIS FAILED (COV002)."
+  ],
+  "current_registry": {
+    "files": 274,
+    "declaration_occurrences": 3771,
+    "neutral_exports": 198,
+    "recorded_findings": 11
+  },
+  "preserved_failure_report": "/private/tmp/fly-brain-resource-ownership-first-staged-failure-20261006-01.json"
+}

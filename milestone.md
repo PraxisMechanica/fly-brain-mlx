@@ -244,6 +244,22 @@ Completion requires:
   Complete structural enforcement remains COV002; the live registry fixture is
   reconciliation evidence, not an application-compliance certificate.
 
+- Ownership registry integration is pushed as
+  `c5296da3fd66ff3d48348a919bd1a44e5b01b496` with both full native hooks passing.
+  Review `3613b96dac3c6c9bcc411301de3f828d25846839` resolves the two actual runtime
+  parents after 95 source hashes and the current registry/scheduling record are
+  verified. Native execution/state are simulation-run children; reference
+  builds/fresh processes are qualification-case children. The two attribution
+  uncertainties are cleared; eleven other recorded findings remain. Sixty-seven
+  parent policy cases pass. Initial prose count and old live-registry expectation
+  are corrected without app/scientific source changes. Reference and remaining
+  probe repairs wait for the assigned session contract; native reducer probes
+  retain their separate consumer boundaries. Compact proof:
+  `docs/evidence/code-quality/resource-ownership-review-20261006/parent-integration.json`.
+  The first parent hook rejects a small health regression after 219 source
+  cases pass; separate runtime-parent cases preserve all checks and repair it.
+  Full rule/alias/effect/control-flow and historical resolution remain COV002.
+
 ## Parallel refactor ownership — 2026-10-06
 
 The user explicitly requested parallel implementation and committed handoffs.

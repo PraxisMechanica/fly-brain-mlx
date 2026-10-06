@@ -174,6 +174,19 @@ Its content/semantic checks remain separate. Compact proof:
 The ownership document owns classification decisions; this registry is not
 complete effect/type/alias/control-flow or historical-revision analysis.
 
+## Runtime child ownership — 2026-10-06
+
+Source-grounded review confirms native execution/state belong to simulation_run;
+reference builds and fresh processes belong to qualification_case. Their
+registry relationships are storage-only runtime children, not new independently
+operated domains. Ninety-five source hashes, current policy and the accepted
+scheduling record are verified. Sixty-seven parent policy cases pass after the
+live registry assertion is updated. Only the two attribution uncertainties are
+removed: eleven other recorded findings remain. Concrete consumer access,
+provider lifetime, aliases, reference seams and full session adoption are still
+open. Compact proof:
+`docs/evidence/code-quality/resource-ownership-review-20261006/parent-integration.json`.
+
 ## Remaining work
 
 Inventory every first-party file, declaration, owned resource, public export,

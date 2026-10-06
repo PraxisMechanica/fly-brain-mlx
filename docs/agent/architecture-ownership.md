@@ -1,8 +1,8 @@
 # Reviewed Python ownership registry
 
 Scope: combined parent source at
-`a9453aa1c3c6a0f7ddbb27b16303dd0441233ecc` plus the ownership component and its
-indexed-policy controls. Parent reconciliation confidence: 95%. The original
+`c5296da3fd66ff3d48348a919bd1a44e5b01b496` plus the reviewed runtime-child
+relationships and their registry controls. Parent reconciliation confidence: 95%. The original
 worker record retains its `0a313d0` base and 90% classification confidence. This
 registry records responsibilities; it does not certify application architecture
 or change scientific behavior.
@@ -108,10 +108,12 @@ independently operated workflows. Pinned input records, experiment/stimulus
 artifacts and the simulation spike file are declared storage-only parts of the
 simulation run: their source has no independent mutation service or endpoint.
 Comparison imports a spike snapshot; it does not own the producing simulation
-run. Reference standalone builds can be built, executed, read and identified
-independently, so their ownership/lifetime separation remains unresolved.
-Native device execution/state attribution also remains unresolved. Both appear
-as recorded `COV001` findings rather than invented exemptions.
+run. The actual reference builder has no independent public lifecycle or reuse
+service: its compiled producer and fresh processes are qualification-case
+runtime children. Native execution/state implement the simulation run. Their
+`storage_only` relationships reflect these current operations, with reviewed
+confidence 96% / 98%. Concrete access, lifetime, representation and scientific
+adoption remain separate debt; this decision grants no boundary exemption.
 
 FlyWire neuron identity, neuron-row identity, original edge-row identity and
 trial identity have distinct meanings but currently cross neutral contracts as
@@ -149,10 +151,11 @@ is outside this Python/stub registry; its existing native gate remains required.
 
 The parent reconciled 35 exact changed/new files from the comparison,
 composition, metric-control and native-resolver slices, plus the indexed-policy
-controls. The combined inventory covers 274 source/stub files, 3,770 declaration
+controls. The combined inventory covers 274 source/stub files, 3,771 declaration
 occurrences and 198 neutral exports. All 62 frozen historical/reference records
-retain their exact provenance. Reconciliation has zero gaps; thirteen recorded
-architecture/resource/identifier findings remain visible. This result proves
+retain their exact provenance. Reconciliation has zero gaps; eleven recorded
+architecture/identifier findings remain visible after the two runtime ownership
+uncertainties are resolved. This result proves
 named-declaration and syntactic-binding coverage only.
 
 `ownership.json` is now a canonical indexed check input. Source-only controls
@@ -166,3 +169,12 @@ The original worker fixtures and reports stay under
 record there is `parent-integration.json`; raw reconciliation and fixture reports
 are retained outside Git. Parent owns subsequent reconciliation, complete rule
 integration, project status/index updates and sequential remote delivery.
+
+The committed resource review records actual exports/callers, scoped process
+completion, source direction, immutable-observation limits and exclusive repair
+footprints. Its proof is
+`docs/evidence/code-quality/resource-ownership-review-20261006/parent-integration.json`.
+The parent verified all 95 reviewed source hashes, corrected the prose's initial
+declaration count from its raw manifest, updated the live registry assertion,
+and passed 67 policy cases. The earlier ownership component evidence retains
+its thirteen-finding checkpoint; neither snapshot certifies full architecture.
