@@ -21,6 +21,38 @@ qualification. Do not add MaleCNS, new neuron models, plasticity, reinforcement
 learning, a user interface, or a general simulation framework. Preserve all data,
 evidence, and assigned work.
 
+## Current agent goal — 2026-10-06
+
+Complete rearchitecture, refactoring, and general cleanup, then prepare a verified
+handoff to the prior implementation agent. This is the user's latest scope
+amendment. Decision confidence: 99% at
+`6d57cd1ff32f0eedf0151443538258ee015bf0ab`.
+
+This agent owns the remaining architecture/dependency repairs, their required
+quality enforcement, documentation cleanup, and preservation verification.
+Scientific checks are in scope only when needed to prove a refactor preserves
+behavior. New simulator features, numerical remedies, the remaining full-network
+matrix, performance optimization, and Milestones 4–7 belong to the prior
+implementation agent after handoff. The earlier whole-project percentage and
+completion-time estimates do not measure this bounded goal.
+
+Completion requires:
+
+- Finish the authorized architecture repairs and complete applicable structural
+  enforcement. Unresolved coverage or violations cannot be reported as a pass;
+  preserve the strict contract and scientific acceptance gates.
+- Keep the human README and agent documentation coherent, with one active owner
+  for each instruction, decision, and next action.
+- Pass the required local commit/push checks and behavior-preservation checks
+  appropriate to each refactor. Record actual coverage, failures, skipped checks,
+  and approval constraints, including the existing hosted-cache hold.
+- Push small coherent commits to `origin/main`; leave a clean working tree and
+  preserve data, scientific evidence, incoming work, and suspended runs.
+- Provide a concise handoff with delivered commits, architecture boundaries,
+  verification, unresolved approvals and scientific limits, and the prior
+  implementation agent's ordered next work. Do not continue implementation once
+  this refactor/cleanup goal is verified and ready for handoff.
+
 ## Current state
 
 - Architecture remediation completed on 2026-10-04; all seven recorded checks
@@ -75,9 +107,9 @@ evidence, and assigned work.
   Original PRs 1–4 are closed; all original refs, incoming work, and evidence
   remain preserved. Bulk metric dumps are excluded from the review diffs.
 - The latest 2026-10-06 instruction requests direct commits when the commit
-  and push hooks can run the checks. Deliver the remaining documentation change
-  directly to `main` with both hooks. Confidence in this delivery choice is 99%
-  at `5efda389aabf5fa46b176dffb7fef6c69572685d`. The earlier proposed fourth PR
+  and push hooks can run the checks. Deliver the authorized refactor/cleanup
+  changes directly to `main` with both hooks. Confidence in this delivery choice
+  is 99% at `5efda389aabf5fa46b176dffb7fef6c69572685d`. The earlier proposed fourth PR
   is superseded. PR cleanup no longer requires waiting for the merged layers.
 - The complete structural analyzer is still missing, so feature/numerical work
   remains held. Hosted execution is separately held: repository variable
@@ -125,7 +157,7 @@ evidence, and assigned work.
   case was rerun, and no acceptance transferred. Remaining concrete execution,
   state, and observation-policy dependencies still need the complete port slice.
 
-## Next work
+## Next work for this agent
 
 1. Finish quality enforcement before further performance implementation. Complete
    structural-rule ownership/type/call/effect coverage and rejection fixtures;
@@ -135,20 +167,29 @@ evidence, and assigned work.
    Use the pinned standalone
    metric package and existing uv/MLX architecture. [Tool provenance](tools/code-quality/provenance.json)
    and [developer commands](docs/agent/development.md).
-2. Complete reference identity, sealing, and reuse under the
+2. Complete the remaining qualification/execution boundary and other recorded
+   ownership repairs, using the accepted boundary review and preservation gates.
+   Do not change numerical policy or transfer scientific case acceptance.
+3. Finish documentation consistency checks and prepare the handoff against the
+   completion criteria above. Preserve and finish the uncommitted analyzer
+   foundations; their inventory/compiler probes are not complete enforcement.
+
+## Prior implementation agent's next work after handoff
+
+1. Complete reference identity, sealing, and reuse under the
    [reviewed provenance contract](docs/evidence/execution-time-investigation/reference-reuse/astra-review.md).
    Build/runtime identity and complete tape/native checks are implemented;
    cache reuse remains disabled until its decisive qualification passes.
-3. Finish applicable scientific qualification before enabling guarded exact-count
+2. Finish applicable scientific qualification before enabling guarded exact-count
    reduction in normal execution. The 157 scalar cases, 24,576 pinned cases,
    complete layout, two fresh complete sugar native trajectories, and separate
    layout repeat match their retained oracle. [Full native proof](docs/evidence/execution-time-investigation/exact-count-reduction/full-native/parent-verification.json).
    The original reducer remains the default; broader required checks remain.
-4. Measure an improved complete representative check. Finish the prerequisites
+3. Measure an improved complete representative check. Finish the prerequisites
    for the [prospective voltage-increment prototype](docs/agent/numerical-contract.md#prospective-single-state-voltage-increment-prototype),
    then screen the failed one-second sugar case. Keep original arithmetic and
    references as oracles; no old case acceptance transfers to a changed mode.
-5. Continue the complete Milestone 4 matrix and required batches only with
+4. Continue the complete Milestone 4 matrix and required batches only with
    qualified modes. Then complete benchmarking, reproduction, final scientific
    review, and handoff.
 
