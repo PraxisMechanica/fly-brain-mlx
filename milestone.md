@@ -190,6 +190,17 @@ Completion requires:
   Compact proof: `docs/evidence/code-quality/comparison-rules-20261006/verification.json`.
   No case acceptance transfers; the full structural result remains COV002.
 
+- Both the comparison repair `aaafbf60522e30f4ec2bd8d5ab098d12148b1297` and
+  parallel assignment record `f0d8116d0e0bd640a78ce918d273fe931e583647` are pushed
+  with native hooks passing. Hosted runs 37479774365 and 37480391382 succeed.
+- Three new source-only metric controls pass. They measure a real staged source
+  regression, individually reverse CQ001/CQ002/CQ003 in an isolated comparator
+  copy, and prove the corresponding diagnostic disappears from the unchanged
+  native snapshots. Equal/repaired source passes. The installed analyzer stays
+  unchanged; other rules still reject the shared regression. Health and
+  maintainability remain the same heuristic, not independent architecture proof.
+  Compact evidence: `docs/evidence/code-quality/metric-weakening-20261006/verification.json`.
+
 ## Parallel refactor ownership — 2026-10-06
 
 The user explicitly requested parallel implementation and committed handoffs.

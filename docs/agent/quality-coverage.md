@@ -115,6 +115,15 @@ and lose detection when scope or transitivity is weakened. The proof is in
 This repairs the inspected role split and source graph; complete role/call/effect
 and alias enforcement remains COV002.
 
+## Metric predicate weakening — 2026-10-06
+
+Three source-only cases measure the same actual staged regression, then reverse
+each native metric rule in a fresh isolated copy. Each rule loses its diagnostic
+while other rules retain theirs; equal snapshots and repaired/nearby source
+pass. CQ002 retains the actual file path. The installed package is unchanged.
+`docs/evidence/code-quality/metric-weakening-20261006/verification.json` records
+the executed proof. Coupled health/maintainability formulas remain one heuristic.
+
 ## Remaining work
 
 Inventory every first-party file, declaration, owned resource, public export,
