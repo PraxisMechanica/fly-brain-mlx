@@ -115,9 +115,12 @@ Completion requires:
   remains held. The latest user amendment on 2026-10-06 releases the hosted-cache
   approval hold through the non-production authorization in `AGENTS.md`.
   Repository variable `QUALITY_CI_TEMP_DB_CACHE_APPROVED` is now verified true;
-  a fresh hosted run remains to be verified. Prior hosted skips are not passes.
-  Local checks preserve their existing
-  cache outside fixture cleanup. All three reconstructed layers passed their
+  hosted run 37468037333 passed every job step at
+  `68bc087a56884cf0cff4f62c956806bec228cbad`. Its saved staged and actual-commit
+  metric reports both pass. This proves the configured gate at that revision;
+  it does not complete the structural catalog. Prior skips are not passes.
+  Local checks preserve their cache outside fixture cleanup. All three
+  reconstructed layers passed their
   native commit/push hooks.
 
 - Quality work resumed at `876cb157b403c6e65d96aa3d411ae8686988cf06` under the
@@ -158,13 +161,25 @@ Completion requires:
   case was rerun, and no acceptance transferred. Remaining concrete execution,
   state, and observation-policy dependencies still need the complete port slice.
 
+- At `68bc087a56884cf0cff4f62c956806bec228cbad`, finish the analyzer's Python
+  declaration-inventory and native Pyright resolver foundations. Forty-one
+  source-only fixtures pass with no failures/errors/skips; strict typing,
+  formatting, and lint pass. Actual aliased/re-exported/type-only protocol calls
+  resolve to their defining method. Coverage/framing/resolution weakening loses
+  detection of the same defects. Discovery parses 249 Python/stub files and
+  3,332 named declarations across the six explicit roots, including all sixty
+  retained evidence-source files. The compact component proof is recorded at
+  `docs/evidence/code-quality/architecture-foundations-20261006/verification.json`.
+  These are foundations, not complete symbol/role/resource/effect classification
+  or whole-application enforcement. The 37-rule result remains COV002.
+
 ## Next work for this agent
 
 1. Finish quality enforcement before further performance implementation. Complete
    structural-rule ownership/type/call/effect coverage and rejection fixtures;
    resolve remaining findings after the recorded clock repair below.
    Verify remaining metric/index weakening cases and required merge enforcement.
-   Verify hosted qualification under the recorded project authorization.
+   Verify each delivered revision through the configured hosted gate.
    Use the pinned standalone
    metric package and existing uv/MLX architecture. [Tool provenance](tools/code-quality/provenance.json)
    and [developer commands](docs/agent/development.md).
@@ -172,8 +187,7 @@ Completion requires:
    ownership repairs, using the accepted boundary review and preservation gates.
    Do not change numerical policy or transfer scientific case acceptance.
 3. Finish documentation consistency checks and prepare the handoff against the
-   completion criteria above. Preserve and finish the uncommitted analyzer
-   foundations; their inventory/compiler probes are not complete enforcement.
+   completion criteria above; foundation probes are not complete enforcement.
 
 ## Prior implementation agent's next work after handoff
 
@@ -256,7 +270,7 @@ scientific table rows, 87 numeric inline expressions, and the coefficient code
 block remain unchanged. All 831 original versioned data/evidence files retain
 their identity and working contents. Native commit/push checks are required
 before delivery. The former hosted-cache approval hold is released by the latest
-user amendment; fresh hosted verification remains required.
+user amendment; hosted verification results retain the revision scope above.
 
 [Original documentation verification](https://github.com/PraxisMechanica/fly-brain-mlx/blob/edfbb9dcfb477bf788740ca9096165518d21231a/docs/evidence/documentation/organization-20261005/verification.json)
 records the earlier 755-link check, fourteen parsed command examples, successful

@@ -76,6 +76,28 @@ reader comparisons preserve all 96 native arrays' dtype, shape, and bytes. This
 is bounded forwarding/evidence preservation; the observer and ledger logic are
 unchanged. No complete application architectural approval is claimed.
 
+## Analyzer foundations — 2026-10-06
+
+The executable Python inventory reconciles exact named declarations and file
+hashes with supplied ownership records. It rejects missing/unmapped source,
+blank ownership, absent mappings, changed frozen-source provenance, separately
+empty roots, parse failures, workspace escapes, and untraversed directory links.
+The resolver uses the locked native Pyright language server; real protocol
+fixtures resolve aliases, re-exports, and type-only references to their defining
+method. Broken tools/messages, unresolved symbols, and source changes fail COV002.
+
+Forty-one source-only fixtures pass, including six real reconciliation mutations
+and two native-resolution/framing guard mutations that lose detection when
+weakened. Strict typing, formatting, and lint pass. Live discovery parses 249
+Python/stub files and 3,332 named declarations, including sixty retained evidence
+sources. The compact proof is in
+`docs/evidence/code-quality/architecture-foundations-20261006/verification.json`.
+
+These components do not yet classify every production symbol/export/resource or
+provide a complete typed call, alias, effect, and control-flow model. The full
+architecture result remains **ANALYSIS FAILED (COV002)**. Passing their fixtures
+is not a whole-application architecture pass.
+
 ## Remaining work
 
 Inventory every first-party file, declaration, owned resource, public export,

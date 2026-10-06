@@ -1,0 +1,99 @@
+{
+  "base_commit": "68bc087a56884cf0cff4f62c956806bec228cbad",
+  "decision_confidence": 0.96,
+  "component_status": "PASS within the tested inventory and native resolver scopes",
+  "full_architecture_status": "ANALYSIS FAILED (COV002): complete 37-rule mechanisms and reviewed ownership metadata remain incomplete",
+  "source_hashes": {
+    "tools/architecture/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tools/architecture/inventory.py": "f1594d38145a4d33c7b9036de96c1bd4c190b893e44e61035ee7ae980147885b",
+    "tools/architecture/compiler.py": "04527274836792a476d39d0b2b634eae7719c0db06fe9d1d7c9eb86a69e958c5",
+    "tests/quality/test_architecture_inventory.py": "6b45e32a1c0db608899f990c54dbfc5f45cd46a5525c96c45ffd04443123c049",
+    "tests/quality/test_architecture_compiler.py": "0ae2b8155a0921c80a6e81d3df3ea41227dcef644d133435c3d46568b29d26e7"
+  },
+  "inventory": {
+    "roots": [
+      "src",
+      "tests",
+      "tools",
+      "typings",
+      "main.py",
+      "docs/evidence"
+    ],
+    "parsed_python_and_stub_files": 249,
+    "named_function_class_and_assignment_declarations": 3332,
+    "files_by_scope": {
+      "docs": 60,
+      "main.py": 1,
+      "src": 94,
+      "tests": 86,
+      "tools": 5,
+      "typings": 3
+    },
+    "rejections": [
+      "unowned file",
+      "unregistered declaration",
+      "changed frozen artifact hash",
+      "blank owner/role",
+      "absent mapped file/declaration",
+      "missing or individually empty root",
+      "escaped workspace source",
+      "untraversed directory symlink",
+      "parse failure",
+      "empty reconciliation"
+    ]
+  },
+  "resolver": {
+    "tool": "locked Pyright 1.1.414 pyright-langserver",
+    "native_fixtures": [
+      "aliased protocol method",
+      "re-exported protocol",
+      "renamed import",
+      "type-only import",
+      "unknown method",
+      "source changed after opening"
+    ],
+    "failure_handling": [
+      "absent or nonexecutable tool",
+      "missing advertised capabilities",
+      "bounded request/response reads",
+      "malformed framing/JSON",
+      "missing or unexpected response identity/result",
+      "unsupported server request",
+      "unresolved definition/hover",
+      "close only the owned language server"
+    ]
+  },
+  "verification": {
+    "fixture_command": "uv run --locked --no-sync python -m pytest -q -p no:cacheprovider --basetemp=/private/tmp/fly-brain-architecture-foundation-tests-20261006-04 -o tmp_path_retention_policy=all tests/quality/test_architecture_compiler.py tests/quality/test_architecture_inventory.py",
+    "passed": 41,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "duration_s": 2.98,
+    "typing": "0 errors, 0 warnings, 0 informations",
+    "lint_and_format": "Ruff pass",
+    "weakening_proof": "Removing each of six ownership diagnostics or the unresolved-symbol/framing guard stops detecting its unchanged violating fixture",
+    "initial_environment_failure": "A Pyright invocation without the task UV_CACHE_DIR was sandbox-rejected by the default uv cache; retry with the retained task cache passed",
+    "artifacts": "/private/tmp/fly-brain-architecture-foundation-tests-20261006-04"
+  },
+  "hosted_predecessor": {
+    "run_id": 37468037333,
+    "job_id": 112283936018,
+    "commit": "68bc087a56884cf0cff4f62c956806bec228cbad",
+    "conclusion": "success; all job steps completed successfully",
+    "metrics_staged_and_commits_passed": true,
+    "artifact_directory": "/private/tmp/fly-brain-policy-ci-37468037333-20261006-01",
+    "artifact_sha256": {
+      "commits.json": "5bde5000098e3f4e20450c7aa1fc16cb9ab9bf7643d0bca452f39bbc66a9df1e",
+      "staged.json": "580fa9bdcc92d4d9e3866ec679aedd35adb8c26ad1dc54c82f88dba7601a0ca4"
+    },
+    "scope": "Existing configured shared gate at the predecessor commit; excludes these new foundation files and does not establish complete structural coverage"
+  },
+  "limits": [
+    "No complete per-symbol role, resource, public-export, effect, or composition registry exists yet",
+    "Named assignment discovery is not full Python binding/export analysis",
+    "Native definition/type-definition/hover queries are not a complete typed call/alias/control-flow model",
+    "The foundation components are tested by the quality suite; whole-application architecture enforcement is not yet integrated",
+    "No application or scientific behavior changed or new scientific case acceptance established"
+  ]
+}
