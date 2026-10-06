@@ -1,10 +1,9 @@
 import math
+from collections.abc import Mapping
 from dataclasses import dataclass
 
 import numpy as np
 from numpy.typing import NDArray
-
-from .input_patterns import source_masks
 
 
 @dataclass(frozen=True)
@@ -37,20 +36,19 @@ class FanInChecks:
 
 
 def build_cases(
-    target: int,
-    sources: NDArray[np.int32],
     counts: NDArray[np.int32],
     weights: NDArray[np.float64],
+    *,
+    masks: Mapping[str, NDArray[np.bool_]],
+    permutation: NDArray[np.int64],
 ) -> FanInCases:
-    masks = source_masks(target, sources, weights)
-    generator = np.random.Generator(
-        np.random.PCG64(np.random.SeedSequence([20261004, 784, target]))
-    )
+    if (permutation.dtype, permutation.shape) != (np.int64, (counts.size,)):
+        raise ValueError('Fan-in permutation has the wrong native shape or dtype')
     orders = np.stack(
         (
             np.arange(counts.size, dtype=np.int32),
             np.arange(counts.size, dtype=np.int32)[::-1],
-            generator.permutation(counts.size).astype(np.int32),
+            permutation.astype(np.int32),
         )
     )
     width = 1 << (max(1, counts.size) - 1).bit_length()

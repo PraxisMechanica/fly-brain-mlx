@@ -6,10 +6,12 @@ import numpy as np
 import pytest
 import torch
 
+from fly_brain.infrastructure.seeded_random import uniforms
 from fly_brain.qualification.adapters.parity_case import run
 from fly_brain.qualification.models import ParityCase
 from fly_brain.simulation.experiments import P9_IDS
 from fly_brain.simulation.models import InputPin
+from fly_brain.simulation.module import build_stimulus
 from tests.qualification.test_mlx_observer import fixture
 
 pytestmark = [pytest.mark.integration, pytest.mark.reference, pytest.mark.metal]
@@ -26,11 +28,21 @@ def test_driver_runs_prescribed_p9_protocol_without_accepting_a_small_connectome
     try:
         torch.set_num_threads(1)
         report = run(
-            connectome, pin, ParityCase('p9', 1000, 0), tmp_path / 'case', precision
+            connectome,
+            pin,
+            ParityCase('p9', 1000, 0),
+            tmp_path / 'case',
+            precision,
+            generate=build_stimulus(uniforms),
         )
         with pytest.raises(FileExistsError):
             run(
-                connectome, pin, ParityCase('p9', 1000, 0), tmp_path / 'case', precision
+                connectome,
+                pin,
+                ParityCase('p9', 1000, 0),
+                tmp_path / 'case',
+                precision,
+                generate=build_stimulus(uniforms),
             )
     finally:
         torch.set_num_threads(threads)

@@ -4,6 +4,7 @@ from functools import partial
 from time import perf_counter
 
 from fly_brain.comparison.ports import ComparisonCommand
+from fly_brain.qualification.fan_in_ports import FanInCaseBuilder
 from fly_brain.qualification.ports import (
     DiagnosticCommand,
     ParityCommand,
@@ -13,6 +14,7 @@ from fly_brain.simulation.ports import (
     ConnectomeReader,
     PinnedInputs,
     SimulationCommand,
+    StimulusGenerator,
 )
 
 
@@ -104,7 +106,9 @@ def fan_in_audit() -> DiagnosticCommand:
     from fly_brain.qualification.adapters.fan_in_probe import run
     from fly_brain.qualification.module import build_input_probe
 
-    return build_input_probe(pinned_inputs(), partial(run, precision=precision))
+    return build_input_probe(
+        pinned_inputs(), partial(run, precision=precision, build_cases=fan_in_cases())
+    )
 
 
 def layout_fan_in_audit() -> DiagnosticCommand:
@@ -119,6 +123,7 @@ def layout_fan_in_audit() -> DiagnosticCommand:
             run,
             precision=precision,
             evaluator=evaluate_cases,
+            build_cases=fan_in_cases(),
             scope='All prescribed pinned fan-in cases through production layout; not full-network dynamics.',
         ),
     )
@@ -152,6 +157,7 @@ def simulation() -> SimulationCommand:
         partial(run, precision=precision),
         partial(write_run, clock=perf_counter),
         perf_counter,
+        stimulus(),
     )
 
 
@@ -163,4 +169,20 @@ def parity_case() -> ParityCommand:
     from fly_brain.qualification.module import build_parity_case
 
     torch.set_num_threads(1)
-    return build_parity_case(pinned_inputs(), partial(run, precision=precision))
+    return build_parity_case(
+        pinned_inputs(), partial(run, precision=precision, generate=stimulus())
+    )
+
+
+def stimulus() -> StimulusGenerator:
+    from fly_brain.infrastructure.seeded_random import uniforms
+    from fly_brain.simulation.module import build_stimulus
+
+    return build_stimulus(uniforms)
+
+
+def fan_in_cases() -> FanInCaseBuilder:
+    from fly_brain.infrastructure.seeded_random import permutation, uniforms
+    from fly_brain.qualification.module import build_fan_in_cases
+
+    return build_fan_in_cases(uniforms, permutation)

@@ -6,6 +6,8 @@ from numpy.typing import NDArray
 from fly_brain.simulation.mapping import absolute_count_sums
 from fly_brain.simulation.models import Connectome
 
+MASK_PROBABILITIES = (0.001, 0.01, 0.1, 0.5)
+
 
 @dataclass(frozen=True)
 class InputPatterns:
@@ -65,9 +67,14 @@ def analyze_inputs(connectome: Connectome) -> InputPatterns:
 
 
 def source_masks(
-    target: int, sources: NDArray[np.int32], weights: NDArray[np.float64]
+    sources: NDArray[np.int32],
+    weights: NDArray[np.float64],
+    *,
+    random_source_masks: tuple[NDArray[np.bool_], ...],
 ) -> dict[str, NDArray[np.bool_]]:
     unique, inverse = np.unique(sources, return_inverse=True)
+    if len(random_source_masks) != 64:
+        raise ValueError('Source masks require every prescribed random vector')
     group_weight = np.zeros(unique.size, dtype=np.float64)
     group_error = np.zeros(unique.size, dtype=np.float64)
     np.add.at(group_weight, inverse, weights)
@@ -82,15 +89,18 @@ def source_masks(
         'positive-error': (group_error > 0)[inverse],
         'negative-error': (group_error < 0)[inverse],
     }
-    for probability_index, probability in enumerate((0.001, 0.01, 0.1, 0.5)):
+    for probability_index, probability in enumerate(MASK_PROBABILITIES):
         for replicate in range(16):
-            generator = np.random.Generator(
-                np.random.PCG64(
-                    np.random.SeedSequence(
-                        [20261004, 783, target, probability_index, replicate]
-                    )
-                )
-            )
-            active = generator.random(unique.size) < probability
+            active = random_source_masks[probability_index * 16 + replicate]
+            if (active.shape, active.dtype) != ((unique.size,), np.bool_):
+                raise ValueError('Source mask has the wrong native shape or dtype')
             masks[f'p{probability}-r{replicate:02}'] = active[inverse]
     return masks
+
+
+def threshold_uniforms(
+    uniforms: NDArray[np.float64], probability: float
+) -> NDArray[np.bool_]:
+    if (uniforms.dtype, uniforms.ndim) != (np.float64, 1):
+        raise ValueError('Source uniforms require a native float64 vector')
+    return uniforms < probability

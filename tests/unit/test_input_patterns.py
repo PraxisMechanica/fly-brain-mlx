@@ -1,8 +1,9 @@
 import numpy as np
 import pytest
 
-from fly_brain.qualification.input_patterns import analyze_inputs, source_masks
+from fly_brain.qualification.input_patterns import analyze_inputs
 from fly_brain.simulation.models import Connectome
+from tests.support.seeded_inputs import source_masks
 
 pytestmark = pytest.mark.unit
 

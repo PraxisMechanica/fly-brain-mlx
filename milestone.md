@@ -78,7 +78,9 @@ Completion requires:
   verified typed-storage correction in this source. Clock and actual-row repairs,
   pure comparison rules, owned command composition, native symbol/graph
   foundations, reviewed ownership and runtime-parent decisions are delivered.
-  Required local commit/push hooks and each configured hosted job passed.
+  Required local commit/push hooks and each configured hosted job passed. The
+  next RNG slice is verified in this source; its delivery evidence stays in the
+  dated history and compact component record.
 - Deliver small coherent commits directly to `main` through both installed hooks,
   under the user's latest delivery instruction. Preserve original refs and all
   incoming work. The non-production authorization in `AGENTS.md` covers the

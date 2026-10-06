@@ -12,7 +12,9 @@ from fly_brain import bootstrap
 from fly_brain.comparison import commands as comparison_commands
 from fly_brain.comparison.models import ComparisonRequest, ComparisonResult, Spikes
 from fly_brain.comparison.module import build_comparison
+from fly_brain.infrastructure.seeded_random import uniforms
 from fly_brain.qualification import commands as qualification_commands
+from fly_brain.qualification.fan_in_ports import FanInCaseBuilder
 from fly_brain.qualification.models import (
     ParityCase,
     QualificationRequest,
@@ -38,7 +40,11 @@ from fly_brain.simulation.models import (
     SpikeEvents,
     Stimulus,
 )
-from fly_brain.simulation.module import build_pinned_inputs, build_simulation
+from fly_brain.simulation.module import (
+    build_pinned_inputs,
+    build_simulation,
+    build_stimulus,
+)
 from fly_brain.simulation.ports import (
     Clock,
     ConnectomeReader,
@@ -285,7 +291,9 @@ def test_simulation_preserves_stage_order_clock_calls_and_result_format(
         calls.append((timings, started))
         return result
 
-    command = build_simulation(load, persist, execute, write, clock)
+    command = build_simulation(
+        load, persist, execute, write, clock, build_stimulus(uniforms)
+    )
     assert calls == []
     assert command(request) == 0
     assert calls == [
@@ -443,8 +451,10 @@ def test_layout_fan_in_factory_preserves_precision_evaluator_and_scope(
         precision: str,
         evaluator: object,
         scope: str,
+        build_cases: FanInCaseBuilder,
     ) -> dict[str, object]:
         assert network is connectome and inputs is pin
+        assert callable(build_cases)
         calls.append((output, precision, evaluator, scope))
         return {'accepted': True}
 

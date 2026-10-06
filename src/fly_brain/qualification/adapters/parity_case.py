@@ -12,10 +12,11 @@ import torch
 
 from fly_brain.qualification.matrix import required_cases
 from fly_brain.qualification.models import ParityCase
+from fly_brain.qualification.stimulus_ports import StimulusGenerator
 from fly_brain.simulation.backend.bucketed import prepare_observed
 from fly_brain.simulation.experiments import EXPERIMENTS
 from fly_brain.simulation.models import Connectome, InputPin
-from fly_brain.simulation.stimuli import generate, neuron_indices
+from fly_brain.simulation.stimuli import neuron_indices
 from fly_brain.simulation.storage import persist_stimulus
 
 from .brian_jobs import build
@@ -30,6 +31,8 @@ def run(
     case: ParityCase,
     output: Path,
     precision: str,
+    *,
+    generate: StimulusGenerator,
 ) -> dict[str, object]:
     if case not in required_cases():
         raise ValueError('Qualification requires a prescribed frozen case')
@@ -51,7 +54,7 @@ def run(
         output,
         experiment,
         pin,
-        generate(connectome, experiment, case.steps, (case.trial,)),
+        generate(connectome, experiment, case.steps, (case.trial,), 20261004),
     )
     silenced = neuron_indices(connectome, experiment.silenced_ids)
     with (output / 'environment.json').open('x') as artifact:

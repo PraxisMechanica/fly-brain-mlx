@@ -1,6 +1,7 @@
 import hashlib
 
 import numpy as np
+from numpy.typing import NDArray
 
 from .models import Connectome, Experiment, Stimulus
 
@@ -17,24 +18,36 @@ def neuron_indices(connectome: Connectome, ids: tuple[int, ...]) -> tuple[int, .
     return tuple(lookup[identifier] for identifier in ids)
 
 
+def trial_events(
+    rates_hz: tuple[float, ...], uniforms: NDArray[np.float64]
+) -> NDArray[np.uint8]:
+    if (uniforms.dtype, uniforms.ndim) != (np.float64, 2):
+        raise ValueError('Stimulus uniforms require a native float64 matrix')
+    probabilities = np.asarray(rates_hz, dtype=np.float64) * 0.0001
+    return (uniforms < probabilities).astype(np.uint8)
+
+
 def generate(
     connectome: Connectome,
     experiment: Experiment,
     steps: int,
     trials: tuple[int, ...],
     seed: int = 20261004,
+    *,
+    prepared: tuple[NDArray[np.uint8], ...],
 ) -> Stimulus:
+    if len(prepared) != len(trials):
+        raise ValueError('Stimulus requires every requested trial')
     events = np.empty(
         (len(trials), steps, len(experiment.activated_ids)), dtype=np.uint8
     )
-    probabilities = np.asarray(experiment.rates_hz, dtype=np.float64) * 0.0001
-    for row, trial in enumerate(trials):
-        generator = np.random.Generator(
-            np.random.PCG64(
-                np.random.SeedSequence([seed, experiment.generator_code, trial])
-            )
-        )
-        events[row] = generator.random((steps, probabilities.size)) < probabilities
+    for row, values in enumerate(prepared):
+        if (values.shape, values.dtype) != (
+            (steps, len(experiment.activated_ids)),
+            np.uint8,
+        ):
+            raise ValueError('Prepared stimulus has the wrong native shape or dtype')
+        events[row] = values
     events.setflags(write=False)
     return Stimulus(
         events,

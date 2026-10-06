@@ -1,6 +1,9 @@
 from pathlib import Path
 from typing import Protocol
 
+import numpy as np
+from numpy.typing import NDArray
+
 from .models import (
     Connectome,
     Experiment,
@@ -54,6 +57,24 @@ class SimulationWriter(Protocol):
 
 class Clock(Protocol):
     def __call__(self, /) -> float: ...
+
+
+class UniformDraws(Protocol):
+    def __call__(
+        self, seed: tuple[int, int, int], size: tuple[int, int], /
+    ) -> NDArray[np.float64]: ...
+
+
+class StimulusGenerator(Protocol):
+    def __call__(
+        self,
+        connectome: Connectome,
+        experiment: Experiment,
+        steps: int,
+        trials: tuple[int, ...],
+        seed: int,
+        /,
+    ) -> Stimulus: ...
 
 
 class SimulationUseCase(Protocol):

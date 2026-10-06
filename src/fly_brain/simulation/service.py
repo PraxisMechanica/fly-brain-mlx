@@ -11,7 +11,8 @@ from .models import (
     SimulationRun,
     Stimulus,
 )
-from .stimuli import generate, neuron_indices
+from .ports import StimulusGenerator
+from .stimuli import neuron_indices
 
 
 def simulate(
@@ -32,6 +33,7 @@ def simulate(
         SimulationResult,
     ],
     clock: Callable[[], float],
+    generate: StimulusGenerator,
 ) -> SimulationResult:
     started = clock()
     connectome, pin = load(request.project)

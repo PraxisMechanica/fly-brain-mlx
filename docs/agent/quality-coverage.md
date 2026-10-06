@@ -197,6 +197,26 @@ The old collector remains active. Pinned transparency and four-trial memory,
 all consumer migrations and complete alias/type/effect/control-flow enforcement
 remain pending; this component is not an architecture or adoption certificate.
 
+## Seeded acquisition and pure input transformations — 2026-10-06
+
+Fresh uniform/permutation acquisition now occurs outside domain rules through
+required consumer-owned typed ports. Services supply completed trial/mask/order
+values to pure stimulus and fan-in transformations. Exact original seed lists,
+draw sizes/order, immediate preparation, probabilities and mathematical bodies
+are preserved. Parent verification passes 144 focused cases and 26 native
+effect/canonical provider-boundary cases; 54 original/new records match all
+fields. The integrated full pinned four-trial, 1,000-step stimulus preserves
+complete event bytes and metadata. No device/scientific acceptance follows.
+
+Resolved native definition/call witnesses reject effect aliases, re-exports,
+wrappers, hidden defaults and constructors; unresolved callbacks/targets and
+changed/empty/unmapped inputs fail COV002. Individual weakening controls lose
+their own diagnostics. Four additional canonical consumer scopes reject the
+concrete seeded provider, repair to neutral values and lose detection when
+removed. Only three source-reviewed STATE001 findings are cleared. Full
+type/alias/implicit-dispatch/control-flow coverage remains incomplete. Proof:
+`docs/evidence/code-quality/seeded-input-boundary-20261006/parent-integration.json`.
+
 ## Remaining work
 
 Maintain the reviewed inventory as source changes, complete all remaining

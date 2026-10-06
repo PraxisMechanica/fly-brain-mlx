@@ -17,8 +17,8 @@ from fly_brain.simulation.models import (
     SpikeEvents,
 )
 from fly_brain.simulation.schemas import SimulationOptions
-from fly_brain.simulation.stimuli import generate
 from fly_brain.simulation.storage import persist_stimulus, write_run
+from tests.support.seeded_inputs import generate
 
 pytestmark = pytest.mark.integration
 

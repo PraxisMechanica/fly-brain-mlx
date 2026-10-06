@@ -75,17 +75,19 @@ existing fault assertions are preserved. The same session owner will complete
 pinned-run/four-trial memory qualification before caller migration. RNG and
 shared assembly writes remain with the ownership worker; no collector is active.
 
-The ownership agent's committed purity review `a6fade0` bounds the three
-seeded-random acquisition seams and immutable audit-state transition. It is a
-read-only plan; all four findings remain until concrete repairs are checked.
-Shared ports/bootstrap/capture/case writes must be serialized with the session
-owner. The ownership worker now implements the complete RNG acquisition/pure-transform
-slice in an independent clone at `54aea507`; only its proved three RNG findings
-may be cleared. Native bridge splitting remains exclusive to the symbols owner;
+The committed RNG slice `b8d490a` completes the three acquisition repairs;
+parent checks preserve original numeric values and the full pinned stimulus.
+Its same owner now implements the immutable audit transition and required
+paired-observer/capture rebinding. Only those audit paths and fixtures are
+allocated; session production/caller migration waits for the committed fold.
+The session owner currently writes pinned-proof tests/evidence only. Shared
+ports/bootstrap/parity source is no longer concurrently edited. Native bridge splitting remains exclusive to the symbols owner;
 every new native_types_*.mjs module needs source/index/type coverage on
-integration. An independent read-only metric review checks the documented
-aggregation discrepancy before any tool correction; no threshold or guard is
-weakened.
+integration. The verified metric review finds a Python undercount; its same owner now
+qualifies a Python-only correction in an isolated clone/runtime. Original
+packages/reports and JavaScript/health/summary/CQ001–3 rules stay preserved.
+The bridge candidate remains metric-rejected and uncommitted; no threshold
+or guard is weakened.
 
 The exact session assignment is retained in the worker conversation. Additional
 caller allocation comes from the parent before an edit. No worker changes

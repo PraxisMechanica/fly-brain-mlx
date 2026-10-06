@@ -7,7 +7,7 @@ import pytest
 from fly_brain.qualification.batch_identity import require_stimuli
 from fly_brain.simulation.experiments import EXPERIMENTS
 from fly_brain.simulation.models import ExperimentName
-from fly_brain.simulation.stimuli import generate
+from tests.support.seeded_inputs import generate
 from tests.unit.test_stimuli import connectome
 
 pytestmark = pytest.mark.unit

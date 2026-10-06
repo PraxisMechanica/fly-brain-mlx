@@ -8,8 +8,8 @@ import pytest
 from fly_brain.qualification.adapters.batch_stimulus import load
 from fly_brain.simulation.experiments import EXPERIMENTS
 from fly_brain.simulation.models import InputPin
-from fly_brain.simulation.stimuli import generate
 from fly_brain.simulation.storage import persist_stimulus
+from tests.support.seeded_inputs import generate
 from tests.unit.test_stimuli import connectome
 
 pytestmark = pytest.mark.integration

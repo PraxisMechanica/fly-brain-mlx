@@ -1,7 +1,8 @@
 import numpy as np
 import pytest
 
-from fly_brain.qualification.fan_in import build_cases, compare_cases
+from fly_brain.qualification.fan_in import compare_cases
+from tests.support.seeded_inputs import build_cases
 
 pytestmark = pytest.mark.unit
 

@@ -15,6 +15,32 @@ pytestmark = pytest.mark.integration
         ('simulation.input_service', 'simulation.inputs', 'simulation.models'),
         ('comparison.ports', 'comparison.storage', 'comparison.models'),
         ('comparison.reporting', 'comparison.storage', 'comparison.models'),
+        (
+            'simulation.stimulus_service',
+            'infrastructure.seeded_random',
+            'simulation.models',
+        ),
+        (
+            'qualification.fan_in_service',
+            'infrastructure.seeded_random',
+            'qualification.models',
+        ),
+        (
+            'qualification.fan_in_ports',
+            'infrastructure.seeded_random',
+            'qualification.models',
+        ),
+        (
+            'qualification.stimulus_ports',
+            'infrastructure.seeded_random',
+            'simulation.models',
+        ),
+        ('simulation.stimuli', 'infrastructure.seeded_random', 'simulation.models'),
+        (
+            'qualification.input_patterns',
+            'infrastructure.seeded_random',
+            'qualification.models',
+        ),
     ),
 )
 def test_new_composition_contracts_reject_implementations_then_accept_neutral_values(

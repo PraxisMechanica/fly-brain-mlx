@@ -1,6 +1,8 @@
 from functools import partial
 
 from . import commands, service
+from .fan_in_ports import FanInCaseBuilder, PermutationDraws, UniformDraws
+from .fan_in_service import prepare_cases
 from .models import ResultWriter, TestRunner
 from .ports import (
     DiagnosticCommand,
@@ -39,3 +41,9 @@ def build_input_probe(load: PinnedInputs, execute: InputProbe) -> DiagnosticComm
 def build_parity_case(load: PinnedInputs, execute: ParityProbe) -> ParityCommand:
     use_case = partial(service.parity_case, load=load, execute=execute)
     return partial(commands.parity_case, use_case=use_case)
+
+
+def build_fan_in_cases(
+    draw_uniforms: UniformDraws, permute: PermutationDraws
+) -> FanInCaseBuilder:
+    return partial(prepare_cases, draw_uniforms=draw_uniforms, permute=permute)

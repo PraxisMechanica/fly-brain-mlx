@@ -9,9 +9,12 @@ from .ports import (
     SimulationCommand,
     SimulationExecutor,
     SimulationWriter,
+    StimulusGenerator,
     StimulusWriter,
+    UniformDraws,
 )
 from .service import simulate
+from .stimulus_service import schedule
 
 
 def build_pinned_inputs(reader_factory: ConnectomeReaderFactory) -> PinnedInputs:
@@ -24,8 +27,19 @@ def build_simulation(
     execute: SimulationExecutor,
     write: SimulationWriter,
     clock: Clock,
+    generate: StimulusGenerator,
 ) -> SimulationCommand:
     use_case = partial(
-        simulate, load=load, persist=persist, execute=execute, write=write, clock=clock
+        simulate,
+        load=load,
+        persist=persist,
+        execute=execute,
+        write=write,
+        clock=clock,
+        generate=generate,
     )
     return partial(simulation, use_case=use_case)
+
+
+def build_stimulus(draw_uniforms: UniformDraws) -> StimulusGenerator:
+    return partial(schedule, draw_uniforms=draw_uniforms)

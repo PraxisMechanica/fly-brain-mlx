@@ -3,7 +3,8 @@ import pytest
 
 from fly_brain.simulation.experiments import EXPERIMENTS, P9_IDS, SUGAR_IDS
 from fly_brain.simulation.models import Connectome
-from fly_brain.simulation.stimuli import generate, neuron_indices
+from fly_brain.simulation.stimuli import neuron_indices
+from tests.support.seeded_inputs import generate
 
 pytestmark = pytest.mark.unit
 

@@ -1525,3 +1525,31 @@ Array-facing dataclass reflection now exposes actual snapshots; no production
 consumer uses the former representation. Legacy collectors remain active.
 Complete pinned transparency/four-trial transient-memory proof, caller migration
 and full 37-rule enforcement remain required; no new scientific acceptance.
+
+
+### Seeded acquisition boundary — 2026-10-06
+
+Worker `b8d490a35b75d7b4fea9f8799a7554bae1888e49` separates fresh NumPy
+SeedSequence/PCG64 acquisition from explicit-input stimulus/mask/fan-in rules.
+Required typed consumers and live assembly/callers move together. Parent at
+`3f62a6a` verifies all 29 source hashes, 11 raw result hashes, 54 old/new full
+records and the exact 29-row policy delta while preserving typed storage.
+Fresh checks pass 144 focused cases and 26 native effect/canonical source-hook
+cases with no failures/errors/skips. The full pinned 138,639-neuron identity
+and four-trial, 1,000-step sugar event schedule preserve native bytes and
+metadata, hash `444385040e153d7666e83f345707d998e22b541a39fa753d87d1a6e94f5705c2`.
+An initial summary probe used nonexistent Stimulus.trials; corrected to actual
+trial_indices and reran all event/metadata/artifact checks. No device run was
+needed. Exact metadata covers 299 files, 4,078 declaration occurrences and
+278 neutral exports with zero gaps, preserving 62 frozen records. Only the
+three proved STATE001 findings are cleared; eight other findings and COV002
+remain. Compact proof:
+`docs/evidence/code-quality/seeded-input-boundary-20261006/parent-integration.json`.
+
+The existing purity owner now receives the immutable CausalAudit transition,
+all live paired/capture folds and only required fixture changes. Native-type
+source remains rejected by its metric gate; its verified candidate is retained.
+The metric review establishes Python aggregation undercount without granting
+the bridge a pass; a separately assigned correction preserves the original
+archive, other languages and all regression predicates. Pinned session
+qualification runs independently; no collector activation or new acceptance.

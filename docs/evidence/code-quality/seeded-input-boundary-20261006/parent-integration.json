@@ -1,0 +1,96 @@
+{
+  "base": "3f62a6a87b991f2f4e0651dd978ab5464d1d1f3f",
+  "worker_sha": "b8d490a35b75d7b4fea9f8799a7554bae1888e49",
+  "confidence_percent": 95,
+  "source_hashes_verified": 29,
+  "raw_hashes_verified": 11,
+  "worker_focused_tests": 220,
+  "worker_guard_tests": 16,
+  "exact_old_new_records": 54,
+  "registry": {
+    "files": 299,
+    "declaration_occurrences": 4078,
+    "unique_symbols": 3976,
+    "neutral_exports": 278,
+    "frozen_records": 62,
+    "gaps": 0,
+    "recorded_findings": 8
+  },
+  "exact_registry_delta_rows": 29,
+  "cleared_findings": [
+    {
+      "rule": "STATE001",
+      "symbol": {
+        "path": "src/fly_brain/simulation/stimuli.py",
+        "name": "generate"
+      },
+      "message": "A fixed seed makes results reproducible but does not turn the NumPy random generator into an injected value or a proved pure callback."
+    },
+    {
+      "rule": "STATE001",
+      "symbol": {
+        "path": "src/fly_brain/qualification/fan_in.py",
+        "name": "build_cases"
+      },
+      "message": "The qualification case builder constructs a random generator; fixed scientific seeds are preserved, with pure-effect classification unresolved."
+    },
+    {
+      "rule": "STATE001",
+      "symbol": {
+        "path": "src/fly_brain/qualification/input_patterns.py",
+        "name": "source_masks"
+      },
+      "message": "The prescribed source-mask generator uses NumPy randomness; no ambient-effect exemption is granted for determinism."
+    }
+  ],
+  "canonical_new_consumers": [
+    "simulation.stimulus_service",
+    "qualification.fan_in_service",
+    "qualification.fan_in_ports",
+    "qualification.stimulus_ports"
+  ],
+  "canonical_forbidden_provider": "infrastructure.seeded_random",
+  "limits": [
+    "Complete structural enforcement remains ANALYSIS FAILED COV002.",
+    "Only three proved RNG acquisition findings cleared; audit/identifier/reference/native-contract findings remain.",
+    "No scientific acceptance, numerical/reducer/reference/backend change or session activation.",
+    "Original archive/reference/evidence and typed storage changes preserved."
+  ],
+  "parent_checks": {
+    "focused": {
+      "path": "/private/tmp/fly-brain-rng-parent-focused-20261006-01.xml",
+      "sha256": "7994c66a64d24f585510d5cc013163f60e81191dfcac3ac0b1d247d05e84c5a1",
+      "tests": 144,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "native_effect_and_canonical_hook": {
+      "path": "/private/tmp/fly-brain-rng-parent-guards-20261006-01.xml",
+      "sha256": "c03e4876c95c2e0609c08fccbd397ee9ef75f6af66e9f3b666e0b19d07280cf0",
+      "tests": 26,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "full_pinned_stimulus": {
+    "record": "/private/tmp/fly-brain-rng-parent-pinned-20261006-01.json",
+    "sha256": "32a9f38603e308de2ae29db6501b46f88ce649ffe8496345b8e343bb6c1b3599",
+    "event_sha256": "444385040e153d7666e83f345707d998e22b541a39fa753d87d1a6e94f5705c2",
+    "exact_event_bytes_and_metadata": true,
+    "trials": 4,
+    "steps": 1000
+  },
+  "worker_protected_hashes_exact": 261,
+  "prior_typed_storage_and_canonical_fixture_differences": [
+    "src/fly_brain/qualification/session_blocks.py",
+    "src/fly_brain/qualification/session_expectations.py",
+    "src/fly_brain/simulation/observations.py",
+    "tests/qualification/test_observation_session_faults.py",
+    "tests/quality/test_composition_boundaries.py",
+    "tests/unit/test_session_expectations.py",
+    "tests/unit/test_session_observer_faults.py",
+    "tests/unit/test_session_values.py"
+  ]
+}

@@ -8,7 +8,8 @@ import mlx.core as mx
 import numpy as np
 from numpy.typing import NDArray
 
-from fly_brain.qualification.fan_in import FanInCases, build_cases, compare_cases
+from fly_brain.qualification.fan_in import FanInCases, compare_cases
+from fly_brain.qualification.fan_in_ports import FanInCaseBuilder
 from fly_brain.qualification.input_patterns import analyze_inputs
 from fly_brain.simulation.backend.accumulation import factored_sum
 from fly_brain.simulation.mapping import group_destinations
@@ -53,6 +54,8 @@ def run(
         [Connectome, int, NDArray[np.int32], FanInCases], Evaluation
     ] = evaluate_cases,
     scope: str = 'Isolated pinned-data fan-in qualification; not a full-network run.',
+    *,
+    build_cases: FanInCaseBuilder,
 ) -> dict[str, object]:
     output.mkdir(parents=True, exist_ok=False)
     assert precision == '0'

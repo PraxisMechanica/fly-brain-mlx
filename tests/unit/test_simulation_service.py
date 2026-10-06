@@ -3,6 +3,7 @@ from pathlib import Path
 import numpy as np
 import pytest
 
+from fly_brain.infrastructure.seeded_random import uniforms
 from fly_brain.simulation.models import (
     Connectome,
     Experiment,
@@ -13,6 +14,7 @@ from fly_brain.simulation.models import (
     SpikeEvents,
     Stimulus,
 )
+from fly_brain.simulation.module import build_stimulus
 from fly_brain.simulation.service import simulate
 
 pytestmark = pytest.mark.unit
@@ -65,7 +67,12 @@ def test_stage_timings_use_only_the_injected_clock() -> None:
         return result
 
     clock = iter((100.0, 102.0, 105.0, 108.0, 109.0, 113.0)).__next__
-    assert simulate(request, load, persist, execute, write, clock) is result
+    assert (
+        simulate(
+            request, load, persist, execute, write, clock, build_stimulus(uniforms)
+        )
+        is result
+    )
     assert observed == [
         ({'data_load_s': 2.0, 'schedule_s': 3.0, 'stimulus_io_s': 4.0}, 100.0)
     ]
