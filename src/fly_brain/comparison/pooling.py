@@ -4,8 +4,8 @@ import numpy as np
 from numpy.typing import NDArray
 
 from .acceptance import counts_on_support, groups_by_neuron, match_steps
+from .metrics import pearson_or_none
 from .models import ParityMetrics, SpikeSteps
-from .service import pearson_or_none
 
 
 def measure_trials(

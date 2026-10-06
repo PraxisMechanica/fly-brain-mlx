@@ -98,6 +98,7 @@ source_modules = [
     "fly_brain.comparison.acceptance",
     "fly_brain.comparison.diagnostics",
     "fly_brain.comparison.pooling",
+    "fly_brain.comparison.metrics",
     "fly_brain.comparison.service",
 ]
 forbidden_modules = [
@@ -122,3 +123,18 @@ name = "Spike comparison has no execution framework"
 type = "forbidden"
 source_modules = ["fly_brain.comparison"]
 forbidden_modules = ["fly_brain.simulation", "fly_brain.qualification", "mlx", "brian2", "torch"]
+
+[[tool.importlinter.contracts]]
+name = "DEP001: Comparison rules have no orchestration dependencies"
+type = "forbidden"
+source_modules = [
+    "fly_brain.comparison.acceptance",
+    "fly_brain.comparison.diagnostics",
+    "fly_brain.comparison.metrics",
+    "fly_brain.comparison.pooling",
+]
+forbidden_modules = [
+    "fly_brain.comparison.service",
+    "fly_brain.comparison.schemas",
+    "fly_brain.comparison.storage",
+]

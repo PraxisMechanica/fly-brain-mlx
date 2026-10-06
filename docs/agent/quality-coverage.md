@@ -21,13 +21,13 @@ they are not independent architecture evidence.
 ## Current architecture result
 
 **ANALYSIS FAILED — COV002: complete structural enforcement is not implemented.**
-The strict catalog contains 37 rules. Native checks and three import contracts
+The strict catalog contains 37 rules. Native checks and four import contracts
 cannot prove them all. No incomplete rule is treated as clean or inapplicable.
 
 | Rules | Working mechanism and limit |
 | --- | --- |
 | OWN001–OWN006 | Domain roots are documented. Complete file/symbol/resource role classification and deterministic placement checks are missing. |
-| DEP001 | Import Linter checks three configured domain/framework boundaries, including the qualification-owned observation port, aliases, type-only imports, re-exports and transitive paths. Other role boundaries and same-module interactions are not covered. |
+| DEP001 | Import Linter checks four configured domain/framework/role boundaries, including the qualification-owned observation port, aliases, type-only imports, re-exports and transitive paths. Other role boundaries and same-module interactions are not covered. |
 | DEP002–DEP004 | Some forbidden paths fail existing contracts. Complete logical owner cycles, public-contract exports and resolved foreign symbol/type checks are missing. |
 | DI001–DI004 | Strict typing checks declared signatures. Collaborator identity, hidden construction, ambient dependencies and lifecycle analysis are missing. |
 | ROLE001–ROLE007 | Complete resolved call/control-flow, role, persistence and neutral-contract checks are missing. |
@@ -97,6 +97,23 @@ These components do not yet classify every production symbol/export/resource or
 provide a complete typed call, alias, effect, and control-flow model. The full
 architecture result remains **ANALYSIS FAILED (COV002)**. Passing their fixtures
 is not a whole-application architecture pass.
+
+## Comparison rules and orchestration — 2026-10-06
+
+`comparison.metrics` owns pure scoring and result construction.
+`comparison.service` coordinates its typed reader and pure transformations;
+acceptance/pooling import the rule module directly. Original scoring ASTs and
+reader/preparation order are preserved. Seventy-nine focused behavior/file/CLI
+cases and 81 exact original/new serialized fixture comparisons pass. A buffer
+reuse test fails when a control reads both inputs before preparing the first.
+
+The fourth native import contract protects acceptance, diagnostics, metrics and
+pooling from service/schema/storage dependencies. Six real source-only hook
+cases reject aliased/type-only/indirect/re-export paths, accept neutral values,
+and lose detection when scope or transitivity is weakened. The proof is in
+`docs/evidence/code-quality/comparison-rules-20261006/verification.json`.
+This repairs the inspected role split and source graph; complete role/call/effect
+and alias enforcement remains COV002.
 
 ## Remaining work
 

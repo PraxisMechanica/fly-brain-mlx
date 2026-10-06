@@ -173,6 +173,23 @@ Completion requires:
   These are foundations, not complete symbol/role/resource/effect classification
   or whole-application enforcement. The 37-rule result remains COV002.
 
+- At `0a313d02b56d886542d130134346506106a5f926`, the analyzer foundations are
+  committed and pushed with both native hooks passing. Hosted run 37471806648
+  completes every job step successfully. Its scope is the configured gate,
+  not complete structural enforcement.
+- Separate pure comparison scoring/result construction from reader orchestration.
+  The four scoring function ASTs, result body, and first-read/prepare ordering
+  remain unchanged. All 81 original/new serialized fixture pairs match; the
+  shared-buffer regression detects an intentionally reordered reader control.
+  Seventy-nine focused application/file/CLI cases and six source-only hook cases
+  pass with no failures/errors/skips. A fourth import contract rejects direct,
+  aliased, type-only, transitive, and re-exported rule-to-service dependencies;
+  weakening scope/transitive enforcement loses detection. Strict typing,
+  formatting, lint, and all four import contracts pass. Numerical backend,
+  qualification adapters, scientific contract, and data remain unchanged.
+  Compact proof: `docs/evidence/code-quality/comparison-rules-20261006/verification.json`.
+  No case acceptance transfers; the full structural result remains COV002.
+
 ## Next work for this agent
 
 1. Finish quality enforcement before further performance implementation. Complete

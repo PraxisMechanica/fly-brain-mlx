@@ -4,9 +4,10 @@ import numpy as np
 import pytest
 from pydantic import ValidationError
 
+from fly_brain.comparison.metrics import count_timing_matches, pearson_or_none
 from fly_brain.comparison.models import ComparisonRequest, Spikes
 from fly_brain.comparison.schemas import ComparisonOptions
-from fly_brain.comparison.service import compare, count_timing_matches, pearson_or_none
+from fly_brain.comparison.service import compare
 
 pytestmark = pytest.mark.unit
 
@@ -50,3 +51,24 @@ def test_boundary_rejects_an_invalid_duration(tmp_path: Path, duration: float) -
             first_label='a',
             second_label='b',
         )
+
+
+def test_comparison_prepares_first_spikes_before_reader_reuses_its_buffer() -> None:
+    ids = np.array([10], dtype=np.int64)
+    times = np.array([0.01], dtype=np.float64)
+    shared = Spikes(np.array([0], dtype=np.int16), ids, times)
+    first, second = Path('first'), Path('second')
+    request = ComparisonRequest(first, second, 1.0, 1, 1.0, 'first', 'second')
+
+    def reader(path: Path, duration_s: float) -> Spikes:
+        assert duration_s == request.duration_s
+        if path == second:
+            ids[0] = 20
+            times[0] = 0.02
+        return shared
+
+    result = compare(request, reader)
+    assert result.summary['active_shared'] == 0
+    assert [
+        (row['flywire_id'], row['rate_a_hz'], row['rate_b_hz']) for row in result.rates
+    ] == [(10, 1.0, 0.0), (20, 0.0, 1.0)]

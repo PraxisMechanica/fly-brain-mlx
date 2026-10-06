@@ -3,8 +3,8 @@ from fractions import Fraction
 import numpy as np
 from numpy.typing import NDArray
 
+from .metrics import pearson_or_none
 from .models import MetricAcceptance, ParityMetrics, SpikeSteps
-from .service import pearson_or_none
 
 
 def validate_coordinates(spikes: SpikeSteps, neurons: int, steps: int) -> None:
