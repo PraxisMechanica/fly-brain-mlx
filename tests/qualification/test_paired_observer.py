@@ -66,7 +66,7 @@ def test_live_engines_pair_every_phase_and_final_partial_block(
         assert block.reference.fields['pre_v'].dtype == np.float64
         assert block.mlx.fields['pre_v'].dtype == np.float32
         assert all(len(digest) == 64 for digest in block.native_sha256)
-        audit_block(block, audit)
+        audit = audit_block(block, audit)
     assert audit.step == 101
     assert audit.first_spike_step is None and audit.first_budget_violation is None
 

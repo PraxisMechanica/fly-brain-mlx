@@ -60,7 +60,7 @@ class CausalCapture:
         )
 
     def check(self, block: PairedBlock) -> None:
-        audit_block(block, self.audit)
+        self.audit = audit_block(block, self.audit)
         violation = self.audit.first_budget_violation
         if self.budget is None and violation is not None:
             self.budget = self.context(block, violation.step, (violation.neuron,))

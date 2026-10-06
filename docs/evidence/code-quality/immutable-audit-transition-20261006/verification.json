@@ -1,0 +1,103 @@
+{
+  "base": "b8d490a35b75d7b4fea9f8799a7554bae1888e49",
+  "api": "Frozen CausalAudit(step=0, first_budget_violation=None, first_spike_step=None, first_spike_neurons=()); advance_audit(audit,step,reference,mlx,reference_spikes,mlx_spikes)->new CausalAudit; audit_block->new CausalAudit; capture rebinds before contexts. No mutable check facade.",
+  "focused": {
+    "tests": 86,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 0.57
+  },
+  "preservation": {
+    "successful_prefixes": 576,
+    "capture_blocks": 3,
+    "output_sha256": "14c51a0b94025199e14082a9ee1674c2bb1e147e26f137f6264e4deff1519a7d",
+    "policy_ast_sha256": "78e062080155728e463b435006014550140bc0304bf9026dda056befc7cc8ca5",
+    "fold_ast_sha256": "e6157939a1deb76b47e709bfdbec16d015e1fe1db0f34c01ab07e5264200cbf0",
+    "capture_ast_sha256": "acc83cbe12f24ad73955f0455681d0ebc5d8060421d26f3b5bd03b78da26b24b",
+    "existing_assertions": {
+      "tests/unit/test_causality.py": {
+        "count": 7,
+        "sha256": "ae4cd9e7e5823f6aff75355edc744cfa8337cae6bc3b16abefabd24fef38ecf3"
+      },
+      "tests/unit/test_adjudication.py": {
+        "count": 0,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "tests/integration/test_cause_binding.py": {
+        "count": 1,
+        "sha256": "3a9d3671db699893ec162c189544ed49fd8834b36e59659a77d1fea1f5409484"
+      },
+      "tests/qualification/test_paired_observer.py": {
+        "count": 29,
+        "sha256": "f8f850d704b4588dbfb1558b280286f73507eb8d14308ee6f733d370c44f2f08"
+      }
+    },
+    "unchanged_python_stubs": 291
+  },
+  "failure_contract": "Step-order precedes finiteness; nonfinite values after a fork fail. A failed pure step/block returns no value and leaves its original value/context untouched for explicit retry. Old missing-field partial mutation is demonstrated rather than asserted equivalent. All callers reject failed operations. No valid case can publish from a failed fold.",
+  "source_sha256": {
+    "tests/integration/test_cause_binding.py": "a316fb6769ac46390a840ff63c8ff8c592a47d36d9ce5c5215752db25b6caf7e",
+    "src/fly_brain/qualification/causality.py": "6ee04785f1fc8ea03fc8cc0402d1534f91f47e58f7103f60387ce454fd7818f0",
+    "tests/unit/test_causality.py": "8ab78e1a7bf94803fb610a89c87a9fc9964f691abddfd2257002799dbf32c561",
+    "src/fly_brain/qualification/adapters/causal_capture.py": "d21ef2a942725647ca6e4524a6f27d472465e4f0fdb9f3e739513e4b20c8b089",
+    "tests/qualification/test_paired_observer.py": "c1732d9a1b99bc9cf10c91087236ec12f2667b106bc584f28bcebc8239771537",
+    "tests/unit/test_adjudication.py": "68124a1e972c16ffdd1f774974f5da098cd670e9d68dd25d7b25845e3a654d8e",
+    "src/fly_brain/qualification/adapters/paired_observer.py": "8e358791986453efc53ce80ffe8c57398838ff7481c67076875791425919dbdc",
+    "tests/unit/test_audit_transition.py": "f0eb77ccc018f106e6f912eac41d0c0bd568071eac9d2eaa838ddceb8887401e"
+  },
+  "registry": {
+    "exact_rows": 8,
+    "sources": 299,
+    "declaration_occurrences": 4078,
+    "gaps": 0,
+    "remaining_findings": 7,
+    "removed": "Only STATE002 CausalAudit.check after receiver mutation is replaced by a pure returned value.",
+    "delta": "registry-delta.json; merge only these rows with parent storage/native/metric work."
+  },
+  "checks": {
+    "command": "env -u QUALITY_BASE -u QUALITY_HEAD UV_CACHE_DIR=/private/tmp/fly-brain-documentation-uv-cache-20261005 PRE_COMMIT_HOME=/private/tmp/fly-brain-purity-precommit-20261006-01 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=/private/tmp/fly-brain-purity-implementation-20261006-01/src:/private/tmp/fly-brain-purity-implementation-20261006-01 just check",
+    "result": "Exit zero: strict Pyright zero errors/warnings; Ruff; four import contracts; 248 quality tests in 134.39 seconds; staged and actual previous RNG commit metrics pass.",
+    "metrics": {
+      "files": [
+        295,
+        296
+      ],
+      "nonblank_lines": [
+        32981,
+        33221
+      ],
+      "average_complexity": [
+        4.9,
+        4.9
+      ],
+      "maximum_complexity": [
+        28,
+        28
+      ],
+      "health_maintainability": [
+        70.23,
+        70.29
+      ]
+    },
+    "initial_failure": "CPU fixture imported MLXBlock, causing sandbox Metal-device import failure. New test now uses a typed host-data carrier/type-only annotation; no production device code changed. Initial negative immutable-write test triggered strict typing; direct frozen setter invocation verifies the same runtime rejection without suppression.",
+    "native_commit_log": "/private/tmp/fly-brain-audit-native-commit-20261006-01.log"
+  },
+  "raw_outputs": {
+    "/private/tmp/fly-brain-audit-focused-20261006-01.log": "e5c427131fbad2f00672c78a980dda74cea31bae47c48580d43146cccf2b4936",
+    "/private/tmp/fly-brain-audit-focused-20261006-02.log": "008ef98c4f7710bdd09952acc73c245a4d5027331d90af485e10ca6502431bf9",
+    "/private/tmp/fly-brain-audit-focused-20261006-03.log": "779a03f02aec3dac77d526065486fb14a15abdb40e2c0165b72f6b92aedb6d39",
+    "/private/tmp/fly-brain-audit-focused-20261006-03.xml": "5ff51a81003278c7c6434c561150e09296dc94a7e2a13609c00a1f20b777b128",
+    "/private/tmp/fly-brain-audit-pyright-20261006-01.log": "6fd53cc3ebae1e26c0634801144bf08fa9a81e505527925891d26673d64fb9cc",
+    "/private/tmp/fly-brain-audit-pyright-20261006-02.log": "6d88a1b220adb7a3d62092b6e38431f0b3fe8babe9864fab90e5849766260332",
+    "/private/tmp/fly-brain-audit-preservation-20261006-01.json": "9944a4542ea83e5b3b5aa2d62421cde501fde500ce56f8c69abc19591f551550",
+    "/private/tmp/fly-brain-audit-byte-records-20261006-01.json": "14c51a0b94025199e14082a9ee1674c2bb1e147e26f137f6264e4deff1519a7d",
+    "/private/tmp/fly-brain-audit-just-check-20261006-01.log": "6d03cf5c72441d7887bad6779d2951e7ce058abeec39bbb1cb7ae2d93a2fa935"
+  },
+  "limits": [
+    "Full architecture remains ANALYSIS FAILED (COV002); no complete alias/effect/historical/control-flow/role predicate claim.",
+    "No Metal/reference/device/pinned-case/scientific matrix run. Assigned qualified observer fixture change is mechanical return rebinding only; all assertion ASTs preserved. Session owner retains native/pinned proof obligations.",
+    "No backend, reduction, state/queue/ledger/provider, reference/build, RNG/assembly/parity/serialization/read-only acceptance-predicate changes. Prior 9/52 and failed one-second result/cache-reuse hold unchanged.",
+    "Frozen historical audit verifiers retain their source and producer-revision applicability; immutable active API does not rewrite old evidence."
+  ]
+}

@@ -153,10 +153,11 @@ The current parent integration reviews sixteen exact inactive-session
 source/test changes. The subsequent typed-storage correction reviews eight
 exact source/test rows and reconciles the combined inventory: 289 source/stub
 files at that checkpoint. The subsequent RNG slice reconciles 299 source/stub
-files, 4,078 declaration occurrences and 278 neutral exports. All 62 frozen
+files at that checkpoint. The immutable audit transition reconciles 300
+files, 4,109 declaration occurrences and 278 neutral exports. All 62 frozen
 historical/reference records retain provenance. Reconciliation has zero gaps;
-Eight architecture/identifier findings remain after the three proved RNG
-acquisition repairs. Candidate neutral observation
+Seven architecture/identifier findings remain after the three proved RNG
+acquisition repairs and immutable audit transition. Candidate neutral observation
 values/ports and local assembly sites have exact entries; private helper
 functions are not silently promoted to public contracts. The typed-storage
 correction removes dynamic attribute/type shadowing and preserves array-facing

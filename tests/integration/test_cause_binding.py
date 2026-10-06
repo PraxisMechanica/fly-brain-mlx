@@ -121,11 +121,8 @@ def test_completed_cause_cannot_apply_to_changed_or_incomplete_evidence(
         (review / 'astra-review.md').write_text('changed review')
     elif fault == 'execution_changed':
         (paired / 'spike-context.npz').write_bytes(b'changed cause')
-    audit = CausalAudit()
-    audit.step, audit.first_spike_step, audit.first_spike_neurons = (
-        10000,
-        5719,
-        (100750,),
+    audit = CausalAudit(
+        step=10000, first_spike_step=5719, first_spike_neurons=(100750,)
     )
     if fault == 'none':
         hashes = require_cause_binding(run, review, case, audit, 'launch')

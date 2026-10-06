@@ -74,13 +74,13 @@ Completion requires:
   process 62191 remains designated suspended; do not resume or discard it
   without resolving its original-mode evidence. [Pause record](docs/evidence/execution-time-investigation/pause.json).
 - The latest delivered refactor checkpoint is
-  `54aea507158774760f8c57e077b1411dc52cdb1e` on `origin/main`, followed by the
-  verified typed-storage correction in this source. Clock and actual-row repairs,
+  `fe614726a09252890303c91c8516cc7f840de354` on `origin/main`, followed by the
+  verified immutable-audit correction in this source. Clock and actual-row repairs,
   pure comparison rules, owned command composition, native symbol/graph
   foundations, reviewed ownership and runtime-parent decisions are delivered.
   Required local commit/push hooks and each configured hosted job passed. The
-  next RNG slice is verified in this source; its delivery evidence stays in the
-  dated history and compact component record.
+  RNG slice is delivered; the audit correction passes 86 CPU and 24 real paired
+  cases. Exact delivery evidence stays in dated history and component records.
 - Deliver small coherent commits directly to `main` through both installed hooks,
   under the user's latest delivery instruction. Preserve original refs and all
   incoming work. The non-production authorization in `AGENTS.md` covers the

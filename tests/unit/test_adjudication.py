@@ -1,3 +1,5 @@
+from dataclasses import replace
+
 import pytest
 
 from fly_brain.qualification.adjudication import (
@@ -18,8 +20,7 @@ def test_explained_first_spike_cannot_waive_any_frozen_metric(
     failed_gate: str | None,
 ) -> None:
     case = ParityCase('sugar', 1000, 1)
-    audit = CausalAudit()
-    audit.step, audit.first_spike_step, audit.first_spike_neurons = 1000, 999, (41514,)
+    audit = CausalAudit(step=1000, first_spike_step=999, first_spike_neurons=(41514,))
     checks = {name: name != FIRST_SPIKE_CHECK for name in CASE_CHECKS}
     gates = {name: name != failed_gate for name in METRIC_CHECKS}
     if failed_gate is None:
@@ -36,8 +37,7 @@ def test_a_review_for_another_case_or_first_cause_cannot_grant_acceptance(
     fault: str,
 ) -> None:
     case = ParityCase('sugar', 1000, 1)
-    audit = CausalAudit()
-    audit.step, audit.first_spike_step, audit.first_spike_neurons = 1000, 999, (41514,)
+    audit = CausalAudit(step=1000, first_spike_step=999, first_spike_neurons=(41514,))
     reviewed = ParityCase(
         'p9' if fault == 'experiment' else 'sugar',
         10000 if fault == 'horizon' else 1000,
@@ -57,8 +57,7 @@ def test_scientific_review_cannot_hide_a_changed_or_failed_validity_check(
     fault: str,
 ) -> None:
     case = ParityCase('sugar', 1000, 1)
-    audit = CausalAudit()
-    audit.step, audit.first_spike_step, audit.first_spike_neurons = 1000, 999, (41514,)
+    audit = CausalAudit(step=1000, first_spike_step=999, first_spike_neurons=(41514,))
     checks = {name: name != FIRST_SPIKE_CHECK for name in CASE_CHECKS}
     gates = dict.fromkeys(METRIC_CHECKS, True)
     if fault == 'missing':
@@ -88,8 +87,7 @@ def test_review_requires_its_own_complete_valid_case_and_causal_audit(
     fault: str,
 ) -> None:
     case = ParityCase('sugar', 1000, 1)
-    audit = CausalAudit()
-    audit.step, audit.first_spike_step, audit.first_spike_neurons = 1000, 999, (41514,)
+    audit = CausalAudit(step=1000, first_spike_step=999, first_spike_neurons=(41514,))
     checks = {name: name != FIRST_SPIKE_CHECK for name in CASE_CHECKS}
     gates = dict.fromkeys(METRIC_CHECKS, True)
     if fault == 'missing_metric':
@@ -97,17 +95,20 @@ def test_review_requires_its_own_complete_valid_case_and_causal_audit(
     elif fault == 'extra_metric':
         gates['another_metric'] = True
     elif fault == 'budget':
-        audit.first_budget_violation = BudgetViolation(
-            999, 'pre', 'v', 1, -45, -46, 0.00145
+        audit = replace(
+            audit,
+            first_budget_violation=BudgetViolation(
+                999, 'pre', 'v', 1, -45, -46, 0.00145
+            ),
         )
     elif fault == 'truncated':
-        audit.step = 999
+        audit = replace(audit, step=999)
     elif fault == 'absent':
-        audit.first_spike_step = None
+        audit = replace(audit, first_spike_step=None)
     elif fault == 'late':
-        audit.first_spike_step = 1000
+        audit = replace(audit, first_spike_step=1000)
     elif fault == 'empty':
-        audit.first_spike_neurons = ()
+        audit = replace(audit, first_spike_neurons=())
     else:
         case = ParityCase('silent', 1000, 1)
     with pytest.raises(ValueError, match='Review requires'):

@@ -1553,3 +1553,28 @@ The metric review establishes Python aggregation undercount without granting
 the bridge a pass; a separately assigned correction preserves the original
 archive, other languages and all regression predicates. Pinned session
 qualification runs independently; no collector activation or new acceptance.
+
+
+### Immutable causal audit transition — 2026-10-06
+
+Worker `42d94b0e8f78aca7f0b21d8a2c3ea33b525b0e2d` turns the four-field
+audit into a frozen value and pure advance_audit transition, with every live
+paired/capture fold rebound before context selection. Parent at `fe61472`
+verifies eight source hashes and nine raw result hashes, 576 successful
+original/new prefixes, three capture blocks and 37 original assertion ASTs.
+Fresh parent checks pass 86 CPU and 24 real paired-observer cases (90 upstream
+warnings), no failures/errors/skips. The first CPU collection used the original
+editable path because environment overrides ended at the preceding policy
+command; rerun explicitly targets worktree source and fresh outputs.
+
+Step/finiteness precedence, pre/before/end and v/g ordering, exact strict budget,
+first-neuron/fork latching and subsequent finite checks remain. Failed pure
+steps/blocks return no value and publish no partial audit/context; old malformed
+input partial mutation is separately demonstrated and explicitly retired.
+Exact eight-row policy integration reconciles 300 files, 4,109 declarations and
+278 neutral exports with zero gaps; only STATE002 is cleared. Seven findings
+and complete37-rule COV002 remain. Compact proof:
+`docs/evidence/code-quality/immutable-audit-transition-20261006/parent-integration.json`.
+No numerical mode, backend/reference/queue/ledger/provider/RNG/serialization or
+scientific acceptance changes. Identifier boundary review remains read-only;
+collector migration waits for complete committed pinned preservation evidence.

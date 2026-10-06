@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING
 
 import numpy as np
 
-from fly_brain.qualification.causality import CausalAudit
+from fly_brain.qualification.causality import CausalAudit, advance_audit
 
 from .observer_stream import FinalSnapshot, PhaseBlock, StepSnapshot
 from .reference_queues import ReferenceQueues
@@ -105,7 +105,7 @@ def trial_block(block: 'MLXBlock', trial: int) -> 'MLXBlock':
     )
 
 
-def audit_block(block: PairedBlock, audit: CausalAudit) -> None:
+def audit_block(block: PairedBlock, audit: CausalAudit) -> CausalAudit:
     reference, mlx = block.reference.fields, block.mlx.fields
     neurons = reference['pre_v'].shape[1]
     if mlx['pre_v'].shape != (block.reference.rows, 1, neurons):
@@ -157,7 +157,8 @@ def audit_block(block: PairedBlock, audit: CausalAudit) -> None:
                 mlx['end_last_spike_step'][row, 0],
             ):
                 raise ValueError('Common-history last-spike clocks differ')
-        audit.check(
+        audit = advance_audit(
+            audit,
             snapshot.step,
             {
                 name: np.asarray(reference[name][row], dtype=np.float64) * 1000
@@ -167,3 +168,4 @@ def audit_block(block: PairedBlock, audit: CausalAudit) -> None:
             spikes,
             actual_spikes,
         )
+    return audit

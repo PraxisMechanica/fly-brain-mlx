@@ -217,6 +217,22 @@ removed. Only three source-reviewed STATE001 findings are cleared. Full
 type/alias/implicit-dispatch/control-flow coverage remains incomplete. Proof:
 `docs/evidence/code-quality/seeded-input-boundary-20261006/parent-integration.json`.
 
+## Immutable causal audit transition — 2026-10-06
+
+The audit is now a frozen scalar/tuple value. Its pure transition returns the
+next value; paired observation folds it and capture stores it before selecting
+contexts. Step/phase/field order, exact budgets, first fork/violation and finite
+checks remain. The verified worker preserves 576 successful prefixes, three
+capture blocks and all 37 original assertion statements. Parent checks pass
+86 CPU and 24 real paired-observer cases with no failures/errors/skips.
+
+Failed pure steps/blocks publish no partial state or context. The old partial
+mutation on malformed input is demonstrated explicitly; live callers propagate
+failure and cannot publish a valid case from it. Only the source-reviewed
+STATE002 finding is cleared. Complete alias/effect/control-flow and historical
+coverage remain COV002. Compact proof:
+`docs/evidence/code-quality/immutable-audit-transition-20261006/parent-integration.json`.
+
 ## Remaining work
 
 Maintain the reviewed inventory as source changes, complete all remaining

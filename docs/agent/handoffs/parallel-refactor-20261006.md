@@ -77,9 +77,10 @@ shared assembly writes remain with the ownership worker; no collector is active.
 
 The committed RNG slice `b8d490a` completes the three acquisition repairs;
 parent checks preserve original numeric values and the full pinned stimulus.
-Its same owner now implements the immutable audit transition and required
-paired-observer/capture rebinding. Only those audit paths and fixtures are
-allocated; session production/caller migration waits for the committed fold.
+Its same owner commits the immutable audit transition as `42d94b0`; parent
+verification passes 86 CPU and 24 real paired cases. The owner now reviews the
+five primitive-identifier boundaries read-only. Session production/caller
+migration waits for verified audit integration and complete pinned proof.
 The session owner currently writes pinned-proof tests/evidence only. Shared
 ports/bootstrap/parity source is no longer concurrently edited. Native bridge splitting remains exclusive to the symbols owner;
 every new native_types_*.mjs module needs source/index/type coverage on
