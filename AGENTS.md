@@ -39,7 +39,7 @@ Use GPT-6.1 Sol for implementation at the user-selected effort (currently
 
 Resolve precision, numerical representation, and implementation choices using
 the delegated engineering judgment. For deeper scientific, numerical, or
-kernel-design judgment, use [the bounded subagent skill](skills/bounded-subagent/SKILL.md).
+kernel-design judgment, use the installed `bounded-subagent` skill.
 Spawn `gpt-6-astra` explicitly at `xhigh` with fresh context; await completion,
 verify the evidence, and record the decision and limits before dependent work.
 Sol then resumes implementation. Keep assigned reviews with their current

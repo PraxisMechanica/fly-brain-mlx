@@ -30,6 +30,8 @@ recorded artifact paths and hashes retain their meaning.
 
 - [Milestone history](history/milestones.md): complete checkpoint log, including
   original acceptance evidence and superseded work instructions.
+- [Former repository delegation skill](history/bounded-subagent.md): archived
+  generic workflow and interface metadata used by earlier review briefs.
 - [Reference baseline](history/reference-baseline.md): original source,
   equations, input hashes, backend disagreements, measurements, and notices.
 - [Architecture audit](history/architecture-audit.md): findings before repair.

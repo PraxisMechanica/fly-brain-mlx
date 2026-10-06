@@ -1,4 +1,0 @@
-interface:
-  display_name: "Bounded Subagent"
-  short_description: "Delegate with your chosen model and reasoning effort"
-  default_prompt: "Use $bounded-subagent to delegate this component with the model and reasoning effort specified in my instructions, then await and verify the result."

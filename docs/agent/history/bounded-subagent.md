@@ -1,3 +1,16 @@
+# Former repository delegation skill
+
+Historical record only. This snapshot does not govern current work. The installed
+`bounded-subagent` skill in the session catalog owns reusable delegation
+procedures; current project model and review choices belong to `AGENTS.md`.
+
+Archived without changing the original skill or interface text from source
+`e8d2919cb277ae2512c102dbac325290957b1bfa`. Earlier review briefs and checkpoint
+links refer to this snapshot. Its former repository paths were `skills/bounded-subagent/SKILL.md`
+and `skills/bounded-subagent/agents/openai.yaml`.
+
+## Original skill
+
 ---
 name: bounded-subagent
 description: Delegate a bounded component using the model and reasoning effort specified by the user or project, await completion, verify evidence, and integrate the result. Use for authorized reviews, investigations, or explicitly delegated implementation; keep existing assignments with their current owners.
@@ -50,3 +63,12 @@ Parent and child share the filesystem. Serialize edits to shared files and keep 
 Inspect any changed files and the cited evidence. Reproduce the checks needed to support the decision before accepting it. If the evidence is incomplete or contradicts the contract, give the same child a bounded follow-up instead of silently broadening the task or treating its conclusion as approval.
 
 Record accepted decisions, verification, unresolved issues, and the next step in the project's authoritative progress record when one exists. State skipped checks and material limitations explicitly. Resume dependent implementation only when the component's acceptance criteria are met; a review that exposes a blocker leaves the dependent work blocked.
+
+## Original interface metadata
+
+```yaml
+interface:
+  display_name: "Bounded Subagent"
+  short_description: "Delegate with your chosen model and reasoning effort"
+  default_prompt: "Use $bounded-subagent to delegate this component with the model and reasoning effort specified in my instructions, then await and verify the result."
+```

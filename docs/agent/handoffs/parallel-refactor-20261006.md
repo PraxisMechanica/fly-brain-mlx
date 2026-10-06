@@ -1,108 +1,33 @@
-# Parallel refactor assignments — 2026-10-06
+# Parallel refactor assignments
 
-The user explicitly requested bounded parallel work and committed handoffs.
-Decision confidence: 97% at 0a313d02b56d886542d130134346506106a5f926.
-All three implementation agents inherit GPT-6.1 Sol at xhigh.
+Updated 2026-10-07. This file owns current exclusive scopes and integration order.
+[Earlier assignment records](../history/milestones.md#parallel-assignment-record-2026-10-07)
+are historical; reusable delegation procedures belong to the installed skill.
 
-Each worker uses an independent local-main clone pinned to that commit. The
-clones share installed dependencies read-only, have separate Git metadata and
-pre-commit caches, and retain their source/evidence. No feature branch or
-competing origin/main push is created. The parent integrates and pushes serially.
 
-## Initial assignments at 0a313d0
+The initial assignments and handoff above are historical. Original composition,
+native symbols/graphs, ownership and runtime-resource repairs are delivered.
+RNG acquisition, immutable causal audits, corrected metric aggregation and full
+pinned preservation evidence are delivered. Current source checkpoint is
+`e8d2919cb277ae2512c102dbac325290957b1bfa`; exact results remain in component evidence and milestone history.
 
-| Agent | Component | Exclusive file scope |
+All implementation agents retain inherited GPT-6.1 Sol at `xhigh`. The accepted
+scientific review retains its existing GPT-6 Astra owner. Workers commit verified
+components before handoff; the parent reviews, reconciles, checks and pushes
+serially. No worker changes shared dependencies, canonical configuration or
+remote refs. Source progress is not an adoption or complete-architecture pass.
+
+| Owner | Current component | Exclusive scope and finishing condition |
 | --- | --- | --- |
-| architecture_ownership | Reviewed owners/roles, binding fingerprints, resources/public exports and typed metadata loader | New tools/architecture/policy.py, compact ownership metadata, its dedicated test, ownership evidence and optional architecture-ownership.md |
-| architecture_symbols | Native symbol/type-definition/call relationships, alias handling and graph primitives | New symbols/graph modules and dedicated tests; compiler.py/compiler tests only if needed; symbol evidence |
-| composition_refactor | Separate bootstrap assembly from owned runtime use cases; preserve lazy imports, configuration, load/clock boundaries and CLI behavior | bootstrap.py, cli.py; owned module/ports/commands/input-service wiring; qualification/service.py if needed; neutral qualification ports; composition/package tests and the narrow test_parity_options.py seam update; composition evidence |
+| architecture_symbols | Native structured types and source inventory | Native type bridge, records/envelope/payload/schema/report, exact native JavaScript projection/context/query modules, source inventory bridge and dedicated fixtures/evidence. All source/declaration/type/error controls must pass unchanged quality gates before committed handoff. Parent owns language coverage, canonical index/type wiring and shared policy. |
+| composition_refactor | Active observation-session callers | Qualification paired/batch/case/parity consumers and ports; minimal simulation-owned factory/bootstrap composition; actual source-identity minimum and dedicated preservation/boundary fixtures. Retire old production observer/ledger together; preserve exact test-only historical oracles and all numerical/reference bodies. Commit the complete caller slice after required checks. Parent reconciles its separately organized pinned proof helpers. |
+| architecture_ownership | Semantic policy review | Digest typing repair is delivered. Current assignment is read-only: exact owner/role/effect/export metadata and rule-to-mechanism/repair footprints for complete enforcement. Write only the assigned external review directory. Four simulation identifier migrations await session caller release because their models/ports/callers overlap. |
+| parent | Shared integration and delivery | Verify committed source/evidence, reconcile exact policy/configuration, complete full structural rule/call/alias/effect/control-flow enforcement, maintain current documentation, and push checked commits to origin/main. No feature/numerical work or full scientific matrix. |
 
-The parent exclusively owns shared pyproject/justfile/hook/workflow configuration,
-AGENTS.md, milestone.md, quality-coverage.md, the agent index, integration and the
-current comparison rule repair. No worker edits another worker's files. Workers
-request a parent allocation before expanding file scope.
+Current source remains **ANALYSIS FAILED (COV002)** for complete 37-rule coverage.
+The four simulation identifier findings and remaining ownership/boundary repairs
+stay required. Reference/probe seams are allocated after the committed session
+contract; no existing assignment moves silently. The accepted shortest pinned
+proof covers its recorded source/horizon/memory envelope and grants no new
+scientific acceptance.
 
-Ownership metadata and native semantic IR have no unpublished API dependency:
-metadata uses the existing inventory records; native IR emits explicit locations
-and generic graph relationships. The parent joins them and implements the full
-rule/gate integration. Composition changes application declarations; reconcile
-its final committed symbols and public contracts into the ownership registry
-at integration. Do not guess future declarations or register broad exemptions.
-
-Each worker must install required hooks, run focused checks plus the existing
-shared gate, and commit coherent verified changes before handoff. It returns
-SHAs, exact files, actual commands/results, coverage limits, and integration
-requirements. No hook bypass, dependency installation, push, rebase, branch
-creation, scientific mode change or full-matrix execution is assigned.
-
-The parent reviews each committed diff and evidence, imports the commit without
-bypassing mandatory commit checks, reconciles shared metadata/configuration,
-checks the combined snapshot, and pushes to origin/main in sequence. Native
-resolution limits and missing applicable mechanisms remain COV002; green
-component checks do not establish all 37 rules or new scientific acceptance.
-
-## Initial handoff checkpoint at 471ab69
-
-At parent `471ab69`, composition worker commit `05dd220` is integrated and pushed
-with both hooks and 150 parent behavior/boundary cases passing. Native resolver
-worker commit `ffbc2fe` passes 84 parent source fixtures and is being integrated.
-Ownership worker commit `d6e8d43` remains preserved for the next serial join.
-
-## Current integration and assignments
-
-At `f2de8f01a2e5311a94ac4e520572925d23ce6f78`, all original worker components
-are integrated: composition at `471ab69`, native identities/graphs at `a9453aa`,
-reviewed ownership at `c5296da`, runtime-parent decisions at `f2de8f0`. Each passed
-native commit/push hooks and its configured hosted job. Resource review `3613b96`
-is complete. Documentation audit `e48aa9e` is a committed read-only handoff;
-the parent implements its six-document corrections.
-
-Implementation settings remain inherited GPT-6.1 Sol at xhigh. The accepted
-scientific review stays with its existing fresh-context GPT-6 Astra reviewer.
-Unmerged native-type and session results remain provisional; no collector
-adoption or case acceptance follows from worker progress messages.
-
-| Owner | Current bounded component | Exclusive scope and finishing condition |
-| --- | --- | --- |
-| architecture_symbols | Native structured types | New native_types.py, native_types.mjs, native_types_node.d.ts, dedicated fixtures and compact evidence. Preserve committed resolver files; check native categories/signatures/identities with installed TypeScript and fail closed on unsupported data. Commit before handoff. |
-| composition_refactor | Opaque sessions and independent expectations | Neutral simulation observations/session provider, qualification ports/observer/ledger/paired/case/batch callers, dedicated tests/evidence. Preserve engine math, reference/build/weight-reader sources and bootstrap/CLI. Commit the inactive provider first; complete accepted transparency/integrity and shortest pinned-run/memory proof before collector adoption. |
-| parent | Shared reconciliation and delivery | Apply documentation corrections, verify committed evidence, own shared configuration/policy/status/index, reconcile exact source mappings and push serially. Allocate reference/probe seams after the committed session contract is known. |
-
-The inactive session handoff `6e111545` and storage correction `a58be25e` are
-verified against the combined parent source. Checks pass 106 Metal and 66
-value/alias/package/canonical-port cases. Nine public constructors and all
-existing fault assertions are preserved. The same session owner will complete
-pinned-run/four-trial memory qualification before caller migration. RNG and
-shared assembly writes remain with the ownership worker; no collector is active.
-
-The committed RNG slice `b8d490a` completes the three acquisition repairs;
-parent checks preserve original numeric values and the full pinned stimulus.
-Its same owner commits the immutable audit transition as `42d94b0`; parent
-verification passes 86 CPU and 24 real paired cases. The owner now reviews the
-five primitive-identifier boundaries read-only. Session production/caller
-migration waits for verified audit integration and complete pinned proof.
-The session owner currently writes pinned-proof tests/evidence only. Shared
-ports/bootstrap/parity source is no longer concurrently edited. Native bridge splitting remains exclusive to the symbols owner;
-every new native_types_*.mjs module needs source/index/type coverage on
-integration. The qualified Python-only metric correction is committed as `88c6eaa`; parent
-measurement/index tests pass on combined source with an isolated runtime.
-Original packages/reports and JavaScript/health/summary/CQ001–3 rules remain
-preserved. The metric owner has finished its bounded handoff.
-The bridge candidate remains metric-rejected and uncommitted; no threshold
-or guard is weakened.
-
-The exact session assignment is retained in the worker conversation. Additional
-caller allocation comes from the parent before an edit. No worker changes
-shared configuration, policy metadata, status/index documents, dependencies,
-other workers' code, branches or remote refs. The parent reconciles final
-committed declarations after application and analyzer integration. The native
-structured-type component and opaque observation boundary do not touch each
-other's files; their checks and parent policy joins are serialized.
-
-Parent allocation after the committed runtime-resource review: the existing
-session worker also owns minimal native-session/evidence-type wiring in
-qualification/adapters/parity_case.py, paired_observer.py and paired_causes.py.
-Reference producer/build/weight-reader bytes remain protected. Reference seams
-and the remaining layout/pulse/scalar/reducer probes are allocated only after
-the session's committed contract is known; their exclusive scopes do not move
-silently to the session worker.

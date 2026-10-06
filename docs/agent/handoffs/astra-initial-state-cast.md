@@ -2,7 +2,7 @@
 
 Historical review brief. Holds, process states, model-switch instructions, package counts, and remote availability below describe the recorded checkpoint. For current work, read [milestone.md](../../../milestone.md) and [AGENTS.md](../../../AGENTS.md). Original review ownership and scientific evidence are preserved.
 
-Assignment: fresh-context GPT-6 Astra subagent at explicit `xhigh`. Sol retains the parent chat. This is a new failed-gate review after the completed manual accumulation review; it does not duplicate or reassign that owner. Follow [the bounded subagent skill](../../../skills/bounded-subagent/SKILL.md).
+Assignment: fresh-context GPT-6 Astra subagent at explicit `xhigh`. Sol retains the parent chat. This is a new failed-gate review after the completed manual accumulation review; it does not duplicate or reassign that owner. Follow [the bounded subagent skill](../history/bounded-subagent.md).
 
 ## Checkpoint and question
 

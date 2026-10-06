@@ -168,7 +168,7 @@ The numerical backend varies; the model, experiment definitions, neuron ordering
 - Commit every passing working state with changes immediately; more than 100 uncommitted lines is an immediate commit checkpoint under the user's latest amendment.
 - Distinguish tolerance-bounded small-network continuous state with exact ordinary-fixture discrete parity from full-network event/statistical parity. Keep the separately asserted threshold-rounding limitation explicit. Do not declare acceptance thresholds after seeing results, explain away discrepancies, or infer scientific validity from a successful run alone.
 
-Each review assignment must contain the reason for deeper review, current checkpoint and commits, exact evidence and files to inspect, one bounded requested outcome, and a completion condition. Use [the bounded subagent skill](../../../skills/bounded-subagent/SKILL.md) with the model and effort specified by this project's delegation rule for future reviews. Sol awaits the result, verifies the evidence, records the decision, and commits integrated work before continuing dependent implementation. The earlier manual handoffs retain their historical completion records.
+Each review assignment must contain the reason for deeper review, current checkpoint and commits, exact evidence and files to inspect, one bounded requested outcome, and a completion condition. Use [the bounded subagent skill](bounded-subagent.md) with the model and effort specified by this project's delegation rule for future reviews. Sol awaits the result, verifies the evidence, records the decision, and commits integrated work before continuing dependent implementation. The earlier manual handoffs retain their historical completion records.
 
 ## Completion requirements
 
@@ -1275,7 +1275,7 @@ Milestones 1–3 are complete within their recorded envelopes. All 24,576 prescr
 
 The latest default application run passes **488 tests**, zero failures/errors/skips; the complete scientific suite records **203 passed tests**, zero failures/errors/skips, including 41 CPU setup/observer checks. These are separate suites. The internal batch collector additionally passes 13 focused real Metal observer/collector tests, zero failures/errors/skips, with all quality checks recorded. Ruff, strict Pyright, and all three import contracts pass. Complete shortest reference/MLX/CPU transparency and raw replay, actual queue/due agreement, live causal auditing, and sampled single/four-trial concurrent memory are verified. **Nine three-engine cases are accepted (9/52)**: all five sugar trials at 0.1 seconds, plus P9, silenced sugar, two-class, and silent trial 0 at that horizon. Eight accepted rasters match MLX/reference exactly; sugar trial 1 has a separately verified parent acceptance under the prospective explained-roundoff rule. Every fixed/paired metric and complete causal/native replay requirement passes. The silent control independently matches all 19 frozen empty-metric fields. Batch trial 1's first difference has a verified bounded roundoff classification. Reviewed pure group coverage/calculations/bin composition passes focused intent checks; recorded partial reports preserve missing identities and independently reproduce pooled metrics within actual trial boundaries. Complete matrix reports remain open. The remaining 43 cases, prescribed full repeat/batch gates, full parity approval, and benchmark speed remain open. Existing data, results, and standalone artifacts are preserved. New runs require a fresh output directory. Engineering choices remain delegated to Sol; use bounded Astra review where deeper numerical judgment is needed.
 
-Delegation setup (2026-10-04): [the versioned bounded subagent skill](../../../skills/bounded-subagent/SKILL.md) is installed through a symlink at `~/.codex/skills/bounded-subagent`, with automatic discovery enabled. At the user's request, model and reasoning effort are resolved from user instructions or project rules rather than fixed in the reusable skill. The bundled `quick_validate.py` passed; the installed link, file contents, and parsed interface metadata were verified. A read-only `gpt-6-astra` subagent at explicit `xhigh` completed the workflow review and four hypothetical dispatch checks: an explicit Sol/high pair, the project's Astra/xhigh pair, missing choices without defaults, and explicitly requested inheritance. It found no material defects. These were instruction/tool-contract checks, not four live dispatches. At that setup checkpoint, Sol retained the user's selected `max`; the updated goal now requests `xhigh`. The existing manual assignment and scientific evidence retained their owner. This setup did not start Milestone 2 or run additional numerical checks.
+Delegation setup (2026-10-04): [the versioned bounded subagent skill](bounded-subagent.md) is installed through a symlink at `~/.codex/skills/bounded-subagent`, with automatic discovery enabled. At the user's request, model and reasoning effort are resolved from user instructions or project rules rather than fixed in the reusable skill. The bundled `quick_validate.py` passed; the installed link, file contents, and parsed interface metadata were verified. A read-only `gpt-6-astra` subagent at explicit `xhigh` completed the workflow review and four hypothetical dispatch checks: an explicit Sol/high pair, the project's Astra/xhigh pair, missing choices without defaults, and explicitly requested inheritance. It found no material defects. These were instruction/tool-contract checks, not four live dispatches. At that setup checkpoint, Sol retained the user's selected `max`; the updated goal now requests `xhigh`. The existing manual assignment and scientific evidence retained their owner. This setup did not start Milestone 2 or run additional numerical checks.
 
 Git remote `upstream` is the public reference repository. No user-owned push destination has been supplied; local commits have not been pushed. Do not assume permission or write access to the upstream repository.
 
@@ -1657,3 +1657,119 @@ reconstruction still passes native typing and is recorded as a coverage limit.
 No reference sealing/cache reuse, native arithmetic, output bytes or scientific
 acceptance changes. Proof:
 `docs/evidence/code-quality/reference-digest-boundary-20261007/parent-integration.json`.
+
+
+## Parallel assignment record 2026-10-07
+
+Archived from the current assignment document at `e8d2919cb277ae2512c102dbac325290957b1bfa`.
+This original record preserves earlier scopes, progress and completed instructions.
+Current assignments belong only to `docs/agent/handoffs/parallel-refactor-20261006.md`.
+
+# Parallel refactor assignments — 2026-10-06
+
+The user explicitly requested bounded parallel work and committed handoffs.
+Decision confidence: 97% at 0a313d02b56d886542d130134346506106a5f926.
+All three implementation agents inherit GPT-6.1 Sol at xhigh.
+
+Each worker uses an independent local-main clone pinned to that commit. The
+clones share installed dependencies read-only, have separate Git metadata and
+pre-commit caches, and retain their source/evidence. No feature branch or
+competing origin/main push is created. The parent integrates and pushes serially.
+
+## Initial assignments at 0a313d0
+
+| Agent | Component | Exclusive file scope |
+| --- | --- | --- |
+| architecture_ownership | Reviewed owners/roles, binding fingerprints, resources/public exports and typed metadata loader | New tools/architecture/policy.py, compact ownership metadata, its dedicated test, ownership evidence and optional architecture-ownership.md |
+| architecture_symbols | Native symbol/type-definition/call relationships, alias handling and graph primitives | New symbols/graph modules and dedicated tests; compiler.py/compiler tests only if needed; symbol evidence |
+| composition_refactor | Separate bootstrap assembly from owned runtime use cases; preserve lazy imports, configuration, load/clock boundaries and CLI behavior | bootstrap.py, cli.py; owned module/ports/commands/input-service wiring; qualification/service.py if needed; neutral qualification ports; composition/package tests and the narrow test_parity_options.py seam update; composition evidence |
+
+The parent exclusively owns shared pyproject/justfile/hook/workflow configuration,
+AGENTS.md, milestone.md, quality-coverage.md, the agent index, integration and the
+current comparison rule repair. No worker edits another worker's files. Workers
+request a parent allocation before expanding file scope.
+
+Ownership metadata and native semantic IR have no unpublished API dependency:
+metadata uses the existing inventory records; native IR emits explicit locations
+and generic graph relationships. The parent joins them and implements the full
+rule/gate integration. Composition changes application declarations; reconcile
+its final committed symbols and public contracts into the ownership registry
+at integration. Do not guess future declarations or register broad exemptions.
+
+Each worker must install required hooks, run focused checks plus the existing
+shared gate, and commit coherent verified changes before handoff. It returns
+SHAs, exact files, actual commands/results, coverage limits, and integration
+requirements. No hook bypass, dependency installation, push, rebase, branch
+creation, scientific mode change or full-matrix execution is assigned.
+
+The parent reviews each committed diff and evidence, imports the commit without
+bypassing mandatory commit checks, reconciles shared metadata/configuration,
+checks the combined snapshot, and pushes to origin/main in sequence. Native
+resolution limits and missing applicable mechanisms remain COV002; green
+component checks do not establish all 37 rules or new scientific acceptance.
+
+## Initial handoff checkpoint at 471ab69
+
+At parent `471ab69`, composition worker commit `05dd220` is integrated and pushed
+with both hooks and 150 parent behavior/boundary cases passing. Native resolver
+worker commit `ffbc2fe` passes 84 parent source fixtures and is being integrated.
+Ownership worker commit `d6e8d43` remains preserved for the next serial join.
+
+## Current integration and assignments
+
+At `f2de8f01a2e5311a94ac4e520572925d23ce6f78`, all original worker components
+are integrated: composition at `471ab69`, native identities/graphs at `a9453aa`,
+reviewed ownership at `c5296da`, runtime-parent decisions at `f2de8f0`. Each passed
+native commit/push hooks and its configured hosted job. Resource review `3613b96`
+is complete. Documentation audit `e48aa9e` is a committed read-only handoff;
+the parent implements its six-document corrections.
+
+Implementation settings remain inherited GPT-6.1 Sol at xhigh. The accepted
+scientific review stays with its existing fresh-context GPT-6 Astra reviewer.
+Unmerged native-type and session results remain provisional; no collector
+adoption or case acceptance follows from worker progress messages.
+
+| Owner | Current bounded component | Exclusive scope and finishing condition |
+| --- | --- | --- |
+| architecture_symbols | Native structured types | New native_types.py, native_types.mjs, native_types_node.d.ts, dedicated fixtures and compact evidence. Preserve committed resolver files; check native categories/signatures/identities with installed TypeScript and fail closed on unsupported data. Commit before handoff. |
+| composition_refactor | Opaque sessions and independent expectations | Neutral simulation observations/session provider, qualification ports/observer/ledger/paired/case/batch callers, dedicated tests/evidence. Preserve engine math, reference/build/weight-reader sources and bootstrap/CLI. Commit the inactive provider first; complete accepted transparency/integrity and shortest pinned-run/memory proof before collector adoption. |
+| parent | Shared reconciliation and delivery | Apply documentation corrections, verify committed evidence, own shared configuration/policy/status/index, reconcile exact source mappings and push serially. Allocate reference/probe seams after the committed session contract is known. |
+
+The inactive session handoff `6e111545` and storage correction `a58be25e` are
+verified against the combined parent source. Checks pass 106 Metal and 66
+value/alias/package/canonical-port cases. Nine public constructors and all
+existing fault assertions are preserved. The same session owner will complete
+pinned-run/four-trial memory qualification before caller migration. RNG and
+shared assembly writes remain with the ownership worker; no collector is active.
+
+The committed RNG slice `b8d490a` completes the three acquisition repairs;
+parent checks preserve original numeric values and the full pinned stimulus.
+Its same owner commits the immutable audit transition as `42d94b0`; parent
+verification passes 86 CPU and 24 real paired cases. The owner now reviews the
+five primitive-identifier boundaries read-only. Session production/caller
+migration waits for verified audit integration and complete pinned proof.
+The session owner currently writes pinned-proof tests/evidence only. Shared
+ports/bootstrap/parity source is no longer concurrently edited. Native bridge splitting remains exclusive to the symbols owner;
+every new native_types_*.mjs module needs source/index/type coverage on
+integration. The qualified Python-only metric correction is committed as `88c6eaa`; parent
+measurement/index tests pass on combined source with an isolated runtime.
+Original packages/reports and JavaScript/health/summary/CQ001–3 rules remain
+preserved. The metric owner has finished its bounded handoff.
+The bridge candidate remains metric-rejected and uncommitted; no threshold
+or guard is weakened.
+
+The exact session assignment is retained in the worker conversation. Additional
+caller allocation comes from the parent before an edit. No worker changes
+shared configuration, policy metadata, status/index documents, dependencies,
+other workers' code, branches or remote refs. The parent reconciles final
+committed declarations after application and analyzer integration. The native
+structured-type component and opaque observation boundary do not touch each
+other's files; their checks and parent policy joins are serialized.
+
+Parent allocation after the committed runtime-resource review: the existing
+session worker also owns minimal native-session/evidence-type wiring in
+qualification/adapters/parity_case.py, paired_observer.py and paired_causes.py.
+Reference producer/build/weight-reader bytes remain protected. Reference seams
+and the remaining layout/pulse/scalar/reducer probes are allocated only after
+the session's committed contract is known; their exclusive scopes do not move
+silently to the session worker.

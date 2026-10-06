@@ -74,12 +74,12 @@ Completion requires:
   process 62191 remains designated suspended; do not resume or discard it
   without resolving its original-mode evidence. [Pause record](docs/evidence/execution-time-investigation/pause.json).
 - The latest delivered refactor checkpoint is
-  `3a3b8da3bbca8573efb535a040c17847d5032c36` on `origin/main`, followed by the
-  verified reference-digest typing repair in this source. Clock and actual-row repairs,
+  `e8d2919cb277ae2512c102dbac325290957b1bfa` on `origin/main`. Clock and actual-row repairs,
   pure comparison rules, owned command composition, native symbol/graph
   foundations, reviewed ownership and runtime-parent decisions are delivered.
-  Required local commit/push hooks passed; earlier configured hosted jobs passed,
-  while the pinned-proof hosted run is pending. The RNG slice is delivered; the audit correction passes 86 CPU and 24 real paired
+  Required local commit/push hooks and the pinned-proof hosted job passed.
+  The digest hosted check is recorded separately after delivery. The RNG slice
+  is delivered; the audit correction passes 86 CPU and 24 real paired
   cases. The reference-digest repair passes 94 parent preservation/type/policy
   cases and clears only its primitive-identifier finding; six findings remain.
   Exact delivery evidence stays in dated history and component records.
