@@ -97,6 +97,10 @@ Completion requires:
   cases. All 116 original production files and 64 frozen sources remain byte
   exact. Caller propagation, lawful conversion enforcement, all six findings
   and complete 37-rule coverage remain unresolved.
+- The reviewed semantic input contract passes 119 parent schema/native/policy
+  cases. It preserves all 317 prior source files, 64 frozen sources and six
+  findings. Validated metadata explicitly cannot claim complete architecture
+  compliance; actual native coverage and predicate integration remain required.
 - All three implementation workers stopped with account usage-limit errors on
   2026-10-07. Completed commits and unfinished clones are preserved. Parent
   verification and delivery continue where possible; their scopes remain owned.

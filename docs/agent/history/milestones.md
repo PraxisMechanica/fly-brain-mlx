@@ -1837,3 +1837,25 @@ assignments, and continues independent verification and delivery. The semantic
 input handoff `37f5cff` is committed but not yet integrated; the native type/source
 candidate and neutral import boundary are unfinished. Previous duration
 estimates cannot assume the parallel workers are running.
+
+
+### Reviewed semantic input schema — 2026-10-07
+
+At parent base `10b176c7cea2a313cf66e819175524ef282f9d2d`, worker handoff
+`37f5cffd6bc94f43530bbcab12880805cdddd702` adds strict records, schema,
+filesystem/hash/UTF-16 integrity, pure reference joins and native-context
+validation. Parent verifies all eleven committed hashes, eighteen retained
+artifacts and nine relocated function ASTs, then passes 119 schema/native/policy
+cases with zero failures/errors/skips. All 317 prior parent sources and 64
+frozen sources remain byte exact. Only six new registry rows are joined;
+reconciliation covers 323 files and 4,506 declaration occurrences with zero
+gaps and the same six findings.
+
+The result is reviewed semantic inputs, never an architecture PASS. Independent
+native configuration/artifact facts cannot be replaced by policy claims;
+missing observations, altered identity/provenance, unsupported language/kind,
+unresolved references, malformed paths and weakened guards are exercised.
+Complete type/alias/effect/control-flow/history/language coverage and execution
+of all required predicates remain COV002. No application/numerical change,
+scientific acceptance or cache reuse follows. Compact parent proof:
+`docs/evidence/code-quality/semantic-policy-schema-20261007/parent-integration.json`.

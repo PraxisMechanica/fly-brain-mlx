@@ -309,6 +309,19 @@ original assertions, 107 other production sources and six proof bodies remain
 preserved. No acceptance/cache transfers or complete37-rule pass follows. Proof:
 `docs/evidence/code-quality/active-session-migration-20261006/parent-integration.json`.
 
+## Reviewed semantic input contract — 2026-10-07
+
+The separate version-2 input schema records all 14 required sections and the
+exact 37-rule/context inventory. Native source/UTF-16 anchors, configuration,
+artifact hashes/versions and cross-record references must match independent
+observations and actual bytes. Five individual guard-weakening controls prove
+rejection loss; unsupported languages/kinds and absent observations fail COV002.
+Parent passes 119 schema/native/policy cases and preserves all 317 prior sources,
+64 frozen sources and six findings. `require_semantic_compliance()` always raises
+COV002: records cannot manufacture type/alias/effect/control-flow coverage or an
+executed predicate. Actual global inventory and required gate integration remain.
+Evidence: `docs/evidence/code-quality/semantic-policy-schema-20261007/parent-integration.json`.
+
 ## Remaining work
 
 Maintain the reviewed inventory as source changes, complete all remaining

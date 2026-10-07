@@ -1,0 +1,65 @@
+{
+  "base": "e8d2919cb277ae2512c102dbac325290957b1bfa",
+  "files": {
+    "tools/architecture/semantic_policy_records.py": {
+      "before": null,
+      "after": {
+        "owner": "architecture",
+        "role": "tooling",
+        "declaration_count": 186,
+        "declaration_sha256": "c87aa4c46ec987db5c4514ade7d0d0c9ccad2374b1ee606257c1a4313121ec60",
+        "binding_sha256": "e9a94272290e8f21c0395df5b7511b012ea7001910d098da5d7ef6c5e67b691f"
+      }
+    },
+    "tools/architecture/semantic_policy_schema.py": {
+      "before": null,
+      "after": {
+        "owner": "architecture",
+        "role": "tooling",
+        "declaration_count": 23,
+        "declaration_sha256": "e951d0c370ea65e667f4bd1dc33bad75ea403911544161f418a79577122e97fe",
+        "binding_sha256": "01fd1a813fc16b4e7dc9c52f2d6966685d260bde35adf9129631772bebb639de"
+      }
+    },
+    "tools/architecture/semantic_policy_validation.py": {
+      "before": null,
+      "after": {
+        "owner": "architecture",
+        "role": "tooling",
+        "declaration_count": 8,
+        "declaration_sha256": "ddf0b6f7eedeaa40faf5e574f7e2133ff12ed42ea0528adbb04ea813e7b496ae",
+        "binding_sha256": "2043fd6281c73c91e40712625ed734604fb05d2de736a47e47ccf2704436f643"
+      }
+    },
+    "tools/architecture/semantic_policy_inputs.py": {
+      "before": null,
+      "after": {
+        "owner": "architecture",
+        "role": "tooling",
+        "declaration_count": 4,
+        "declaration_sha256": "a789da263a678060347053cfe6e4cf1570bd462b2ffaa35193f7eab89f1ae9ce",
+        "binding_sha256": "3eb39bf2cbe5cd38a03e9f92d8b1daaabc9e84172c797a680f3feb40c2890e01"
+      }
+    },
+    "tools/architecture/semantic_policy_references.py": {
+      "before": null,
+      "after": {
+        "owner": "architecture",
+        "role": "tooling",
+        "declaration_count": 3,
+        "declaration_sha256": "ab0de3a1fc04ddf432c6bf21922615fed86d1ee59a515118ac6ac581d37103bd",
+        "binding_sha256": "c37ce70ac002004899e3740ef4882562225dafef4d17a64bf3ee581a468b7d5f"
+      }
+    },
+    "tests/quality/test_semantic_policy.py": {
+      "before": null,
+      "after": {
+        "owner": "architecture",
+        "role": "tooling",
+        "declaration_count": 21,
+        "declaration_sha256": "17aedd2d99db569cda72a2b98fb413154d9d75c4ab566d0e84900c6a3fbd86ef",
+        "binding_sha256": "a509cd1372b39da9c6988ad59738fd758fd623b67689b440717f5ade025f3390"
+      }
+    }
+  }
+}
