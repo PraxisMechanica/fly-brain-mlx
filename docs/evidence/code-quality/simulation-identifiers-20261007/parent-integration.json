@@ -1,0 +1,40 @@
+{
+  "base_commit": "43ab8ec0aa4a656a966376fd02d1d8ef15e7bd44",
+  "worker_commit": "3478357a83a56cd0705afc1a0c077ea1f22932ee",
+  "decision_confidence": 0.95,
+  "scope": "Pure simulation identifier foundation only; live caller propagation and lawful conversion enforcement remain incomplete",
+  "parent_focused_tests": {
+    "tests": 87,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "test_report": {
+    "path": "/private/tmp/fly-brain-identifier-foundation-parent-20261007-01.xml",
+    "sha256": "6e4c1e939261f4d7cc337952e399ded101bdfefdfe4037dc4984bf5e51bf5b33"
+  },
+  "worker_source_files_verified": 4,
+  "retained_worker_artifacts_verified": 7,
+  "original_production_files_byte_unchanged": 116,
+  "frozen_source_files_byte_unchanged": 64,
+  "ownership_join": {
+    "new_rows": [
+      "src/fly_brain/simulation/identifiers.py",
+      "tests/unit/test_identifier_type_contracts.py",
+      "tests/unit/test_identifier_values.py"
+    ],
+    "original_rows_and_all_other_metadata_unchanged": true,
+    "sources": 317,
+    "declaration_occurrences": 4261,
+    "neutral_exports": 291,
+    "reconciliation_gaps": 0,
+    "recorded_findings": 6
+  },
+  "limits": [
+    "NewType constructors preserve the same runtime scalar and array objects; no live caller behavior changes in this component",
+    "Native strict typing rejects wrong spaces; explicit rebranding is still possible and does not prove lawful conversion",
+    "Complete 37-rule analysis remains ANALYSIS FAILED (COV002)",
+    "No scientific acceptance or cache reuse granted"
+  ],
+  "local_and_hosted_delivery": "Verified externally after normal commit and push hooks; this pre-commit record does not claim delivery"
+}

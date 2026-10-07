@@ -61,6 +61,9 @@
   }
 },
   "files": {
+    "tests/unit/test_identifier_type_contracts.py": {"owner":"simulation","role":"test","declaration_count":7,"declaration_sha256":"689107eb3f5d1d2963db6574836776e360c4fd865343f37672a131e6d75e4cc6","binding_sha256":"3e312221549d975c22558fdabd97bbc42bea41775059527a131fb3ad2f4cc483"},
+    "tests/unit/test_identifier_values.py": {"owner":"simulation","role":"test","declaration_count":3,"declaration_sha256":"7872c49a06d5152bbf42a2c029b3298a4999b9413c91ca7ddafe5f0c5db57917","binding_sha256":"663c353f9b2f2672d46cc0c893f766203d5485bc9b78d4b76bed76d86d354298"},
+    "src/fly_brain/simulation/identifiers.py": {"owner":"simulation","role":"types","declaration_count":10,"declaration_sha256":"d271567c3de17e9c32123d0ea858897af9efa01529b1de4a0cd2ecc8c2ff3ce5","binding_sha256":"4eee4d6e9f258631ab80efb827d42bafa9030a4282c84288e99c28cb1d076b5f","public":["FlyWireNeuronId","NeuronRow","TrialId","FlyWireIds64","NeuronRows32","NeuronRows64","EdgeRows32","PaddedEdgeRows32","TrialIds16","TrialIds64"]},
     "tests/quality/test_active_session_contract.py": {"owner":"architecture","role":"tooling","declaration_count":3,"declaration_sha256":"a5e4f49053722c1e888c186d69b919266bc6db199bfed777b3076489c5c1f8a1","binding_sha256":"9315fe0fb31eb9f5c1593c151661652e625d78e68fd955d7aa2749b91a793509"},
     "tests/quality/test_active_session_boundary.py": {"owner":"quality_gate","role":"tooling","declaration_count":11,"declaration_sha256":"ac926d4d6f944d74ab37cd361d69c55c268fbbf345609e7c80fe1a4a3e7ff9b6","binding_sha256":"fc7c03476a884029e9768d0d24497f15bcfc7ff5754be491e7f293211e20d1f2"},
     "tests/support/session_block_values.py": {"owner":"system_tests","role":"system_test","declaration_count":2,"declaration_sha256":"09b8051ba000cebe04f6f91b1ed9557c9e6dc29b95bdacda8bc9c127a3c1d0f1","binding_sha256":"493d955c3e58aa680c31a9616091a050392c013c9bd01bd46201d6bb4e3e898b"},

@@ -1810,3 +1810,30 @@ contract, which is now the fifth contract and already defines that setting.
 The fixture is corrected to select only its own comparison block. All original
 assertions and canonical rules remain exact; 19 corrected comparison/active
 contract cases pass. The failing hook log remains retained before full rerun.
+
+
+### Simulation identifier foundation — 2026-10-07
+
+At delivered base `43ab8ec0aa4a656a966376fd02d1d8ef15e7bd44`, worker
+`3478357a83a56cd0705afc1a0c077ea1f22932ee` commits three scalar and seven
+array identity types with actual native wrong-space, alias/re-export, repair,
+brand-erasure and empty/unresolved controls. Constructors preserve the same
+scalar and array objects, dtype, shape, strides, bytes, order and writeability.
+Parent passes 87 type/value/policy cases and independently verifies four worker
+files and seven retained artifacts. All 116 existing production files and
+64 frozen sources remain exact; only three new ownership rows are joined.
+Reconciliation covers 317 files, 4,261 declaration occurrences and 291 neutral
+exports, with zero gaps and the same six recorded findings.
+
+This component changes no live caller. Explicit NewType rebranding is still
+possible; lawful conversion enforcement and the coordinated caller migration
+remain required. Complete 37-rule analysis stays **ANALYSIS FAILED (COV002)**.
+No scientific acceptance, numerical mode or reference reuse is granted.
+Evidence: `docs/evidence/code-quality/simulation-identifiers-20261007/parent-integration.json`.
+
+All three implementation workers stop with account usage-limit errors. The
+parent preserves their completed commits and unfinished clones, retains their
+assignments, and continues independent verification and delivery. The semantic
+input handoff `37f5cff` is committed but not yet integrated; the native type/source
+candidate and neutral import boundary are unfinished. Previous duration
+estimates cannot assume the parallel workers are running.

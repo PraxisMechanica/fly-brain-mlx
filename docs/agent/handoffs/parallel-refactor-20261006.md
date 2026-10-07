@@ -9,7 +9,7 @@ The initial assignments and handoff above are historical. Original composition,
 native symbols/graphs, ownership and runtime-resource repairs are delivered.
 RNG acquisition, immutable causal audits, corrected metric aggregation and full
 pinned preservation evidence are delivered. Current source checkpoint is
-`e8d2919cb277ae2512c102dbac325290957b1bfa`; exact results remain in component evidence and milestone history.
+`43ab8ec0aa4a656a966376fd02d1d8ef15e7bd44`; exact results remain in component evidence and milestone history.
 
 All implementation agents retain inherited GPT-6.1 Sol at `xhigh`. The accepted
 scientific review retains its existing GPT-6 Astra owner. Workers commit verified
@@ -20,9 +20,14 @@ remote refs. Source progress is not an adoption or complete-architecture pass.
 | Owner | Current component | Exclusive scope and finishing condition |
 | --- | --- | --- |
 | architecture_symbols | Native structured types and source inventory | Native type bridge, records/envelope/payload/schema/report, exact native JavaScript projection/context/query modules, source inventory bridge and dedicated fixtures/evidence. All source/declaration/type/error controls must pass unchanged quality gates before committed handoff. Parent owns language coverage, canonical index/type wiring and shared policy. |
-| composition_refactor | Active observation-session callers — committed handoff `7989ade` | Qualification paired/batch/case/parity consumers and ports; minimal simulation-owned factory/bootstrap composition; actual source-identity minimum and dedicated preservation/boundary fixtures. Retire old production observer/ledger together; preserve exact test-only historical oracles and all numerical/reference bodies. Verified worker handoff is complete. Parent has joined the canonical contract, exact rows and historical proof imports and verified 234 package/source plus 145 native cases; parent delivery remains sequential. |
-| architecture_ownership | Semantic policy review | Digest typing repair is delivered. Read-only semantic policy review is accepted. Current implementation owns only new semantic_policy_records.py, semantic_policy_schema.py, semantic_policy_validation.py, dedicated quality fixtures and compact evidence in its independent clone. Parent owns shared policy/IR/config joins. Commit after the actual full gate and native hook; never treat validated metadata as semantic compliance. Four simulation identifier migrations await session caller release because their models/ports/callers overlap. |
+| composition_refactor | Simulation identifier propagation | Active session migration is delivered. Foundation handoff `3478357` adds pure identities and focused contracts; parent verifies 87 cases with all 116 original production files and 64 frozen sources exact. The same owner retains coordinated caller propagation in its separate clone; comparison edits await the tested neutral import boundary. Commit verified components before handoff. |
+| architecture_ownership | Semantic policy and neutral import boundary | Semantic input handoff `37f5cff` is committed and awaits parent integration: records, schema, filesystem integrity, pure references, native-context validation, dedicated fixtures and evidence. The same owner retains the new neutral import contract and fixtures in a separate clone. Parent owns canonical configuration and exact shared registry joins. Neither metadata nor a neutral import exception grants complete architecture compliance. |
 | parent | Shared integration and delivery | Verify committed source/evidence, reconcile exact policy/configuration, complete full structural rule/call/alias/effect/control-flow enforcement, maintain current documentation, and push checked commits to origin/main. No feature/numerical work or full scientific matrix. |
+
+All three implementation workers stopped with account usage-limit errors on
+2026-10-07. Their original owners, clean committed handoffs and unfinished clones
+are preserved; no unfinished component is adopted. Parent verification and
+serial delivery of completed components continue where possible.
 
 Current source remains **ANALYSIS FAILED (COV002)** for complete 37-rule coverage.
 The four simulation identifier findings and remaining ownership/boundary repairs

@@ -1,0 +1,89 @@
+{
+  "component": "Pure simulation identity foundation; caller propagation remains assigned and incomplete",
+  "base_commit": "43ab8ec0aa4a656a966376fd02d1d8ef15e7bd44",
+  "decision_confidence": 0.95,
+  "types": [
+    "FlyWireNeuronId",
+    "NeuronRow",
+    "TrialId",
+    "FlyWireIds64",
+    "NeuronRows32",
+    "NeuronRows64",
+    "EdgeRows32",
+    "PaddedEdgeRows32",
+    "TrialIds16",
+    "TrialIds64"
+  ],
+  "source_sha256": {
+    "src/fly_brain/simulation/identifiers.py": "85d9e7bb486947d32640a00a9af3fc4811af20a69e3f13a165355ee10f6f478f",
+    "tests/unit/test_identifier_values.py": "87962001218dea2145ef0bf8abf7d51a05f7f18fc56307e0a2d9d813052363b9",
+    "tests/unit/test_identifier_type_contracts.py": "579cc5710e7bbb56ba2bfe58e84a8746b91555cdec31d47fca009584d5cd1866"
+  },
+  "checks": {
+    "focused_tests": {
+      "passed": 20,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "elapsed_s": 18.63,
+      "command": "uv run --locked --no-sync python -m pytest -q tests/unit/test_identifier_values.py tests/unit/test_identifier_type_contracts.py --basetemp=/private/tmp/fly-brain-simulation-identifiers-raw-20261007-01/foundation-pytest --junitxml=/private/tmp/fly-brain-simulation-identifiers-raw-20261007-01/foundation-final-tests.xml"
+    },
+    "just_check": {
+      "passed": true,
+      "quality_cases": 367,
+      "quality_elapsed_s": 284.22,
+      "strict_typing_errors": 0,
+      "import_contracts_kept": 5,
+      "metric_gate": "PASS",
+      "command": "just check"
+    }
+  },
+  "preservation": {
+    "original_production_files_byte_unchanged": 116,
+    "frozen_sources_byte_unchanged": 64,
+    "constructor_returns_same_scalar_and_array_objects": true,
+    "native_dtypes_shapes_strides_bytes_order_writeability_empty_cases_preserved": true,
+    "identifier_registry_and_recorded_findings_unchanged": true,
+    "recorded_findings": 6,
+    "lawful_conversion_enforcement": "Not supplied by NewType; explicit cross-space rebranding remains a recorded native typing limit",
+    "scientific_acceptance": "None transferred or newly claimed"
+  },
+  "retained_artifacts": {
+    "refreshed-footprint.json": {
+      "path": "/private/tmp/fly-brain-simulation-identifiers-raw-20261007-01/refreshed-footprint.json",
+      "sha256": "2db645a8420cb60c5706cbd00efa3db3e7daece95943569590d45f697e0910d7",
+      "bytes": 544950
+    },
+    "foundation-final-tests.xml": {
+      "path": "/private/tmp/fly-brain-simulation-identifiers-raw-20261007-01/foundation-final-tests.xml",
+      "sha256": "5d217828da0c90d67ee7bff9bf1d8b0768802be65fc42556d3d315dbd1a48e6e",
+      "bytes": 3634
+    },
+    "foundation-final-tests.log": {
+      "path": "/private/tmp/fly-brain-simulation-identifiers-raw-20261007-01/foundation-final-tests.log",
+      "sha256": "746f29b7be5ec219ff4c84e592c7faf5789979333e6e49b88f8a01c9b7f290e5",
+      "bytes": 100
+    },
+    "foundation-just-check.log": {
+      "path": "/private/tmp/fly-brain-simulation-identifiers-raw-20261007-01/foundation-just-check.log",
+      "sha256": "0c8eb2f5b203ef89b96ace71ac9a71c0f4a27536e8e43883b5c0dc67fd405129",
+      "bytes": 3755
+    },
+    "foundation-quality-staged.json": {
+      "path": "/private/tmp/fly-brain-simulation-identifiers-raw-20261007-01/foundation-quality-staged.json",
+      "sha256": "aac28ece945c2562659855ebde4ada4f75112a1524791c7b1a3eda5b4b4eecdc",
+      "bytes": 345492
+    },
+    "foundation-policy-delta.json": {
+      "path": "/private/tmp/fly-brain-simulation-identifiers-raw-20261007-01/foundation-policy-delta.json",
+      "sha256": "469ca58fbbedd8d7e646c8f438dbe869b05bf9ed0a189409125c5387d590348d",
+      "bytes": 1637
+    },
+    "foundation-preservation.json": {
+      "path": "/private/tmp/fly-brain-simulation-identifiers-raw-20261007-01/foundation-preservation.json",
+      "sha256": "2f65b433a77d63b03e188008af6c1fdf00239f21d4f0d65f62282bb0384ccc5e",
+      "bytes": 14739
+    }
+  },
+  "native_hook_result": "Required at commit; final result will be retained externally in foundation-delivery.json"
+}

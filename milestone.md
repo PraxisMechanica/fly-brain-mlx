@@ -74,8 +74,8 @@ Completion requires:
   process 62191 remains designated suspended; do not resume or discard it
   without resolving its original-mode evidence. [Pause record](docs/evidence/execution-time-investigation/pause.json).
 - The latest delivered refactor checkpoint is
-  `b64c140b4cf28a7c6df1ac0ece42a263e8fd6e91` on `origin/main`, followed by
-  the verified active observation-session migration in this source. Clock and
+  `43ab8ec0aa4a656a966376fd02d1d8ef15e7bd44` on `origin/main`, including
+  the verified active observation-session migration. Clock and
   actual-row repairs,
   pure comparison rules, owned command composition, native symbol/graph
   foundations, reviewed ownership and runtime-parent decisions are delivered.
@@ -93,6 +93,13 @@ Completion requires:
   owns working mechanisms and missing analysis; [source ownership](docs/agent/architecture-ownership.md)
   owns the reviewed classifications and remaining findings. Green component
   checks grant no new scientific acceptance.
+- The pure simulation identifier foundation passes 87 parent type/value/policy
+  cases. All 116 original production files and 64 frozen sources remain byte
+  exact. Caller propagation, lawful conversion enforcement, all six findings
+  and complete 37-rule coverage remain unresolved.
+- All three implementation workers stopped with account usage-limit errors on
+  2026-10-07. Completed commits and unfinished clones are preserved. Parent
+  verification and delivery continue where possible; their scopes remain owned.
 - Native structured-type export remains assigned, unintegrated work. The
   committed inactive session candidate `6e111545` and typed correction `a58be25e`
   pass 106 parent Metal cases and 66 value/package/canonical-hook cases. The
