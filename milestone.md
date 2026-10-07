@@ -1,6 +1,6 @@
 # MLX fly-brain milestones
 
-Audience: agents. Updated 2026-10-07 (Europe/Lisbon).
+Audience: agents. Updated 2026-10-08 (Europe/Lisbon).
 This is the active plan, acceptance status, and next-work record.
 [AGENTS.md](AGENTS.md) owns project policy; the
 [numerical contract](docs/agent/numerical-contract.md) owns scientific semantics
@@ -54,6 +54,9 @@ Maintained clone spans decrease from 502 to 436, or 1.64% to 1.43%, under the
 unchanged detector and scope. The combined dashboard percentage remains high
 because its retained scientific JSON and historical scripts are also inputs;
 removing routine reports reduces its denominator as well as duplicated spans.
+The exact combined scan decreases from 20,441 to 19,690 duplicated spans, while
+its percentage increases from 24.20% to 25.89% because the measured denominator
+decreases from 84,451 to 76,043 spans. This is not a maintained-code regression.
 
 All 721 unit/integration cases and 75 affected real Metal/reference cases pass,
 with zero failures, errors, or skips. The 75 collected case identities,
@@ -64,7 +67,13 @@ contracts, 419 quality cases, and staged metric regression checks. Whole-file
 average complexity decreases from 20.39 to 20.29; health increases from 36.17 to
 36.27. Exact ownership reconciliation has 324 sources, zero mapping gaps, and
 the same six recorded findings. Complete 37-rule enforcement remains COV002.
-Required commit/push hooks and remote delivery are the remaining steps.
+Delivered at `068e940c865a3d1b64fb952eccc3f66cd17c6f28` on `origin/main`;
+both installed commit and push hooks pass without bypass. The
+[hosted gate](https://github.com/PraxisMechanica/fly-brain-mlx/actions/runs/37700459943)
+passes for that exact revision. The checkout remains detached
+because another managed checkout already owns `main`; its unfinished work is
+preserved. This amendment completes the bounded code and retention cleanup;
+the earlier architecture and scientific work orders remain separate.
 
 ## Earlier architecture cleanup goal — 2026-10-06
 
@@ -118,7 +127,7 @@ Completion requires:
   holds remain historical. The preserved P9
   process 62191 remains designated suspended; do not resume or discard it
   without resolving its original-mode evidence. [Pause record](docs/evidence/execution-time-investigation/pause.json).
-- The latest delivered refactor checkpoint is
+- The earlier delivered architecture refactor checkpoint is
   `43ab8ec0aa4a656a966376fd02d1d8ef15e7bd44` on `origin/main`, including
   the verified active observation-session migration. Clock and
   actual-row repairs,
