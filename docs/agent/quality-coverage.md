@@ -4,6 +4,11 @@ Audience: agents and maintainers. This records executable coverage, not an
 application-wide clean-architecture approval. [milestone.md](../../milestone.md)
 owns the active work order.
 
+Routine generated test and development reports were removed from Git on
+2026-10-07. The results below describe their original checkpoints; report paths
+in those records are historical references. Current verification comes from the
+executable checks and the concise outcomes in `milestone.md`.
+
 At `1376e40`, confidence **99%** that the published native/metric integration
 works: [GitHub run 37328288754](https://github.com/PraxisMechanica/fly-brain-mlx/actions/runs/37328288754)
 passes on Apple silicon, including bootstrap, both hook installation, the shared

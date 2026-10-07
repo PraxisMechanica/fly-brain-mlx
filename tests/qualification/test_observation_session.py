@@ -5,8 +5,6 @@ from typing import cast
 import numpy as np
 import pytest
 
-from fly_brain.qualification.ports import ObservationSessionFactory
-from fly_brain.qualification.session_blocks import SessionBlock
 from fly_brain.qualification.session_expectations import (
     CHECK_NAMES,
     expect_step,
@@ -14,44 +12,13 @@ from fly_brain.qualification.session_expectations import (
     observation_checks,
     require_configuration,
 )
-from fly_brain.qualification.session_observer import observe_session
 from fly_brain.simulation.models import Connectome
 from fly_brain.simulation.observation_module import build_observation_sessions
 from fly_brain.simulation.observations import ObservationInitialState
-from tests.qualification.test_mlx_observer import Fixture, fixture, observed, stock
+from tests.qualification.test_mlx_observer import observed, stock
+from tests.support.observation_fixtures import Fixture, fixture, initial, session_blocks
 
 pytestmark = [pytest.mark.integration, pytest.mark.metal]
-
-
-def initial(case: Fixture) -> ObservationInitialState:
-    shape = (case.events.shape[0], 6)
-    return ObservationInitialState(
-        np.broadcast_to(
-            np.array([-52, -52, -44, -44, -44, -52], dtype=np.float64), shape
-        ),
-        np.broadcast_to(np.array([0, 0, 100, 0, 0, 0], dtype=np.float64), shape),
-        np.full(shape, -100000000, dtype=np.int32),
-    )
-
-
-def session_blocks(
-    case: Fixture, precision: str, block_size: int
-) -> list[SessionBlock]:
-    factory, _ = build_observation_sessions(
-        case.connectome, case.targets, (3,), precision
-    )
-    consumer: ObservationSessionFactory = factory
-    return list(
-        observe_session(
-            consumer,
-            case.connectome,
-            case.targets,
-            tuple(range(case.events.shape[0])),
-            case.events,
-            initial(case),
-            block_size,
-        )
-    )
 
 
 @pytest.mark.parametrize('block_size', (1, 17, 32))

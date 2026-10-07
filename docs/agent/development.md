@@ -28,12 +28,20 @@ Python aggregation patch. Version 0.1.1 counts whole-file native decisions;
 older metric numbers retain their original 0.1.0 identity. Both archives remain
 versioned, and provenance/archives/patch are canonical indexed gate inputs.
 
+Generated test logs, XML test results, type-check output, and development
+verification reports are ignored and must not be committed. Record concise
+verification outcomes in `milestone.md`; keep requested local outputs under
+`data/results` or `.quality-reports`. Edit working files directly without
+temporary preservation copies.
+
 Hosted execution uses the same command when repository variable
 `QUALITY_CI_TEMP_DB_CACHE_APPROVED` is true. The project authorization in
 `AGENTS.md` covers the hosted pre-commit SQLite cache and its automatic runner
 teardown. `milestone.md` records current verification status. Local fixtures
 retain their cache at `/private/tmp/fly-brain-pre-commit-cache` outside fixture
 cleanup.
+This cache belongs to the development tool. The application has no database;
+its storage adapters handle connectome inputs and simulation result files.
 
 Brian2 and PyTorch are qualification references; their central processing unit
 (CPU) execution is separate from the MLX production runtime. Apple's command
@@ -118,7 +126,10 @@ for local third-party stubs and narrow suppressions.
 ## Historical recovery
 
 [Architecture remediation](history/architecture-remediation.md#retired-source)
-records retired workflows and exact Git recovery commands. Historical result
-bundles retain their original environment scope. [Reference history](history/reference-baseline.md)
+records retired workflows and exact Git recovery commands. Historical results
+retain their original environment scope. Routine generated reports were removed
+from Git on 2026-10-07; their former filenames in dated records do not imply that
+the old output bundles remain completely materialized. Scientific hashes and
+acceptance limits retain their recorded meaning. [Reference history](history/reference-baseline.md)
 owns original source measurements and notices. [Evidence](../evidence/) stays at
 its original paths with recorded source/environment bindings.

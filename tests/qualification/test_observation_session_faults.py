@@ -22,7 +22,7 @@ from fly_brain.simulation.observations import (
     ObservationInitialState,
     ObservationOperands,
 )
-from tests.qualification.test_mlx_observer import fixture
+from tests.support.observation_fixtures import fixture
 
 pytestmark = [pytest.mark.integration, pytest.mark.metal]
 

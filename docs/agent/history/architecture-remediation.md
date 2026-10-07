@@ -40,7 +40,7 @@ Removed active workflows: `environment.yml`, `environment-brian2genn.yml`, split
 
 Moved numerical code: MLX core and accumulation arithmetic now belong to `simulation/backend`; independent Brian2/PyTorch references and diagnostic execution belong to `qualification/adapters`; shared test helpers belong to `tests/support`. Comparison rules no longer depend on Pandas or the benchmark dispatcher. No compatibility wrappers or duplicate installation methods were added.
 
-The [source preservation record](../../evidence/architecture-remediation/source-preservation.json) checks 28 arithmetic/reference bodies against `22c813e`. Precision configuration and the factored propagation binding are explicit. Their behavior is covered by fresh scientific qualification, not inferred from source identity alone.
+The source preservation record checks 28 arithmetic/reference bodies against `22c813e`. Precision configuration and the factored propagation binding are explicit. Their behavior is covered by fresh scientific qualification, not inferred from source identity alone.
 
 ## Final technology scope
 
@@ -62,7 +62,7 @@ The force, choice, and rejected alternatives above still apply. The review check
 
 | Audit finding | Implemented correction and evidence |
 | --- | --- |
-| No installable package | One `src/fly_brain` package and installed command; imports and comparison execute from outside the checkout. The [clean installation](../../evidence/architecture-remediation/clean-runtime.json) is normal, not editable. |
+| No installable package | One `src/fly_brain` package and installed command; imports and comparison execute from outside the checkout. The clean installation is normal, not editable. |
 | Orchestration/persistence cycle | The inherited dispatcher and runners are removed. Domain services accept small callable contracts; bootstrap owns concrete composition. Three enforced import contracts pass. |
 | Hidden operational globals | Paths and requests are immutable values. Precision is configured before framework loading and injected into construction. Each execution captures its own network and propagation arrays. Output writers receive explicit fresh destinations. |
 | Algorithms/test support lack ownership | Accumulation belongs to the MLX backend. Independent references belong to qualification adapters. Shared harness/artifact support uses fixtures and an injected execution factory; no peer-test patching or global measurement registry remains. |
@@ -72,13 +72,13 @@ No unresolved audit finding or blanket legacy exemption remains. Unit checks pro
 
 ## Completion evidence and limits
 
-- [Final check record](../../evidence/architecture-remediation/checks.json): Ruff lint/import sorting and formatting pass; strict Pyright has zero errors or warnings; three import contracts pass; the uv lock is current; both installed environments are compatible.
-- [Application test report](../../evidence/architecture-remediation/boundary-tests-final.xml): 31 passed, zero failures, errors, or skips.
-- [Scientific test report](../../evidence/architecture-remediation/qualification/tests.xml) and [result](../../evidence/architecture-remediation/qualification/result.json): 61 passed, zero failures, errors, or skips, on the Apple M1 Max Metal device. Complete state/event artifacts are retained beside the report.
+- Final check record: Ruff lint/import sorting and formatting pass; strict Pyright has zero errors or warnings; three import contracts pass; the uv lock is current; both installed environments are compatible.
+- Application test report: 31 passed, zero failures, errors, or skips.
+- Scientific test report and result: 61 passed, zero failures, errors, or skips, on the Apple M1 Max Metal device. Complete state/event artifacts are retained beside the report.
 - [Factored scalar result](../../evidence/architecture-remediation/factored-scalars/factored.json): 157/157 pass both unchanged budgets; repeated and minimally padded standalone results match bit for bit. Maximum one-step budget fraction is 0.0236594731.
 - [Retained casting diagnostic](../../evidence/architecture-remediation/accumulation-scalars/accumulation.json): all 125 diagnostic assertions pass, but only 109/125 original-weight one-step cases and 119/125 trajectory cases meet parity. Its strategy remains unapproved. Passing limitation assertions does not erase these failures.
 - [Reference replay](../../evidence/architecture-remediation/reference-replay/numerical-contract.json): two NumPy and two C++ traces are byte-identical, with 43 spikes and the frozen stimulus hash. The [schedule diagnostic](../../evidence/architecture-remediation/reference-schedule/reference-schedule.json) matches the original Brian2/PyTorch trace.
-- [Source preservation](../../evidence/architecture-remediation/source-preservation.json), [artifact/archive verification](../../evidence/architecture-remediation/artifact-preservation.json), and the [bounded Astra preservation review](../../evidence/architecture-remediation/astra-preservation-review.md) establish the retained small-network numerical contract. The parent verified the evidence before integration.
+- Source preservation, artifact/archive verification, and the [bounded Astra preservation review](../../evidence/architecture-remediation/astra-preservation-review.md) establish the retained small-network numerical contract. The parent verified the evidence before integration.
 
 Architecture compliance is complete for the current application scope. This does not qualify a complete connectome, compiled factored propagation, custom kernels, production spike export, full-network parity, or performance. Threshold rounding and serial/weight-casting limits remain recorded. The manual specification/evidence updates were preserved and left unstaged at architecture release. Sol then verified and integrated the completed manual handoff in a separate checkpoint recorded in `milestone.md`; the original scientific decision and owner are retained.
 

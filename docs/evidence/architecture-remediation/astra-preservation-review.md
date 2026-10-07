@@ -15,7 +15,7 @@ Checkpoints: preserved source at `22c813e`; application refactor at `d98f5bf`. T
 - The fresh suite records 61 passed, zero failures, errors, or skips. The reviewer independently compared 1,044 arrays in 37 core/network artifacts and the 15 scalar factored arrays with the retained evidence. All array bytes match.
 - All 157 factored scalar cases meet the unchanged one-step and trajectory budgets. Repeated and independently sized reductions are bit-identical. All four reference replays are byte-identical, with 43 spikes and the retained stimulus hash.
 
-The parent independently verified [28 source/reference checks](source-preservation.json), [all 1,076 arrays in 39 artifacts, the replay traces, and incoming archive hashes](artifact-preservation.json), the complete test report, and scalar acceptance counts before integrating this decision.
+The parent independently verified 28 source/reference checks, all 1,076 arrays in 39 artifacts, the replay traces, and incoming archive hashes, the complete test report, and scalar acceptance counts before integrating this decision.
 
 ## Limits
 

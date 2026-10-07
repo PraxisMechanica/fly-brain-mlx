@@ -1,6 +1,6 @@
 # MLX fly-brain milestones
 
-Audience: agents. Updated 2026-10-07 (Europe/Zurich).
+Audience: agents. Updated 2026-10-07 (Europe/Lisbon).
 This is the active plan, acceptance status, and next-work record.
 [AGENTS.md](AGENTS.md) owns project policy; the
 [numerical contract](docs/agent/numerical-contract.md) owns scientific semantics
@@ -21,7 +21,52 @@ qualification. Do not add MaleCNS, new neuron models, plasticity, reinforcement
 learning, a user interface, or a general simulation framework. Preserve all data,
 evidence, and assigned work.
 
-## Current agent goal — 2026-10-06
+## Current task amendment — 2026-10-07
+
+The user requests de-duplication and fewer lines of maintained code, no committed
+test logs or generated development reports, direct edits without temporary
+preservation copies, and a database-free application. Decision confidence: 99%
+at `1c9cb00345b6244ab66fa9d50f17cc2dba49baea`. Existing architecture worker
+assignments and scientific development holds remain in force.
+
+Success requires actual shared implementations, lower measured duplication and
+code size, preserved independent scientific checks, required local hooks, and
+delivery to `origin/main`. The initial dashboard's 24.88% is reproduced at
+`43ab8ec`; current `main` measures 24.20% across all supported formats and 1.64%
+across maintained source. Its 37,181 source lines include 9,638 lines of frozen
+historical scientific scripts; maintained `src/tests/tools` have 27,540 lines.
+
+The shared comparison assembly passes 8,410 single-case and 25,230 pooled
+baseline comparisons with identical field types, values, fractions, undefined
+states, and floating-point bits. All 53 focused metric/gate/matrix tests pass.
+The bounded scientific review permits this same-domain consolidation while
+keeping trial-specific matching, exposure, windows, and acceptance gates exact.
+
+The retention review removes 211 routine reports and logs, totaling 3,490,040
+bytes. They have no active application or test consumers. All 64 frozen source
+hashes remain exact; scientific fixture arrays, manifests, and reviewed limits
+remain. Removed report links are retired, and generated reports are ignored.
+Historical bundles that included those reports are no longer completely
+materialized in the current tree; their scientific hashes are not rewritten.
+The completed refactor removes 87 nonblank lines: maintained source decreases
+from 27,540 to 27,453, and all supported source decreases from 37,181 to 37,094.
+Maintained clone spans decrease from 502 to 436, or 1.64% to 1.43%, under the
+unchanged detector and scope. The combined dashboard percentage remains high
+because its retained scientific JSON and historical scripts are also inputs;
+removing routine reports reduces its denominator as well as duplicated spans.
+
+All 721 unit/integration cases and 75 affected real Metal/reference cases pass,
+with zero failures, errors, or skips. The 75 collected case identities,
+parametrizations, and assertion counts are unchanged. Parent inspection verifies
+144 actual phase arrays across twelve fresh native archives, all thirty checks,
+and final queues. `just check` passes formatting, lint, strict typing, five import
+contracts, 419 quality cases, and staged metric regression checks. Whole-file
+average complexity decreases from 20.39 to 20.29; health increases from 36.17 to
+36.27. Exact ownership reconciliation has 324 sources, zero mapping gaps, and
+the same six recorded findings. Complete 37-rule enforcement remains COV002.
+Required commit/push hooks and remote delivery are the remaining steps.
+
+## Earlier architecture cleanup goal — 2026-10-06
 
 Complete rearchitecture, refactoring, and general cleanup, then prepare a verified
 handoff to the prior implementation agent. This is the user's latest scope

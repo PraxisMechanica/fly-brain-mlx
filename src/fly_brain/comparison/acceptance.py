@@ -97,27 +97,22 @@ def match_steps(
     return differences
 
 
-def measure(
-    reference: SpikeSteps,
-    candidate: SpikeSteps,
-    support: NDArray[np.int64],
-    duration_s: float,
+def assemble_metrics(
+    first: NDArray[np.int64],
+    second: NDArray[np.int64],
+    reference_spikes: int,
+    candidate_spikes: int,
+    differences: list[int],
+    exact: int,
+    one_step: int,
+    exposure_s: float,
 ) -> ParityMetrics:
-    first = counts_on_support(reference, support)
-    second = counts_on_support(candidate, support)
-    reference_spikes = len(reference.steps)
-    candidate_spikes = len(candidate.steps)
     union = int(np.count_nonzero((first > 0) | (second > 0)))
     intersection = (first > 0) & (second > 0)
     count_difference = int(np.abs(first - second).sum())
-    first_groups = groups_by_neuron(reference)
-    second_groups = groups_by_neuron(candidate)
-    differences = match_steps(first_groups, second_groups, 10)
     matches = len(differences)
     total = reference_spikes + candidate_spikes
-    exact = len(match_steps(first_groups, second_groups, 0))
-    one_step = len(match_steps(first_groups, second_groups, 1))
-    common_errors = (second.astype(np.float64) - first) / duration_s
+    common_errors = (second.astype(np.float64) - first) / exposure_s
     if reference_spikes:
         count_error = Fraction(
             abs(candidate_spikes - reference_spikes), reference_spikes
@@ -159,11 +154,31 @@ def measure(
             second[intersection].astype(np.float64),
         ),
         common_rate_mae_hz=float(np.mean(np.abs(common_errors)))
-        if support.size
+        if first.size
         else None,
         common_rate_rmse_hz=float(np.sqrt(np.mean(common_errors**2)))
-        if support.size
+        if first.size
         else None,
+    )
+
+
+def measure(
+    reference: SpikeSteps,
+    candidate: SpikeSteps,
+    support: NDArray[np.int64],
+    duration_s: float,
+) -> ParityMetrics:
+    first_groups = groups_by_neuron(reference)
+    second_groups = groups_by_neuron(candidate)
+    return assemble_metrics(
+        counts_on_support(reference, support),
+        counts_on_support(candidate, support),
+        len(reference.steps),
+        len(candidate.steps),
+        match_steps(first_groups, second_groups, 10),
+        len(match_steps(first_groups, second_groups, 0)),
+        len(match_steps(first_groups, second_groups, 1)),
+        duration_s,
     )
 
 

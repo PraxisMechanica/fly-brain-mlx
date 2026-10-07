@@ -18,7 +18,7 @@ Preserve the existing scientific evidence during repair. The small MLX core cont
 
 ## Audited technologies and approved target
 
-The [technology inventory](../../evidence/architecture-audit/technology-inventory.json) records installed versions, configuration files, and source imports. Installation and application integration are separate facts.
+The technology inventory records installed versions, configuration files, and source imports. Installation and application integration are separate facts.
 
 | Area | Current state | Required target for this application |
 | --- | --- | --- |
@@ -65,7 +65,11 @@ MLX arrays and explicit device streams belong in the MLX backend; replacing them
 
 ### Reproduced static checks
 
-The [check record](../../evidence/architecture-audit/checks.json) contains exact commands, exit codes, source hashes, inventory, and diagnostic counts. Raw outputs are retained beside it. Exact Pyright stdout is preserved in `.json.gz` files. The readable JSON copies omit only the final empty terminal line.
+The historical check record contained commands, exit codes, source hashes,
+inventory, and diagnostic counts. Routine JSON, compressed Pyright stdout,
+settings dumps, and console output were removed from Git under the user's
+2026-10-07 retention amendment. The diagnostic counts below retain their
+original checkpoint scope.
 
 | Check | Scope | Result |
 | --- | --- | --- |
@@ -77,7 +81,7 @@ The 881 diagnostics include six missing-stub and eight missing-import reports, p
 
 ## How the oversight occurred
 
-Relevant public session/tool records and Git history are summarized in [process history](../../evidence/architecture-audit/process-history.json). Times here are Europe/Paris.
+Relevant public session/tool records and Git history are summarized in process history. Times here are Europe/Paris.
 
 1. Both design skills were read at 14:14:49 and again at 15:22:36, before MLX implementation. At 14:16:59 this chat publicly said it was using them to keep the port within the existing backend interface. The failure was in applying and enforcing their requirements, not discovering the skills.
 2. The imported source was preserved at `4466b37`. Subsequent reference helpers (`295994b`, `5489ae0`) repeated path injection and global operational overrides. These choices should have triggered a recorded architecture exception or correction before being extended.

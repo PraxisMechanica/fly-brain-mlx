@@ -28,3 +28,21 @@ __pycache__/
 dist/
 node_modules/
 .quality-reports/
+
+# Generated test and development reports
+/docs/evidence/**/*.xml
+/docs/evidence/**/*.log
+/docs/evidence/**/pyright.json
+/docs/evidence/**/quality.json
+/docs/evidence/**/result.json
+/docs/evidence/**/initial-result.json
+/docs/evidence/code-quality/**/*.json
+/docs/evidence/architecture-audit/*.json
+/docs/evidence/architecture-audit/*.json.gz
+/docs/evidence/architecture-audit/*.txt
+/docs/evidence/documentation/**/*.json
+/docs/evidence/architecture-remediation/artifact-preservation.json
+/docs/evidence/architecture-remediation/checks.json
+/docs/evidence/architecture-remediation/clean-runtime.json
+/docs/evidence/architecture-remediation/incoming-review-work.json
+/docs/evidence/architecture-remediation/source-preservation.json

@@ -1,16 +1,12 @@
 import hashlib
-from dataclasses import dataclass
 from pathlib import Path
 from typing import cast
 
 import mlx.core as mx
 import numpy as np
 import pytest
-from numpy.typing import NDArray
 
 from fly_brain.qualification.adapters.paired_observer import trial_block
-from fly_brain.qualification.session_blocks import SessionBlock
-from fly_brain.qualification.session_observer import observe_session
 from fly_brain.simulation.backend import core
 from fly_brain.simulation.backend.arrays import (
     HostArray,
@@ -19,42 +15,15 @@ from fly_brain.simulation.backend.arrays import (
     evaluate,
 )
 from fly_brain.simulation.backend.bucketed import prepare
-from fly_brain.simulation.models import Connectome
-from fly_brain.simulation.observation_module import build_observation_sessions
-from fly_brain.simulation.observations import ObservationInitialState
 from tests.support.legacy_mlx_ledger import EventLedger
 from tests.support.legacy_mlx_observer import (
     MLXBlock,
     observe,
 )
+from tests.support.observation_fixtures import Fixture, fixture
+from tests.support.observation_fixtures import session_blocks as active_observed
 
 pytestmark = [pytest.mark.integration, pytest.mark.metal]
-
-
-@dataclass(frozen=True)
-class Fixture:
-    connectome: Connectome
-    targets: tuple[int, ...]
-    events: NDArray[np.uint8]
-
-
-def fixture(empty: bool = False) -> Fixture:
-    counts = np.array([] if empty else [360, 0, 1, -2, 3, 360, -1, -1], dtype=np.int32)
-    original = Connectome(
-        np.arange(6, dtype=np.int64),
-        np.array([] if empty else [0, 0, 0, 1, 2, 3, 4, 4], dtype=np.int32),
-        np.array([] if empty else [1, 1, 0, 2, 3, 0, 5, 5], dtype=np.int32),
-        counts,
-        counts.astype(np.float64) * 0.275,
-    )
-    targets = () if empty else (0, 0, 1)
-    events = np.zeros((4, 101, len(targets)), dtype=np.uint8)
-    if targets:
-        for trial in range(4):
-            events[trial, trial::3, 0] = 1
-            events[trial, trial::7, 1] = 1
-            events[trial, trial::4, 2] = 1
-    return Fixture(original, targets, events)
 
 
 def initial(network: core.Network, trials: int) -> core.State:
@@ -75,33 +44,6 @@ def observed(case: Fixture, precision: str, block_size: int) -> list[MLXBlock]:
             initial(execution.network, trials),
             case.events,
             EventLedger(case.connectome, case.targets, trials),
-            block_size,
-        )
-    )
-
-
-def active_observed(
-    case: Fixture, precision: str, block_size: int
-) -> list[SessionBlock]:
-    factory, _ = build_observation_sessions(
-        case.connectome, case.targets, (3,), precision
-    )
-    trials = case.events.shape[0]
-    initial_values = ObservationInitialState(
-        np.broadcast_to(
-            np.array((-52, -52, -44, -44, -44, -52), dtype=np.float64), (trials, 6)
-        ),
-        np.broadcast_to(np.array((0, 0, 100, 0, 0, 0), dtype=np.float64), (trials, 6)),
-        np.full((trials, 6), -100000000, dtype=np.int32),
-    )
-    return list(
-        observe_session(
-            factory,
-            case.connectome,
-            case.targets,
-            tuple(range(trials)),
-            case.events,
-            initial_values,
             block_size,
         )
     )

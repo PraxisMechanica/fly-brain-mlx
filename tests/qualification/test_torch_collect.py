@@ -1,4 +1,3 @@
-import hashlib
 import json
 from pathlib import Path
 
@@ -9,8 +8,7 @@ from fly_brain.qualification.adapters.replay_evidence import cpu as verify_repea
 from fly_brain.qualification.adapters.torch_collect import collect
 from fly_brain.qualification.adapters.torch_observer import observe
 from fly_brain.qualification.adapters.torch_setup import prepare
-from fly_brain.simulation.models import Stimulus
-from tests.qualification.test_mlx_observer import fixture
+from tests.support.observation_fixtures import fixture, stimulus_for
 
 pytestmark = [pytest.mark.integration, pytest.mark.reference]
 
@@ -20,14 +18,8 @@ def test_cpu_collection_preserves_all_native_state_hashes_and_trial_spikes(
     tmp_path: Path, empty: bool
 ) -> None:
     case = fixture(empty)
-    stimulus = Stimulus(
-        case.events,
-        case.targets,
-        (200.0,) * len(case.targets),
-        (0, 1, 2, 3),
-        0,
-        0,
-        hashlib.sha256(case.events.tobytes()).hexdigest(),
+    stimulus = stimulus_for(
+        case.events, case.targets, (200.0,) * len(case.targets), (0, 1, 2, 3)
     )
     model = prepare(case.connectome, case.targets, (3,), 4)
     expected = list(observe(model, case.events, case.targets))

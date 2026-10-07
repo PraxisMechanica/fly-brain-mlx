@@ -19,10 +19,16 @@ require their recorded qualification before adoption.
 Keep the application MLX-only on Apple silicon, managed by uv. Exclude Conda,
 NVIDIA backends, and non-essential dependencies. Brian2 and PyTorch are
 qualification-only references, never production backends.
+Keep the application database-free.
 
 Preserve data, scientific evidence, and incoming work. Write new runs to fresh
 output directories. Current development holds and their releases belong in
 `milestone.md`.
+Generated test logs, test-count reports, type-check output, and development
+verification snapshots do not belong in Git. Keep numerical fixtures, scientific
+manifests, and reviewed scientific decisions. Edit files directly without
+temporary preservation or backup copies; overwrite task-generated outputs as
+needed under the user's 2026-10-07 instruction.
 
 ## Non-production schema and database authorization
 

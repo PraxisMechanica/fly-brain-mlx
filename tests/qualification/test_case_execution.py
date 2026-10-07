@@ -1,4 +1,3 @@
-import hashlib
 import json
 from pathlib import Path
 
@@ -10,9 +9,9 @@ from fly_brain.qualification.adapters.case_execution import execute
 from fly_brain.qualification.adapters.case_report import write
 from fly_brain.qualification.adapters.torch_setup import prepare as prepare_cpu
 from fly_brain.qualification.models import ParityCase
-from fly_brain.simulation.models import InputPin, Stimulus
+from fly_brain.simulation.models import InputPin
 from fly_brain.simulation.observation_module import build_observation_sessions
-from tests.qualification.test_mlx_observer import fixture
+from tests.support.observation_fixtures import fixture, stimulus_for
 
 pytestmark = [pytest.mark.integration, pytest.mark.reference, pytest.mark.metal]
 
@@ -23,15 +22,7 @@ def test_each_engine_replays_fresh_state_with_complete_retained_evidence(
 ) -> None:
     case = fixture(empty)
     events = case.events[:1]
-    stimulus = Stimulus(
-        events,
-        case.targets,
-        (200.0,) * len(case.targets),
-        (0,),
-        0,
-        0,
-        hashlib.sha256(events.tobytes()).hexdigest(),
-    )
+    stimulus = stimulus_for(events, case.targets, (200.0,) * len(case.targets), (0,))
     job = build(case.connectome, case.targets, (3,), events[0], tmp_path / 'build')
     mlx, read_rows = build_observation_sessions(
         case.connectome, case.targets, (3,), precision

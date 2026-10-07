@@ -19,7 +19,7 @@ The reviewer confirms original edge identities, explicit false padding, the tria
 
 ## Parent verification and decision
 
-Sol ran the retained [79-test live qualification](qualification/result.json) and [157-case scalar command](scalars/bucketed-scalars.json), and independently verified all scalar inputs, artifact/source hashes, literal ordered and accurate references, exact count expansions, both budgets, repeats/standalone bits, zero copies, and prototype output/component bits. [Verification](scalars/verification.json). The original numerical oracle is unchanged. Full Ruff, strict Pyright, three import contracts, and [53 application tests](scalars/application-tests.xml) pass.
+Sol ran the retained 79-test live qualification and [157-case scalar command](scalars/bucketed-scalars.json), and independently verified all scalar inputs, artifact/source hashes, literal ordered and accurate references, exact count expansions, both budgets, repeats/standalone bits, zero copies, and prototype output/component bits. [Verification](scalars/verification.json). The original numerical oracle is unchanged. Full Ruff, strict Pyright, three import contracts, and 53 application tests pass.
 
 Sol accepts the bounded decision and resumes the required qualification. The reviewer's extra in-memory checks are reported as such; Sol did not repeat that separate 120-step check. No user decision about low-level state precision is required.
 

@@ -1,4 +1,3 @@
-import hashlib
 import json
 from collections.abc import Generator
 from pathlib import Path
@@ -17,17 +16,12 @@ from fly_brain.simulation.backend import core
 from fly_brain.simulation.backend.bucketed import prepare
 from fly_brain.simulation.models import Connectome, Stimulus
 from fly_brain.simulation.observation_module import build_observation_sessions
-from fly_brain.simulation.observations import HostFieldSnapshots
-from tests.qualification.test_mlx_observer import fixture
 from tests.support.legacy_mlx_ledger import EventLedger
-from tests.support.legacy_mlx_observer import MLXBlock, observe
+from tests.support.legacy_mlx_observer import observe
+from tests.support.observation_fixtures import fixture, stimulus_for
 from tests.support.session_block_values import replace_block, trial_fields
 
 pytestmark = [pytest.mark.integration, pytest.mark.metal]
-
-
-def trial_block(block: MLXBlock, trial: int) -> HostFieldSnapshots:
-    return trial_fields(block.fields, trial)
 
 
 @pytest.mark.parametrize('empty', (False, True))
@@ -35,15 +29,7 @@ def test_batch_collection_preserves_every_trial_native_phase_queue_and_spike(
     precision: str, tmp_path: Path, empty: bool
 ) -> None:
     case = fixture(empty)
-    stimulus = Stimulus(
-        case.events,
-        case.targets,
-        (),
-        (0, 1, 2, 3),
-        0,
-        0,
-        hashlib.sha256(case.events.tobytes()).hexdigest(),
-    )
+    stimulus = stimulus_for(case.events, case.targets, (), (0, 1, 2, 3))
     execution = prepare(case.connectome, case.targets, (3,), precision)
     expected = list(
         observe(
@@ -71,7 +57,8 @@ def test_batch_collection_preserves_every_trial_native_phase_queue_and_spike(
         ]
         for saved, actual in zip(rows, expected, strict=True):
             assert saved['native_phase_sha256'] == [
-                phase_hash(trial_block(actual, trial).fields) for trial in range(4)
+                phase_hash(trial_fields(actual.fields, trial).fields)
+                for trial in range(4)
             ]
             assert saved['mlx_queue_sha256'] == list(actual.queue_sha256)
             assert saved['mlx_due_sha256'] == [list(row) for row in actual.due_sha256]

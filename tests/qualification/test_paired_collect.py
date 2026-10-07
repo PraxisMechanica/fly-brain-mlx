@@ -1,4 +1,3 @@
-import hashlib
 import json
 from dataclasses import replace
 from pathlib import Path
@@ -22,9 +21,8 @@ from fly_brain.qualification.adapters.paired_collect import collect
 from fly_brain.qualification.adapters.paired_observer import PairedBlock, phase_hash
 from fly_brain.qualification.adapters.pending_queues import verify as verify_pending
 from fly_brain.qualification.adapters.replay_evidence import paired as verify_repeat
-from fly_brain.simulation.models import Stimulus
 from fly_brain.simulation.observation_module import build_observation_sessions
-from tests.qualification.test_mlx_observer import fixture
+from tests.support.observation_fixtures import fixture, stimulus_for
 from tests.support.session_block_values import replace_block
 
 pytestmark = [pytest.mark.integration, pytest.mark.reference, pytest.mark.metal]
@@ -36,15 +34,7 @@ def test_live_collection_retains_complete_native_and_physical_replay(
 ) -> None:
     case = fixture(empty)
     events = case.events[:1]
-    stimulus = Stimulus(
-        events,
-        case.targets,
-        (200.0,) * len(case.targets),
-        (0,),
-        0,
-        0,
-        hashlib.sha256(events.tobytes()).hexdigest(),
-    )
+    stimulus = stimulus_for(events, case.targets, (200.0,) * len(case.targets), (0,))
     job = build(case.connectome, case.targets, (3,), events[0], tmp_path / 'build')
     execution, read_rows = build_observation_sessions(
         case.connectome, case.targets, (3,), precision
@@ -165,15 +155,7 @@ def test_injected_first_budget_fault_retains_actual_inputs_and_reference_weights
 ) -> None:
     case = fixture()
     events = case.events[:1]
-    stimulus = Stimulus(
-        events,
-        case.targets,
-        (200.0,) * 3,
-        (0,),
-        0,
-        0,
-        hashlib.sha256(events.tobytes()).hexdigest(),
-    )
+    stimulus = stimulus_for(events, case.targets, (200.0,) * 3, (0,))
     job = build(case.connectome, case.targets, (3,), events[0], tmp_path / 'build')
     execution, read_rows = build_observation_sessions(
         case.connectome, case.targets, (3,), precision
