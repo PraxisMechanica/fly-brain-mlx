@@ -113,9 +113,14 @@ All 64 frozen source hashes are exact. Ownership reconciliation covers 334
 sources with zero mapping gaps and the same six recorded findings; all 67 policy
 tests pass after repairing an omitted owner caught by the first full check.
 The unchanged staged metric gate passes with zero findings: average complexity
-20.29 to 20.22 and health/maintainability 36.27 to 36.30. Aggregate hook checks
-and delivery remain in progress. No numerical arithmetic, fixtures or acceptance
-predicates change, and this work grants no additional scientific acceptance.
+20.29 to 20.22 and health/maintainability 36.27 to 36.30. All 467 quality cases
+pass through the aggregate installed commit and push hooks; actual successful
+cleanup leaves no `logs/` directory. Source implementation is delivered at
+`c5ef99086a9fa18105146e0143fbea3ac95096cb` on `origin/main`. A dropped SSH
+connection required one push retry with keepalive; both hooks passed again.
+This completes the logging implementation and local verification. No numerical
+arithmetic, fixtures or acceptance predicates change, and this work grants no
+additional scientific acceptance.
 Complete 37-rule architecture enforcement remains ANALYSIS FAILED (COV002).
 
 ## Earlier architecture cleanup goal — 2026-10-06
