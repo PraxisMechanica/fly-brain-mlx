@@ -28,11 +28,24 @@ Python aggregation patch. Version 0.1.1 counts whole-file native decisions;
 older metric numbers retain their original 0.1.0 identity. Both archives remain
 versioned, and provenance/archives/patch are canonical indexed gate inputs.
 
-Generated test logs, XML test results, type-check output, and development
-verification reports are ignored and must not be committed. Record concise
-verification outcomes in `milestone.md`; keep requested local outputs under
-`data/results` or `.quality-reports`. Edit working files directly without
-temporary preservation copies.
+Disposable developer diagnostics belong in ignored `logs/`; complete scientific
+run bundles belong in ignored `executions/`. Commit and push hooks clear `logs/`
+only after every required check succeeds. Failures keep diagnostics, and cleanup
+refuses symlinked roots or versioned files. Scientific bundles are outside this
+cleanup scope. Record concise verification outcomes in `milestone.md`; do not
+commit generated reports or make temporary preservation copies.
+
+Quality checks print short success summaries. Failures show bounded output and
+retain a diagnostic file under `logs/quality`, capped at 64 KiB of text with
+explicit omissions. Metric summaries include complete finding counts and at most
+twenty examples, with no repeated file inventories. Hosted checks print bounded
+diagnostics without uploading report artifacts. A manual `just check` keeps its
+diagnostics locally.
+Diagnostic commands show at most twenty summary fields and ten examples per
+failure category, scan every actual flag, and keep full scientific reports in
+the execution bundle. The console view does not grant scientific acceptance.
+Read diagnostic files in targeted chunks rather than loading entire run bundles
+into the agent context.
 
 Hosted execution uses the same command when repository variable
 `QUALITY_CI_TEMP_DB_CACHE_APPROVED` is true. The project authorization in
@@ -55,8 +68,8 @@ fallback is unsupported.
 Run from the repository root. Every output path must be new.
 
 ```sh
-uv run --locked --group qualification pytest
-uv run --locked --group qualification fly-brain qualify --output data/results/qualification-01
+uv run --locked --group qualification python -m pytest
+uv run --locked --group qualification fly-brain qualify --output executions/qualification-01
 ```
 
 Default pytest selection covers unit, file/process integration and source-only
@@ -70,7 +83,7 @@ One prescribed full-connectome parity case:
 ```sh
 uv run --locked --group qualification fly-brain qualify-parity \
   --experiment p9 --duration-s 0.1 --trial 0 \
-  --output data/results/parity-p9-0.1-0-01
+  --output executions/parity-p9-0.1-0-01
 ```
 
 It runs all three engines twice from fresh state with a persisted canonical
@@ -83,7 +96,7 @@ cannot establish complete-matrix acceptance.
 Use the shared command form with a fresh output directory:
 
 ```sh
-uv run --locked --group qualification fly-brain <command> --output data/results/<fresh-directory>
+uv run --locked --group qualification fly-brain <command> --output executions/<fresh-directory>
 ```
 
 | Command | Recorded scope |

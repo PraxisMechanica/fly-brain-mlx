@@ -1,7 +1,9 @@
 import math
 from pathlib import Path
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
+
+from fly_brain.infrastructure.output_paths import require_retained_output
 
 from .models import ExperimentName, SimulationRequest
 
@@ -33,6 +35,11 @@ class SimulationOptions(BaseModel):
                 'Output must be a new directory; existing data is preserved'
             )
         return output
+
+    @model_validator(mode='after')
+    def output_is_retained(self) -> 'SimulationOptions':
+        require_retained_output(self.output, self.project)
+        return self
 
     @field_validator('duration_s')
     @classmethod

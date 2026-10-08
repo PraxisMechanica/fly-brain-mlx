@@ -139,8 +139,14 @@ def test_project_and_output_diagnostics_preserve_report_and_exit_contracts(
     commands = (build_project_probe(project_probe), build_output_probe(output_probe))
     assert calls == []
     for command in commands:
-        assert command(request) == (0 if report.get('accepted', True) else 1)
-        assert capsys.readouterr().out == json.dumps(report, indent=2) + '\n'
+        exit_code = command(request)
+        assert exit_code == (0 if report.get('accepted', True) else 1)
+        displayed = json.loads(capsys.readouterr().out)
+        assert (displayed['summary'], displayed['output'], displayed['exit_code']) == (
+            report,
+            str(request.output),
+            exit_code,
+        )
     assert calls == [(request.project, request.output), request.output]
 
 
@@ -164,7 +170,11 @@ def test_input_audit_passes_the_loaded_identity_to_one_probe(
     assert calls == []
     assert command(request) == 0
     assert calls == [request.project, request.output]
-    assert capsys.readouterr().out == '{\n  "accepted": true\n}\n'
+    displayed = json.loads(capsys.readouterr().out)
+    assert (displayed['summary'], displayed['output']) == (
+        {'accepted': True},
+        str(request.output),
+    )
 
 
 @pytest.mark.parametrize('accepted', (True, False))

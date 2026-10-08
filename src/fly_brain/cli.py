@@ -5,6 +5,7 @@ from pathlib import Path
 
 from . import bootstrap
 from .comparison.schemas import ComparisonOptions
+from .infrastructure.output_paths import require_retained_output
 from .qualification.schemas import ParityOptions, QualificationOptions
 from .simulation.schemas import SimulationOptions
 
@@ -82,7 +83,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     if arguments.command == 'simulate':
         output = (
             arguments.output
-            or arguments.project / 'data/results' / f'mlx-{time.time_ns()}'
+            or arguments.project / 'executions' / f'mlx-{time.time_ns()}'
         )
         request = SimulationOptions(
             project=arguments.project,
@@ -105,6 +106,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         )
         request = options.to_request()
         output = Path(arguments.output).resolve()
+        require_retained_output(output)
         return bootstrap.comparison()(request, output)
     options = QualificationOptions(project=arguments.project, output=arguments.output)
     request = options.to_request()

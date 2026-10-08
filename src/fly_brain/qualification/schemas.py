@@ -2,6 +2,7 @@ from pathlib import Path
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
+from fly_brain.infrastructure.output_paths import require_retained_output
 from fly_brain.qualification.matrix import required_cases
 from fly_brain.qualification.models import ParityCase, QualificationRequest
 from fly_brain.simulation.models import ExperimentName
@@ -29,6 +30,11 @@ class QualificationOptions(BaseModel):
                 'Output must be a new directory; existing data is preserved'
             )
         return output
+
+    @model_validator(mode='after')
+    def output_is_retained(self) -> 'QualificationOptions':
+        require_retained_output(self.output, self.project)
+        return self
 
     def to_request(self) -> QualificationRequest:
         return QualificationRequest(self.project, self.output)

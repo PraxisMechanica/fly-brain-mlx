@@ -34,7 +34,7 @@ def hook_repository(root: Path, source: str = GOOD) -> tuple[Path, dict[str, str
         shutil.copyfile(PROJECT / name, repo / name)
     tools = repo / 'executables'
     tools.mkdir()
-    (repo / '.gitignore').write_text('executables/\n')
+    (repo / '.gitignore').write_text('executables/\n/logs/\n/executions/\n')
     just, imports = shutil.which('just'), shutil.which('lint-imports')
     assert just is not None and imports is not None
     (tools / 'just').symlink_to(just)
@@ -47,6 +47,8 @@ def hook_repository(root: Path, source: str = GOOD) -> tuple[Path, dict[str, str
         'if failure and failure in arguments:\n'
         "    print('controlled tool failure: ' + failure)\n"
         '    sys.exit(23)\n'
+        "if 'tools.code_quality.cleanup' in arguments:\n"
+        f'    sys.exit(subprocess.call([sys.executable, {str(PROJECT / "tools/code_quality/cleanup.py")!r}]))\n'
         "if 'lint-imports' in arguments:\n"
         f"    sys.exit(subprocess.call([{imports!r}, '--no-cache']))\n"
     )

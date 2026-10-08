@@ -3,6 +3,7 @@ from pathlib import Path
 
 from .models import ParityCase, QualificationRequest
 from .ports import DiagnosticUseCase, ParityUseCase, QualificationUseCase
+from .presentation import diagnostic_display
 
 
 def qualification(request: QualificationRequest, use_case: QualificationUseCase) -> int:
@@ -17,8 +18,9 @@ def qualification(request: QualificationRequest, use_case: QualificationUseCase)
 
 def diagnostic(request: QualificationRequest, use_case: DiagnosticUseCase) -> int:
     report = use_case(request)
-    print(json.dumps(report, indent=2))
-    return 0 if report.get('accepted', True) else 1
+    exit_code = 0 if report.get('accepted', True) else 1
+    print(json.dumps(diagnostic_display(report, request.output, exit_code), indent=2))
+    return exit_code
 
 
 def parity_case(

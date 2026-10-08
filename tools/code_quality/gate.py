@@ -4,6 +4,8 @@ import sys
 from collections.abc import Mapping
 from pathlib import Path
 
+from .diagnostics import measure
+
 
 def references(environment: Mapping[str, str]) -> tuple[str, str] | None:
     for names in (
@@ -44,18 +46,11 @@ def require_indexed_inputs() -> None:
             'tools/code-quality/vendor/eng-metrics-code-quality-0.1.0.tgz',
             'tools/code-quality/vendor/eng-metrics-code-quality-0.1.1.tgz',
             'tools/code-quality/python-aggregation.patch',
+            'tools/code_quality/metrics.mjs',
         )
     )
     if missing := sorted(inputs - indexed):
         raise ValueError('COV001: unindexed check inputs: ' + ', '.join(missing))
-
-
-def measure(arguments: list[str], name: str) -> int:
-    report = Path('.quality-reports') / f'{name}.json'
-    report.parent.mkdir(exist_ok=True)
-    return subprocess.call(
-        ['pnpm', 'exec', 'code-quality', 'check', *arguments, '--json', str(report)]
-    )
 
 
 def main() -> int:

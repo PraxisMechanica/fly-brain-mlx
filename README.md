@@ -41,7 +41,7 @@ The default experiment is `sugar`. `--experiment` also accepts `p9`,
 `--output` to select a new output directory, and `--project` to select this
 checkout when you run the command from another directory.
 
-Each run creates a fresh directory under `data/results` by default. It writes
+Each run creates a fresh directory under ignored `executions` by default. It writes
 Parquet spike events, the exact stimulus and its provenance, and a
 `simulation.json` report with counts, timings, versions, and hashes. Spike files
 retain the existing six-column format, including typed empty output.
@@ -52,7 +52,7 @@ retain the existing six-column format, including typed empty output.
 uv run --locked --no-dev fly-brain compare \
   --first /path/to/mlx.parquet --second /path/to/reference.parquet \
   --duration-s 0.1 --trials 1 --tolerance-ms 0.1 \
-  --output data/results/comparison-01
+  --output executions/comparison-01
 ```
 
 Use a new output directory. Comparison writes `pairwise_summary.json`,

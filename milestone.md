@@ -75,6 +75,49 @@ because another managed checkout already owns `main`; its unfinished work is
 preserved. This amendment completes the bounded code and retention cleanup;
 the earlier architecture and scientific work orders remain separate.
 
+## Diagnostic retention amendment — 2026-10-08
+
+The user permits saved outputs in ignored folders, requests automatic commit-hook
+cleanup, and requires useful diagnostics that fit the agent context. Decision
+confidence: 99% at `463cbb2bbb7db431f7c682f7252ae9bb74434fcb`, following the
+bounded scientific retention review. This supersedes the earlier prohibition on
+saving task outputs; direct edits still require no preservation or backup copies.
+
+Disposable development diagnostics use `logs/`; complete scientific bundles use
+`executions/`. Both are ignored. After all required checks pass, commit and push
+hooks delete only this checkout's `logs/`. Failures or interruptions retain it.
+Cleanup rejects a symlinked root and indexed files and does not follow nested
+symlinks. Scientific bundles remain complete, use fresh destinations, and are
+excluded from cleanup. Resolved destinations under disposable logs are rejected
+before scientific command composition. Existing evidence and runs are untouched.
+
+The oversized JSON came from complete before/after metric inventories, repeated
+verification snapshots, and full diagnostic reports. The gate now retains the
+same complete metric decisions but emits summary metrics, exact finding counts,
+and at most twenty examples. Successful checks print short outcomes; failed
+checks show at most 4 KiB and save at most 64 KiB with explicit omissions.
+Diagnostic commands display bounded summaries, actual flags, failure/skip counts,
+and artifact locations while leaving complete scientific reports intact. Hosted
+checks no longer upload generated report artifacts. The application remains
+database-free.
+
+Completion requires failure/weakening controls for the hook, bounded-output and
+exit-status tests, unchanged scientific source hashes, exact ownership review,
+all required quality checks, both installed hooks, and delivery to `origin/main`.
+Formatting, strict typing, five import contracts, 111 command/schema tests,
+71 parent output/hook/composition tests and 745 regular unit/integration tests
+pass. The separate pinned native-proof artifact fixture requires its scientific
+bundle and writes a fresh proof report; it is excluded from this logging task's
+regular application run. No new scientific execution is required or performed.
+All 64 frozen source hashes are exact. Ownership reconciliation covers 334
+sources with zero mapping gaps and the same six recorded findings; all 67 policy
+tests pass after repairing an omitted owner caught by the first full check.
+The unchanged staged metric gate passes with zero findings: average complexity
+20.29 to 20.22 and health/maintainability 36.27 to 36.30. Aggregate hook checks
+and delivery remain in progress. No numerical arithmetic, fixtures or acceptance
+predicates change, and this work grants no additional scientific acceptance.
+Complete 37-rule architecture enforcement remains ANALYSIS FAILED (COV002).
+
 ## Earlier architecture cleanup goal — 2026-10-06
 
 Complete rearchitecture, refactoring, and general cleanup, then prepare a verified

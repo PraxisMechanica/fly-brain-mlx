@@ -73,7 +73,7 @@ def test_cli_preserves_simulation_defaults_and_fresh_default_output(
     assert cli.main(['simulate', '--project', str(tmp_path)]) == 0
     assert calls == [
         SimulationRequest(
-            tmp_path, tmp_path / 'data/results/mlx-123', 'sugar', 0.1, 1, 20261004
+            tmp_path, tmp_path / 'executions/mlx-123', 'sugar', 0.1, 1, 20261004
         )
     ]
 
