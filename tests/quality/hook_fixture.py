@@ -32,9 +32,14 @@ def hook_repository(root: Path, source: str = GOOD) -> tuple[Path, dict[str, str
     (repo / SERVICE).write_text(source)
     for name in ('.pre-commit-config.yaml', 'justfile'):
         shutil.copyfile(PROJECT / name, repo / name)
+    retention = repo / 'tools/code_quality/retention.json'
+    retention.parent.mkdir(parents=True)
+    shutil.copyfile(PROJECT / 'tools/code_quality/retention.json', retention)
     tools = repo / 'executables'
     tools.mkdir()
-    (repo / '.gitignore').write_text('executables/\n/logs/\n/executions/\n')
+    (repo / '.gitignore').write_text(
+        'executables/\n/logs/\n/executions/\n/.quality-reports/\n'
+    )
     just, imports = shutil.which('just'), shutil.which('lint-imports')
     assert just is not None and imports is not None
     (tools / 'just').symlink_to(just)
@@ -48,7 +53,8 @@ def hook_repository(root: Path, source: str = GOOD) -> tuple[Path, dict[str, str
         "    print('controlled tool failure: ' + failure)\n"
         '    sys.exit(23)\n'
         "if 'tools.code_quality.cleanup' in arguments:\n"
-        f'    sys.exit(subprocess.call([sys.executable, {str(PROJECT / "tools/code_quality/cleanup.py")!r}]))\n'
+        f'    os.environ["PYTHONPATH"] = {str(PROJECT)!r} + os.pathsep + os.environ.get("PYTHONPATH", "")\n'
+        '    sys.exit(subprocess.call([sys.executable, "-m", "tools.code_quality.cleanup"]))\n'
         "if 'lint-imports' in arguments:\n"
         f"    sys.exit(subprocess.call([{imports!r}, '--no-cache']))\n"
     )

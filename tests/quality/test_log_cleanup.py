@@ -3,12 +3,13 @@ from pathlib import Path
 import pytest
 
 from tests.quality.hook_fixture import commit_document, hook_repository
-from tests.quality.support import git, repository
+from tests.quality.support import git
+from tests.quality.test_output_retention import retain, retention_repository
 from tools.code_quality.cleanup import clean_logs
 
 
-def test_cleanup_removes_only_disposable_logs(tmp_path: Path) -> None:
-    repo = repository(tmp_path)
+def test_cleanup_removes_all_unretained_outputs(tmp_path: Path) -> None:
+    repo = retention_repository(tmp_path)
     logs = repo / 'logs' / 'quality'
     logs.mkdir(parents=True)
     (logs / 'failure.json').write_text('{"failed": true}\n')
@@ -16,18 +17,17 @@ def test_cleanup_removes_only_disposable_logs(tmp_path: Path) -> None:
     execution.parent.mkdir()
     execution.write_bytes(b'required native evidence')
     clean_logs(repo)
-    assert not (repo / 'logs').exists()
-    assert execution.read_bytes() == b'required native evidence'
+    assert ((repo / 'logs').exists(), execution.exists()) == (False, False)
 
 
 def test_missing_logs_are_a_valid_clean_state(tmp_path: Path) -> None:
-    repo = repository(tmp_path)
+    repo = retention_repository(tmp_path)
     clean_logs(repo)
     assert (repo / 'calculation.py').is_file()
 
 
 def test_cleanup_refuses_a_symlinked_root(tmp_path: Path) -> None:
-    repo = repository(tmp_path)
+    repo = retention_repository(tmp_path)
     evidence = tmp_path / 'required-evidence'
     evidence.mkdir()
     original = evidence / 'trace.npz'
@@ -39,20 +39,21 @@ def test_cleanup_refuses_a_symlinked_root(tmp_path: Path) -> None:
 
 
 def test_nested_symlink_does_not_remove_its_target(tmp_path: Path) -> None:
-    repo = repository(tmp_path)
+    repo = retention_repository(tmp_path)
     logs = repo / 'logs'
     logs.mkdir()
     evidence = repo / 'executions'
     evidence.mkdir()
     original = evidence / 'trace.npz'
     original.write_bytes(b'keep')
+    retain(repo, 'executions/trace.npz')
     (logs / 'trace').symlink_to(evidence, target_is_directory=True)
     clean_logs(repo)
     assert original.read_bytes() == b'keep'
 
 
 def test_versioned_files_block_cleanup(tmp_path: Path) -> None:
-    repo = repository(tmp_path)
+    repo = retention_repository(tmp_path)
     logs = repo / 'logs'
     logs.mkdir()
     original = logs / 'fixture.json'
@@ -64,7 +65,7 @@ def test_versioned_files_block_cleanup(tmp_path: Path) -> None:
 
 
 def test_file_in_place_of_logs_blocks_cleanup(tmp_path: Path) -> None:
-    repo = repository(tmp_path)
+    repo = retention_repository(tmp_path)
     (repo / 'logs').write_text('keep\n')
     with pytest.raises(ValueError, match='directory'):
         clean_logs(repo)
@@ -93,6 +94,7 @@ def test_hook_cleanup_requires_all_checks_to_pass(tmp_path: Path, tool: str) -> 
     execution = repo / 'executions' / 'trace.npz'
     execution.parent.mkdir()
     execution.write_bytes(b'scientific evidence')
+    retain(repo, 'executions/trace.npz')
     previous = git(repo, 'rev-parse', 'HEAD')
     result = commit_document(repo, {**environment, 'FAIL_TOOL': tool})
     if tool:

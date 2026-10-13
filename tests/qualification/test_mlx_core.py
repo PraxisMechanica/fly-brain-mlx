@@ -309,7 +309,7 @@ def test_retained_reference_replay_qualifies_exact_events_and_integer_times(
     harness: Harness, project: Path
 ) -> None:
     retained = np.load(
-        project / 'docs/evidence/milestone-0/numerical-contract-replay.npz',
+        project / 'tests/data/reference/numerical-contract-replay.npz',
         allow_pickle=False,
     )
     events = replay_events()

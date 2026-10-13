@@ -47,6 +47,7 @@ def require_indexed_inputs() -> None:
             'tools/code-quality/vendor/eng-metrics-code-quality-0.1.1.tgz',
             'tools/code-quality/python-aggregation.patch',
             'tools/code_quality/metrics.mjs',
+            'tools/code_quality/retention.json',
         )
     )
     if missing := sorted(inputs - indexed):

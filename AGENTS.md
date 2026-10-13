@@ -21,18 +21,23 @@ NVIDIA backends, and non-essential dependencies. Brian2 and PyTorch are
 qualification-only references, never production backends.
 Keep the application database-free.
 
-Preserve data, scientific evidence, and incoming work. Write new runs to fresh
-output directories. Current development holds and their releases belong in
-`milestone.md`.
-Store disposable developer diagnostics under ignored `logs/`; successful commit
-and push hooks remove that folder after all checks finish. Failed checks retain
-their diagnostics. Store complete scientific run bundles under ignored
-`executions/`, with fresh directories and the required evidence intact. Keep
-numerical fixtures, scientific manifests, and reviewed decisions; execution
-evidence is excluded from automatic log cleanup. Use compact diagnostic summaries
-with explicit omission counts and artifact locations. Generated outputs do not
-belong in Git. Edit files directly without temporary preservation or backup
-copies; overwrite disposable diagnostic outputs as needed.
+Preserve source, pinned model inputs, authored scientific rules and incoming
+work. Write runs to fresh output directories. Current holds and their releases
+belong in `milestone.md`.
+Generated outputs are deleted by default at commit and push boundaries. Store
+diagnostics under ignored `logs/` and execution working data under ignored
+`executions/`. Before an output must cross a commit, register its exact path,
+current operational reason and release condition in
+`tools/code_quality/retention.json`. Scientific output is not an automatic
+exception. Complete required verification before deletion, or register the
+unfinished verification consumer explicitly. Failed hooks retain diagnostics
+until that failure is resolved; a successful commit requires an explicit
+exception for any remaining output. Remove exceptions when their consumer ends.
+Keep the seven registered independent regression fixtures while their consumers
+need them. Historical conclusions do not imply that deleted raw proofs remain
+reproducible from this checkout. Use bounded diagnostic summaries with explicit
+omissions. Generated outputs do not belong in Git. Edit directly without
+temporary preservation or backup copies.
 
 ## Non-production schema and database authorization
 

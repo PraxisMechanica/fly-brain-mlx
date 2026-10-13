@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "exceptions": [
+    {
+      "path": "tests/data/reference/numerical-contract-replay.npz",
+      "reason": "Independent fixed reference states, events and spikes consumed by tests/qualification/test_mlx_core.py:test_retained_reference_replay_qualifies_exact_events_and_integer_times.",
+      "release_when": "The named consumer is removed or receives an independently validated replacement fixture."
+    },
+    {
+      "path": "tests/data/reference/accumulation-limit.npz",
+      "reason": "Adverse signed-weight inputs consumed by src/fly_brain/qualification/adapters/accumulation_probe.py:diagnostic_cases, including the retained cancellation regression.",
+      "release_when": "The named consumer is removed or receives an independently validated replacement fixture."
+    },
+    {
+      "path": "tests/data/reference/reference-observer/input.npz",
+      "reason": "Fixed queue input consumed by tests/integration/test_reference_queues.py:recorded for independent event/queue ledger regression.",
+      "release_when": "The named consumer is removed or receives an independently validated replacement fixture."
+    },
+    {
+      "path": "tests/data/reference/reference-observer/block-0-observer.bin.gz",
+      "reason": "Independent reference observer stream consumed by tests/integration/test_reference_queues.py:recorded for block size 0, including corruption rejection.",
+      "release_when": "The named consumer is removed or receives an independently validated replacement fixture."
+    },
+    {
+      "path": "tests/data/reference/reference-observer/block-1-observer.bin.gz",
+      "reason": "Independent reference observer stream consumed by tests/integration/test_reference_queues.py:recorded for block size 1, including corruption rejection.",
+      "release_when": "The named consumer is removed or receives an independently validated replacement fixture."
+    },
+    {
+      "path": "tests/data/reference/reference-observer/block-17-observer.bin.gz",
+      "reason": "Independent reference observer stream consumed by tests/integration/test_reference_queues.py:recorded for block size 17, including corruption rejection.",
+      "release_when": "The named consumer is removed or receives an independently validated replacement fixture."
+    },
+    {
+      "path": "tests/data/reference/reference-observer/block-32-observer.bin.gz",
+      "reason": "Independent reference observer stream consumed by tests/integration/test_reference_queues.py:recorded for block size 32, including corruption rejection.",
+      "release_when": "The named consumer is removed or receives an independently validated replacement fixture."
+    }
+  ]
+}

@@ -23,17 +23,21 @@ and staged/commit metric regression checks. It does not run the complete
 application or scientific suite. Current executable coverage and limits are in
 [quality-coverage.md](quality-coverage.md).
 The [metric provenance](../../tools/code-quality/provenance.json) binds the
-vendored standalone package to its original source plus the exact qualified
-Python aggregation patch. Version 0.1.1 counts whole-file native decisions;
-older metric numbers retain their original 0.1.0 identity. Both archives remain
-versioned, and provenance/archives/patch are canonical indexed gate inputs.
+vendored standalone package to its source plus the exact qualified Python
+aggregation patch. Version 0.1.1 counts whole-file native decisions. Provenance,
+source/qualified archives, and the patch are canonical indexed gate inputs.
 
-Disposable developer diagnostics belong in ignored `logs/`; complete scientific
-run bundles belong in ignored `executions/`. Commit and push hooks clear `logs/`
-only after every required check succeeds. Failures keep diagnostics, and cleanup
-refuses symlinked roots or versioned files. Scientific bundles are outside this
-cleanup scope. Record concise verification outcomes in `milestone.md`; do not
-commit generated reports or make temporary preservation copies.
+Developer diagnostics belong in ignored `logs/`; execution working data belongs
+in ignored `executions/`. Successful commit and push hooks delete both folders
+and legacy `.quality-reports/` outputs by default. Cleanup refuses symlinked
+roots and versioned output files. Failed hooks retain diagnostics until the
+failure is resolved.
+Before a run or output must cross a commit, add its exact checkout-relative path,
+current operational `reason`, and `release_when` condition to
+`tools/code_quality/retention.json`. No blanket scientific exception applies.
+Register unfinished repeat, batch, scoring or failure-review work before
+committing; remove its exception when that consumer finishes. Record concise
+outcomes in `milestone.md`, without generated reports or preservation copies.
 
 Quality checks print short success summaries. Failures show bounded output and
 retain a diagnostic file under `logs/quality`, capped at 64 KiB of text with
@@ -75,8 +79,10 @@ uv run --locked --group qualification fly-brain qualify --output executions/qual
 Default pytest selection covers unit, file/process integration and source-only
 quality tests.
 `qualify` exercises the independent reference and MLX scientific suites on a
-real Metal device and retains logs, reports, measurements, and state/event
-arrays. Skipped, missing, empty, or failed required results prevent acceptance.
+real Metal device. Its logs, reports and state/event arrays are working inputs
+to verification. They expire at the next successful commit unless an explicit
+remaining consumer is registered. Skipped, missing, empty, or failed required
+results prevent acceptance.
 
 One prescribed full-connectome parity case:
 
@@ -136,13 +142,7 @@ Import-linter enforces the configured domain/framework boundaries. Pyright
 checks owned code in strict mode. [Typing limits](typing.md) own the rationale
 for local third-party stubs and narrow suppressions.
 
-## Historical recovery
-
-[Architecture remediation](history/architecture-remediation.md#retired-source)
-records retired workflows and exact Git recovery commands. Historical results
-retain their original environment scope. Routine generated reports were removed
-from Git on 2026-10-07; their former filenames in dated records do not imply that
-the old output bundles remain completely materialized. Scientific hashes and
-acceptance limits retain their recorded meaning. [Reference history](history/reference-baseline.md)
-owns original source measurements and notices. [Evidence](../evidence/) stays at
-its original paths with recorded source/environment bindings.
+The seven independent regression fixtures live under `tests/data/reference`.
+Their exact paths, current consumers, and release conditions are registered in
+[the retention manifest](../../tools/code_quality/retention.json). Current
+qualification uses fresh outputs and every required scientific gate.

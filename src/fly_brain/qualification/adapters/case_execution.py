@@ -43,7 +43,7 @@ def execute(
                 'mode': 'active-source-exact-integer',
                 'dynamics': 'Pinned original TorchModel components and scaling',
                 'scope': 'Qualified singleton comparator evaluation',
-                'qualification': 'docs/evidence/execution-time-investigation/active-cpu-qualification/full-native/parent-verification.json',
+                'qualification': 'docs/agent/numerical-contract.md',
             },
             artifact,
             indent=2,

@@ -7,11 +7,7 @@ code/output*
 # Simulation results (large parquet files)
 *.parquet
 data/ground-truth-comparison.json
-data/results/*
-!data/results/nature_2026_07/
-data/results/nature_2026_07/analysis*
-data/results/nature_2026_07/logs*
-data/results/nature_2026_07/archive*
+/data/results/
 
 # Historical weight caches; preserve existing data
 data/weight_coo.pkl
@@ -31,20 +27,5 @@ node_modules/
 /logs/
 /executions/
 
-# Generated test and development reports
-/docs/evidence/**/*.xml
-/docs/evidence/**/*.log
-/docs/evidence/**/pyright.json
-/docs/evidence/**/quality.json
-/docs/evidence/**/result.json
-/docs/evidence/**/initial-result.json
-/docs/evidence/code-quality/**/*.json
-/docs/evidence/architecture-audit/*.json
-/docs/evidence/architecture-audit/*.json.gz
-/docs/evidence/architecture-audit/*.txt
-/docs/evidence/documentation/**/*.json
-/docs/evidence/architecture-remediation/artifact-preservation.json
-/docs/evidence/architecture-remediation/checks.json
-/docs/evidence/architecture-remediation/clean-runtime.json
-/docs/evidence/architecture-remediation/incoming-review-work.json
-/docs/evidence/architecture-remediation/source-preservation.json
+# Legacy generated-output location
+/docs/evidence/

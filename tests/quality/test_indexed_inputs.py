@@ -30,6 +30,7 @@ def indexed_repository(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
         'tools/code-quality/vendor/eng-metrics-code-quality-0.1.1.tgz',
         'tools/code-quality/python-aggregation.patch',
         'tools/code_quality/metrics.mjs',
+        'tools/code_quality/retention.json',
     ):
         target = repo / name
         target.parent.mkdir(parents=True, exist_ok=True)
@@ -105,6 +106,7 @@ def test_disabling_index_guard_hides_uncommitted_source(
         'tools/code-quality/vendor/eng-metrics-code-quality-0.1.1.tgz',
         'tools/code-quality/python-aggregation.patch',
         'tools/code_quality/metrics.mjs',
+        'tools/code_quality/retention.json',
     ),
 )
 @pytest.mark.parametrize('ignored', (False, True))
@@ -138,6 +140,7 @@ def matching_literals(tree: ast.AST, value: str) -> list[ast.Constant]:
         'tools/code-quality/vendor/eng-metrics-code-quality-0.1.1.tgz',
         'tools/code-quality/python-aggregation.patch',
         'tools/code_quality/metrics.mjs',
+        'tools/code_quality/retention.json',
     ),
 )
 def test_removing_one_canonical_input_loses_its_unindexed_defect(

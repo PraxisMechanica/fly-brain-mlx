@@ -24,8 +24,7 @@ Record = tuple[
 @pytest.fixture(params=(0, 1, 17, 32))
 def recorded(request: pytest.FixtureRequest) -> Record:
     evidence = (
-        Path(__file__).resolve().parents[2]
-        / 'docs/evidence/milestone-4/reference-observer'
+        Path(__file__).resolve().parents[2] / 'tests/data/reference/reference-observer'
     )
     size = cast(int, request.param)
     with np.load(evidence / 'input.npz') as inputs:

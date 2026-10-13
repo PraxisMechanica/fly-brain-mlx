@@ -498,7 +498,7 @@ def test_live_registry_reconciles_all_source_and_retains_actual_debt_and_limits(
     result = review_policy(root, policy)
     assert not result.findings
     assert set(policy.files) == {s.path for s in result.sources}
-    assert len([s for s in result.sources if s.path.startswith('docs/evidence/')]) == 60
+    assert [s for s in result.sources if s.path.startswith('docs/evidence/')] == []
     assert policy.document.identifiers['flywire_neuron'].representation == 'primitive'
     assert result.recorded_findings
     assert any('COV002' in limitation for limitation in result.limitations)

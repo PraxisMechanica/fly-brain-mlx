@@ -30,9 +30,7 @@ def diagnostic_cases(root: Path) -> list[Case]:
             Case(name, weights, np.ones(weights.size, dtype=np.bool_), initial)
         )
 
-    with np.load(
-        root / 'docs/evidence/milestone-1/final/accumulation-limit.npz'
-    ) as raw:
+    with np.load(root / 'tests/data/reference/accumulation-limit.npz') as raw:
         ordered = np.asarray(raw['ordered_weights_mv'], dtype=np.float64)
         add('retained-ordered', ordered)
         add('retained-interleaved', raw['interleaved_weights_mv'])

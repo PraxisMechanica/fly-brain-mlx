@@ -1,11 +1,7 @@
 # Reviewed Python ownership registry
 
-Scope: combined parent source at
-`90cc61b1aecd0a49844a901f3080b3989c421edd` plus the inactive observation-session
-component and its canonical consumer controls. Parent reconciliation confidence: 95%. The original
-worker record retains its `0a313d0` base and 90% classification confidence. This
-registry records responsibilities; it does not certify application architecture
-or change scientific behavior.
+This registry records current source responsibilities. It does not certify
+application architecture or change scientific behavior.
 
 The intended outcome is a typed, deterministic input to the structural analyzer:
 every retained first-party Python or stub file has an exact reviewed entry,
@@ -18,8 +14,8 @@ result remains **ANALYSIS FAILED (COV002)**.
 ## Contract and coverage
 
 [ownership.json](../../tools/architecture/ownership.json) has one explicit row
-per file across `src`, `tests`, `tools`, `typings`, `main.py`, and `docs/evidence`.
-The six roots drive discovery; they grant no owner, role, export or effect
+per file across `src`, `tests`, `tools`, `typings`, and `main.py`.
+The five roots drive discovery; they grant no owner, role, export or effect
 permission. No folder-based classification, wildcard, exclusion, suppression,
 generated-code exception or automatic classification runs in the build.
 
@@ -54,8 +50,8 @@ named production declarations have not changed. This is a conservative binding
 set check. It does not resolve lambda/comprehension scopes, captured values,
 call targets, alias ownership, control flow, error propagation or effects.
 
-Historical source and the two adapted scientific references additionally require
-exact source hashes. Ordinary active files are not content-frozen: changed
+The two current test oracles and two adapted scientific references additionally
+require exact source hashes. Ordinary active files are not content-frozen: changed
 arithmetic with identical binding/declaration sets still needs the scientific
 and semantic analyzers. The source-only fixtures demonstrate this limit
 explicitly. Source changes during reconciliation fail `COV002`.
@@ -72,20 +68,19 @@ new shared domain. Scientific comparisons between complete engines and shared
 artifact fixtures have a declared system-test owner. Placement and all permitted
 interactions still require the complete analyzer.
 
-Exact declaration overrides record real mixed responsibilities. The completed
-bootstrap repair now assembles commands rather than executing workflows, and
-comparison scoring is owned by `comparison.metrics`. Only those two proven
-mixed-role findings are removed. Their new ports, modules, commands and service
-operations have exact reviewed entries. Qualification still contains independent
-rules, storage, orchestration, device/framework adapters, local contracts and
+Exact declaration overrides record real mixed responsibilities. Bootstrap
+assembles commands, and comparison scoring belongs to `comparison.metrics`.
+Ports, modules, commands and service operations have exact reviewed entries.
+Qualification contains independent rules, storage, orchestration,
+device/framework adapters, local contracts and
 neutral observations; it is not a whitelisted adapter tree. A role record does
 not excuse incompatible co-location or implementation calls within a function.
 
 Host NumPy arrays are numerical data. Calling a pure array operation or receiving
 an array is not automatically a collaborator dependency. Frozen dataclasses do
-not make all contained arrays, dictionaries or sets immutable. The detached
-native-byte evidence for `ReductionRow` is stronger than the unproved alias
-ownership of other records. That difference remains explicit.
+not make all contained arrays, dictionaries or sets immutable. `ReductionRow`
+uses detached native-byte storage; alias ownership of other records remains
+unproved.
 
 MLX arrays in `Network`, `State`, `Layout` and `Execution` carry vendor device
 representation; execution callbacks carry behavior. They are not neutral public
@@ -111,15 +106,16 @@ Comparison imports a spike snapshot; it does not own the producing simulation
 run. The actual reference builder has no independent public lifecycle or reuse
 service: its compiled producer and fresh processes are qualification-case
 runtime children. Native execution/state implement the simulation run. Their
-`storage_only` relationships reflect these current operations, with reviewed
-confidence 96% / 98%. Concrete access, lifetime, representation and scientific
-adoption remain separate debt; this decision grants no boundary exemption.
+`storage_only` relationships reflect these current operations. Concrete access,
+lifetime, representation and scientific adoption remain separate debt; this
+decision grants no boundary exemption.
 
 FlyWire neuron identity, neuron-row identity, original edge-row identity and
 trial identity have distinct meanings but currently cross neutral contracts as
-unbranded integer/array values. The reference producer digest now uses the
-qualification-owned `ReferenceProducerDigest` type. The four simulation identifiers retain recorded
-`VALUE001` findings. Native typing rejects primitive and foreign-brand consumers;
+unbranded integer/array values. The reference producer digest uses the
+qualification-owned `ReferenceProducerDigest` type. The four simulation
+identifiers retain recorded `VALUE001` findings. Native typing rejects primitive
+and foreign-brand consumers;
 explicit foreign-brand reconstruction and lawful conversion sites still require
 complete semantic enforcement.
 `ExperimentName` is an owned closed literal; `ParityCase` is a distinct compound
@@ -135,15 +131,13 @@ external pre-commit SQLite cache is a tool-lifecycle responsibility, covered by
 the standing non-production authorization. Missing query/call mechanisms remain
 `COV002`; these absence decisions do not waive future unclassified source.
 
-## Provenance and integration
+## Current provenance and limits
 
-All sixty retained evidence Python files are read and parsed as source, with
-exact local hashes at the reviewed base. Their executed/interrupted verifiers,
-independent scoring calculations, copied ledger and prospective prototypes keep
-their real declaration ownership where the script contains domain algorithms.
-They are handwritten historical source, not generated code. Resolving their old
-imports/callers needs their historical revision/environment; current-tree
-resolution failures cannot become a pass or an automatic exclusion.
+Four current sources have frozen hashes: the adapted Brian2/PyTorch references
+and `tests/support/legacy_mlx_observer.py` /
+`tests/support/legacy_mlx_ledger.py`. The latter remain independent test oracles
+for observation-session behavior. They are checked first-party source, with
+their exact provenance in the registry.
 
 The adapted Brian2/PyTorch reference records freeze the local source and name the
 upstream commit, source path and original blob hash obtained from local Git.
@@ -152,45 +146,15 @@ The Brian2/PyArrow stubs are handwritten, checked source contracts and have no
 generator provenance. The separately pinned JavaScript metric tool's provenance
 is outside this Python/stub registry; its existing native gate remains required.
 
-The current parent integration reviews sixteen exact inactive-session
-source/test changes. The subsequent typed-storage correction reviews eight
-exact source/test rows and reconciles the combined inventory: 289 source/stub
-files at that checkpoint. The subsequent RNG slice reconciles 299 source/stub
-files at that checkpoint. The immutable audit transition reconciles 300
-files at that checkpoint. The corrected metric/index component reconciles 302
-files at that checkpoint. The organized pinned proof reconciles 309 source
-files, 4,209 declaration occurrences and 278 neutral exports. All 62 frozen
-historical/reference records retain provenance. Reconciliation has zero gaps.
-The digest repair reconciles 311 source files, 4,226 declaration occurrences
-and 279 neutral exports, retaining all 62 frozen records with zero gaps.
-The active session join reconciles 314 source files, 4,241 declaration
-occurrences, 281 neutral exports and 64 frozen records with zero mapping gaps.
-Six architecture/identifier findings remain after the three proved RNG
-acquisition repairs, immutable audit transition and digest typing repair.
-Candidate neutral observation values/ports and local assembly sites have exact entries; private helper
-functions are not silently promoted to public contracts. The typed-storage
-correction removes dynamic attribute/type shadowing and preserves array-facing
-constructors and values. Private snapshots remain private; removed interception
-members are no longer public exports. Historical/type/alias/effect coverage stays
+Six architecture/identifier findings remain: the concrete `Advance` callback
+contract, mixed model/framework responsibilities in the frozen `TorchModel`,
+and four primitive simulation identity contracts. Neutral observation values,
+ports, and local assembly sites have exact entries; private helpers and snapshots
+are not public contracts. Complete type/alias/effect/control-flow coverage stays
 incomplete until the complete analyzer is verified.
 
-`ownership.json` is now a canonical indexed check input. Source-only controls
+`ownership.json` is a canonical indexed check input. Source-only controls
 reject missing-index and ignored policy inputs, accept explicit staging, permit
 nearby measurement JSON, and stop rejecting the same metadata defect when only
 the policy input is omitted. They exercise the input guard; policy content and
 full structural rules have their separate analyzers and limits.
-
-The original worker fixtures and reports stay under
-`docs/evidence/code-quality/architecture-ownership-20261006/`. The compact parent
-record there is `parent-integration.json`; raw reconciliation and fixture reports
-are retained outside Git. Parent owns subsequent reconciliation, complete rule
-integration, project status/index updates and sequential remote delivery.
-
-The committed resource review records actual exports/callers, scoped process
-completion, source direction, immutable-observation limits and exclusive repair
-footprints. Its proof is
-`docs/evidence/code-quality/resource-ownership-review-20261006/parent-integration.json`.
-The parent verified all 95 reviewed source hashes, corrected the prose's initial
-declaration count from its raw manifest, updated the live registry assertion,
-and passed 67 policy cases. The earlier ownership component evidence retains
-its thirteen-finding checkpoint; neither snapshot certifies full architecture.
