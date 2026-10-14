@@ -6,9 +6,17 @@ source declarations and all four frozen hashes. No numerical changes or
 scientific executions were made for this review.
 
 The [ownership contract](architecture-ownership.md) checks the reviewed source
-hashes of two adapted references and two legacy observation oracles. Current
-hashes and independent lineage have one owner: [ownership.json](../../tools/architecture/ownership.json).
+hashes of adapted references, the extracted parameter factory and two legacy
+observation oracles. Current hashes and independent lineage have one owner: [ownership.json](../../tools/architecture/ownership.json).
 The active scope and holds remain in [milestone.md](../../milestone.md).
+
+The initial review below covers the original four-source checkpoint. The checked
+structural repair at `4c87409` extracts `model_parameters` into the pure owned
+`qualification/reference_parameters.py` and injects fresh read-only defaults
+through composition. Both source pieces have current hash guards and original
+lineage; all actual identity consumers include the factory. The numerical
+Torch declarations and all ten ordered default values are preserved. The wider
+model/provider responsibilities below remain unresolved.
 
 ## Conflict with complete separation
 

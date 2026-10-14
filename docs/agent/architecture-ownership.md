@@ -54,9 +54,9 @@ named production declarations have not changed. This is a conservative binding
 set check. It does not resolve lambda/comprehension scopes, captured values,
 call targets, alias ownership, control flow, error propagation or effects.
 
-The two current test oracles and two adapted scientific references additionally
-require exact source hashes. Ordinary active files are not content-frozen: changed
-arithmetic with identical binding/declaration sets still needs the scientific
+The two current test oracles, adapted Brian2/Torch references and extracted pure
+reference-parameter factory additionally require exact reviewed source hashes.
+Ordinary active files are not content-frozen: changed arithmetic with identical binding/declaration sets still needs the scientific
 and semantic analyzers. The source-only fixtures demonstrate this limit
 explicitly. Source changes during reconciliation fail `COV002`.
 
@@ -144,10 +144,13 @@ the standing non-production authorization. Missing query/call mechanisms remain
 
 ## Current provenance and limits
 
-Four current sources have frozen hashes: the adapted Brian2/PyTorch references
-and `tests/support/legacy_mlx_observer.py` /
-`tests/support/legacy_mlx_ledger.py`. The latter remain independent test oracles
-for observation-session behavior. They are checked first-party source, with
+Five current sources have frozen hashes: the adapted Brian2/PyTorch references,
+`qualification/reference_parameters.py`, and
+`tests/support/legacy_mlx_observer.py` / `tests/support/legacy_mlx_ledger.py`.
+The parameter factory is extracted exactly; the residual Torch source retains
+its numerical declarations and original lineage. Both current pieces have
+separate hash guards and are included in actual source-identity consumers. The
+two legacy MLX sources remain independent observation-session test oracles. They are checked first-party source, with
 their exact provenance in the registry.
 
 The adapted Brian2/PyTorch reference records freeze the local source and name the

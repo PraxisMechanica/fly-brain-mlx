@@ -107,17 +107,20 @@ recorded regression fixtures remain as current test data under
 `tests/data/reference`, totaling 45,360 bytes. Their manifest names the exact
 current consumer and release condition. All seven bytes/hash identities were
 preserved during relocation; production/reference arithmetic is unchanged.
-The four active reference/oracle source files remain byte exact. Pinned FlyWire
-input datasets and licences remain intact. The native import-fact cache has an active operational exception in the
-retention manifest; no scientific run output is retained.
+Five current reference/oracle sources have reviewed hash guards. The pure
+parameter factory is extracted exactly from the original Torch reference; its
+remaining numerical declarations retain their original syntax. The Brian2 and
+two legacy MLX oracles remain byte exact. Pinned FlyWire inputs and licences
+remain intact. The native import-fact cache has an active operational exception
+in the retention manifest; no scientific run output is retained.
 
 Success requires:
 
 - Complete applicable 37-rule analysis and rejection fixtures, required gate
   integration, and resolution of the authorized architecture findings. Missing
   capabilities remain an analysis failure.
-- Preserve pinned inputs, four frozen oracles, the seven independent regression
-  fixtures, scientific predicates, numerical behavior and output contracts.
+- Preserve pinned inputs, reviewed reference/oracle lineage, the seven independent
+  regression fixtures, scientific predicates, numerical behavior and output contracts.
 - Keep human usage in `README.md` and current agent contracts in the indexed
   agent documents, with one owner per fact and valid destinations.
 - Integrate committed worker components serially, then pass meaningful behavior
@@ -149,6 +152,7 @@ The following components are committed on parent `main`:
 | Qualification case trial labels | `f27a75b` | 193 worker cases and three native checks; all 52 catalog values/order unchanged |
 | Consumer-owned parity stimulus preparation | `eb6fe8f`, `86038e0` | Both catalog reads, seed, persistence/silencing order and errors retained; sixth live import contract checked |
 | Owned spike array identifiers | `f20d6ec` | 106 CPU cases and one real Metal case passed once; eight normalized modules, 67 original assertions, array identity/bytes/layout and seven fixtures preserved |
+| Injected pure reference parameters | `4c87409` | Exact factory extraction and five protected hashes; 100 CPU, six boundary, five native and two composition cases; 6,120 native tensor-byte pairs preserved without replay |
 
 Every component passed its required normal commit checks and default cleanup. Joined
 metric regressions were repaired without thresholds, suppressions or removed
@@ -173,13 +177,13 @@ interrupted and rerun with fresh fixtures under `executions`. The failed run is
 not acceptance evidence. Timings and failure classification completed their
 consumers; their raw outputs have no retention exception.
 
-Five comparison calculation files, four frozen sources, six pinned input files,
-both licences and seven independent fixtures remain byte exact. The identifier
-changes preserve numerical bodies and old assertions; NewType supplies nominal
+At that checkpoint, five comparison calculation files, four frozen sources, six
+pinned input files, both licences and seven independent fixtures were byte exact.
+The identifier changes preserve numerical bodies and old assertions; NewType supplies nominal
 typing without new runtime validation or complete conversion-origin proof.
 No full native proof bundle or scientific matrix was recreated.
 
-All listed source components are pushed to `origin/main` through `f20d6ec`.
+All listed source components are pushed to `origin/main` through `4c87409`.
 The spike identifier component passed the installed normal commit and push hooks
 and default cleanup without replaying its completed regressions. Delivery uses
 one ten-file component commit; the worker's earlier private ancestry is preserved
@@ -191,16 +195,17 @@ the hosted compiler-layout failure in exact passing run `38505093226`.
 
 ## Remaining order and unresolved decisions
 
-1. Finish and integrate the reviewed reference-default extraction with its
-   preserved native evidence and actual quality checks. Verify exact hosted
-   revisions and leave no expired output exception.
+1. Keep checked components and current documentation delivered incrementally.
+   Verify exact hosted revisions and leave no expired output exception.
 2. Complete native declaration-only observation and reviewed live version 2
    contexts. A source-only prototype observes 314 worker sources, but raw native
    binding tables omit dormant declarations and mix import target URIs with
    lexical ranges. Reconcile every authored occurrence; do not invent identities.
-   Await the native TOML parser before observing canonical configuration. The
-   existing manual diagnostic rules match strict rules, but canonical import,
-   virtual-environment and source-origin equivalence remain unproved.
+   The pinned native TOML loader already works; use the actual CLI filesystem,
+   full host and completed source enumeration before observing canonical
+   configuration. Existing manual diagnostic rules match strict rules, but
+   canonical import, virtual-environment and source-origin equivalence remain
+   unproved.
 3. Repair the separate private `torch_setup` mapping call and wider provider
    roles after checked source-preserving separation. The selected parity path's
    experiment lookup, neuron mapping and stimulus storage dependencies are
@@ -222,10 +227,17 @@ interpretation. The authorized refactor can reclassify a reviewed source revisio
 only after preserving scientific behavior, independent lineage and every actual
 source-identity consumer. Current hashes remain enforced until that specific
 repair is checked; no numerical remedy, new execution mode or rule deviation is
-approved. The pending pure reference-default extraction has a completed delegated
-scientific review and bounded preservation evidence; final checked integration
-is still required. The [coverage report](docs/agent/quality-coverage.md) owns
-remaining mechanism limits.
+approved. The pure reference-default extraction is checked and pushed at
+`4c87409`, following the completed delegated scientific review. All 21 preserved
+cases collect after genuine test-responsibility factoring, and strict typing
+passes. Native metrics passed both worker parents at mean 15.22, maximum 96 and
+health 39.91; parent commit/push checks also passed. Nine provenance controls
+and two independent weakenings preserve the joined assertion's rejection.
+Completed numerical cohorts were not replayed. Exact hosted run `38545182620`
+passed with 23 changed inputs, 33 affected Python files, 21 reviewed sources and
+91 import module/contract checks. Its quality step took 14 seconds, with no
+pytest and zero artifacts. The [coverage report](docs/agent/quality-coverage.md)
+owns remaining mechanism limits.
 
 ## Current scientific scope
 
