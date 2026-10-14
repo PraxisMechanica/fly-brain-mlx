@@ -319,8 +319,9 @@ initial source enumeration and final hashes. Eleven session cases and six
 changed context cases qualified; all 21 original context cases still collect.
 One weakening case accidentally ran twice; no further replay followed. Worker
 metrics improved mean 15.17 to 15.14 and health 40.20 to 40.23; maximum 96 is
-unchanged. Selected, unreferenced stubs remain natively unbound; this is not
-complete declaration enrollment. The historical declaration candidate remains
+unchanged. At that checkpoint, selected unreferenced stubs lacked native binding;
+the later enrollment repair below supplies bounded native reads, not complete
+declaration coverage. The historical declaration candidate remains
 unadopted and full 37-rule coverage remains COV002.
 
 The nine-file canonical batch-label component is pushed at `78599bd` after
@@ -429,14 +430,34 @@ and six-finding count remain. No source, numerical behavior or export permission
 changes. A fresh Astra review assesses the minimum neutral numerical value and
 primitive boundary before dependent implementation; full analysis remains COV002.
 
+The six-file selected native-source enrollment component is pushed at `98ade94`
+after normal commit/push checks. Exact hosted run `38579880497` completed every
+job step and its quality step successfully: six changed inputs, two affected
+Python files, two reviewed sources and 365 retained records. The quality step
+took 14 seconds, ran no pytest and uploaded zero artifacts. A later push cancelled
+the final run status after those checks finished; completed checks were not
+replayed. Twenty-one affected controls are qualified and five unchanged controls
+reused; all 26 remain. Only changed repair/extraction/relocation seams repeated,
+including the 13 relocated binding controls in 3.33 seconds.
+
+Interim enrollment forces native parsing/binding and validates the actual Module,
+scope, symbol table and original-file identity. Unreferenced stubs keep their
+untracked flag; repeated reads retain file/tree identity and cached binding.
+Session admission/disposal, CLI enumeration, report/configuration and final input
+hash guards remain. Typed JavaScript, strict Pyright, Ruff, native syntax and the
+new bridge-file inventory passed. Worker metrics improve mean 15.03 to 14.97
+and health 40.52 to 40.71 across 390 to 392 files; maximum 96 is unchanged.
+Metric failures were repaired by separating enrollment and session responsibilities,
+with six verification statements and moved control bodies preserved. Complete
+declarations, dormant bindings, alias/effect/call/control-flow and runtime
+context equivalence remain missing; the historical prototype stays unaccepted.
+
 ## Remaining order and unresolved decisions
 
-Current bounded assignments (confidence 95%): B qualifies selected-source
-enrollment through the pinned native interim-registration/binder APIs and checked
-canonical live session. Actual Module, scope, symbol-table and original-file
-identity guards stay intact; a measured per-file metric failure justifies one
-separate enrollment owner, without a metric waiver. The historical 14-path
-declaration tree remains unaccepted; dormant occurrences and lexical-versus-resolved identities must stay
+Current bounded assignments (confidence 95%): B has delivered selected-source
+enrollment and assesses the smallest canonical-session declaration observation
+without source changes. The historical 14-path declaration tree remains
+unaccepted; dormant occurrences and lexical-versus-resolved identities stay
 explicit. A has delivered the preparation → late count read → pure completion
 boundary and exact mapping contract. Its literal Advance rule assessment is
 complete; the finding label is corrected without retiring the dependency debt.
