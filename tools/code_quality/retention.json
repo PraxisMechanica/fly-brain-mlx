@@ -2,11 +2,6 @@
   "version": 1,
   "exceptions": [
     {
-      "path": "executions/implementation-20261014-observation-profile",
-      "reason": "Bounded pinned-data profiles and exact native artifacts are consumed by diagnosis and repair of the unexpectedly slow preservation harness, then before/after equivalence verification.",
-      "release_when": "The performance cause and bounded before/after measurements are verified, the native equivalence consumer finishes, and milestone.md records the results and remaining limits."
-    },
-    {
       "path": "executions/implementation-20261014-local-audits",
       "reason": "Fresh required scalar, pinned fan-in, production-layout, device-row and connectome-pulse evidence is consumed by local scientific acceptance and the delivered matrix's input/arithmetic qualification.",
       "release_when": "All six audit reports and native arrays have been verified, affected failures are resolved or held, matrix/adoption consumers have finished, and milestone.md records the bounded results."
@@ -15,11 +10,6 @@
       "path": "executions/implementation-20261014-matrix",
       "reason": "The required 52 paired cases and sugar/P9 batches retain canonical schedules, repeat proofs, native spikes and causal contexts for rescoring, batch comparison, diagnosis and final acceptance.",
       "release_when": "All current repeatability, scoring, batch, causal and final acceptance consumers finish and milestone.md records the verified conclusions and limitations."
-    },
-    {
-      "path": "executions/implementation-20261014-local-complete",
-      "reason": "Fresh complete local scientific qualification, frozen pinned input and native proof artifacts are consumed by required numerical, observation, repeat and batch verification and comparison with the failed baseline setup.",
-      "release_when": "Every current local-qualification and native-artifact consumer finishes, all failures are resolved or explicitly held, and milestone.md records the verified bounded results."
     },
     {
       "path": "executions/implementation-20261014-inputs",

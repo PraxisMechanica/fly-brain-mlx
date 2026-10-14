@@ -65,11 +65,9 @@ Continue bounded diagnosis; preserve every discrete/state check. All estimates
 refer to the agent's own elapsed execution time including investigation, edits,
 tool runs, tests and verification, not hypothetical human engineering effort.
 The full-run time ceiling remains unresolved; do not assume a matrix exemption.
-A 90%-confidence estimate for remaining bounded harness diagnosis and delivery is
-**30–120 minutes of agent execution once the run-budget scope is resolved**.
-The whole-goal interval below is conditional on permission for the required
-scientific experiment runtimes; it remains provisional until a paired case can
-be timed under an agreed budget.
+The whole-goal interval below is conditional on an agreed budget for the required
+scientific experiments. The bounded performance diagnosis and repair checkpoint
+below supersedes its earlier 30–120-minute estimate.
 
 Delivery: `b626b4c` and `f571f0b` passed automatic commit/push checks and are on
 `origin/main`. Hosted CI `38653169030` passed for the first repair; exact-revision
@@ -83,8 +81,9 @@ been assumed and no acceptance gate has been removed.
 
 The failed initial setup baseline and inspected end-to-end export/comparison
 outputs have completed their consumers; their retention exceptions are released.
-Keep the current local scientific, input, profile/native-equivalence and future
-matrix bundles for the remaining qualification and performance decisions.
+Keep the fresh scalar/layout/fan-in/pulse, pinned-input and matrix bundles for
+their remaining qualification consumers. The later checkpoint below releases
+completed profiling and historical local-preservation consumers.
 
 Bounded repair, inspected at `303a444` (95% decision confidence): the native
 observer currently expands all 19 expected source-history slots to every edge
@@ -109,15 +108,39 @@ launching it with the project import context repaired setup without changing the
 scientific input. These results are bounded preservation, not 1,000-step or
 52-case acceptance.
 
-Next: attempt the first prescribed paired case, sugar/1,000 steps/trial 0, under
-an external **240-second process-group deadline**. Its reference/MLX/CPU fresh
-repeats and all existing gates remain mandatory; a cutoff is an unaccepted,
-incomplete case, never a pass. This bounded attempt measures actual paired
-throughput and may expose the first scientific cause; it grants no long-run
-budget exemption. Retain it under the registered matrix root. The 90%-confidence
-remaining estimate for this bounded measurement, diagnosis and delivery is
-20–60 minutes of the agent's own elapsed execution. Whole-goal completion remains
-conditional on the unresolved long-run budget and actual gate results.
+The first prescribed case, sugar/1,000 steps/trial 0, was attempted under an
+external **240-second process-group deadline** at `c0dba11`. All 52 canonical
+inputs passed independent regeneration/reload/prefix/trial verification in
+5.406 seconds. The first paired replay completed in 156.644 seconds, after
+12.286 seconds for reference preparation and 21.114 seconds total engine setup.
+It has all 32 phase blocks, all 1,001 reference physical snapshots, **1,612 exact
+spikes per engine**, no common-history state-budget violation and no different
+spike. A separate consumer verified the final pending original-edge identities,
+canonical preflight and committed source/environment identity. These are first
+replay results only, not case acceptance.
+
+The measured first replay projects a complete case above five minutes once the
+mandatory fresh paired repeat and both CPU runs are included. The parent stopped
+the owned process group at 214.947 seconds rather than consume the remaining
+budget on an incomplete repeat. The repeat retained 96 steps; both CPU runs and
+the final absolute/paired metric report are missing. Exit was `-15` from this
+explicit early stop, not a timeout; there is no `case.json`. The exact stop reason
+and verification are retained under the registered matrix root. **Acceptance
+remains 0/52**. No long-run exception, shortened case or waived gate is assumed.
+
+The user's latest amendment ends performance tuning because its returns are
+diminishing. Do not start another tuning profile or repeat the long preservation
+suite. Bounded measured savings are **30.82%** (47.861 to 33.111 seconds); native
+comparison savings are 47.8% (5.428 to 2.831 seconds). Full-suite savings are
+unmeasured: its last complete runtime was 2,948.68 seconds. Retain the unfinished
+matrix consumers; release completed profiling/native-equivalence and historical
+local-preservation consumers under the normal cleanup policy. The seven
+independent fixtures remain retained. The whole-goal budget hold still needs
+resolution before the required long scientific cases can run.
+
+Delivery: `c0dba11` is on `origin/main`, with successful commit/push hooks and
+exact-revision hosted CI `38655154312` (70-second job, 20 seconds for affected
+checks/tests). No simulation or test remains active.
 
 ### Implementation baseline and unverified requirements
 
@@ -225,8 +248,10 @@ zero errors/skips**. All five full pinned observation-preservation producers and
 their complete native-byte artifact consumer passed. These six checks consumed
 2,656.310 seconds (90.13% of summed test duration); the remaining 370 checks took
 290.925 seconds. Launching this preservation work before implementation was an
-avoidable scheduling mistake. Its outputs remain available; do not repeat it for
-an unrelated fixture fix. The lone failure read a virtual Git source identity as
+avoidable scheduling mistake. Its native artifacts completed their verification
+consumers before release at the latest checkpoint above; those raw proofs are
+no longer retained. Do not repeat it for an unrelated fixture fix. The lone
+failure read a virtual Git source identity as
 a filesystem path. Reading the same hash-checked immutable source directly fixes
 that consumer while preserving AST, parameter order, scalar type and value checks.
 The failed target alone then passed in **1.04 seconds**. The complete command's
@@ -269,22 +294,24 @@ does not replace scientific qualification.
    limitations before working outputs expire. Deliver incremental hooked commits
    to `origin/main`, require successful exact-revision CI and a clean tree.
 
-Progress: **30%** of this implementation goal, based on an explicit work breakdown:
+Progress: **31%** of this implementation goal, based on an explicit work breakdown:
 baseline/scope inventory 10%, end-to-end workflows 10%, local scientific gates
 15%, demonstrated implementation repairs 15%, 52-case qualification 30%, batches
 10%, final evidence/delivery 10%. Inventory earns 10 points, workflow/provenance
 and inspected end-to-end outputs earn eight, fresh local/input/reference evidence
-earns eight, and demonstrated harness/serialization repairs earn four;
+earns eight, and demonstrated harness/serialization repairs earn five;
 scientific acceptance remains 0/52. Reassess weights if measured work changes
 the scope; do not derive scientific acceptance from code coverage or test counts.
 
-Remaining-time estimate (90% confidence planning interval): **7–42 elapsed days**
-on this one local host, provisionally including serial qualification and repairs.
-This is engineering judgment before timing a current paired case, not a measured
-performance claim. The matrix alone requires 1,231,000 steps per engine per
-repetition (2,462,000 with fresh repeats), plus local and batch work. Replace this
-interval with measured throughput and revised repair uncertainty after the first
-paired case; revise again after each material implementation/measurement result.
+Remaining-time estimate (90% confidence planning interval): **5–21 elapsed days**
+of the agent's own execution on this local host, conditional on an agreed
+long-experiment budget. The matrix requires 1,231,000 steps per engine per
+repetition (2,462,000 with fresh repeats). Extrapolating the measured first paired
+replay alone gives approximately 4.46 days of paired execution, before CPU runs,
+batches, preparation, investigation, edits and verification. This is a planning
+estimate, not a throughput guarantee: longer/activity-dependent cases, fresh
+repeats, CPU cost and scientific repairs remain unmeasured. The estimate replaces
+the pre-measurement 7–42-day interval; revise it when those costs are measured.
 
 Current timing evidence: ordinary full-connectome observation proof blocks
 0–480 took 60.1475 seconds between writes, or 0.12531 seconds per step including
