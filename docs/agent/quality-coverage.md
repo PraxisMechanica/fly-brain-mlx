@@ -7,7 +7,7 @@ owns the active work order and verification status.
 ## Current architecture result
 
 **ANALYSIS FAILED — COV002: complete structural enforcement is not implemented.**
-The strict catalog contains 37 rules. Native checks and eight import contracts
+The strict catalog contains 37 rules. Native checks and nine import contracts
 cannot prove them all. Recorded debt is described in
 [source ownership](architecture-ownership.md).
 No incomplete rule is treated as clean or inapplicable.
@@ -16,7 +16,7 @@ No incomplete rule is treated as clean or inapplicable.
 | --- | --- |
 | OWN001 | The placement predicate checks domain bindings against exact owner roots and its explicitly reviewed outside role over independently validated version 2 inputs. Missing native identities, sources, hashes or relevant scope fail COV002. Whole live contexts and required gate integration remain missing. |
 | OWN002–OWN006 | The reviewed registry/loader reconcile exact Python files, named declarations, binding sets and frozen provenance. Complete resource, binding/type/effect classification and role predicates remain missing. |
-| DEP001 | Import Linter checks eight configured domain/framework/role boundaries, including neutral observation ports and active session consumers. Fixtures cover aliases, type-only imports, re-exports and transitive paths. Other role boundaries and same-module interactions are not covered. |
+| DEP001 | Import Linter checks nine configured domain/framework/role boundaries, including neutral observation ports and active session consumers. Fixtures cover aliases, type-only imports, re-exports and transitive paths. Other role boundaries and same-module interactions are not covered. |
 | DEP002–DEP004 | Some forbidden paths fail existing contracts. Complete logical owner cycles, public-contract exports and resolved foreign symbol/type checks are missing. |
 | DI001–DI004 | Strict typing and bounded native facts expose declared/instantiated signatures and selected explicit calls. Complete collaborator/slot origins, hidden construction, ambient dependencies and lifecycle analysis are missing. |
 | ROLE001–ROLE007 | Complete resolved call/control-flow, role, persistence and neutral-contract checks are missing. |
@@ -141,7 +141,10 @@ consumer-owned seeded acquisition, immutable causal-audit transitions, typed
 reference digests, branded Connectome/grouping arrays, Experiment/Stimulus
 scalars, requested session/case trial labels, injected observation sessions, pure
 reference parameters, consumer-owned connectome silencing and host mapping
-readers used by the input audit. Row-space coordinate validation and FlyWire-space
+readers used by the input audit. The host audit separates pure rules and
+orchestration from four repository operations behind required `InputAuditFiles`;
+configured imports reject service/rule dependencies on its storage implementation.
+Row-space coordinate validation and FlyWire-space
 comparison/pooling now use separate constrained raster specializations while
 preserving the record and arrays. Native type arguments are qualified with the
 actual NumPy dependency root. Conversion-origin and complete ancestry precision

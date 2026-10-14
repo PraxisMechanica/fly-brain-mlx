@@ -158,6 +158,7 @@ The following components are committed on parent `main`:
 | Shared canonical compiler session lifetime | `7ab7d04` | 11 session and six affected context cases; unchanged report/config/hash/disposal logic and loaded-origin projection; selected-unbound stubs remain missing |
 | Consumer-owned reference connectome silencing | `1b64d51` | 36 focused controls; 18 normalized modules, 70 original assertions, unchanged mapping, five protected sources and seven fixtures |
 | Consumer-owned host input mapping | `9019148` | 19 focused cases without reruns; byte-exact original/candidate NPZ and JSON, four callback positions, six normalized modules and 15 original assertions |
+| Pure host audit rules and injected file storage | `b56caf2` | 28 affected cases; exact old/new archive/report, original assertion and error order, lazy assembly and returned artifact identity |
 | Distinct row/FlyWire rasters | `6dfede5` | 117 distinct focused cases; native type arguments with resolved NumPy, 14 normalized modules, 54 old assertions, exact borrowed arrays and numerical bodies |
 
 Every component passed its required normal commit checks and default cleanup. Joined
@@ -189,7 +190,7 @@ The identifier changes preserve numerical bodies and old assertions; NewType sup
 typing without new runtime validation or complete conversion-origin proof.
 No full native proof bundle or scientific matrix was recreated.
 
-All listed source components are pushed to `origin/main` through `6dfede5`.
+All listed source components are pushed to `origin/main` through `b56caf2`.
 The spike identifier component passed the installed normal commit and push hooks
 and default cleanup without replaying its completed regressions. Delivery uses
 one ten-file component commit; the worker's earlier private ancestry is preserved
@@ -263,8 +264,25 @@ sources and seven fixtures remain exact. Worker metrics kept mean 15.17 and
 maximum 96 while health improved 40.20 to 40.26. Required consumer/provider
 readers preserve grouping, absolute counts, silencing and late bucket acquisition.
 The pure bucket report receives completed data; `MappedArray` is reviewed as
-`qualification/types`. Eight import contracts are configured. Direct file
-persistence and mixed role responsibilities still require a separate repair.
+`qualification/types`. Eight import contracts are configured. The separate role/persistence repair is recorded below at `b56caf2`.
+
+The 13-file host audit role separation is pushed at `b56caf2` after normal
+commit/push checks and exact hosted run `38564788054`: 13 changed inputs,
+84 affected Python files, 11 reviewed sources and 350 retained source records.
+Hosted execution ran no pytest and uploaded zero artifacts. Its 28 affected
+controls passed in 9.14 seconds without replay. Pure rules, orchestration and
+four repository operations now have separate owners; `InputAuditFiles` is a
+required injected port, and assembly stays lazy. Actual returned Path reuse,
+str-before-read/hash and header failure after NPZ but before artifact reading,
+bucket acquisition and JSON remain unchanged.
+
+Archive/report bytes, numerical/storage syntax, 15 original rule assertions,
+67 existing fixture assertions and original raises are preserved. Five protected
+sources and seven independent fixtures remain exact. Worker metrics improved
+mean 15.17 to 15.10 and health 40.26 to 40.34 across 380 to 383 files; maximum
+96 remains. Nine import contracts are configured. Resource, identifier,
+provenance and finding inventories remain unchanged; complete effect, alias
+and architectural enforcement is still missing.
 
 The raster identifier component is pushed at `6dfede5` after normal commit/push
 checks and default cleanup. All 117 distinct focused controls are qualified:
