@@ -27,7 +27,17 @@ def check(name: str, command: Sequence[str]) -> int:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        'name', choices=('format', 'lint', 'types', 'boundaries', 'tests', 'metrics')
+        'name',
+        choices=(
+            'inputs',
+            'format',
+            'lint',
+            'types',
+            'boundaries',
+            'ownership',
+            'tests',
+            'metrics',
+        ),
     )
     parser.add_argument('command', nargs=argparse.REMAINDER)
     arguments = parser.parse_args()

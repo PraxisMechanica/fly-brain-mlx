@@ -35,6 +35,11 @@
       "path": "tests/data/reference/reference-observer/block-32-observer.bin.gz",
       "reason": "Independent reference observer stream consumed by tests/integration/test_reference_queues.py:recorded for block size 32, including corruption rejection.",
       "release_when": "The named consumer is removed or receives an independently validated replacement fixture."
+    },
+    {
+      "path": "logs/quality/imports",
+      "reason": "Native Grimp import facts consumed by tools/code_quality/boundaries.py; unchanged source parsing is reused across commit and delivery checks. No test or quality verdict is cached.",
+      "release_when": "The native import-cache consumer is removed or its cache format becomes incompatible."
     }
   ]
 }

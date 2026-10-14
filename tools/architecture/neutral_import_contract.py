@@ -6,6 +6,8 @@ from importlinter.contracts.forbidden import ForbiddenContract
 from importlinter.domain.contract import Contract, ContractCheck, InvalidContractOptions
 from pydantic import TypeAdapter
 
+from tools.architecture.neutral_import_scope import source_scope
+
 SOURCE_ROOT = 'fly_brain.comparison'
 FOREIGN_ROOTS = (
     'fly_brain.simulation',
@@ -78,27 +80,12 @@ class NeutralImportContract(Contract):
                 {'boundary': 'COV002: ' + str(error)}
             ) from error
 
-    def check(self, graph: ImportGraph, verbose: bool) -> ContractCheck:
-        required = {SOURCE_ROOT, *FOREIGN_ROOTS[:2], *NEUTRAL_MODULES}
-        if not required <= graph.modules:
-            raise ValueError('COV002: missing comparison/foreign/neutral scope')
-        descendants: set[str] = (
-            graph.find_descendants(SOURCE_ROOT)
-            if not graph.is_module_squashed(SOURCE_ROOT)
-            else set()
+    def check(
+        self, graph: ImportGraph, verbose: bool, affected: set[str] | None = None
+    ) -> ContractCheck:
+        source, forbidden = source_scope(
+            graph, SOURCE_ROOT, FOREIGN_ROOTS, NEUTRAL_MODULES, affected
         )
-        source = sorted({SOURCE_ROOT, *descendants})
-        if len(source) < 2:
-            raise ValueError('COV002: empty comparison scope')
-        foreign: set[str] = set()
-        for root in set(FOREIGN_ROOTS) & graph.modules:
-            foreign.add(root)
-            if not graph.is_module_squashed(root):
-                foreign.update(graph.find_descendants(root))
-        internal = foreign - set(FOREIGN_ROOTS[2:])
-        if any(graph.is_module_squashed(m) for m in (*source, *internal)):
-            raise ValueError('COV002: squashed internal module inventory')
-        forbidden = sorted(foreign - set(NEUTRAL_MODULES))
         native = ForbiddenContract(
             self.name,
             self.session_options,

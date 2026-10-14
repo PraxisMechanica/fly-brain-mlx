@@ -4,14 +4,22 @@ fail_fast: true
 repos:
   - repo: local
     hooks:
-      - id: project-checks
+      - id: project-checks-commit
         name: Required code and architecture checks
-        entry: just check
+        entry: just check commit
         language: system
         always_run: true
         pass_filenames: false
         require_serial: true
-        stages: [pre-commit, pre-push]
+        stages: [pre-commit]
+      - id: project-checks-push
+        name: Incremental code and architecture checks
+        entry: just check push
+        language: system
+        always_run: true
+        pass_filenames: false
+        require_serial: true
+        stages: [pre-push]
       - id: diagnostic-cleanup
         name: Remove outputs without reviewed retention exceptions
         entry: uv run --locked --no-sync python -m tools.code_quality.cleanup

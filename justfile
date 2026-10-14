@@ -1,24 +1,25 @@
 set shell := ["sh", "-eu", "-c"]
 
-check: format-check lint type-check boundaries quality-tests metrics
+check stage="commit":
+    uv run --locked --no-sync python -m tools.code_quality.check {{stage}}
 
 format-check:
-    uv run --locked --no-sync python -m tools.code_quality.run format ruff format --check src tests tools main.py
+    uv run --locked --no-sync python -m tools.code_quality.check manual --only format
 
 lint:
-    uv run --locked --no-sync python -m tools.code_quality.run lint ruff check src tests tools main.py
+    uv run --locked --no-sync python -m tools.code_quality.check manual --only lint
 
 type-check:
-    uv run --locked --no-sync python -m tools.code_quality.run types pyright
+    uv run --locked --no-sync python -m tools.code_quality.check manual --only types
 
 boundaries:
-    uv run --locked --no-sync python -m tools.code_quality.run boundaries lint-imports --no-cache
+    uv run --locked --no-sync python -m tools.code_quality.check manual --only boundaries
 
 quality-tests:
     uv run --locked --no-sync python -m tools.code_quality.run tests python -m pytest -q tests/quality
 
 metrics:
-    uv run --locked --no-sync python -m tools.code_quality.run metrics python -m tools.code_quality.gate
+    uv run --locked --no-sync python -m tools.code_quality.check manual --only metrics
 
 bootstrap:
     uv sync --locked --group qualification

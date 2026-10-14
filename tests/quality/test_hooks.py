@@ -27,14 +27,17 @@ def test_installed_hooks_allow_compliant_commit(tmp_path: Path) -> None:
         'ruff format',
         'ruff check',
         'pyright',
-        'lint-imports',
-        'pytest',
-        'tools.code_quality.gate',
+        'tools.code_quality.boundaries',
+        'tools.code_quality.gate --inputs-only',
+        'tools.code_quality.gate --stage',
     ],
 )
 def test_every_failed_child_blocks_commit(tmp_path: Path, tool: str) -> None:
     repo, environment = hook_repository(tmp_path)
     previous = git(repo, 'rev-parse', 'HEAD')
+    changed = repo / SERVICE
+    changed.write_text(GOOD + '# Changed checked input\n')
+    git(repo, 'add', SERVICE)
     result = commit_document(repo, {**environment, 'FAIL_TOOL': tool})
     assert result.returncode != 0
     assert 'controlled tool failure: ' + tool in result.stdout + result.stderr
@@ -49,12 +52,13 @@ def test_missing_executable_blocks_commit(tmp_path: Path) -> None:
     assert 'uv' in result.stdout + result.stderr
 
 
-def test_unchanged_dependency_debt_blocks_document_commit(tmp_path: Path) -> None:
+def test_document_commit_does_not_repeat_unchanged_source_analysis(
+    tmp_path: Path,
+) -> None:
     repo, environment = hook_repository(tmp_path, BAD)
     result = commit_document(repo, environment)
-    assert result.returncode != 0
-    assert 'fly_brain.simulation.service' in result.stdout + result.stderr
-    assert 'fly_brain.simulation.backend' in result.stdout + result.stderr
+    assert result.returncode == 0, result.stdout + result.stderr
+    assert 'fly_brain.simulation.backend' not in result.stdout + result.stderr
 
 
 def test_unstaged_repair_cannot_hide_staged_dependency(tmp_path: Path) -> None:
@@ -69,27 +73,34 @@ def test_unstaged_repair_cannot_hide_staged_dependency(tmp_path: Path) -> None:
     assert source.read_text() == GOOD
 
 
-def test_actual_push_hook_blocks_existing_dependency_debt(tmp_path: Path) -> None:
+def test_actual_push_hook_blocks_changed_dependency_debt(tmp_path: Path) -> None:
     root = tmp_path / 'candidate'
     root.mkdir()
-    repo, environment = hook_repository(root, BAD)
+    repo, environment = hook_repository(root)
     remote = tmp_path / 'remote.git'
-    git(tmp_path, 'init', '--bare', str(remote))
+    git(tmp_path, 'clone', '--bare', str(repo), str(remote))
     git(repo, 'remote', 'add', 'origin', str(remote))
+    parent = git(repo, 'rev-parse', 'HEAD')
+    (repo / SERVICE).write_text(BAD)
+    git(repo, 'add', SERVICE)
+    tree = git(repo, 'write-tree')
+    broken = git(
+        repo,
+        'commit-tree',
+        tree,
+        '-p',
+        parent,
+        '-m',
+        'Create deliberately broken push fixture',
+    )
+    git(repo, 'update-ref', 'HEAD', broken)
     result = run(['git', 'push', 'origin', 'main'], repo, environment)
     assert result.returncode != 0
     assert 'fly_brain.simulation.backend' in result.stdout + result.stderr
 
 
-def test_disabling_full_scan_hides_unchanged_debt(tmp_path: Path) -> None:
+def test_document_only_commit_has_no_checker_regression_replay(tmp_path: Path) -> None:
     repo, environment = hook_repository(tmp_path, BAD)
-    config = repo / '.pre-commit-config.yaml'
-    config.write_text(
-        config.read_text().replace(
-            'always_run: true', 'always_run: false\n        types: [python]'
-        )
-    )
-    git(repo, 'add', '.pre-commit-config.yaml')
-    result = commit_document(repo, environment)
+    result = commit_document(repo, {**environment, 'FAIL_TOOL': 'pytest'})
     assert result.returncode == 0, result.stdout + result.stderr
-    assert 'Skipped' in result.stdout + result.stderr
+    assert 'controlled tool failure' not in result.stdout + result.stderr

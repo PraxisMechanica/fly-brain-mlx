@@ -80,9 +80,9 @@ def test_file_in_place_of_logs_blocks_cleanup(tmp_path: Path) -> None:
         'ruff format',
         'ruff check',
         'pyright',
-        'lint-imports',
-        'pytest',
-        'tools.code_quality.gate',
+        'tools.code_quality.boundaries',
+        'tools.code_quality.gate --inputs-only',
+        'tools.code_quality.gate --stage',
     ),
 )
 def test_hook_cleanup_requires_all_checks_to_pass(tmp_path: Path, tool: str) -> None:
@@ -96,6 +96,9 @@ def test_hook_cleanup_requires_all_checks_to_pass(tmp_path: Path, tool: str) -> 
     execution.write_bytes(b'scientific evidence')
     retain(repo, 'executions/trace.npz')
     previous = git(repo, 'rev-parse', 'HEAD')
+    source = repo / 'src/fly_brain/simulation/service.py'
+    source.write_text(source.read_text() + '# Changed checked input\n')
+    git(repo, 'add', 'src/fly_brain/simulation/service.py')
     result = commit_document(repo, {**environment, 'FAIL_TOOL': tool})
     if tool:
         assert result.returncode != 0
@@ -118,7 +121,7 @@ def test_hook_refuses_to_clean_a_symlinked_logs_root(tmp_path: Path) -> None:
     previous = git(repo, 'rev-parse', 'HEAD')
     result = commit_document(repo, environment)
     assert result.returncode != 0
-    assert 'symlinked logs' in result.stdout + result.stderr
+    assert 'symlinked' in result.stdout + result.stderr
     assert git(repo, 'rev-parse', 'HEAD') == previous
     assert original.read_bytes() == b'preserve'
 
@@ -132,6 +135,9 @@ def test_disabling_fail_fast_erases_failed_diagnostics(tmp_path: Path) -> None:
     config = repo / '.pre-commit-config.yaml'
     config.write_text(config.read_text().replace('fail_fast: true', 'fail_fast: false'))
     git(repo, 'add', '.pre-commit-config.yaml')
+    source = repo / 'src/fly_brain/simulation/service.py'
+    source.write_text(source.read_text() + '# Changed checked input\n')
+    git(repo, 'add', 'src/fly_brain/simulation/service.py')
     result = commit_document(repo, {**environment, 'FAIL_TOOL': 'pyright'})
     assert result.returncode != 0
-    assert not logs.exists()
+    assert not (logs / 'failure.txt').exists()

@@ -50,5 +50,12 @@ def compiler_context(inputs: Inputs) -> Invalidation:
         runtime or 'ruff' in tool_changed,
         runtime
         or 'importlinter' in tool_changed
-        or 'tools/architecture/neutral_import_contract.py' in inputs.changed,
+        or bool(
+            inputs.changed
+            & {
+                'tools/architecture/neutral_import_contract.py',
+                'tools/architecture/neutral_import_scope.py',
+                'tools/code_quality/boundaries.py',
+            }
+        ),
     )

@@ -13,6 +13,10 @@ SERVICE = 'src/fly_brain/simulation/service.py'
 
 def hook_repository(root: Path, source: str = GOOD) -> tuple[Path, dict[str, str]]:
     repo = repository(root)
+    git(repo, 'rm', 'calculation.py')
+    tests = repo / 'tests'
+    tests.mkdir()
+    (tests / '__init__.py').write_text('')
     policy = (
         '[tool.importlinter]'
         + (PROJECT / 'pyproject.toml').read_text().split('[tool.importlinter]', 1)[1]
@@ -57,9 +61,17 @@ def hook_repository(root: Path, source: str = GOOD) -> tuple[Path, dict[str, str
         'if failure and failure in arguments:\n'
         "    print('controlled tool failure: ' + failure)\n"
         '    sys.exit(23)\n'
+        "if 'tools.code_quality.check' in arguments:\n"
+        f'    os.environ["PYTHONPATH"] = {str(PROJECT)!r} + os.pathsep + os.environ.get("PYTHONPATH", "")\n'
+        '    stage = sys.argv[-1]\n'
+        '    sys.exit(subprocess.call([sys.executable, "-m", "tools.code_quality.check", stage]))\n'
         "if 'tools.code_quality.cleanup' in arguments:\n"
         f'    os.environ["PYTHONPATH"] = {str(PROJECT)!r} + os.pathsep + os.environ.get("PYTHONPATH", "")\n'
         '    sys.exit(subprocess.call([sys.executable, "-m", "tools.code_quality.cleanup"]))\n'
+        "if 'tools.code_quality.boundaries' in arguments:\n"
+        f'    os.environ["PYTHONPATH"] = {str(PROJECT)!r} + os.pathsep + os.environ.get("PYTHONPATH", "")\n'
+        '    start = sys.argv.index("tools.code_quality.boundaries")\n'
+        '    sys.exit(subprocess.call([sys.executable, "-m", "tools.code_quality.boundaries", *sys.argv[start + 1:]]))\n'
         "if 'lint-imports' in arguments:\n"
         f"    sys.exit(subprocess.call([{imports!r}, '--no-cache']))\n"
     )

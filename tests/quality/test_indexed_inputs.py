@@ -1,6 +1,7 @@
 import ast
 import inspect
 from collections.abc import Callable
+from contextlib import AbstractContextManager, nullcontext
 from functools import partial
 from pathlib import Path
 from textwrap import dedent
@@ -132,20 +133,21 @@ def matching_literals(tree: ast.AST, value: str) -> list[ast.Constant]:
 
 
 @pytest.mark.parametrize(
-    'name',
+    'name,remaining_guard',
     (
-        'tools/architecture/ownership.json',
-        'tools/code-quality/provenance.json',
-        'tools/code-quality/vendor/eng-metrics-code-quality-0.1.0.tgz',
-        'tools/code-quality/vendor/eng-metrics-code-quality-0.1.1.tgz',
-        'tools/code-quality/python-aggregation.patch',
-        'tools/code_quality/metrics.mjs',
-        'tools/code_quality/retention.json',
+        ('tools/architecture/ownership.json', nullcontext()),
+        ('tools/code-quality/provenance.json', nullcontext()),
+        ('tools/code-quality/vendor/eng-metrics-code-quality-0.1.0.tgz', nullcontext()),
+        ('tools/code-quality/vendor/eng-metrics-code-quality-0.1.1.tgz', nullcontext()),
+        ('tools/code-quality/python-aggregation.patch', nullcontext()),
+        ('tools/code_quality/metrics.mjs', pytest.raises(ValueError, match='COV001')),
+        ('tools/code_quality/retention.json', nullcontext()),
     ),
 )
-def test_removing_one_canonical_input_loses_its_unindexed_defect(
+def test_exact_input_weakening_keeps_the_independent_native_source_guard(
     indexed_repository: Path,
     name: str,
+    remaining_guard: AbstractContextManager[object],
 ) -> None:
     git(indexed_repository, 'rm', '--cached', name)
     with pytest.raises(ValueError, match='COV001'):
@@ -157,4 +159,5 @@ def test_removing_one_canonical_input_loses_its_unindexed_defect(
     namespace = dict(gate.require_indexed_inputs.__globals__)
     exec(compile(tree, '<weakened-policy-index>', 'exec'), namespace)
     weakened = cast(Callable[[], None], namespace['require_indexed_inputs'])
-    weakened()
+    with remaining_guard:
+        weakened()

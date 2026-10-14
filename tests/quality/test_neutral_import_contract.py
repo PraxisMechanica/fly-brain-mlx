@@ -6,6 +6,7 @@ import pytest
 
 from tests.quality.support import PROJECT, run
 from tools.architecture import neutral_import_contract as adapter
+from tools.architecture import neutral_import_scope as scope_adapter
 
 pytestmark = pytest.mark.unit
 NEUTRAL = 'neutral_modules = ["fly_brain.simulation.identifiers"]'
@@ -67,6 +68,16 @@ def rejected(root: Path, *evidence: str) -> None:
     assert code != 0, output
     for expected in evidence:
         assert expected in output, output
+
+
+def checker_source() -> str:
+    return (
+        inspect.getsource(scope_adapter)
+        + '\n'
+        + inspect.getsource(adapter).replace(
+            'from tools.architecture.neutral_import_scope import source_scope\n', ''
+        )
+    )
 
 
 def checker(root: Path, source: str) -> None:
@@ -241,7 +252,7 @@ def test_missing_native_scope_never_returns_a_kept_contract(
     'guard,replacement,source,extras',
     (
         (
-            'graph.find_descendants(SOURCE_ROOT)',
+            'graph.find_descendants(source_root)',
             "{'fly_brain.comparison.models'}",
             'pass\n',
             {
@@ -261,7 +272,7 @@ def test_missing_native_scope_never_returns_a_kept_contract(
             {'fly_brain/bridge.py': 'from fly_brain.simulation.backend import VALUE\n'},
         ),
         (
-            'foreign - set(NEUTRAL_MODULES)',
+            'foreign - set(neutral_modules)',
             "foreign - {'fly_brain.simulation.backend'}",
             'from fly_brain.simulation.backend import VALUE\n',
             {},
@@ -273,7 +284,7 @@ def test_weakening_each_native_discovery_path_or_exact_neutral_exception_loses_i
 ) -> None:
     source_fixture(tmp_path, source, extras)
     rejected(tmp_path, 'DEP003')
-    code = inspect.getsource(adapter)
+    code = checker_source()
     assert guard in code
     checker(tmp_path, code.replace(guard, replacement))
     status, output = lint(tmp_path)
@@ -322,8 +333,8 @@ def test_empty_discovered_comparison_scope_and_native_parse_error_fail(
     'anchor,fault,guard,diagnostic',
     (
         (
-            'required = {SOURCE_ROOT',
-            "graph.squash_module('fly_brain.simulation.backend')\n        required = {SOURCE_ROOT",
+            'required = {source_root',
+            "graph.squash_module('fly_brain.simulation.backend')\n    required = {source_root",
             'any(graph.is_module_squashed(m) for m in (*source, *internal))',
             'squashed internal module inventory',
         ),
@@ -345,7 +356,7 @@ def test_native_inventory_and_framework_failures_have_independent_rejection_guar
     tmp_path: Path, anchor: str, fault: str, guard: str, diagnostic: str
 ) -> None:
     source_fixture(tmp_path, 'from fly_brain.simulation.identifiers import TrialId\n')
-    source = inspect.getsource(adapter)
+    source = checker_source()
     assert anchor in source
     faulty = source.replace(anchor, fault)
     checker(tmp_path, faulty)
