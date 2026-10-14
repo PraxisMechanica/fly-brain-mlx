@@ -88,15 +88,15 @@ acceptance. Current limitations remain below and in
 ## Remaining order and unresolved decisions
 
 Current bounded assignments (confidence 95%): B has delivered selected-source
-enrollment and assesses the smallest canonical-session declaration observation
-without source changes. The historical 14-path declaration tree remains
+enrollment and implements the smallest bound-declaration observer using the
+canonical live session. The historical 14-path declaration tree remains
 unaccepted; dormant occurrences and lexical-versus-resolved identities stay
 explicit. A has delivered the fan-in count boundary and completed the literal Advance
 rule assessment. Its next bounded component is the reviewed source-only neutral
 value/primitive proof; DEP004 remains open and no live backend is substituted.
-C has delivered the `NetworkCase` selectors and committed the three Torch
-qualification target annotations and affected consumers. Parent integration
-passed at `15b8871`; push and exact hosted verification remain before acceptance. Passed-tuple/scalar identity, values/order and host projections
+C has delivered the `NetworkCase` and Torch qualification target selectors,
+verified through exact hosted run `38583143321`. It now assesses the native
+JavaScript reverse-consumer scope without source edits. Passed-tuple/scalar identity, values/order and host projections
 are preserved; historical cross-site literal-tuple coalescing is outside the
 contract. Canonical batch labels are delivered. Local array positions, collectors, digest
 streams and original numeric behavior remain unchanged. Positional artifact

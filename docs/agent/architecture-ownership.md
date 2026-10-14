@@ -120,8 +120,8 @@ grouped original edge rows, and bucket neuron/padded-edge rows now use the exist
 simulation-owned array brands. Their lawful producer and constructor boundaries
 retain the same objects, array bytes and numerical operations. Experiment FlyWire
 scalars, stimulus neuron rows, requested observation-session labels and
-`ParityCase.trial` and the four `NetworkCase` selectors use the existing owned
-scalar brands. Catalog, validated
+`ParityCase.trial`, the four `NetworkCase` selectors and Torch qualification
+setup/observation targets use the existing owned scalar brands. Catalog, validated
 option and persisted-stimulus ingress retain their existing values and guards;
 ordinary steps/counts and local reference array positions remain coordinates.
 Rasters and complete lawful-conversion origins remain unproved. The four

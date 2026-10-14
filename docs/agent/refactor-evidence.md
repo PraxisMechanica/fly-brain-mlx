@@ -389,6 +389,30 @@ with six verification statements and moved control bodies preserved. Complete
 declarations, dormant bindings, alias/effect/call/control-flow and runtime
 context equivalence remain missing; the historical prototype stays unaccepted.
 
+The six-file Torch target-selector component is delivered at `15b8871`.
+Normal commit/push checks and exact hosted run `38583143321` passed over the
+`615764d..4b98632` two-commit range: eight changed inputs, 27 affected Python
+files, five reviewed sources and 363 retained records. Its quality step took
+23 seconds, ran no pytest and uploaded zero artifacts. Twenty-six distinct
+controls passed once: 17 identity/CPU cases in 7.86 seconds and nine provenance
+cases in 0.36 seconds; 18 unchanged cases were deselected.
+
+Three target annotations use `NeuronRow`; seven authored fixture elements retain
+scalar identity. Each signature has independent weakening and exact wrong-space
+rejection. Ordinary versus observed CPU execution compares 520 individual arrays
+across five native fields and 260 trial hashes over 25 steps, one/four trials and
+empty/overlapping
+channels. Production numerical/hash/launch predicates and `_SOURCES` remain
+exact. The launch fixture changes only the selected launch/file key, with its
+four-case truth table verified; generic all-source corruption did not establish
+the selected module's guard. Its initial per-file complexity 21→22 failure was
+repaired without removing either key condition. Four normalized existing modules,
+eight original assertions, 361 other Python files, five protected sources,
+seven fixtures and six tracked data inputs are preserved. Worker metrics improve
+mean 15.01 to 15.00 and health 40.55 to 40.59; maximum 96 remains. Two existing
+Torch sparse warnings occurred. Metal-dependent collection failed before
+scientific cases; direct CPU controls grant no new scientific acceptance.
+
 ## Reference parameter preservation
 
 The pure reference-default extraction is checked and pushed at
