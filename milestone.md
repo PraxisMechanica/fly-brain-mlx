@@ -389,8 +389,10 @@ its historical failing tree is preserved, not delivered or accepted.
 
 Current bounded assignments (confidence 95%): B qualifies selected-source
 enrollment through the pinned native interim-registration/binder APIs and checked
-canonical live session. The historical 14-path declaration tree remains
-unaccepted; dormant occurrences and lexical-versus-resolved identities must stay
+canonical live session. Actual Module, scope, symbol-table and original-file
+identity guards stay intact; a measured per-file metric failure justifies one
+separate enrollment owner, without a metric waiver. The historical 14-path
+declaration tree remains unaccepted; dormant occurrences and lexical-versus-resolved identities must stay
 explicit. A implements the bounded preparation → late absolute-count read →
 pure completion split in existing input-pattern/probe/factory files, with the
 exact mapping contract and named report-source capture. Grouping injection is
@@ -469,7 +471,7 @@ native equivalence; retain no archive simply in anticipation of possible reuse.
 ## Current architecture scope
 
 Complete 37-rule structural enforcement remains **ANALYSIS FAILED (COV002)**.
-Six recorded architecture/identifier findings remain. Strict typing, eight
+Six recorded architecture/identifier findings remain. Strict typing, configured
 import contracts, source ownership reconciliation and qualified native metric
 checks are useful components, not a full structural or scientific approval.
 Current coverage is in [quality-coverage.md](docs/agent/quality-coverage.md) and
