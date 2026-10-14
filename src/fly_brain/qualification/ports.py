@@ -5,7 +5,12 @@ import numpy as np
 from numpy.typing import NDArray
 
 from fly_brain.simulation.identifiers import NeuronRow, TrialId
-from fly_brain.simulation.models import Connectome, InputPin
+from fly_brain.simulation.models import (
+    Connectome,
+    DestinationBucket,
+    DestinationGrouping,
+    InputPin,
+)
 from fly_brain.simulation.observations import (
     NativeComparison,
     NativeObservation,
@@ -27,6 +32,18 @@ class ConnectomeSilencer(Protocol):
     def __call__(
         self, connectome: Connectome, silenced: tuple[NeuronRow, ...], /
     ) -> Connectome: ...
+
+
+class AbsoluteCountReader(Protocol):
+    def __call__(self, connectome: Connectome, /) -> NDArray[np.int64]: ...
+
+
+class DestinationGroupingReader(Protocol):
+    def __call__(self, connectome: Connectome, /) -> DestinationGrouping: ...
+
+
+class DestinationBucketsReader(Protocol):
+    def __call__(self, connectome: Connectome, /) -> tuple[DestinationBucket, ...]: ...
 
 
 class PinnedInputs(Protocol):

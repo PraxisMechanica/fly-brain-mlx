@@ -1,8 +1,16 @@
 from pathlib import Path
 
+import numpy as np
+from numpy.typing import NDArray
+
 from .identifiers import NeuronRow
-from .mapping import silence_sources
-from .models import Connectome, InputPin
+from .mapping import (
+    absolute_count_sums,
+    bucket_destinations,
+    group_destinations,
+    silence_sources,
+)
+from .models import Connectome, DestinationBucket, DestinationGrouping, InputPin
 from .ports import ConnectomeReaderFactory
 
 
@@ -10,6 +18,18 @@ def silence_connectome(
     connectome: Connectome, silenced: tuple[NeuronRow, ...]
 ) -> Connectome:
     return silence_sources(connectome, silenced)
+
+
+def read_absolute_counts(connectome: Connectome) -> NDArray[np.int64]:
+    return absolute_count_sums(connectome)
+
+
+def read_destination_grouping(connectome: Connectome) -> DestinationGrouping:
+    return group_destinations(connectome)
+
+
+def read_destination_buckets(connectome: Connectome) -> tuple[DestinationBucket, ...]:
+    return bucket_destinations(connectome)
 
 
 def load_pinned_inputs(

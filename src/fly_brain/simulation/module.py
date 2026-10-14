@@ -1,11 +1,20 @@
 from functools import partial
 
 from .commands import simulation
-from .input_service import load_pinned_inputs, silence_connectome
+from .input_service import (
+    load_pinned_inputs,
+    read_absolute_counts,
+    read_destination_buckets,
+    read_destination_grouping,
+    silence_connectome,
+)
 from .ports import (
+    AbsoluteCountReader,
     Clock,
     ConnectomeReaderFactory,
     ConnectomeSilencer,
+    DestinationBucketsReader,
+    DestinationGroupingReader,
     ExperimentReader,
     PinnedInputs,
     SimulationCommand,
@@ -26,6 +35,18 @@ def build_pinned_inputs(reader_factory: ConnectomeReaderFactory) -> PinnedInputs
 
 def build_connectome_silencer() -> ConnectomeSilencer:
     return silence_connectome
+
+
+def build_absolute_count_reader() -> AbsoluteCountReader:
+    return read_absolute_counts
+
+
+def build_destination_grouping_reader() -> DestinationGroupingReader:
+    return read_destination_grouping
+
+
+def build_destination_buckets_reader() -> DestinationBucketsReader:
+    return read_destination_buckets
 
 
 def build_simulation(

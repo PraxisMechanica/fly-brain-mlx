@@ -5,22 +5,25 @@ from pathlib import Path
 import numpy as np
 from numpy.typing import NDArray
 
-from fly_brain.simulation.mapping import (
-    absolute_count_sums,
-    bucket_destinations,
-    group_destinations,
-    silence_sources,
+from fly_brain.qualification.ports import (
+    AbsoluteCountReader,
+    ConnectomeSilencer,
+    DestinationBucketsReader,
+    DestinationGroupingReader,
 )
-from fly_brain.simulation.models import Connectome, InputPin
+from fly_brain.simulation.identifiers import NeuronRow
+from fly_brain.simulation.models import Connectome, DestinationBucket, InputPin
 
 MappedArray = NDArray[np.int32] | NDArray[np.int64] | NDArray[np.float64]
 
 
-def bucket_report(connectome: Connectome, pin: InputPin) -> dict[str, object]:
+def bucket_report(
+    connectome: Connectome, pin: InputPin, *, buckets: tuple[DestinationBucket, ...]
+) -> dict[str, object]:
     restored: list[NDArray[np.int32]] = []
     targets: list[NDArray[np.int32]] = []
     reports: list[dict[str, object]] = []
-    for bucket in bucket_destinations(connectome):
+    for bucket in buckets:
         identities = bucket.edge_ids[bucket.occupied]
         target_grid = np.broadcast_to(bucket.targets[:, None], bucket.edge_ids.shape)
         np.testing.assert_array_equal(
@@ -85,9 +88,18 @@ def bucket_report(connectome: Connectome, pin: InputPin) -> dict[str, object]:
     }
 
 
-def run(connectome: Connectome, pin: InputPin, output: Path) -> dict[str, object]:
+def run(
+    connectome: Connectome,
+    pin: InputPin,
+    output: Path,
+    *,
+    read_grouping: DestinationGroupingReader,
+    read_absolute_counts: AbsoluteCountReader,
+    silence: ConnectomeSilencer,
+    read_buckets: DestinationBucketsReader,
+) -> dict[str, object]:
     output.mkdir(parents=True, exist_ok=False)
-    grouping = group_destinations(connectome)
+    grouping = read_grouping(connectome)
     identity = np.arange(connectome.counts.size, dtype=np.int32)
     assert np.array_equal(grouping.edge_ids[grouping.inverse], identity)
     assert np.array_equal(grouping.inverse[grouping.edge_ids], identity)
@@ -107,9 +119,9 @@ def run(connectome: Connectome, pin: InputPin, output: Path) -> dict[str, object
     assert np.array_equal(
         connectome.counts.astype(np.float32).astype(np.int64), connectome.counts
     )
-    absolute = absolute_count_sums(connectome)
+    absolute = read_absolute_counts(connectome)
     assert int(absolute.max()) <= 2**40
-    silenced = silence_sources(connectome, (0,))
+    silenced = silence(connectome, (NeuronRow(0),))
     outgoing = connectome.sources == 0
     assert np.all(silenced.counts[outgoing] == 0)
     assert np.array_equal(silenced.counts[~outgoing], connectome.counts[~outgoing])
@@ -182,7 +194,9 @@ def run(connectome: Connectome, pin: InputPin, output: Path) -> dict[str, object
         },
         'artifact': str(artifact),
         'artifact_sha256': hashlib.sha256(artifact.read_bytes()).hexdigest(),
-        'destination_buckets': bucket_report(connectome, pin),
+        'destination_buckets': bucket_report(
+            connectome, pin, buckets=read_buckets(connectome)
+        ),
         'scope': 'Host input mapping only; no full-network execution or parity claim.',
     }
     with (output / 'mapping.json').open('x') as destination:

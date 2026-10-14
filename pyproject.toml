@@ -205,3 +205,14 @@ forbidden_modules = [
     "fly_brain.simulation.storage",
 ]
 allow_indirect_imports = false
+
+[[tool.importlinter.contracts]]
+name = "DEP003/ROLE005: Input audit uses owned mapping services"
+type = "forbidden"
+source_modules = ["fly_brain.qualification.adapters.connectome_probe"]
+forbidden_modules = [
+    "fly_brain.simulation.mapping",
+    "fly_brain.simulation.input_service",
+    "fly_brain.simulation.module",
+]
+allow_indirect_imports = false
