@@ -29,7 +29,7 @@ from fly_brain.simulation.observations import HostArray
 from tests.support.session_block_values import replace_block
 
 pytestmark = pytest.mark.unit
-BASE = 'b8d490a35b75d7b4fea9f8799a7554bae1888e49'
+BASE = '8e90dc665b0c89616eacb4d62415970de955828d'
 ROOT = Path(__file__).resolve().parents[2]
 
 

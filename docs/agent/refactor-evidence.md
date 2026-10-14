@@ -705,8 +705,29 @@ archive-preservation proof and health 41.27 to 41.25. It was not waived. A
 same-file helper attempt also failed the normal hook before pytest: complexity
 14 to 18 and health 41.31 to 41.27. The bounded repair reuses existing archive
 fixture construction and standard-library exact byte comparison (`shallow=False`)
-at both reconstruction stages and the installed-source observation. Hash, lineage,
+for the composed final reconstruction and installed-source observation; both
+archive stages keep independent source-name and hash checks. Hash, lineage,
 source-name, patch-result, mismatch and error predicates remain required. Five
 explicit guard-disabling exercises in the immediate consumer files are marked
 out of routine selection without changing their bodies. Final hook/delivery
 results are recorded in the wrap-up checkpoint after execution.
+
+The numeric-fact component is committed at `c22e943` after its normal hook and
+cleanup pass. Automatic tests succeed; 217 recorded node IDs and no remaining
+failures are observed after cleanup. The preceding automatic invocation passed
+210 cases and failed seven diagnostic fixtures, with 14 checker cases deselected
+in 94.62 seconds. Those failures were canonical-tool inputs incorrectly resolved
+from the temporary target repository. Provenance/package/lock now resolve from
+the wrapper's own project; target Git inputs and numeric cache stay target-local.
+The focused invalidation case changes the actual C# analysis manifest. Existing
+diagnostic assertions are unchanged. No manual pytest or parent replay occurred.
+
+Hosted run `38615309920` for `45146bc` passed static checks but exposed 17 setup
+errors in the audit-transition fixture: its legacy reference commit existed only
+in the local object store. It passed 894 cases, deselected 110 and took 43.81
+pytest seconds. The repair changes only the fixture reference to published main
+ancestor `8e90dc665b0c89616eacb4d62415970de955828d`. The reference source has the
+same Git blob `416d049624204b34a3d674d371e5ad523da3654c` and SHA256
+`56a9009c163cc31436775b0a357622f0035a846b3e84bbe92d641ef49e8c9a1e`.
+All test bodies, assertions and production arithmetic remain unchanged. Its
+automatic affected-test result is recorded after the corrective commit.
