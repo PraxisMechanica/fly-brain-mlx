@@ -155,6 +155,7 @@ The following components are committed on parent `main`:
 | Injected pure reference parameters | `4c87409` | Exact factory extraction and five protected hashes; 100 CPU, six boundary, five native and two composition cases; 6,120 native tensor-byte pairs preserved without replay |
 | Comparison scalar identifier keys | `fe14b74` | 32 focused cases; three identity wrappers, four unchanged calculation functions and 16 byte-exact original/new JSON/CSV outputs |
 | Canonical native Python compiler context | `39c4556` | 21 defined cases; independently reconciled source/configuration/import-origin facts; equivalent read capture and record/process separation |
+| Shared canonical compiler session lifetime | `7ab7d04` | 11 session and six affected context cases; unchanged report/config/hash/disposal logic and loaded-origin projection; selected-unbound stubs remain missing |
 | Consumer-owned reference connectome silencing | `1b64d51` | 36 focused controls; 18 normalized modules, 70 original assertions, unchanged mapping, five protected sources and seven fixtures |
 | Consumer-owned host input mapping | `9019148` | 19 focused cases without reruns; byte-exact original/candidate NPZ and JSON, four callback positions, six normalized modules and 15 original assertions |
 
@@ -187,7 +188,7 @@ The identifier changes preserve numerical bodies and old assertions; NewType sup
 typing without new runtime validation or complete conversion-origin proof.
 No full native proof bundle or scientific matrix was recreated.
 
-All listed source components are pushed to `origin/main` through `9019148`.
+All listed source components are pushed to `origin/main` through `7ab7d04`.
 The spike identifier component passed the installed normal commit and push hooks
 and default cleanup without replaying its completed regressions. Delivery uses
 one ten-file component commit; the worker's earlier private ancestry is preserved
@@ -264,12 +265,28 @@ The pure bucket report receives completed data; `MappedArray` is reviewed as
 `qualification/types`. Eight import contracts are configured. Direct file
 persistence and mixed role responsibilities still require a separate repair.
 
-The raster specialization candidate is held: 116 focused controls are qualified,
-but the native expression query reports the FlyWire argument for both row and
-FlyWire aliases before projection. Its exact name locations and distinct native
-alias names are checked; the required specialization control remains failing.
-No candidate source or relaxed expectation is adopted. The native owner is
-assessing acquisition/context semantics after its separate session component.
+The raster specialization candidate has 116 qualified focused controls. Its
+remaining native proof initially queried a context with unresolved NumPy imports:
+both NewType bases were Unknown, promoting both aliases to the later constraint.
+One targeted comparison kept source bytes/nodes unchanged and supplied the actual
+installed dependency root; row and FlyWire arguments then differ correctly, with
+zero unresolved imports. C is repairing only that fixture context and the failed
+control before adoption. B separately assesses missing-import rejection; neither
+projector substitution nor relaxed specialization expectations are authorized.
+
+The seven-file compiler-session component is pushed at `7ab7d04` after normal
+commit/push checks and exact hosted run `38560890820`: seven changed inputs,
+two affected Python files, two reviewed sources and 355 retained records.
+Its quality step took 16 seconds; its complete job took 72 seconds, with no
+pytest and zero artifacts. It shares the canonical live Program through bounded
+source reads and refreshes loaded origins after a consumer, preserving the
+initial source enumeration and final hashes. Eleven session cases and six
+changed context cases qualified; all 21 original context cases still collect.
+One weakening case accidentally ran twice; no further replay followed. Worker
+metrics improved mean 15.17 to 15.14 and health 40.20 to 40.23; maximum 96 is
+unchanged. Selected, unreferenced stubs remain natively unbound; this is not
+complete declaration enrollment. The historical declaration candidate remains
+unadopted and full 37-rule coverage remains COV002.
 
 ## Remaining order and unresolved decisions
 

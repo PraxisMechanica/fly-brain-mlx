@@ -93,7 +93,10 @@ ordered import roots and loaded-source origins. It uses the native command-line
 host and file system, reconciles discovery independently and hashes configuration,
 request, compiler, bridge and read inputs. Shared editable dependency paths are
 observed; runtime-environment equivalence is not established. It supplies no
-binding, type, call, effect, control-flow or runtime-target verdict.
+binding, type, call, effect, control-flow or runtime-target verdict. The shared
+live session provides source-bound reads, checks original and refreshed loaded
+origins, and rejects unregistered or post-disposal reads. Selected but unreferenced
+stubs may still lack native binding/parse results; complete enrollment is missing.
 
 The [native partial API](../../tools/architecture/native_partials.py) exports
 source-bound constructor and wrapped-expression identities, ordered captures,
