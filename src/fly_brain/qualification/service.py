@@ -14,6 +14,13 @@ from fly_brain.qualification.ports import (
     PinnedInputs,
     ProjectProbe,
 )
+from fly_brain.qualification.stimulus_ports import (
+    ExperimentReader,
+    StimulusGenerator,
+    StimulusRecorder,
+)
+from fly_brain.simulation.identifiers import NeuronRow
+from fly_brain.simulation.models import Connectome, InputPin, Stimulus
 
 
 def qualify(
@@ -52,3 +59,18 @@ def parity_case(
 ) -> dict[str, object]:
     connectome, pin = load(project)
     return execute(connectome, pin, case, output)
+
+
+def prepare_case_stimulus(
+    connectome: Connectome,
+    pin: InputPin,
+    case: ParityCase,
+    output: Path,
+    *,
+    read_experiment: ExperimentReader,
+    generate: StimulusGenerator,
+    record: StimulusRecorder,
+) -> tuple[Stimulus, tuple[NeuronRow, ...]]:
+    experiment = read_experiment(case.experiment)
+    stimulus = generate(connectome, experiment, case.steps, (case.trial,), 20261004)
+    return record(output, connectome, experiment, pin, stimulus)

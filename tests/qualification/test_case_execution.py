@@ -16,6 +16,7 @@ from fly_brain.qualification.adapters.torch_setup import prepare as prepare_cpu
 from fly_brain.qualification.models import ParityCase
 from fly_brain.simulation.identifiers import NeuronRow, TrialId
 from fly_brain.simulation.models import InputPin
+from fly_brain.simulation.module import build_experiment_reader
 from fly_brain.simulation.observation_module import build_observation_sessions
 from tests.support.observation_fixtures import fixture, stimulus_for
 
@@ -91,6 +92,7 @@ def test_each_engine_replays_fresh_state_with_complete_retained_evidence(
         score=build_case_scoring(),
         validate=build_coordinate_validation(),
         convert_clock=build_reference_clock_conversion(),
+        read_experiment=build_experiment_reader(),
     )
     assert (
         report['case_accepted'] is False
@@ -120,4 +122,5 @@ def test_each_engine_replays_fresh_state_with_complete_retained_evidence(
             score=build_case_scoring(),
             validate=build_coordinate_validation(),
             convert_clock=build_reference_clock_conversion(),
+            read_experiment=build_experiment_reader(),
         )

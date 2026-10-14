@@ -8,6 +8,7 @@ from .identifiers import NeuronRow, TrialId
 from .models import (
     Connectome,
     Experiment,
+    ExperimentName,
     InputPin,
     SimulationRequest,
     SimulationResult,
@@ -88,3 +89,19 @@ class SimulationUseCase(Protocol):
 
 class SimulationCommand(Protocol):
     def __call__(self, request: SimulationRequest, /) -> int: ...
+
+
+class ExperimentReader(Protocol):
+    def __call__(self, name: ExperimentName, /) -> Experiment: ...
+
+
+class StimulusRecorder(Protocol):
+    def __call__(
+        self,
+        output: Path,
+        connectome: Connectome,
+        experiment: Experiment,
+        pin: InputPin,
+        stimulus: Stimulus,
+        /,
+    ) -> tuple[Stimulus, tuple[NeuronRow, ...]]: ...

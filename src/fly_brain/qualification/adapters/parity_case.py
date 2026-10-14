@@ -18,11 +18,11 @@ from fly_brain.qualification.spike_comparison_ports import (
     CoordinateValidator,
     ReferenceClockConverter,
 )
-from fly_brain.qualification.stimulus_ports import StimulusGenerator
-from fly_brain.simulation.experiments import EXPERIMENTS
+from fly_brain.qualification.stimulus_ports import (
+    CaseStimulusPreparation,
+    ExperimentReader,
+)
 from fly_brain.simulation.models import Connectome, InputPin
-from fly_brain.simulation.stimuli import neuron_indices
-from fly_brain.simulation.storage import persist_stimulus
 
 from .brian_jobs import build
 from .case_execution import execute
@@ -37,7 +37,8 @@ def run(
     output: Path,
     precision: str,
     *,
-    generate: StimulusGenerator,
+    prepare_stimulus: CaseStimulusPreparation,
+    read_experiment: ExperimentReader,
     assemble_observations: ObservationAssembly,
     score: CaseScorer,
     validate: CoordinateValidator,
@@ -58,14 +59,7 @@ def run(
             flush=True,
         )
 
-    experiment = EXPERIMENTS[case.experiment]
-    stimulus = persist_stimulus(
-        output,
-        experiment,
-        pin,
-        generate(connectome, experiment, case.steps, (case.trial,), 20261004),
-    )
-    silenced = neuron_indices(connectome, experiment.silenced_ids)
+    stimulus, silenced = prepare_stimulus(connectome, pin, case, output)
     with (output / 'environment.json').open('x') as artifact:
         json.dump(
             {
@@ -137,6 +131,7 @@ def run(
         score=score,
         validate=validate,
         convert_clock=convert_clock,
+        read_experiment=read_experiment,
     )
     progress('case-recorded')
     return report

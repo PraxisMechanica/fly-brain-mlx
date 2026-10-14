@@ -13,7 +13,7 @@ from fly_brain.qualification.spike_comparison_ports import (
     CoordinateValidator,
     ReferenceClockConverter,
 )
-from fly_brain.simulation.experiments import EXPERIMENTS
+from fly_brain.qualification.stimulus_ports import ExperimentReader
 from fly_brain.simulation.models import Connectome, InputPin, Stimulus
 
 from .case_spikes import load
@@ -43,6 +43,7 @@ def write(
     score: CaseScorer,
     validate: CoordinateValidator,
     convert_clock: ReferenceClockConverter,
+    read_experiment: ExperimentReader,
 ) -> dict[str, object]:
     paired, cpu = observations / 'paired-first', observations / 'cpu-first'
     verify_paired(paired, observations / 'paired-repeat')
@@ -61,7 +62,7 @@ def write(
         if causal['first_spike_step'] is None
         else None
     )
-    experiment = EXPERIMENTS[case.experiment]
+    experiment = read_experiment(case.experiment)
     checks = {
         'required_frozen_case': case in required_cases(),
         'full_connectome_geometry': pin.neurons == 138639 and pin.edges == 15091983,

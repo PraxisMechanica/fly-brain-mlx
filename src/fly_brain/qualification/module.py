@@ -14,6 +14,12 @@ from .ports import (
     ProjectProbe,
     QualificationCommand,
 )
+from .stimulus_ports import (
+    CaseStimulusPreparation,
+    ExperimentReader,
+    StimulusGenerator,
+    StimulusRecorder,
+)
 
 
 def build_qualification(
@@ -47,3 +53,16 @@ def build_fan_in_cases(
     draw_uniforms: UniformDraws, permute: PermutationDraws
 ) -> FanInCaseBuilder:
     return partial(prepare_cases, draw_uniforms=draw_uniforms, permute=permute)
+
+
+def build_case_stimulus(
+    read_experiment: ExperimentReader,
+    generate: StimulusGenerator,
+    record: StimulusRecorder,
+) -> CaseStimulusPreparation:
+    return partial(
+        service.prepare_case_stimulus,
+        read_experiment=read_experiment,
+        generate=generate,
+        record=record,
+    )

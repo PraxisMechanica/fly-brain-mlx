@@ -174,15 +174,24 @@ def parity_case() -> ParityCommand:
         build_reference_clock_conversion,
     )
     from fly_brain.qualification.adapters.parity_case import run
-    from fly_brain.qualification.module import build_parity_case
+    from fly_brain.qualification.module import build_case_stimulus, build_parity_case
+    from fly_brain.simulation.module import (
+        build_experiment_reader,
+        build_stimulus_recorder,
+    )
+    from fly_brain.simulation.storage import persist_stimulus
 
     torch.set_num_threads(1)
+    read_experiment = build_experiment_reader()
     return build_parity_case(
         pinned_inputs(),
         partial(
             run,
             precision=precision,
-            generate=stimulus(),
+            prepare_stimulus=build_case_stimulus(
+                read_experiment, stimulus(), build_stimulus_recorder(persist_stimulus)
+            ),
+            read_experiment=read_experiment,
             assemble_observations=assemble_observations,
             score=build_case_scoring(),
             validate=build_coordinate_validation(),

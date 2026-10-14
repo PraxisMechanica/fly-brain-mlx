@@ -352,7 +352,10 @@ FACTORIES: tuple[tuple[str, tuple[str, ...]], ...] = (
     ('device_layout_audit', ('configure', 'device_layout_probe')),
     ('connectome_pulse', ('configure', 'connectome_pulse')),
     ('simulation', ('configure', 'simulation.backend.runner', 'simulation.storage')),
-    ('parity_case', ('configure', 'torch', 'parity_case', 'threads:1')),
+    (
+        'parity_case',
+        ('configure', 'torch', 'parity_case', 'simulation.storage', 'threads:1'),
+    ),
 )
 
 
