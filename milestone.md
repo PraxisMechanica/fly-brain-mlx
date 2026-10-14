@@ -186,7 +186,7 @@ The identifier changes preserve numerical bodies and old assertions; NewType sup
 typing without new runtime validation or complete conversion-origin proof.
 No full native proof bundle or scientific matrix was recreated.
 
-All listed source components are pushed to `origin/main` through `1b64d51`.
+All listed source components are pushed to `origin/main` through `26e4df3`.
 The spike identifier component passed the installed normal commit and push hooks
 and default cleanup without replaying its completed regressions. Delivery uses
 one ten-file component commit; the worker's earlier private ancestry is preserved
@@ -230,6 +230,17 @@ trajectories were not replayed. Worker metrics improved mean 15.21 to 15.20,
 with maximum 96 and health 39.94 unchanged. Seven exact import contracts are
 configured. The native framework's missing forbidden-target limit is retained
 as a control; a separate required-gate coverage repair remains with its owner.
+
+The separate configured-target coverage repair is pushed at `26e4df3`. It keeps
+production complexity at 25 and the original incremental fixture byte exact.
+Twenty-two distinct controls are qualified; only changed or failed controls
+repeated. Worker native metrics improved mean 15.20 to 15.18 and health 39.98 to
+40.01, with maximum 96 unchanged. Normal commit/push checks and exact hosted
+run `38555176909` passed: three changed inputs, three affected Python files,
+93 import module/contract checks and two reviewed sources. Its quality step
+took 16 seconds; its job took 72 seconds, with no pytest and zero artifacts.
+Missing configured first-party targets now fail COV002 before inactive-source
+skipping; the separate raw-framework limitation control remains unchanged.
 
 ## Remaining order and unresolved decisions
 

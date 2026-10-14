@@ -40,6 +40,13 @@ regressions once before commit and record source/dependency identity. Hooks and
 hosted checks do not replay those tests. Unsupported Python deletion/rename
 impact fails COV002, as do native removals without a proved affected scope.
 
+Configured first-party forbidden targets must exist exactly in the native graph,
+including when their source scope is inactive. The runner derives first-party
+roots from its canonical packages and the declared session roots. It retains
+source-presence checks, exact-root/descendant matching and optional absent
+external packages. Missing configured first-party targets fail COV002; the
+upstream framework's separate missing-target limitation remains recorded.
+
 Commit metrics check the index. Push/hosted metrics check every submitted commit
 and merge parent, with native blob calculations reused within the command.
 No persistent test or metric verdict cache is used. The native import-fact cache
