@@ -20,9 +20,11 @@ just check commit
 pre-commit configuration, and installs commit/push hooks. `just check commit`
 selects changed indexed inputs and affected dependents for formatting, lint,
 strict typing, import boundaries, reviewed ownership and metric regression. It
-leaves regression execution with the component owner, who runs meaningful
-affected tests once before committing. `just check push` and `just check ci`
-validate the submitted source range without replaying those tests. Current native
+runs static checks without local pytest. Component owners author meaningful tests
+for actual changes; the CI stage executes the selected tests once for the submitted
+revision. Commit and push stages do not invoke pytest, and agents do not add manual
+pre-commit test runs. `just check push` validates the submitted static source range;
+`just check ci` is the single automatic test owner. Current native
 imports and every submitted changed path select affected dependents. Python
 deletions and renames with unproved impact fail COV002; they do not receive an
 empty pass. Changed compiler/tool/configuration inputs invalidate their scope.
@@ -59,8 +61,10 @@ retain a diagnostic file under `logs/quality`, capped at 64 KiB of text with
 explicit omissions. Metric summaries include complete finding counts and at most
 twenty examples, with no repeated file inventories. Hosted checks print bounded
 diagnostics without uploading report artifacts. `just check manual` keeps its diagnostics locally.
-Select focused pytest targets for the actual changed behavior and affected
-consumers. Default pytest selection covers application unit/integration tests.
+CI selects focused pytest targets for actual changed behavior and affected
+consumers, then invokes pytest once. Do not duplicate that invocation locally.
+Default application selection excludes reviewed `checker` exercises even where
+those files live under unit/integration folders.
 Do not run the whole checker suite, hook-simulation matrices or guard-weakening
 exercises as routine project verification. A checker implementation change can
 receive focused ordinary behavior tests; no broad self-qualification is required.

@@ -28,10 +28,10 @@ the complete checker regression suite at each worker, commit, push and hosted
 boundary. This supersedes the previous unconditional full-snapshot workflow.
 The checked workflow now uses that model. Preserve exact predicates, complete
 source discovery, changed-input invalidation and honest coverage; incremental
-results do not establish missing 37-rule mechanisms. Component owners retain
-source/dependency evidence and run meaningful regressions once; repeat only
-changed or failed controls. Automatic regression scheduling and a persistent
-metric verdict cache are outside the minimum solution.
+results do not establish missing 37-rule mechanisms. Component owners retain source/dependency evidence. The latest user correction
+requires automatic test execution once per submitted revision; CI is the selected
+owner. Local worker/parent commits and pushes run static checks only. A persistent
+test-verdict cache is outside the minimum solution.
 
 The latest user amendment on 2026-10-14 requires tests of actual changes, not
 broad checker self-testing. Remove the quality suite from default pytest and the
@@ -39,7 +39,17 @@ blanket checker-test command. Do not require hook-simulation matrices or disabli
 individual guards as routine verification. Focus ordinary tests on changed
 behavior and affected consumers; unchanged controls are reused. This supersedes
 the former blanket checker rejection/repair/weakening qualification workflow.
-The architecture predicates and scientific requirements remain unchanged.
+The user clarifies that relevant tests must execute automatically at commit or
+CI, without additional manual or duplicate runs. CI is the single pytest owner;
+B implements one affected-test invocation in the existing CI gate. This supersedes
+manual pre-commit pytest instructions. Directly changed tests and proved affected
+application tests are selected; typing-context invalidation must not restore the
+entire checker suite. The architecture and scientific predicates remain unchanged. The
+application-only timing at `f3b02b3` passes 951 cases in 128.73 seconds, but reveals
+checker exercises mixed into unit/integration folders. C owns their reviewed
+`checker` markers and exact ownership-row deltas; root owns default marker
+selection. Preserve all actual runtime/scientific test bodies. Reuse completed
+timing data and verify collection instead of rerunning unchanged tests.
 
 The user also identifies repeated full metric baselines. A owns the minimal
 numeric per-blob fact reuse component (confidence 95%, starting `2a54911`), in an
@@ -121,7 +131,8 @@ are preserved; historical cross-site literal-tuple coalescing is outside the
 contract. Canonical batch labels are delivered. Local array positions, collectors, digest
 streams and original numeric behavior remain unchanged. Positional artifact
 provenance and joint stimulus-identity enforcement remain missing. Owners use separate main execution checkouts,
-qualify affected controls once and commit before serial parent integration.
+commit static-checked components before serial parent integration. CI executes
+selected tests once after delivery; neither worker nor parent runs pytest locally.
 
 The user requests architecture-test profiling on 2026-10-14 (confidence 99%).
 The parent completed one instrumented quality-suite diagnostic and one whole

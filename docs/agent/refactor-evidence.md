@@ -649,3 +649,19 @@ artifacts. Every job step passed. This qualifies the delivered selector/import
 components and test repairs within their stated limits; six findings and complete
 37-rule enforcement remain unresolved.
 
+## Application selection after broad checker removal
+
+At `f3b02b3`, one requested application-only timing run passed 951 tests with 29
+existing dependency warnings: 127.95 seconds reported by pytest and 128.73 seconds
+wall time (2m09s). The fresh-proof-bundle integration consumer remains explicitly
+excluded, as in the earlier measurement; scientific qualification is not run.
+This measurement is not an automatic pre-commit test repeat.
+
+The timing exposes residual compiler/source/guard-erasure exercises mixed into
+unit/integration modules, including fan-in reader and input-storage port probes.
+C separates those from routine selection by reviewed pytest markers while keeping
+actual runtime, native tensor/alias/order and scientific behavior tests. The saved
+timing XML has an immediate registered classification consumer; selecting affected
+cases and reusing these timings avoids another unchanged application run.
+Commit/push/hosted hooks execute static checks and do not invoke pytest.
+
