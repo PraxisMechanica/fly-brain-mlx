@@ -34,6 +34,12 @@ pytestmark = pytest.mark.integration
         ('source_changed', 'fly_brain.simulation.input_service'),
         ('source_omitted', 'fly_brain.simulation.input_service'),
         ('launch_changed', 'fly_brain.simulation.input_service'),
+        ('source_changed', 'fly_brain.qualification.adapters.torch_setup'),
+        ('source_omitted', 'fly_brain.qualification.adapters.torch_setup'),
+        ('launch_changed', 'fly_brain.qualification.adapters.torch_setup'),
+        ('source_changed', 'fly_brain.qualification.adapters.torch_observer'),
+        ('source_omitted', 'fly_brain.qualification.adapters.torch_observer'),
+        ('launch_changed', 'fly_brain.qualification.adapters.torch_observer'),
     ),
 )
 def test_batch_cannot_reuse_evidence_with_changed_execution_settings_or_source(
@@ -165,7 +171,12 @@ def test_batch_cannot_reuse_evidence_with_changed_execution_settings_or_source(
         del singles[TrialId(3)]
 
     def read_launch(commit: str, relative: str) -> bytes:
-        return originals[relative] if commit == 'launch' else b'changed launch bytes'
+        return (
+            b'changed launch bytes'
+            if (commit, relative)
+            == ('changed', 'src/' + changed_source.replace('.', '/') + '.py')
+            else originals[relative]
+        )
 
     if fault in ('none', 'extra_source'):
         assert require_environments(

@@ -36,7 +36,7 @@ class Replay(nn.Module):
 
 def prepare(
     connectome: Connectome,
-    targets: tuple[int, ...],
+    targets: tuple[NeuronRow, ...],
     silenced: tuple[NeuronRow, ...],
     trials: int,
     *,
@@ -63,7 +63,7 @@ def prepare(
 
 
 def replay_inputs(
-    events: NDArray[np.uint8], targets: tuple[int, ...], neurons: int
+    events: NDArray[np.uint8], targets: tuple[NeuronRow, ...], neurons: int
 ) -> torch.Tensor:
     if (
         events.ndim != 2

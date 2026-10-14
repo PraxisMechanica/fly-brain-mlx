@@ -5,6 +5,8 @@ import numpy as np
 import torch
 from numpy.typing import NDArray
 
+from fly_brain.simulation.identifiers import NeuronRow
+
 from .active_cpu import TorchStep
 from .paired_observer import phase_hash
 from .torch_reference import TensorState, TorchModel
@@ -51,7 +53,7 @@ def capture(state: TensorState, step: int) -> TorchSnapshot:
 def observe(
     model: TorchModel,
     events: NDArray[np.uint8],
-    targets: tuple[int, ...],
+    targets: tuple[NeuronRow, ...],
     advance: TorchStep | None = None,
 ) -> Generator[TorchSnapshot, None, None]:
     if (

@@ -50,7 +50,9 @@ def test_replay_preserves_overlapping_channels_as_counts_at_original_input_slot(
     None
 ):
     actual = replay_inputs(
-        np.array([[1, 1, 0], [0, 1, 1]], dtype=np.uint8), (0, 0, 2), 3
+        np.array([[1, 1, 0], [0, 1, 1]], dtype=np.uint8),
+        (NeuronRow(0), NeuronRow(0), NeuronRow(2)),
+        3,
     )
     assert actual.dtype == torch.float32 and native_float(actual).tolist() == [
         [2, 0, 0],
@@ -63,7 +65,7 @@ def test_replay_matches_guaranteed_native_poisson_for_all_five_returned_tensors(
     trials: int,
 ) -> None:
     case = fixture()
-    targets = (0, 2)
+    targets = (NeuronRow(0), NeuronRow(2))
     replay = prepare(
         case.connectome,
         targets,
@@ -102,7 +104,7 @@ def test_replay_rejects_noncanonical_or_mismatched_channels(
     events: NDArray[np.uint8],
 ) -> None:
     with pytest.raises(ValueError, match='canonical uint8'):
-        replay_inputs(events, (0, 1), 6)
+        replay_inputs(events, (NeuronRow(0), NeuronRow(1)), 6)
 
 
 @pytest.mark.parametrize('dtype', (torch.float64, torch.int32, torch.bool))
