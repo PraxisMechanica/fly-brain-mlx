@@ -19,8 +19,3 @@ installation, simulation, and spike comparison instructions.
 | [Output retention manifest](../../tools/code_quality/retention.json) | Exact current exceptions, operational consumers, and release conditions |
 
 Update the document that owns a fact. Other documents link to that owner.
-Independent regression fixtures live under `tests/data/reference`; the retention
-manifest names all seven fixtures and their current consumers. Generated outputs
-expire at commit and push boundaries unless the manifest registers an exact
-current operational reason and release condition. Current verification uses
-fresh outputs and every required scientific gate.

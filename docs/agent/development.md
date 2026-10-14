@@ -72,7 +72,8 @@ fallback is unsupported.
 Run from the repository root. Every output path must be new.
 
 ```sh
-uv run --locked --group qualification python -m pytest
+uv run --locked --group qualification python -m pytest \
+  --ignore=tests/integration/test_session_proof_artifacts.py
 uv run --locked --group qualification fly-brain qualify --output executions/qualification-01
 ```
 

@@ -4,9 +4,10 @@ Run the FlyWire v783 leaky integrate-and-fire model on Apple silicon with MLX.
 This project is based on [Eon Systems' simulation](https://github.com/eonsystemspbc/fly-brain),
 pinned at `a3db62f9436074e485c0278290c2164ed6150808`.
 
-The complete shortest sugar experiment and silent control have been verified.
-Full-network scientific parity and performance qualification are still in
-progress. See [project status](milestone.md) for the recorded scope and limits.
+Historical verification covered the complete shortest sugar experiment and
+silent control. Full-network scientific parity and performance qualification
+remain unfinished. See [project status](milestone.md) for current evidence and
+limits.
 
 ## Install
 
