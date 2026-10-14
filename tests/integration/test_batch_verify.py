@@ -4,9 +4,7 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-from fly_brain.comparison.module import (
-    build_coordinate_validation,
-)
+from fly_brain.comparison.acceptance import validate_coordinates
 from fly_brain.qualification.adapters.batch_native import Engine
 from fly_brain.qualification.adapters.batch_verify import compare
 from fly_brain.qualification.batch_evidence import NativeDifference, PhaseDifference
@@ -63,7 +61,7 @@ def test_saved_batch_comparison_covers_actual_trial_shapes_and_streams(
             rows = [{'step': step, 'native_sha256': selected} for step in range(-1, 35)]
         (path / stream).write_text(''.join(json.dumps(row) + '\n' for row in rows))
     assert compare(
-        batch, singletons, engine, 35, 6, 3, 2, validate=build_coordinate_validation()
+        batch, singletons, engine, 35, 6, 3, 2, validate=validate_coordinates
     ) == (
         None,
         {TrialId(trial): () for trial in range(4)},
@@ -87,7 +85,7 @@ def test_saved_batch_comparison_covers_actual_trial_shapes_and_streams(
             6,
             3,
             2,
-            validate=build_coordinate_validation(),
+            validate=validate_coordinates,
         )[0]
         == unresolved
     )
@@ -101,5 +99,5 @@ def test_saved_batch_comparison_covers_actual_trial_shapes_and_streams(
             6,
             3,
             2,
-            validate=build_coordinate_validation(),
+            validate=validate_coordinates,
         )

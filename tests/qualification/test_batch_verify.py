@@ -6,9 +6,7 @@ from typing import cast
 import pytest
 import torch
 
-from fly_brain.comparison.module import (
-    build_coordinate_validation,
-)
+from fly_brain.comparison.acceptance import validate_coordinates
 from fly_brain.qualification.adapters.batch_verify import compare
 from fly_brain.qualification.adapters.brian_jobs import build
 from fly_brain.qualification.adapters.mlx_batch_collect import collect as collect_mlx
@@ -133,5 +131,5 @@ def test_actual_batch_native_evidence_matches_fresh_independent_trial_collection
                 6,
                 len(case.connectome.sources),
                 len(case.targets),
-                validate=build_coordinate_validation(),
+                validate=validate_coordinates,
             ) == (None, {TrialId(trial): () for trial in range(4)})

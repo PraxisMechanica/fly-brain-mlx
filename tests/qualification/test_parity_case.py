@@ -7,10 +7,10 @@ import numpy as np
 import pytest
 import torch
 
-from fly_brain.comparison.module import (
-    build_case_scoring,
-    build_coordinate_validation,
-    build_reference_clock_conversion,
+from fly_brain.comparison.acceptance import (
+    evaluate_case,
+    steps_from_reference_clock,
+    validate_coordinates,
 )
 from fly_brain.infrastructure.seeded_random import uniforms
 from fly_brain.qualification.adapters.parity_case import run
@@ -58,9 +58,9 @@ def test_driver_runs_prescribed_p9_protocol_without_accepting_a_small_connectome
             prepare_stimulus=prepare_stimulus,
             read_experiment=read_experiment,
             assemble_observations=build_observation_assembly(),
-            score=build_case_scoring(),
-            validate=build_coordinate_validation(),
-            convert_clock=build_reference_clock_conversion(),
+            score=evaluate_case,
+            validate=validate_coordinates,
+            convert_clock=steps_from_reference_clock,
             reference_parameters=model_parameters(),
             silence=build_connectome_silencer(),
         )
@@ -74,9 +74,9 @@ def test_driver_runs_prescribed_p9_protocol_without_accepting_a_small_connectome
                 prepare_stimulus=prepare_stimulus,
                 read_experiment=read_experiment,
                 assemble_observations=build_observation_assembly(),
-                score=build_case_scoring(),
-                validate=build_coordinate_validation(),
-                convert_clock=build_reference_clock_conversion(),
+                score=evaluate_case,
+                validate=validate_coordinates,
+                convert_clock=steps_from_reference_clock,
                 reference_parameters=model_parameters(),
                 silence=build_connectome_silencer(),
             )

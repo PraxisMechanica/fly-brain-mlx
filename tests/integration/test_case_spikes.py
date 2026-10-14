@@ -4,9 +4,9 @@ import numpy as np
 import pytest
 from numpy.typing import NDArray
 
-from fly_brain.comparison.module import (
-    build_coordinate_validation,
-    build_reference_clock_conversion,
+from fly_brain.comparison.acceptance import (
+    steps_from_reference_clock,
+    validate_coordinates,
 )
 from fly_brain.qualification.adapters.case_spikes import load
 from fly_brain.qualification.adapters.observer_evidence import array_record
@@ -79,8 +79,8 @@ def test_native_coordinates_are_validated_before_pinned_identifier_mapping(
                 3,
                 paired,
                 cpu,
-                validate=build_coordinate_validation(),
-                convert_clock=build_reference_clock_conversion(),
+                validate=validate_coordinates,
+                convert_clock=steps_from_reference_clock,
             )
         return
     spikes, native = load(
@@ -88,8 +88,8 @@ def test_native_coordinates_are_validated_before_pinned_identifier_mapping(
         3,
         paired,
         cpu,
-        validate=build_coordinate_validation(),
-        convert_clock=build_reference_clock_conversion(),
+        validate=validate_coordinates,
+        convert_clock=steps_from_reference_clock,
     )
     assert all(
         value.neurons.tolist() == [23] and value.steps.tolist() == [1]

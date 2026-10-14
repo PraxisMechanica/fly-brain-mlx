@@ -4,10 +4,10 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-from fly_brain.comparison.module import (
-    build_case_scoring,
-    build_coordinate_validation,
-    build_reference_clock_conversion,
+from fly_brain.comparison.acceptance import (
+    evaluate_case,
+    steps_from_reference_clock,
+    validate_coordinates,
 )
 from fly_brain.qualification.adapters.brian_jobs import build
 from fly_brain.qualification.adapters.case_execution import execute
@@ -100,9 +100,9 @@ def test_each_engine_replays_fresh_state_with_complete_retained_evidence(
         stimulus,
         output,
         tmp_path,
-        score=build_case_scoring(),
-        validate=build_coordinate_validation(),
-        convert_clock=build_reference_clock_conversion(),
+        score=evaluate_case,
+        validate=validate_coordinates,
+        convert_clock=steps_from_reference_clock,
         read_experiment=build_experiment_reader(),
     )
     assert (
@@ -130,8 +130,8 @@ def test_each_engine_replays_fresh_state_with_complete_retained_evidence(
             stimulus,
             output,
             tmp_path,
-            score=build_case_scoring(),
-            validate=build_coordinate_validation(),
-            convert_clock=build_reference_clock_conversion(),
+            score=evaluate_case,
+            validate=validate_coordinates,
+            convert_clock=steps_from_reference_clock,
             read_experiment=build_experiment_reader(),
         )

@@ -7,12 +7,12 @@ from typing import get_args
 import numpy as np
 import pytest
 
-from fly_brain.comparison.models import FlyWireSpikeSteps, SpikeSteps
-from fly_brain.comparison.module import (
-    build_case_scoring,
-    build_coordinate_validation,
-    build_reference_clock_conversion,
+from fly_brain.comparison.acceptance import (
+    evaluate_case,
+    steps_from_reference_clock,
+    validate_coordinates,
 )
+from fly_brain.comparison.models import FlyWireSpikeSteps, SpikeSteps
 from fly_brain.infrastructure.seeded_random import uniforms
 from fly_brain.qualification.adapters import case_report
 from fly_brain.qualification.models import ParityCase
@@ -205,9 +205,9 @@ def test_report_reads_catalog_again_after_native_evidence_and_pending_checks(
         stimulus,
         observations,
         output,
-        score=build_case_scoring(),
-        validate=build_coordinate_validation(),
-        convert_clock=build_reference_clock_conversion(),
+        score=evaluate_case,
+        validate=validate_coordinates,
+        convert_clock=steps_from_reference_clock,
         read_experiment=read,
     )
     assert calls == ['catalog', 'record', 'paired', 'cpu', 'load', 'pending', 'catalog']

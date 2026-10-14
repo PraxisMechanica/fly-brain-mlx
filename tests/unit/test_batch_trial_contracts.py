@@ -5,7 +5,7 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-from fly_brain.comparison.module import build_coordinate_validation
+from fly_brain.comparison.acceptance import validate_coordinates
 from fly_brain.qualification.adapters.batch_verify import compare
 from fly_brain.qualification.batch_evidence import (
     NativeDifference,
@@ -230,17 +230,17 @@ def test_saved_singleton_label_three_uses_position_zero_and_float_keys_still_fai
             )
         )
     difference, finals = compare(
-        batch, singletons, 'cpu', 1, 6, 3, 2, validate=build_coordinate_validation()
+        batch, singletons, 'cpu', 1, 6, 3, 2, validate=validate_coordinates
     )
     source = (
         'import sys\n'
         'from pathlib import Path\n'
-        'from fly_brain.comparison.module import build_coordinate_validation\n'
+        'from fly_brain.comparison.acceptance import validate_coordinates\n'
         'from fly_brain.qualification.adapters.batch_verify import compare\n'
         'root = Path(sys.argv[1])\n'
         "compare(root / 'batch', "
         "{float(label): root / f'single-{label}' for label in (3, 1, 0, 2)}, "
-        "'cpu', 1, 6, 3, 2, validate=build_coordinate_validation())\n"
+        "'cpu', 1, 6, 3, 2, validate=validate_coordinates)\n"
     )
     found = tuple(map(location, typed(tmp_path, source)))
     process = run(

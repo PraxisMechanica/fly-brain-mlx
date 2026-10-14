@@ -2,6 +2,7 @@ import builtins
 import json
 import sys
 from collections.abc import Sequence
+from functools import partial
 from pathlib import Path
 from types import ModuleType
 
@@ -10,10 +11,16 @@ import pytest
 
 from fly_brain import bootstrap
 from fly_brain.comparison import commands as comparison_commands
+from fly_brain.comparison.acceptance import (
+    evaluate_case,
+    steps_from_reference_clock,
+    validate_coordinates,
+)
 from fly_brain.comparison.models import ComparisonRequest, ComparisonResult, Spikes
 from fly_brain.comparison.module import build_comparison
 from fly_brain.infrastructure.seeded_random import uniforms
 from fly_brain.qualification import commands as qualification_commands
+from fly_brain.qualification import module as qualification_module
 from fly_brain.qualification.adapters.connectome_probe import InputAuditRepository
 from fly_brain.qualification.fan_in_ports import FanInCaseBuilder
 from fly_brain.qualification.models import (
@@ -31,7 +38,12 @@ from fly_brain.qualification.module import (
     build_project_probe,
     build_qualification,
 )
-from fly_brain.qualification.ports import AbsoluteCountReader, DestinationGroupingReader
+from fly_brain.qualification.ports import (
+    AbsoluteCountReader,
+    DestinationGroupingReader,
+    ParityCommand,
+    ParityProbe,
+)
 from fly_brain.simulation.identifiers import (
     FlyWireIds64,
     NeuronRows32,
@@ -441,6 +453,18 @@ def test_bootstrap_factories_preserve_configuration_order_without_workflow_effec
     observations = ModuleType('fly_brain.simulation.observation_module')
     observations.__dict__['build_observation_assembly'] = lambda: forbidden
     monkeypatch.setitem(sys.modules, observations.__name__, observations)
+
+    if factory == 'parity_case':
+
+        def assemble(load: PinnedInputs, execute: ParityProbe) -> ParityCommand:
+            command = build_parity_case(load, execute)
+            assert isinstance(execute, partial)
+            assert execute.keywords['score'] is evaluate_case
+            assert execute.keywords['validate'] is validate_coordinates
+            assert execute.keywords['convert_clock'] is steps_from_reference_clock
+            return command
+
+        monkeypatch.setattr(qualification_module, 'build_parity_case', assemble)
 
     importing = builtins.__import__
 
