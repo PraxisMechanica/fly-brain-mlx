@@ -435,7 +435,8 @@
     "tests/quality/test_native_impact.py": {"owner":"quality_gate","role":"test","declaration_count":23,"declaration_sha256":"50f4f9ae0fe0220477922650ea0c2fd6bc539fee9682a9ff02d61dcf3d7039d5","binding_sha256":"8062319e51074dcf6c40e80538c20aa7c5a5f697829603619f5724db3425656d"},
     "tools/code_quality/native_impact.py": {"owner":"quality_gate","role":"tooling","declaration_count":5,"declaration_sha256":"1847ad81ba0aa00f93af58517bc935ce0c682dc38eaeb414ffd251ce8771cc99","binding_sha256":"219ecd66a5c80c7ba71f50f27a69e8125cd7ed79d9b68c06d522c167dd4ecd0d"},
     "tools/code_quality/native_impact_inputs.py": {"owner":"quality_gate","role":"tooling","declaration_count":7,"declaration_sha256":"6f6f7fca447c638a888f8b09f13629765be53375a668a61739779d907da410a6","binding_sha256":"6e8c30a88a1570b93162e5b1a886d61bf435bd3fcdd9a56860a83a6bebc4a63c"},
-    "tools/code_quality/native_impact_records.py": {"owner":"quality_gate","role":"tooling","declaration_count":1,"declaration_sha256":"eed0f140e7574616383602233655eb1ab337390efd0930ea720527419c2c4647","binding_sha256":"6cba4be24ec56d3f7009d7720c7b1cdface7d9ad32e1e8ce7022c5988c21066b"}
+    "tools/code_quality/native_impact_records.py": {"owner":"quality_gate","role":"tooling","declaration_count":1,"declaration_sha256":"eed0f140e7574616383602233655eb1ab337390efd0930ea720527419c2c4647","binding_sha256":"6cba4be24ec56d3f7009d7720c7b1cdface7d9ad32e1e8ce7022c5988c21066b"},
+    "tests/quality/test_native_python_imports.py": {"owner":"architecture","role":"test","declaration_count":13,"declaration_sha256":"bfafd6850083fe0db4bc31f7c8dab47e9e6ba62028f8fb7bcaecbda975a416cd","binding_sha256":"e0dcf3416b0648db0b3756791822cd25a6d3ad975ab455579d7bb6a79eb2538a"}
   },
   "resources": {
   "simulation_run": {

@@ -1,6 +1,7 @@
 // @ts-check
 /// <reference path="./native_python_context_api.d.ts" />
 import { existsSync, realpathSync } from 'node:fs';
+import { verifySourceImports } from './native_python_imports.mjs';
 import { array, boolean, construct, fail, hash, integer, invoke, object, string } from './native_types_values.mjs';
 
 /** @param {unknown} value @returns {string} */
@@ -33,12 +34,11 @@ export function observe(service, config, fs, required, native, console) {
   for (const path of tracked) {
     if (!invoke(program, 'getBoundSourceFile', [path]) || array(invoke(program, 'getParseDiagnostics', [path]), 'parse diagnostics').length) fail(`native source cannot be bound: ${uri(path)}`);
   }
-  const loadedSources = () => program.getSourceFileInfoList().map((info) => {
+  const loadedSources = () => Array.from(program.getSourceFileInfoList(), (info) => {
     const original = fs.getOriginalUri(info.uri), path = realpathSync(uri(original)), module = moduleName(info.uri);
     const typeshed = boolean(info.isTypeshedFile, 'typeshed origin'), third_party = boolean(info.isThirdPartyImport, 'third-party origin');
     if (!required.has(path) && (!typeshed && !third_party || packages.some((name) => module === name || module.startsWith(name + '.')))) fail(`foreign or unregistered first-party resolution: ${module}: ${path}`);
-    const imports = array(invoke(info.sourceFile, 'getImports', []), 'native imports');
-    if (imports.some((entry) => !boolean(object(entry, 'native import').isImportFound, 'native import found'))) fail(`unresolved native import: ${path}`);
+    verifySourceImports(native, program, path, info.sourceFile, trackedPaths.includes(path));
     return {path, sha256: hash(path), raw_uri: uri(info.uri), module, mapped: boolean(fs.isMappedUri(info.uri), 'native URI mapping'), typeshed, third_party,
       py_typed: boolean(info.isThirdPartyPyTypedPresent, 'py.typed origin')};
   });
