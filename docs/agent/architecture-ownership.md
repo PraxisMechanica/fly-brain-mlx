@@ -167,7 +167,8 @@ is outside this Python/stub registry; its existing native gate remains required.
 
 Six architecture/identifier findings remain: the concrete `Advance` callback
 contract, mixed model/framework responsibilities in the frozen `TorchModel`,
-and four primitive simulation identity contracts. Neutral observation values,
+and four simulation identity findings covering residual primitive or mixed
+contracts and unproved lawful origins. Neutral observation values,
 ports, and local assembly sites have exact entries; private helpers and snapshots
 are not public contracts. Complete type/alias/effect/control-flow coverage stays
 incomplete until the complete analyzer is verified.

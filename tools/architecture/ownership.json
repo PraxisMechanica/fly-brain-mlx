@@ -561,6 +561,14 @@
     "representation": "primitive",
     "evidence": [
       {
+        "path": "src/fly_brain/comparison/models.py",
+        "name": "ComparisonResult.rates"
+      },
+      {
+        "path": "src/fly_brain/comparison/models.py",
+        "name": "Metrics.rates"
+      },
+      {
         "path": "src/fly_brain/simulation/models.py",
         "name": "Connectome.neuron_ids"
       },
@@ -573,7 +581,7 @@
         "name": "Spikes.neuron_ids"
       }
     ],
-    "decision": "Exact pinned FlyWire identity is carried as unbranded int64/tuple[int] values at public boundaries. Keep VALUE001 visible; do not change scientific identity bytes here."
+    "decision": "Public connectome, experiment and file-spike fields use owned nominal brands. Metrics keys, generic report rows and mapped raster contracts still erase FlyWire identity; lawful conversion origins remain unproved."
   },
   "neuron_row": {
     "owner": "simulation",
@@ -593,13 +601,21 @@
         "name": "ReductionRow.neuron"
       }
     ],
-    "decision": "Row positions identify neurons within the pin and differ from FlyWire identifiers. Existing int/int32 values are not distinct identifier types."
+    "decision": "Connectome, stimulus and spike-event fields use owned nominal brands. NetworkCase selectors, observation maps, reduction selectors and row-space raster contracts remain primitive."
   },
   "edge_row": {
     "owner": "simulation",
     "resource": "pinned_connectome",
     "representation": "primitive",
     "evidence": [
+      {
+        "path": "src/fly_brain/simulation/observations.py",
+        "name": "NativeObservation.due_edges"
+      },
+      {
+        "path": "src/fly_brain/qualification/session_blocks.py",
+        "name": "SessionBlock.due_edges"
+      },
       {
         "path": "src/fly_brain/simulation/models.py",
         "name": "DestinationGrouping.edge_ids"
@@ -609,13 +625,21 @@
         "name": "ReductionRow.edges"
       }
     ],
-    "decision": "Original row positions identify retained connections, including zero and duplicate edges. The int32 representation must not be reinterpreted as a neuron identity."
+    "decision": "Grouping and bucket fields distinguish original and padded edge brands. Due-event contracts retain primitive original-edge positions; reduction leaves retain primitive padded-edge slots with their occupancy masks."
   },
   "trial": {
     "owner": "simulation",
     "resource": "simulation_run",
     "representation": "primitive",
     "evidence": [
+      {
+        "path": "src/fly_brain/qualification/batch_evidence.py",
+        "name": "PhaseDifference.trial"
+      },
+      {
+        "path": "src/fly_brain/qualification/batch_evidence.py",
+        "name": "NativeDifference.trial"
+      },
       {
         "path": "src/fly_brain/simulation/models.py",
         "name": "Stimulus.trial_indices"
@@ -629,7 +653,7 @@
         "name": "ParityCase.trial"
       }
     ],
-    "decision": "Zero-based trial identity crosses simulation and qualification boundaries as unbranded integers. Time steps and numeric dimensions are coordinate facts and are not invented independent resources."
+    "decision": "Stimulus, session, case and spike-event contracts use owned trial brands. Metrics grouping keys and batch-difference records retain primitive trial values; requested labels and local array positions require distinct treatment."
   },
   "experiment_name": {
     "owner": "simulation",
