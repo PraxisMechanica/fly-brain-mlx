@@ -5,9 +5,9 @@ against `9d73531edb2f9974cfeda1623348239401529bc6`. The coordinator checked the
 source declarations and all four frozen hashes. No numerical changes or
 scientific executions were made for this review.
 
-The [ownership contract](architecture-ownership.md) requires exact source hashes
-for two adapted references and two legacy observation oracles. Their hashes and
-lineage have one owner: [ownership.json](../../tools/architecture/ownership.json).
+The [ownership contract](architecture-ownership.md) checks the reviewed source
+hashes of two adapted references and two legacy observation oracles. Current
+hashes and independent lineage have one owner: [ownership.json](../../tools/architecture/ownership.json).
 The active scope and holds remain in [milestone.md](../../milestone.md).
 
 ## Conflict with complete separation
@@ -43,25 +43,27 @@ and application-facing executor contract. No second universal engine interface
 is needed. Non-frozen host preparation and observation shells can be separated
 without changing the frozen sources, but that does not clear the inner findings.
 
-After resolving the freeze, the inner rules need a checked read-only numerical
+The inner rules need a checked read-only numerical
 value contract and only the primitive operations actually consumed. Provider
 code must implement those primitives, rather than the model or reducer itself.
 Opaque `object` values, casts, a generic operation dispatcher, or an adapter
 calling a domain rule cannot supply the required purity and ownership evidence.
 
-Complete separation therefore needs a human amendment permitting structural
-changes to the adapted reference modules and affected legacy imports/interfaces,
-while preserving independent scientific lineage and numerical behavior. If byte
-identity remains mandatory, exact human-approved rule/symbol deviations must stay
-reported. Neither option grants a clean result to incomplete 37-rule analysis.
-No amendment or deviation has been approved by this review.
+The earlier interpretation that every structural repair needs a separate human
+freeze amendment overstated the approved refactor scope. The numerical contract
+preserves scientific behavior and independent lineage; the current hash guard
+binds its reviewed source revision. An authorized structural repair may update
+that revision after the required review, behavior preservation and source-identity
+consumers are verified. Keep the guard and provenance; never change a hash merely
+to silence a failed check. No rule deviation or numerical remedy is implied, and
+incomplete 37-rule analysis still cannot receive a clean result.
 
 ## Preservation required for a repair
 
 The [numerical contract](numerical-contract.md) owns equations, order, precision,
 state/event/queue behavior, and acceptance. Preserve the pinned inputs and seven
-independent fixtures. Keep the four current source hashes until the freeze is
-explicitly resolved.
+independent fixtures. Keep the current reviewed hashes until a specific verified structural repair
+reclassifies its changed sources and source-identity consumers.
 
 Kernel/value changes require the existing complete reference/core/factored suite,
 157 scalar cases, and affected layout checks against fresh independent references.

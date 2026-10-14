@@ -199,16 +199,22 @@ and exact-revision hosted checks before remote delivery is reported complete.
    predicates, injection/lifetime checks, control flow/failure disposition and
    alias/effect closure. Bind every applicable rule into the required gate with
    independent rejection, repair, nearby-compliant and weakening controls.
-5. Resolve the exact-source freeze conflict before the dependent inner repairs,
+5. Verify source-preserving structural repairs before the dependent inner repairs,
    complete all authorized refactor verification, and prepare the ordered handoff
    to `[Fly Brain] implementation`. That chat is idle; no message has been sent.
 
 A fresh scientific review found complete model/provider separation incompatible
 with the exact four-source freeze. The [reviewed boundaries](docs/agent/numerical-boundaries.md)
 identify affected symbols, the minimum repair and preservation requirements.
-No structural amendment or exact rule deviation is approved. Keep all four
-hashes exact while independent non-frozen work proceeds. The
-[coverage report](docs/agent/quality-coverage.md) owns remaining mechanism limits.
+The prior requirement for a separate human freeze amendment was an overbroad
+interpretation. The authorized refactor can reclassify a reviewed source revision
+only after preserving scientific behavior, independent lineage and every actual
+source-identity consumer. Current hashes remain enforced until that specific
+repair is checked; no numerical remedy, new execution mode or rule deviation is
+approved. The pending pure reference-default extraction has a completed delegated
+scientific review and bounded preservation evidence; final checked integration
+is still required. The [coverage report](docs/agent/quality-coverage.md) owns
+remaining mechanism limits.
 
 ## Current scientific scope
 

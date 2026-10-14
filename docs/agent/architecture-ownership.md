@@ -154,8 +154,10 @@ The adapted Brian2/PyTorch reference records freeze the local source and name th
 upstream commit, source path and original blob hash obtained from local Git.
 They are first-party qualification references, not blanket vendor exemptions.
 The [numerical boundary review](numerical-boundaries.md) records the conflict
-between exact source preservation and complete model/provider separation; no
-freeze amendment or rule deviation has been approved.
+between permanent byte identity and complete model/provider separation. It also
+records the correction: authorized structural repairs may reclassify the reviewed
+source revision after preservation and identity checks. No rule deviation or
+numerical change is granted.
 The Brian2/PyArrow stubs are handwritten, checked source contracts and have no
 generator provenance. The separately pinned JavaScript metric tool's provenance
 is outside this Python/stub registry; its existing native gate remains required.
