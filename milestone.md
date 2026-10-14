@@ -344,6 +344,23 @@ retaining every predicate; no cohort ran until the candidate passed metrics.
 The six recorded findings remain. Positional artifacts lack requested-label
 metadata; lawful origins and joint stimulus/artifact identity remain unproved.
 
+The six-file network-case selector component is pushed at `3736127` after
+normal commit/push checks and exact hosted run `38577838508`: six changed inputs,
+148 affected Python files, five reviewed sources and 360 retained records. Its
+quality step took 26 seconds, with no pytest and zero artifacts. Twelve distinct
+affected controls passed once in
+5.37 seconds: twelve wrong-space field sites, a shared repair, four independent
+field weakenings and four host-preservation instances. Strict typing and Ruff
+passed; worker metrics improve mean 15.03 to 15.01 and health 40.52 to 40.55,
+with maximum 96 unchanged. Four normalized modules, all 80 original assertions,
+33 constructors, 360 other Python files, five protected sources, seven fixtures
+and six tracked data inputs are preserved. Only four selector annotations and
+148 identity-only element wrappers change; five empty constructors stay exact.
+Passed tuple/scalar identities and host layouts are preserved. Historical
+cross-site literal-tuple coalescing is outside the contract. Scientific collection
+failed at the qualification conftest because no Metal device was available;
+no scientific cases ran. All six findings and numerical holds remain.
+
 The five-file fan-in grouping seam is pushed at `d0c1d6f` after normal
 commit/push checks and exact hosted run `38571157980`: five changed inputs,
 16 affected Python files, four reviewed sources and 359 retained records.
@@ -397,11 +414,11 @@ explicit. A implements the bounded preparation → late absolute-count read →
 pure completion split in existing input-pattern/probe/factory files, with the
 exact mapping contract and named report-source capture. Grouping injection is
 delivered and cannot alone establish a complete module guard.
-C implements only the four `NetworkCase` selector annotations and their authored
-catalog elements. Actual consumers require passed-tuple/scalar alias identity,
-values/order and host projections; historical compiler coalescing of constant
-tuples across sites/calls is not preserved or required. Canonical batch labels
-are delivered. Local array positions, collectors, digest
+C has delivered the four `NetworkCase` selector annotations and authored
+catalog elements. It assesses the next qualification-side row selector boundary
+without edits. Passed-tuple/scalar identity, values/order and host projections
+are preserved; historical cross-site literal-tuple coalescing is outside the
+contract. Canonical batch labels are delivered. Local array positions, collectors, digest
 streams and original numeric behavior remain unchanged. Positional artifact
 provenance and joint stimulus-identity enforcement remain missing. Owners use separate main execution checkouts,
 qualify affected controls once and commit before serial parent integration.

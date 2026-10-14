@@ -620,7 +620,7 @@
         "name": "ReductionRow.neuron"
       }
     ],
-    "decision": "Connectome, stimulus and spike-event fields use owned nominal brands. Row-space coordinate validation uses its own raster specialization. NetworkCase selectors, observation maps and reduction selectors remain primitive."
+    "decision": "Connectome, stimulus, spike-event and NetworkCase selector fields use owned nominal brands. Row-space coordinate validation uses its own raster specialization. Observation maps and reduction selectors remain primitive; lawful origins remain unproved."
   },
   "edge_row": {
     "owner": "simulation",
