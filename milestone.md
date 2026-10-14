@@ -267,10 +267,11 @@ persistence and mixed role responsibilities still require a separate repair.
 
 The raster specialization candidate has 116 qualified focused controls. Its
 remaining native proof initially queried a context with unresolved NumPy imports:
-both NewType bases were Unknown, promoting both aliases to the later constraint.
+both NewType bases were native Any, promoting both aliases to the later constraint.
 One targeted comparison kept source bytes/nodes unchanged and supplied the actual
 installed dependency root; row and FlyWire arguments then differ correctly, with
-zero unresolved imports. C is repairing only that fixture context and the failed
+no unresolved authored/NumPy imports. Dormant Python 3.14 branches in upstream
+typeshed still name absent annotationlib. C is repairing only that fixture context and the failed
 control before adoption. B separately assesses missing-import rejection; neither
 projector substitution nor relaxed specialization expectations are authorized.
 
