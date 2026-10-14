@@ -6,6 +6,8 @@ from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
 from typing import cast
 
+from .git_environment import isolated_environment
+
 MANAGED_ROOTS = ('logs', 'executions', '.quality-reports')
 POLICY = 'tools/code_quality/retention.json'
 
@@ -116,6 +118,7 @@ def clean_outputs(root: Path) -> None:
         subprocess.check_output(
             ['git', 'ls-files', '-z', '--', POLICY, *MANAGED_ROOTS],
             cwd=root,
+            env=isolated_environment(),
             text=True,
         ).split('\0')
     ) - {''}

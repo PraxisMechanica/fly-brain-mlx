@@ -1,7 +1,8 @@
-import os
 import subprocess
 from collections.abc import Sequence
 from pathlib import Path
+
+from tools.code_quality.git_environment import isolated_environment
 
 PROJECT = Path(__file__).resolve().parents[2]
 ENGINE = PROJECT / 'node_modules/@eng-metrics/code-quality/src/cli.mjs'
@@ -14,9 +15,7 @@ def run(
     root: Path,
     environment: dict[str, str] | None = None,
 ) -> subprocess.CompletedProcess[str]:
-    isolated = {
-        key: value for key, value in os.environ.items() if not key.startswith('GIT_')
-    }
+    isolated = isolated_environment()
     isolated.update(environment or {})
     return subprocess.run(
         arguments,
