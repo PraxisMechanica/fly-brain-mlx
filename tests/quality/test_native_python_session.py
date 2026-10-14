@@ -85,47 +85,78 @@ def test_live_native_reads_share_the_canonical_program_without_tracking_mutation
     result = session_probe(
         context_root,
         'const path=request.root+"/src/context_pkg/model.py";\n'
-        'return [Boolean(session.bind(path)),session.parsed(path).parserOutput.parseTree.nodeType,\n'
+        'const bound=session.bind(path),tree=session.parsed(path).parserOutput.parseTree;\n'
+        'return [bound===session.bind(path),tree===session.parsed(path).parserOutput.parseTree,tree.nodeType,\n'
         'session.diagnostics(path),typeof session.node_info,"setTrackedFiles" in session,Object.isFrozen(session)];',
     )
     value = json.loads(result.stdout)
     assert (result.returncode, value['value'], value['report']['host_kind']) == (
         0,
-        [True, 36, [], 'object', False, True],
+        [True, True, 36, [], 'object', False, True],
         0,
     ), result.stdout + result.stderr
 
 
 @pytest.mark.parametrize(
-    'consumer,after,message',
+    'consumer,after,mutation,message',
     (
         (
             'return session.parsed(request.root+"/outside.py");',
+            '',
+            '',
+            'session read is outside discovery',
+        ),
+        (
+            'return session.parsed(request.package+"/dist/typeshed-fallback/stdlib/builtins.pyi");',
+            '',
             '',
             'session read is outside discovery',
         ),
         (
             'session.parsed(request.root+"/src/context_pkg/model.py"); return 1;',
             'borrowed.parsed(request.root+"/src/context_pkg/model.py");',
+            '',
             'session is closed',
+        ),
+        (
+            'const path=request.root+"/typings/late.pyi"; session.parsed(path);\nconst {writeFileSync}=await import("node:fs"); writeFileSync(path,"value: str\\n"); return 1;',
+            '',
+            '',
+            'COV002: context input changed after observation',
         ),
     ),
 )
-def test_session_rejects_unregistered_and_post_disposal_reads(
-    context_root: Path, consumer: str, after: str, message: str
+def test_session_rejects_missing_or_invalid_selected_reads(
+    context_root: Path, consumer: str, after: str, mutation: str, message: str
 ) -> None:
     (context_root / 'outside.py').write_text('value = 1\n')
-    result = session_probe(context_root, consumer, after=after)
-    assert (result.returncode, message in result.stdout) == (2, True), result.stdout
+    (context_root / 'typings/late.pyi').write_text('value: int\n')
+    bridge = edited_bridge(
+        context_root,
+        'const session = Object.freeze({',
+        mutation + ' const session = Object.freeze({',
+    ).with_name('native_python_session.mjs')
+    result = session_probe(context_root, consumer, after=after, bridge=bridge)
+    assert (
+        result.returncode,
+        'COV002:' in result.stdout,
+        message in result.stdout,
+    ) == (
+        2,
+        True,
+        True,
+    ), result.stdout
 
 
+@pytest.mark.parametrize('omitted', ('src/context_pkg/model.py', 'typings/late.pyi'))
 def test_native_enumeration_rejects_omission_before_the_consumer_runs(
-    context_root: Path,
+    context_root: Path, omitted: str
 ) -> None:
+    (context_root / 'typings/late.pyi').write_text('value: int\n')
     result = session_probe(
         context_root,
         'process.stderr.write("consumer-ran"); return 1;',
-        omitted=('src/context_pkg/model.py',),
+        omitted=(omitted,),
     )
     assert (
         result.returncode,
@@ -156,56 +187,66 @@ def test_real_native_resources_dispose_on_consumer_success_and_failure(
 
 
 @pytest.mark.parametrize(
-    'consumer,after,guard',
+    'consumer,after,mutation,module,guard,replacement,exit_code,admitted,value',
     (
         (
-            'return session.parsed(request.root+"/outside.py");',
+            'session.parsed(request.root+"/outside.py"); process.stderr.write("outside-read"); return 1;',
             '',
+            '',
+            'native_python_session.mjs',
             'if (!required.has(resolved))',
+            'if (false)',
+            2,
+            'outside-read',
+            None,
         ),
         (
             'session.parsed(request.root+"/src/context_pkg/model.py"); return 1;',
             'borrowed.parsed(request.root+"/src/context_pkg/model.py");',
+            '',
+            'native_python_session.mjs',
             'if (!active)',
+            'if (false)',
+            0,
+            '',
+            1,
         ),
     ),
 )
 def test_disabling_each_read_guard_admits_the_same_unsupported_read(
-    context_root: Path, consumer: str, after: str, guard: str
+    context_root: Path,
+    consumer: str,
+    after: str,
+    mutation: str,
+    module: str,
+    guard: str,
+    replacement: str,
+    exit_code: int,
+    admitted: str,
+    value: bool | int | None,
 ) -> None:
     (context_root / 'outside.py').write_text('value = 1\n')
-    bridge = edited_bridge(
-        context_root,
-        guard,
-        'if (false)',
-    ).with_name('native_python_session.mjs')
-    result = session_probe(
-        context_root,
-        consumer,
-        after=after,
-        bridge=bridge,
+    (context_root / 'typings/late.pyi').write_text('value: int\n')
+    bridge = edited_bridge(context_root, guard, replacement, module).with_name(
+        'native_python_session.mjs'
     )
-    assert result.returncode == 0, result.stdout
-
-
-def test_selected_unreferenced_stub_remains_an_explicit_missing_native_result(
-    context_root: Path,
-) -> None:
-    path = context_root / 'typings/late.pyi'
-    path.write_text('value: int\n')
-    result = session_probe(
-        context_root,
-        'const path=request.root+"/typings/late.pyi";\n'
-        'return [session.bind(path)===undefined,session.parsed(path)===undefined];',
+    text = bridge.read_text()
+    bridge.write_text(
+        text.replace(
+            'const session = Object.freeze({',
+            mutation + ' const session = Object.freeze({',
+        )
     )
-    value = json.loads(result.stdout)
+    result = session_probe(context_root, consumer, after=after, bridge=bridge)
     assert (
         result.returncode,
-        value['value'],
-        str(path) in value['report']['stub_inputs'],
-        str(path) in [entry['path'] for entry in value['report']['loaded']],
-        str(path) in [entry['path'] for entry in value['report']['read_inputs']],
-    ) == (0, [True, True], True, False, False), result.stdout
+        result.stderr,
+        json.loads(result.stdout).get('value'),
+    ) == (
+        exit_code,
+        admitted,
+        value,
+    ), result.stdout
 
 
 @pytest.mark.parametrize('guard', ('normal', 'weakened'))

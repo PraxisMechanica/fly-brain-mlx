@@ -19,6 +19,7 @@ declare namespace NativePython {
     isThirdPartyPyTypedPresent: boolean; sourceFile: unknown;
   }
   interface Program extends NativeTypes.Program {
+    addInterimFile(uri: NativeTypes.Uri): SourceInfo;
     getBoundSourceFile(uri: NativeTypes.Uri): unknown;
     getSourceFileInfoList(): SourceInfo[];
   }

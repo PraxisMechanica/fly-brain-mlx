@@ -3,6 +3,7 @@
 import { createHash } from 'node:crypto';
 import { realpathSync } from 'node:fs';
 import { join } from 'node:path';
+import { enroll } from './native_python_binding.mjs';
 import { observe, uri } from './native_python_observation.mjs';
 import { captureReads } from './native_types_context.mjs';
 import { pinnedPackage, loader, VERSION, HASHES } from './native_types_loading.mjs';
@@ -65,7 +66,9 @@ export async function withSession(request, text, consume) {
       if (!active) fail('native Python session is closed');
       const resolved = realpathSync(path);
       if (!required.has(resolved)) fail(`native Python session read is outside discovery: ${resolved}`);
-      return Uri.file(resolved, services);
+      const source = Uri.file(resolved, services);
+      enroll(program, source, fs, native);
+      return source;
     };
     const session = Object.freeze({
       native, node_info: object(object(program, 'native program').analyzerNodeInfoReader, 'native node info reader'),
