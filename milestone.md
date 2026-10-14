@@ -66,8 +66,25 @@ refer to the agent's own elapsed execution time including investigation, edits,
 tool runs, tests and verification, not hypothetical human engineering effort.
 The full-run time ceiling remains unresolved; do not assume a matrix exemption.
 A 90%-confidence estimate for remaining bounded harness diagnosis and delivery is
-**30–120 minutes** at this checkpoint. The whole-goal interval below remains
-provisional until a paired case can be timed under an agreed execution budget.
+**30–120 minutes of agent execution once the run-budget scope is resolved**.
+The whole-goal interval below is conditional on permission for the required
+scientific experiment runtimes; it remains provisional until a paired case can
+be timed under an agreed budget.
+
+Delivery: `b626b4c` and `f571f0b` passed automatic commit/push checks and are on
+`origin/main`. Hosted CI `38653169030` passed for the first repair; exact-revision
+CI `38653765395` passed for the map-reuse/timeout repair (59-second job, including
+25 seconds for affected checks/tests). No native or pinned data test is running.
+Remaining full preservation and matrix/batch runs are held:
+the measured 32-step workload still predicts an over-five-minute preservation
+case. Resolve whether the five-minute ceiling also covers the originally required
+full-network scientific experiments before starting those runs. No exception has
+been assumed and no acceptance gate has been removed.
+
+The failed initial setup baseline and inspected end-to-end export/comparison
+outputs have completed their consumers; their retention exceptions are released.
+Keep the current local scientific, input, profile/native-equivalence and future
+matrix bundles for the remaining qualification and performance decisions.
 
 ### Implementation baseline and unverified requirements
 
