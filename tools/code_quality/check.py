@@ -9,6 +9,8 @@ from typing import Literal
 from .changes import Plan, build_plan
 from .native_impact import commands
 from .run import check
+from .test_selection import commands as test_commands
+from .test_selection import execution_arguments
 
 Stage = Literal['commit', 'push', 'ci', 'manual']
 COMMAND = ('uv', 'run', '--locked', '--no-sync')
@@ -66,6 +68,7 @@ def tasks(plan: Plan, stage: Stage) -> tuple[tuple[str, tuple[str, ...]], ...]:
         result.append(
             ('metrics', ('python', '-m', 'tools.code_quality.gate', '--stage', stage))
         )
+    result.extend(test_commands(plan.tests, stage))
     return tuple(result)
 
 
@@ -107,9 +110,12 @@ def execute(plan: Plan, stage: Stage, only: str | None = None) -> int:
     print(
         f'Incremental {stage}: {len(plan.changed)} changed inputs; '
         f'{len(plan.python)} affected Python files.'
+        f' {len(plan.tests)} selected test targets.'
     )
     for name, arguments in selected:
-        if result := check(name, (*COMMAND, *arguments)):
+        if result := check(
+            name, (*COMMAND, *execution_arguments(name, arguments, stage))
+        ):
             return result
     if not selected:
         print('No changed inputs require this check.')
@@ -131,6 +137,7 @@ def main(arguments: Sequence[str] | None = None) -> int:
             'boundaries',
             'ownership',
             'metrics',
+            'tests',
         ),
     )
     options = parser.parse_args(arguments, namespace=Arguments())

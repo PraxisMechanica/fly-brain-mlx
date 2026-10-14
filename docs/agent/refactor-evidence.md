@@ -659,9 +659,20 @@ This measurement is not an automatic pre-commit test repeat.
 
 The timing exposes residual compiler/source/guard-erasure exercises mixed into
 unit/integration modules, including fan-in reader and input-storage port probes.
-C separates those from routine selection by reviewed pytest markers while keeping
-actual runtime, native tensor/alias/order and scientific behavior tests. The saved
-timing XML has an immediate registered classification consumer; selecting affected
-cases and reusing these timings avoids another unchanged application run.
-Commit/push/hosted hooks execute static checks and do not invoke pytest.
+The marker component is integrated at `7fba34d`. Its 13 reviewed files exclude
+109 checker cases while preserving all 88 original test/helper function bodies
+and 101 assertions, including actual runtime, native tensor/alias/order and
+scientific behavior cases. Exact declaration/binding fingerprints remain unchanged.
+Those excluded cases account for 117.223 of 124.852 summed testcase seconds in
+the saved measurement; the remaining 842 cases account for 7.629 seconds. These
+are historical testcase sums, not a measured new wall time. The classification
+consumer is complete. No manual test rerun was added.
+
+The latest user correction requires one automatic affected-test invocation in
+the commit hook and the same selection in CI. Push/manual gate stages do not
+invoke pytest; parent fast-forward integration reuses the worker-tested commit.
+This replaces the earlier CI-only interpretation. Routine selection excludes
+reviewed checker exercises and the integration consumer requiring a fresh full
+native proof bundle; neither full scientific qualification nor complete 37-rule
+architecture acceptance is established.
 

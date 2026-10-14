@@ -252,6 +252,7 @@ def test_canonical_native_paths_override_loaded_editable_packages(
     assert build_plan(checkout, 'commit', {}).python == ('tools/local_source.py',)
 
 
+@pytest.mark.checker
 def test_disabling_native_dependency_selection_loses_consumer(
     checkout: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:

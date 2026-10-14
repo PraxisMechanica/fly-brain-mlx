@@ -1,4 +1,4 @@
-"""Changed/current scope composition. Component owners run regressions once.
+"""Changed/current scopes with automatic commit and CI behavior tests.
 
 Runtime imports, historical deletion closure and complete architecture coverage
 are unsupported. The runner must verify checkout/index consistency before planning.
@@ -17,6 +17,7 @@ from .change_inputs import Stage as Stage
 from .change_inputs import resolve_inputs
 from .impact import current_graph, module_name
 from .native_impact import affected as native_affected
+from .test_selection import delivery_inputs, select_tests
 
 
 @dataclass(frozen=True)
@@ -31,43 +32,47 @@ class Plan:
     boundary_files: tuple[str, ...] = ()
     tree: str | None = None
     native: tuple[str, ...] = ()
+    tests: tuple[str, ...] = ()
 
 
 def build_plan(root: Path, stage: Stage, environment: Mapping[str, str]) -> Plan:
     """Preserve range seeds and current consumers; never certify architecture rules.
 
     Unproved Python deletions/renames fail COV002. Stubs invalidate typing globally.
-    main.py conservatively consumes app modules. This API selects static checks.
+    main.py conservatively consumes app modules. Test scope precedes type widening.
     """
     try:
         inputs = resolve_inputs(root, stage, environment)
+        testing = delivery_inputs(inputs, stage)
         context = compiler_context(inputs)
         changed, existing = inputs.changed, inputs.existing
         actual = changed & existing
         python_sources = {path for path in existing if path.endswith('.py')}
         changed_python = actual & python_sources
+        seeds = (changed | testing.changed) & python_sources
         python = set(actual)
-        removed = {path for path in changed if path.endswith('.py')} - existing
+        removed = {path for path in testing.changed if path.endswith('.py')} - existing
         if removed:
             raise ValueError(
                 'unproved affected scope for removed Python input: '
                 + ', '.join(sorted(removed))
             )
-        if changed_python:
+        impacts: dict[str, set[str]] = {}
+        if seeds:
             graph = current_graph(inputs.root, inputs.tree)
             required = python_sources - {'main.py'}
             sources = {module_name(path): path for path in required}
             if len(sources) != len(required) or not sources.keys() <= graph.modules:
                 raise ValueError('native graph omits required Python source')
-            affected: set[str] = set()
-            for path in changed_python - {'main.py'}:
+            for path in seeds - {'main.py'}:
                 name = module_name(path)
-                affected |= {name} | graph.find_downstream_modules(
+                affected = {name} | graph.find_downstream_modules(
                     name, as_package=path.endswith('/__init__.py')
                 )
                 if path.endswith('/__init__.py'):
                     affected |= graph.find_descendants(name)
-            python |= {sources[name] for name in affected & sources.keys()}
+                impacts[path] = {sources[name] for name in affected & sources.keys()}
+            python.update(*map(impacts.__getitem__, changed_python - {'main.py'}))
         app = {path for path in python_sources if path.startswith('src/')}
         boundary_files = app if context.boundaries else python & app
         if python & app and 'main.py' in existing:
@@ -92,6 +97,7 @@ def build_plan(root: Path, stage: Stage, environment: Mapping[str, str]) -> Plan
             tuple(sorted(boundary_files)),
             inputs.tree,
             native_affected(inputs, context.runtime),
+            select_tests(testing, impacts, stage),
         )
     except (
         OSError,

@@ -29,9 +29,11 @@ boundary. This supersedes the previous unconditional full-snapshot workflow.
 The checked workflow now uses that model. Preserve exact predicates, complete
 source discovery, changed-input invalidation and honest coverage; incremental
 results do not establish missing 37-rule mechanisms. Component owners retain source/dependency evidence. The latest user correction
-requires automatic test execution once per submitted revision; CI is the selected
-owner. Local worker/parent commits and pushes run static checks only. A persistent
-test-verdict cache is outside the minimum solution.
+requires automatic affected tests in the commit hook, using the same selection
+as CI. No separate manual pytest or push-hook test run is required. Adopt a
+checked worker descendant by fast-forward instead of making a second integration
+commit that repeats local tests. CI independently verifies the delivered revision;
+a persistent test-verdict cache is outside the minimum solution.
 
 The latest user amendment on 2026-10-14 requires tests of actual changes, not
 broad checker self-testing. Remove the quality suite from default pytest and the
@@ -39,17 +41,19 @@ blanket checker-test command. Do not require hook-simulation matrices or disabli
 individual guards as routine verification. Focus ordinary tests on changed
 behavior and affected consumers; unchanged controls are reused. This supersedes
 the former blanket checker rejection/repair/weakening qualification workflow.
-The user clarifies that relevant tests must execute automatically at commit or
-CI, without additional manual or duplicate runs. CI is the single pytest owner;
-B implements one affected-test invocation in the existing CI gate. This supersedes
+The latest user clarification requires relevant tests automatically in the
+commit hook to catch failures before delivery, and in CI through the same runner.
+B owns one affected-test invocation per commit/CI gate; push and manual gate
+stages do not run pytest. This supersedes the prior CI-only interpretation and
 manual pre-commit pytest instructions. Directly changed tests and proved affected
 application tests are selected; typing-context invalidation must not restore the
 entire checker suite. The architecture and scientific predicates remain unchanged. The
 application-only timing at `f3b02b3` passes 951 cases in 128.73 seconds, but reveals
-checker exercises mixed into unit/integration folders. C owns their reviewed
-`checker` markers and exact ownership-row deltas; root owns default marker
+checker exercises mixed into unit/integration folders. The marker component is integrated at `7fba34d`: 13 reviewed files exclude
+109 checker cases, with all 88 original function bodies and 101 assertions
+preserved. Ownership fingerprints are unchanged; root owns default marker
 selection. Preserve all actual runtime/scientific test bodies. Reuse completed
-timing data and verify collection instead of rerunning unchanged tests.
+timing data instead of making additional manual test runs.
 
 The user also identifies repeated full metric baselines. A owns the minimal
 numeric per-blob fact reuse component (confidence 95%, starting `2a54911`), in an
@@ -131,8 +135,9 @@ are preserved; historical cross-site literal-tuple coalescing is outside the
 contract. Canonical batch labels are delivered. Local array positions, collectors, digest
 streams and original numeric behavior remain unchanged. Positional artifact
 provenance and joint stimulus-identity enforcement remain missing. Owners use separate main execution checkouts,
-commit static-checked components before serial parent integration. CI executes
-selected tests once after delivery; neither worker nor parent runs pytest locally.
+commit components through the automatic affected-test hook before parent
+fast-forward integration. CI independently verifies delivery; neither worker nor
+parent adds separate manual pytest calls, and pushes do not run tests.
 
 The user requests architecture-test profiling on 2026-10-14 (confidence 99%).
 The parent completed one instrumented quality-suite diagnostic and one whole

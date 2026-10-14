@@ -20,11 +20,12 @@ just check commit
 pre-commit configuration, and installs commit/push hooks. `just check commit`
 selects changed indexed inputs and affected dependents for formatting, lint,
 strict typing, import boundaries, reviewed ownership and metric regression. It
-runs static checks without local pytest. Component owners author meaningful tests
-for actual changes; the CI stage executes the selected tests once for the submitted
-revision. Commit and push stages do not invoke pytest, and agents do not add manual
-pre-commit test runs. `just check push` validates the submitted static source range;
-`just check ci` is the single automatic test owner. Current native
+runs the selected tests automatically after those checks and blocks a failing
+commit. The selection includes staged and pending delivery changes since
+`origin/main`, so it covers the revision CI will receive. CI uses the same
+affected-test runner. Agents do not add manual pre-commit pytest calls.
+`just check push` validates the submitted static source range without running
+tests; `just check manual` also leaves test execution to the automatic boundaries. Current native
 imports and every submitted changed path select affected dependents. Python
 deletions and renames with unproved impact fail COV002; they do not receive an
 empty pass. Changed compiler/tool/configuration inputs invalidate their scope.
@@ -61,8 +62,10 @@ retain a diagnostic file under `logs/quality`, capped at 64 KiB of text with
 explicit omissions. Metric summaries include complete finding counts and at most
 twenty examples, with no repeated file inventories. Hosted checks print bounded
 diagnostics without uploading report artifacts. `just check manual` keeps its diagnostics locally.
-CI selects focused pytest targets for actual changed behavior and affected
-consumers, then invokes pytest once. Do not duplicate that invocation locally.
+The commit and CI gates select focused pytest targets for actual changed
+behavior and affected consumers, then invoke pytest once per gate. Adopt checked
+worker descendants by fast-forward to avoid a second local integration test run.
+Do not add a separate manual run or repeat tests in the push hook.
 Default application selection excludes reviewed `checker` exercises even where
 those files live under unit/integration folders.
 Do not run the whole checker suite, hook-simulation matrices or guard-weakening
@@ -101,7 +104,7 @@ uv run --locked --group qualification fly-brain qualify --output executions/qual
 ```
 
 Default pytest selection covers application unit and file/process integration
-tests. Use explicit affected targets during development; the full command above
+tests. Ordinary development relies on automatic affected tests; the full command above
 is for an explicitly requested full application run. The proof-artifact integration consumer needs a fresh full native
 proof bundle; refactor verification reports its exclusion explicitly. When
 choosing a repository-local pytest temporary root, use a fresh path under

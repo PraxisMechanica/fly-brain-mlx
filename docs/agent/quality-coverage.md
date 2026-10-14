@@ -26,7 +26,7 @@ No incomplete rule is treated as clean or inapplicable.
 | CODE001, STYLE001 | Ruff detects configured unused bindings/syntax failures and checks formatting. Named-declaration/binding reconciliation and frozen provenance guards are implemented. Complete contract/stub and semantic catalog coverage remain missing. |
 | COV001 | Hook mode rejects unindexed Python/check inputs, including canonical policy and metric prerequisites. The loader rejects missing/changed file/declaration/binding inputs and frozen provenance. Source fixtures prove repair and weakening; complete semantic bindings, source languages, roles/resources and build variants still require coverage. |
 | COV002 | Missing capabilities raise analysis failures in the bounded analyzer components. Complete required executable coverage/error analysis remains to be implemented and integrated. |
-| COV003 | Commit, push and hosted checks use explicit stage modes. Changed sources and affected dependents receive static checks; CI executes selected tests once per submitted revision; local commit/push stages are static only. Global inventory and metric aggregates remain accounted for. Required merge protection is not configured. |
+| COV003 | Commit, push and hosted checks use explicit stage modes. Changed sources and affected dependents receive static checks; commit and CI gates each execute one selected-test command. Push/manual stages do not run tests; parent fast-forward integration reuses the checked worker revision. Global inventory and metric aggregates remain accounted for. Required merge protection is not configured. |
 | COV004 | Native import and metric fixtures exercise rejection and repair; hook probes exercise child-error propagation and staged-source handling. Transitive paths, source selection and canonical-input weakening are covered. Unimplemented predicates remain unproved. Focused tests verify actual changes; broad checker simulations and guard weakening are no longer routine requirements. |
 
 ## Working mechanisms
@@ -38,8 +38,9 @@ bridge checks derive reverse static type consumers from pinned TypeScript
 dependencies; changed ambient/global declarations invalidate their native cohort.
 The compiler loads supporting context, while computed provider acquisition and
 runtime/effect resolution remain unproved. Component owners author focused tests and record
-source/dependency identity. CI is the single automatic pytest
-owner; commit/push hooks and agents do not add local test runs. Unsupported Python deletion/rename
+source/dependency identity. The commit hook automatically runs affected tests
+and blocks failures before delivery; CI uses the same selection. Push/manual
+stages and agents do not add separate test runs. Unsupported Python deletion/rename
 impact fails COV002, as do native removals without a proved affected scope.
 
 Configured first-party forbidden targets must exist exactly in the native graph,

@@ -55,5 +55,5 @@ jobs:
         run: just bootstrap
       - name: Select the actual commit range
         run: uv run --locked --no-sync python -m tools.code_quality.ci_refs
-      - name: Run changed-code quality checks
+      - name: Run affected checks and tests
         run: just check ci

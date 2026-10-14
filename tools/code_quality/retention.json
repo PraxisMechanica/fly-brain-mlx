@@ -40,11 +40,6 @@
       "path": "logs/quality/imports",
       "reason": "Native Grimp import facts consumed by tools/code_quality/boundaries.py; unchanged source parsing is reused across commit and delivery checks. No test or quality verdict is cached.",
       "release_when": "The native import-cache consumer is removed or its cache format becomes incompatible."
-    },
-    {
-      "path": "logs/quality/application-timing-20261014.xml",
-      "reason": "Measured application-test durations consumed by composition_refactor while separating checker exercises from routine application selection; comparison uses this completed run rather than repeating unchanged tests.",
-      "release_when": "The parent verifies routine/checker collection and records the timing-based classification summary."
     }
   ]
 }
