@@ -1,4 +1,5 @@
 import hashlib
+from itertools import chain
 from pathlib import Path
 
 import pytest
@@ -126,9 +127,13 @@ def test_each_actual_bridge_typing_and_inventory_driver_is_parsed_and_hashed() -
     root = PROJECT
     paths = [
         str(path.relative_to(root))
-        for path in sorted((root / 'tools/architecture').glob('native_*.mjs'))
+        for path in sorted(
+            chain(
+                (root / 'tools/architecture').glob('native_*.mjs'),
+                (root / 'tools/architecture').glob('native_*.d.ts'),
+            )
+        )
     ]
-    paths.append('tools/architecture/native_types_node.d.ts')
     source = source_inputs(root, paths)
     config = NativeInput(
         str(root / 'package.json'),
