@@ -72,7 +72,12 @@ Pyright 1.1.414's evaluator to export immutable structured graphs for classes,
 protocols, generics, unions, signatures and supported type variables, with exact
 declaration and input identities. `require_precise` rejects Any/Unknown surfaces.
 Unsupported projection forms, including ParamSpec/TypeVarTuple and recursive
-shapes, fail COV002 rather than receiving a fabricated type.
+shapes, fail COV002 rather than receiving a fabricated type. Actual bound import
+records use native reachability: active unresolved/partial imports and invalid
+native records fail with source-located COV002 after queries. Namespace-package
+origins and unreachable version branches remain valid; loaded-file and actual
+read hashes remain guarded. This does not prove computed imports, full ancestry
+precision or equivalence of the manually supplied type context.
 
 The [native call API](../../tools/architecture/native_calls.py) exports selected
 signatures/overloads, receiver types, argument/result graph references and exact

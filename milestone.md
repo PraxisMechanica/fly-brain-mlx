@@ -142,6 +142,7 @@ The following components are committed on parent `main`:
 | Component | Parent commit | Bounded evidence |
 | --- | --- | --- |
 | Native structured types and checked JavaScript inventory | `9d73531`, `38ce609` | 44 type intent cases; pinned compiler inputs work inside or outside the checkout |
+| Active native type-import coverage | `c4084be` | 25 distinct cases; actual bound imports/reachability, source-located missing/partial records, namespace origins, refreshed loaded inputs and unchanged precision |
 | Exact neutral comparison import boundary | `76f1e5d` | 38 import cases and 15 existing commit/push cases |
 | Connectome neuron and recurrent-edge array identities | `fd0a54f` | 193 input/type cases and 107 Metal/reference cases |
 | Injected qualification comparison operations | `6b495a8` | Unchanged calculation files; consumer-owned scoring, coordinates, clock conversion and diagnostics |
@@ -190,7 +191,7 @@ The identifier changes preserve numerical bodies and old assertions; NewType sup
 typing without new runtime validation or complete conversion-origin proof.
 No full native proof bundle or scientific matrix was recreated.
 
-All listed source components are pushed to `origin/main` through `b56caf2`.
+All listed source components are pushed to `origin/main` through `c4084be`.
 The spike identifier component passed the installed normal commit and push hooks
 and default cleanup without replaying its completed regressions. Delivery uses
 one ten-file component commit; the worker's earlier private ancestry is preserved
@@ -294,7 +295,7 @@ aliases to the later constraint. The repaired context resolves authored/NumPy
 imports, retains their actual input hashes and observes separate row/FlyWire
 arguments with known ndarray bases. Dormant Python 3.14 branches in upstream
 typeshed still name absent annotationlib. Projector code and specialization
-expectations are unchanged; active-import rejection is a separate owned change.
+expectations are unchanged; active-import rejection is separately delivered at `c4084be`.
 
 Fourteen normalized modules and 54 original assertions retain their meaning;
 340 other Python files, five protected sources and seven fixtures remain exact.
@@ -320,11 +321,33 @@ unchanged. Selected, unreferenced stubs remain natively unbound; this is not
 complete declaration enrollment. The historical declaration candidate remains
 unadopted and full 37-rule coverage remains COV002.
 
+The five-file native type-import guard is pushed at `c4084be` after normal
+commit/push checks and exact hosted run `38568072694`: five changed inputs,
+one affected Python source, one reviewed source and 361 retained records.
+Typed JavaScript, native syntax and every hosted step passed, with no pytest
+and zero artifacts. Twenty-five distinct controls are qualified; 13 changed
+invocation-seam controls repeated after the genuine helper extraction, while
+12 unchanged public controls were reused. The initial per-file/repository
+complexity failure was not committed or waived. Final worker metrics improved
+mean 15.13 to 15.12 and health 40.28 to 40.34 across 382 to 384 files, with maximum
+96 unchanged.
+
+The import guard owns actual parsed/bound import records and native reachability.
+It rejects active missing/partially resolved modules or invalid native facts,
+refreshes loaded inputs after queries, and permits actual namespace imports and
+unreachable version branches. `NativeSources` is byte exact; type projection,
+call/partial APIs and existing precision predicates are unchanged. Manual type
+contexts still require correct import roots; computed imports, complete ancestry,
+effects and runtime targets remain unproved. B now assesses the old 14-path
+uncommitted declaration prototype and a minimal canonical-session observation;
+its historical failing tree is preserved, not delivered or accepted.
+
 ## Remaining order and unresolved decisions
 
-Current bounded assignments at `20a2cb7` (confidence 95%): B owns active
-native-import rejection through bound nodes and native reachability, including
-lazy-loaded inputs and invalid native records; ancestry precision is separate.
+Current bounded assignments (confidence 95%): B assesses the historical
+14-path declaration candidate against the checked canonical live session;
+dormant occurrences and lexical-versus-resolved identities must remain explicit.
+Active type-import rejection is delivered; ancestry precision is separate.
 A owns only the required grouping-reader seam in the two fan-in factories and
 probe. The existing indirect `input_patterns → mapping.absolute_count_sums`
 dependency remains; grouping injection cannot establish a complete module guard.
