@@ -391,11 +391,15 @@ Current bounded assignments (confidence 95%): B qualifies selected-source
 enrollment through the pinned native interim-registration/binder APIs and checked
 canonical live session. The historical 14-path declaration tree remains
 unaccepted; dormant occurrences and lexical-versus-resolved identities must stay
-explicit. A assesses the remaining absolute-count mapping seam and late
-acquisition/pure-rule separation. Grouping injection is delivered and cannot
-alone establish a complete module guard.
-C assesses `NetworkCase` neuron-row selector tuples and their actual producers;
-canonical batch labels are delivered. Local array positions, collectors, digest
+explicit. A implements the bounded preparation → late absolute-count read →
+pure completion split in existing input-pattern/probe/factory files, with the
+exact mapping contract and named report-source capture. Grouping injection is
+delivered and cannot alone establish a complete module guard.
+C implements only the four `NetworkCase` selector annotations and their authored
+catalog elements. Actual consumers require passed-tuple/scalar alias identity,
+values/order and host projections; historical compiler coalescing of constant
+tuples across sites/calls is not preserved or required. Canonical batch labels
+are delivered. Local array positions, collectors, digest
 streams and original numeric behavior remain unchanged. Positional artifact
 provenance and joint stimulus-identity enforcement remain missing. Owners use separate main execution checkouts,
 qualify affected controls once and commit before serial parent integration.
