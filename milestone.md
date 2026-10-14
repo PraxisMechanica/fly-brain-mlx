@@ -89,8 +89,8 @@ acceptance. Current limitations remain below and in
 
 Current bounded assignments (confidence 95%): B has delivered selected-source
 enrollment and the native bound-declaration observer using the canonical live
-session. It assesses the smallest canonical-session seam for existing type
-queries. The historical 14-path declaration tree remains unaccepted; dormant
+session. It repairs the shared active-import guard before canonical type-query
+reuse. The superseded 14-path declaration candidate is retired; dormant
 occurrences and lexical-versus-resolved identities stay explicit.
 A has delivered the fan-in count boundary and the reviewed source-only neutral
 value/primitive proof. It assesses the remaining observation neuron-row/reduction

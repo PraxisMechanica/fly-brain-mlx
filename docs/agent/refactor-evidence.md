@@ -436,6 +436,34 @@ guard weakenings qualified. Complete authored bindings and dormant declarations
 remain missing. The historical 14-path prototype is unchanged and unaccepted;
 all six findings and complete architecture/scientific limits remain.
 
+## Superseded declaration candidate disposition
+
+The original candidate at `056e9f3c`, staged tree `18835a60`, was rejected and
+retired from its worker checkout. Its recorded staged metric result failed CQ002: mean
+complexity 15.43 to 15.83 across 335 to 348 files, with maximum 96 unchanged.
+Health improved 39.35 to 39.41, but that did not waive the failed predicate.
+Its historical record reports 156 source-only cases; no new cohort was run for
+this disposition and no normal commit was accepted. Native bound tables did not
+establish complete authored bindings, and alias target URIs could not be fused
+with lexical spans. The checked canonical-session observer takes the smaller
+route while keeping those capability gaps explicit.
+
+The owner and parent verified that no current qualified mechanism imports or
+requires this stack. All 13 added source/test files are our own candidate;
+its only existing-file change adds eight ownership rows. Every original row,
+other policy field and existing source remains exact. The parent matched both
+index and working bytes to the recorded staged tree before cleanup. Remaining
+capability gaps and the six findings are preserved independently of that source
+candidate. No experimental source or raw diagnostic archive becomes delivered
+or accepted merely to clear an uncommitted-change count.
+
+The parent removed exactly those 13 candidate files and eight added rows,
+restoring the existing policy byte for byte. Default cleanup removed their
+consumed ignored diagnostics. That historical worker checkout is clean, and its
+seven independent fixtures remain exact at 45,360 bytes. No existing source or
+incoming work was discarded; these are disposition records, not preserved raw
+reproducibility evidence.
+
 ## Source-only neutral numerical proof
 
 The three-file symbolic proof is pushed at `5eddbf6` after normal commit/push
