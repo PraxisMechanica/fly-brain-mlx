@@ -12,7 +12,9 @@ from fly_brain.simulation.identifiers import (
     FlyWireIds64,
     FlyWireNeuronId,
     NeuronRows32,
+    NeuronRows64,
     TrialId,
+    TrialIds64,
 )
 from fly_brain.simulation.models import (
     Connectome,
@@ -72,8 +74,8 @@ def test_spike_export_preserves_original_types_and_is_readable_when_empty(
     persist_stimulus(output, experiment, pin, stimulus)
     request = SimulationRequest(tmp_path, output, 'p9', 0.1, 1, 20261004)
     events = SpikeEvents(
-        np.zeros(count, dtype=np.int64),
-        np.ones(count, dtype=np.int64),
+        TrialIds64(np.zeros(count, dtype=np.int64)),
+        NeuronRows64(np.ones(count, dtype=np.int64)),
         np.arange(count, dtype=np.int64) * 2 + 1,
     )
     result = write_run(
@@ -106,8 +108,8 @@ def test_export_timings_use_the_injected_clock(tmp_path: Path) -> None:
     request = SimulationRequest(tmp_path, tmp_path / 'run', 'silent', 0.001, 1, 0)
     persist_stimulus(request.output, experiment, pin, stimulus)
     events = SpikeEvents(
-        np.array([], dtype=np.int64),
-        np.array([], dtype=np.int64),
+        TrialIds64(np.array([], dtype=np.int64)),
+        NeuronRows64(np.array([], dtype=np.int64)),
         np.array([], dtype=np.int64),
     )
     run = SimulationRun(events, {'warm_simulation_s': 4.0}, 0, 'test')

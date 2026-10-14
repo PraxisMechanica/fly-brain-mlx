@@ -5,6 +5,8 @@ from pathlib import Path
 import numpy as np
 import pyarrow.parquet as pq
 
+from fly_brain.simulation.identifiers import FlyWireIds64, TrialIds16
+
 from .models import ComparisonResult, Spikes
 
 
@@ -33,8 +35,8 @@ def read_spikes(path: Path, duration_s: float) -> Spikes:
     if not np.all(np.isfinite(times)):
         raise ValueError('Spike times must be finite')
     return Spikes(
-        np.asarray(table['trial'].to_numpy(), dtype=np.int16),
-        np.asarray(table['flywire_id'].to_numpy(), dtype=np.int64),
+        TrialIds16(np.asarray(table['trial'].to_numpy(), dtype=np.int16)),
+        FlyWireIds64(np.asarray(table['flywire_id'].to_numpy(), dtype=np.int64)),
         times,
     )
 

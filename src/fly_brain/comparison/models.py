@@ -6,13 +6,15 @@ from typing import Protocol
 import numpy as np
 from numpy.typing import NDArray
 
+from fly_brain.simulation.identifiers import FlyWireIds64, TrialIds16
+
 MetricValue = str | int | float | None
 
 
 @dataclass(frozen=True)
 class Spikes:
-    trials: NDArray[np.int16]
-    neuron_ids: NDArray[np.int64]
+    trials: TrialIds16
+    neuron_ids: FlyWireIds64
     time_s: NDArray[np.float64]
 
 

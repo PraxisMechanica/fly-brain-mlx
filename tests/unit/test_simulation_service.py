@@ -4,7 +4,12 @@ import numpy as np
 import pytest
 
 from fly_brain.infrastructure.seeded_random import uniforms
-from fly_brain.simulation.identifiers import FlyWireIds64, NeuronRows32
+from fly_brain.simulation.identifiers import (
+    FlyWireIds64,
+    NeuronRows32,
+    NeuronRows64,
+    TrialIds64,
+)
 from fly_brain.simulation.models import (
     Connectome,
     Experiment,
@@ -34,8 +39,8 @@ def test_stage_timings_use_only_the_injected_clock() -> None:
     )
     pin = InputPin('csv', 'parquet', 2, 0)
     events = SpikeEvents(
-        np.array([], dtype=np.int64),
-        np.array([], dtype=np.int64),
+        TrialIds64(np.array([], dtype=np.int64)),
+        NeuronRows64(np.array([], dtype=np.int64)),
         np.array([], dtype=np.int64),
     )
     run = SimulationRun(events, {}, 0, 'test')

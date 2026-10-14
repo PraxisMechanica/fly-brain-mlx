@@ -8,6 +8,7 @@ from fly_brain.comparison.metrics import count_timing_matches, pearson_or_none
 from fly_brain.comparison.models import ComparisonRequest, Spikes
 from fly_brain.comparison.schemas import ComparisonOptions
 from fly_brain.comparison.service import compare
+from fly_brain.simulation.identifiers import FlyWireIds64, TrialIds16
 
 pytestmark = pytest.mark.unit
 
@@ -24,8 +25,16 @@ def test_timing_matches_include_the_exact_tolerance_boundary() -> None:
 
 
 def test_timing_matches_do_not_cross_trials() -> None:
-    first = Spikes(np.array([0], dtype=np.int16), np.array([10]), np.array([0.0]))
-    second = Spikes(np.array([1], dtype=np.int16), np.array([10]), np.array([0.0]))
+    first = Spikes(
+        TrialIds16(np.array([0], dtype=np.int16)),
+        FlyWireIds64(np.array([10])),
+        np.array([0.0]),
+    )
+    second = Spikes(
+        TrialIds16(np.array([1], dtype=np.int16)),
+        FlyWireIds64(np.array([10])),
+        np.array([0.0]),
+    )
     request = ComparisonRequest(Path('a'), Path('b'), 1.0, 2, 1.0, 'a', 'b')
     inputs = {request.first: first, request.second: second}
     result = compare(request, lambda path, duration: inputs[path])
@@ -56,7 +65,7 @@ def test_boundary_rejects_an_invalid_duration(tmp_path: Path, duration: float) -
 def test_comparison_prepares_first_spikes_before_reader_reuses_its_buffer() -> None:
     ids = np.array([10], dtype=np.int64)
     times = np.array([0.01], dtype=np.float64)
-    shared = Spikes(np.array([0], dtype=np.int16), ids, times)
+    shared = Spikes(TrialIds16(np.array([0], dtype=np.int16)), FlyWireIds64(ids), times)
     first, second = Path('first'), Path('second')
     request = ComparisonRequest(first, second, 1.0, 1, 1.0, 'first', 'second')
 

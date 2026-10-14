@@ -11,8 +11,10 @@ from .identifiers import (
     FlyWireNeuronId,
     NeuronRow,
     NeuronRows32,
+    NeuronRows64,
     PaddedEdgeRows32,
     TrialId,
+    TrialIds64,
 )
 
 
@@ -98,8 +100,8 @@ class SimulationRequest:
 
 @dataclass(frozen=True)
 class SpikeEvents:
-    trials: NDArray[np.int64]
-    neurons: NDArray[np.int64]
+    trials: TrialIds64
+    neurons: NeuronRows64
     steps: NDArray[np.int64]
 
 

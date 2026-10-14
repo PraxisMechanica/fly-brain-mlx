@@ -4,6 +4,7 @@ import mlx.core as mx
 import numpy as np
 from numpy.typing import NDArray
 
+from fly_brain.simulation.identifiers import NeuronRows64, TrialIds64
 from fly_brain.simulation.models import Connectome, SimulationRun, SpikeEvents, Stimulus
 
 from . import core
@@ -69,7 +70,9 @@ def run(
     neurons = np.concatenate([part[1] for part in collected])
     spike_steps = np.concatenate([part[2] for part in collected])
     order = np.lexsort((neurons, spike_steps, trials))
-    spikes = SpikeEvents(trials[order], neurons[order], spike_steps[order])
+    spikes = SpikeEvents(
+        TrialIds64(trials[order]), NeuronRows64(neurons[order]), spike_steps[order]
+    )
     collection_s += perf_counter() - started_collection
     return SimulationRun(
         spikes,

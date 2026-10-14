@@ -30,7 +30,14 @@ from fly_brain.qualification.module import (
     build_project_probe,
     build_qualification,
 )
-from fly_brain.simulation.identifiers import FlyWireIds64, NeuronRows32, TrialId
+from fly_brain.simulation.identifiers import (
+    FlyWireIds64,
+    NeuronRows32,
+    NeuronRows64,
+    TrialId,
+    TrialIds16,
+    TrialIds64,
+)
 from fly_brain.simulation.models import (
     Connectome,
     Experiment,
@@ -232,8 +239,8 @@ def test_comparison_reads_in_order_and_writes_before_printing(
     request = ComparisonRequest(Path('/first'), Path('/second'), 0.1, 1, 0.1, 'a', 'b')
     output = Path('/fresh')
     spikes = Spikes(
-        np.array([0], dtype=np.int16),
-        np.array([10], dtype=np.int64),
+        TrialIds16(np.array([0], dtype=np.int16)),
+        FlyWireIds64(np.array([10], dtype=np.int64)),
         np.array([0.001], dtype=np.float64),
     )
     calls: list[object] = []
@@ -262,7 +269,11 @@ def test_simulation_preserves_stage_order_clock_calls_and_result_format(
 ) -> None:
     request = SimulationRequest(Path('/project'), Path('/fresh'), 'silent', 0.001, 1, 0)
     connectome, pin = empty_connectome(), InputPin('csv', 'parquet', 2, 0)
-    events = SpikeEvents(*(np.array([], dtype=np.int64) for _ in range(3)))
+    events = SpikeEvents(
+        TrialIds64(np.array([], dtype=np.int64)),
+        NeuronRows64(np.array([], dtype=np.int64)),
+        np.array([], dtype=np.int64),
+    )
     run = SimulationRun(events, {}, 0, 'test')
     result = SimulationResult(Path('/fresh/spikes.parquet'), 0, 0, 13.0)
     calls: list[object] = []
@@ -509,7 +520,11 @@ def test_simulation_factory_shares_the_injected_clock_with_the_result_writer(
 ) -> None:
     request = SimulationRequest(Path('/project'), Path('/fresh'), 'silent', 0.001, 1, 0)
     connectome = empty_connectome()
-    events = SpikeEvents(*(np.array([], dtype=np.int64) for _ in range(3)))
+    events = SpikeEvents(
+        TrialIds64(np.array([], dtype=np.int64)),
+        NeuronRows64(np.array([], dtype=np.int64)),
+        np.array([], dtype=np.int64),
+    )
     run = SimulationRun(events, {}, 0, 'test')
     result = SimulationResult(Path('/fresh/spikes.parquet'), 0, 0, 13.0)
     calls: list[object] = []
