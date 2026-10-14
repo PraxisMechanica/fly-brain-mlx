@@ -31,6 +31,7 @@ from fly_brain.qualification.module import (
     build_project_probe,
     build_qualification,
 )
+from fly_brain.qualification.ports import DestinationGroupingReader
 from fly_brain.simulation.identifiers import (
     FlyWireIds64,
     NeuronRows32,
@@ -490,9 +491,10 @@ def test_layout_fan_in_factory_preserves_precision_evaluator_and_scope(
         evaluator: object,
         scope: str,
         build_cases: FanInCaseBuilder,
+        read_grouping: DestinationGroupingReader,
     ) -> dict[str, object]:
         assert network is connectome and inputs is pin
-        assert callable(build_cases)
+        assert (callable(build_cases), callable(read_grouping)) == (True, True)
         calls.append((output, precision, evaluator, scope))
         return {'accepted': True}
 

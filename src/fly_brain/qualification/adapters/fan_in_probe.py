@@ -11,8 +11,8 @@ from numpy.typing import NDArray
 from fly_brain.qualification.fan_in import FanInCases, compare_cases
 from fly_brain.qualification.fan_in_ports import FanInCaseBuilder
 from fly_brain.qualification.input_patterns import analyze_inputs
+from fly_brain.qualification.ports import DestinationGroupingReader
 from fly_brain.simulation.backend.accumulation import factored_sum
-from fly_brain.simulation.mapping import group_destinations
 from fly_brain.simulation.models import Connectome, InputPin
 
 Reduction = tuple[NDArray[np.float32], NDArray[np.float32], NDArray[np.float32]]
@@ -56,6 +56,7 @@ def run(
     scope: str = 'Isolated pinned-data fan-in qualification; not a full-network run.',
     *,
     build_cases: FanInCaseBuilder,
+    read_grouping: DestinationGroupingReader,
 ) -> dict[str, object]:
     output.mkdir(parents=True, exist_ok=False)
     assert precision == '0'
@@ -65,7 +66,7 @@ def run(
     assert np.__version__ == '1.26.4'
     mx.disable_compile()
     patterns = analyze_inputs(connectome)
-    grouping = group_destinations(connectome)
+    grouping = read_grouping(connectome)
     targets: list[dict[str, object]] = []
     all_accepted = True
     total_cases = total_one_step = total_trajectory = original_failures = 0
