@@ -15,9 +15,6 @@ type-check:
 boundaries:
     uv run --locked --no-sync python -m tools.code_quality.check manual --only boundaries
 
-quality-tests:
-    uv run --locked --no-sync python -m tools.code_quality.run tests python -m pytest -q tests/quality
-
 metrics:
     uv run --locked --no-sync python -m tools.code_quality.check manual --only metrics
 

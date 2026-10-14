@@ -33,6 +33,22 @@ source/dependency evidence and run meaningful regressions once; repeat only
 changed or failed controls. Automatic regression scheduling and a persistent
 metric verdict cache are outside the minimum solution.
 
+The latest user amendment on 2026-10-14 requires tests of actual changes, not
+broad checker self-testing. Remove the quality suite from default pytest and the
+blanket checker-test command. Do not require hook-simulation matrices or disabling
+individual guards as routine verification. Focus ordinary tests on changed
+behavior and affected consumers; unchanged controls are reused. This supersedes
+the former blanket checker rejection/repair/weakening qualification workflow.
+The architecture predicates and scientific requirements remain unchanged.
+
+The user also identifies repeated full metric baselines. A owns the minimal
+numeric per-blob fact reuse component (confidence 95%, starting `2a54911`), in an
+isolated main checkout. Preserve complete Git inventory and aggregate/per-file
+comparisons; warm runs must read/analyze only changed or newly encountered blobs.
+Cache facts bind source and analyzer identity; no green verdict is cached. Cold
+bootstrap and incompatible analyzer inputs require fresh calculation. Root owns
+package/lock integration, retention and shared workflow documentation.
+
 The parent owns shared policy, canonical commands/configuration, retention,
 documentation and serial integration. Recovery is complete. The same worker
 owners use isolated execution checkouts and commit verified components before
@@ -62,8 +78,8 @@ in the retention manifest; no scientific run output is retained.
 
 Success requires:
 
-- Complete applicable 37-rule analysis and rejection fixtures, required gate
-  integration, and resolution of the authorized architecture findings. Missing
+- Complete applicable 37-rule analysis, focused verification of changed behavior,
+  required gate integration, and resolution of authorized architecture findings. Missing
   capabilities remain an analysis failure.
 - Preserve pinned inputs, reviewed reference/oracle lineage, the seven independent
   regression fixtures, scientific predicates, numerical behavior and output contracts.
@@ -137,8 +153,8 @@ architecture/scientific acceptance. Root owns results and output consumers.
    generation/persistence/silencing order and errors.
 4. Complete callable/slot origins, implicit calls, runtime targets, source/export
    predicates, injection/lifetime checks, control flow/failure disposition and
-   alias/effect closure. Bind every applicable rule into the required gate with
-   independent rejection, repair, nearby-compliant and weakening controls.
+   alias/effect closure. Bind every applicable rule into the required gate and
+   verify changed behavior with focused tests under the latest user amendment.
 5. Verify source-preserving structural repairs before the dependent inner repairs,
    complete all authorized refactor verification, and prepare the ordered handoff
    to `[Fly Brain] implementation`. That chat is idle; no message has been sent.

@@ -60,7 +60,7 @@ venv = ".venv"
 stubPath = "typings"
 
 [tool.pytest.ini_options]
-testpaths = ["tests/unit", "tests/integration", "tests/quality"]
+testpaths = ["tests/unit", "tests/integration"]
 addopts = ["--strict-config", "--strict-markers", "--import-mode=importlib"]
 markers = [
     "unit: deterministic tests without a device or reference framework",

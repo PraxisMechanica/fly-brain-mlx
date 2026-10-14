@@ -59,7 +59,11 @@ retain a diagnostic file under `logs/quality`, capped at 64 KiB of text with
 explicit omissions. Metric summaries include complete finding counts and at most
 twenty examples, with no repeated file inventories. Hosted checks print bounded
 diagnostics without uploading report artifacts. `just check manual` keeps its diagnostics locally.
-`just quality-tests` remains an explicit manual regression command.
+Select focused pytest targets for the actual changed behavior and affected
+consumers. Default pytest selection covers application unit/integration tests.
+Do not run the whole checker suite, hook-simulation matrices or guard-weakening
+exercises as routine project verification. A checker implementation change can
+receive focused ordinary behavior tests; no broad self-qualification is required.
 Diagnostic commands show at most twenty summary fields and ten examples per
 failure category, scan every actual flag, and keep full scientific reports in
 the execution bundle. The console view does not grant scientific acceptance.
@@ -92,8 +96,9 @@ uv run --locked --group qualification python -m pytest \
 uv run --locked --group qualification fly-brain qualify --output executions/qualification-01
 ```
 
-Default pytest selection covers unit, file/process integration and source-only
-quality tests. The proof-artifact integration consumer needs a fresh full native
+Default pytest selection covers application unit and file/process integration
+tests. Use explicit affected targets during development; the full command above
+is for an explicitly requested full application run. The proof-artifact integration consumer needs a fresh full native
 proof bundle; refactor verification reports its exclusion explicitly. When
 choosing a repository-local pytest temporary root, use a fresh path under
 `executions/`: application fixtures create scientific working data and must not

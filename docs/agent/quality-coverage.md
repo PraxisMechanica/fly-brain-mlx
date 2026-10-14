@@ -27,7 +27,7 @@ No incomplete rule is treated as clean or inapplicable.
 | COV001 | Hook mode rejects unindexed Python/check inputs, including canonical policy and metric prerequisites. The loader rejects missing/changed file/declaration/binding inputs and frozen provenance. Source fixtures prove repair and weakening; complete semantic bindings, source languages, roles/resources and build variants still require coverage. |
 | COV002 | Missing capabilities raise analysis failures in the bounded analyzer components. Complete required executable coverage/error analysis remains to be implemented and integrated. |
 | COV003 | Commit, push and hosted checks use explicit stage modes. Changed sources and affected dependents receive static checks; component owners execute meaningful regressions once before commit. Global inventory and metric aggregates remain accounted for. Required merge protection is not configured. |
-| COV004 | Native import and metric fixtures exercise rejection and repair; hook probes exercise child-error propagation and staged-source handling. Transitive paths, source selection and canonical-input weakening are covered. Other predicates need their own negative, repaired, close, error and weakening cases. |
+| COV004 | Native import and metric fixtures exercise rejection and repair; hook probes exercise child-error propagation and staged-source handling. Transitive paths, source selection and canonical-input weakening are covered. Unimplemented predicates remain unproved. Focused tests verify actual changes; broad checker simulations and guard weakening are no longer routine requirements. |
 
 ## Working mechanisms
 
