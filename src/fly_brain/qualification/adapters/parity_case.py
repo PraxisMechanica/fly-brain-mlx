@@ -1,8 +1,4 @@
-import hashlib
-import importlib.metadata
 import json
-import platform
-import sys
 from collections.abc import Mapping
 from dataclasses import asdict
 from pathlib import Path
@@ -28,6 +24,9 @@ from fly_brain.simulation.models import Connectome, InputPin
 from .brian_jobs import build
 from .case_execution import execute
 from .case_report import write
+from .environment import write as write_environment
+from .reference_identity import create as reference_identity
+from .reference_identity import file_record
 from .torch_setup import prepare as prepare_cpu
 
 
@@ -63,33 +62,7 @@ def run(
         )
 
     stimulus, silenced = prepare_stimulus(connectome, pin, case, output)
-    with (output / 'environment.json').open('x') as artifact:
-        json.dump(
-            {
-                'python': sys.version,
-                'platform': platform.platform(),
-                'versions': {
-                    name: importlib.metadata.version(name)
-                    for name in ('mlx', 'mlx-metal', 'numpy', 'brian2', 'torch')
-                },
-                'MLX_ENABLE_TF32': precision,
-                'compilation': 'disabled',
-                'device': mx.device_info(),
-                'cpu_threads': torch.get_num_threads(),
-                'cpu_interop_threads': torch.get_num_interop_threads(),
-                'cpu_default_dtype': str(torch.get_default_dtype()),
-                'cpu_deterministic_algorithms': torch.are_deterministic_algorithms_enabled(),
-                'source_sha256': {
-                    name: hashlib.sha256(Path(module.__file__).read_bytes()).hexdigest()
-                    for name, module in sys.modules.copy().items()
-                    if name.startswith('fly_brain.') and module.__file__ is not None
-                },
-                'scope': 'Qualification execution; input load is outside elapsed timing. No benchmark or unified-memory claim.',
-            },
-            artifact,
-            indent=2,
-            allow_nan=False,
-        )
+    write_environment(output, precision)
     progress('building-reference')
     job = build(
         connectome,
@@ -97,6 +70,18 @@ def run(
         silenced,
         stimulus.events[0],
         output / 'reference-build',
+        bind_build=True,
+    )
+    if job.build_context is None:
+        raise ValueError('Paired qualification requires bound reference build context')
+    digest, identity = reference_identity(
+        connectome,
+        stimulus,
+        silenced,
+        job.shape,
+        job.files,
+        job.directory,
+        job.build_context,
     )
     with (output / 'reference-job.json').open('x') as artifact:
         json.dump(
@@ -105,6 +90,9 @@ def run(
                 'shape': asdict(job.shape),
                 'observed': job.observed,
                 'files': job.files,
+                'producer_sha256': digest,
+                'producer': identity,
+                'executable': file_record(job.directory / 'main'),
             },
             artifact,
             indent=2,

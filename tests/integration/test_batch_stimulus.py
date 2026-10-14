@@ -47,6 +47,8 @@ def test_saved_batch_input_preserves_native_bytes_and_trial_provenance(
         'trial_shape',
         'pin',
         'channels',
+        'classes',
+        'amplitudes',
         'seed_type',
         'step_size',
         'version',
@@ -93,6 +95,10 @@ def test_saved_input_cannot_hide_corruption_or_silently_convert_native_evidence(
         metadata['input_sha256']['connectivity'] = 'wrong'
     elif fault == 'channels':
         metadata['activated_ids'].reverse()
+    elif fault == 'classes':
+        metadata['activation_classes'][0] = 2
+    elif fault == 'amplitudes':
+        metadata['amplitudes_mv'][0] = 68.0
     elif fault == 'seed_type':
         metadata['seed'] = True
     elif fault == 'step_size':

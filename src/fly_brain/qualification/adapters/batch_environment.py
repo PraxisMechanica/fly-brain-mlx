@@ -88,7 +88,7 @@ class _Environment(BaseModel):
     scope: str
 
 
-def _read(
+def read_environment(
     project: Path, evidence: ExecutionEvidence, read_launch: LaunchReader
 ) -> _Environment:
     directory, launch = evidence
@@ -137,11 +137,11 @@ def require_environments(
 ) -> dict[str, str]:
     if set(singletons) != {0, 1, 2, 3}:
         raise ValueError('Batch environment requires all four independent identities')
-    actual = _read(project, batch, read_launch)
+    actual = read_environment(project, batch, read_launch)
     settings = actual.model_dump(exclude={'source_sha256', 'scope'})
     common = dict(actual.source_sha256)
     for trial in range(4):
-        expected = _read(project, singletons[TrialId(trial)], read_launch)
+        expected = read_environment(project, singletons[TrialId(trial)], read_launch)
         if expected.model_dump(exclude={'source_sha256', 'scope'}) != settings:
             raise ValueError(f'Batch execution settings differ from singleton {trial}')
         common = {

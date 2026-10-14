@@ -55,11 +55,36 @@ def test_persisted_schedule_reloads_exact_bytes_and_trial_provenance(
     assert restored.sha256 == stimulus.sha256 and not restored.events.flags.writeable
     metadata = json.loads((output / 'stimulus.json').read_text())
     assert metadata['seed_tuples'] == [[20261004, 1, 2], [20261004, 1, 4]]
+    assert metadata['activation_classes'] == [1]
+    assert metadata['amplitudes_mv'] == [68.75]
     assert metadata['per_trial_event_sha256'] == [
         hashlib.sha256(row.tobytes()).hexdigest() for row in stimulus.events
     ]
     with pytest.raises(FileExistsError):
         persist_stimulus(output, experiment, InputPin('csv', 'parquet', 2, 0), stimulus)
+
+
+def test_saved_channels_keep_class_and_amplitude_for_overlapping_zero_rate_input(
+    tmp_path: Path,
+) -> None:
+    experiment = Experiment(
+        'two-class',
+        4,
+        4,
+        (FlyWireNeuronId(20), FlyWireNeuronId(20)),
+        (100.0, 0.0),
+        first_class_channels=1,
+    )
+    stimulus = generate(network(), experiment, 1000, (TrialId(0),))
+    persist_stimulus(
+        tmp_path / 'run', experiment, InputPin('csv', 'pq', 2, 0), stimulus
+    )
+    metadata = json.loads((tmp_path / 'run/stimulus.json').read_text())
+    assert metadata['activated_ids'] == [20, 20]
+    assert metadata['targets'] == [1, 1]
+    assert metadata['activation_classes'] == [1, 2]
+    assert metadata['rates_hz'] == [100.0, 0.0]
+    assert metadata['amplitudes_mv'] == [68.75, 68.75]
 
 
 @pytest.mark.parametrize('count', [0, 2])

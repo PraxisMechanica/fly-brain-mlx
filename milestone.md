@@ -18,6 +18,17 @@ references, pinned inputs, numerical tolerances and every acceptance gate.
 Decision confidence: 99%, inspected at `9f89ef6` (clean and equal to fetched
 `origin/main`). No new arithmetic or execution mode is accepted by this amendment.
 
+The user's later 2026-10-14 amendment requires **less than 10% of working time
+spent waiting for tests**. Implementation comes first; automatic affected hooks
+and CI own routine testing. Do not launch another broad scientific suite for a
+fixture, reporting or provenance repair. Rerun a failed scientific check directly;
+repeat expensive proofs only when their numerical/observation dependencies change
+or required evidence is absent. Run the mandatory matrix on stable implementation,
+with useful independent work during execution. Count idle scientific, hook and CI
+waiting toward the target; background execution counts as productive overlap only
+while actual independent work advances. The target has not yet been demonstrated,
+and does not waive scientific gates. Decision confidence: 99% at `e519de7`.
+
 ### Implementation baseline and unverified requirements
 
 Source inspection at `9f89ef6` finds working code paths for the five experiments,
@@ -29,20 +40,40 @@ and verifiers exist; a complete-matrix/batch orchestration command does not.
 The production voltage update is still the original coupled expression; the
 increment expression in the numerical contract is prospective only.
 
-Only the seven independent fixtures and two operational quality caches survive.
-No full-network execution bundles survive. Historical suite counts, removed raw
+At the initial implementation checkpoint only the seven independent fixtures and
+two operational quality caches survived. No full-network execution bundles survived.
+Historical suite counts, removed raw
 outputs and passing routine tests establish **zero currently verified cases out
-of 52**. Current source has not yet passed fresh local scientific, layout,
+of 52**. At that checkpoint source had not passed fresh local scientific, layout,
 fan-in, pulse, repeatability, four-trial batch or end-to-end export checks in
 this implementation phase. A case with a first spike difference is conservatively
 unaccepted by the existing reporter pending a bound causal decision; metric
 success alone must never be reported as case acceptance.
 
+Further source inspection found two provenance gaps to repair before matrix
+qualification: `parity_case.run` does not request/persist the existing bound
+compiler context, and `persist_stimulus` does not explicitly record channel class
+and event amplitude. The latter are implicit in experiment order and the fixed
+model rule. Keep the six spike columns, pinned schedules and reference arithmetic;
+make these required scientific records explicit. No new backend abstraction is
+needed. Decision confidence: 95%, reviewed at `e519de7`.
+
+The pending implementation now records channel class and amplitude without
+changing event bytes, persists the bound reference producer/compiler/header/input
+and executable provenance, and records launch/source identity for singleton and
+batch execution. New matrix and batch commands compose the existing collectors,
+repeat verifiers, metric rules and source validators. The matrix independently
+checks all canonical prefixes/trials, rescores native outputs, and reports group
+coverage and 100 ms localization. Batch comparison uses exact equality as a
+sufficient state-budget proof; differences remain unaccepted. No numerical kernel,
+protected reference, pinned input or tolerance changes are included. Automatic
+affected checks and real scientific execution remain required for these changes.
+
 The inspected host has Apple M1 Max, 32 GiB memory, approximately 225 GiB free
 disk, Python 3.10.14, MLX/Metal 0.32.3, NumPy 1.26.4, Brian2 2.8.0 and PyTorch
 2.11.0. Metal is available and the precision setting is zero. Compilation stays
-disabled. Fresh baseline local qualification is running; its output is retained
-for diagnosis and measured planning. The host input audit passed all 15,091,983
+disabled. Fresh local qualification outputs are retained for verification and
+measured planning. The host input audit passed all 15,091,983
 rows: pinned hashes, orientation/identifier ordering, stable reversible grouping,
 exact count conversion and outgoing-only silencing. Maximum absolute-count sum
 is 69,948 (guard: 2^40); maximum in-degree is 10,356. This is input equivalence,
@@ -58,11 +89,25 @@ source inspection alone is not a qualification pass.
 The baseline finished unaccepted in 290.35 seconds: 375 collected, 351 passed,
 five failures (missing explicit pinned dataset path) and 19 setup errors (missing
 `FLY_BRAIN_REFERENCE_BASELINE`). Zero skips; no numerical failure was reported
-among the checks that executed. The historical-reference fixture is being repaired
-to execute exact source bytes from immutable commit `79f62adee10b092fcaaaed0ea4043da3f5b9c415`
+among the checks that executed. The historical-reference fixture now executes
+exact source bytes from immutable commit `79f62adee10b092fcaaaed0ea4043da3f5b9c415`
 directly from Git, preserving the independently recorded full Torch source hash
 and all native tensor comparisons. It needs no deleted external checkout or
 preservation copy. This fixes test setup, not reference arithmetic.
+
+The repaired complete run finished in 2,948.68 seconds: **375 passed, one failed,
+zero errors/skips**. All five full pinned observation-preservation producers and
+their complete native-byte artifact consumer passed. These six checks consumed
+2,656.310 seconds (90.13% of summed test duration); the remaining 370 checks took
+290.925 seconds. Launching this preservation work before implementation was an
+avoidable scheduling mistake. Its outputs remain available; do not repeat it for
+an unrelated fixture fix. The lone failure read a virtual Git source identity as
+a filesystem path. Reading the same hash-checked immutable source directly fixes
+that consumer while preserving AST, parameter order, scalar type and value checks.
+The failed target alone then passed in **1.04 seconds**. The complete command's
+recorded exit remains failed; this targeted repair does not rewrite that result.
+No numerical failure occurred in these local checks; full-network parity is still
+unverified. Scientific outputs remain subject to the registered consumer holds.
 
 Delivery: `614ed23` (plan/retention) and `85630e1` (local runner prerequisites and
 consumer) passed commit/push hooks and exact-revision hosted CI runs `38637520665`
@@ -74,17 +119,19 @@ does not replace scientific qualification.
 
 ### Bounded implementation plan and completion criteria
 
-1. Establish fresh input/source identity and local reference/core/factored
-   qualification. Run the prescribed 157-case scalar, pinned fan-in, production
-   layout, device-row and connectome-pulse audits. Inspect all failures and
-   skips. Measure a shortest paired case before extrapolating matrix runtime.
-2. Repair demonstrated causes using the smallest change. The already approved
+1. Finish the demonstrated workflow/provenance gaps and minimal matrix/batch
+   orchestration before another broad run. Use completed local proofs where their
+   actual dependencies are unchanged; keep precise limits and source identity.
+2. Repair demonstrated numerical causes using the smallest change. The approved
    voltage-increment prototype may be tested if evidence warrants it; adoption
    requires all prescribed local numerical, discrete, repeat, batch/chunk and
    observation checks. Do not change the independent references or budgets.
-3. Complete simulation/export/comparison and minimal matrix/batch orchestration.
-   Preserve per-case outputs, provenance, exact schedules, fresh repeats,
-   common-history state-budget coverage and explicit first-cause evidence.
+3. Run only outstanding local scientific requirements: prescribed 157-case scalar,
+   pinned fan-in, production layout, device-row and connectome-pulse audits as
+   needed after inspecting the existing run's coverage. Preserve exact schedules,
+   repeats, common-history coverage and first-cause evidence. Time one shortest
+   paired case as the first required matrix case, retaining it for later consumers;
+   avoid a throwaway benchmark followed by an identical qualification rerun.
 4. On the delivered arithmetic/mode, run all 52 prescribed paired cases twice
    per engine, check canonical prefixes and distinct trials, and report every
    absolute/paired gate without pooling away failures. Diagnose and repair
@@ -97,11 +144,12 @@ does not replace scientific qualification.
    limitations before working outputs expire. Deliver incremental hooked commits
    to `origin/main`, require successful exact-revision CI and a clean tree.
 
-Progress: **12%** of this implementation goal, based on an explicit work breakdown:
+Progress: **20%** of this implementation goal, based on an explicit work breakdown:
 baseline/scope inventory 10%, end-to-end workflows 10%, local scientific gates
 15%, demonstrated implementation repairs 15%, 52-case qualification 30%, batches
-10%, final evidence/delivery 10%. Inventory earns 10 points and the fresh input
-and independent-reference checks earn two of the local-gate points;
+10%, final evidence/delivery 10%. Inventory earns 10 points, the implemented
+workflow/provenance work earns four pending its end-to-end verification, and
+fresh local/input/reference evidence earns six of the local-gate points;
 scientific acceptance remains 0/52. Reassess weights if measured work changes
 the scope; do not derive scientific acceptance from code coverage or test counts.
 
@@ -118,6 +166,11 @@ Current timing evidence: ordinary full-connectome observation proof blocks
 proof serialization. This is a partial producer measurement, not an ordinary
 simulation benchmark or paired-observer throughput. It does not yet justify
 narrowing the interval; full paired timing and repair uncertainty remain open.
+The complete 1,000-step ordinary producer finished in 139.281 seconds. The four-trial
+preservation producer took 1,422.598 seconds. These include proof capture and
+instrumentation; neither is a paired-matrix throughput measurement. Avoiding a
+repeat of unchanged preservation saves approximately 44 minutes per broad run;
+it does not yet justify narrowing the remaining-time interval.
 
 Fresh CPU reference diagnostics passed on this host. `probe-replay` regenerated,
 reloaded and prefix-checked canonical fixture hash

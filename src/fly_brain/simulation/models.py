@@ -75,6 +75,17 @@ class Experiment:
     activated_ids: tuple[FlyWireNeuronId, ...]
     rates_hz: tuple[float, ...]
     silenced_ids: tuple[FlyWireNeuronId, ...] = ()
+    first_class_channels: int | None = None
+
+    @property
+    def activation_classes(self) -> tuple[int, ...]:
+        channels = len(self.activated_ids)
+        first = (
+            channels if self.first_class_channels is None else self.first_class_channels
+        )
+        if not 0 <= first <= channels:
+            raise ValueError('Activation class boundary must be within the channels')
+        return (1,) * first + (2,) * (channels - first)
 
 
 @dataclass(frozen=True)

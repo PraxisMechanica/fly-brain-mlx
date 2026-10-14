@@ -9,7 +9,7 @@ import pytest
 
 from fly_brain.qualification import reference_parameters
 from fly_brain.qualification.adapters import torch_reference
-from tests.support.reference_baseline import ORIGINAL_SHA256
+from tests.support.reference_baseline import ORIGINAL_SHA256, original_source
 from tests.support.reference_baseline import original as original
 
 pytestmark = [pytest.mark.integration, pytest.mark.reference]
@@ -19,8 +19,7 @@ def test_factory_preserves_original_ast_order_scalar_types_and_fresh_values(
     original: tuple[ModuleType, ModuleType],
 ) -> None:
     baseline, _ = original
-    assert baseline.__file__ is not None
-    previous = ast.parse(Path(baseline.__file__).read_bytes())
+    previous = ast.parse(original_source('torch_reference'))
     current = ast.parse(Path(torch_reference.__file__).read_bytes())
     factory = next(
         node

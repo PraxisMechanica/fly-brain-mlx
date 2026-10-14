@@ -142,6 +142,15 @@ to verification. They expire at the next successful commit unless an explicit
 remaining consumer is registered. Skipped, missing, empty, or failed required
 results prevent acceptance.
 
+During implementation, fix and rerun only the failed scientific targets instead
+of restarting `qualify`. Keep completed expensive proofs while their verification
+consumers need them, and repeat them when affected source/input changes require
+it. Finish workflow and provenance changes before full qualification. The current
+milestone requires less than 10% of working time in idle test waiting; account for
+scientific and automatic-check waits too. Do useful independent work during long
+runs, and report any measured conflict with mandatory acceptance instead of
+silently omitting gates or counting idle execution as implementation work.
+
 One prescribed full-connectome parity case:
 
 ```sh
@@ -151,9 +160,46 @@ uv run --locked --group qualification fly-brain qualify-parity \
 ```
 
 It runs all three engines twice from fresh state with a persisted canonical
-schedule. `case.json` retains frozen metrics and native state/queue/cause
+schedule. Channel metadata explicitly records class, rate and amplitude, including
+duplicate and zero-rate channels. `launch.json` and `environment.json` record the
+launch commit, complete package source inventory and execution settings.
+`reference-job.json` binds the actual compiler, consumed headers/dependencies,
+generated model, input arrays and executable. `case.json` retains frozen metrics and native state/queue/cause
 verification. First differences require scientific review. One accepted case
 cannot establish complete-matrix acceptance.
+
+After implementation and outstanding local scientific requirements are ready,
+run the complete prescribed matrix and both batch comparisons:
+
+```sh
+uv run --locked --group qualification python -m tools.qualify_matrix \
+  --output executions/matrix-01
+```
+
+The controller must match its committed source before launch. It verifies all 52
+canonical inputs against independent PCG64 generation, regeneration, reload,
+duration prefixes, singleton/batch identity and outgoing-silenced replay. Every
+case runs fresh repeats, is rescored from native spikes, and has its source hashes
+checked against its launch and the current checkout. It stops at the first
+unaccepted or invalid case and writes incomplete coverage as unaccepted.
+`matrix.json` keeps per-case gates, pooled metrics and per-trial/pooled 100 ms
+counts. All case outputs remain available for repeat, batch and causal consumers.
+Do not modify numerical/observer sources while their qualification is running.
+
+The same batch workflow can consume completed one-second singleton cases:
+
+```sh
+uv run --locked --group qualification python -m tools.qualify_batch \
+  --experiment sugar --singletons executions/matrix-01/cases \
+  --output executions/sugar-batch-01
+```
+
+Use `--experiment p9` for the other prescribed batch. It requires accepted
+singletons 0–3, byte-identical canonical schedules and compatible recorded execution
+settings/sources. Fresh four-trial MLX and CPU reference runs are repeated, then
+compared with the independent trials. Exact native phase/final equality is a
+sufficient state-budget proof; a difference remains unaccepted pending diagnosis.
+These commands do not grant acceptance when local or causal gates are unresolved.
 
 ## Diagnostic command inventory
 

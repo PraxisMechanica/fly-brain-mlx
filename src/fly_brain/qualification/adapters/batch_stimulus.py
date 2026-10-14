@@ -24,7 +24,9 @@ class _Metadata(BaseModel):
     trial_indices: tuple[int, ...]
     targets: tuple[int, ...]
     activated_ids: tuple[int, ...]
+    activation_classes: tuple[Literal[1, 2], ...]
     rates_hz: tuple[float, ...]
+    amplitudes_mv: tuple[float, ...]
     experiment: ExperimentName
     experiment_code: int
     silenced_ids: tuple[int, ...]
@@ -68,7 +70,9 @@ def load(directory: Path, experiment: Experiment, pin: InputPin) -> Stimulus:
         or metadata.experiment_code != experiment.code
         or metadata.generator_code != experiment.generator_code
         or metadata.activated_ids != experiment.activated_ids
+        or metadata.activation_classes != experiment.activation_classes
         or metadata.rates_hz != experiment.rates_hz
+        or metadata.amplitudes_mv != (68.75,) * len(experiment.activated_ids)
         or metadata.silenced_ids != experiment.silenced_ids
         or metadata.seed_tuples
         != tuple(

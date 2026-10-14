@@ -195,5 +195,7 @@ def test_experiment_and_stimulus_keep_supplied_objects_and_serialized_identities
     assert json.dumps(asdict(experiment)) == (
         '{"name": "p9", "code": 1, "generator_code": 1, '
         '"activated_ids": [720575940627652358, 720575940635872101], '
-        '"rates_hz": [100.0, 100.0], "silenced_ids": [720575940627652358]}'
+        '"rates_hz": [100.0, 100.0], "silenced_ids": [720575940627652358], '
+        '"first_class_channels": null}'
     )
+    assert experiment.activation_classes == (1, 1)

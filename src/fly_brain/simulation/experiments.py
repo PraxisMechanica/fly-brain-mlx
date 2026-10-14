@@ -33,7 +33,12 @@ EXPERIMENTS: dict[ExperimentName, Experiment] = {
         'sugar-silenced', 3, 0, SUGAR_IDS, (200.0,) * 21, SUGAR_IDS
     ),
     'two-class': Experiment(
-        'two-class', 4, 4, SUGAR_IDS + P9_IDS, (200.0,) * 21 + (100.0,) * 2
+        'two-class',
+        4,
+        4,
+        SUGAR_IDS + P9_IDS,
+        (200.0,) * 21 + (100.0,) * 2,
+        first_class_channels=len(SUGAR_IDS),
     ),
     'silent': Experiment('silent', 5, 5, (), ()),
 }

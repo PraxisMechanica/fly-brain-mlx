@@ -11,9 +11,23 @@ ORIGINAL_COMMIT = '79f62adee10b092fcaaaed0ea4043da3f5b9c415'
 ORIGINAL_SHA256 = 'bf52258041a464156ce05b267601dbefceb893356fbf8401b358b036a29ba6cb'
 
 
+def original_source(name: str) -> bytes:
+    source = subprocess.check_output(
+        [
+            'git',
+            '-C',
+            str(Path(__file__).resolve().parents[2]),
+            'show',
+            ORIGINAL_COMMIT + ':src/fly_brain/qualification/adapters/' + name + '.py',
+        ]
+    )
+    if name == 'torch_reference':
+        assert hashlib.sha256(source).hexdigest() == ORIGINAL_SHA256
+    return source
+
+
 @pytest.fixture(scope='module')
 def original() -> Iterator[tuple[ModuleType, ModuleType]]:
-    root = Path(__file__).resolve().parents[2]
     package = ModuleType('preserved_torch_reference')
     package.__path__ = []
     loaded: dict[str, ModuleType] = {}
@@ -31,17 +45,7 @@ def original() -> Iterator[tuple[ModuleType, ModuleType]]:
                 + name
                 + '.py'
             )
-            source = subprocess.check_output(
-                [
-                    'git',
-                    '-C',
-                    str(root),
-                    'show',
-                    identity,
-                ]
-            )
-            if name == 'torch_reference':
-                assert hashlib.sha256(source).hexdigest() == ORIGINAL_SHA256
+            source = original_source(name)
             module = ModuleType(package.__name__ + '.' + name)
             module.__file__ = identity
             patch.setitem(sys.modules, module.__name__, module)
