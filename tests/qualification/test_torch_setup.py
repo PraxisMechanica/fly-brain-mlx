@@ -5,13 +5,13 @@ from numpy.typing import NDArray
 
 from fly_brain.qualification.adapters.torch_reference import (
     TorchModel,
-    model_parameters,
 )
 from fly_brain.qualification.adapters.torch_setup import (
     native_float,
     prepare,
     replay_inputs,
 )
+from fly_brain.qualification.reference_parameters import model_parameters
 from tests.qualification.test_mlx_observer import fixture
 
 pytestmark = [pytest.mark.integration, pytest.mark.reference]
@@ -21,7 +21,9 @@ def test_sparse_cpu_setup_preserves_orientation_outgoing_silencing_and_activatio
     None
 ):
     case = fixture()
-    model = prepare(case.connectome, case.targets, (3,), 1)
+    model = prepare(
+        case.connectome, case.targets, (3,), 1, reference_parameters=model_parameters()
+    )
     expected = np.zeros((6, 6), dtype=np.float32)
     for source, target, count in zip(
         case.connectome.sources,
@@ -55,7 +57,9 @@ def test_replay_matches_guaranteed_native_poisson_for_all_five_returned_tensors(
 ) -> None:
     case = fixture()
     targets = (0, 2)
-    replay = prepare(case.connectome, targets, (), trials)
+    replay = prepare(
+        case.connectome, targets, (), trials, reference_parameters=model_parameters()
+    )
     native = TorchModel(
         trials, 6, 0.1, model_parameters(), replay.weights, list(targets), device='cpu'
     )
@@ -95,20 +99,29 @@ def test_native_capture_refuses_silent_precision_conversion(dtype: torch.dtype) 
         native_float(torch.zeros(1, dtype=dtype))
 
 
-def test_comparator_refuses_a_changed_global_precision() -> None:
+@pytest.mark.parametrize('silenced', ((), (99,)))
+def test_comparator_refuses_a_changed_global_precision(
+    silenced: tuple[int, ...],
+) -> None:
     previous = torch.get_default_dtype()
     try:
         torch.set_default_dtype(torch.float64)
         case = fixture(True)
         with pytest.raises(RuntimeError, match='default float32'):
-            prepare(case.connectome, (), (), 1)
+            prepare(
+                case.connectome,
+                (),
+                silenced,
+                1,
+                reference_parameters=model_parameters(),
+            )
     finally:
         torch.set_default_dtype(previous)
 
 
 def test_empty_connectivity_and_channels_preserve_exact_silence() -> None:
     case = fixture(True)
-    model = prepare(case.connectome, (), (), 4)
+    model = prepare(case.connectome, (), (), 4, reference_parameters=model_parameters())
     state = model.state_init()
     counts = replay_inputs(np.empty((4, 0), dtype=np.uint8), (), 6)
     with torch.no_grad():

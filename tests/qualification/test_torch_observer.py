@@ -9,6 +9,7 @@ from fly_brain.qualification.adapters.torch_setup import (
     prepare,
     replay_inputs,
 )
+from fly_brain.qualification.reference_parameters import model_parameters
 from tests.qualification.test_mlx_observer import fixture
 
 pytestmark = [pytest.mark.integration, pytest.mark.reference]
@@ -17,7 +18,9 @@ pytestmark = [pytest.mark.integration, pytest.mark.reference]
 @pytest.mark.parametrize('index', range(5))
 def test_native_snapshot_owns_and_hashes_every_actual_tensor(index: int) -> None:
     case = fixture()
-    state = prepare(case.connectome, case.targets, (), 4).state_init()
+    state = prepare(
+        case.connectome, case.targets, (), 4, reference_parameters=model_parameters()
+    ).state_init()
     saved = capture(state, -1)
     names = tuple(saved.fields)
     assert all(
@@ -35,7 +38,9 @@ def test_native_snapshot_owns_and_hashes_every_actual_tensor(index: int) -> None
 @pytest.mark.parametrize('index', range(5))
 def test_observer_rejects_nonfinite_actual_reference_state(index: int) -> None:
     case = fixture()
-    state = prepare(case.connectome, case.targets, (), 1).state_init()
+    state = prepare(
+        case.connectome, case.targets, (), 1, reference_parameters=model_parameters()
+    ).state_init()
     state[index].fill_(float('nan'))
     with pytest.raises(ValueError, match='Invalid native CPU reference field'):
         capture(state, 0)
@@ -48,7 +53,13 @@ def test_streamed_observer_preserves_all_ordinary_state_and_buffer_bytes(
 ) -> None:
     case = fixture(empty)
     events = case.events[:trials]
-    model = prepare(case.connectome, case.targets, (3,), trials)
+    model = prepare(
+        case.connectome,
+        case.targets,
+        (3,),
+        trials,
+        reference_parameters=model_parameters(),
+    )
     state = model.state_init()
     expected = [tuple(native_float(value).copy() for value in state)]
     with torch.no_grad():
@@ -72,7 +83,13 @@ def test_cpu_state_and_buffer_repeat_and_match_independent_trials(empty: bool) -
     case = fixture(empty)
 
     def run(events: NDArray[np.uint8]):
-        model = prepare(case.connectome, case.targets, (3,), events.shape[0])
+        model = prepare(
+            case.connectome,
+            case.targets,
+            (3,),
+            events.shape[0],
+            reference_parameters=model_parameters(),
+        )
         return list(observe(model, events, case.targets))
 
     batch, repeated = run(case.events), run(case.events)
@@ -105,7 +122,9 @@ def test_observer_rejects_invalid_replay_before_yielding_state(
     events: NDArray[np.uint8],
 ) -> None:
     case = fixture()
-    model = prepare(case.connectome, case.targets, (), 1)
+    model = prepare(
+        case.connectome, case.targets, (), 1, reference_parameters=model_parameters()
+    )
     with pytest.raises(ValueError, match='canonical trial-by-step channels'):
         next(observe(model, events, case.targets))
 
@@ -116,7 +135,7 @@ def test_snapshot_rejects_missing_neuron_or_physical_delay_slots(
 ) -> None:
     case = fixture()
     g, buffer, spikes, voltage, refrac = prepare(
-        case.connectome, case.targets, (), 1
+        case.connectome, case.targets, (), 1, reference_parameters=model_parameters()
     ).state_init()
     state = (
         g,
@@ -134,7 +153,9 @@ def test_snapshot_rejects_invalid_spikes_or_refractory_counters(
     index: int, value: float
 ) -> None:
     case = fixture()
-    state = prepare(case.connectome, case.targets, (), 1).state_init()
+    state = prepare(
+        case.connectome, case.targets, (), 1, reference_parameters=model_parameters()
+    ).state_init()
     state[index].fill_(value)
     with pytest.raises(ValueError, match='must be discrete'):
         capture(state, 0)

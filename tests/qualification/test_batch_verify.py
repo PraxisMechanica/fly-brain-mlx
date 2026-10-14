@@ -16,6 +16,7 @@ from fly_brain.qualification.adapters.paired_collect import collect as collect_p
 from fly_brain.qualification.adapters.replay_evidence import verify
 from fly_brain.qualification.adapters.torch_collect import collect as collect_cpu
 from fly_brain.qualification.adapters.torch_setup import prepare as prepare_cpu
+from fly_brain.qualification.reference_parameters import model_parameters
 from fly_brain.simulation.identifiers import NeuronRow, TrialId
 from fly_brain.simulation.models import Stimulus
 from fly_brain.simulation.observation_module import build_observation_sessions
@@ -57,7 +58,9 @@ def test_actual_batch_native_evidence_matches_fresh_independent_trial_collection
         0,
         hashlib.sha256(case.events.tobytes()).hexdigest(),
     )
-    cpu = prepare_cpu(case.connectome, case.targets, (3,), 4)
+    cpu = prepare_cpu(
+        case.connectome, case.targets, (3,), 4, reference_parameters=model_parameters()
+    )
     for mode in ('first', 'repeat'):
         collect_mlx(execution, case.connectome, stimulus, output / f'mlx-{mode}')
         collect_cpu(cpu, stimulus, output / f'cpu-{mode}')
@@ -98,7 +101,15 @@ def test_actual_batch_native_evidence_matches_fresh_independent_trial_collection
             and capture.budget is None
         )
         collect_cpu(
-            prepare_cpu(case.connectome, case.targets, (3,), 1), one, path / 'cpu'
+            prepare_cpu(
+                case.connectome,
+                case.targets,
+                (3,),
+                1,
+                reference_parameters=model_parameters(),
+            ),
+            one,
+            path / 'cpu',
         )
         singles[trial] = path
     for engine in ('mlx', 'cpu'):

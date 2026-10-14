@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from typing import cast
 
 import numpy as np
@@ -8,7 +9,7 @@ from numpy.typing import NDArray
 from fly_brain.simulation.mapping import silence_sources
 from fly_brain.simulation.models import Connectome
 
-from .torch_reference import TorchModel, model_parameters
+from .torch_reference import TorchModel
 
 
 def tensor(values: NDArray[np.float32 | np.int32 | np.int64]) -> torch.Tensor:
@@ -37,6 +38,8 @@ def prepare(
     targets: tuple[int, ...],
     silenced: tuple[int, ...],
     trials: int,
+    *,
+    reference_parameters: Mapping[str, float],
 ) -> TorchModel:
     if torch.get_default_dtype() != torch.float32:
         raise RuntimeError('The pinned PyTorch comparator requires default float32')
@@ -49,7 +52,7 @@ def prepare(
         dtype=torch.float32,
         device='cpu',
     ).to_sparse_csr()
-    params = model_parameters()
+    params = dict(reference_parameters)
     model = TorchModel(
         trials, neurons, 0.1, params, weights, list(targets), device='cpu'
     )

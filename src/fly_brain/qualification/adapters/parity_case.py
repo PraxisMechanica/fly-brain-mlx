@@ -3,6 +3,7 @@ import importlib.metadata
 import json
 import platform
 import sys
+from collections.abc import Mapping
 from dataclasses import asdict
 from pathlib import Path
 from time import perf_counter
@@ -37,6 +38,7 @@ def run(
     output: Path,
     precision: str,
     *,
+    reference_parameters: Mapping[str, float],
     prepare_stimulus: CaseStimulusPreparation,
     read_experiment: ExperimentReader,
     assemble_observations: ObservationAssembly,
@@ -110,7 +112,13 @@ def run(
     factory, read_rows = assemble_observations(
         connectome, stimulus.targets, silenced, precision
     )
-    cpu = prepare_cpu(connectome, stimulus.targets, silenced, 1)
+    cpu = prepare_cpu(
+        connectome,
+        stimulus.targets,
+        silenced,
+        1,
+        reference_parameters=reference_parameters,
+    )
     execute(
         job,
         factory,

@@ -27,6 +27,9 @@ pytestmark = pytest.mark.integration
         ('extra_source', 'fly_brain.simulation.backend.core'),
         ('source_changed', 'fly_brain.simulation.identifiers'),
         ('source_omitted', 'fly_brain.simulation.identifiers'),
+        ('source_changed', 'fly_brain.qualification.reference_parameters'),
+        ('source_omitted', 'fly_brain.qualification.reference_parameters'),
+        ('launch_changed', 'fly_brain.qualification.reference_parameters'),
     ),
 )
 def test_batch_cannot_reuse_evidence_with_changed_execution_settings_or_source(
@@ -52,6 +55,7 @@ def test_batch_cannot_reuse_evidence_with_changed_execution_settings_or_source(
         'fly_brain.simulation.observation_ports',
         'fly_brain.simulation.observation_module',
         'fly_brain.qualification.models',
+        'fly_brain.qualification.reference_parameters',
         'fly_brain.qualification.ports',
         'fly_brain.qualification.stimulus_ports',
         'fly_brain.qualification.session_observer',

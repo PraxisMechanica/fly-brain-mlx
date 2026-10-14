@@ -1,4 +1,5 @@
 import json
+from collections.abc import Mapping
 from pathlib import Path
 
 import brian2 as b
@@ -8,7 +9,9 @@ from . import brian_reference as reference
 from . import torch_reference as pt
 
 
-def run(output: Path) -> dict[str, object]:
+def run(
+    output: Path, *, reference_parameters: Mapping[str, float]
+) -> dict[str, object]:
     output.mkdir(parents=True, exist_ok=False)
     b.set_device('runtime')
     b.start_scope()
@@ -46,7 +49,7 @@ def run(output: Path) -> dict[str, object]:
     network.run(0.5 * b.ms)
 
     weights = torch.tensor([[0.0, 0.0], [1.0, 0.0]])
-    model = pt.TorchModel(1, 2, 0.1, pt.model_parameters(), weights)
+    model = pt.TorchModel(1, 2, 0.1, dict(reference_parameters), weights)
     torch_state = model.state_init()
     torch_state[3][0, 0] = -44
     trace: list[dict[str, int | float]] = []

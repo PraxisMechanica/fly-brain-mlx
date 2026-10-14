@@ -87,6 +87,7 @@ source_modules = [
     "fly_brain.simulation.ports",
     "fly_brain.simulation.service",
     "fly_brain.qualification.models",
+    "fly_brain.qualification.reference_parameters",
     "fly_brain.qualification.ports",
     "fly_brain.qualification.fan_in_service",
     "fly_brain.qualification.fan_in_ports",

@@ -8,6 +8,7 @@ from fly_brain.qualification.adapters.replay_evidence import cpu as verify_repea
 from fly_brain.qualification.adapters.torch_collect import collect
 from fly_brain.qualification.adapters.torch_observer import observe
 from fly_brain.qualification.adapters.torch_setup import prepare
+from fly_brain.qualification.reference_parameters import model_parameters
 from fly_brain.simulation.identifiers import TrialId
 from tests.support.observation_fixtures import fixture, stimulus_for
 
@@ -25,7 +26,9 @@ def test_cpu_collection_preserves_all_native_state_hashes_and_trial_spikes(
         (200.0,) * len(case.targets),
         (TrialId(0), TrialId(1), TrialId(2), TrialId(3)),
     )
-    model = prepare(case.connectome, case.targets, (3,), 4)
+    model = prepare(
+        case.connectome, case.targets, (3,), 4, reference_parameters=model_parameters()
+    )
     expected = list(observe(model, case.events, case.targets))
     outputs = (tmp_path / 'first', tmp_path / 'repeat')
     for output in outputs:

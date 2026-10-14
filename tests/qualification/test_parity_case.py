@@ -1,3 +1,4 @@
+import hashlib
 import json
 from dataclasses import replace
 from pathlib import Path
@@ -15,6 +16,7 @@ from fly_brain.infrastructure.seeded_random import uniforms
 from fly_brain.qualification.adapters.parity_case import run
 from fly_brain.qualification.models import ParityCase
 from fly_brain.qualification.module import build_case_stimulus
+from fly_brain.qualification.reference_parameters import model_parameters
 from fly_brain.simulation.experiments import P9_IDS
 from fly_brain.simulation.identifiers import TrialId
 from fly_brain.simulation.models import InputPin
@@ -58,6 +60,7 @@ def test_driver_runs_prescribed_p9_protocol_without_accepting_a_small_connectome
             score=build_case_scoring(),
             validate=build_coordinate_validation(),
             convert_clock=build_reference_clock_conversion(),
+            reference_parameters=model_parameters(),
         )
         with pytest.raises(FileExistsError):
             run(
@@ -72,6 +75,7 @@ def test_driver_runs_prescribed_p9_protocol_without_accepting_a_small_connectome
                 score=build_case_scoring(),
                 validate=build_coordinate_validation(),
                 convert_clock=build_reference_clock_conversion(),
+                reference_parameters=model_parameters(),
             )
     finally:
         torch.set_num_threads(threads)
@@ -84,4 +88,12 @@ def test_driver_runs_prescribed_p9_protocol_without_accepting_a_small_connectome
     environment = json.loads((tmp_path / 'case/environment.json').read_text())
     assert environment['cpu_threads'] == 1 and environment['compilation'] == 'disabled'
     assert environment['versions']['brian2'] == '2.8.0'
-    assert environment['source_sha256']['fly_brain.simulation.backend.core']
+    assert (
+        bool(environment['source_sha256']['fly_brain.simulation.backend.core']),
+        environment['source_sha256']['fly_brain.qualification.reference_parameters'],
+    ) == (
+        True,
+        hashlib.sha256(
+            Path(model_parameters.__code__.co_filename).read_bytes()
+        ).hexdigest(),
+    )

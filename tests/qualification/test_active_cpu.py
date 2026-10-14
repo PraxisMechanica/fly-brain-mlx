@@ -12,6 +12,7 @@ from fly_brain.qualification.adapters.torch_setup import (
     replay_inputs,
     tensor,
 )
+from fly_brain.qualification.reference_parameters import model_parameters
 from fly_brain.simulation.identifiers import FlyWireIds64, NeuronRows32
 from fly_brain.simulation.models import Connectome
 from tests.qualification.test_mlx_observer import fixture
@@ -33,7 +34,9 @@ def test_every_binary_mask_preserves_scaled_cancellation_duplicate_and_zero_byte
         counts,
         counts * 0.275,
     )
-    model = prepare(connectome, (), silenced, 4)
+    model = prepare(
+        connectome, (), silenced, 4, reference_parameters=model_parameters()
+    )
     active = ActiveSources.from_model(model)
     masks = np.asarray(list(product((0, 1), repeat=5)), dtype=np.float32)
     for batch in masks.reshape(-1, 4, 5):
@@ -60,7 +63,13 @@ def test_active_fresh_trajectories_repeat_every_original_native_state_and_delay_
 ) -> None:
     case = fixture(empty)
     events = case.events[:trials]
-    model = prepare(case.connectome, case.targets, (3,), trials)
+    model = prepare(
+        case.connectome,
+        case.targets,
+        (3,),
+        trials,
+        reference_parameters=model_parameters(),
+    )
     original = list(observe(model, events, case.targets))
     candidate = step(model)
     for _ in range(2):
@@ -76,7 +85,9 @@ def test_active_fresh_trajectories_repeat_every_original_native_state_and_delay_
 @pytest.mark.parametrize('value', [0.5, 2, -1, float('nan'), float('inf')])
 def test_active_propagation_rejects_nonbinary_recurrent_values(value: float) -> None:
     case = fixture()
-    model = prepare(case.connectome, case.targets, (), 1)
+    model = prepare(
+        case.connectome, case.targets, (), 1, reference_parameters=model_parameters()
+    )
     active = ActiveSources.from_model(model)
     with pytest.raises(ValueError, match='binary recurrent'):
         active(torch.full((1, 6), value, dtype=torch.float32))
@@ -87,7 +98,9 @@ def test_active_setup_rejects_weights_outside_exact_integer_envelope(
     value: float,
 ) -> None:
     case = fixture()
-    model = prepare(case.connectome, case.targets, (), 1)
+    model = prepare(
+        case.connectome, case.targets, (), 1, reference_parameters=model_parameters()
+    )
     model.weights.values()[0] = value
     with pytest.raises(ValueError, match='exact integer envelope'):
         ActiveSources.from_model(model)
@@ -98,7 +111,9 @@ def test_active_chunked_ordinary_state_matches_observer_and_independent_trials(
     empty: bool,
 ) -> None:
     case = fixture(empty)
-    model = prepare(case.connectome, case.targets, (3,), 4)
+    model = prepare(
+        case.connectome, case.targets, (3,), 4, reference_parameters=model_parameters()
+    )
     expected = list(observe(model, case.events, case.targets, step(model)))
     advance = step(model)
     with torch.no_grad():
@@ -115,7 +130,13 @@ def test_active_chunked_ordinary_state_matches_observer_and_independent_trials(
             begin += size
     assert begin == case.events.shape[1]
     for trial in range(4):
-        singleton = prepare(case.connectome, case.targets, (3,), 1)
+        singleton = prepare(
+            case.connectome,
+            case.targets,
+            (3,),
+            1,
+            reference_parameters=model_parameters(),
+        )
         actual = observe(
             singleton, case.events[trial : trial + 1], case.targets, step(singleton)
         )

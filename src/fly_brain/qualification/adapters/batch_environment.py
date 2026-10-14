@@ -29,6 +29,7 @@ _SOURCES = frozenset(
         'fly_brain.simulation.observation_ports',
         'fly_brain.simulation.observation_module',
         'fly_brain.qualification.models',
+        'fly_brain.qualification.reference_parameters',
         'fly_brain.qualification.ports',
         'fly_brain.qualification.stimulus_ports',
         'fly_brain.qualification.session_observer',

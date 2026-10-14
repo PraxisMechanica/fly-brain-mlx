@@ -5,7 +5,8 @@ import torch
 from numpy.typing import NDArray
 
 from fly_brain.qualification.adapters import brian_reference as reference
-from fly_brain.qualification.adapters.torch_reference import AlphaLIF, model_parameters
+from fly_brain.qualification.adapters.torch_reference import AlphaLIF
+from fly_brain.qualification.reference_parameters import model_parameters
 
 pytestmark = [pytest.mark.integration, pytest.mark.reference]
 

@@ -2,6 +2,7 @@ import os
 import platform
 from functools import partial
 from time import perf_counter
+from types import MappingProxyType
 
 from fly_brain.comparison.ports import ComparisonCommand
 from fly_brain.qualification.fan_in_ports import FanInCaseBuilder
@@ -78,8 +79,11 @@ def replay() -> DiagnosticCommand:
 def schedule() -> DiagnosticCommand:
     from fly_brain.qualification.adapters.schedule_probe import run
     from fly_brain.qualification.module import build_output_probe
+    from fly_brain.qualification.reference_parameters import model_parameters
 
-    return build_output_probe(run)
+    return build_output_probe(
+        partial(run, reference_parameters=MappingProxyType(model_parameters()))
+    )
 
 
 def build_connectome_reader() -> ConnectomeReader:
@@ -175,6 +179,7 @@ def parity_case() -> ParityCommand:
     )
     from fly_brain.qualification.adapters.parity_case import run
     from fly_brain.qualification.module import build_case_stimulus, build_parity_case
+    from fly_brain.qualification.reference_parameters import model_parameters
     from fly_brain.simulation.module import (
         build_experiment_reader,
         build_stimulus_recorder,
@@ -188,6 +193,7 @@ def parity_case() -> ParityCommand:
         partial(
             run,
             precision=precision,
+            reference_parameters=MappingProxyType(model_parameters()),
             prepare_stimulus=build_case_stimulus(
                 read_experiment, stimulus(), build_stimulus_recorder(persist_stimulus)
             ),

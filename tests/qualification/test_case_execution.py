@@ -14,6 +14,7 @@ from fly_brain.qualification.adapters.case_execution import execute
 from fly_brain.qualification.adapters.case_report import write
 from fly_brain.qualification.adapters.torch_setup import prepare as prepare_cpu
 from fly_brain.qualification.models import ParityCase
+from fly_brain.qualification.reference_parameters import model_parameters
 from fly_brain.simulation.identifiers import NeuronRow, TrialId
 from fly_brain.simulation.models import InputPin
 from fly_brain.simulation.module import build_experiment_reader
@@ -36,7 +37,9 @@ def test_each_engine_replays_fresh_state_with_complete_retained_evidence(
     mlx, read_rows = build_observation_sessions(
         case.connectome, case.targets, (NeuronRow(3),), precision
     )
-    cpu = prepare_cpu(case.connectome, case.targets, (3,), 1)
+    cpu = prepare_cpu(
+        case.connectome, case.targets, (3,), 1, reference_parameters=model_parameters()
+    )
     progress: list[str] = []
     output = tmp_path / 'evidence'
     execute(
