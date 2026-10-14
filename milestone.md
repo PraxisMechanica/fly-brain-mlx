@@ -151,6 +151,7 @@ The following components are committed on parent `main`:
 | Experiment, stimulus and observation-session identifiers | `e41d03f` | 346 worker input/type cases and 102 native cases; 43 normalized modules and 239 old assertions preserved |
 | Native partial construction facts | `1610c6a` | 44 worker cases and 19 independent parent controls; static constructor/capture facts only |
 | Qualification case trial labels | `f27a75b` | 193 worker cases and three native checks; all 52 catalog values/order unchanged |
+| Canonical batch trial labels | `78599bd` | 57 distinct host/type cases once; wrong-space fields/keys, independent weakenings, exact integer encoding and label 3 versus singleton position 0 |
 | Consumer-owned parity stimulus preparation | `eb6fe8f`, `86038e0` | Both catalog reads, seed, persistence/silencing order and errors retained; sixth live import contract checked |
 | Owned spike array identifiers | `f20d6ec` | 106 CPU cases and one real Metal case passed once; eight normalized modules, 67 original assertions, array identity/bytes/layout and seven fixtures preserved |
 | Injected pure reference parameters | `4c87409` | Exact factory extraction and five protected hashes; 100 CPU, six boundary, five native and two composition cases; 6,120 native tensor-byte pairs preserved without replay |
@@ -192,7 +193,7 @@ The identifier changes preserve numerical bodies and old assertions; NewType sup
 typing without new runtime validation or complete conversion-origin proof.
 No full native proof bundle or scientific matrix was recreated.
 
-All listed source components are pushed to `origin/main` through `d0c1d6f`.
+All listed source components are pushed to `origin/main` through `78599bd`.
 The spike identifier component passed the installed normal commit and push hooks
 and default cleanup without replaying its completed regressions. Delivery uses
 one ten-file component commit; the worker's earlier private ancestry is preserved
@@ -322,6 +323,27 @@ unchanged. Selected, unreferenced stubs remain natively unbound; this is not
 complete declaration enrollment. The historical declaration candidate remains
 unadopted and full 37-rule coverage remains COV002.
 
+The nine-file canonical batch-label component is pushed at `78599bd` after
+normal commit/push checks and exact hosted run `38571882656`: nine changed inputs,
+nine affected Python files, eight reviewed sources and 356 retained records.
+Hosted execution ran no pytest and uploaded zero artifacts. Fifty-seven distinct
+affected cases passed once in 8.27 seconds; 11 pinned Pyright CLI invocations
+cover 18 wrong-space substitutions, one shared repair, three independent
+selected-module weakenings and float-key rejection. CPU artifact comparison
+preserves requested label 3 versus singleton position 0, order, integer encoding
+and original float-key tuple-index failure timing. Local positions and the
+original position-call argument remain unchanged; no runtime int conversion
+or new validation is introduced.
+
+Seven normalized modules, ten original assertions, 354 other Python files,
+five protected sources, seven fixtures and six tracked data inputs remain exact.
+Worker metrics improve mean 15.06 to 15.05 and health 40.41 to 40.43 across
+386 to 387 files, with maximum 96 unchanged. Fixture complexity failures were
+repaired through shared diagnostics/digest setup and complete parallel snapshots,
+retaining every predicate; no cohort ran until the candidate passed metrics.
+The six recorded findings remain. Positional artifacts lack requested-label
+metadata; lawful origins and joint stimulus/artifact identity remain unproved.
+
 The five-file fan-in grouping seam is pushed at `d0c1d6f` after normal
 commit/push checks and exact hosted run `38571157980`: five changed inputs,
 16 affected Python files, four reviewed sources and 359 retained records.
@@ -372,10 +394,10 @@ unaccepted; dormant occurrences and lexical-versus-resolved identities must stay
 explicit. A assesses the remaining absolute-count mapping seam and late
 acquisition/pure-rule separation. Grouping injection is delivered and cannot
 alone establish a complete module guard.
-C owns batch singleton-label fields/map keys and explicit canonical crossings;
-local array positions, collectors, digest streams and original numeric behavior
-remain unchanged. Positional artifact provenance and joint stimulus-identity
-enforcement remain missing. Owners use separate main execution checkouts,
+C assesses `NetworkCase` neuron-row selector tuples and their actual producers;
+canonical batch labels are delivered. Local array positions, collectors, digest
+streams and original numeric behavior remain unchanged. Positional artifact
+provenance and joint stimulus-identity enforcement remain missing. Owners use separate main execution checkouts,
 qualify affected controls once and commit before serial parent integration.
 
 1. Keep checked components and current documentation delivered incrementally.

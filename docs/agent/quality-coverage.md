@@ -144,7 +144,7 @@ Current implementation boundaries include explicit clock injection, injected
 comparison scoring/coordinates/clock conversion/diagnostics, command composition,
 consumer-owned seeded acquisition, immutable causal-audit transitions, typed
 reference digests, branded Connectome/grouping arrays, Experiment/Stimulus
-scalars, requested session/case trial labels, injected observation sessions, pure
+scalars, requested session/case and canonical batch trial labels, injected observation sessions, pure
 reference parameters, consumer-owned connectome silencing and host mapping
 readers used by the input audit and required grouping for fan-in audits.
 Fan-in grouping retains the indirect absolute-count dependency, so this does

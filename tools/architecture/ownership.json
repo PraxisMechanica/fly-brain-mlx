@@ -671,7 +671,7 @@
         "name": "ParityCase.trial"
       }
     ],
-    "decision": "Stimulus, session, case, spike-event contracts and Metrics grouping keys use owned trial brands. Batch-difference records retain primitive trial values; requested labels and local array positions require distinct treatment."
+    "decision": "Stimulus, session, case, spike-event contracts and Metrics grouping keys use owned trial brands. Canonical singleton keys and batch-difference records use TrialId while local array positions remain coordinates. Positional artifact provenance, lawful origins and joint stimulus identity remain unproved."
   },
   "experiment_name": {
     "owner": "simulation",
