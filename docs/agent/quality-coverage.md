@@ -55,7 +55,16 @@ and merge parent. Native numeric facts are reused per source blob across
 commands, with implementation/runtime/configuration identity invalidation; full
 inventories and aggregate comparisons still execute. This is calculation reuse,
 not a persistent test or metric verdict cache. Cold or incompatible facts require
-fresh calculation; malformed facts fail analysis. The native import-fact cache
+fresh calculation; malformed facts fail analysis.
+The latest user amendment makes CQ001/CQ002/CQ003 numerical regressions advisory
+in the project gate. Native findings/status/measurements remain visible; the
+project policy annotation records that these findings do not block. Analysis,
+protocol, source-input and coverage errors remain blocking. The native standalone
+engine retains its qualified comparator; project aliases use the project policy.
+This does not weaken architecture or scientific predicates. The duplicate custom
+health/maintainability score and whole-file complexity are not proof of quality.
+Reliable per-function complexity review remains a proposed diagnostic improvement,
+not an implemented gate or a numerical acceptance requirement. The native import-fact cache
 is separate from a verdict and uses the verified source-tree identity; manual
 or unindexed inputs use a fresh graph. [Developer workflow](development.md) owns
 installation, diagnostics and exact output retention. The required gate does

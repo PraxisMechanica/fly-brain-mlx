@@ -12,6 +12,16 @@ current automatic-test and numeric metric-reuse changes, deliver checked commits
 and leave no uncommitted task code. Stop broader development at this checkpoint.
 The remaining refactor below is unfinished and must not be reported as complete.
 
+The final user amendment rejects strict numerical score ratchets, including both
+health and complexity increases. The project gate reports valid CQ001/CQ002/CQ003
+regressions as advisory while preserving their native values/findings; concrete
+verification and analysis errors remain blocking. No 0.01-point tolerance is
+adopted. Whole-file aggregates are trends, not an assertion that code got worse.
+Changed-function review thresholds (cyclomatic above 20, cognitive above 15) are
+proposed review prompts only; a qualified per-function analyzer is not yet
+implemented. Do not turn those prompts into mandatory rejection or force splitting
+that merely improves the score.
+
 Complete the rearchitecture/refactor and prepare a verified handoff to the prior
 implementation agent. The user resumes this scope on 2026-10-13 after the
 historical-record cleanup was delivered at
@@ -218,3 +228,34 @@ import contracts, source ownership reconciliation and qualified native metric
 checks are useful components, not a full structural or scientific approval.
 Current coverage is in [quality-coverage.md](docs/agent/quality-coverage.md) and
 classifications in [architecture-ownership.md](docs/agent/architecture-ownership.md).
+
+## Ordered continuation handoff
+
+This wrap-up closes the current tool/test cleanup; the complete rearchitecture
+is unfinished. Read the delivered component and failure evidence before resuming.
+Use current `origin/main`, not the historical detached checkout or retired
+declaration candidate. The delivery checkout on this host is
+`/Users/ocasta/.codex/worktrees/pr-split/fly-brain`; the original
+`/Users/ocasta/Code/fly-brain` checkout is an unchanged detached historical view.
+
+1. Complete the existing authored-declaration reconciliation and live version 2
+   context work, then native call/slot origins, alias/effect/control-flow and
+   failure disposition. The detailed remaining order above and quality coverage
+   own the unresolved mechanisms. Full 37-rule analysis remains COV002.
+2. Resolve the six recorded findings: concrete Advance dependency, mixed
+   TorchModel responsibilities and four simulation identity/origin findings.
+   Preserve the reviewed numerical boundaries and exact reference lineage.
+3. Verify each structural repair through the automatic affected-test commit
+   boundary, adopt worker commits by fast-forward, and deliver small commits.
+   Do not reintroduce blanket checker qualification, manual pytest duplicates
+   or numerical score ratchets. Native/process test consumption still needs
+   explicit evidence where Python import edges do not prove it.
+4. Finish architecture acceptance and the implementation handoff before releasing
+   numerical development. New simulator features, numerical remedies and the
+   complete scientific matrix remain outside this completed tool-cleanup slice.
+
+Pinned inputs, five protected source identities, seven independent fixtures and
+all scientific acceptance predicates remain required. Active import/numeric-fact
+caches have exact operational retention consumers; completed timing/profile
+outputs have no continuing exception. Final delivery checks are recorded in
+refactor evidence, with limitations and failed attempts retained explicitly.

@@ -5,8 +5,8 @@
   "engines": { "node": ">=22" },
   "scripts": {
     "quality:analyze": "code-quality analyze",
-    "quality:staged": "code-quality check --staged",
-    "quality:check": "code-quality check"
+    "quality:staged": "uv run --locked --no-sync python -m tools.code_quality.gate --stage commit",
+    "quality:check": "uv run --locked --no-sync python -m tools.code_quality.gate --stage push"
   },
   "devDependencies": {
     "@eng-metrics/code-quality": "file:tools/code-quality/vendor/eng-metrics-code-quality-0.1.2.tgz"

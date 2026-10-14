@@ -39,7 +39,17 @@ comparison. Numeric per-blob facts are reused across commands in
 Cold or incompatible analyzer identities require fresh calculations. The identity
 binds qualified engine bytes, canonical configuration and bounded native/Python
 runtime inputs; it does not prove arbitrary external dependency integrity.
-Malformed facts fail analysis. No persistent test or quality verdict is cached. This gate does not run the complete application
+Malformed facts fail analysis. No persistent test or quality verdict is cached.
+Numerical metric regressions (CQ001/CQ002/CQ003) are advisory project diagnostics,
+not commit blockers. The native status, values and findings remain unchanged in
+reports; `project_policy` records the project decision and native exit. Invalid
+results, unknown rule IDs, empty failed reports and analyzer/tool failures still
+block. Package metric-check aliases use this same project gate.
+Code health and maintainability index are identical custom scores; neither has a
+blocking threshold. Whole-file complexity, repository averages/maxima, cognitive
+heuristics and nonblank line counts are diagnostic trends. No requirement makes
+every score improve on every commit. Function-level complexity review requires
+a reliable function-level analyzer; the current gate does not implement one. This gate does not run the complete application
 or scientific suite. Current executable coverage and limits are in
 [quality-coverage.md](quality-coverage.md).
 The [metric provenance](../../tools/code-quality/provenance.json) binds the

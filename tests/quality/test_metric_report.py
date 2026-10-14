@@ -19,7 +19,22 @@ def test_metric_report_preserves_valid_status(
     passed: bool,
 ) -> None:
     monkeypatch.chdir(tmp_path)
-    report = {'status': status, 'passed': passed}
+    report: dict[str, object] = {'status': status, 'passed': passed}
+    if exit_code == 1:
+        report['findings'] = {
+            'total': 1,
+            'by_rule': {'CQ001': 1},
+            'examples': [
+                {
+                    'rule': 'CQ001',
+                    'path': '<repository>',
+                    'metric': 'code_health',
+                    'before': 40.0,
+                    'after': 39.99,
+                }
+            ],
+            'omitted': 0,
+        }
 
     def execute(
         *arguments: object, **options: object
@@ -27,7 +42,13 @@ def test_metric_report_preserves_valid_status(
         return subprocess.CompletedProcess(['node'], exit_code, json.dumps(report), '')
 
     monkeypatch.setattr(diagnostics.subprocess, 'run', execute)
-    assert diagnostics.measure(['--staged'], 'staged') == exit_code
+    assert diagnostics.measure(['--staged'], 'staged') == (2 if exit_code == 2 else 0)
+    report['project_policy'] = {
+        'name': 'advisory_numerical_metrics',
+        'native_exit_code': exit_code,
+        'blocking': exit_code == 2,
+        'advisory': exit_code == 1,
+    }
     assert json.loads((tmp_path / 'logs/quality/staged.json').read_text()) == report
 
 

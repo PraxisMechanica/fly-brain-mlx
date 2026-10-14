@@ -731,3 +731,13 @@ same Git blob `416d049624204b34a3d674d371e5ad523da3654c` and SHA256
 `56a9009c163cc31436775b0a357622f0035a846b3e84bbe92d641ef49e8c9a1e`.
 All test bodies, assertions and production arithmetic remain unchanged. Its
 automatic affected-test result is recorded after the corrective commit.
+
+The published audit-fixture correction is delivered at `3bd3ffe`; its normal
+affected-test hook and cleanup pass. Parent push runs static checks without a
+pytest repeat. The final user amendment makes numerical score regressions
+advisory at the project adapter boundary. It supersedes the suggested 0.01-point
+tolerance and the prior complexity/health ratchet. Native qualified package bytes
+and raw measurements/findings remain unchanged; malformed/unknown/empty failures
+and tool/analysis errors remain blocking. Test, typing, architecture and scientific
+predicates are unaffected. Per-function complexity review remains a proposal,
+not implemented measurement or a required numerical threshold.

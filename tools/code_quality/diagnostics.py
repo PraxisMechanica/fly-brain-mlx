@@ -49,6 +49,40 @@ def metric_payload(process: subprocess.CompletedProcess[str]) -> dict[str, objec
     return payload
 
 
+def project_metric_exit(payload: dict[str, object], native_exit: int) -> int:
+    if native_exit != 1:
+        return native_exit
+    value = payload.get('findings')
+    if not isinstance(value, dict):
+        raise ValueError('Metric regression findings must be an object')
+    findings = cast(dict[str, object], value)
+    total, omitted = findings.get('total'), findings.get('omitted')
+    counts, examples = findings.get('by_rule'), findings.get('examples')
+    if (
+        type(total) is not int
+        or type(omitted) is not int
+        or not isinstance(counts, dict)
+        or not isinstance(examples, list)
+    ):
+        raise ValueError('Metric regression findings have an invalid shape')
+    by_rule = cast(dict[str, object], counts)
+    samples = cast(list[object], examples)
+    if not by_rule or any(
+        rule not in ('CQ001', 'CQ002', 'CQ003') or type(count) is not int or count <= 0
+        for rule, count in by_rule.items()
+    ):
+        raise ValueError('Metric regression contains unknown rules or invalid counts')
+    if (
+        total <= 0
+        or omitted < 0
+        or total != sum(cast(int, count) for count in by_rule.values())
+        or total != len(samples) + omitted
+        or not 1 <= len(samples) <= 20
+    ):
+        raise ValueError('Metric regression findings do not explain the failure')
+    return 0
+
+
 def measure(arguments: list[str], name: str) -> int:
     report = destination(name, 'json')
     process = subprocess.run(
@@ -57,8 +91,10 @@ def measure(arguments: list[str], name: str) -> int:
         text=True,
         check=False,
     )
+    payload: dict[str, object]
     try:
         payload = metric_payload(process)
+        exit_code = project_metric_exit(payload, process.returncode)
     except ValueError as error:
         payload = {
             'status': 'analysis_error',
@@ -68,9 +104,17 @@ def measure(arguments: list[str], name: str) -> int:
                 'process_output': bounded(process.stderr or process.stdout, 2000),
             },
         }
-        process.returncode = 2
+        exit_code = 2
+    payload['project_policy'] = {
+        'name': 'advisory_numerical_metrics',
+        'native_exit_code': process.returncode,
+        'blocking': exit_code != 0,
+        'advisory': process.returncode == 1 and exit_code == 0,
+    }
     report.write_text(json.dumps(payload, indent=2) + '\n')
-    print(f'{name}: {payload["status"]}; diagnostics: {report}')
-    if process.returncode:
+    print(
+        f'{name}: {payload["status"]}; blocking: {exit_code != 0}; diagnostics: {report}'
+    )
+    if payload['status'] != 'pass':
         print(json.dumps(payload, indent=2), file=sys.stderr)
-    return process.returncode
+    return exit_code
