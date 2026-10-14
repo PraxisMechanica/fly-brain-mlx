@@ -5,6 +5,8 @@ from typing import Literal
 
 from pydantic import BaseModel, ConfigDict
 
+from fly_brain.simulation.identifiers import TrialId
+
 LaunchReader = Callable[[str, str], bytes]
 ExecutionEvidence = tuple[Path, str]
 
@@ -130,7 +132,7 @@ def _read(
 def require_environments(
     project: Path,
     batch: ExecutionEvidence,
-    singletons: Mapping[int, ExecutionEvidence],
+    singletons: Mapping[TrialId, ExecutionEvidence],
     read_launch: LaunchReader,
 ) -> dict[str, str]:
     if set(singletons) != {0, 1, 2, 3}:
@@ -139,7 +141,7 @@ def require_environments(
     settings = actual.model_dump(exclude={'source_sha256', 'scope'})
     common = dict(actual.source_sha256)
     for trial in range(4):
-        expected = _read(project, singletons[trial], read_launch)
+        expected = _read(project, singletons[TrialId(trial)], read_launch)
         if expected.model_dump(exclude={'source_sha256', 'scope'}) != settings:
             raise ValueError(f'Batch execution settings differ from singleton {trial}')
         common = {

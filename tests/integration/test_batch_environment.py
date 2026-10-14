@@ -5,6 +5,7 @@ from pathlib import Path
 import pytest
 
 from fly_brain.qualification.adapters.batch_environment import require_environments
+from fly_brain.simulation.identifiers import TrialId
 
 pytestmark = pytest.mark.integration
 
@@ -131,7 +132,7 @@ def test_batch_cannot_reuse_evidence_with_changed_execution_settings_or_source(
             hashes['fly_brain.qualification.adapters.batch_extra']
         )
     (batch / 'environment.json').write_text(json.dumps(batch_data))
-    singles: dict[int, tuple[Path, str]] = {}
+    singles: dict[TrialId, tuple[Path, str]] = {}
     for trial in range(4):
         directory = tmp_path / f'single-{trial}'
         directory.mkdir()
@@ -156,12 +157,12 @@ def test_batch_cannot_reuse_evidence_with_changed_execution_settings_or_source(
             elif fault == 'source_omitted':
                 del metadata['source_sha256'][changed_source]
         (directory / 'environment.json').write_text(json.dumps(metadata))
-        singles[trial] = (
+        singles[TrialId(trial)] = (
             directory,
             'changed' if trial == 3 and fault == 'launch_changed' else 'launch',
         )
     if fault == 'missing':
-        del singles[3]
+        del singles[TrialId(3)]
 
     def read_launch(commit: str, relative: str) -> bytes:
         return originals[relative] if commit == 'launch' else b'changed launch bytes'

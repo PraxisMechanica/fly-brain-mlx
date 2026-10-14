@@ -10,6 +10,7 @@ from fly_brain.comparison.module import (
 from fly_brain.qualification.adapters.batch_native import Engine
 from fly_brain.qualification.adapters.batch_verify import compare
 from fly_brain.qualification.batch_evidence import NativeDifference, PhaseDifference
+from fly_brain.simulation.identifiers import TrialId
 from tests.unit.test_batch_native import native
 
 pytestmark = pytest.mark.integration
@@ -21,7 +22,7 @@ def test_saved_batch_comparison_covers_actual_trial_shapes_and_streams(
     tmp_path: Path,
 ) -> None:
     batch = tmp_path / 'batch'
-    singletons = {trial: tmp_path / f'single-{trial}' for trial in range(4)}
+    singletons = {TrialId(trial): tmp_path / f'single-{trial}' for trial in range(4)}
     hashes = tuple(str(trial + 1) * 64 for trial in range(4))
     stream = 'phase-digests.jsonl' if engine == 'mlx' else 'native-digests.jsonl'
     many = native(engine, 4)
@@ -65,7 +66,7 @@ def test_saved_batch_comparison_covers_actual_trial_shapes_and_streams(
         batch, singletons, engine, 35, 6, 3, 2, validate=build_coordinate_validation()
     ) == (
         None,
-        {trial: () for trial in range(4)},
+        {TrialId(trial): () for trial in range(4)},
     )
     path = batch / stream
     rows = [json.loads(line) for line in path.read_text().splitlines()]
@@ -73,9 +74,9 @@ def test_saved_batch_comparison_covers_actual_trial_shapes_and_streams(
     rows[-1][key][3] = 'f' * 64
     path.write_text(''.join(json.dumps(row) + '\n' for row in rows))
     unresolved = (
-        PhaseDifference(3, 32, 3, 'native')
+        PhaseDifference(TrialId(3), 32, 3, 'native')
         if engine == 'mlx'
-        else NativeDifference(3, 34)
+        else NativeDifference(TrialId(3), 34)
     )
     assert (
         compare(

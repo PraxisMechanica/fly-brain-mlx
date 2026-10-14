@@ -13,6 +13,7 @@ from fly_brain.qualification.batch_evidence import (
     require_native_coverage,
     require_phase_coverage,
 )
+from fly_brain.simulation.identifiers import TrialId
 
 pytestmark = pytest.mark.unit
 
@@ -31,9 +32,9 @@ def batch(steps: int = 35) -> tuple[PhaseDigest, ...]:
     )
 
 
-def singles(blocks: tuple[PhaseDigest, ...]) -> dict[int, tuple[PhaseDigest, ...]]:
+def singles(blocks: tuple[PhaseDigest, ...]) -> dict[TrialId, tuple[PhaseDigest, ...]]:
     return {
-        trial: tuple(
+        TrialId(trial): tuple(
             PhaseDigest(
                 b.begin,
                 b.rows,
@@ -70,7 +71,9 @@ def test_a_changed_digest_returns_an_unresolved_block_not_a_tolerance_pass(
     else:
         values[3] = 'f' * 64
     changed[-1] = replace(changed[-1], **{field: tuple(values)})
-    assert phase_difference(changed, one, 35) == PhaseDifference(3, 32, 3, field)
+    assert phase_difference(changed, one, 35) == PhaseDifference(
+        TrialId(3), 32, 3, field
+    )
 
 
 @pytest.mark.parametrize(
@@ -98,7 +101,7 @@ def test_incomplete_or_malformed_phase_evidence_cannot_pass(fault: str) -> None:
 def test_all_four_independent_trial_identities_are_required(missing: int) -> None:
     blocks = batch()
     one = singles(blocks)
-    del one[missing]
+    del one[TrialId(missing)]
     with pytest.raises(ValueError, match='zero through three'):
         phase_difference(blocks, one, 35)
 
@@ -109,15 +112,15 @@ def test_cpu_batch_native_equality_requires_every_snapshot_and_its_actual_trial(
     hashes = tuple(str(trial + 1) * 64 for trial in range(4))
     many = [NativeDigest(step, hashes) for step in range(-1, 35)]
     one = {
-        trial: [NativeDigest(step, (hashes[trial],)) for step in range(-1, 35)]
+        TrialId(trial): [NativeDigest(step, (hashes[trial],)) for step in range(-1, 35)]
         for trial in range(4)
     }
     assert native_difference(many, one, 35) is None
-    one[3][-1] = NativeDigest(34, ('f' * 64,))
-    assert native_difference(many, one, 35) == NativeDifference(3, 34)
-    one[0], one[1] = one[1], one[0]
-    assert native_difference(many, one, 35) == NativeDifference(0, -1)
-    del one[2]
+    one[TrialId(3)][-1] = NativeDigest(34, ('f' * 64,))
+    assert native_difference(many, one, 35) == NativeDifference(TrialId(3), 34)
+    one[TrialId(0)], one[TrialId(1)] = one[TrialId(1)], one[TrialId(0)]
+    assert native_difference(many, one, 35) == NativeDifference(TrialId(0), -1)
+    del one[TrialId(2)]
     with pytest.raises(ValueError, match='zero through three'):
         native_difference(many, one, 35)
 

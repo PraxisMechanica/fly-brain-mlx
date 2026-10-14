@@ -82,7 +82,7 @@ def test_actual_batch_native_evidence_matches_fresh_independent_trial_collection
         ('native-digests.jsonl',),
         ('native.npz',),
     )
-    singles: dict[int, Path] = {}
+    singles: dict[TrialId, Path] = {}
     for trial in range(4):
         events = case.events[trial : trial + 1]
         one = Stimulus(
@@ -118,7 +118,7 @@ def test_actual_batch_native_evidence_matches_fresh_independent_trial_collection
             one,
             path / 'cpu',
         )
-        singles[trial] = path
+        singles[TrialId(trial)] = path
     for engine in ('mlx', 'cpu'):
         corresponding = {
             trial: path / ('paired' if engine == 'mlx' else 'cpu')
@@ -134,4 +134,4 @@ def test_actual_batch_native_evidence_matches_fresh_independent_trial_collection
                 len(case.connectome.sources),
                 len(case.targets),
                 validate=build_coordinate_validation(),
-            ) == (None, {trial: () for trial in range(4)})
+            ) == (None, {TrialId(trial): () for trial in range(4)})

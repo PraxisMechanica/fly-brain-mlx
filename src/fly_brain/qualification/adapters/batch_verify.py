@@ -14,6 +14,7 @@ from fly_brain.qualification.batch_evidence import (
     phase_difference,
 )
 from fly_brain.qualification.spike_comparison_ports import CoordinateValidator
+from fly_brain.simulation.identifiers import TrialId
 
 from .batch_native import Engine, NativeArrays, compare_final_trial
 
@@ -53,7 +54,7 @@ def cpu_snapshots(directory: Path) -> tuple[NativeDigest, ...]:
 
 def compare(
     batch: Path,
-    singletons: Mapping[int, Path],
+    singletons: Mapping[TrialId, Path],
     engine: Engine,
     steps: int,
     neurons: int,
@@ -61,7 +62,7 @@ def compare(
     channels: int,
     *,
     validate: CoordinateValidator,
-) -> tuple[PhaseDifference | NativeDifference | None, dict[int, tuple[str, ...]]]:
+) -> tuple[PhaseDifference | NativeDifference | None, dict[TrialId, tuple[str, ...]]]:
     if set(singletons) != {0, 1, 2, 3}:
         raise ValueError(
             'Batch comparison requires independent trials zero through three'
@@ -83,7 +84,7 @@ def compare(
         )
     with np.load(batch / 'native.npz', allow_pickle=False) as archive:
         many = cast(NativeArrays, {name: archive[name] for name in archive.files})
-    finals: dict[int, tuple[str, ...]] = {}
+    finals: dict[TrialId, tuple[str, ...]] = {}
     for trial, path in singletons.items():
         filename = 'mlx-native.npz' if engine == 'mlx' else 'native.npz'
         with np.load(path / filename, allow_pickle=False) as archive:

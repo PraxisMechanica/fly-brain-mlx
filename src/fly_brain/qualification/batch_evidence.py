@@ -3,6 +3,8 @@ from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from typing import Literal
 
+from fly_brain.simulation.identifiers import TrialId
+
 
 @dataclass(frozen=True)
 class PhaseDigest:
@@ -15,7 +17,7 @@ class PhaseDigest:
 
 @dataclass(frozen=True)
 class PhaseDifference:
-    trial: int
+    trial: TrialId
     begin: int
     rows: int
     field: Literal['native', 'queues', 'due']
@@ -29,7 +31,7 @@ class NativeDigest:
 
 @dataclass(frozen=True)
 class NativeDifference:
-    trial: int
+    trial: TrialId
     step: int
 
 
@@ -54,7 +56,7 @@ def require_native_coverage(
 
 def native_difference(
     batch: Sequence[NativeDigest],
-    singletons: Mapping[int, Sequence[NativeDigest]],
+    singletons: Mapping[TrialId, Sequence[NativeDigest]],
     steps: int,
 ) -> NativeDifference | None:
     if set(singletons) != {0, 1, 2, 3}:
@@ -66,8 +68,8 @@ def native_difference(
         require_native_coverage(single, steps, 1)
     for position, many in enumerate(batch):
         for trial in range(4):
-            if many.native[trial] != singletons[trial][position].native[0]:
-                return NativeDifference(trial, many.step)
+            if many.native[trial] != singletons[TrialId(trial)][position].native[0]:
+                return NativeDifference(TrialId(trial), many.step)
     return None
 
 
@@ -101,7 +103,7 @@ def require_phase_coverage(
 
 def phase_difference(
     batch: Sequence[PhaseDigest],
-    singletons: Mapping[int, Sequence[PhaseDigest]],
+    singletons: Mapping[TrialId, Sequence[PhaseDigest]],
     steps: int,
 ) -> PhaseDifference | None:
     if set(singletons) != {0, 1, 2, 3}:
@@ -113,13 +115,13 @@ def phase_difference(
         require_phase_coverage(single, steps, 1)
     for position, many in enumerate(batch):
         for trial in range(4):
-            one = singletons[trial][position]
+            one = singletons[TrialId(trial)][position]
             if many.native[trial] != one.native[0]:
-                return PhaseDifference(trial, many.begin, many.rows, 'native')
+                return PhaseDifference(TrialId(trial), many.begin, many.rows, 'native')
             if many.queues[trial] != one.queues[0]:
-                return PhaseDifference(trial, many.begin, many.rows, 'queues')
+                return PhaseDifference(TrialId(trial), many.begin, many.rows, 'queues')
             if tuple(row[trial] for row in many.due) != tuple(
                 row[0] for row in one.due
             ):
-                return PhaseDifference(trial, many.begin, many.rows, 'due')
+                return PhaseDifference(TrialId(trial), many.begin, many.rows, 'due')
     return None
