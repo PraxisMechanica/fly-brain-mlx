@@ -8,7 +8,7 @@ export function uri(value) { return string(invoke(value, 'getFilePath', []), 'na
 
 /** @param {NativePython.Service} service @param {NativeTypes.RecordValue} config @param {NativePython.FileSystem} fs
  * @param {Map<string,string>} required @param {NativeTypes.Loader} native @param {NativeTypes.RecordValue} console
- * @returns {NativePython.Observation} */
+ * @returns {NativePython.ObservationSnapshot} */
 export function observe(service, config, fs, required, native, console) {
   const enumeration = service._sourceEnumerator.enumerate(0);
   if (!(enumeration.matches instanceof Map) || !boolean(enumeration.isComplete, 'enumeration completion') || !boolean(invoke(service, 'enumerateSourceFiles', [0]), 'service enumeration completion')) fail('native source enumeration is incomplete');
@@ -33,7 +33,7 @@ export function observe(service, config, fs, required, native, console) {
   for (const path of tracked) {
     if (!invoke(program, 'getBoundSourceFile', [path]) || array(invoke(program, 'getParseDiagnostics', [path]), 'parse diagnostics').length) fail(`native source cannot be bound: ${uri(path)}`);
   }
-  const loaded = program.getSourceFileInfoList().map((info) => {
+  const loadedSources = () => program.getSourceFileInfoList().map((info) => {
     const original = fs.getOriginalUri(info.uri), path = realpathSync(uri(original)), module = moduleName(info.uri);
     const typeshed = boolean(info.isTypeshedFile, 'typeshed origin'), third_party = boolean(info.isThirdPartyImport, 'third-party origin');
     if (!required.has(path) && (!typeshed && !third_party || packages.some((name) => module === name || module.startsWith(name + '.')))) fail(`foreign or unregistered first-party resolution: ${module}: ${path}`);
@@ -42,10 +42,11 @@ export function observe(service, config, fs, required, native, console) {
     return {path, sha256: hash(path), raw_uri: uri(info.uri), module, mapped: boolean(fs.isMappedUri(info.uri), 'native URI mapping'), typeshed, third_party,
       py_typed: boolean(info.isThirdPartyPyTypedPresent, 'py.typed origin')};
   });
+  const loaded = loadedSources();
   const environments = tracked.map((path) => {
     const env = environment(path), version = object(env.pythonVersion, 'native Python version');
     return {root: typeof env.root === 'string' ? env.root : uri(env.root), python: `${integer(version.major, 'Python major')}.${integer(version.minor, 'Python minor')}`, platform: string(env.pythonPlatform, 'native platform'),
       extra_paths: array(env.extraPaths, 'extra paths').map(uri), import_roots: array(invoke(resolver, 'getImportRoots', [env, true]), 'import roots').map(uri)};
   });
-  return {tracked: trackedPaths, stub_inputs: stubs, stub_path: stubPath, loaded, environments};
+  return {tracked: trackedPaths, stub_inputs: stubs, stub_path: stubPath, loaded, environments, refreshLoaded: loadedSources};
 }

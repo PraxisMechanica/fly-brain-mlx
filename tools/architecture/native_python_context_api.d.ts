@@ -5,6 +5,13 @@ declare namespace NativePython {
     getOriginalUri(uri: NativeTypes.Uri): NativeTypes.Uri;
     isMappedUri(uri: NativeTypes.Uri): boolean;
   }
+  interface Session {
+    readonly native: NativeTypes.Loader;
+    readonly node_info: unknown;
+    bind(path: string): unknown;
+    parsed(path: string): NativeTypes.Parsed | undefined;
+    diagnostics(path: string): unknown[] | undefined;
+  }
   interface Enumeration { matches: Map<string, NativeTypes.Uri>; isComplete: boolean; }
   interface SourceEnumerator { enumerate(milliseconds: number): Enumeration; }
   interface SourceInfo {
@@ -25,6 +32,9 @@ declare namespace NativePython {
     raw_uri: string; module: string; mapped: boolean; typeshed: boolean; third_party: boolean; py_typed: boolean;
   }
   type Observation = Pick<Report, 'tracked' | 'stub_inputs' | 'stub_path' | 'loaded' | 'environments'>;
+  interface ObservationSnapshot extends Observation {
+    refreshLoaded(): Origin[];
+  }
   interface Report {
     schema: 1; version: string; node_version: string; host_kind: 0; request_sha256: string;
     configuration: NativeTypes.FileInput[]; primary_config: string; diagnostic_rules: [string, string | boolean][];

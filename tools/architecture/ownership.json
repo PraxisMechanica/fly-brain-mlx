@@ -415,7 +415,8 @@
     "tests/unit/test_connectome_silencing.py": {"owner":"simulation","role":"test","declaration_count":4,"declaration_sha256":"b3e84f95f11ab996d5709bbf46a02a2f251f7d17169578499a315ae1eb6ca023","binding_sha256":"cc1893ec1a4b978a9b22cd7ca0f95d00190e32fa9450cad1008efc3b706ea965"},
     "tests/quality/test_configured_target_coverage.py": {"owner":"quality_gate","role":"test","declaration_count":7,"declaration_sha256":"0c293e7a3db87e590cbb9d37eaf5b149a8b7aa1f7542e24ae1afca91f61c6fc4","binding_sha256":"ae4cd7f2bf155dcb1971d007a9eaf7c3f95c2c7f843a3fb3f07eb74e6252d24e"},
     "tests/integration/test_input_audit_boundary.py": {"owner":"qualification","role":"test","declaration_count":15,"declaration_sha256":"350fd6ff180032612349cb56c55bf50f493aa74fcbad007e648b41ca5df2006c","binding_sha256":"9f44d5a9dfb0ae6aa8689481e2e6f0ed639501b32fc157d483fb5e303a8320c1"},
-    "tests/quality/test_input_audit_boundary.py": {"owner":"architecture","role":"test","declaration_count":12,"declaration_sha256":"b261586bac33664d61cd954decfbd63b5aa0de06f2344ee7ebd44cb6d59fc16b","binding_sha256":"f412c4947263f91a27df6a9c2cf039615e8e5b46db473adb9f88a55a9321da85"}
+    "tests/quality/test_input_audit_boundary.py": {"owner":"architecture","role":"test","declaration_count":12,"declaration_sha256":"b261586bac33664d61cd954decfbd63b5aa0de06f2344ee7ebd44cb6d59fc16b","binding_sha256":"f412c4947263f91a27df6a9c2cf039615e8e5b46db473adb9f88a55a9321da85"},
+    "tests/quality/test_native_python_session.py": {"owner":"architecture","role":"test","declaration_count":8,"declaration_sha256":"e9d2d508a7f11de0ada1884c9aa44b72ac318a6b90cb08753cfccc08c937ea71","binding_sha256":"208cea8ba40498c03e79405f24849841a2206cffdf9a1069c48812c9ffbdbcc6"}
   },
   "resources": {
   "simulation_run": {

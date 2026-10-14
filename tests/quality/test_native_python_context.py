@@ -63,7 +63,7 @@ def edited_bridge(
     root: Path,
     before: str,
     after: str,
-    module: str = 'native_python_context.mjs',
+    module: str = 'native_python_session.mjs',
 ) -> Path:
     directory = root / 'bridge'
     modified_bridge(directory, lambda source: source)
@@ -215,7 +215,7 @@ def test_foreign_editable_first_party_resolution_is_rejected(
     'module,before,after,message',
     (
         (
-            'native_python_context.mjs',
+            'native_python_session.mjs',
             'FullAccessHost',
             'LimitedAccessHost',
             'full host',
@@ -227,19 +227,19 @@ def test_foreign_editable_first_party_resolution_is_rejected(
             'incomplete',
         ),
         (
-            'native_python_context.mjs',
+            'native_python_session.mjs',
             "await invoke(native(6074), 'ensureTomlModuleLoaded', []);",
             'await Promise.resolve();',
             'configuration',
         ),
         (
-            'native_python_context.mjs',
+            'native_python_session.mjs',
             "request_sha256: createHash('sha256').update(text).digest('hex')",
             "request_sha256: '0'.repeat(64)",
             'provenance differs',
         ),
         (
-            'native_python_context.mjs',
+            'native_python_session.mjs',
             'compiler_artifacts: Object.entries(HASHES).map(([path, sha256]) => ({path: join(packageRoot, path), sha256}))',
             'compiler_artifacts: []',
             'provenance differs',
