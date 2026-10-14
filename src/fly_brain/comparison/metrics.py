@@ -3,6 +3,8 @@ from collections import defaultdict
 import numpy as np
 from numpy.typing import NDArray
 
+from fly_brain.simulation.identifiers import FlyWireNeuronId, TrialId
+
 from .models import (
     ComparisonRequest,
     ComparisonResult,
@@ -15,14 +17,14 @@ from .models import (
 def prepare_metrics(spikes: Spikes, duration_s: float, trials: int) -> Metrics:
     neurons, counts = np.unique(spikes.neuron_ids, return_counts=True)
     rates = {
-        int(neuron): float(count / (duration_s * trials))
+        FlyWireNeuronId(int(neuron)): float(count / (duration_s * trials))
         for neuron, count in zip(neurons, counts, strict=True)
     }
-    grouped: dict[tuple[int, int], list[float]] = defaultdict(list)
+    grouped: dict[tuple[TrialId, FlyWireNeuronId], list[float]] = defaultdict(list)
     for trial, neuron, time in zip(
         spikes.trials, spikes.neuron_ids, spikes.time_s, strict=True
     ):
-        grouped[int(trial), int(neuron)].append(float(time))
+        grouped[TrialId(int(trial)), FlyWireNeuronId(int(neuron))].append(float(time))
     groups = {
         key: np.sort(np.asarray(times, dtype=np.float64))
         for key, times in grouped.items()

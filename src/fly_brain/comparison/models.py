@@ -6,7 +6,12 @@ from typing import Protocol
 import numpy as np
 from numpy.typing import NDArray
 
-from fly_brain.simulation.identifiers import FlyWireIds64, TrialIds16
+from fly_brain.simulation.identifiers import (
+    FlyWireIds64,
+    FlyWireNeuronId,
+    TrialId,
+    TrialIds16,
+)
 
 MetricValue = str | int | float | None
 
@@ -77,9 +82,9 @@ class ComparisonResult:
 
 @dataclass(frozen=True)
 class Metrics:
-    rates: dict[int, float]
-    active: set[int]
-    groups: dict[tuple[int, int], NDArray[np.float64]]
+    rates: dict[FlyWireNeuronId, float]
+    active: set[FlyWireNeuronId]
+    groups: dict[tuple[TrialId, FlyWireNeuronId], NDArray[np.float64]]
     spikes: int
 
 
