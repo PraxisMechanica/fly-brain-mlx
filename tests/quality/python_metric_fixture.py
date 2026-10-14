@@ -12,7 +12,9 @@ from tools.architecture.compiler import JsonValue, object_value
 VENDOR = PROJECT / 'tools/code-quality/vendor'
 BASE_ARCHIVE = VENDOR / 'eng-metrics-code-quality-0.1.0.tgz'
 ARCHIVE = VENDOR / 'eng-metrics-code-quality-0.1.1.tgz'
+FACT_ARCHIVE = VENDOR / 'eng-metrics-code-quality-0.1.2.tgz'
 PATCH = PROJECT / 'tools/code-quality/python-aggregation.patch'
+FACT_PATCH = PROJECT / 'tools/code-quality/metric-facts.patch'
 PROVENANCE = PROJECT / 'tools/code-quality/provenance.json'
 
 

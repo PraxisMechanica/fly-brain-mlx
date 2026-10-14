@@ -51,8 +51,11 @@ external packages. Missing configured first-party targets fail COV002; the
 upstream framework's separate missing-target limitation remains recorded.
 
 Commit metrics check the index. Push/hosted metrics check every submitted commit
-and merge parent, with native blob calculations reused within the command.
-No persistent test or metric verdict cache is used. The native import-fact cache
+and merge parent. Native numeric facts are reused per source blob across
+commands, with implementation/runtime/configuration identity invalidation; full
+inventories and aggregate comparisons still execute. This is calculation reuse,
+not a persistent test or metric verdict cache. Cold or incompatible facts require
+fresh calculation; malformed facts fail analysis. The native import-fact cache
 is separate from a verdict and uses the verified source-tree identity; manual
 or unindexed inputs use a fresh graph. [Developer workflow](development.md) owns
 installation, diagnostics and exact output retention. The required gate does

@@ -1,0 +1,111 @@
+--- a/package.json
++++ b/package.json
+@@ -1,6 +1,6 @@
+ {
+   "name": "@eng-metrics/code-quality",
+-  "version": "0.1.1",
++  "version": "0.1.2",
+   "type": "module",
+   "description": "Code quality measurements and Git regression gates used by the code-quality application",
+   "engines": {
+--- /dev/null
++++ b/src/facts.mjs
+@@ -0,0 +1,47 @@
++import { promises as fs } from 'node:fs';
++import path from 'node:path';
++
++const identityPattern = /^[a-f0-9]{64}$/;
++const keyPattern = /^[a-f0-9]{64}:sha(?:1:[a-f0-9]{40}|256:[a-f0-9]{64})$/;
++
++function decode(value) {
++  if (!Array.isArray(value) || value.length !== 3 || value[0] !== 1 ||
++      typeof value[1] !== 'string' || !identityPattern.test(value[1]) || !Array.isArray(value[2])) {
++    throw new Error('Invalid metric-facts protocol');
++  }
++  const cache = new Map();
++  for (const row of value[2]) {
++    if (!Array.isArray(row) || row.length !== 2 || typeof row[0] !== 'string' ||
++        !keyPattern.test(row[0]) || cache.has(row[0]) || !Array.isArray(row[1]) ||
++        row[1].length !== 3 || !row[1].every(number => Number.isSafeInteger(number) && number >= 0) || row[1][0] < 1) {
++      throw new Error('Invalid metric-facts entry');
++    }
++    const [cyclomatic_complexity, cognitive_complexity, lines_of_code] = row[1];
++    cache.set(row[0], { cyclomatic_complexity, cognitive_complexity, lines_of_code });
++  }
++  return { identity: value[1], cache };
++}
++
++export async function loadMetricFacts(filename, identity) {
++  if (!identityPattern.test(identity)) throw new Error('Invalid metric-facts identity');
++  let source;
++  try { source = await fs.readFile(filename, 'utf8'); }
++  catch (error) {
++    if (error.code === 'ENOENT') return new Map();
++    throw error;
++  }
++  const decoded = decode(JSON.parse(source));
++  return decoded.identity === identity ? decoded.cache : new Map();
++}
++
++export async function saveMetricFacts(filename, identity, cache) {
++  const rows = [...cache].map(([key, calculation]) => [key, [
++    calculation.cyclomatic_complexity, calculation.cognitive_complexity, calculation.lines_of_code,
++  ]]);
++  const value = [1, identity, rows];
++  decode(value);
++  await fs.mkdir(path.dirname(filename), { recursive: true });
++  const temporary = `${filename}.${process.pid}.tmp`;
++  await fs.writeFile(temporary, JSON.stringify(value));
++  await fs.rename(temporary, filename);
++}
+--- a/src/git-gate.mjs
++++ b/src/git-gate.mjs
+@@ -25,18 +25,17 @@
+   return compareSnapshots(baseline, candidate, await renamedPaths(repositoryPath, before, after));
+ }
+ 
+-export async function checkStaged({ repositoryPath = '.' } = {}) {
++export async function checkStaged({ repositoryPath = '.', cache = new Map() } = {}) {
+   const before = await readHead(repositoryPath);
+   const after = (await git(repositoryPath, ['write-tree'])).trim();
+-  if (!before) return { passed: true, findings: [], before: null, after: await analyzeSnapshot({ repositoryPath, revision: after }), initial: true };
+-  return checkPair(repositoryPath, before, after, new Map());
++  if (!before) return { passed: true, findings: [], before: null, after: await analyzeSnapshot({ repositoryPath, revision: after, cache }), initial: true };
++  return checkPair(repositoryPath, before, after, cache);
+ }
+ 
+-export async function checkCommits({ repositoryPath = '.', base, head = 'HEAD' }) {
++export async function checkCommits({ repositoryPath = '.', base, head = 'HEAD', cache = new Map() }) {
+   const target = await resolve(repositoryPath, head);
+   const boundary = await resolve(repositoryPath, base);
+   const revisions = (await git(repositoryPath, ['rev-list', '--reverse', '--topo-order', `${boundary}..${target}`])).split('\n').filter(Boolean);
+-  const cache = new Map();
+   const results = [];
+   for (const commit of revisions) {
+     const parents = (await git(repositoryPath, ['rev-list', '--parents', '-n', '1', commit])).trim().split(' ').slice(1);
+--- a/src/index.d.ts
++++ b/src/index.d.ts
+@@ -7,8 +7,8 @@
+ export interface CommitCheck { passed: boolean; base: string; head: string; commits: { commit: string; comparisons: Comparison[]; passed: boolean }[]; }
+ export function analyzeSnapshot(options?: { repositoryPath?: string; revision?: string; cache?: Map<string, Calculation> }): Promise<Snapshot>;
+ export function compareSnapshots(before: Snapshot, after: Snapshot, renames?: Map<string, string>): Comparison;
+-export function checkStaged(options?: { repositoryPath?: string }): Promise<Comparison>;
+-export function checkCommits(options: { repositoryPath?: string; base: string; head?: string }): Promise<CommitCheck>;
++export function checkStaged(options?: { repositoryPath?: string; cache?: Map<string, Calculation> }): Promise<Comparison>;
++export function checkCommits(options: { repositoryPath?: string; base: string; head?: string; cache?: Map<string, Calculation> }): Promise<CommitCheck>;
+ export function analyzeLanguageFile(path: string, language: string): Promise<Calculation>;
+ export function calculateJavaScriptComplexity(content: string, language?: string): Calculation;
+ export function calculateCSharpComplexity(content: string, definedSymbols?: string[]): Calculation;
+@@ -17,3 +17,5 @@
+ export function getFileLanguage(path: string): string | null;
+ export function isIncludedPath(path: string): boolean;
+ export function createAnalysisManifest(): { languages: Record<string, string>; discovery_key: string; summary_key: string; duplication_key: string; };
++export function loadMetricFacts(path: string, identity: string): Promise<Map<string, Calculation>>;
++export function saveMetricFacts(path: string, identity: string, cache: Map<string, Calculation>): Promise<void>;
+--- a/src/index.mjs
++++ b/src/index.mjs
+@@ -6,3 +6,4 @@
+ export { analyzeSnapshot } from './snapshot.mjs';
+ export { compareSnapshots } from './gate.mjs';
+ export { checkStaged, checkCommits } from './git-gate.mjs';
++export { loadMetricFacts, saveMetricFacts } from './facts.mjs';

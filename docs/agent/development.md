@@ -34,14 +34,20 @@ Pinned TypeScript dependencies select changed native modules and static type
 consumers; ambient/global changes invalidate that native cohort. Native syntax
 checks receive changed files. Unsupported module scope fails COV002.
 Metrics preserve complete inventory arithmetic and every commit/merge-parent
-comparison using native calculations within the command. No persistent test or
-quality verdict cache is used. This gate does not run the complete application
+comparison. Numeric per-blob facts are reused across commands in
+`logs/quality/metric-facts.json`; unchanged warm blobs are not read or recalculated.
+Cold or incompatible analyzer identities require fresh calculations. The identity
+binds qualified engine bytes, canonical configuration and bounded native/Python
+runtime inputs; it does not prove arbitrary external dependency integrity.
+Malformed facts fail analysis. No persistent test or quality verdict is cached. This gate does not run the complete application
 or scientific suite. Current executable coverage and limits are in
 [quality-coverage.md](quality-coverage.md).
 The [metric provenance](../../tools/code-quality/provenance.json) binds the
-vendored standalone package to its source plus the exact qualified Python
-aggregation patch. Version 0.1.1 counts whole-file native decisions. Provenance,
-source/qualified archives, and the patch are canonical indexed gate inputs.
+vendored standalone package to its source and both exact authored patches.
+Version 0.1.1 counts whole-file native decisions; version 0.1.2 adds numeric fact
+persistence and passes the same calculation map across Git comparisons. Snapshot,
+calculator, inventory, aggregate and regression-predicate bytes remain unchanged.
+Provenance, source/qualified archives and both patches are indexed gate inputs.
 
 Developer diagnostics belong in ignored `logs/`; execution working data belongs
 in ignored `executions/`. Successful commit and push hooks delete both folders

@@ -40,6 +40,11 @@
       "path": "logs/quality/imports",
       "reason": "Native Grimp import facts consumed by tools/code_quality/boundaries.py; unchanged source parsing is reused across commit and delivery checks. No test or quality verdict is cached.",
       "release_when": "The native import-cache consumer is removed or its cache format becomes incompatible."
+    },
+    {
+      "path": "logs/quality/metric-facts.json",
+      "reason": "Numeric per-blob native metric calculations consumed by tools/code_quality/metrics.mjs across commit and delivery invocations; source/analyzer identities invalidate facts and no quality verdict is stored.",
+      "release_when": "The native metric-fact consumer is removed or its fact format becomes incompatible."
     }
   ]
 }

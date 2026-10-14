@@ -7,6 +7,11 @@ and commands in the [developer workflow](docs/agent/development.md).
 
 ## Current task
 
+The user requests a neat wrap-up and handoff on 2026-10-14. Finish only the
+current automatic-test and numeric metric-reuse changes, deliver checked commits,
+and leave no uncommitted task code. Stop broader development at this checkpoint.
+The remaining refactor below is unfinished and must not be reported as complete.
+
 Complete the rearchitecture/refactor and prepare a verified handoff to the prior
 implementation agent. The user resumes this scope on 2026-10-13 after the
 historical-record cleanup was delivered at
@@ -87,8 +92,8 @@ Five current reference/oracle sources have reviewed hash guards. The pure
 parameter factory is extracted exactly from the original Torch reference; its
 remaining numerical declarations retain their original syntax. The Brian2 and
 two legacy MLX oracles remain byte exact. Pinned FlyWire inputs and licences
-remain intact. The native import-fact cache has an active operational exception
-in the retention manifest; no scientific run output is retained.
+remain intact. The native import and numeric metric-fact caches have active operational
+exceptions in the retention manifest; no scientific run output is retained.
 
 Success requires:
 

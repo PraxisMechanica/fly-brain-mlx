@@ -29,6 +29,8 @@ def indexed_repository(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
         'tools/code-quality/provenance.json',
         'tools/code-quality/vendor/eng-metrics-code-quality-0.1.0.tgz',
         'tools/code-quality/vendor/eng-metrics-code-quality-0.1.1.tgz',
+        'tools/code-quality/vendor/eng-metrics-code-quality-0.1.2.tgz',
+        'tools/code-quality/metric-facts.patch',
         'tools/code-quality/python-aggregation.patch',
         'tools/code_quality/metrics.mjs',
         'tools/code_quality/retention.json',
@@ -81,6 +83,7 @@ def test_non_source_evidence_does_not_require_indexing(
     gate.require_indexed_inputs()
 
 
+@pytest.mark.checker
 def test_disabling_index_guard_hides_uncommitted_source(
     indexed_repository: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
@@ -105,6 +108,8 @@ def test_disabling_index_guard_hides_uncommitted_source(
         'tools/code-quality/provenance.json',
         'tools/code-quality/vendor/eng-metrics-code-quality-0.1.0.tgz',
         'tools/code-quality/vendor/eng-metrics-code-quality-0.1.1.tgz',
+        'tools/code-quality/vendor/eng-metrics-code-quality-0.1.2.tgz',
+        'tools/code-quality/metric-facts.patch',
         'tools/code-quality/python-aggregation.patch',
         'tools/code_quality/metrics.mjs',
         'tools/code_quality/retention.json',
@@ -144,6 +149,7 @@ def matching_literals(tree: ast.AST, value: str) -> list[ast.Constant]:
         ('tools/code_quality/retention.json', nullcontext()),
     ),
 )
+@pytest.mark.checker
 def test_exact_input_weakening_keeps_the_independent_native_source_guard(
     indexed_repository: Path,
     name: str,

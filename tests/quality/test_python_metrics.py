@@ -1,5 +1,6 @@
 import hashlib
 import json
+from filecmp import cmpfiles
 from pathlib import Path
 from typing import cast
 
@@ -8,6 +9,8 @@ import pytest
 from tests.quality.python_metric_fixture import (
     ARCHIVE,
     BASE_ARCHIVE,
+    FACT_ARCHIVE,
+    FACT_PATCH,
     PATCH,
     PROVENANCE,
     analyze,
@@ -152,6 +155,7 @@ def test_a_later_repair_cannot_hide_the_masked_function_commit(tmp_path: Path) -
         ),
     ),
 )
+@pytest.mark.checker
 def test_each_effective_scope_guard_loses_its_own_source_rejection_when_disabled(
     tmp_path: Path, guard: str, baseline: str
 ) -> None:
@@ -207,6 +211,7 @@ def test_malformed_or_unsafe_tool_protocol_cannot_become_a_valid_snapshot(
     assert result.returncode == 2 and 'Radon could not analyze' in result.stderr
 
 
+@pytest.mark.checker
 def test_disabling_protocol_shape_validation_loses_its_missing_field_error(
     tmp_path: Path,
 ) -> None:
@@ -228,6 +233,7 @@ def test_unavailable_radon_remains_a_native_tool_analysis_failure(
     assert result.returncode == 2 and 'radon' in result.stderr
 
 
+@pytest.mark.checker
 def test_wrong_radon_version_rejects_and_disabling_the_pin_loses_detection(
     tmp_path: Path,
 ) -> None:
@@ -293,28 +299,48 @@ def test_exact_archive_patch_and_installed_bytes_preserve_every_other_engine_sou
     provenance = object_value(cast(JsonValue, json.loads(PROVENANCE.read_text())))
     base = object_value(provenance['base'])
     patch = object_value(provenance['patch'])
-    before, after = archive_sources(BASE_ARCHIVE), archive_sources(ARCHIVE)
+    second_patch = object_value(provenance['metric_facts_patch'])
+    before, first = archive_sources(BASE_ARCHIVE), archive_sources(ARCHIVE)
+    after = archive_sources(FACT_ARCHIVE)
     original = package(tmp_path, 'reconstructed', BASE_ARCHIVE)
-    applied = run(['patch', '-p1', '-i', str(PATCH)], original)
+    first_expected = package(tmp_path, 'first-engine', ARCHIVE)
+    first_changes = cmpfiles(original, first_expected, list(before), shallow=False)
+    first_applied = run(['patch', '-p1', '-i', str(PATCH)], original)
+    applied = run(['patch', '-p1', '-i', str(FACT_PATCH)], original)
+    after_expected = package(tmp_path, 'fact-engine', FACT_ARCHIVE)
+    changes = cmpfiles(first_expected, after_expected, list(after), shallow=False)
     files = object_value(provenance['files'])
     assert (
         hashlib.sha256(BASE_ARCHIVE.read_bytes()).hexdigest(),
         base['archive_sha256'],
         hashlib.sha256(ARCHIVE.read_bytes()).hexdigest(),
         hashlib.sha256(PATCH.read_bytes()).hexdigest(),
+        first_applied.returncode,
+        first.keys(),
+        (sorted(first_changes[1]), first_changes[2]),
+        hashlib.sha256(FACT_ARCHIVE.read_bytes()).hexdigest(),
+        hashlib.sha256(FACT_PATCH.read_bytes()).hexdigest(),
         applied.returncode,
-        {name: (original / name).read_bytes() for name in before},
-        {name: (ENGINE.parent.parent / name).read_bytes() for name in after},
+        cmpfiles(original, after_expected, list(after), shallow=False),
+        cmpfiles(ENGINE.parent.parent, after_expected, list(after), shallow=False),
         {name: hashlib.sha256(value).hexdigest() for name, value in after.items()},
-        sorted(name for name in before if before[name] != after[name]),
+        (sorted(changes[1]), sorted(changes[2])),
     ) == (
         '57e0ff1d7aa9d8ae627b5385795470b46ea29dcae8ff186f5432c58a410956a7',
         '57e0ff1d7aa9d8ae627b5385795470b46ea29dcae8ff186f5432c58a410956a7',
-        provenance['archive_sha256'],
+        second_patch['base_archive_sha256'],
         patch['sha256'],
         0,
-        after,
-        after,
+        before.keys(),
+        (['package.json', 'src/analyzers.mjs', 'src/manifest.mjs'], []),
+        provenance['archive_sha256'],
+        second_patch['sha256'],
+        0,
+        (list(after), [], []),
+        (list(after), [], []),
         {name: object_value(value)['sha256'] for name, value in files.items()},
-        ['package.json', 'src/analyzers.mjs', 'src/manifest.mjs'],
+        (
+            ['package.json', 'src/git-gate.mjs', 'src/index.d.ts', 'src/index.mjs'],
+            ['src/facts.mjs'],
+        ),
     )

@@ -676,3 +676,37 @@ reviewed checker exercises and the integration consumer requiring a fresh full
 native proof bundle; neither full scientific qualification nor complete 37-rule
 architecture acceptance is established.
 
+
+## Automatic test boundaries and final metric-reuse slice
+
+The automatic runner is delivered at `45146bc`. Its normal commit hook passes
+static checks, one selected pytest command and cleanup. No manual pytest runs.
+The recorded selection is 911 node identifiers: 842 application cases and 69
+focused quality cases in 77 files. Successful child output was hidden by the hook,
+so exact pass/skip totals and wall time are unavailable; no replay was added.
+Mean complexity 14.85 and maximum 96 remain; health improves 41.27 to 41.31.
+Parent adoption is a fast-forward; push executes static checks without pytest.
+Native/process/resource consumers are not inferred from Python import edges;
+changed behavior at those boundaries needs explicit focused test sources.
+
+The final metric component adds the exact authored 0.1.1-to-0.1.2 patch and
+qualified archive while preserving original source/patch lineage. Parent archive
+inspection independently verifies all provenance hashes and the exact five
+changed package paths: package metadata, numeric-fact storage, Git map injection
+and two exports/type declarations. Nine discovery/calculation/comparison sources
+remain byte exact; production/numerical source is untouched. Three focused cache
+cases cover cold/warm/changed-blob reuse, identity invalidation/protocol and exact
+rename/delete/merge-parent comparisons. They run through the mandatory hook,
+with no separate manual pytest. The local fact cache does not establish arbitrary
+external dependency integrity or full architecture coverage.
+
+The initial staged metric check found a complexity regression in the expanded
+archive-preservation proof and health 41.27 to 41.25. It was not waived. A
+same-file helper attempt also failed the normal hook before pytest: complexity
+14 to 18 and health 41.31 to 41.27. The bounded repair reuses existing archive
+fixture construction and standard-library exact byte comparison (`shallow=False`)
+at both reconstruction stages and the installed-source observation. Hash, lineage,
+source-name, patch-result, mismatch and error predicates remain required. Five
+explicit guard-disabling exercises in the immediate consumer files are marked
+out of routine selection without changing their bodies. Final hook/delivery
+results are recorded in the wrap-up checkpoint after execution.
