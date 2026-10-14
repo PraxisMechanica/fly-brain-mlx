@@ -12,6 +12,7 @@ from fly_brain.qualification.session_expectations import (
     observation_checks,
     require_configuration,
 )
+from fly_brain.simulation.identifiers import FlyWireIds64, NeuronRows32
 from fly_brain.simulation.models import Connectome
 from fly_brain.simulation.observation_module import build_observation_sessions
 from fly_brain.simulation.observations import ObservationInitialState
@@ -203,9 +204,9 @@ def test_actual_native_threshold_equality_and_neighbors_match_independent_predic
     from fly_brain.simulation.backend.core import COEFFICIENTS
 
     network = Connectome(
-        np.array([0], dtype=np.int64),
-        np.array([], dtype=np.int32),
-        np.array([], dtype=np.int32),
+        FlyWireIds64(np.array([0], dtype=np.int64)),
+        NeuronRows32(np.array([], dtype=np.int32)),
+        NeuronRows32(np.array([], dtype=np.int32)),
         np.array([], dtype=np.int32),
         np.array([], dtype=np.float64),
     )

@@ -6,6 +6,7 @@ from numpy.typing import NDArray
 
 from fly_brain.qualification.session_blocks import SessionBlock
 from fly_brain.qualification.session_observer import observe_session
+from fly_brain.simulation.identifiers import FlyWireIds64, NeuronRows32
 from fly_brain.simulation.models import Connectome, Stimulus
 from fly_brain.simulation.observation_module import build_observation_sessions
 from fly_brain.simulation.observations import ObservationInitialState
@@ -21,9 +22,13 @@ class Fixture:
 def fixture(empty: bool = False) -> Fixture:
     counts = np.array([] if empty else [360, 0, 1, -2, 3, 360, -1, -1], dtype=np.int32)
     original = Connectome(
-        np.arange(6, dtype=np.int64),
-        np.array([] if empty else [0, 0, 0, 1, 2, 3, 4, 4], dtype=np.int32),
-        np.array([] if empty else [1, 1, 0, 2, 3, 0, 5, 5], dtype=np.int32),
+        FlyWireIds64(np.arange(6, dtype=np.int64)),
+        NeuronRows32(
+            np.array([] if empty else [0, 0, 0, 1, 2, 3, 4, 4], dtype=np.int32)
+        ),
+        NeuronRows32(
+            np.array([] if empty else [1, 1, 0, 2, 3, 0, 5, 5], dtype=np.int32)
+        ),
         counts,
         counts.astype(np.float64) * 0.275,
     )

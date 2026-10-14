@@ -6,6 +6,7 @@ import numpy as np
 import pytest
 
 from fly_brain.simulation.backend.runner import run
+from fly_brain.simulation.identifiers import FlyWireIds64, NeuronRows32
 from fly_brain.simulation.models import Connectome, Stimulus
 
 pytestmark = [pytest.mark.integration, pytest.mark.metal]
@@ -15,9 +16,9 @@ def test_production_collection_keeps_trial_identity_and_steps_across_blocks(
     precision: str, request: pytest.FixtureRequest
 ) -> None:
     c = Connectome(
-        np.array([10, 20], dtype=np.int64),
-        np.array([], dtype=np.int32),
-        np.array([], dtype=np.int32),
+        FlyWireIds64(np.array([10, 20], dtype=np.int64)),
+        NeuronRows32(np.array([], dtype=np.int32)),
+        NeuronRows32(np.array([], dtype=np.int32)),
         np.array([], dtype=np.int32),
         np.array([], dtype=np.float64),
     )

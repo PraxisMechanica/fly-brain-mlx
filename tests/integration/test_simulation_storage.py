@@ -8,6 +8,7 @@ import pytest
 from pydantic import ValidationError
 
 from fly_brain.comparison.storage import read_spikes
+from fly_brain.simulation.identifiers import FlyWireIds64, NeuronRows32
 from fly_brain.simulation.models import (
     Connectome,
     Experiment,
@@ -25,9 +26,9 @@ pytestmark = pytest.mark.integration
 
 def network() -> Connectome:
     return Connectome(
-        np.array([10, 20], dtype=np.int64),
-        np.array([], dtype=np.int32),
-        np.array([], dtype=np.int32),
+        FlyWireIds64(np.array([10, 20], dtype=np.int64)),
+        NeuronRows32(np.array([], dtype=np.int32)),
+        NeuronRows32(np.array([], dtype=np.int32)),
         np.array([], dtype=np.int32),
         np.array([], dtype=np.float64),
     )

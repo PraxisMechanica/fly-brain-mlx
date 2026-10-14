@@ -4,6 +4,7 @@ import pytest
 
 from fly_brain.simulation.backend.arrays import as_host, boolean_input
 from fly_brain.simulation.backend.bucketed import accumulate, make_layout
+from fly_brain.simulation.identifiers import FlyWireIds64, NeuronRows32
 from fly_brain.simulation.models import Connectome
 
 pytestmark = [pytest.mark.integration, pytest.mark.metal]
@@ -29,9 +30,9 @@ def test_guarded_whole_layout_preserves_every_count_and_scaled_native_bit(
 ) -> None:
     integer_counts = np.asarray(counts, dtype=np.int32)
     connectome = Connectome(
-        np.arange(2, dtype=np.int64),
-        np.zeros(len(counts), dtype=np.int32),
-        np.ones(len(counts), dtype=np.int32),
+        FlyWireIds64(np.arange(2, dtype=np.int64)),
+        NeuronRows32(np.zeros(len(counts), dtype=np.int32)),
+        NeuronRows32(np.ones(len(counts), dtype=np.int32)),
         integer_counts,
         integer_counts.astype(np.float64) * 0.275,
     )
@@ -68,7 +69,11 @@ def test_guarded_whole_layout_preserves_every_count_and_scaled_native_bit(
 def test_accumulator_rejects_nonboolean_edge_membership(precision: str) -> None:
     counts = np.array([1], dtype=np.int32)
     connectome = Connectome(
-        np.arange(2, dtype=np.int64), counts * 0, counts, counts, counts * 0.275
+        FlyWireIds64(np.arange(2, dtype=np.int64)),
+        NeuronRows32(counts * 0),
+        NeuronRows32(counts),
+        counts,
+        counts * 0.275,
     )
     layout = make_layout(connectome, exact_counts=True)
     with mx.stream(mx.gpu), pytest.raises(ValueError, match='Boolean edges'):

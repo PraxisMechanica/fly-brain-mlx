@@ -12,6 +12,7 @@ from fly_brain.qualification.adapters.torch_setup import (
     replay_inputs,
     tensor,
 )
+from fly_brain.simulation.identifiers import FlyWireIds64, NeuronRows32
 from fly_brain.simulation.models import Connectome
 from tests.qualification.test_mlx_observer import fixture
 
@@ -26,7 +27,11 @@ def test_every_binary_mask_preserves_scaled_cancellation_duplicate_and_zero_byte
     destinations = np.array([1, 1, 2, 2, 2, 1, 1, 3, 0], dtype=np.int32)
     counts = np.array([3, -3, -2, 3, 2, -1, 1, 0, -4], dtype=np.int32)
     connectome = Connectome(
-        np.arange(5, dtype=np.int64), sources, destinations, counts, counts * 0.275
+        FlyWireIds64(np.arange(5, dtype=np.int64)),
+        NeuronRows32(sources),
+        NeuronRows32(destinations),
+        counts,
+        counts * 0.275,
     )
     model = prepare(connectome, (), silenced, 4)
     active = ActiveSources.from_model(model)

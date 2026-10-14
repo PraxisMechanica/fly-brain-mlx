@@ -6,6 +6,7 @@ from numpy.typing import NDArray
 
 from fly_brain.qualification.adapters.case_spikes import load
 from fly_brain.qualification.adapters.observer_evidence import array_record
+from fly_brain.simulation.identifiers import FlyWireIds64, NeuronRows32
 from fly_brain.simulation.models import Connectome
 
 pytestmark = pytest.mark.integration
@@ -28,9 +29,9 @@ def test_native_coordinates_are_validated_before_pinned_identifier_mapping(
     tmp_path: Path, fault: str
 ) -> None:
     connectome = Connectome(
-        np.array([17, 23, 42], dtype=np.int64),
-        np.empty(0, dtype=np.int32),
-        np.empty(0, dtype=np.int32),
+        FlyWireIds64(np.array([17, 23, 42], dtype=np.int64)),
+        NeuronRows32(np.empty(0, dtype=np.int32)),
+        NeuronRows32(np.empty(0, dtype=np.int32)),
         np.empty(0, dtype=np.int32),
         np.empty(0, dtype=np.float64),
     )

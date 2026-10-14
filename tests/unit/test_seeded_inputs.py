@@ -16,6 +16,7 @@ from fly_brain.qualification.fan_in_service import prepare_cases
 from fly_brain.qualification.input_patterns import threshold_uniforms
 from fly_brain.simulation import models
 from fly_brain.simulation.experiments import EXPERIMENTS, P9_IDS, SUGAR_IDS
+from fly_brain.simulation.identifiers import FlyWireIds64, NeuronRows32
 from fly_brain.simulation.models import Connectome, Experiment, ExperimentName, Stimulus
 from fly_brain.simulation.stimuli import trial_events
 from fly_brain.simulation.stimulus_service import schedule
@@ -66,9 +67,9 @@ def original(monkeypatch: pytest.MonkeyPatch) -> Original:
 
 def connectome() -> Connectome:
     return Connectome(
-        np.array(P9_IDS + SUGAR_IDS[::-1], dtype=np.int64),
-        np.array([], dtype=np.int32),
-        np.array([], dtype=np.int32),
+        FlyWireIds64(np.array(P9_IDS + SUGAR_IDS[::-1], dtype=np.int64)),
+        NeuronRows32(np.array([], dtype=np.int32)),
+        NeuronRows32(np.array([], dtype=np.int32)),
         np.array([], dtype=np.int32),
         np.array([], dtype=np.float64),
     )

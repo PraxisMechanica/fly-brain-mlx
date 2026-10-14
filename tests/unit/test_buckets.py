@@ -1,6 +1,7 @@
 import numpy as np
 import pytest
 
+from fly_brain.simulation.identifiers import FlyWireIds64, NeuronRows32
 from fly_brain.simulation.mapping import bucket_destinations, silence_sources
 from fly_brain.simulation.models import Connectome
 
@@ -10,9 +11,9 @@ pytestmark = pytest.mark.unit
 def connectome() -> Connectome:
     counts = np.array([3, 0, -3, 2, 1], dtype=np.int32)
     return Connectome(
-        np.array([30, 10, 20], dtype=np.int64),
-        np.array([1, 0, 0, 2, 0], dtype=np.int32),
-        np.array([2, 1, 2, 2, 1], dtype=np.int32),
+        FlyWireIds64(np.array([30, 10, 20], dtype=np.int64)),
+        NeuronRows32(np.array([1, 0, 0, 2, 0], dtype=np.int32)),
+        NeuronRows32(np.array([2, 1, 2, 2, 1], dtype=np.int32)),
         counts,
         counts.astype(np.float64) * 0.275,
     )

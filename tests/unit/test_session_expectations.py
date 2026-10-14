@@ -9,6 +9,7 @@ from fly_brain.qualification.session_expectations import (
     initial_ledger,
     observation_checks,
 )
+from fly_brain.simulation.identifiers import FlyWireIds64, NeuronRows32
 from fly_brain.simulation.models import Connectome
 from fly_brain.simulation.observations import (
     PHASE_DTYPES,
@@ -22,9 +23,9 @@ pytestmark = pytest.mark.unit
 def connectome() -> Connectome:
     counts = np.array([2, 0, -1], dtype=np.int32)
     return Connectome(
-        np.arange(2, dtype=np.int64),
-        np.array([0, 0, 1], dtype=np.int32),
-        np.array([1, 1, 0], dtype=np.int32),
+        FlyWireIds64(np.arange(2, dtype=np.int64)),
+        NeuronRows32(np.array([0, 0, 1], dtype=np.int32)),
+        NeuronRows32(np.array([1, 1, 0], dtype=np.int32)),
         counts,
         counts.astype(np.float64) * 0.275,
     )

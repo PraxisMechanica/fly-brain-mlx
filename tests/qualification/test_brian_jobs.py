@@ -29,6 +29,7 @@ from fly_brain.qualification.adapters.observer_stream import (
 from fly_brain.qualification.adapters.observer_tape import replay
 from fly_brain.qualification.adapters.paired_observer import phase_hash
 from fly_brain.qualification.adapters.reference_queues import ReferenceQueues
+from fly_brain.simulation.identifiers import FlyWireIds64, NeuronRows32
 from fly_brain.simulation.models import Connectome
 
 pytestmark = [pytest.mark.integration, pytest.mark.reference]
@@ -56,7 +57,11 @@ def runs(
     destinations = np.array([1, 1, 0, 2, 3, 0, 5, 5], dtype=np.int32)
     counts = np.array([360, 0, 1, -2, 3, 360, -1, -1], dtype=np.int32)
     connectome = Connectome(
-        np.arange(6, dtype=np.int64), sources, destinations, counts, counts * 0.275
+        FlyWireIds64(np.arange(6, dtype=np.int64)),
+        NeuronRows32(sources),
+        NeuronRows32(destinations),
+        counts,
+        counts * 0.275,
     )
     events = np.zeros((101, 3), dtype=np.uint8)
     events[::3, 0] = events[::7, 1] = events[::4, 2] = 1
@@ -276,7 +281,11 @@ def test_silent_and_empty_edge_jobs_preserve_real_queue_geometry(
     destinations = np.array([1, 2] if edges else [], dtype=np.int32)
     counts = np.array([360, -1] if edges else [], dtype=np.int32)
     connectome = Connectome(
-        np.arange(3, dtype=np.int64), sources, destinations, counts, counts * 0.275
+        FlyWireIds64(np.arange(3, dtype=np.int64)),
+        NeuronRows32(sources),
+        NeuronRows32(destinations),
+        counts,
+        counts * 0.275,
     )
     events = np.zeros((39, int(channels)), dtype=np.uint8)
     if channels:

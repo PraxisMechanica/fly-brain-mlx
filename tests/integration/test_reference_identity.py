@@ -8,6 +8,7 @@ import pytest
 
 from fly_brain.qualification.adapters.observer_stream import StreamShape
 from fly_brain.qualification.adapters.reference_identity import create, file_record
+from fly_brain.simulation.identifiers import FlyWireIds64, NeuronRows32
 from fly_brain.simulation.models import Connectome, Stimulus
 from tests.quality.test_reference_digest import LegacyProducer, preserved_identity
 
@@ -55,9 +56,9 @@ def test_reference_identity_binds_each_scientific_input_category(
     tmp_path: Path, changed: str, legacy_producer: LegacyProducer
 ) -> None:
     connectome = Connectome(
-        np.arange(3, dtype=np.int64),
-        np.asarray([0, 1], dtype=np.int32),
-        np.asarray([1, 2], dtype=np.int32),
+        FlyWireIds64(np.arange(3, dtype=np.int64)),
+        NeuronRows32(np.asarray([0, 1], dtype=np.int32)),
+        NeuronRows32(np.asarray([1, 2], dtype=np.int32)),
         np.asarray([1, -1], dtype=np.int32),
         np.asarray([0.275, -0.275], dtype=np.float64),
     )
@@ -103,9 +104,9 @@ def test_unused_candidate_executable_is_separate_from_sealed_producer(
     legacy_producer: LegacyProducer,
 ) -> None:
     connectome = Connectome(
-        np.arange(1, dtype=np.int64),
-        np.empty(0, np.int32),
-        np.empty(0, np.int32),
+        FlyWireIds64(np.arange(1, dtype=np.int64)),
+        NeuronRows32(np.empty(0, np.int32)),
+        NeuronRows32(np.empty(0, np.int32)),
         np.empty(0, np.int32),
         np.empty(0, np.float64),
     )

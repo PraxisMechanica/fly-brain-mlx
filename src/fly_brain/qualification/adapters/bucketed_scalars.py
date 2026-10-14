@@ -10,6 +10,7 @@ from numpy.typing import NDArray
 from fly_brain.simulation.backend.accumulation import SCALE
 from fly_brain.simulation.backend.arrays import boolean_input
 from fly_brain.simulation.backend.bucketed import Layout, accumulate, make_layout
+from fly_brain.simulation.identifiers import FlyWireIds64, NeuronRows32
 from fly_brain.simulation.models import Connectome
 
 from .accumulation_probe import Case
@@ -44,9 +45,9 @@ def run(
         assert np.max(np.abs(counts.astype(np.int64)), initial=0) <= 2**24
         assert np.abs(counts.astype(np.int64)).sum() <= 2**40
         connectome = Connectome(
-            np.arange(counts.size + 1, dtype=np.int64),
-            np.arange(counts.size, dtype=np.int32),
-            np.full(counts.size, counts.size, dtype=np.int32),
+            FlyWireIds64(np.arange(counts.size + 1, dtype=np.int64)),
+            NeuronRows32(np.arange(counts.size, dtype=np.int32)),
+            NeuronRows32(np.full(counts.size, counts.size, dtype=np.int32)),
             counts,
             case.weights,
         )

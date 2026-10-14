@@ -1,6 +1,7 @@
 import numpy as np
 from numpy.typing import NDArray
 
+from .identifiers import EdgeRows32, NeuronRows32, PaddedEdgeRows32
 from .models import Connectome, DestinationBucket, DestinationGrouping
 
 
@@ -16,7 +17,7 @@ def group_destinations(connectome: Connectome) -> DestinationGrouping:
     inverse[order] = np.arange(order.size, dtype=np.int32)
     degree = np.bincount(connectome.destinations, minlength=connectome.neuron_ids.size)
     offsets = np.concatenate((np.zeros(1, dtype=np.int64), np.cumsum(degree)))
-    return DestinationGrouping(order, inverse, offsets)
+    return DestinationGrouping(EdgeRows32(order), inverse, offsets)
 
 
 def bucket_destinations(connectome: Connectome) -> tuple[DestinationBucket, ...]:
@@ -42,7 +43,11 @@ def bucket_destinations(connectome: Connectome) -> tuple[DestinationBucket, ...]
             occupied[row, : edges.size] = True
         for values in (targets, edge_ids, counts, occupied):
             values.setflags(write=False)
-        buckets.append(DestinationBucket(targets, edge_ids, counts, occupied))
+        buckets.append(
+            DestinationBucket(
+                NeuronRows32(targets), PaddedEdgeRows32(edge_ids), counts, occupied
+            )
+        )
     return tuple(buckets)
 
 

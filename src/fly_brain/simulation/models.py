@@ -5,6 +5,13 @@ from typing import Literal
 import numpy as np
 from numpy.typing import ArrayLike, NDArray
 
+from .identifiers import (
+    EdgeRows32,
+    FlyWireIds64,
+    NeuronRows32,
+    PaddedEdgeRows32,
+)
+
 
 @dataclass(frozen=True)
 class NetworkCase:
@@ -30,24 +37,24 @@ class InputPin:
 
 @dataclass(frozen=True)
 class Connectome:
-    neuron_ids: NDArray[np.int64]
-    sources: NDArray[np.int32]
-    destinations: NDArray[np.int32]
+    neuron_ids: FlyWireIds64
+    sources: NeuronRows32
+    destinations: NeuronRows32
     counts: NDArray[np.int32]
     weights_mv: NDArray[np.float64]
 
 
 @dataclass(frozen=True)
 class DestinationGrouping:
-    edge_ids: NDArray[np.int32]
+    edge_ids: EdgeRows32
     inverse: NDArray[np.int32]
     offsets: NDArray[np.int64]
 
 
 @dataclass(frozen=True)
 class DestinationBucket:
-    targets: NDArray[np.int32]
-    edge_ids: NDArray[np.int32]
+    targets: NeuronRows32
+    edge_ids: PaddedEdgeRows32
     counts: NDArray[np.float32]
     occupied: NDArray[np.bool_]
 

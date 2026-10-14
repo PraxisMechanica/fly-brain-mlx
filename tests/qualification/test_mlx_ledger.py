@@ -8,6 +8,7 @@ import pytest
 from fly_brain.simulation.backend import core
 from fly_brain.simulation.backend.arrays import as_host, boolean_input, evaluate
 from fly_brain.simulation.backend.bucketed import prepare
+from fly_brain.simulation.identifiers import FlyWireIds64, NeuronRows32
 from fly_brain.simulation.models import Connectome
 from tests.support.legacy_mlx_ledger import CHECK_NAMES, EventLedger
 
@@ -17,9 +18,13 @@ pytestmark = [pytest.mark.integration, pytest.mark.metal]
 def connectome(empty: bool = False) -> Connectome:
     counts = np.array([] if empty else [360, 0, 1, -2, 3, 360, -1, -1], dtype=np.int32)
     return Connectome(
-        np.arange(6, dtype=np.int64),
-        np.array([] if empty else [0, 0, 0, 1, 2, 3, 4, 4], dtype=np.int32),
-        np.array([] if empty else [1, 1, 0, 2, 3, 0, 5, 5], dtype=np.int32),
+        FlyWireIds64(np.arange(6, dtype=np.int64)),
+        NeuronRows32(
+            np.array([] if empty else [0, 0, 0, 1, 2, 3, 4, 4], dtype=np.int32)
+        ),
+        NeuronRows32(
+            np.array([] if empty else [1, 1, 0, 2, 3, 0, 5, 5], dtype=np.int32)
+        ),
         counts,
         counts.astype(np.float64) * 0.275,
     )

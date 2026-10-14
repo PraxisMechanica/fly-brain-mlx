@@ -5,6 +5,7 @@ from numpy.typing import NDArray
 from fly_brain.qualification.fan_in import FanInCases
 from fly_brain.simulation.backend.arrays import boolean_input
 from fly_brain.simulation.backend.bucketed import Layout, accumulate, make_layout
+from fly_brain.simulation.identifiers import FlyWireIds64, NeuronRows32
 from fly_brain.simulation.models import Connectome
 
 from .fan_in_probe import Evaluation, Reduction
@@ -45,9 +46,9 @@ def evaluate_cases(
     )
     for order_index, order in enumerate(cases.orders):
         local = Connectome(
-            connectome.neuron_ids[nodes],
-            sources[order],
-            np.full(edges.size, local_target, dtype=np.int32),
+            FlyWireIds64(connectome.neuron_ids[nodes]),
+            NeuronRows32(sources[order]),
+            NeuronRows32(np.full(edges.size, local_target, dtype=np.int32)),
             connectome.counts[edges][order],
             connectome.weights_mv[edges][order],
         )

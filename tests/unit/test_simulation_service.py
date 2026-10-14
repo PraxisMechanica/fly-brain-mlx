@@ -4,6 +4,7 @@ import numpy as np
 import pytest
 
 from fly_brain.infrastructure.seeded_random import uniforms
+from fly_brain.simulation.identifiers import FlyWireIds64, NeuronRows32
 from fly_brain.simulation.models import (
     Connectome,
     Experiment,
@@ -25,9 +26,9 @@ def test_stage_timings_use_only_the_injected_clock() -> None:
         Path('/project'), Path('/result'), 'silent', 0.001, 1, 0
     )
     connectome = Connectome(
-        np.array([10, 20], dtype=np.int64),
-        np.array([], dtype=np.int32),
-        np.array([], dtype=np.int32),
+        FlyWireIds64(np.array([10, 20], dtype=np.int64)),
+        NeuronRows32(np.array([], dtype=np.int32)),
+        NeuronRows32(np.array([], dtype=np.int32)),
         np.array([], dtype=np.int32),
         np.array([], dtype=np.float64),
     )

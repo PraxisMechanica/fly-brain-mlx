@@ -2,6 +2,7 @@ import numpy as np
 import pytest
 
 from fly_brain.qualification.input_patterns import analyze_inputs
+from fly_brain.simulation.identifiers import FlyWireIds64, NeuronRows32
 from fly_brain.simulation.models import Connectome
 from tests.support.seeded_inputs import source_masks
 
@@ -12,9 +13,9 @@ def test_equal_selector_scores_use_the_lowest_neuron_indices() -> None:
     counts = np.ones(20, dtype=np.int32)
     indices = np.arange(20, dtype=np.int32)
     connectome = Connectome(
-        np.arange(20, dtype=np.int64),
-        indices,
-        indices,
+        FlyWireIds64(np.arange(20, dtype=np.int64)),
+        NeuronRows32(indices),
+        NeuronRows32(indices),
         counts,
         counts.astype(np.float64) * 0.275,
     )
@@ -37,7 +38,11 @@ def test_error_extrema_cannot_choose_duplicate_edges_independently() -> None:
     destinations = np.ones(2, dtype=np.int32)
     weights = counts.astype(np.float64) * 0.275
     connectome = Connectome(
-        np.array([10, 20], dtype=np.int64), sources, destinations, counts, weights
+        FlyWireIds64(np.array([10, 20], dtype=np.int64)),
+        NeuronRows32(sources),
+        NeuronRows32(destinations),
+        counts,
+        weights,
     )
     patterns = analyze_inputs(connectome)
     assert patterns.positive_cast_error_mv[1] > 0

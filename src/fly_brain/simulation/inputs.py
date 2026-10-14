@@ -6,6 +6,7 @@ import numpy as np
 import pyarrow.parquet as pq
 from numpy.typing import NDArray
 
+from .identifiers import FlyWireIds64, NeuronRows32
 from .mapping import absolute_count_sums
 from .models import Connectome, InputPin
 
@@ -78,9 +79,9 @@ def load_connectome(
     if pin.neurons <= 0 or max(pin.neurons, pin.edges) > np.iinfo(np.int32).max:
         raise ValueError('Connectome identity arrays must fit int32 indexing')
     connectome = Connectome(
-        neuron_ids,
-        source_indices.astype(np.int32),
-        destination_indices.astype(np.int32),
+        FlyWireIds64(neuron_ids),
+        NeuronRows32(source_indices.astype(np.int32)),
+        NeuronRows32(destination_indices.astype(np.int32)),
         counts64.astype(np.int32),
         counts64.astype(np.float64) * pin.scale_mv,
     )

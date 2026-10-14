@@ -6,6 +6,7 @@ import pytest
 
 from fly_brain.simulation.backend.bucketed import make_layout, prepare_observed
 from fly_brain.simulation.backend.reduction_evidence import read_rows
+from fly_brain.simulation.identifiers import FlyWireIds64, NeuronRows32
 from fly_brain.simulation.models import Connectome
 from fly_brain.simulation.observations import COMPENSATED_ORDER, EXACT_ORDER
 from tests.qualification.test_mlx_observer import fixture
@@ -29,9 +30,9 @@ def test_requested_exact_mode_reports_original_fallback_outside_the_guard(
 ) -> None:
     counts = np.array([2**24, 2**24], dtype=np.int32)
     connectome = Connectome(
-        np.array([10, 20], dtype=np.int64),
-        np.array([0, 0], dtype=np.int32),
-        np.array([1, 1], dtype=np.int32),
+        FlyWireIds64(np.array([10, 20], dtype=np.int64)),
+        NeuronRows32(np.array([0, 0], dtype=np.int32)),
+        NeuronRows32(np.array([1, 1], dtype=np.int32)),
         counts,
         counts.astype(np.float64) * 0.275,
     )

@@ -30,6 +30,7 @@ from fly_brain.qualification.module import (
     build_project_probe,
     build_qualification,
 )
+from fly_brain.simulation.identifiers import FlyWireIds64, NeuronRows32
 from fly_brain.simulation.models import (
     Connectome,
     Experiment,
@@ -56,9 +57,9 @@ pytestmark = pytest.mark.unit
 
 def empty_connectome() -> Connectome:
     return Connectome(
-        np.array([10, 20], dtype=np.int64),
-        np.array([], dtype=np.int32),
-        np.array([], dtype=np.int32),
+        FlyWireIds64(np.array([10, 20], dtype=np.int64)),
+        NeuronRows32(np.array([], dtype=np.int32)),
+        NeuronRows32(np.array([], dtype=np.int32)),
         np.array([], dtype=np.int32),
         np.array([], dtype=np.float64),
     )

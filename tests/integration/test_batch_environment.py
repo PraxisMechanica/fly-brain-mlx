@@ -10,25 +10,27 @@ pytestmark = pytest.mark.integration
 
 
 @pytest.mark.parametrize(
-    'fault',
+    'fault,changed_source',
     (
-        'none',
-        'missing',
-        'version',
-        'precision',
-        'compile',
-        'threads',
-        'interop',
-        'dtype',
-        'device',
-        'source_changed',
-        'source_omitted',
-        'launch_changed',
-        'extra_source',
+        ('none', 'fly_brain.simulation.backend.core'),
+        ('missing', 'fly_brain.simulation.backend.core'),
+        ('version', 'fly_brain.simulation.backend.core'),
+        ('precision', 'fly_brain.simulation.backend.core'),
+        ('compile', 'fly_brain.simulation.backend.core'),
+        ('threads', 'fly_brain.simulation.backend.core'),
+        ('interop', 'fly_brain.simulation.backend.core'),
+        ('dtype', 'fly_brain.simulation.backend.core'),
+        ('device', 'fly_brain.simulation.backend.core'),
+        ('source_changed', 'fly_brain.simulation.backend.core'),
+        ('source_omitted', 'fly_brain.simulation.backend.core'),
+        ('launch_changed', 'fly_brain.simulation.backend.core'),
+        ('extra_source', 'fly_brain.simulation.backend.core'),
+        ('source_changed', 'fly_brain.simulation.identifiers'),
+        ('source_omitted', 'fly_brain.simulation.identifiers'),
     ),
 )
 def test_batch_cannot_reuse_evidence_with_changed_execution_settings_or_source(
-    tmp_path: Path, fault: str
+    tmp_path: Path, fault: str, changed_source: str
 ) -> None:
     names = [
         'fly_brain.simulation.backend.core',
@@ -40,6 +42,7 @@ def test_batch_cannot_reuse_evidence_with_changed_execution_settings_or_source(
         'fly_brain.simulation.backend.reduction_evidence',
         'fly_brain.simulation.mapping',
         'fly_brain.simulation.models',
+        'fly_brain.simulation.identifiers',
         'fly_brain.simulation.stimuli',
         'fly_brain.simulation.stimulus_service',
         'fly_brain.simulation.ports',
@@ -141,9 +144,9 @@ def test_batch_cannot_reuse_evidence_with_changed_execution_settings_or_source(
             elif fault == 'device':
                 metadata['device']['architecture'] = 'other'
             elif fault == 'source_changed':
-                metadata['source_sha256'][names[0]] = '0' * 64
+                metadata['source_sha256'][changed_source] = '0' * 64
             elif fault == 'source_omitted':
-                del metadata['source_sha256'][names[0]]
+                del metadata['source_sha256'][changed_source]
         (directory / 'environment.json').write_text(json.dumps(metadata))
         singles[trial] = (
             directory,
