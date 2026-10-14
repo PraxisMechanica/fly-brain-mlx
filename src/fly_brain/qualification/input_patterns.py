@@ -3,7 +3,6 @@ from dataclasses import dataclass
 import numpy as np
 from numpy.typing import NDArray
 
-from fly_brain.simulation.mapping import absolute_count_sums
 from fly_brain.simulation.models import Connectome
 
 MASK_PROBABILITIES = (0.001, 0.01, 0.1, 0.5)
@@ -21,7 +20,18 @@ class InputPatterns:
     targets: NDArray[np.int32]
 
 
-def analyze_inputs(connectome: Connectome) -> InputPatterns:
+@dataclass(frozen=True)
+class InputPreparation:
+    degree: NDArray[np.int64]
+    absolute_weight_mv: NDArray[np.float64]
+    positive_cast_error_mv: NDArray[np.float64]
+    negative_cast_error_mv: NDArray[np.float64]
+    positive_source_error_mv: NDArray[np.float64]
+    negative_source_error_mv: NDArray[np.float64]
+    selected: frozenset[int]
+
+
+def prepare_inputs(connectome: Connectome) -> InputPreparation:
     neurons = connectome.neuron_ids.size
     degree = np.bincount(connectome.destinations, minlength=neurons)
     error = connectome.weights_mv.astype(np.float32).astype(np.float64)
@@ -52,15 +62,29 @@ def analyze_inputs(connectome: Connectome) -> InputPatterns:
         selected.update(int(index) for index in np.lexsort((indices, -metric))[:16])
     for value in np.quantile(degree, [0, 0.5, 0.9, 0.99, 1], method='nearest'):
         selected.add(int(np.flatnonzero(degree == value)[0]))
-    absolute_counts = absolute_count_sums(connectome)
-    selected.add(int(np.argmax(absolute_counts)))
-    return InputPatterns(
+    return InputPreparation(
         degree,
         absolute_weight,
         positive_error,
         negative_error,
         positive_source,
         negative_source,
+        frozenset(selected),
+    )
+
+
+def analyze_inputs(
+    prepared: InputPreparation, *, absolute_counts: NDArray[np.int64]
+) -> InputPatterns:
+    selected = set(prepared.selected)
+    selected.add(int(np.argmax(absolute_counts)))
+    return InputPatterns(
+        prepared.degree,
+        prepared.absolute_weight_mv,
+        prepared.positive_cast_error_mv,
+        prepared.negative_cast_error_mv,
+        prepared.positive_source_error_mv,
+        prepared.negative_source_error_mv,
         absolute_counts,
         np.array(sorted(selected), dtype=np.int32),
     )

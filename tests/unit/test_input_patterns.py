@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 
-from fly_brain.qualification.input_patterns import analyze_inputs
+from fly_brain.qualification.input_patterns import analyze_inputs, prepare_inputs
 from fly_brain.simulation.identifiers import FlyWireIds64, NeuronRows32
 from fly_brain.simulation.models import Connectome
 from tests.support.seeded_inputs import source_masks
@@ -19,7 +19,9 @@ def test_equal_selector_scores_use_the_lowest_neuron_indices() -> None:
         counts,
         counts.astype(np.float64) * 0.275,
     )
-    assert analyze_inputs(connectome).targets.tolist() == list(range(16))
+    assert analyze_inputs(
+        prepare_inputs(connectome), absolute_counts=np.ones(20, dtype=np.int64)
+    ).targets.tolist() == list(range(16))
 
 
 def test_source_masks_keep_duplicate_edges_synchronized() -> None:
@@ -44,7 +46,9 @@ def test_error_extrema_cannot_choose_duplicate_edges_independently() -> None:
         counts,
         weights,
     )
-    patterns = analyze_inputs(connectome)
+    patterns = analyze_inputs(
+        prepare_inputs(connectome), absolute_counts=np.array([0, 2], dtype=np.int64)
+    )
     assert patterns.positive_cast_error_mv[1] > 0
     assert patterns.negative_cast_error_mv[1] < 0
     assert patterns.positive_source_error_mv[1] == 0

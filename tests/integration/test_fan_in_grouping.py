@@ -7,10 +7,13 @@ import numpy as np
 import pytest
 from numpy.typing import NDArray
 
-from fly_brain.qualification.input_patterns import InputPatterns
+from fly_brain.qualification.input_patterns import InputPatterns, InputPreparation
 from fly_brain.simulation.identifiers import FlyWireIds64, NeuronRows32
 from fly_brain.simulation.models import Connectome, DestinationGrouping, InputPin
-from fly_brain.simulation.module import build_destination_grouping_reader
+from fly_brain.simulation.module import (
+    build_absolute_count_reader,
+    build_destination_grouping_reader,
+)
 from tests.quality.support import PROJECT
 from tests.quality.test_reference_silencing_boundary import typed
 
@@ -21,16 +24,16 @@ from api import run
 from fly_brain.qualification.fan_in_ports import FanInCaseBuilder
 from fly_brain.qualification.ports import DestinationGroupingReader
 from fly_brain.simulation.models import Connectome, DestinationGrouping, InputPin
-from fly_brain.simulation.module import build_destination_grouping_reader
+from fly_brain.simulation.module import build_absolute_count_reader, build_destination_grouping_reader
 reader: DestinationGroupingReader = build_destination_grouping_reader()
 def wrong(network: Connectome) -> int:
     return 0
 def close(network: Connectome) -> DestinationGrouping:
     return reader(network)
 def drive(network: Connectome, pin: InputPin, output: Path, cases: FanInCaseBuilder) -> dict[str, object]:
-    return run(network, pin, output, '0', build_cases=cases{keyword})
+    return run(network, pin, output, '0', build_cases=cases, read_absolute_counts=build_absolute_count_reader(){keyword})
 """
-PHASES = ('analysis', 'grouping', 'cases')
+PHASES = ('analysis', 'counts', 'completion', 'grouping', 'cases')
 
 
 def payload(
@@ -93,8 +96,10 @@ def test_reader_order_identity_and_failure_before_evaluation(
     )
     output = tmp_path / 'fan-in'
     calls: list[str] = []
-    original = probe.analyze_inputs
+    original = probe.prepare_inputs
+    complete = probe.analyze_inputs
     supplied = build_destination_grouping_reader()
+    absolute = build_absolute_count_reader()
     before = network_payload(network)
 
     def observe(name: str, received: Connectome) -> None:
@@ -104,9 +109,19 @@ def test_reader_order_identity_and_failure_before_evaluation(
         if name == failure:
             raise ValueError('injected ' + name)
 
-    def analyze(received: Connectome) -> InputPatterns:
+    def analyze(received: Connectome) -> InputPreparation:
         observe('analysis', received)
         return original(received)
+
+    def read_absolute(received: Connectome) -> NDArray[np.int64]:
+        observe('counts', received)
+        return absolute(received)
+
+    def finish(
+        prepared: InputPreparation, *, absolute_counts: NDArray[np.int64]
+    ) -> InputPatterns:
+        observe('completion', network)
+        return complete(prepared, absolute_counts=absolute_counts)
 
     def read(received: Connectome) -> DestinationGrouping:
         observe('grouping', received)
@@ -131,7 +146,8 @@ def test_reader_order_identity_and_failure_before_evaluation(
 
     monkeypatch.setattr(probe.mx, 'disable_compile', lambda: calls.append('disable'))
     monkeypatch.setattr(probe.importlib.metadata, 'version', version)
-    monkeypatch.setattr(probe, 'analyze_inputs', analyze)
+    monkeypatch.setattr(probe, 'prepare_inputs', analyze)
+    monkeypatch.setattr(probe, 'analyze_inputs', finish)
     with pytest.raises(ValueError, match='^injected ' + failure + '$'):
         probe.run(
             network,
@@ -140,6 +156,7 @@ def test_reader_order_identity_and_failure_before_evaluation(
             '0',
             build_cases=cases,
             read_grouping=read,
+            read_absolute_counts=read_absolute,
         )
     observed = (calls, network_payload(network), probe.run.__defaults__)
     assert observed == (

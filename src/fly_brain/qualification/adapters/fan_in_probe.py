@@ -10,8 +10,8 @@ from numpy.typing import NDArray
 
 from fly_brain.qualification.fan_in import FanInCases, compare_cases
 from fly_brain.qualification.fan_in_ports import FanInCaseBuilder
-from fly_brain.qualification.input_patterns import analyze_inputs
-from fly_brain.qualification.ports import DestinationGroupingReader
+from fly_brain.qualification.input_patterns import analyze_inputs, prepare_inputs
+from fly_brain.qualification.ports import AbsoluteCountReader, DestinationGroupingReader
 from fly_brain.simulation.backend.accumulation import factored_sum
 from fly_brain.simulation.models import Connectome, InputPin
 
@@ -57,6 +57,7 @@ def run(
     *,
     build_cases: FanInCaseBuilder,
     read_grouping: DestinationGroupingReader,
+    read_absolute_counts: AbsoluteCountReader,
 ) -> dict[str, object]:
     output.mkdir(parents=True, exist_ok=False)
     assert precision == '0'
@@ -65,7 +66,9 @@ def run(
     assert importlib.metadata.version('mlx-metal') == '0.32.3'
     assert np.__version__ == '1.26.4'
     mx.disable_compile()
-    patterns = analyze_inputs(connectome)
+    prepared = prepare_inputs(connectome)
+    absolute_counts = read_absolute_counts(connectome)
+    patterns = analyze_inputs(prepared, absolute_counts=absolute_counts)
     grouping = read_grouping(connectome)
     targets: list[dict[str, object]] = []
     all_accepted = True
@@ -278,6 +281,10 @@ def run(
                 / 'simulation/backend/accumulation.py',
                 Path(__file__).with_name('bucketed_fan_in.py'),
                 Path(__file__).resolve().parents[2] / 'simulation/backend/bucketed.py',
+                Path(__file__).resolve().parents[2] / 'simulation/input_service.py',
+                Path(__file__).resolve().parents[2] / 'simulation/mapping.py',
+                Path(__file__).resolve().parents[1] / 'fan_in_service.py',
+                Path(__file__).resolve().parents[2] / 'infrastructure/seeded_random.py',
             )
         },
         'measurements': targets,

@@ -122,7 +122,10 @@ def fan_in_audit() -> DiagnosticCommand:
     precision = configure_mlx()
     from fly_brain.qualification.adapters.fan_in_probe import run
     from fly_brain.qualification.module import build_input_probe
-    from fly_brain.simulation.module import build_destination_grouping_reader
+    from fly_brain.simulation.module import (
+        build_absolute_count_reader,
+        build_destination_grouping_reader,
+    )
 
     return build_input_probe(
         pinned_inputs(),
@@ -131,6 +134,7 @@ def fan_in_audit() -> DiagnosticCommand:
             precision=precision,
             build_cases=fan_in_cases(),
             read_grouping=build_destination_grouping_reader(),
+            read_absolute_counts=build_absolute_count_reader(),
         ),
     )
 
@@ -140,7 +144,10 @@ def layout_fan_in_audit() -> DiagnosticCommand:
     from fly_brain.qualification.adapters.bucketed_fan_in import evaluate_cases
     from fly_brain.qualification.adapters.fan_in_probe import run
     from fly_brain.qualification.module import build_input_probe
-    from fly_brain.simulation.module import build_destination_grouping_reader
+    from fly_brain.simulation.module import (
+        build_absolute_count_reader,
+        build_destination_grouping_reader,
+    )
 
     return build_input_probe(
         pinned_inputs(),
@@ -151,6 +158,7 @@ def layout_fan_in_audit() -> DiagnosticCommand:
             build_cases=fan_in_cases(),
             scope='All prescribed pinned fan-in cases through production layout; not full-network dynamics.',
             read_grouping=build_destination_grouping_reader(),
+            read_absolute_counts=build_absolute_count_reader(),
         ),
     )
 
