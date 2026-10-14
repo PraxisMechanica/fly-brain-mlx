@@ -754,12 +754,12 @@
 ],
   "findings": [
   {
-    "rule": "ROLE006",
+    "rule": "DEP004",
     "symbol": {
       "path": "src/fly_brain/simulation/backend/engines.py",
       "name": "Advance"
     },
-    "message": "The callback/Execution contract names concrete core.State and MLX arrays. It is a local implementation contract, excluded from neutral public exports."
+    "message": "The reviewed local ports depend on concrete core.State, core.StepTrace and MLX arrays; Compiler and Factory also reach core.Network and Advance through Execution. Advance is excluded from neutral public exports, so this is DEP004 contract dependence rather than a ROLE006 public-contract leak."
   },
   {
     "rule": "OWN005",

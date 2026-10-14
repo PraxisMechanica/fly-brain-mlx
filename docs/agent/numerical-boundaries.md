@@ -34,9 +34,11 @@ responsibilities. Neither constitutes a complete repair.
 
 [engines.py](../../src/fly_brain/simulation/backend/engines.py)'s `Advance` exposes
 `core.State`, `core.StepTrace`, and `mx.array`. Renaming it to a protocol with the
-same members does not repair DEP004. The recorded ROLE006 finding also needs its
-literal public-contract scope checked before it is retired. The existing six
-findings are not a complete analysis or a sufficient blanket deviation list.
+same members does not repair DEP004. The finding is recorded as DEP004: the
+reviewed ports depend on implementation types, although `Advance` is excluded
+from neutral public exports. The earlier ROLE006 public-contract label was
+misclassified. The same debt remains open; the six findings are not a complete
+analysis or a sufficient blanket deviation list.
 
 ## Smallest sound implementation boundary
 

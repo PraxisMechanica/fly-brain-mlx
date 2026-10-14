@@ -421,6 +421,14 @@ effects and runtime targets remain unproved. B now assesses the old 14-path
 uncommitted declaration prototype and a minimal canonical-session observation;
 its historical failing tree is preserved, not delivered or accepted.
 
+The `Advance` finding is classified as DEP004 after the literal source/export
+review at `992f5a4` (confidence 95%). ROLE006 requires a public domain contract;
+`Advance` is excluded from that reviewed export set. Its ports still depend on
+concrete state/trace/device types, directly and through `Execution`, so the debt
+and six-finding count remain. No source, numerical behavior or export permission
+changes. A fresh Astra review assesses the minimum neutral numerical value and
+primitive boundary before dependent implementation; full analysis remains COV002.
+
 ## Remaining order and unresolved decisions
 
 Current bounded assignments (confidence 95%): B qualifies selected-source
@@ -430,8 +438,8 @@ identity guards stay intact; a measured per-file metric failure justifies one
 separate enrollment owner, without a metric waiver. The historical 14-path
 declaration tree remains unaccepted; dormant occurrences and lexical-versus-resolved identities must stay
 explicit. A has delivered the preparation → late count read → pure completion
-boundary and exact mapping contract. It assesses the literal rule classification
-of the existing Advance finding without source edits or numerical changes.
+boundary and exact mapping contract. Its literal Advance rule assessment is
+complete; the finding label is corrected without retiring the dependency debt.
 C has delivered the four `NetworkCase` selector annotations and authored
 catalog elements. It implements only the three qualification-side target
 annotations in Torch setup/observation and their existing consumers. Passed-tuple/scalar identity, values/order and host projections
