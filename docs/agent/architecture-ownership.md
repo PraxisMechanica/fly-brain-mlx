@@ -37,6 +37,10 @@ source reconciliation:
 - `declaration_fingerprint(declarations)` and `binding_fingerprint(tree)`: obtain
   review inputs after inspecting source. They are not an automatic policy repair.
 
+The [developer workflow](development.md) owns integration check selection.
+The historical unconditional full reconciliation instruction is retired; scoped
+reconciliation does not waive incomplete semantic analysis.
+
 `Review.findings` are executable reconciliation findings. `recorded_findings`
 retain source-reviewed architecture debt, unresolved resource attribution and
 primitive identifier contracts, with their current source locations. These two

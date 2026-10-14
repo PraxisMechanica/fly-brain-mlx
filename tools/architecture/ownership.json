@@ -753,8 +753,7 @@
   "The five current source roots are fully discovered without generated/vendor exclusions. Historical executed records were removed under the explicit default-deletion instruction; four active reference/oracle source files remain hash-frozen.",
   "Handwritten Brian2/PyArrow stubs stay first-party checked contract inputs. Adapted Brian2/PyTorch references have exact local and upstream provenance and retain scientific scope; none has a generated-code exemption.",
   "Reference-build/execution and native execution-state belong to their existing qualification-case/simulation-run workflows as storage-only runtime children. Source ownership is resolved; concrete accesses, lifecycle/representation/alias effects, scientific adoption and primitive identifier contracts remain separate findings or COV002 coverage gaps.",
-  "Production declaration role overrides record existing mixed-role/owner responsibilities; they do not authorize incompatible co-location or effect calls. Full placement, graph, call, resource and control-flow checks are not implemented here.",
-  "After parent integration, review every incoming comparison/bootstrap/port/module/command declaration and binding set, update only its exact entries and recorded findings, and rerun full policy reconciliation. No build-time auto-classification is provided."
+  "Production declaration role overrides record existing mixed-role/owner responsibilities; they do not authorize incompatible co-location or effect calls. Full placement, graph, call, resource and control-flow checks are not implemented here."
 ],
   "findings": [
   {
