@@ -60,6 +60,7 @@
   }
 },
   "files": {
+    "tests/quality/test_native_source_install_layout.py": {"owner":"architecture","role":"test","declaration_count":6,"declaration_sha256":"1cb10a882e27c5f1ab4bd63da78ec308d43880f538a97e7d0e903f58c0a77814","binding_sha256":"ca2ef238178274a22f735c5f7f0cc382885e3d17e5ae78d91d6475e7e600f412"},
     "tests/quality/native_call_support.py": {"owner":"architecture","role":"test","declaration_count":5,"declaration_sha256":"789451d6694b6c8b48806d0ec231bf95dd0e6a021db4473bdd408d9ff61291a9","binding_sha256":"6e34018912b3143e2e8631e639281636bb5c378948b30e2df7442fc965cc4d67"},
     "tests/quality/test_native_call_guards.py": {"owner":"architecture","role":"test","declaration_count":14,"declaration_sha256":"ce071399795bf011cfa5c4bc6b517ef4021a4843484ee2c99897c9e46b9cda6f","binding_sha256":"d2b0e6965430bd32d5405fa4d920c085c822fb5fe2641c1744ce210459cb327e"},
     "tests/quality/test_native_calls.py": {"owner":"architecture","role":"test","declaration_count":8,"declaration_sha256":"620cef4a194379a04f24db8147e6a359d4fae9f5c76d9bcbaa2306660c676692","binding_sha256":"d6ba02bc98396398cf7859c3dbb57615a008d8606bdb24bce6e4312e81a0d6bd"},
