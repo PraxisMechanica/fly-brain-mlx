@@ -413,6 +413,29 @@ mean 15.01 to 15.00 and health 40.55 to 40.59; maximum 96 remains. Two existing
 Torch sparse warnings occurred. Metal-dependent collection failed before
 scientific cases; direct CPU controls grant no new scientific acceptance.
 
+## Native bound-declaration observation
+
+The four-file observer is pushed at `2e5e04b` after normal commit/push checks.
+Exact hosted run `38588500963` passed every step; its quality step took 11 seconds,
+ran no pytest and uploaded zero artifacts. Twenty-seven distinct controls are
+qualified: the initial 26 passed in 7.52 seconds, then the added unmatched-node
+control and genuinely affected inventory control passed in 1.51 seconds.
+Strict Python and checked JavaScript typing, Ruff and native syntax passed.
+Worker metrics improved mean 14.93 to 14.89 and health 40.86 to 41.05 across
+395 to 398 files; maximum 96 remained unchanged. The single added registry row
+is an architecture test; existing rows, classifications and findings are intact.
+
+The observer reuses the qualified live session, keeps real parser-node/Symbol
+identities and distinguishes local report indexes. Tracked modules and selected
+unreferenced stubs retain their flags and loaded/read hashes. Native lexical
+UTF-16 spans stay separate from raw alias declaration URI/range. Intrinsic dummy
+ranges and a real augmented-assignment destination absent from the parsed-node
+walk have explicit statuses; absence alone does not prove compiler generation.
+Malformed native facts fail COV002, with same-Symbol repair and two independent
+guard weakenings qualified. Complete authored bindings and dormant declarations
+remain missing. The historical 14-path prototype is unchanged and unaccepted;
+all six findings and complete architecture/scientific limits remain.
+
 ## Reference parameter preservation
 
 The pure reference-default extraction is checked and pushed at

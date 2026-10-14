@@ -103,9 +103,15 @@ live session supplies source-bound native reads, guards original/refreshed loade
 origins and rejects unregistered or post-disposal reads. Selected unreferenced
 stubs receive native interim enrollment and forced binding; the actual Module,
 scope, symbol table and original-file identity are checked. Tracking remains
-unchanged and repeated reads retain cached file/tree identity. Complete authored
-declarations, dormant bindings and lexical-versus-resolved identities remain
-unproved; enrollment does not fill absent semantic capabilities.
+unchanged and repeated reads retain cached file/tree identity. The
+[native bound-declaration observer](../../tools/architecture/native_python_declarations.mjs)
+retains actual parser-node and Symbol IDs, report-local scope/declaration indexes,
+and native reachability. Raw declaration URI/range remain separate from lexical
+UTF-16 spans. Intrinsic and unmatched native nodes are explicit. Dormant parsed
+names can lack native bindings; complete authored bindings, parsed-name roles,
+declaration payloads, alias resolution, types, calls, effects, control flow and
+runtime targets remain missing. Enrollment and observation do not fill those
+absent semantic capabilities.
 
 The [native partial API](../../tools/architecture/native_partials.py) exports
 source-bound constructor and wrapped-expression identities, ordered captures,
@@ -124,8 +130,8 @@ callable/slot origins, partial dispatch, implicit calls, runtime target sets,
 alias ownership, control flow and effect summaries remain missing. The existing
 native type/call/partial setup still manually supplies strict rules and paths;
 the new canonical context observations have not yet replaced those contexts or
-proved runtime-environment equivalence. Declaration-only observation and reviewed
-live version 2 inputs remain the next dependency.
+proved runtime-environment equivalence. Complete authored declaration
+reconciliation and reviewed live version 2 inputs remain dependencies.
 
 The [semantic input schema](../../tools/architecture/semantic_policy_schema.py)
 defines version 2 with required sections and the exact 37-rule/context

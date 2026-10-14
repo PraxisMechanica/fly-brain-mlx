@@ -88,10 +88,11 @@ acceptance. Current limitations remain below and in
 ## Remaining order and unresolved decisions
 
 Current bounded assignments (confidence 95%): B has delivered selected-source
-enrollment and implements the smallest bound-declaration observer using the
-canonical live session. The historical 14-path declaration tree remains
-unaccepted; dormant occurrences and lexical-versus-resolved identities stay
-explicit. A has delivered the fan-in count boundary and completed the literal Advance
+enrollment and the native bound-declaration observer using the canonical live
+session. It assesses the smallest canonical-session seam for existing type
+queries. The historical 14-path declaration tree remains unaccepted; dormant
+occurrences and lexical-versus-resolved identities stay explicit.
+A has delivered the fan-in count boundary and completed the literal Advance
 rule assessment. Its next bounded component is the reviewed source-only neutral
 value/primitive proof; DEP004 remains open and no live backend is substituted.
 C has delivered the `NetworkCase` and Torch qualification target selectors,
@@ -108,7 +109,7 @@ qualify affected controls once and commit before serial parent integration.
 
 1. Keep checked components and current documentation delivered incrementally.
    Verify exact hosted revisions and leave no expired output exception.
-2. Complete native declaration-only observation and reviewed live version 2
+2. Complete authored declaration reconciliation and reviewed live version 2
    contexts. A source-only prototype observes 314 worker sources, but raw native
    binding tables omit dormant declarations and mix import target URIs with
    lexical ranges. Reconcile every authored occurrence; do not invent identities.
