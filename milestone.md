@@ -29,6 +29,31 @@ waiting toward the target; background execution counts as productive overlap onl
 while actual independent work advances. The target has not yet been demonstrated,
 and does not waive scientific gates. Decision confidence: 99% at `e519de7`.
 
+The user's subsequent amendment sets a **five-minute maximum for test runs** and
+requires careful diagnosis of any overrun. No long run is active. Full-matrix
+launch is held while the parent diagnoses the preservation harness with bounded
+pinned workloads (32 steps/four trials, external 120-second timeout). Preserve
+all native/discrete/state gates; do not reduce scientific case coverage or relabel
+long tests to evade the limit. Decision confidence: 95% at `c4556ce`.
+
+Bounded profiling completed in 47.861 seconds for 32 steps/four trials, including
+profiling, construction and proof writing. It found strided full-edge due-mask
+checks, repeated contiguous copies for queue hashing, and default-level ZIP
+compression. The pending repair gathers each trial's expected due mask in
+contiguous order, hashes native queue slots directly in the same canonical order,
+and writes the same lossless NPZ arrays at ZIP level 1. The identical workload
+then took 36.262 seconds (24.23% less). All 142 saved arrays, all four trial
+receipts and every one of the 30 gates compare exactly. The earlier verifier's
+scalar byte-view error was repaired without rerunning either profile.
+
+This is a partial performance repair, not compliance with the full-run ceiling.
+GPU evaluation, repeated fixed-map copies/uploads and full edge-queue checking
+still dominate. No 1,000-step preservation rerun or matrix launch is authorized by
+this timing result. Continue bounded diagnosis; preserve the numerical operation
+sequence and every discrete/state check. The existing remaining-time interval is
+the agent's own elapsed execution time including investigation, edits, tool runs,
+tests and verification, not hypothetical human engineering effort.
+
 ### Implementation baseline and unverified requirements
 
 Source inspection at `9f89ef6` finds working code paths for the five experiments,

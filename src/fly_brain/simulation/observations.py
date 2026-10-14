@@ -552,16 +552,20 @@ class PhysicalQueueObservation:
 
     @property
     def sha256(self) -> tuple[str, ...]:
-        return tuple(
-            hashlib.sha256(self.queue[:, trial].tobytes()).hexdigest()
-            for trial in range(self.queue.shape[1])
-        )
+        queue = self.queue
+        hashes: list[str] = []
+        for trial in range(queue.shape[1]):
+            digest = hashlib.sha256()
+            for slot in range(queue.shape[0]):
+                digest.update(memoryview(queue[slot, trial]))
+            hashes.append(digest.hexdigest())
+        return tuple(hashes)
 
     @property
     def slot_sha256(self) -> tuple[tuple[str, ...], ...]:
         return tuple(
             tuple(
-                hashlib.sha256(self.queue[slot, trial].tobytes()).hexdigest()
+                hashlib.sha256(memoryview(self.queue[slot, trial])).hexdigest()
                 for slot in range(self.queue.shape[0])
             )
             for trial in range(self.queue.shape[1])

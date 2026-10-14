@@ -222,13 +222,15 @@ def observation_checks(
     ):
         for name in names:
             gates[:, column] &= np.all(actual.fields[name] == expected, axis=1)
-    due = operands.due_sources[:, operands.sources]
-    for trial, value in enumerate(due):
+    sources = operands.sources
+    for trial, due_sources in enumerate(operands.due_sources):
+        value = due_sources[sources]
         gates[trial, 3] &= (
             np.array_equal(
                 actual.due_edges[trial], np.flatnonzero(value).astype(np.int32)
             )
-            and actual.due_sha256[trial] == hashlib.sha256(value.tobytes()).hexdigest()
+            and actual.due_sha256[trial]
+            == hashlib.sha256(memoryview(value)).hexdigest()
         )
     finite = np.stack(
         [

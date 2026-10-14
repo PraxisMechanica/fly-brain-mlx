@@ -1,3 +1,4 @@
+import hashlib
 import inspect
 
 import numpy as np
@@ -112,3 +113,22 @@ def test_comparison_construction_rejects_omitted_policy_factors() -> None:
         'pending_sources',
     ):
         assert parameters[name].default is inspect.Parameter.empty
+
+
+@pytest.mark.parametrize('trials', (1, 4))
+def test_queue_hashes_keep_canonical_native_slot_and_trial_byte_order(
+    trials: int,
+) -> None:
+    queue = np.arange(19 * trials * 7).reshape(19, trials, 7) % 3 == 0
+    actual = PhysicalQueueObservation(32, tuple(map(TrialId, range(trials))), queue)
+    assert actual.sha256 == tuple(
+        hashlib.sha256(queue[:, trial].tobytes(order='C')).hexdigest()
+        for trial in range(trials)
+    )
+    assert actual.slot_sha256 == tuple(
+        tuple(
+            hashlib.sha256(queue[slot, trial].tobytes()).hexdigest()
+            for slot in range(19)
+        )
+        for trial in range(trials)
+    )

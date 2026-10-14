@@ -5,13 +5,15 @@ import resource
 import subprocess
 import time
 import tracemalloc
+import zipfile
+from collections.abc import Mapping
 from pathlib import Path
 
 import mlx.core as mx
 import numpy as np
 from numpy.typing import NDArray
 
-from fly_brain.simulation.observations import PHASE_UNITS
+from fly_brain.simulation.observations import PHASE_UNITS, HostArray
 from tests.support.session_proof_values import (
     BlockProof,
     Frame,
@@ -26,6 +28,15 @@ def resident_bytes() -> int:
         ['/bin/ps', '-o', 'rss=', '-p', str(os.getpid())], text=True
     )
     return int(value.strip()) * 1024
+
+
+def write_arrays(path: Path, arrays: Mapping[str, HostArray]) -> None:
+    with zipfile.ZipFile(
+        path, mode='x', compression=zipfile.ZIP_DEFLATED, compresslevel=1
+    ) as archive:
+        for name, values in arrays.items():
+            with archive.open(name + '.npy', mode='w', force_zip64=True) as member:
+                np.save(member, values, allow_pickle=False)
 
 
 class Recorder:
@@ -62,8 +73,7 @@ class Recorder:
         if queue.dtype != np.bool_ or queue.shape[0:2] != (19, len(self.trials)):
             raise ValueError('Actual queue dtype, slots or trial coverage differs')
         path = self.output / f'queue-{step:04d}.npz'
-        with path.open('xb') as destination:
-            np.savez_compressed(destination, queue=queue)
+        write_arrays(path, {'queue': queue})
         self.sample('physical-queue-return', step)
 
     def frame(self, frame: Frame) -> None:
@@ -80,8 +90,7 @@ class Recorder:
             if not frame.checks.all():
                 raise ValueError('Actual independent observation checks failed')
             arrays['checks'] = frame.checks
-        with path.open('xb') as destination:
-            np.savez_compressed(destination, **arrays)
+        write_arrays(path, arrays)
         with np.load(queue_path, allow_pickle=False) as saved:
             queue: NDArray[np.bool_] = saved['queue']
         by_trial = {
