@@ -178,6 +178,20 @@ forbidden_modules = [
 allow_indirect_imports = false
 
 [[tool.importlinter.contracts]]
+name = "DEP003/ROLE005: PyTorch reference uses injected connectome silencing"
+type = "forbidden"
+source_modules = [
+    "fly_brain.qualification.adapters.torch_setup",
+    "fly_brain.qualification.adapters.parity_case",
+]
+forbidden_modules = [
+    "fly_brain.simulation.mapping",
+    "fly_brain.simulation.input_service",
+    "fly_brain.simulation.module",
+]
+allow_indirect_imports = false
+
+[[tool.importlinter.contracts]]
 name = "DEP003/ROLE005: Parity uses owned stimulus services"
 type = "forbidden"
 source_modules = [

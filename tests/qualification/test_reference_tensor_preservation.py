@@ -8,6 +8,8 @@ import torch
 from fly_brain.qualification import reference_parameters
 from fly_brain.qualification.adapters import torch_setup
 from fly_brain.qualification.adapters.torch_reference import TensorState
+from fly_brain.simulation.identifiers import NeuronRow
+from fly_brain.simulation.module import build_connectome_silencer
 from tests.support.observation_fixtures import fixture
 from tests.support.reference_baseline import original as original
 
@@ -29,13 +31,13 @@ def snapshot(state: TensorState) -> tuple[tuple[str, tuple[int, ...], bytes], ..
     'empty,duplicates', ((False, False), (False, True), (True, False))
 )
 @pytest.mark.parametrize('trials', (1, 4))
-@pytest.mark.parametrize('silenced', ((), (3,)))
+@pytest.mark.parametrize('silenced', ((), (NeuronRow(3),)))
 def test_initial_and_every_chunked_native_tensor_byte_matches_independent_old_source(
     original: tuple[ModuleType, ModuleType],
     empty: bool,
     duplicates: bool,
     trials: int,
-    silenced: tuple[int, ...],
+    silenced: tuple[NeuronRow, ...],
 ) -> None:
     _, previous = original
     case = fixture(empty)
@@ -50,6 +52,7 @@ def test_initial_and_every_chunked_native_tensor_byte_matches_independent_old_so
         silenced,
         trials,
         reference_parameters=MappingProxyType(reference_parameters.model_parameters()),
+        silence=build_connectome_silencer(),
     )
     old_state, new_state = old.state_init(), new.state_init()
     assert snapshot(old_state) == snapshot(new_state)
@@ -101,6 +104,7 @@ def test_native_byte_control_detects_each_changed_initial_tensor(
         (),
         1,
         reference_parameters=reference_parameters.model_parameters(),
+        silence=build_connectome_silencer(),
     ).state_init()
     assert snapshot(old) == snapshot(new)
     new[index].add_(1)

@@ -18,6 +18,7 @@ _SOURCES = frozenset(
         'fly_brain.simulation.backend.observation_session',
         'fly_brain.simulation.backend.reduction_evidence',
         'fly_brain.simulation.mapping',
+        'fly_brain.simulation.input_service',
         'fly_brain.simulation.models',
         'fly_brain.simulation.identifiers',
         'fly_brain.simulation.stimuli',

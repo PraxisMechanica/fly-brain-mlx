@@ -21,6 +21,7 @@ from fly_brain.simulation.experiments import P9_IDS
 from fly_brain.simulation.identifiers import TrialId
 from fly_brain.simulation.models import InputPin
 from fly_brain.simulation.module import (
+    build_connectome_silencer,
     build_experiment_reader,
     build_stimulus,
     build_stimulus_recorder,
@@ -61,6 +62,7 @@ def test_driver_runs_prescribed_p9_protocol_without_accepting_a_small_connectome
             validate=build_coordinate_validation(),
             convert_clock=build_reference_clock_conversion(),
             reference_parameters=model_parameters(),
+            silence=build_connectome_silencer(),
         )
         with pytest.raises(FileExistsError):
             run(
@@ -76,6 +78,7 @@ def test_driver_runs_prescribed_p9_protocol_without_accepting_a_small_connectome
                 validate=build_coordinate_validation(),
                 convert_clock=build_reference_clock_conversion(),
                 reference_parameters=model_parameters(),
+                silence=build_connectome_silencer(),
             )
     finally:
         torch.set_num_threads(threads)

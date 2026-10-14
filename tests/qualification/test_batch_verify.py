@@ -19,6 +19,7 @@ from fly_brain.qualification.adapters.torch_setup import prepare as prepare_cpu
 from fly_brain.qualification.reference_parameters import model_parameters
 from fly_brain.simulation.identifiers import NeuronRow, TrialId
 from fly_brain.simulation.models import Stimulus
+from fly_brain.simulation.module import build_connectome_silencer
 from fly_brain.simulation.observation_module import build_observation_sessions
 from tests.qualification.test_mlx_observer import fixture
 
@@ -59,7 +60,12 @@ def test_actual_batch_native_evidence_matches_fresh_independent_trial_collection
         hashlib.sha256(case.events.tobytes()).hexdigest(),
     )
     cpu = prepare_cpu(
-        case.connectome, case.targets, (3,), 4, reference_parameters=model_parameters()
+        case.connectome,
+        case.targets,
+        (NeuronRow(3),),
+        4,
+        reference_parameters=model_parameters(),
+        silence=build_connectome_silencer(),
     )
     for mode in ('first', 'repeat'):
         collect_mlx(execution, case.connectome, stimulus, output / f'mlx-{mode}')
@@ -104,9 +110,10 @@ def test_actual_batch_native_evidence_matches_fresh_independent_trial_collection
             prepare_cpu(
                 case.connectome,
                 case.targets,
-                (3,),
+                (NeuronRow(3),),
                 1,
                 reference_parameters=model_parameters(),
+                silence=build_connectome_silencer(),
             ),
             one,
             path / 'cpu',

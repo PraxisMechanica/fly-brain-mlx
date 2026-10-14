@@ -1,7 +1,15 @@
 from pathlib import Path
 
+from .identifiers import NeuronRow
+from .mapping import silence_sources
 from .models import Connectome, InputPin
 from .ports import ConnectomeReaderFactory
+
+
+def silence_connectome(
+    connectome: Connectome, silenced: tuple[NeuronRow, ...]
+) -> Connectome:
+    return silence_sources(connectome, silenced)
 
 
 def load_pinned_inputs(

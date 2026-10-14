@@ -1,10 +1,11 @@
 from functools import partial
 
 from .commands import simulation
-from .input_service import load_pinned_inputs
+from .input_service import load_pinned_inputs, silence_connectome
 from .ports import (
     Clock,
     ConnectomeReaderFactory,
+    ConnectomeSilencer,
     ExperimentReader,
     PinnedInputs,
     SimulationCommand,
@@ -21,6 +22,10 @@ from .stimulus_service import read_experiment, record_stimulus, schedule
 
 def build_pinned_inputs(reader_factory: ConnectomeReaderFactory) -> PinnedInputs:
     return partial(load_pinned_inputs, reader_factory=reader_factory)
+
+
+def build_connectome_silencer() -> ConnectomeSilencer:
+    return silence_connectome
 
 
 def build_simulation(

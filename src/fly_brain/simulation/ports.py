@@ -27,6 +27,12 @@ class ConnectomeReaderFactory(Protocol):
     def __call__(self, /) -> ConnectomeReader: ...
 
 
+class ConnectomeSilencer(Protocol):
+    def __call__(
+        self, connectome: Connectome, silenced: tuple[NeuronRow, ...], /
+    ) -> Connectome: ...
+
+
 class PinnedInputs(Protocol):
     def __call__(self, project: Path, /) -> tuple[Connectome, InputPin]: ...
 

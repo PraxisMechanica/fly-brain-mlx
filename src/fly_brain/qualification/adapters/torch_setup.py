@@ -6,7 +6,8 @@ import torch
 import torch.nn as nn
 from numpy.typing import NDArray
 
-from fly_brain.simulation.mapping import silence_sources
+from fly_brain.qualification.ports import ConnectomeSilencer
+from fly_brain.simulation.identifiers import NeuronRow
 from fly_brain.simulation.models import Connectome
 
 from .torch_reference import TorchModel
@@ -36,14 +37,15 @@ class Replay(nn.Module):
 def prepare(
     connectome: Connectome,
     targets: tuple[int, ...],
-    silenced: tuple[int, ...],
+    silenced: tuple[NeuronRow, ...],
     trials: int,
     *,
     reference_parameters: Mapping[str, float],
+    silence: ConnectomeSilencer,
 ) -> TorchModel:
     if torch.get_default_dtype() != torch.float32:
         raise RuntimeError('The pinned PyTorch comparator requires default float32')
-    connectome = silence_sources(connectome, silenced)
+    connectome = silence(connectome, silenced)
     neurons = len(connectome.neuron_ids)
     weights = torch.sparse_coo_tensor(  # pyright: ignore[reportUnknownMemberType]
         tensor(np.stack((connectome.destinations, connectome.sources))),

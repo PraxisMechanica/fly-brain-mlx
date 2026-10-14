@@ -13,7 +13,7 @@ import torch
 
 from fly_brain.qualification.matrix import required_cases
 from fly_brain.qualification.models import ParityCase
-from fly_brain.qualification.ports import ObservationAssembly
+from fly_brain.qualification.ports import ConnectomeSilencer, ObservationAssembly
 from fly_brain.qualification.spike_comparison_ports import (
     CaseScorer,
     CoordinateValidator,
@@ -39,6 +39,7 @@ def run(
     precision: str,
     *,
     reference_parameters: Mapping[str, float],
+    silence: ConnectomeSilencer,
     prepare_stimulus: CaseStimulusPreparation,
     read_experiment: ExperimentReader,
     assemble_observations: ObservationAssembly,
@@ -118,6 +119,7 @@ def run(
         silenced,
         1,
         reference_parameters=reference_parameters,
+        silence=silence,
     )
     execute(
         job,

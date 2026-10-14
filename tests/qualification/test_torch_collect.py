@@ -9,7 +9,8 @@ from fly_brain.qualification.adapters.torch_collect import collect
 from fly_brain.qualification.adapters.torch_observer import observe
 from fly_brain.qualification.adapters.torch_setup import prepare
 from fly_brain.qualification.reference_parameters import model_parameters
-from fly_brain.simulation.identifiers import TrialId
+from fly_brain.simulation.identifiers import NeuronRow, TrialId
+from fly_brain.simulation.module import build_connectome_silencer
 from tests.support.observation_fixtures import fixture, stimulus_for
 
 pytestmark = [pytest.mark.integration, pytest.mark.reference]
@@ -27,7 +28,12 @@ def test_cpu_collection_preserves_all_native_state_hashes_and_trial_spikes(
         (TrialId(0), TrialId(1), TrialId(2), TrialId(3)),
     )
     model = prepare(
-        case.connectome, case.targets, (3,), 4, reference_parameters=model_parameters()
+        case.connectome,
+        case.targets,
+        (NeuronRow(3),),
+        4,
+        reference_parameters=model_parameters(),
+        silence=build_connectome_silencer(),
     )
     expected = list(observe(model, case.events, case.targets))
     outputs = (tmp_path / 'first', tmp_path / 'repeat')

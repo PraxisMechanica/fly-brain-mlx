@@ -23,6 +23,12 @@ class ReductionReader(Protocol):
     def __call__(self, neurons: tuple[int, ...], /) -> ReductionEvidence: ...
 
 
+class ConnectomeSilencer(Protocol):
+    def __call__(
+        self, connectome: Connectome, silenced: tuple[NeuronRow, ...], /
+    ) -> Connectome: ...
+
+
 class PinnedInputs(Protocol):
     def __call__(self, project: Path, /) -> tuple[Connectome, InputPin]: ...
 

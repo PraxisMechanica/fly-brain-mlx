@@ -12,6 +12,8 @@ from fly_brain.qualification.adapters.torch_setup import (
     replay_inputs,
 )
 from fly_brain.qualification.reference_parameters import model_parameters
+from fly_brain.simulation.identifiers import NeuronRow
+from fly_brain.simulation.module import build_connectome_silencer
 from tests.qualification.test_mlx_observer import fixture
 
 pytestmark = [pytest.mark.integration, pytest.mark.reference]
@@ -22,7 +24,12 @@ def test_sparse_cpu_setup_preserves_orientation_outgoing_silencing_and_activatio
 ):
     case = fixture()
     model = prepare(
-        case.connectome, case.targets, (3,), 1, reference_parameters=model_parameters()
+        case.connectome,
+        case.targets,
+        (NeuronRow(3),),
+        1,
+        reference_parameters=model_parameters(),
+        silence=build_connectome_silencer(),
     )
     expected = np.zeros((6, 6), dtype=np.float32)
     for source, target, count in zip(
@@ -58,7 +65,12 @@ def test_replay_matches_guaranteed_native_poisson_for_all_five_returned_tensors(
     case = fixture()
     targets = (0, 2)
     replay = prepare(
-        case.connectome, targets, (), trials, reference_parameters=model_parameters()
+        case.connectome,
+        targets,
+        (),
+        trials,
+        reference_parameters=model_parameters(),
+        silence=build_connectome_silencer(),
     )
     native = TorchModel(
         trials, 6, 0.1, model_parameters(), replay.weights, list(targets), device='cpu'
@@ -99,9 +111,9 @@ def test_native_capture_refuses_silent_precision_conversion(dtype: torch.dtype) 
         native_float(torch.zeros(1, dtype=dtype))
 
 
-@pytest.mark.parametrize('silenced', ((), (99,)))
+@pytest.mark.parametrize('silenced', ((), (NeuronRow(99),)))
 def test_comparator_refuses_a_changed_global_precision(
-    silenced: tuple[int, ...],
+    silenced: tuple[NeuronRow, ...],
 ) -> None:
     previous = torch.get_default_dtype()
     try:
@@ -114,6 +126,7 @@ def test_comparator_refuses_a_changed_global_precision(
                 silenced,
                 1,
                 reference_parameters=model_parameters(),
+                silence=build_connectome_silencer(),
             )
     finally:
         torch.set_default_dtype(previous)
@@ -121,7 +134,14 @@ def test_comparator_refuses_a_changed_global_precision(
 
 def test_empty_connectivity_and_channels_preserve_exact_silence() -> None:
     case = fixture(True)
-    model = prepare(case.connectome, (), (), 4, reference_parameters=model_parameters())
+    model = prepare(
+        case.connectome,
+        (),
+        (),
+        4,
+        reference_parameters=model_parameters(),
+        silence=build_connectome_silencer(),
+    )
     state = model.state_init()
     counts = replay_inputs(np.empty((4, 0), dtype=np.uint8), (), 6)
     with torch.no_grad():

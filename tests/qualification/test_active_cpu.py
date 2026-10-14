@@ -13,16 +13,17 @@ from fly_brain.qualification.adapters.torch_setup import (
     tensor,
 )
 from fly_brain.qualification.reference_parameters import model_parameters
-from fly_brain.simulation.identifiers import FlyWireIds64, NeuronRows32
+from fly_brain.simulation.identifiers import FlyWireIds64, NeuronRow, NeuronRows32
 from fly_brain.simulation.models import Connectome
+from fly_brain.simulation.module import build_connectome_silencer
 from tests.qualification.test_mlx_observer import fixture
 
 pytestmark = [pytest.mark.integration, pytest.mark.reference]
 
 
-@pytest.mark.parametrize('silenced', [(), (0,)])
+@pytest.mark.parametrize('silenced', [(), (NeuronRow(0),)])
 def test_every_binary_mask_preserves_scaled_cancellation_duplicate_and_zero_bytes(
-    silenced: tuple[int, ...],
+    silenced: tuple[NeuronRow, ...],
 ) -> None:
     sources = np.array([0, 0, 0, 1, 1, 1, 2, 2, 3], dtype=np.int32)
     destinations = np.array([1, 1, 2, 2, 2, 1, 1, 3, 0], dtype=np.int32)
@@ -35,7 +36,12 @@ def test_every_binary_mask_preserves_scaled_cancellation_duplicate_and_zero_byte
         counts * 0.275,
     )
     model = prepare(
-        connectome, (), silenced, 4, reference_parameters=model_parameters()
+        connectome,
+        (),
+        silenced,
+        4,
+        reference_parameters=model_parameters(),
+        silence=build_connectome_silencer(),
     )
     active = ActiveSources.from_model(model)
     masks = np.asarray(list(product((0, 1), repeat=5)), dtype=np.float32)
@@ -66,9 +72,10 @@ def test_active_fresh_trajectories_repeat_every_original_native_state_and_delay_
     model = prepare(
         case.connectome,
         case.targets,
-        (3,),
+        (NeuronRow(3),),
         trials,
         reference_parameters=model_parameters(),
+        silence=build_connectome_silencer(),
     )
     original = list(observe(model, events, case.targets))
     candidate = step(model)
@@ -86,7 +93,12 @@ def test_active_fresh_trajectories_repeat_every_original_native_state_and_delay_
 def test_active_propagation_rejects_nonbinary_recurrent_values(value: float) -> None:
     case = fixture()
     model = prepare(
-        case.connectome, case.targets, (), 1, reference_parameters=model_parameters()
+        case.connectome,
+        case.targets,
+        (),
+        1,
+        reference_parameters=model_parameters(),
+        silence=build_connectome_silencer(),
     )
     active = ActiveSources.from_model(model)
     with pytest.raises(ValueError, match='binary recurrent'):
@@ -99,7 +111,12 @@ def test_active_setup_rejects_weights_outside_exact_integer_envelope(
 ) -> None:
     case = fixture()
     model = prepare(
-        case.connectome, case.targets, (), 1, reference_parameters=model_parameters()
+        case.connectome,
+        case.targets,
+        (),
+        1,
+        reference_parameters=model_parameters(),
+        silence=build_connectome_silencer(),
     )
     model.weights.values()[0] = value
     with pytest.raises(ValueError, match='exact integer envelope'):
@@ -112,7 +129,12 @@ def test_active_chunked_ordinary_state_matches_observer_and_independent_trials(
 ) -> None:
     case = fixture(empty)
     model = prepare(
-        case.connectome, case.targets, (3,), 4, reference_parameters=model_parameters()
+        case.connectome,
+        case.targets,
+        (NeuronRow(3),),
+        4,
+        reference_parameters=model_parameters(),
+        silence=build_connectome_silencer(),
     )
     expected = list(observe(model, case.events, case.targets, step(model)))
     advance = step(model)
@@ -133,9 +155,10 @@ def test_active_chunked_ordinary_state_matches_observer_and_independent_trials(
         singleton = prepare(
             case.connectome,
             case.targets,
-            (3,),
+            (NeuronRow(3),),
             1,
             reference_parameters=model_parameters(),
+            silence=build_connectome_silencer(),
         )
         actual = observe(
             singleton, case.events[trial : trial + 1], case.targets, step(singleton)

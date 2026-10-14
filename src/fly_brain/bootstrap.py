@@ -181,6 +181,7 @@ def parity_case() -> ParityCommand:
     from fly_brain.qualification.module import build_case_stimulus, build_parity_case
     from fly_brain.qualification.reference_parameters import model_parameters
     from fly_brain.simulation.module import (
+        build_connectome_silencer,
         build_experiment_reader,
         build_stimulus_recorder,
     )
@@ -194,6 +195,7 @@ def parity_case() -> ParityCommand:
             run,
             precision=precision,
             reference_parameters=MappingProxyType(model_parameters()),
+            silence=build_connectome_silencer(),
             prepare_stimulus=build_case_stimulus(
                 read_experiment, stimulus(), build_stimulus_recorder(persist_stimulus)
             ),

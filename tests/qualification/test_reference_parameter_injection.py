@@ -11,6 +11,8 @@ import torch
 from fly_brain import bootstrap
 from fly_brain.qualification import reference_parameters
 from fly_brain.qualification.adapters import schedule_probe, torch_setup
+from fly_brain.simulation.identifiers import NeuronRow
+from fly_brain.simulation.module import build_connectome_silencer
 from tests.support.observation_fixtures import fixture
 from tests.support.reference_baseline import ORIGINAL_COMMIT
 from tests.support.reference_baseline import original as original
@@ -29,16 +31,27 @@ def test_setup_copies_values_after_silencing_and_keeps_original_error_precedence
         (),
         1,
         reference_parameters=MappingProxyType(values),
+        silence=build_connectome_silencer(),
     )
     values['wScale'] = 0
     assert model.scale == 0.275
     with pytest.raises(ValueError, match='Silenced source index'):
         torch_setup.prepare(
-            case.connectome, (), (99,), 1, reference_parameters=MappingProxyType({})
+            case.connectome,
+            (),
+            (NeuronRow(99),),
+            1,
+            reference_parameters=MappingProxyType({}),
+            silence=build_connectome_silencer(),
         )
     with pytest.raises(KeyError):
         torch_setup.prepare(
-            case.connectome, (), (), 1, reference_parameters=MappingProxyType({})
+            case.connectome,
+            (),
+            (),
+            1,
+            reference_parameters=MappingProxyType({}),
+            silence=build_connectome_silencer(),
         )
 
 
