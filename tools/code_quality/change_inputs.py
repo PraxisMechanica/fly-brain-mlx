@@ -71,20 +71,19 @@ def resolve_inputs(root: Path, stage: Stage, environment: Mapping[str, str]) -> 
         base, head = (
             git(root, 'rev-parse', '--verify', ref + '^{commit}') for ref in requested
         )
-        if base == head or head != git(root, 'rev-parse', 'HEAD'):
-            raise ValueError('submitted range is empty or not the current checkout')
         revisions = git(root, 'rev-list', base + '..' + head).splitlines()
+        if not revisions or head != git(root, 'rev-parse', 'HEAD'):
+            raise ValueError('submitted range is empty or not the current checkout')
         changed = paths(
             root,
-            'diff-tree',
+            'log',
             '--root',
-            '-m',
-            '-r',
-            '--no-commit-id',
+            '--diff-merges=separate',
+            '--format=',
             '--name-only',
             '-z',
             '--no-renames',
-            *revisions,
+            base + '..' + head,
         )
         files = paths(root, 'ls-tree', '-r', '--name-only', '-z', head)
         tree = git(root, 'rev-parse', head + '^{tree}')
