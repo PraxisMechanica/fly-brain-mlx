@@ -50,6 +50,8 @@ class NativeObservationSession:
         self._comparison_maps: (
             tuple[NDArray[np.int32], NDArray[np.int32], mx.array, mx.array] | None
         ) = None
+        self._pending_sources: NDArray[np.bool_] | None = None
+        self._pending_edges: tuple[mx.array, ...] = ()
 
     @property
     def configuration(self) -> ObservationConfiguration:
@@ -150,6 +152,7 @@ class NativeObservationSession:
                     mx.array(destination_map),
                 )
                 self._comparison_maps = maps
+                self._pending_sources = None
             sources, destinations = maps[2], maps[3]
             due = boolean_input(operands.due_sources)[:, sources]
             accepted = (
@@ -171,8 +174,24 @@ class NativeObservationSession:
                     (self._state.last_spike_step, mx.array(operands.last_spike_step)),
                 )
             ]
-            pending = boolean_input(operands.pending_sources)[:, :, sources]
-            queues = mx.all(self._state.queue == pending, axis=2).T
+            pending = operands.pending_sources
+            previous = self._pending_sources
+            if previous is None:
+                expected_slots = [boolean_input(row)[:, sources] for row in pending]
+            else:
+                expected_slots = list(self._pending_edges)
+                changed_slots = np.flatnonzero(np.any(pending != previous, axis=(1, 2)))
+                for slot in changed_slots:
+                    expected_slots[slot] = boolean_input(pending[slot])[:, sources]
+            self._pending_sources = pending
+            self._pending_edges = tuple(expected_slots)
+            queues = mx.stack(
+                [
+                    mx.all(self._state.queue[slot] == expected, axis=1)
+                    for slot, expected in enumerate(expected_slots)
+                ],
+                axis=1,
+            )
             gates = mx.stack(columns, axis=1)
             evaluate(gates, queues)
             result = NativeComparison(

@@ -86,6 +86,39 @@ outputs have completed their consumers; their retention exceptions are released.
 Keep the current local scientific, input, profile/native-equivalence and future
 matrix bundles for the remaining qualification and performance decisions.
 
+Bounded repair, inspected at `303a444` (95% decision confidence): the native
+observer currently expands all 19 expected source-history slots to every edge
+on every step, although usually only two slots change. Reuse an expected slot
+only after comparing its complete immutable source-history row with the current
+independent operand; invalidate all slots when source maps change. Continue to
+compare every actual edge in every actual physical slot on every step. Verify
+individual changed-history rejection/recovery, existing map/physical-slot faults,
+transparency, repeats, chunks and batch consumers, then compare the same capped
+32-step native artifacts with the retained original. This changes observation
+work only; production arithmetic and queue updates remain unchanged.
+An isolated full-size queue-update alternative saved only 0.156 seconds over 38
+steps (1.184 to 1.028 seconds), so it does not justify production adoption.
+The expected-slot repair reduced native comparison from 5.428 to 2.831 seconds
+in the unchanged profile. Whole-workload elapsed time was 33.111 seconds, versus
+34.308 immediately before this repair and 47.861 originally. All 142 saved arrays,
+all four trial receipts and all 30 gates still compare exactly. All 85 affected
+native transparency/history/map/slot fault, repeat, chunk, batch and proof checks
+passed in 15.33 seconds (zero failures/errors/skips). The capped profile's first
+launch failed before model loading because a script path hid the `tests` package;
+launching it with the project import context repaired setup without changing the
+scientific input. These results are bounded preservation, not 1,000-step or
+52-case acceptance.
+
+Next: attempt the first prescribed paired case, sugar/1,000 steps/trial 0, under
+an external **240-second process-group deadline**. Its reference/MLX/CPU fresh
+repeats and all existing gates remain mandatory; a cutoff is an unaccepted,
+incomplete case, never a pass. This bounded attempt measures actual paired
+throughput and may expose the first scientific cause; it grants no long-run
+budget exemption. Retain it under the registered matrix root. The 90%-confidence
+remaining estimate for this bounded measurement, diagnosis and delivery is
+20–60 minutes of the agent's own elapsed execution. Whole-goal completion remains
+conditional on the unresolved long-run budget and actual gate results.
+
 ### Implementation baseline and unverified requirements
 
 Source inspection at `9f89ef6` finds working code paths for the five experiments,

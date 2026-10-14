@@ -275,6 +275,9 @@ def test_changed_independent_maps_invalidate_the_reused_device_mapping(
         ledger, operands = expect_step(
             ledger, actual, inputs, case.connectome, case.targets
         )
+        if step == 1:
+            changed = corrupt_operands(operands, 'sources')
+            assert not session.compare(changed).queue_equal.all()
         if step < 18:
             assert observation_checks(actual, session.compare(operands), operands).all()
         else:
@@ -314,6 +317,46 @@ def test_actual_nonfinite_phase_data_remains_visible_to_qualification(
                 firing_initial(),
             )
         )
+
+
+@pytest.mark.parametrize('slot', range(19))
+def test_reused_expected_slots_detect_changed_history_and_recover(
+    precision: str, slot: int
+) -> None:
+    case = fixture()
+    factory, _ = build_observation_sessions(
+        case.connectome, case.targets, (), precision
+    )
+    initial = firing_initial()
+    session = factory((TrialId(0),), initial)
+    ledger = initial_ledger(case.connectome, case.targets, 1, initial)
+    inputs = np.zeros((1, len(case.targets)), dtype=np.bool_)
+    actual = session.advance(inputs)
+    ledger, first = expect_step(ledger, actual, inputs, case.connectome, case.targets)
+    assert observation_checks(actual, session.compare(first), first).all()
+    actual = session.advance(inputs)
+    _, operands = expect_step(ledger, actual, inputs, case.connectome, case.targets)
+    pending = operands.pending_sources.copy()
+    pending[slot, 0, case.connectome.sources[0]] ^= True
+    changed = ObservationOperands(
+        operands.sources,
+        operands.destinations,
+        operands.available,
+        operands.spikes,
+        operands.receiving,
+        operands.due_sources,
+        operands.accepted_destinations,
+        operands.discarded_destinations,
+        operands.accepted_inputs,
+        operands.last_spike_step,
+        pending,
+    )
+    comparison = session.compare(changed)
+    assert comparison.gates_equal.all()
+    expected = np.ones((1, 19), dtype=np.bool_)
+    expected[0, slot] = False
+    assert np.array_equal(comparison.queue_equal, expected)
+    assert observation_checks(actual, session.compare(operands), operands).all()
 
 
 @pytest.mark.parametrize(
