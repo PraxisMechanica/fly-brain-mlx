@@ -154,6 +154,8 @@ The following components are committed on parent `main`:
 | Owned spike array identifiers | `f20d6ec` | 106 CPU cases and one real Metal case passed once; eight normalized modules, 67 original assertions, array identity/bytes/layout and seven fixtures preserved |
 | Injected pure reference parameters | `4c87409` | Exact factory extraction and five protected hashes; 100 CPU, six boundary, five native and two composition cases; 6,120 native tensor-byte pairs preserved without replay |
 | Comparison scalar identifier keys | `fe14b74` | 32 focused cases; three identity wrappers, four unchanged calculation functions and 16 byte-exact original/new JSON/CSV outputs |
+| Canonical native Python compiler context | `39c4556` | 21 defined cases; independently reconciled source/configuration/import-origin facts; equivalent read capture and record/process separation |
+| Consumer-owned reference connectome silencing | `1b64d51` | 36 focused controls; 18 normalized modules, 70 original assertions, unchanged mapping, five protected sources and seven fixtures |
 
 Every component passed its required normal commit checks and default cleanup. Joined
 metric regressions were repaired without thresholds, suppressions or removed
@@ -184,7 +186,7 @@ The identifier changes preserve numerical bodies and old assertions; NewType sup
 typing without new runtime validation or complete conversion-origin proof.
 No full native proof bundle or scientific matrix was recreated.
 
-All listed source components are pushed to `origin/main` through `fe14b74`.
+All listed source components are pushed to `origin/main` through `1b64d51`.
 The spike identifier component passed the installed normal commit and push hooks
 and default cleanup without replaying its completed regressions. Delivery uses
 one ten-file component commit; the worker's earlier private ancestry is preserved
@@ -205,6 +207,30 @@ fixture is reviewed as `comparison/test`. Generic report identities, mixed
 rasters, batch label/position contracts and lawful origins remain unresolved;
 all six recorded findings remain. Hosted execution ran no pytest and uploaded zero artifacts.
 
+The eight-file compiler-context component passed normal commit/push checks and
+exact hosted run `38552915992`: eight changed inputs, three affected Python
+sources, three reviewed sources and 347 unchanged records. Its quality step
+took 12 seconds; its complete job took 48 seconds. Hosted execution ran no pytest
+and uploaded zero artifacts. The worker retained all 21 cases; only changed or
+failed controls repeated. Native metrics kept mean 15.29 and maximum 96 while
+health improved 39.91 to 40.11. Configuration/source observations do not supply
+missing declaration, call, effect or runtime-dispatch capabilities.
+
+The reference-silencing component passed normal commit/push checks and exact
+hosted run `38554048146`: 23 changed inputs, 73 affected Python files, 93 import
+module/contract checks, 21 reviewed sources and 332 retained source records.
+Its quality step took 17 seconds; the complete job took 64 seconds. Hosted
+execution ran no pytest and uploaded zero artifacts. It removes the
+qualification adapter's private mapping call through required consumer/provider
+ports, preserving the float32 guard, call order and original rule.
+Its 36 distinct focused controls qualified the affected callback, port,
+composition, identity and native paths; 88 qualification cases collect. Only
+failed or changed controls repeated during repair. Existing scientific
+trajectories were not replayed. Worker metrics improved mean 15.21 to 15.20,
+with maximum 96 and health 39.94 unchanged. Seven exact import contracts are
+configured. The native framework's missing forbidden-target limit is retained
+as a control; a separate required-gate coverage repair remains with its owner.
+
 ## Remaining order and unresolved decisions
 
 1. Keep checked components and current documentation delivered incrementally.
@@ -213,15 +239,14 @@ all six recorded findings remain. Hosted execution ran no pytest and uploaded ze
    contexts. A source-only prototype observes 314 worker sources, but raw native
    binding tables omit dormant declarations and mix import target URIs with
    lexical ranges. Reconcile every authored occurrence; do not invent identities.
-   The pinned native TOML loader already works; use the actual CLI filesystem,
-   full host and completed source enumeration before observing canonical
-   configuration. Existing manual diagnostic rules match strict rules, but
-   canonical import, virtual-environment and source-origin equivalence remain
-   unproved.
-3. Repair the separate private `torch_setup` mapping call and wider provider
-   roles after checked source-preserving separation. The selected parity path's
-   experiment lookup, neuron mapping and stimulus storage dependencies are
-   already consumer-owned; preserve both catalog-read positions, seed 20261004,
+   Canonical configuration, native command-line host/file-system behavior,
+   complete source enumeration and loaded-source origins are observed at
+   `39c4556`. Replace manual downstream contexts with those verified facts;
+   runtime-environment equivalence and complete live analysis remain unproved.
+3. Continue wider provider-role separation after the checked pure parameter and
+   private `torch_setup` mapping repairs. The selected parity path's experiment
+   lookup, neuron mapping, stimulus storage and connectome silencing now use
+   consumer-owned services; preserve both catalog-read positions, seed 20261004,
    generation/persistence/silencing order and errors.
 4. Complete callable/slot origins, implicit calls, runtime targets, source/export
    predicates, injection/lifetime checks, control flow/failure disposition and
@@ -273,7 +298,7 @@ native equivalence; retain no archive simply in anticipation of possible reuse.
 ## Current architecture scope
 
 Complete 37-rule structural enforcement remains **ANALYSIS FAILED (COV002)**.
-Six recorded architecture/identifier findings remain. Strict typing, six
+Six recorded architecture/identifier findings remain. Strict typing, seven
 import contracts, source ownership reconciliation and qualified native metric
 checks are useful components, not a full structural or scientific approval.
 Current coverage is in [quality-coverage.md](docs/agent/quality-coverage.md) and
