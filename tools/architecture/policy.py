@@ -10,7 +10,12 @@ from typing import Annotated, Literal
 
 from pydantic import BaseModel, ConfigDict, Field, ValidationError, field_validator
 
-from .inventory import Declaration, Finding, Ownership, Source, discover, reconcile
+from .inventory import (
+    Declaration,
+    Finding,
+    Ownership,
+    Source,
+)
 
 Role = Literal[
     'types',
@@ -318,148 +323,17 @@ def _validate(document: PolicyDocument) -> None:
         _symbol(finding.symbol, document)
 
 
-def load_policy(path: Path) -> Policy:
-    try:
-        text = path.read_text()
-        json.loads(text, object_pairs_hook=_unique_object)
-        document = PolicyDocument.model_validate_json(text)
-    except (OSError, UnicodeError, ValidationError, json.JSONDecodeError) as error:
-        raise ValueError(
-            'COV002: architecture policy could not be loaded: ' + str(error)
-        ) from error
+def parse_policy(text: str) -> Policy:
+    json.loads(text, object_pairs_hook=_unique_object)
+    document = PolicyDocument.model_validate_json(text)
     _validate(document)
     return Policy(document, MappingProxyType(dict(document.files)))
 
 
-def _binding_review(root: Path, source: Source) -> str:
+def load_policy(path: Path) -> Policy:
     try:
-        content = (root / source.path).read_bytes()
-    except OSError as error:
+        return parse_policy(path.read_text())
+    except (OSError, UnicodeError, ValidationError, json.JSONDecodeError) as error:
         raise ValueError(
-            'COV002: ownership source could not be read: ' + source.path
+            'COV002: architecture policy could not be loaded: ' + str(error)
         ) from error
-    if hashlib.sha256(content).hexdigest() != source.sha256:
-        raise ValueError(
-            'COV002: source changed during ownership review: ' + source.path
-        )
-    return binding_fingerprint(ast.parse(content))
-
-
-def _recorded_findings(
-    policy: Policy, sources: Sequence[Source]
-) -> tuple[Finding, ...]:
-    locations = {
-        (source.path, item.name): item.line
-        for source in sources
-        for item in source.declarations
-    }
-    result = [
-        Finding(
-            item.rule,
-            item.symbol.path,
-            locations.get((item.symbol.path, item.symbol.name), 1),
-            item.message,
-        )
-        for item in policy.document.findings
-    ]
-    for name, resource in policy.document.resources.items():
-        if resource.relationship == 'unresolved':
-            symbol = resource.evidence[0]
-            result.append(
-                Finding(
-                    'COV001',
-                    symbol.path,
-                    locations.get((symbol.path, symbol.name), 1),
-                    'Unresolved resource ownership: ' + name + '. ' + resource.decision,
-                )
-            )
-    for name, identifier in policy.document.identifiers.items():
-        if identifier.representation == 'primitive':
-            symbol = identifier.evidence[0]
-            result.append(
-                Finding(
-                    'VALUE001',
-                    symbol.path,
-                    locations.get((symbol.path, symbol.name), 1),
-                    'Reviewed primitive resource identifier: '
-                    + name
-                    + '. '
-                    + identifier.decision,
-                )
-            )
-    return tuple(result)
-
-
-def review_policy(root: Path, policy: Policy) -> Review:
-    root = root.resolve()
-    sources = discover(root, policy.document.source_roots)
-    ownership: dict[str, Ownership] = {}
-    symbols: dict[tuple[str, str], Classification] = {}
-    findings: list[Finding] = []
-    for source in sources:
-        record = policy.files.get(source.path)
-        if record is None:
-            continue
-        names = tuple(item.name for item in source.declarations)
-        if (
-            len(source.declarations) != record.declaration_count
-            or declaration_fingerprint(source.declarations) != record.declaration_sha256
-        ):
-            findings.append(
-                Finding('COV001', source.path, 1, 'Reviewed declaration set changed')
-            )
-            continue
-        if _binding_review(root, source) != record.binding_sha256:
-            findings.append(
-                Finding('COV001', source.path, 1, 'Unreviewed source bindings')
-            )
-            continue
-        explicit = set(record.symbols) | set(record.public) | set(record.composition)
-        for name in sorted(explicit - set(names)):
-            findings.append(
-                Finding(
-                    'COV001', source.path, 1, 'Mapped declaration is absent: ' + name
-                )
-            )
-        ownership[source.path] = Ownership(
-            record.owner,
-            record.role,
-            names,
-            record.frozen.sha256 if record.frozen is not None else None,
-        )
-        for item in source.declarations:
-            symbols[source.path, item.name] = record.symbols.get(
-                item.name, Classification(owner=record.owner, role=record.role)
-            )
-    findings.extend(reconcile(sources, ownership))
-    for path in sorted(policy.files.keys() - {source.path for source in sources}):
-        findings.append(
-            Finding('COV001', path, 1, 'Policy source is absent from discovery')
-        )
-    referenced = [
-        symbol
-        for record in (
-            *policy.document.resources.values(),
-            *policy.document.identifiers.values(),
-        )
-        for symbol in record.evidence
-    ]
-    referenced.extend(finding.symbol for finding in policy.document.findings)
-    for symbol in referenced:
-        if (symbol.path, symbol.name) not in symbols:
-            findings.append(
-                Finding(
-                    'COV001',
-                    symbol.path,
-                    1,
-                    'Unresolved policy evidence: ' + symbol.name,
-                )
-            )
-    return Review(
-        sources,
-        MappingProxyType(ownership),
-        MappingProxyType(symbols),
-        tuple(findings),
-        _recorded_findings(policy, sources),
-        policy.document.limitations,
-    )

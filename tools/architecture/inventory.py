@@ -66,7 +66,7 @@ def declarations(tree: ast.Module) -> tuple[Declaration, ...]:
     return tuple(result)
 
 
-def discover(root: Path, source_roots: Sequence[str]) -> tuple[Source, ...]:
+def source_paths(root: Path, source_roots: Sequence[str]) -> tuple[Path, ...]:
     root = root.resolve()
     paths: set[Path] = set()
     for source_root in source_roots:
@@ -96,6 +96,12 @@ def discover(root: Path, source_roots: Sequence[str]) -> tuple[Source, ...]:
         paths.update(found)
     if not paths:
         raise ValueError('COV002: intended source scope is empty')
+    return tuple(sorted(paths))
+
+
+def discover(root: Path, source_roots: Sequence[str]) -> tuple[Source, ...]:
+    root = root.resolve()
+    paths = source_paths(root, source_roots)
     result: list[Source] = []
     for path in sorted(paths):
         relative = path.relative_to(root).as_posix()

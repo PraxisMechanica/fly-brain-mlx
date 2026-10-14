@@ -19,17 +19,21 @@ The five roots drive discovery; they grant no owner, role, export or effect
 permission. No folder-based classification, wildcard, exclusion, suppression,
 generated-code exception or automatic classification runs in the build.
 
-[policy.py](../../tools/architecture/policy.py) exposes:
+[policy.py](../../tools/architecture/policy.py) owns metadata loading and
+fingerprints. [policy_review.py](../../tools/architecture/policy_review.py) owns
+source reconciliation:
 
 - `load_policy(path) -> Policy`: reject duplicate JSON keys, invalid or unknown
   fields/types/roles/owners, empty scopes, non-exact paths, incompatible neutral
   export or composition records, resource-parent cycles, false database absence,
   and unowned identifier resources as `COV002` analysis failures.
-- `review_policy(root, policy) -> Review`: discover and parse source without
+- `review_policy(root, policy, source_scope=...) -> Review`: discover and parse source without
   importing the application, check the reviewed sets, resolve exact metadata
   references, and return inventory-compatible `Ownership` records and exact
   `(path, name) -> Classification` mappings. Unmapped, absent or changed source
-  classifications produce `COV001` findings.
+  classifications produce `COV001` findings. An optional exact source scope
+  validates changed sources while accounting for the complete file inventory;
+  unchanged source classifications retain their reviewed baseline.
 - `declaration_fingerprint(declarations)` and `binding_fingerprint(tree)`: obtain
   review inputs after inspecting source. They are not an automatic policy repair.
 

@@ -7,14 +7,15 @@ from typing import Literal
 import pytest
 
 from tools.architecture import policy as policy_module
+from tools.architecture import policy_review as review_module
 from tools.architecture.inventory import Source, discover
 from tools.architecture.policy import (
     Policy,
     binding_fingerprint,
     declaration_fingerprint,
     load_policy,
-    review_policy,
 )
+from tools.architecture.policy_review import review_policy
 
 pytestmark = pytest.mark.unit
 SOURCE = 'def run(value: int) -> int:\n    return value\n'
@@ -345,7 +346,7 @@ def test_weakening_each_review_tripwire_loses_the_same_real_source_defect(
     def weakened(_: object) -> str:
         return expected
 
-    monkeypatch.setattr(policy_module, function, weakened)
+    monkeypatch.setattr(review_module, function, weakened)
     assert not review_policy(tmp_path, policy).findings
 
 
@@ -379,14 +380,14 @@ def test_source_drift_during_review_is_an_analysis_failure(
 ) -> None:
     value = document(tmp_path)
     policy = save(tmp_path, value)
-    original = policy_module.discover
+    original = review_module.discover
 
     def changed(root: Path, roots: Sequence[str]) -> tuple[Source, ...]:
         result = original(root, roots)
         (root / 'service.py').write_text(SOURCE + '# changed during analysis\n')
         return result
 
-    monkeypatch.setattr(policy_module, 'discover', changed)
+    monkeypatch.setattr(review_module, 'discover', changed)
     with pytest.raises(
         ValueError, match='COV002: source changed during ownership review'
     ):
