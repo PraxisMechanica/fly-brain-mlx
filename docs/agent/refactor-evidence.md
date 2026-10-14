@@ -530,7 +530,7 @@ origin, aliases, VALUE001, six findings and full37 coverage remain unresolved.
 
 ## Native static type-consumer selection
 
-The 12-path component is committed at `dcf27bb` after normal incremental hooks.
+The 12-path component is delivered at `dcf27bb` after normal incremental hooks.
 Pinned TypeScript 5.9.3 dependency facts select changed modules and static type
 consumers; ambient/global changes invalidate their native cohort. Compiler flags
 have one owner, semantic checks receive the affected roots and syntax checks
@@ -551,7 +551,7 @@ unproved. The immediate diagnostic consumer completed before default cleanup.
 
 ## Canonical loaded-import observation
 
-The five-path repair is committed at `1dce138` after normal incremental hooks.
+The five-path repair is delivered at `1dce138` after normal incremental hooks.
 The shared parsed-import descriptor body is preserved under parameter substitution.
 Non-forcing source readiness checks retain origin/hash accounting; tracked and
 selected sources bind, while pending unrequested inputs remain lazy. This repairs
@@ -641,4 +641,11 @@ remain unchanged. Only the allocated test and its single fingerprint row change.
 The full profiling cohort is not replayed. Raw profile/working-data consumers
 are complete; normal cleanup expires their outputs. The profiling checkout is
 clean and its seven independent fixtures remain exact at 45,360 bytes.
+
+The combined delivery through `d14bc50` passed exact hosted run `38602758682`:
+22 changed inputs, 15 affected Python files, 11 ownership reviews and 366 retained
+records. The quality step took 21 seconds, ran no pytest and uploaded zero
+artifacts. Every job step passed. This qualifies the delivered selector/import
+components and test repairs within their stated limits; six findings and complete
+37-rule enforcement remain unresolved.
 
