@@ -14,7 +14,7 @@ from tools.architecture.neutral_import_contract import (
     modules_option,
 )
 
-from .impact import current_graph, module_name
+from .impact import PACKAGES, current_graph, module_name
 
 
 class Configuration(BaseModel):
@@ -31,19 +31,38 @@ def modules(paths: Sequence[str]) -> set[str]:
     }
 
 
-def expanded(graph: ImportGraph, roots: Sequence[str], *, required: bool) -> set[str]:
-    if required and not set(roots) <= graph.modules:
-        raise ValueError('COV002: missing configured import-boundary source')
-    return {
-        name
-        for name in graph.modules
-        if any(name == root or name.startswith(root + '.') for root in roots)
-    }
+def matches(name: str, roots: Sequence[str]) -> bool:
+    return any((name + '.').startswith(root + '.') for root in roots)
+
+
+def expanded(
+    graph: ImportGraph,
+    roots: Sequence[str],
+    *,
+    required: Sequence[str],
+    context: str = 'import-boundary source',
+) -> set[str]:
+    missing = set(required) - graph.modules
+    if missing:
+        raise ValueError(
+            'COV002: missing configured ' + context + ': ' + ', '.join(sorted(missing))
+        )
+    return {name for name in graph.modules if matches(name, roots)}
+
+
+def required_targets(
+    targets: Sequence[str], first_party: Sequence[str]
+) -> tuple[str, ...]:
+    return tuple(target for target in targets if matches(target, first_party))
 
 
 def review(configuration: Configuration, graph: ImportGraph, affected: set[str]) -> int:
     broken = 0
     evaluated = 0
+    first_party = (
+        *PACKAGES,
+        *modules_option(configuration.session_options.get('root_packages')),
+    )
     for options in configuration.contracts_options:
         name = options.get('name')
         if not isinstance(name, str):
@@ -52,20 +71,24 @@ def review(configuration: Configuration, graph: ImportGraph, affected: set[str])
             contract = NeutralImportContract(
                 name, configuration.session_options, options
             )
-            scope = expanded(graph, ('fly_brain.comparison',), required=True) & affected
+            roots = ('fly_brain.comparison',)
+            scope = expanded(graph, roots, required=roots) & affected
             if not scope:
                 continue
             result = contract.check(graph, verbose=False, affected=scope)
         elif options.get('type') == 'forbidden':
-            source = expanded(
-                graph, modules_option(options.get('source_modules')), required=True
+            roots = modules_option(options.get('source_modules'))
+            source = expanded(graph, roots, required=roots)
+            targets = modules_option(options.get('forbidden_modules'))
+            forbidden = expanded(
+                graph,
+                targets,
+                required=required_targets(targets, first_party),
+                context='first-party import-boundary target',
             )
             scope = source & affected
             if not scope:
                 continue
-            forbidden = expanded(
-                graph, modules_option(options.get('forbidden_modules')), required=False
-            )
             native = ForbiddenContract(
                 name,
                 configuration.session_options,
