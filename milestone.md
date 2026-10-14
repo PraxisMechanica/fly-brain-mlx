@@ -75,6 +75,13 @@ launches stopped during fixture setup because the explicit precision environment
 and fresh temporary parent were missing; neither executed numerical checks.
 Hosted exact-revision CI `38645807445` remains pending at this checkpoint.
 
+That exact code revision's hosted CI subsequently passed. End-to-end source
+inspection found one concrete empty-output defect: `parity_rates.csv` had a blank
+header when both input rasters were empty. The pending repair preserves the nine
+existing column names for an empty table and extends the existing installed-CLI
+file-contract check to cover that case. This changes file serialization only;
+the legacy diagnostic empty-score convention and scientific gates stay intact.
+
 Fresh scalar audits both passed: 157/157 one-step and trajectory cases in the
 factored and production-layout paths, with exact count expansions, fresh-repeat
 and singleton/batch component equality. Command times were 1.464 and 3.195 seconds.

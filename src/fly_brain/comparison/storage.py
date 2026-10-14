@@ -52,7 +52,20 @@ def write_comparison(output: Path, result: ComparisonResult) -> None:
     ):
         with (output / filename).open('x', newline='') as destination:
             writer = csv.DictWriter(
-                destination, fieldnames=list(rows[0]) if rows else []
+                destination,
+                fieldnames=tuple(rows[0])
+                if rows
+                else (
+                    'backend_a',
+                    'framework_a',
+                    'backend_b',
+                    'framework_b',
+                    't_run',
+                    'n_run',
+                    'flywire_id',
+                    'rate_a_hz',
+                    'rate_b_hz',
+                ),
             )
             writer.writeheader()
             writer.writerows(rows)

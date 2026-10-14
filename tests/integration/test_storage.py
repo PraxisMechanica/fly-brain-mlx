@@ -81,11 +81,16 @@ def test_reader_rejects_null_identifiers(tmp_path: Path) -> None:
         read_spikes(path, 0.1)
 
 
+@pytest.mark.parametrize('empty', (False, True))
 def test_installed_comparison_command_reads_and_writes_the_file_contract(
     tmp_path: Path,
+    empty: bool,
 ) -> None:
     first, second = tmp_path / 'first.parquet', tmp_path / 'second.parquet'
-    for path, times in ((first, [1.0, 3.0]), (second, [1.0])):
+    for path, times in (
+        (first, [] if empty else [1.0, 3.0]),
+        (second, [] if empty else [1.0]),
+    ):
         pq.write_table(
             pa.table(
                 {
@@ -123,11 +128,22 @@ def test_installed_comparison_command_reads_and_writes_the_file_contract(
     assert process.returncode == 0, process.stderr
     report = json.loads((output / 'pairwise_summary.json').read_text())[0]
     assert (report['spikes_a'], report['spikes_b'], report['timing_matches']) == (
-        2,
-        1,
-        1,
+        (0, 0, 0) if empty else (2, 1, 1)
     )
-    assert (output / 'parity_rates.csv').is_file()
+    with (output / 'parity_rates.csv').open(newline='') as source:
+        reader = csv.DictReader(source)
+        assert reader.fieldnames == [
+            'backend_a',
+            'framework_a',
+            'backend_b',
+            'framework_b',
+            't_run',
+            'n_run',
+            'flywire_id',
+            'rate_a_hz',
+            'rate_b_hz',
+        ]
+        assert len(list(reader)) == (0 if empty else 1)
 
 
 def test_comparison_writes_existing_report_filenames_without_overwriting(
