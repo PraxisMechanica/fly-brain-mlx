@@ -741,3 +741,27 @@ and raw measurements/findings remain unchanged; malformed/unknown/empty failures
 and tool/analysis errors remain blocking. Test, typing, architecture and scientific
 predicates are unaffected. Per-function complexity review remains a proposal,
 not implemented measurement or a required numerical threshold.
+
+The advisory-policy component is delivered at `2140a61` after its normal hook,
+automatic selected tests and cleanup pass. Its nine paths contain two actual
+ownership-row changes. Two earlier hook attempts stopped on typing/formatting
+before pytest; neither caused a test replay. The successful automatic invocation
+selected 11 test targets; exact case count/time were hidden and were not recovered
+by rerunning. Native measurements remain regression/passed-false with three CQ002
+findings: mean 14.84 to 14.86, report-test file complexity 9 to 10 and diagnostic
+file complexity 13 to 31. Maximum 96 remains; health/maintainability improve
+41.31 to 41.34. The project annotation correctly marks these advisory/nonblocking.
+Native 0.1.2 package, calculators, comparisons and provenance remain unchanged.
+Parent adoption is a fast-forward; push performs no pytest.
+
+The published audit correction passed exact hosted run `38621098579`: every job
+step succeeds and the affected-check/test step takes 14 seconds. At the wrap-up
+checkpoint, independent source inspection also verifies all five current frozen
+hashes and byte identity of the seven fixtures against `79f62ad`, totaling
+45,360 bytes. This is preservation evidence, not complete scientific acceptance.
+
+Exact hosted run `38622709325` for `2140a61` passes every job step. The
+affected-check/test step takes 116 seconds; this is a targeted quality-tool
+change, not a new full application-suite benchmark. The full
+37-rule analyzer still reports COV002 and six findings remain. No scientific
+hold is released; no new simulator feature or numerical remedy is delivered.

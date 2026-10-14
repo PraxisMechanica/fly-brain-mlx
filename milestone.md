@@ -259,3 +259,21 @@ all scientific acceptance predicates remain required. Active import/numeric-fact
 caches have exact operational retention consumers; completed timing/profile
 outputs have no continuing exception. Final delivery checks are recorded in
 refactor evidence, with limitations and failed attempts retained explicitly.
+
+## Wrap-up delivery checkpoint
+
+Current tool/test cleanup is delivered through `2140a61`: checker selection
+(`7fba34d`), automatic affected-test runner (`45146bc`), native metric-fact reuse
+(`c22e943`), published audit-fixture identity (`3bd3ffe`) and advisory numerical
+metric policy (`2140a61`). Each final component passes its required local boundary;
+worker commits are adopted by fast-forward without a second parent test run.
+Push/manual stages do not run pytest. The audit correction's hosted run
+`38621098579` and policy run `38622709325` both pass; exact results and timing
+limits are recorded in refactor evidence.
+
+Five frozen source hashes and all seven independent fixtures remain exact; fixture
+bytes total 45,360. Full scientific qualification and the fresh-native-proof
+bundle consumer were not run during this tool cleanup. Dynamic native/process
+test consumption, reliable per-function metrics and the broader architecture
+repairs remain explicit limitations. Do not report complete architecture, complete
+scientific acceptance or the original refactor objective as achieved.
