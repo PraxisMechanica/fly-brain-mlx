@@ -60,6 +60,11 @@
   }
 },
   "files": {
+    "tools/code_quality/change_inputs.py": {"owner":"quality_gate","role":"tooling","declaration_count":13,"declaration_sha256":"e3e4b078c952feaec0059111829b9cddc0fe13dd69705f832d181bc3adb5c28b","binding_sha256":"ff43f023c1f5f012f07d3bb21e173e06ae5f95079ecd366db87bd9b99f13437c"},
+    "tools/code_quality/change_context.py": {"owner":"quality_gate","role":"tooling","declaration_count":10,"declaration_sha256":"086c1a637944a3aa11c93269ad868f11a99502ec1a2420da1cf4f595083bda4d","binding_sha256":"393d090ef664d7b58150a45215ea26d7b68fd2bd8850c86c44ce1c852ce061f1"},
+    "tools/code_quality/changes.py": {"owner":"quality_gate","role":"tooling","declaration_count":11,"declaration_sha256":"107273e9198840a8cd064467cdfc926a9da08e74a8833dfd7e83a6f8e9fb080e","binding_sha256":"e2d7f2e205cb62de62ad64d9e98f027eb640af2e7364d1c84c6a1ef6205bcfc8"},
+    "tools/code_quality/impact.py": {"owner":"quality_gate","role":"tooling","declaration_count":6,"declaration_sha256":"399a08e554654c91150766ef377ffdb66561d911c2405d65a6061c0f4e402121","binding_sha256":"9a8f23a4461bc6d5cb7a56c3008c12df3ba5ed29db7a74d3e6d30851fa4e3907"},
+    "tests/quality/test_changed_checks.py": {"owner":"quality_gate","role":"test","declaration_count":22,"declaration_sha256":"665f00ec3053bce12f05b4cc96b3eb076eb226d592f99c575b994c6cc16c8194","binding_sha256":"da70233969fd5d11376f409254bc66629e9a577c23d5040d5ec56baacb010a87"},
     "tests/quality/test_incremental_ownership.py": {"owner":"quality_gate","role":"test","declaration_count":7,"declaration_sha256":"156cb0b22b8f1ad29d50c7b5841f95d2064e613e6890f001bd0844b55c5a09c9","binding_sha256":"810998b5bac3be6ca630c8f8fbd59091e263fe80c8dcde94873f3cfbfa4dee6f"},
     "tools/code_quality/ownership.py": {"owner":"quality_gate","role":"tooling","declaration_count":5,"declaration_sha256":"ef017cfd64b67ac5caaed96263a4bf6fe9b3d66517bd1c559d7f7b6fc3da7edd","binding_sha256":"4b6d23951afb79a32a34ffdf9c6122aa2fe283746297f925a3545b7945b28a40"},
     "tools/architecture/policy_review.py": {"owner":"architecture","role":"tooling","declaration_count":3,"declaration_sha256":"b8db25bedacb80c3f5ec3052fa48b12ec2d402132d6c992207ff4a5cba2dc473","binding_sha256":"4b814136098b9c93c22a532a1d217066052a8f06cae8da9918740fa646e47907"},
