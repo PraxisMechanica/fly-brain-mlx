@@ -175,3 +175,18 @@ forbidden_modules = [
     "fly_brain.simulation.observation_module",
 ]
 allow_indirect_imports = false
+
+[[tool.importlinter.contracts]]
+name = "DEP003/ROLE005: Parity uses owned stimulus services"
+type = "forbidden"
+source_modules = [
+    "fly_brain.qualification.service",
+    "fly_brain.qualification.adapters.parity_case",
+    "fly_brain.qualification.adapters.case_report",
+]
+forbidden_modules = [
+    "fly_brain.simulation.experiments",
+    "fly_brain.simulation.stimuli",
+    "fly_brain.simulation.storage",
+]
+allow_indirect_imports = false
