@@ -242,6 +242,12 @@ took 16 seconds; its job took 72 seconds, with no pytest and zero artifacts.
 Missing configured first-party targets now fail COV002 before inactive-source
 skipping; the separate raw-framework limitation control remains unchanged.
 
+Source review at `2d0a7e6` distinguishes the qualification fan-in tuple aliases
+`Reduction` and `Evaluation` from callable ports. Their exact classifications
+are `qualification/types`; provider code, public exports, source fingerprints
+and six findings are unchanged. Decision confidence: 95%. This metadata-only
+correction requires no numerical execution or regression replay.
+
 ## Remaining order and unresolved decisions
 
 1. Keep checked components and current documentation delivered incrementally.
