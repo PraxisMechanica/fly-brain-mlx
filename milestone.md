@@ -156,6 +156,7 @@ The following components are committed on parent `main`:
 | Comparison scalar identifier keys | `fe14b74` | 32 focused cases; three identity wrappers, four unchanged calculation functions and 16 byte-exact original/new JSON/CSV outputs |
 | Canonical native Python compiler context | `39c4556` | 21 defined cases; independently reconciled source/configuration/import-origin facts; equivalent read capture and record/process separation |
 | Consumer-owned reference connectome silencing | `1b64d51` | 36 focused controls; 18 normalized modules, 70 original assertions, unchanged mapping, five protected sources and seven fixtures |
+| Consumer-owned host input mapping | `9019148` | 19 focused cases without reruns; byte-exact original/candidate NPZ and JSON, four callback positions, six normalized modules and 15 original assertions |
 
 Every component passed its required normal commit checks and default cleanup. Joined
 metric regressions were repaired without thresholds, suppressions or removed
@@ -186,7 +187,7 @@ The identifier changes preserve numerical bodies and old assertions; NewType sup
 typing without new runtime validation or complete conversion-origin proof.
 No full native proof bundle or scientific matrix was recreated.
 
-All listed source components are pushed to `origin/main` through `26e4df3`.
+All listed source components are pushed to `origin/main` through `9019148`.
 The spike identifier component passed the installed normal commit and push hooks
 and default cleanup without replaying its completed regressions. Delivery uses
 one ten-file component commit; the worker's earlier private ancestry is preserved
@@ -247,6 +248,28 @@ Source review at `2d0a7e6` distinguishes the qualification fan-in tuple aliases
 are `qualification/types`; provider code, public exports, source fingerprints
 and six findings are unchanged. Decision confidence: 95%. This metadata-only
 correction requires no numerical execution or regression replay.
+
+The ten-file host input-audit boundary component is pushed at `9019148` after
+normal commit/push checks and exact hosted run `38559492970`: ten changed inputs,
+73 affected Python files, 94 import module/contract checks, eight reviewed
+sources and 348 retained records. Its quality step took 17 seconds; its complete
+job took 59 seconds, with no pytest and zero artifacts. Its 19 focused cases
+passed without reruns; archive
+SHA-256 `bd4f62f828d09125d7929472203edd68d836a5bdb53330ebf75186d0c509e376`
+and JSON bytes match the original driver. Mapping/model bytes, five protected
+sources and seven fixtures remain exact. Worker metrics kept mean 15.17 and
+maximum 96 while health improved 40.20 to 40.26. Required consumer/provider
+readers preserve grouping, absolute counts, silencing and late bucket acquisition.
+The pure bucket report receives completed data; `MappedArray` is reviewed as
+`qualification/types`. Eight import contracts are configured. Direct file
+persistence and mixed role responsibilities still require a separate repair.
+
+The raster specialization candidate is held: 116 focused controls are qualified,
+but the native expression query reports the FlyWire argument for both row and
+FlyWire aliases before projection. Its exact name locations and distinct native
+alias names are checked; the required specialization control remains failing.
+No candidate source or relaxed expectation is adopted. The native owner is
+assessing acquisition/context semantics after its separate session component.
 
 ## Remaining order and unresolved decisions
 
@@ -315,7 +338,7 @@ native equivalence; retain no archive simply in anticipation of possible reuse.
 ## Current architecture scope
 
 Complete 37-rule structural enforcement remains **ANALYSIS FAILED (COV002)**.
-Six recorded architecture/identifier findings remain. Strict typing, seven
+Six recorded architecture/identifier findings remain. Strict typing, eight
 import contracts, source ownership reconciliation and qualified native metric
 checks are useful components, not a full structural or scientific approval.
 Current coverage is in [quality-coverage.md](docs/agent/quality-coverage.md) and
