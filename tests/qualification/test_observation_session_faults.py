@@ -59,7 +59,9 @@ def fault_factory(execution: Execution) -> ObservationSessionFactory:
 
 def corrupt_operands(operands: ObservationOperands, field: str) -> ObservationOperands:
     return ObservationOperands(
-        operands.sources,
+        (operands.sources + np.int32(1)) % 6
+        if field == 'sources'
+        else operands.sources,
         operands.destinations,
         ~operands.available if field == 'available' else operands.available,
         ~operands.spikes if field == 'spikes' else operands.spikes,
@@ -249,6 +251,35 @@ def test_missing_comparison_blocks_advance_and_complete_data_can_release_it(
     )
     assert observation_checks(actual, session.compare(operands), operands).all()
     assert session.advance(inputs).completed_steps == 2
+
+
+def test_changed_independent_maps_invalidate_the_reused_device_mapping(
+    precision: str,
+) -> None:
+    case = fixture()
+    factory, _ = build_observation_sessions(
+        case.connectome, case.targets, (), precision
+    )
+    voltage = np.full((1, 6), -52, dtype=np.float64)
+    voltage[0, 0] = -44
+    initial = ObservationInitialState(
+        voltage,
+        np.zeros((1, 6), dtype=np.float64),
+        np.full((1, 6), -100000000, dtype=np.int32),
+    )
+    session = factory((TrialId(0),), initial)
+    ledger = initial_ledger(case.connectome, case.targets, 1, initial)
+    inputs = np.zeros((1, len(case.targets)), dtype=np.bool_)
+    for step in range(19):
+        actual = session.advance(inputs)
+        ledger, operands = expect_step(
+            ledger, actual, inputs, case.connectome, case.targets
+        )
+        if step < 18:
+            assert observation_checks(actual, session.compare(operands), operands).all()
+        else:
+            changed = corrupt_operands(operands, 'sources')
+            assert not session.compare(changed).gates_equal[0, 3]
 
 
 @pytest.mark.parametrize('phase', ('pre', 'before', 'end'))

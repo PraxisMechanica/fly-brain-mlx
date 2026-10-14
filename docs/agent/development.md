@@ -142,6 +142,11 @@ to verification. They expire at the next successful commit unless an explicit
 remaining consumer is registered. Skipped, missing, empty, or failed required
 results prevent acceptance.
 
+`qualify` has a five-minute test budget, including its setup. An overrun terminates
+the owned test process group and returns exit code 124 with an unaccepted result;
+partial counts are not trusted. Retain its diagnostic output for investigation.
+Use bounded profiles to repair slow checks before repeating an over-limit run.
+
 During implementation, fix and rerun only the failed scientific targets instead
 of restarting `qualify`. Keep completed expensive proofs while their verification
 consumers need them, and repeat them when affected source/input changes require

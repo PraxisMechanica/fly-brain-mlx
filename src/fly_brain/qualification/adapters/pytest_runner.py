@@ -1,7 +1,9 @@
 import os
+import signal
 import subprocess
 import sys
 import xml.etree.ElementTree as ET
+from time import monotonic
 
 from fly_brain.infrastructure.seeded_random import uniforms
 from fly_brain.qualification.models import (
@@ -18,6 +20,7 @@ from fly_brain.simulation.storage import persist_stimulus
 
 
 def run_tests(request: QualificationRequest) -> QualificationResult:
+    started = monotonic()
     request.output.mkdir(parents=True, exist_ok=False)
     connectome, pin = load_pinned_inputs(request.project, lambda: load_connectome)
     experiment = EXPERIMENTS['sugar']
@@ -49,14 +52,26 @@ def run_tests(request: QualificationRequest) -> QualificationResult:
         FLY_BRAIN_PINNED_PROJECT=str(request.project),
     )
     with (request.output / 'qualification.log').open('x') as log:
-        process = subprocess.run(
+        process = subprocess.Popen(
             command,
             cwd=request.project,
             env=environment,
             stdout=log,
             stderr=subprocess.STDOUT,
-            check=False,
+            start_new_session=True,
         )
+        try:
+            exit_code = process.wait(timeout=max(0, 300 - (monotonic() - started)))
+        except subprocess.TimeoutExpired:
+            try:
+                os.killpg(process.pid, signal.SIGKILL)
+            except ProcessLookupError:
+                pass
+            process.wait()
+            log.write(
+                'Qualification exceeded the five-minute limit; stopped for diagnosis.\n'
+            )
+            return QualificationResult(command, 124, None)
     report = request.output / 'tests.xml'
     counts = None
     if report.exists():
@@ -66,4 +81,4 @@ def run_tests(request: QualificationRequest) -> QualificationResult:
             for key in ('tests', 'failures', 'errors', 'skipped')
         )
         counts = TestCounts(*values)
-    return QualificationResult(command, process.returncode, counts)
+    return QualificationResult(command, exit_code, counts)

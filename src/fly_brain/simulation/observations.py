@@ -24,7 +24,15 @@ class HostSnapshot(Generic[Scalar]):
 
     @staticmethod
     def capture(values: NDArray[SnapshotScalar]) -> 'HostSnapshot[SnapshotScalar]':
-        return HostSnapshot(values.tobytes(order='C'), values.dtype, values.shape)
+        backing = values.base
+        payload = (
+            backing
+            if isinstance(backing, bytes)
+            and values.flags.c_contiguous
+            and values.nbytes == len(backing)
+            else values.tobytes(order='C')
+        )
+        return HostSnapshot(payload, values.dtype, values.shape)
 
     @property
     def array(self) -> NDArray[Scalar]:

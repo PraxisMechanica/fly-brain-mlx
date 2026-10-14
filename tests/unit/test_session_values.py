@@ -7,6 +7,7 @@ import pytest
 from fly_brain.qualification.session_expectations import expect_step, initial_ledger
 from fly_brain.simulation.identifiers import TrialId
 from fly_brain.simulation.observations import (
+    HostSnapshot,
     NativeComparison,
     NativeObservation,
     ObservationOperands,
@@ -113,6 +114,37 @@ def test_comparison_construction_rejects_omitted_policy_factors() -> None:
         'pending_sources',
     ):
         assert parameters[name].default is inspect.Parameter.empty
+
+
+def test_snapshot_reuses_complete_immutable_bytes_and_detaches_other_buffers() -> None:
+    mutable = np.arange(12, dtype=np.int32)
+    frozen = HostSnapshot.capture(mutable)
+    repeated = HostSnapshot.capture(frozen.array)
+    assert repeated.payload is frozen.payload
+    fragment = HostSnapshot.capture(frozen.array[1:])
+    assert fragment.payload == mutable[1:].tobytes()
+    assert fragment.payload is not frozen.payload
+    alias = mutable.view()
+    alias.setflags(write=False)
+    detached = HostSnapshot.capture(alias)
+    mutable[:] = -1
+    assert np.array_equal(detached.array, np.arange(12, dtype=np.int32))
+
+
+def test_independent_graph_maps_are_frozen_once_and_shared_across_steps() -> None:
+    network = connectome()
+    state = initial_ledger(network, (), 1, None)
+    sources, destinations = state.sources.base, state.destinations.base
+    for step in range(2):
+        state, operands = expect_step(
+            state,
+            observation(step + 1, (-52, -52)),
+            np.zeros((1, 0), dtype=np.bool_),
+            network,
+            (),
+        )
+        assert state.sources.base is operands.sources.base is sources
+        assert state.destinations.base is operands.destinations.base is destinations
 
 
 @pytest.mark.parametrize('trials', (1, 4))

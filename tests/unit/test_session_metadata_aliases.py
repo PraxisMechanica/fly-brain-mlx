@@ -81,6 +81,8 @@ def test_phase_due_configuration_operand_and_comparison_aliases_cannot_change_ca
         lambda: comparison.gates_equal,
         lambda: comparison.queue_equal,
         lambda: state.last_spike_step,
+        lambda: state.sources,
+        lambda: state.destinations,
         lambda: state.history[0],
     )
     for reader in readers:

@@ -41,6 +41,8 @@ def capture_history(
 @dataclass(frozen=True, init=False)
 class LedgerState:
     step: int
+    _sources_snapshot: HostSnapshot[np.int32] = field(init=False, repr=False)
+    _destinations_snapshot: HostSnapshot[np.int32] = field(init=False, repr=False)
     _last_spike_step_snapshot: HostSnapshot[np.int32] = field(init=False, repr=False)
     _refractory_steps_snapshot: HostSnapshot[np.int32] = field(init=False, repr=False)
     _history_snapshot: tuple[HostSnapshot[np.bool_], ...] = field(
@@ -53,6 +55,8 @@ class LedgerState:
         last_spike_step: NDArray[np.int32],
         refractory_steps: NDArray[np.int32],
         history: tuple[NDArray[np.bool_], ...],
+        sources: NDArray[np.int32],
+        destinations: NDArray[np.int32],
     ) -> None:
         shape = last_spike_step.shape
         if (
@@ -61,12 +65,20 @@ class LedgerState:
             or refractory_steps.dtype != np.int32
             or refractory_steps.shape != (shape[1],)
             or len(history) != 19
+            or sources.dtype != np.int32
+            or destinations.dtype != np.int32
+            or sources.ndim != 1
+            or sources.shape != destinations.shape
             or any(value.dtype != np.bool_ or value.shape != shape for value in history)
         ):
             raise ValueError(
                 'Qualification history requires every trial, neuron and slot'
             )
         object.__setattr__(self, 'step', step)
+        object.__setattr__(self, '_sources_snapshot', HostSnapshot.capture(sources))
+        object.__setattr__(
+            self, '_destinations_snapshot', HostSnapshot.capture(destinations)
+        )
         object.__setattr__(
             self, '_last_spike_step_snapshot', HostSnapshot.capture(last_spike_step)
         )
@@ -74,6 +86,14 @@ class LedgerState:
             self, '_refractory_steps_snapshot', HostSnapshot.capture(refractory_steps)
         )
         object.__setattr__(self, '_history_snapshot', capture_history(history))
+
+    @property
+    def sources(self) -> NDArray[np.int32]:
+        return self._sources_snapshot.array
+
+    @property
+    def destinations(self) -> NDArray[np.int32]:
+        return self._destinations_snapshot.array
 
     @property
     def last_spike_step(self) -> NDArray[np.int32]:
@@ -103,7 +123,9 @@ def initial_ledger(
     refractory = np.full(shape[1], 22, dtype=np.int32)
     refractory[list(targets)] = 0
     empty = np.zeros(shape, dtype=np.bool_)
-    return LedgerState(0, last, refractory, (empty,) * 19)
+    return LedgerState(
+        0, last, refractory, (empty,) * 19, connectome.sources, connectome.destinations
+    )
 
 
 def require_configuration(
@@ -182,8 +204,8 @@ def expect_step(
         source_step = due_step - 18
         pending.append(history[source_step % 19] if 0 <= source_step <= step else empty)
     operands = ObservationOperands(
-        connectome.sources,
-        connectome.destinations,
+        ledger.sources,
+        ledger.destinations,
         available,
         spikes,
         receiving,
@@ -195,7 +217,12 @@ def expect_step(
         np.stack(pending),
     )
     return LedgerState(
-        step + 1, last, ledger.refractory_steps, tuple(history)
+        step + 1,
+        last,
+        ledger.refractory_steps,
+        tuple(history),
+        ledger.sources,
+        ledger.destinations,
     ), operands
 
 

@@ -1,4 +1,5 @@
 import json
+import signal
 import subprocess
 from pathlib import Path
 from typing import TextIO
@@ -17,8 +18,9 @@ from tests.unit.test_stimuli import connectome
 pytestmark = pytest.mark.integration
 
 
+@pytest.mark.parametrize('timed_out', (False, True))
 def test_local_qualification_prepares_the_required_pinned_proof_and_consumer(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, timed_out: bool
 ) -> None:
     network = connectome()
     pin = InputPin('csv', 'parquet', len(network.neuron_ids), 0)
@@ -28,6 +30,18 @@ def test_local_qualification_prepares_the_required_pinned_proof_and_consumer(
         assert project == request.project and callable(reader_factory)
         return network, pin
 
+    killed: list[tuple[int, int]] = []
+
+    class Process:
+        pid = 123
+
+        def wait(self, *, timeout: float | None = None) -> int:
+            if timeout is not None:
+                assert 0 < timeout <= 300
+                if timed_out:
+                    raise subprocess.TimeoutExpired('pytest', timeout)
+            return -9 if killed else 0
+
     def execute(
         command: tuple[str, ...],
         *,
@@ -35,8 +49,8 @@ def test_local_qualification_prepares_the_required_pinned_proof_and_consumer(
         env: dict[str, str],
         stdout: TextIO,
         stderr: int,
-        check: bool,
-    ) -> subprocess.CompletedProcess[str]:
+        start_new_session: bool,
+    ) -> Process:
         assert cwd == request.project
         assert env['FLY_BRAIN_PINNED_PROJECT'] == str(request.project)
         assert env['MLX_ENABLE_TF32'] == '0'
@@ -54,18 +68,28 @@ def test_local_qualification_prepares_the_required_pinned_proof_and_consumer(
             (request.output / 'frozen-stimulus/stimulus.json').read_text()
         )
         assert metadata['seed_tuples'] == [[20261004, 0, trial] for trial in range(4)]
-        assert stderr == subprocess.STDOUT and check is False
+        assert stderr == subprocess.STDOUT and start_new_session is True
         stdout.write('scientific checks executed\n')
         (request.output / 'tests.xml').write_text(
             '<testsuites><testsuite tests="1" failures="0" errors="0" skipped="0" />'
             '</testsuites>'
         )
-        return subprocess.CompletedProcess(command, 0)
+        return Process()
 
     monkeypatch.setattr(pytest_runner, 'load_pinned_inputs', inputs)
-    monkeypatch.setattr(pytest_runner.subprocess, 'run', execute)
+    monkeypatch.setattr(pytest_runner.subprocess, 'Popen', execute)
+
+    def terminate(pid: int, signum: int) -> None:
+        killed.append((pid, signum))
+
+    monkeypatch.setattr(pytest_runner.os, 'killpg', terminate)
     result = pytest_runner.run_tests(request)
-    assert result.accepted
-    assert (request.output / 'qualification.log').read_text() == (
-        'scientific checks executed\n'
-    )
+    assert result.accepted is (not timed_out)
+    log = (request.output / 'qualification.log').read_text()
+    assert log.startswith('scientific checks executed\n')
+    if timed_out:
+        assert result.exit_code == 124 and result.counts is None
+        assert killed == [(123, signal.SIGKILL)]
+        assert 'five-minute limit' in log
+    else:
+        assert killed == []

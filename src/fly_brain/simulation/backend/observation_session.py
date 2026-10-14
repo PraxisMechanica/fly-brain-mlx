@@ -47,6 +47,9 @@ class NativeObservationSession:
         self._initial_synaptic = state.synaptic_mv
         self._initial_last = state.last_spike_step
         self._trace: core.StepTrace | None = None
+        self._comparison_maps: (
+            tuple[NDArray[np.int32], NDArray[np.int32], mx.array, mx.array] | None
+        ) = None
 
     @property
     def configuration(self) -> ObservationConfiguration:
@@ -121,17 +124,33 @@ class NativeObservationSession:
             or operands.pending_sources.shape
             != (self._state.queue.shape[0], trials, neurons)
             or operands.accepted_inputs.shape != trace.accepted_inputs.shape
-            or np.any(operands.sources < 0)
-            or np.any(operands.sources >= neurons)
-            or np.any(operands.destinations < 0)
-            or np.any(operands.destinations >= neurons)
         ):
             raise ValueError(
                 'Native comparison operands have incomplete actual coverage'
             )
         with mx.stream(mx.gpu):
-            sources = mx.array(operands.sources)
-            destinations = mx.array(operands.destinations)
+            source_map, destination_map = operands.sources, operands.destinations
+            maps = self._comparison_maps
+            if (
+                maps is None
+                or source_map.base is not maps[0].base
+                or destination_map.base is not maps[1].base
+            ):
+                if (
+                    np.any(source_map < 0)
+                    or np.any(source_map >= neurons)
+                    or np.any(destination_map < 0)
+                    or np.any(destination_map >= neurons)
+                ):
+                    raise ValueError('Native comparison maps exceed the neuron bounds')
+                maps = (
+                    source_map,
+                    destination_map,
+                    mx.array(source_map),
+                    mx.array(destination_map),
+                )
+                self._comparison_maps = maps
+            sources, destinations = maps[2], maps[3]
             due = boolean_input(operands.due_sources)[:, sources]
             accepted = (
                 due & boolean_input(operands.accepted_destinations)[:, destinations]

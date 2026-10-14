@@ -39,20 +39,35 @@ long tests to evade the limit. Decision confidence: 95% at `c4556ce`.
 Bounded profiling completed in 47.861 seconds for 32 steps/four trials, including
 profiling, construction and proof writing. It found strided full-edge due-mask
 checks, repeated contiguous copies for queue hashing, and default-level ZIP
-compression. The pending repair gathers each trial's expected due mask in
+compression. Commit `b626b4c` gathers each trial's expected due mask in
 contiguous order, hashes native queue slots directly in the same canonical order,
 and writes the same lossless NPZ arrays at ZIP level 1. The identical workload
 then took 36.262 seconds (24.23% less). All 142 saved arrays, all four trial
 receipts and every one of the 30 gates compare exactly. The earlier verifier's
 scalar byte-view error was repaired without rerunning either profile.
 
+Immutable pinned graph/history buffers are now reused, and the native comparator
+retains validated device maps until different immutable maps are supplied. The
+same profile then took **34.308 seconds** (28.32% less than the original). All 142
+native arrays and all four trial receipts still match the original exactly.
+All **66 affected native transparency, fault, slot, chunk, repeat, batch and
+artifact checks passed in 14.41 seconds**, with zero failures/errors/skips. A new
+fault check proves that changed maps invalidate device-map reuse. The production
+neural arithmetic, queue layout and numerical budgets are unchanged.
+
 This is a partial performance repair, not compliance with the full-run ceiling.
-GPU evaluation, repeated fixed-map copies/uploads and full edge-queue checking
-still dominate. No 1,000-step preservation rerun or matrix launch is authorized by
-this timing result. Continue bounded diagnosis; preserve the numerical operation
-sequence and every discrete/state check. The existing remaining-time interval is
-the agent's own elapsed execution time including investigation, edits, tool runs,
-tests and verification, not hypothetical human engineering effort.
+GPU evaluation and full edge-queue checking still dominate. No 1,000-step
+preservation rerun or matrix launch is authorized by this timing result. The
+qualification test runner now enforces its five-minute budget, kills its owned
+process group on expiry and returns an explicitly unaccepted result with no
+trusted counts. Routine affected checks must verify completion and timeout paths.
+Continue bounded diagnosis; preserve every discrete/state check. All estimates
+refer to the agent's own elapsed execution time including investigation, edits,
+tool runs, tests and verification, not hypothetical human engineering effort.
+The full-run time ceiling remains unresolved; do not assume a matrix exemption.
+A 90%-confidence estimate for remaining bounded harness diagnosis and delivery is
+**30–120 minutes** at this checkpoint. The whole-goal interval below remains
+provisional until a paired case can be timed under an agreed execution budget.
 
 ### Implementation baseline and unverified requirements
 
@@ -102,7 +117,7 @@ Hosted exact-revision CI `38645807445` remains pending at this checkpoint.
 
 That exact code revision's hosted CI subsequently passed. End-to-end source
 inspection found one concrete empty-output defect: `parity_rates.csv` had a blank
-header when both input rasters were empty. The pending repair preserves the nine
+header when both input rasters were empty. Commit `c4556ce` preserves the nine
 existing column names for an empty table and extends the existing installed-CLI
 file-contract check to cover that case. This changes file serialization only;
 the legacy diagnostic empty-score convention and scientific gates stay intact.
@@ -110,12 +125,24 @@ the legacy diagnostic empty-score convention and scientific gates stay intact.
 Fresh scalar audits both passed: 157/157 one-step and trajectory cases in the
 factored and production-layout paths, with exact count expansions, fresh-repeat
 and singleton/batch component equality. Command times were 1.464 and 3.195 seconds.
-Maximum factored one-step budget fraction was 0.023660. Pinned fan-in, layout,
-device-row and pulse audits remain in progress. No broad preservation rerun was
-launched. The six changed existing sources since the completed pinned proof are
-workflow/storage/metadata files; numerical kernels and observation producers are
-unchanged. Added package source provenance does not make the old raw proof a
-current-source full-network scientific acceptance record.
+Maximum factored one-step budget fraction was 0.023660. The other four required
+audits subsequently passed; all six commands took 284.477 seconds in total. Each
+fan-in path checked 24,576 cases across 31 targets with zero failed applicable
+flags; all target archive hashes and native flags were inspected. The 99
+original-state one-step conversion limitations remain explicit, never passes;
+the required identical-stored-state one-step and original-state trajectory
+budgets all passed. Worst required fan-in budget fractions were 0.023781/0.024415.
+Complete device-row round trips, all five source/receiving patterns and both
+budgets passed. The pulse proved 20 steps/two trials in original and outgoing-
+silenced modes, exact complete masks/queues/unaffected states, and unchanged
+arrival/influence steps 18/19. No broad preservation rerun was launched.
+
+Pinned production CLI runs and self-comparison round trips also passed on 20 steps:
+two-class/two trials exported 19 spikes; silent/one trial exported a typed empty
+file. The six Parquet columns/types, schedule bytes/classes/amplitudes and hashes,
+comparison JSON/CSV outputs and empty CSV headers were verified. Elapsed command
+and consumer times were 11.557 and 12.345 seconds. These are workflow checks, not
+independent scientific parity or repeatability acceptance.
 
 The inspected host has Apple M1 Max, 32 GiB memory, approximately 225 GiB free
 disk, Python 3.10.14, MLX/Metal 0.32.3, NumPy 1.26.4, Brian2 2.8.0 and PyTorch
@@ -192,12 +219,12 @@ does not replace scientific qualification.
    limitations before working outputs expire. Deliver incremental hooked commits
    to `origin/main`, require successful exact-revision CI and a clean tree.
 
-Progress: **20%** of this implementation goal, based on an explicit work breakdown:
+Progress: **30%** of this implementation goal, based on an explicit work breakdown:
 baseline/scope inventory 10%, end-to-end workflows 10%, local scientific gates
 15%, demonstrated implementation repairs 15%, 52-case qualification 30%, batches
-10%, final evidence/delivery 10%. Inventory earns 10 points, the implemented
-workflow/provenance work earns four pending its end-to-end verification, and
-fresh local/input/reference evidence earns six of the local-gate points;
+10%, final evidence/delivery 10%. Inventory earns 10 points, workflow/provenance
+and inspected end-to-end outputs earn eight, fresh local/input/reference evidence
+earns eight, and demonstrated harness/serialization repairs earn four;
 scientific acceptance remains 0/52. Reassess weights if measured work changes
 the scope; do not derive scientific acceptance from code coverage or test counts.
 
