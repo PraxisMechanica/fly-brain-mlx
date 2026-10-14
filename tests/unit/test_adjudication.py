@@ -11,6 +11,7 @@ from fly_brain.qualification.adjudication import (
 )
 from fly_brain.qualification.causality import BudgetViolation, CausalAudit
 from fly_brain.qualification.models import ParityCase
+from fly_brain.simulation.identifiers import TrialId
 
 pytestmark = pytest.mark.unit
 
@@ -19,7 +20,7 @@ pytestmark = pytest.mark.unit
 def test_explained_first_spike_cannot_waive_any_frozen_metric(
     failed_gate: str | None,
 ) -> None:
-    case = ParityCase('sugar', 1000, 1)
+    case = ParityCase('sugar', 1000, TrialId(1))
     audit = CausalAudit(step=1000, first_spike_step=999, first_spike_neurons=(41514,))
     checks = {name: name != FIRST_SPIKE_CHECK for name in CASE_CHECKS}
     gates = {name: name != failed_gate for name in METRIC_CHECKS}
@@ -36,12 +37,12 @@ def test_explained_first_spike_cannot_waive_any_frozen_metric(
 def test_a_review_for_another_case_or_first_cause_cannot_grant_acceptance(
     fault: str,
 ) -> None:
-    case = ParityCase('sugar', 1000, 1)
+    case = ParityCase('sugar', 1000, TrialId(1))
     audit = CausalAudit(step=1000, first_spike_step=999, first_spike_neurons=(41514,))
     reviewed = ParityCase(
         'p9' if fault == 'experiment' else 'sugar',
         10000 if fault == 'horizon' else 1000,
-        0 if fault == 'trial' else 1,
+        TrialId(0 if fault == 'trial' else 1),
     )
     step = 998 if fault == 'step' else 999
     neurons = () if fault == 'omitted' else (7,) if fault == 'neuron' else (41514,)
@@ -56,7 +57,7 @@ def test_a_review_for_another_case_or_first_cause_cannot_grant_acceptance(
 def test_scientific_review_cannot_hide_a_changed_or_failed_validity_check(
     fault: str,
 ) -> None:
-    case = ParityCase('sugar', 1000, 1)
+    case = ParityCase('sugar', 1000, TrialId(1))
     audit = CausalAudit(step=1000, first_spike_step=999, first_spike_neurons=(41514,))
     checks = {name: name != FIRST_SPIKE_CHECK for name in CASE_CHECKS}
     gates = dict.fromkeys(METRIC_CHECKS, True)
@@ -86,7 +87,7 @@ def test_scientific_review_cannot_hide_a_changed_or_failed_validity_check(
 def test_review_requires_its_own_complete_valid_case_and_causal_audit(
     fault: str,
 ) -> None:
-    case = ParityCase('sugar', 1000, 1)
+    case = ParityCase('sugar', 1000, TrialId(1))
     audit = CausalAudit(step=1000, first_spike_step=999, first_spike_neurons=(41514,))
     checks = {name: name != FIRST_SPIKE_CHECK for name in CASE_CHECKS}
     gates = dict.fromkeys(METRIC_CHECKS, True)
@@ -110,6 +111,6 @@ def test_review_requires_its_own_complete_valid_case_and_causal_audit(
     elif fault == 'empty':
         audit = replace(audit, first_spike_neurons=())
     else:
-        case = ParityCase('silent', 1000, 1)
+        case = ParityCase('silent', 1000, TrialId(1))
     with pytest.raises(ValueError, match='Review requires'):
         require_reviewable(case, checks, gates, audit)

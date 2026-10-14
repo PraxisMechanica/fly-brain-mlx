@@ -4,6 +4,8 @@ import zipfile
 from collections.abc import Mapping
 from pathlib import Path
 
+from fly_brain.simulation.identifiers import TrialId
+
 from ..adjudication import require_same_cause
 from ..causality import CausalAudit
 from ..models import ParityCase
@@ -75,7 +77,9 @@ def require_cause_binding(
     require_same_cause(
         case,
         audit,
-        ParityCase(identity['experiment'], identity['steps'], identity['trial']),
+        ParityCase(
+            identity['experiment'], identity['steps'], TrialId(identity['trial'])
+        ),
         identity['first_spike_step'],
         tuple(identity['first_spike_neurons']),
     )

@@ -4,6 +4,7 @@ import numpy as np
 from numpy.typing import NDArray
 
 from fly_brain.comparison.models import ParityMetrics, SpikeSteps
+from fly_brain.simulation.identifiers import TrialId
 from fly_brain.simulation.models import ExperimentName
 
 from .matrix import required_cases
@@ -15,11 +16,11 @@ from .spike_comparison_ports import TimeBinCounter, TrialMeasurer
 class GroupCoverage:
     experiment: ExperimentName
     steps: int
-    expected: tuple[int, ...]
-    included: tuple[int, ...]
-    missing: tuple[int, ...]
-    invalid: tuple[int, ...]
-    failed: tuple[int, ...]
+    expected: tuple[TrialId, ...]
+    included: tuple[TrialId, ...]
+    missing: tuple[TrialId, ...]
+    invalid: tuple[TrialId, ...]
+    failed: tuple[TrialId, ...]
 
 
 @dataclass(frozen=True)
@@ -34,7 +35,7 @@ class CaseRasters:
 class GroupDiagnostics:
     coverage: GroupCoverage
     metrics: dict[str, ParityMetrics] | None
-    trial_bin_counts: dict[int, dict[str, tuple[int, ...]]]
+    trial_bin_counts: dict[TrialId, dict[str, tuple[int, ...]]]
     pooled_bin_counts: dict[str, tuple[int, ...]] | None
 
 

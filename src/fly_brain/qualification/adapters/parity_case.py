@@ -20,7 +20,6 @@ from fly_brain.qualification.spike_comparison_ports import (
 )
 from fly_brain.qualification.stimulus_ports import StimulusGenerator
 from fly_brain.simulation.experiments import EXPERIMENTS
-from fly_brain.simulation.identifiers import TrialId
 from fly_brain.simulation.models import Connectome, InputPin
 from fly_brain.simulation.stimuli import neuron_indices
 from fly_brain.simulation.storage import persist_stimulus
@@ -64,7 +63,7 @@ def run(
         output,
         experiment,
         pin,
-        generate(connectome, experiment, case.steps, (TrialId(case.trial),), 20261004),
+        generate(connectome, experiment, case.steps, (case.trial,), 20261004),
     )
     silenced = neuron_indices(connectome, experiment.silenced_ids)
     with (output / 'environment.json').open('x') as artifact:

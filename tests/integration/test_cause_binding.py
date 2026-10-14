@@ -9,6 +9,7 @@ import pytest
 from fly_brain.qualification.adapters.case_binding import require_cause_binding
 from fly_brain.qualification.causality import CausalAudit
 from fly_brain.qualification.models import ParityCase
+from fly_brain.simulation.identifiers import TrialId
 
 pytestmark = pytest.mark.integration
 
@@ -91,7 +92,7 @@ def test_completed_cause_cannot_apply_to_changed_or_incomplete_evidence(
         'dispatch.json',
     ):
         (review / name).write_text('completed bound evidence ' + name)
-    case = ParityCase('sugar', 10000, 0)
+    case = ParityCase('sugar', 10000, TrialId(0))
     identity = {
         **asdict(case),
         'first_spike_step': 5719,

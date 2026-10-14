@@ -15,6 +15,7 @@ from fly_brain.infrastructure.seeded_random import uniforms
 from fly_brain.qualification.adapters.parity_case import run
 from fly_brain.qualification.models import ParityCase
 from fly_brain.simulation.experiments import P9_IDS
+from fly_brain.simulation.identifiers import TrialId
 from fly_brain.simulation.models import InputPin
 from fly_brain.simulation.module import build_stimulus
 from fly_brain.simulation.observation_module import build_observation_assembly
@@ -36,7 +37,7 @@ def test_driver_runs_prescribed_p9_protocol_without_accepting_a_small_connectome
         report = run(
             connectome,
             pin,
-            ParityCase('p9', 1000, 0),
+            ParityCase('p9', 1000, TrialId(0)),
             tmp_path / 'case',
             precision,
             generate=build_stimulus(uniforms),
@@ -49,7 +50,7 @@ def test_driver_runs_prescribed_p9_protocol_without_accepting_a_small_connectome
             run(
                 connectome,
                 pin,
-                ParityCase('p9', 1000, 0),
+                ParityCase('p9', 1000, TrialId(0)),
                 tmp_path / 'case',
                 precision,
                 generate=build_stimulus(uniforms),

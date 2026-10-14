@@ -5,6 +5,7 @@ from fly_brain.comparison.models import SpikeSteps
 from fly_brain.comparison.module import build_time_bin_counting, build_trial_measurement
 from fly_brain.qualification.matrix_diagnostics import CaseRasters, coverage, summarize
 from fly_brain.qualification.models import ParityCase
+from fly_brain.simulation.identifiers import TrialId
 
 pytestmark = pytest.mark.unit
 
@@ -20,7 +21,7 @@ def test_unobserved_matrix_retains_all_frozen_cases_without_claiming_silence() -
 def test_failed_invalid_and_missing_cases_remain_separate_within_partial_group() -> (
     None
 ):
-    cases = tuple(ParityCase('sugar', 1000, trial) for trial in range(3))
+    cases = tuple(ParityCase('sugar', 1000, TrialId(trial)) for trial in range(3))
     group = coverage(cases[:2], cases[2:], (cases[1],))[0]
     assert (group.included, group.invalid, group.failed, group.missing) == (
         (0, 1),
@@ -34,19 +35,19 @@ def test_failed_invalid_and_missing_cases_remain_separate_within_partial_group()
 def test_duplicate_case_identity_cannot_select_a_more_favorable_run(
     invalid: bool,
 ) -> None:
-    case = ParityCase('sugar', 1000, 0)
+    case = ParityCase('sugar', 1000, TrialId(0))
     with pytest.raises(ValueError, match='Duplicate'):
         coverage((case,) if invalid else (case, case), (case,) if invalid else ())
 
 
 def test_failed_case_requires_a_valid_included_raster() -> None:
     with pytest.raises(ValueError, match='included failures'):
-        coverage((), failed=(ParityCase('sugar', 1000, 0),))
+        coverage((), failed=(ParityCase('sugar', 1000, TrialId(0)),))
 
 
 def test_unprescribed_case_cannot_expand_the_frozen_matrix() -> None:
     with pytest.raises(ValueError, match='prescribed cases'):
-        coverage((ParityCase('silent', 1000, 1),))
+        coverage((ParityCase('silent', 1000, TrialId(1)),))
 
 
 def test_partial_group_reports_keep_failure_even_when_pooled_counts_cancel() -> None:
@@ -55,8 +56,8 @@ def test_partial_group_reports_keep_failure_even_when_pooled_counts_cancel() -> 
         np.asarray([1], dtype=np.int64), np.asarray([99], dtype=np.int64)
     )
     cases = (
-        CaseRasters(ParityCase('sugar', 1000, 1), empty, active, empty),
-        CaseRasters(ParityCase('sugar', 1000, 0), active, empty, active),
+        CaseRasters(ParityCase('sugar', 1000, TrialId(1)), empty, active, empty),
+        CaseRasters(ParityCase('sugar', 1000, TrialId(0)), active, empty, active),
     )
     group = summarize(
         cases,

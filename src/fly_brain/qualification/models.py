@@ -2,6 +2,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Protocol
 
+from fly_brain.simulation.identifiers import TrialId
 from fly_brain.simulation.models import ExperimentName
 
 
@@ -9,7 +10,7 @@ from fly_brain.simulation.models import ExperimentName
 class ParityCase:
     experiment: ExperimentName
     steps: int
-    trial: int
+    trial: TrialId
 
 
 @dataclass(frozen=True)

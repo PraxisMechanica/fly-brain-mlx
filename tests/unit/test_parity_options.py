@@ -9,6 +9,7 @@ from fly_brain.qualification.matrix import required_cases
 from fly_brain.qualification.models import ParityCase
 from fly_brain.qualification.ports import ParityCommand
 from fly_brain.qualification.schemas import ParityOptions
+from fly_brain.simulation.identifiers import TrialId
 
 pytestmark = pytest.mark.unit
 
@@ -95,5 +96,5 @@ def test_command_dispatches_validated_case_and_reports_its_exit_status(
             '4',
         ]
     )
-    assert calls == [(tmp_path, tmp_path / 'case', ParityCase('p9', 1000, 4))]
+    assert calls == [(tmp_path, tmp_path / 'case', ParityCase('p9', 1000, TrialId(4)))]
     assert code == (0 if accepted else 1)

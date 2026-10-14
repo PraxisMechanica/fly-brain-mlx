@@ -5,6 +5,7 @@ from pydantic import BaseModel, ConfigDict, Field, field_validator, model_valida
 from fly_brain.infrastructure.output_paths import require_retained_output
 from fly_brain.qualification.matrix import required_cases
 from fly_brain.qualification.models import ParityCase, QualificationRequest
+from fly_brain.simulation.identifiers import TrialId
 from fly_brain.simulation.models import ExperimentName
 
 
@@ -55,4 +56,6 @@ class ParityOptions(QualificationOptions):
         return self
 
     def to_case(self) -> ParityCase:
-        return ParityCase(self.experiment, round(self.duration_s * 10000), self.trial)
+        return ParityCase(
+            self.experiment, round(self.duration_s * 10000), TrialId(self.trial)
+        )

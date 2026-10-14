@@ -82,7 +82,7 @@ def test_each_engine_replays_fresh_state_with_complete_retained_evidence(
         )
     pin = InputPin('fixture', 'fixture', 6, len(case.connectome.sources))
     report = write(
-        ParityCase('sugar', 101, 0),
+        ParityCase('sugar', 101, TrialId(0)),
         case.connectome,
         pin,
         stimulus,
@@ -111,7 +111,7 @@ def test_each_engine_replays_fresh_state_with_complete_retained_evidence(
         assert raster['brian_steps'].tobytes() == raster['mlx_steps'].tobytes()
     with pytest.raises(FileExistsError):
         write(
-            ParityCase('sugar', 101, 0),
+            ParityCase('sugar', 101, TrialId(0)),
             case.connectome,
             pin,
             stimulus,

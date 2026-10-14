@@ -30,7 +30,7 @@ from fly_brain.qualification.module import (
     build_project_probe,
     build_qualification,
 )
-from fly_brain.simulation.identifiers import FlyWireIds64, NeuronRows32
+from fly_brain.simulation.identifiers import FlyWireIds64, NeuronRows32, TrialId
 from fly_brain.simulation.models import (
     Connectome,
     Experiment,
@@ -182,7 +182,11 @@ def test_input_audit_passes_the_loaded_identity_to_one_probe(
 def test_parity_loads_before_one_probe_and_preserves_the_summary(
     capsys: pytest.CaptureFixture[str], accepted: bool
 ) -> None:
-    project, output, case = Path('/project'), Path('/fresh'), ParityCase('p9', 1000, 4)
+    project, output, case = (
+        Path('/project'),
+        Path('/fresh'),
+        ParityCase('p9', 1000, TrialId(4)),
+    )
     connectome, pin = empty_connectome(), InputPin('csv', 'parquet', 2, 0)
     calls: list[object] = []
     report: dict[str, object] = {

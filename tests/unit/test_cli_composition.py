@@ -8,6 +8,7 @@ from fly_brain.comparison.ports import ComparisonCommand
 from fly_brain.qualification.models import ParityCase, QualificationRequest
 from fly_brain.qualification.ports import DiagnosticCommand
 from fly_brain.qualification.schemas import ParityOptions
+from fly_brain.simulation.identifiers import TrialId
 from fly_brain.simulation.models import SimulationRequest
 from fly_brain.simulation.ports import SimulationCommand
 
@@ -164,4 +165,4 @@ def test_cli_prepares_the_parity_case_before_composition(
         )
         == 0
     )
-    assert events == ['case', 'case', 'compose', ParityCase('sugar', 1000, 0)]
+    assert events == ['case', 'case', 'compose', ParityCase('sugar', 1000, TrialId(0))]

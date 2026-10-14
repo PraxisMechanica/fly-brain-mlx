@@ -1,3 +1,4 @@
+from fly_brain.simulation.identifiers import TrialId
 from fly_brain.simulation.models import ExperimentName
 
 from .models import ParityCase
@@ -13,7 +14,7 @@ def required_cases() -> tuple[ParityCase, ...]:
         ('silent', long[:2], 1),
     )
     return tuple(
-        ParityCase(experiment, steps, trial)
+        ParityCase(experiment, steps, TrialId(trial))
         for experiment, horizons, trials in configurations
         for steps in horizons
         for trial in range(trials)
