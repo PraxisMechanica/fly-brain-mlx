@@ -60,6 +60,9 @@
   }
 },
   "files": {
+    "tools/architecture/native_python_context.py":{"owner":"architecture","role":"tooling","declaration_count":1,"declaration_sha256":"ff05027a00af322630d02f26cbf7dd6c4351ce583872286b05944788e0760212","binding_sha256":"d375279a7bd4a5e82824fccbb8848d536d4af5d22da24c4903f8d0a64c116b21"},
+    "tools/architecture/native_python_context_records.py":{"owner":"architecture","role":"tooling","declaration_count":43,"declaration_sha256":"e8aeeb03be826830fc7ee8f8c5a3af6f56009d557ae2d8c2cbc0681676e84c8d","binding_sha256":"d5a951050984e606de450e427c45db2d2caa45e147fac06c63dd0e306affe5c1"},
+    "tests/quality/test_native_python_context.py":{"owner":"architecture","role":"test","declaration_count":18,"declaration_sha256":"d9d2f54303dee24b4e55a511011c81a826ac5333f1824737ee7391e6b427c9f6","binding_sha256":"9a501afc64e68ee7bcfc2c63b24e43f80970cd4bd61abdd3a2345de7693795fb"},
     "tests/unit/test_metric_identifier_contracts.py":{"owner":"comparison","role":"test","declaration_count":6,"declaration_sha256":"5a31ce74cf33526295943e9e61580d16ff406d84f4638cf43d3cc6e19cc27d27","binding_sha256":"3ca6f02e3e54c7d34d6040318e21a2cd835cdbf1f2879e69c414555045794906"},
     "tests/support/reference_baseline.py":{"owner":"system_tests","role":"system_test","declaration_count":3,"declaration_sha256":"73a6f16e380e3e147bceba94224ad715fab768aca11783ca0c99e8c30ee72c8a","binding_sha256":"1021578e615993b582eacab9688fc44d6810afedb24c7e88d2dadd29ca830fb2"},
     "tests/qualification/test_reference_tensor_preservation.py":{"owner":"qualification","role":"test","declaration_count":4,"declaration_sha256":"717870201520720856e036a8097fefe661b3d5e2799728370be6162b63f62334","binding_sha256":"2a894556f9c0c0eb00dc74aa518d648e779c2cf2c54c52ba570cb7a7b68eda80"},
