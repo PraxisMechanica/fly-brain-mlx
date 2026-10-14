@@ -428,7 +428,9 @@
     "tests/quality/test_fan_in_mapping_boundary.py": {"owner":"architecture","role":"test","declaration_count":11,"declaration_sha256":"f085a5cf8bcb327f1d7597994a337bc1f3f4d0863990cf1996334522cfdb3d99","binding_sha256":"859a5808680812cae08c06b79e7cf5593f3cccef21cde61476a5084dfd914cf7"},
     "tests/quality/test_native_python_binding.py": {"owner":"architecture","role":"test","declaration_count":3,"declaration_sha256":"f55123f4b7c525d3b4f4ffed5917fde320fe0e119bcb51e092cac82a0517b1d0","binding_sha256":"d33e66cc5c25be01fbf54ed04c8dfeb6a2ad9b883f59e0adec4e881e8d645589"},
     "tests/unit/test_torch_target_identifiers.py": {"owner":"qualification","role":"test","declaration_count":14,"declaration_sha256":"ab3670c16d5c5e79ad38f815f08fbb971de98535f4882627963e8d08b4956d67","binding_sha256":"7b0fa11924cf01fd63d1a305b81cac08697ace0d2c21b284bd2aa7dc1cace9ca"},
-    "tests/quality/test_native_python_declarations.py": {"owner":"architecture","role":"test","declaration_count":12,"declaration_sha256":"1e4d655720a0761943c7b1394fe8ce1b94bf161e57b28af8602732f174958e8d","binding_sha256":"59ea1182fa0b3bf94618a2af2dbeabd0388e7455d1262a828e2649b24a3bcce0"}
+    "tests/quality/test_native_python_declarations.py": {"owner":"architecture","role":"test","declaration_count":12,"declaration_sha256":"1e4d655720a0761943c7b1394fe8ce1b94bf161e57b28af8602732f174958e8d","binding_sha256":"59ea1182fa0b3bf94618a2af2dbeabd0388e7455d1262a828e2649b24a3bcce0"},
+    "tests/quality/test_numerical_value_contracts.py": {"owner":"simulation","role":"test","declaration_count":16,"declaration_sha256":"dbd6659a1f6c43d3aec283b394eadc03099b277dc34869732998925226184969","binding_sha256":"9ba5a5d7f36b0d7f78835ad5e915a66b409474677333a42fc1b8d54b39946d8b"},
+    "tests/support/numerical_value_contracts.py": {"owner":"simulation","role":"test","declaration_count":37,"declaration_sha256":"acf34700b23a4956577988c472adf1b800397e263e7c3237d256c1ced2dcfde6","binding_sha256":"5bfac368af0c4be4e4b25db86a4ceea52664afc57340f03b155f7d4848539cf8"}
   },
   "resources": {
   "simulation_run": {
