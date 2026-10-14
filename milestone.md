@@ -66,11 +66,23 @@ in 4.05 seconds. Other unchanged cohorts were not replayed. Python deletion or
 rename impact that cannot be proved fails COV002. Complete architecture coverage
 and the six recorded findings remain unresolved; this is workflow qualification.
 
-These four commits are local at this checkpoint. Latest delivered parent is
-`eb6fe8fa2e11236a276f33bf14cd57d3603b175c`, whose exact hosted run `38517545563`
-succeeded. Push and exact-revision hosted verification remain before this batch
-can be described as remotely delivered. Preserve the application and pending
-worker components while performing that delivery.
+The first five focused commits are pushed at `f6763e2`. Inspection of hosted
+run `38536184801` found a false zero-file submitted scope; its success is not full
+range acceptance. Corrective commit `b42714d` replaces positional revision
+arguments with native range traversal and explicit separate merge-parent diffs.
+Six controls fail against the old code; 12 affected controls pass after repair,
+including five-commit reverts, merge-only paths, hostile merge configuration,
+NUL-safe names and empty ranges. Strict checks and normal commit hooks passed.
+Native metrics improved mean 15.35 to 15.31 and health 39.80 to 39.88; maximum
+96 is unchanged. Existing assertions, metadata and metric predicates remain.
+
+The corrected complete `eb6fe8f..b42714d` delivery check selected 37 changed
+inputs and 89 affected Python files. Inputs, formatting/lint, strict typing,
+90 import module/contract checks, ownership of 27 selected sources and every
+commit/merge-parent metric comparison all passed in 12.85 seconds. Regression
+tests were not replayed. The two worker holds are released against this checked
+parent. Remote delivery and an actually scoped hosted result for the correction
+are still pending; the earlier zero-file result remains explicitly incomplete.
 
 The parent owns shared policy, canonical commands/configuration, retention,
 documentation and serial integration. Recovery is complete. The same worker
