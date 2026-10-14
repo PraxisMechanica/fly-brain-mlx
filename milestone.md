@@ -7,10 +7,28 @@ and commands in the [developer workflow](docs/agent/development.md).
 
 ## Current task
 
-Finish the user's historical-record cleanup and default-deletion retention
-policy, then commit and push verified changes to `origin/main`. Decision
-confidence: 99% at `5f7b0d7df4df7cfae077986c98619d5eb0f6973e`. This task does not
-resume numerical development or the remaining architecture implementation.
+Complete the rearchitecture/refactor and prepare a verified handoff to the prior
+implementation agent. The user resumes this scope on 2026-10-13 after the
+historical-record cleanup was delivered at
+`79f62adee10b092fcaaaed0ea4043da3f5b9c415`. Decision confidence: 99%.
+
+Completion requires the remaining architecture and dependency repairs, complete
+applicable 37-rule enforcement without weakened predicates, current human/agent
+documentation, meaningful preservation checks, small checked commits delivered
+to `origin/main`, a clean tree and a concise ordered implementation handoff.
+New simulator features, numerical remedies, the full scientific matrix and
+performance work remain outside this agent's scope. Scientific runs are required
+only when needed to verify a refactor. Full coverage and findings cannot receive
+PASS while incomplete; configured component checks are separate evidence.
+
+The parent owns shared policy, canonical commands/configuration, retention,
+documentation and serial integration. The same worker owners first recover their
+unfinished work: `architecture_symbols` owns native structured types/source
+inventory; `architecture_ownership` owns the exact neutral import boundary;
+`composition_refactor` owns coordinated simulation identifier propagation.
+Temporary candidate clones have lost their source and Git metadata; recovery must
+use durable source evidence rather than assume prior candidates survive. Workers
+commit verified components before handoff, and retain disjoint source scopes.
 
 Generated outputs belong in ignored `logs/` or `executions/`. Successful commit
 and push hooks delete those folders and legacy `.quality-reports/` outputs
@@ -37,14 +55,41 @@ process was signalled.
 
 Success requires:
 
-- No historical archive directories or generated records remain in the current
-  tracked tree; current test fixtures have explicit retention reasons.
-- Default-deletion and specific-retention tests pass, including failed-hook,
-  malformed-policy, path/symlink and indexed-input controls.
-- Current source ownership reconciles the five actual source roots without
-  exclusions or retired-file mappings. Scientific gates and known debt remain.
-- Relevant application and real Metal/reference tests pass; required commit,
-  push and hosted quality checks pass. Leave a clean checkout after delivery.
+- Complete applicable 37-rule analysis and rejection fixtures, required gate
+  integration, and resolution of the authorized architecture findings. Missing
+  capabilities remain an analysis failure.
+- Preserve pinned inputs, four frozen oracles, the seven independent regression
+  fixtures, scientific predicates, numerical behavior and output contracts.
+- Keep human usage in `README.md` and current agent contracts in the indexed
+  agent documents, with one owner per fact and valid destinations.
+- Integrate committed worker components serially, then pass meaningful behavior
+  and native preservation checks plus commit, push and exact-revision hosted
+  checks. Deliver small coherent commits to `origin/main`.
+- Finish all refactor assignments, leave a clean tree with no expired output
+  exception, and hand off a concise ordered implementation plan with verified
+  limits. Full scientific implementation remains with the prior agent.
+
+## Resumed work verification
+
+The standalone cleanup guard fix is committed at
+`3c6865f29cb81f1bb471e24a3452c2e178aaa5d5`. Git environment isolation is now
+shared by fixture commands and cleanup, so an inherited hook index cannot
+replace the requested checkout's index. Two foreign-index negative fixtures
+failed before the fix; the close compliant case passed. All 52 focused cleanup
+and hook cases passed after the fix. Required normal commit checks and cleanup
+passed without changing predicates or thresholds. Generated diagnostics expired
+at that successful commit; the four frozen source hashes remain exact.
+
+The native structured-type and exact import-boundary workers have resolved their
+current-base metric failures with responsibility and duplication repairs. The
+identifier worker is separating actual Connectome tests from generic identifier
+foundation tests and reusing existing source-fault controls. Worker commits and
+parent integration remain pending; focused worker results do not establish
+complete architecture enforcement.
+
+The parent is repairing qualification's private comparison calls with narrow
+injected scoring, coordinate, clock-conversion and diagnostic contracts. The
+comparison calculations and existing acceptance predicates remain unchanged.
 
 ## Current scientific scope
 
@@ -74,7 +119,7 @@ checks are useful components, not a full structural or scientific approval.
 Current coverage is in [quality-coverage.md](docs/agent/quality-coverage.md) and
 classifications in [architecture-ownership.md](docs/agent/architecture-ownership.md).
 
-## Cleanup verification
+## Completed cleanup verification
 
 At the `5f7b0d7` base, 157 targeted retention, hook, indexed-input and ownership
 tests passed; strict typing returned zero errors. All 745 application unit and
@@ -96,7 +141,7 @@ checkout at `5f7b0d7`; mandatory commit, push and hosted checks must cover the
 delivery revision. Fresh verification outputs have finished their consumers and
 have no retention exception; the successful delivery hooks delete them.
 
-Keep existing independent work and other managed worktrees intact. This checkout
-is detached because `main` is already checked out elsewhere; deliver through
-`origin HEAD:main` without force. Other threads' read-only assessments do not
-change this cleanup's scope or grant permission to overwrite their work.
+The historical-record cleanup was delivered at `79f62adee10b092fcaaaed0ea4043da3f5b9c415`.
+The refactor coordinator now works on `main` in its managed checkout and preserves
+independent work in the original checkout and other threads. Worker clones use
+separate indexes; the coordinator alone pushes integrated commits to `origin/main`.
