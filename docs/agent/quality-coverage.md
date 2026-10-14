@@ -7,7 +7,7 @@ owns the active work order and verification status.
 ## Current architecture result
 
 **ANALYSIS FAILED — COV002: complete structural enforcement is not implemented.**
-The strict catalog contains 37 rules. Native checks and five import contracts
+The strict catalog contains 37 rules. Native checks and six import contracts
 cannot prove them all. Recorded debt is described in
 [source ownership](architecture-ownership.md).
 No incomplete rule is treated as clean or inapplicable.
@@ -16,26 +16,37 @@ No incomplete rule is treated as clean or inapplicable.
 | --- | --- |
 | OWN001 | The placement predicate checks domain bindings against exact owner roots and its explicitly reviewed outside role over independently validated version 2 inputs. Missing native identities, sources, hashes or relevant scope fail COV002. Whole live contexts and required gate integration remain missing. |
 | OWN002–OWN006 | The reviewed registry/loader reconcile exact Python files, named declarations, binding sets and frozen provenance. Complete resource, binding/type/effect classification and role predicates remain missing. |
-| DEP001 | Import Linter checks five configured domain/framework/role boundaries, including neutral observation ports and active session consumers. Fixtures cover aliases, type-only imports, re-exports and transitive paths. Other role boundaries and same-module interactions are not covered. |
+| DEP001 | Import Linter checks six configured domain/framework/role boundaries, including neutral observation ports and active session consumers. Fixtures cover aliases, type-only imports, re-exports and transitive paths. Other role boundaries and same-module interactions are not covered. |
 | DEP002–DEP004 | Some forbidden paths fail existing contracts. Complete logical owner cycles, public-contract exports and resolved foreign symbol/type checks are missing. |
 | DI001–DI004 | Strict typing and bounded native facts expose declared/instantiated signatures and selected explicit calls. Complete collaborator/slot origins, hidden construction, ambient dependencies and lifecycle analysis are missing. |
 | ROLE001–ROLE007 | Complete resolved call/control-flow, role, persistence and neutral-contract checks are missing. |
 | STATE001–STATE003 | Bounded native call witnesses check seeded acquisition boundaries. Complete effect summaries and ownership/alias analysis are missing. |
 | ISP001, OCP001, LSP001, VALUE001, COMP001, ERR001 | Type checking covers native structural compatibility. Complete consumer-capability, dispatch, unsupported implementation, identifier conversion, inheritance and failure-flow predicates are missing. |
-| TYPE001 | Strict Pyright runs across configured application, tests and tools, using the recorded third-party typing limits. This does not resolve all architectural call/effect identities. |
+| TYPE001 | Strict Pyright checks changed sources and affected dependents while loading their configured type context, using the recorded third-party typing limits. This does not resolve all architectural call/effect identities. |
 | CODE001, STYLE001 | Ruff detects configured unused bindings/syntax failures and checks formatting. Named-declaration/binding reconciliation and frozen provenance guards are implemented. Complete contract/stub and semantic catalog coverage remain missing. |
 | COV001 | Hook mode rejects unindexed Python/check inputs, including canonical policy and metric prerequisites. The loader rejects missing/changed file/declaration/binding inputs and frozen provenance. Source fixtures prove repair and weakening; complete semantic bindings, source languages, roles/resources and build variants still require coverage. |
 | COV002 | Missing capabilities raise analysis failures in the bounded analyzer components. Complete required executable coverage/error analysis remains to be implemented and integrated. |
-| COV003 | Both installed hooks call `just check` with full scans, no filename list and unconditional execution. Real fixtures exercise commit/push rejection. Hosted checks use the same command; required merge protection is not configured. |
-| COV004 | Native import and metric fixtures exercise rejection and repair; hook probes exercise child-error propagation and staged-source handling. Transitive/always-run weakening is covered. Other predicates need their own negative, repaired, close, error and weakening cases. |
+| COV003 | Commit, push and hosted checks use explicit stage modes. Changed sources and affected dependents receive static checks; component owners execute meaningful regressions once before commit. Global inventory and metric aggregates remain accounted for. Required merge protection is not configured. |
+| COV004 | Native import and metric fixtures exercise rejection and repair; hook probes exercise child-error propagation and staged-source handling. Transitive paths, source selection and canonical-input weakening are covered. Other predicates need their own negative, repaired, close, error and weakening cases. |
 
 ## Working mechanisms
 
-The [shared commands](../../justfile) run Ruff formatting/lint, strict Pyright,
-five Import Linter contracts, source-only quality tests, and staged/commit metric
-regression checks. [Developer workflow](development.md) owns installation,
-diagnostic output, and retention. This quality gate does not execute the complete
-application or scientific suite.
+The [shared commands](../../justfile) select changed inputs and affected
+dependents. Ruff checks changed files, strict Pyright checks affected Python
+sources, and native import contracts evaluate affected source modules. Native
+bridge checks load imported type context; complete reverse-consumer coverage
+for those JavaScript sources remains unproved. Component owners run meaningful
+regressions once before commit and record source/dependency identity. Hooks and
+hosted checks do not replay those tests. Unsupported Python deletion/rename
+impact fails COV002, as do native removals without a proved affected scope.
+
+Commit metrics check the index. Push/hosted metrics check every submitted commit
+and merge parent, with native blob calculations reused within the command.
+No persistent test or metric verdict cache is used. The native import-fact cache
+is separate from a verdict and uses the verified source-tree identity; manual
+or unindexed inputs use a fresh graph. [Developer workflow](development.md) owns
+installation, diagnostics and exact output retention. The required gate does
+not execute the complete application or scientific suite.
 
 The [ownership registry and loader](architecture-ownership.md) reject invalid
 metadata, changed declarations/bindings, missing mappings, broken resource/export/

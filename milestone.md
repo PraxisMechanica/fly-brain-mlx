@@ -1,6 +1,6 @@
 # MLX fly-brain milestones
 
-Audience: agents. Updated 2026-10-13 (America/Los_Angeles).
+Audience: agents. Updated 2026-10-14 (America/Los_Angeles).
 This is the current work order. Project policy is in [AGENTS.md](AGENTS.md),
 scientific requirements in the [numerical contract](docs/agent/numerical-contract.md),
 and commands in the [developer workflow](docs/agent/development.md).
@@ -20,6 +20,57 @@ New simulator features, numerical remedies, the full scientific matrix and
 performance work remain outside this agent's scope. Scientific runs are required
 only when needed to verify a refactor. Full coverage and findings cannot receive
 PASS while incomplete; configured component checks are separate evidence.
+
+The latest user amendment on 2026-10-13 prioritizes eliminating duplicate test
+runs. Static architecture analysis must run only for changed source and affected
+dependencies; reuse unchanged verification rather than repeating a full scan or
+the complete checker regression suite at each worker, commit, push and hosted
+boundary. This supersedes the previous unconditional full-snapshot workflow.
+The checked workflow now uses that model. Preserve exact predicates, complete
+source discovery, changed-input invalidation and honest coverage; incremental
+results do not establish missing 37-rule mechanisms. Component owners retain
+source/dependency evidence and run meaningful regressions once; repeat only
+changed or failed controls. Automatic regression scheduling and a persistent
+metric verdict cache are outside the minimum solution.
+
+The user also requires incremental coherent commits. Current source checkpoint
+`83d7252` contains four focused local commits:
+
+- `fd55d95`: scoped ownership review, with metadata parsing separated from source
+  review. The existing controls and affected relocation/weakening controls passed;
+  metrics passed at 348 files, mean 15.36, maximum 96 and health 39.65.
+- `86038e0`: canonical parity stimulus dependency contract, two files. Its live
+  import check, strict typing, Ruff, ownership and native metrics passed.
+- `c77c904`: changed-input selection and canonical native graph context. All 27
+  cases remain; 25 affected cases passed, with two unchanged previously qualified
+  controls deliberately not repeated. Strict typing/Ruff passed. Metrics kept
+  mean 15.36 and maximum 96 while health improved 39.65 to 39.73.
+- `83d7252`: installed commit/push hooks and hosted stage wiring, changed-source
+  consistency checks, scoped native import evaluation and independent input/
+  metric failure propagation. The normal mandatory commit hook and default
+  cleanup passed. The hook did not execute pytest.
+
+The first selector and optional disk-cache candidates failed native metrics and
+were not committed. A completed fresh Astra review identified genuine source/
+fixture simplification; the accepted selector retains every guard and case. No
+threshold, metric provenance, suppression or predicate was weakened. The second
+follow-up review could not start because the selected model was at capacity;
+no substitute model or extra review acceptance is implied.
+
+Parent integration controls cover doc-only skipping, affected dependencies,
+staged debt hidden by an unstaged repair, actual push rejection, source-context
+invalidation, native removals, child failures and cleanup safety. Newly affected
+API/hook cases passed (24 cases in 2.97 seconds); the two added boundary context
+cases passed in 0.23 seconds and four independent input/metric hook cases passed
+in 4.05 seconds. Other unchanged cohorts were not replayed. Python deletion or
+rename impact that cannot be proved fails COV002. Complete architecture coverage
+and the six recorded findings remain unresolved; this is workflow qualification.
+
+These four commits are local at this checkpoint. Latest delivered parent is
+`eb6fe8fa2e11236a276f33bf14cd57d3603b175c`, whose exact hosted run `38517545563`
+succeeded. Push and exact-revision hosted verification remain before this batch
+can be described as remotely delivered. Preserve the application and pending
+worker components while performing that delivery.
 
 The parent owns shared policy, canonical commands/configuration, retention,
 documentation and serial integration. Recovery is complete. The same worker
@@ -42,8 +93,8 @@ recorded regression fixtures remain as current test data under
 current consumer and release condition. All seven bytes/hash identities were
 preserved during relocation; production/reference arithmetic is unchanged.
 The four active reference/oracle source files remain byte exact. Pinned FlyWire
-input datasets and licences remain intact. No generated-output exception is
-currently registered.
+input datasets and licences remain intact. The native import-fact cache has an active operational exception in the
+retention manifest; no scientific run output is retained.
 
 Success requires:
 
@@ -169,7 +220,7 @@ native equivalence; retain no archive simply in anticipation of possible reuse.
 ## Current architecture scope
 
 Complete 37-rule structural enforcement remains **ANALYSIS FAILED (COV002)**.
-Six recorded architecture/identifier findings remain. Strict typing, five
+Six recorded architecture/identifier findings remain. Strict typing, six
 import contracts, source ownership reconciliation and qualified native metric
 checks are useful components, not a full structural or scientific approval.
 Current coverage is in [quality-coverage.md](docs/agent/quality-coverage.md) and

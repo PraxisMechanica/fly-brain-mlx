@@ -13,14 +13,24 @@ Python dependencies use uv. Metric tooling uses Node.js 22 or later and pnpm
 
 ```sh
 just bootstrap
-just check
+just check commit
 ```
 
 `just bootstrap` installs locked development/qualification dependencies, validates
-pre-commit configuration, and installs commit/push hooks. `just check` runs
-formatting, lint, strict typing, import boundaries, source-only quality tests,
-and staged/commit metric regression checks. It does not run the complete
-application or scientific suite. Current executable coverage and limits are in
+pre-commit configuration, and installs commit/push hooks. `just check commit`
+selects changed indexed inputs and affected dependents for formatting, lint,
+strict typing, import boundaries, reviewed ownership and metric regression. It
+leaves regression execution with the component owner, who runs meaningful
+affected tests once before committing. `just check push` and `just check ci`
+validate the submitted source range without replaying those tests. Current native
+imports and every submitted changed path select affected dependents. Python
+deletions and renames with unproved impact fail COV002; they do not receive an
+empty pass. Changed compiler/tool/configuration inputs invalidate their scope.
+Import/type tools load supporting context without re-evaluating every source.
+Metrics preserve complete inventory arithmetic and every commit/merge-parent
+comparison using native calculations within the command. No persistent test or
+quality verdict cache is used. This gate does not run the complete application
+or scientific suite. Current executable coverage and limits are in
 [quality-coverage.md](quality-coverage.md).
 The [metric provenance](../../tools/code-quality/provenance.json) binds the
 vendored standalone package to its source plus the exact qualified Python
@@ -43,15 +53,15 @@ Quality checks print short success summaries. Failures show bounded output and
 retain a diagnostic file under `logs/quality`, capped at 64 KiB of text with
 explicit omissions. Metric summaries include complete finding counts and at most
 twenty examples, with no repeated file inventories. Hosted checks print bounded
-diagnostics without uploading report artifacts. A manual `just check` keeps its
-diagnostics locally.
+diagnostics without uploading report artifacts. `just check manual` keeps its diagnostics locally.
+`just quality-tests` remains an explicit manual regression command.
 Diagnostic commands show at most twenty summary fields and ten examples per
 failure category, scan every actual flag, and keep full scientific reports in
 the execution bundle. The console view does not grant scientific acceptance.
 Read diagnostic files in targeted chunks rather than loading entire run bundles
 into the agent context.
 
-Hosted execution uses the same command when repository variable
+Hosted execution uses `just check ci` when repository variable
 `QUALITY_CI_TEMP_DB_CACHE_APPROVED` is true. The project authorization in
 `AGENTS.md` covers the hosted pre-commit SQLite cache and its automatic runner
 teardown. `milestone.md` records current verification status. Local fixtures
