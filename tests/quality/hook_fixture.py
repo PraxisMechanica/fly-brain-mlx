@@ -35,6 +35,11 @@ def hook_repository(root: Path, source: str = GOOD) -> tuple[Path, dict[str, str
     retention = repo / 'tools/code_quality/retention.json'
     retention.parent.mkdir(parents=True)
     shutil.copyfile(PROJECT / 'tools/code_quality/retention.json', retention)
+    boundary_adapter = repo / 'tools/architecture/neutral_import_contract.py'
+    boundary_adapter.parent.mkdir(parents=True)
+    shutil.copyfile(
+        PROJECT / 'tools/architecture/neutral_import_contract.py', boundary_adapter
+    )
     tools = repo / 'executables'
     tools.mkdir()
     (repo / '.gitignore').write_text(
