@@ -7,7 +7,7 @@ import pytest
 from tests.quality.support import PROJECT, run
 from tools.architecture.compiler import Compiler, JsonValue, object_value
 
-pytestmark = pytest.mark.unit
+pytestmark = [pytest.mark.unit, pytest.mark.checker]
 
 
 def typed(root: Path, source: str) -> list[JsonValue]:

@@ -52,6 +52,7 @@ def location(entry: JsonValue) -> tuple[JsonValue, JsonValue, JsonValue]:
     return value['rule'], value['file'], start['line']
 
 
+@pytest.mark.checker
 @pytest.mark.parametrize('wrong', ('int', 'ids.NeuronRow', 'ids.FlyWireNeuronId'))
 def test_actual_batch_label_fields_and_maps_reject_plain_and_foreign_spaces(
     tmp_path: Path, wrong: str
@@ -66,10 +67,12 @@ def test_actual_batch_label_fields_and_maps_reject_plain_and_foreign_spaces(
     )
 
 
+@pytest.mark.checker
 def test_trial_labels_repair_all_six_actual_boundaries(tmp_path: Path) -> None:
     assert typed(tmp_path, consumer('ids.TrialId')) == []
 
 
+@pytest.mark.checker
 @pytest.mark.parametrize(
     'module,import_line,alias,remaining',
     (

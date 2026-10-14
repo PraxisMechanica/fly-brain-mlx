@@ -67,6 +67,7 @@ def test_raster_specializations_keep_record_fields_and_exact_borrowed_arrays(
     )
 
 
+@pytest.mark.checker
 @pytest.mark.parametrize(
     'bad,good',
     (
@@ -135,6 +136,7 @@ def test_actual_raster_consumers_reject_plain_foreign_and_mixed_spaces(
     )
 
 
+@pytest.mark.checker
 def test_raster_alias_type_only_reexport_and_capture_preserve_space(
     tmp_path: Path,
 ) -> None:
@@ -170,6 +172,7 @@ def test_raster_alias_type_only_reexport_and_capture_preserve_space(
     )
 
 
+@pytest.mark.checker
 def test_erasing_raster_specializations_restores_wrong_space_forwarding(
     tmp_path: Path,
 ) -> None:
@@ -192,6 +195,7 @@ def test_erasing_raster_specializations_restores_wrong_space_forwarding(
     assert (weakened != original, typed(tmp_path, source)) == (True, [])
 
 
+@pytest.mark.checker
 def test_pinned_native_projector_retains_actual_raster_constraints_and_arguments(
     tmp_path: Path,
 ) -> None:

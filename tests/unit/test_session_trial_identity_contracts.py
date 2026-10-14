@@ -18,6 +18,7 @@ from tools.architecture.compiler import object_value
 pytestmark = pytest.mark.unit
 
 
+@pytest.mark.checker
 @pytest.mark.parametrize(
     'model,expression',
     (
@@ -67,6 +68,7 @@ def test_actual_session_values_reject_neuron_rows_as_requested_trial_labels(
     assert typed(tmp_path, source.replace('NeuronRow(2)', 'TrialId(2)')) == []
 
 
+@pytest.mark.checker
 @pytest.mark.parametrize(
     'module',
     ('fly_brain.simulation.observation_ports', 'fly_brain.qualification.ports'),

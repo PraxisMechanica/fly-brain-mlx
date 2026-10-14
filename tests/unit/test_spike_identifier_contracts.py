@@ -70,6 +70,7 @@ def test_event_and_file_contracts_preserve_exact_borrowed_array_values(
     )
 
 
+@pytest.mark.checker
 @pytest.mark.parametrize(
     'record,bad,good',
     (
@@ -139,6 +140,7 @@ def test_actual_record_forwarding_rejects_wrong_spaces_and_raw_arrays(
     assert typed(tmp_path, source.replace(bad, good)) == []
 
 
+@pytest.mark.checker
 def test_erasing_actual_event_trial_brand_loses_same_dtype_space_rejection(
     tmp_path: Path,
 ) -> None:

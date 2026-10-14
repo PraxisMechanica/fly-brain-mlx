@@ -16,6 +16,7 @@ from tools.architecture.compiler import object_value
 pytestmark = pytest.mark.unit
 
 
+@pytest.mark.checker
 @pytest.mark.parametrize('wrong', ('int', 'NeuronRow', 'FlyWireNeuronId'))
 def test_case_constructor_rejects_equal_values_in_wrong_trial_space(
     tmp_path: Path, wrong: str
@@ -45,6 +46,7 @@ def test_case_constructor_rejects_equal_values_in_wrong_trial_space(
     ) == (1, 'reportArgumentType', str(tmp_path / 'consumer.py'), 3, [])
 
 
+@pytest.mark.checker
 def test_captured_reexported_case_constructor_retains_the_trial_contract(
     tmp_path: Path,
 ) -> None:
@@ -74,6 +76,7 @@ def test_captured_reexported_case_constructor_retains_the_trial_contract(
     ) == (1, 'reportArgumentType', 4, [])
 
 
+@pytest.mark.checker
 def test_erasing_actual_case_trial_annotation_loses_primitive_rejection(
     tmp_path: Path,
 ) -> None:
@@ -148,6 +151,7 @@ def test_validated_transport_keeps_integer_trial_and_establishes_requested_label
     )
 
 
+@pytest.mark.checker
 def test_diagnostic_coverage_preserves_case_trial_contract_and_primitive_steps(
     tmp_path: Path,
 ) -> None:

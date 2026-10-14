@@ -169,6 +169,7 @@ def test_reader_order_identity_and_failure_before_evaluation(
     )
 
 
+@pytest.mark.checker
 def test_required_reader_omission_repair_and_independent_weakening(
     tmp_path: Path,
 ) -> None:
@@ -195,6 +196,7 @@ def test_required_reader_omission_repair_and_independent_weakening(
     check_types(tmp_path, NATIVE.format(keyword=''), 0)
 
 
+@pytest.mark.checker
 @pytest.mark.parametrize(
     'reader,status,diagnostic',
     (('wrong', 1, 'reportArgumentType'), ('close', 0, '0 errors')),

@@ -16,6 +16,7 @@ from tools.architecture.compiler import object_value
 pytestmark = pytest.mark.unit
 
 
+@pytest.mark.checker
 @pytest.mark.parametrize(
     'extra_import,parameter,expression,wrong,owned',
     (
@@ -113,6 +114,7 @@ def test_actual_stimulus_contract_rejects_equal_values_in_wrong_identity_space(
     assert typed(tmp_path, source.replace(f'{wrong}(2)', f'{owned}(2)')) == []
 
 
+@pytest.mark.checker
 def test_aliased_reexported_lookup_keeps_flywire_input_and_neuron_row_output(
     tmp_path: Path,
 ) -> None:
@@ -135,6 +137,7 @@ def test_aliased_reexported_lookup_keeps_flywire_input_and_neuron_row_output(
     )
 
 
+@pytest.mark.checker
 def test_erasing_actual_stimulus_target_contract_loses_wrong_space_rejection(
     tmp_path: Path,
 ) -> None:

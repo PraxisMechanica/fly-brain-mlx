@@ -45,6 +45,7 @@ def state(
     )
 
 
+@pytest.mark.checker
 @pytest.mark.parametrize('space', ('int', 'ids.FlyWireNeuronId', 'ids.TrialId'))
 def test_each_actual_selector_rejects_plain_flywire_and_trial_tuples(
     tmp_path: Path, space: str
@@ -59,10 +60,12 @@ def test_each_actual_selector_rejects_plain_flywire_and_trial_tuples(
     )
 
 
+@pytest.mark.checker
 def test_neuron_rows_repair_all_four_constructor_fields(tmp_path: Path) -> None:
     assert typed(tmp_path, consumer('ids.NeuronRow')) == []
 
 
+@pytest.mark.checker
 @pytest.mark.parametrize(
     'field,line',
     (('sources', 3), ('destinations', 4), ('targets', 5), ('silenced', 6)),

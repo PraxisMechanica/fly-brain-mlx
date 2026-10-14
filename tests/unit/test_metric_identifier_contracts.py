@@ -108,6 +108,7 @@ def test_metrics_preserve_owned_scalar_and_container_identity() -> None:
     ) == (True,) * 9
 
 
+@pytest.mark.checker
 @pytest.mark.parametrize(
     'bad,good',
     (
@@ -149,6 +150,7 @@ def test_actual_metrics_constructor_rejects_plain_foreign_and_swapped_keys(
     assert typed(tmp_path, source.replace(bad, good)) == []
 
 
+@pytest.mark.checker
 def test_erasing_metrics_key_contracts_loses_actual_foreign_space_rejection(
     tmp_path: Path,
 ) -> None:

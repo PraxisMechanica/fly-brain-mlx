@@ -137,6 +137,7 @@ def test_owned_assembly_performs_no_storage_or_mapping_operation(
     assert callable(build_host_input_probe(forbidden, forbidden, forbidden, forbidden))
 
 
+@pytest.mark.checker
 @pytest.mark.parametrize('source', SOURCES)
 def test_actual_storage_contract_rejects_direct_and_transitive_paths_then_repairs(
     tmp_path: Path,
@@ -173,6 +174,7 @@ def test_actual_storage_contract_rejects_direct_and_transitive_paths_then_repair
     assert lint(tmp_path, config)[0] == 0
 
 
+@pytest.mark.checker
 def test_required_storage_port_rejects_omission_and_wrong_shape_then_repairs(
     tmp_path: Path,
 ) -> None:

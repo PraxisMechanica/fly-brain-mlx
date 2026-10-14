@@ -75,6 +75,7 @@ def record(
     )
 
 
+@pytest.mark.checker
 @pytest.mark.parametrize('space', ('int', 'ids.FlyWireNeuronId', 'ids.TrialId'))
 def test_each_torch_target_contract_rejects_plain_flywire_and_trial_rows(
     tmp_path: Path, space: str
@@ -89,10 +90,12 @@ def test_each_torch_target_contract_rejects_plain_flywire_and_trial_rows(
     )
 
 
+@pytest.mark.checker
 def test_owned_rows_repair_all_three_actual_calls(tmp_path: Path) -> None:
     assert typed(tmp_path, consumer('ids.NeuronRow')) == []
 
 
+@pytest.mark.checker
 @pytest.mark.parametrize(
     'module,function,line,setup,observer',
     (
