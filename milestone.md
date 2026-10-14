@@ -114,8 +114,9 @@ and C reviewed fixture repetition without additional executions. Results are in
 [refactor evidence](docs/agent/refactor-evidence.md): 9m38s for 1,049 profiled
 quality cases (two failures), and 13.94s for the checked range. Repeated external
 process setup dominates; metrics take 10.11s of that gate. The stale contract-count
-assertion is repaired at `9d13c96`; B repairs independent disposed-session
-weakening evidence without production changes. Only failed/changed controls repeat.
+assertion is repaired at `9d13c96`; independent disposed-session weakening
+evidence is repaired at `84d257d` without production changes. Only failed/changed
+controls repeated. Raw diagnostic consumers are complete and outputs are expired.
 This diagnostic does not restore automatic regression replay or supply missing
 architecture/scientific acceptance. Root owns results and output consumers.
 

@@ -630,8 +630,15 @@ in 0.26 seconds. An initial focused attempt failed before test execution because
 the temporary parent directory was absent after cleanup; creating that parent
 resolved setup. A format-only commit-hook failure was repaired without another
 test run. The second failure is the disposed-session weakening fixture: after
-removing the active guard, a later native binding guard rejects it. Its owner
-repairs independent lifecycle evidence without weakening production checks.
-The full profiling cohort is not replayed. Raw diagnostics expire after the
-record and immediate failure-review consumers finish.
+removing the active guard, a later native binding guard rejects it. The test-only
+repair is committed at `84d257d`; three affected controls pass in 1.039 seconds.
+The normal lifecycle guard rejects before native access. Weakening admits the
+same read into the real disposed Program/reader, then the retained scope guard
+rejects; successful use of a disposed compiler is not claimed. The unregistered
+read control and six untouched function ASTs remain. Strict typing, Ruff, native
+metrics and worker/parent hooks pass; mean 14.85, maximum 96 and health 41.27
+remain unchanged. Only the allocated test and its single fingerprint row change.
+The full profiling cohort is not replayed. Raw profile/working-data consumers
+are complete; normal cleanup expires their outputs. The profiling checkout is
+clean and its seven independent fixtures remain exact at 45,360 bytes.
 
