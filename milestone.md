@@ -91,12 +91,12 @@ Current bounded assignments (confidence 95%): B has delivered selected-source
 enrollment and assesses the smallest canonical-session declaration observation
 without source changes. The historical 14-path declaration tree remains
 unaccepted; dormant occurrences and lexical-versus-resolved identities stay
-explicit. A has delivered the preparation → late count read → pure completion
-boundary and exact mapping contract. Its literal Advance rule assessment is
-complete; the finding label is corrected without retiring the dependency debt.
-C has delivered the four `NetworkCase` selector annotations and authored
-catalog elements. It implements only the three qualification-side target
-annotations in Torch setup/observation and their existing consumers. Passed-tuple/scalar identity, values/order and host projections
+explicit. A has delivered the fan-in count boundary and completed the literal Advance
+rule assessment. Its next bounded component is the reviewed source-only neutral
+value/primitive proof; DEP004 remains open and no live backend is substituted.
+C has delivered the `NetworkCase` selectors and committed the three Torch
+qualification target annotations and affected consumers. Parent integration
+passed at `15b8871`; push and exact hosted verification remain before acceptance. Passed-tuple/scalar identity, values/order and host projections
 are preserved; historical cross-site literal-tuple coalescing is outside the
 contract. Canonical batch labels are delivered. Local array positions, collectors, digest
 streams and original numeric behavior remain unchanged. Positional artifact

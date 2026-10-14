@@ -68,6 +68,47 @@ consumers are verified. Keep the guard and provenance; never change a hash merel
 to silence a failed check. No rule deviation or numerical remedy is implied, and
 incomplete 37-rule analysis still cannot receive a clean result.
 
+## Reviewed numerical value proof
+
+A fresh GPT-6 Astra review at `xhigh` completed on 2026-10-14 against
+`3d294987fa477b35fea6fd03a8aedf19c0a785cf`; the parent checked the actual core
+expression and five protected hashes. The engine dependency diagnosis has 95%
+confidence. Carrier typing and alias safety remain unverified. DEP004 stays open.
+
+The minimum next component is a source-only contract proof for the existing
+`core.integrate` expression. Use read-only float32 and Boolean value contracts
+with neutral shape/dimension/size/dtype metadata. They expose no native handle,
+mutation, evaluation, host transfer or compilation. Bind generic parameters to
+these owned value kinds; an unrestricted type parameter instantiated with an
+MLX array is not neutral.
+
+The proof needs only three primitive operations: `add`, with the actual
+value/integer, integer/value and value/value overloads; `multiply(float, value)`;
+and `where(Boolean, value, value)`. Supply the existing coefficient tuple as
+factual input. Preserve the expression's operand order, integer versus float
+scalar kinds and eight primitive calls. Do not construct device scalars, copy or
+evaluate arrays, fuse expressions or reassociate arithmetic. First prove native
+generic closure, provider exclusion, the absence of cast escapes and exact call
+order in focused fixtures. Keep this proof outside the live backend; commit no
+unused production abstractions.
+
+A live repair must coordinate numerical records, pure transitions/reducers,
+provider primitives, execution shells and actual consumers. Retain record field
+order plus iteration, slicing, `_fields` and `_replace` behavior. The frozen
+legacy observers consume raw arrays; unchanged bindings and complete separation
+cannot both be promised. Their guards stay intact for the source-only proof.
+Later binding revisions need the reviewed preservation and lineage checks.
+Providers must not implement model/queue/reducer policy or invoke owned rules.
+Reuse the existing public observation ports.
+
+Read-only annotations do not prove nonmutation or alias closure. Device arithmetic
+also cannot be qualified by source structure alone. Runtime adoption still needs
+the complete reference/core/factored checks, 157 scalar cases, affected layout,
+queue/discrete-state/repeat/chunk/batch and observation fault/transparency checks
+listed below. No source-only result retires a finding, releases a hold or supplies
+missing semantic analysis. Actual new runtime dependencies must be included in
+all existing producer-source and omission/change/launch identity consumers.
+
 ## Preservation required for a repair
 
 The [numerical contract](numerical-contract.md) owns equations, order, precision,
