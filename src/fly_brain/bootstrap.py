@@ -168,6 +168,11 @@ def parity_case() -> ParityCommand:
     from fly_brain.simulation.observation_module import build_observation_assembly
 
     assemble_observations = build_observation_assembly()
+    from fly_brain.comparison.module import (
+        build_case_scoring,
+        build_coordinate_validation,
+        build_reference_clock_conversion,
+    )
     from fly_brain.qualification.adapters.parity_case import run
     from fly_brain.qualification.module import build_parity_case
 
@@ -179,6 +184,9 @@ def parity_case() -> ParityCommand:
             precision=precision,
             generate=stimulus(),
             assemble_observations=assemble_observations,
+            score=build_case_scoring(),
+            validate=build_coordinate_validation(),
+            convert_clock=build_reference_clock_conversion(),
         ),
     )
 

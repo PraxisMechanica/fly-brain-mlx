@@ -6,6 +6,11 @@ import numpy as np
 import pytest
 import torch
 
+from fly_brain.comparison.module import (
+    build_case_scoring,
+    build_coordinate_validation,
+    build_reference_clock_conversion,
+)
 from fly_brain.infrastructure.seeded_random import uniforms
 from fly_brain.qualification.adapters.parity_case import run
 from fly_brain.qualification.models import ParityCase
@@ -36,6 +41,9 @@ def test_driver_runs_prescribed_p9_protocol_without_accepting_a_small_connectome
             precision,
             generate=build_stimulus(uniforms),
             assemble_observations=build_observation_assembly(),
+            score=build_case_scoring(),
+            validate=build_coordinate_validation(),
+            convert_clock=build_reference_clock_conversion(),
         )
         with pytest.raises(FileExistsError):
             run(
@@ -46,6 +54,9 @@ def test_driver_runs_prescribed_p9_protocol_without_accepting_a_small_connectome
                 precision,
                 generate=build_stimulus(uniforms),
                 assemble_observations=build_observation_assembly(),
+                score=build_case_scoring(),
+                validate=build_coordinate_validation(),
+                convert_clock=build_reference_clock_conversion(),
             )
     finally:
         torch.set_num_threads(threads)

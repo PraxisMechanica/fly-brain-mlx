@@ -4,6 +4,9 @@ from pathlib import Path
 import numpy as np
 import pytest
 
+from fly_brain.comparison.module import (
+    build_coordinate_validation,
+)
 from fly_brain.qualification.adapters.batch_native import Engine
 from fly_brain.qualification.adapters.batch_verify import compare
 from fly_brain.qualification.batch_evidence import NativeDifference, PhaseDifference
@@ -58,7 +61,9 @@ def test_saved_batch_comparison_covers_actual_trial_shapes_and_streams(
         else:
             rows = [{'step': step, 'native_sha256': selected} for step in range(-1, 35)]
         (path / stream).write_text(''.join(json.dumps(row) + '\n' for row in rows))
-    assert compare(batch, singletons, engine, 35, 6, 3, 2) == (
+    assert compare(
+        batch, singletons, engine, 35, 6, 3, 2, validate=build_coordinate_validation()
+    ) == (
         None,
         {trial: () for trial in range(4)},
     )
@@ -72,7 +77,28 @@ def test_saved_batch_comparison_covers_actual_trial_shapes_and_streams(
         if engine == 'mlx'
         else NativeDifference(3, 34)
     )
-    assert compare(batch, singletons, engine, 35, 6, 3, 2)[0] == unresolved
+    assert (
+        compare(
+            batch,
+            singletons,
+            engine,
+            35,
+            6,
+            3,
+            2,
+            validate=build_coordinate_validation(),
+        )[0]
+        == unresolved
+    )
     path.write_text(''.join(json.dumps(row) + '\n' for row in rows[:-1]))
     with pytest.raises(ValueError, match='every prescribed block|initial and every'):
-        compare(batch, singletons, engine, 35, 6, 3, 2)
+        compare(
+            batch,
+            singletons,
+            engine,
+            35,
+            6,
+            3,
+            2,
+            validate=build_coordinate_validation(),
+        )

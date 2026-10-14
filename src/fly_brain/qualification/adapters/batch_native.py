@@ -4,8 +4,8 @@ from typing import Literal, cast
 import numpy as np
 from numpy.typing import NDArray
 
-from fly_brain.comparison.acceptance import validate_coordinates
 from fly_brain.comparison.models import SpikeSteps
+from fly_brain.qualification.spike_comparison_ports import CoordinateValidator
 
 NativeArrays = Mapping[str, NDArray[np.generic]]
 Engine = Literal['mlx', 'cpu']
@@ -57,7 +57,12 @@ def require_fields(
 
 
 def trial_spikes(
-    arrays: NativeArrays, trials: int, neurons: int, steps: int
+    arrays: NativeArrays,
+    trials: int,
+    neurons: int,
+    steps: int,
+    *,
+    validate: CoordinateValidator,
 ) -> tuple[SpikeSteps, ...]:
     if steps < 1 or neurons < 1 or trials not in (1, 4):
         raise ValueError('Spike evidence requires valid trial/network dimensions')
@@ -86,7 +91,7 @@ def trial_spikes(
             cast(NDArray[np.int64], indices[selected]),
             cast(NDArray[np.int64], times[selected]),
         )
-        validate_coordinates(spikes, neurons, steps)
+        validate(spikes, neurons, steps)
         order = np.lexsort((spikes.neurons, spikes.steps))
         result.append(SpikeSteps(spikes.neurons[order], spikes.steps[order]))
     return tuple(result)
@@ -101,13 +106,15 @@ def compare_final_trial(
     edges: int,
     channels: int,
     steps: int,
+    *,
+    validate: CoordinateValidator,
 ) -> tuple[str, ...]:
     if not 0 <= trial < 4:
         raise ValueError('Final comparison requires an actual batch trial')
     require_fields(batch, engine, 4, neurons, edges, channels)
     require_fields(singleton, engine, 1, neurons, edges, channels)
-    many = trial_spikes(batch, 4, neurons, steps)[trial]
-    one = trial_spikes(singleton, 1, neurons, steps)[0]
+    many = trial_spikes(batch, 4, neurons, steps, validate=validate)[trial]
+    one = trial_spikes(singleton, 1, neurons, steps, validate=validate)[0]
     if (many.neurons.tobytes(), many.steps.tobytes()) != (
         one.neurons.tobytes(),
         one.steps.tobytes(),

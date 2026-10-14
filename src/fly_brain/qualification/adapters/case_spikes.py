@@ -4,18 +4,24 @@ from typing import cast
 import numpy as np
 from numpy.typing import NDArray
 
-from fly_brain.comparison.acceptance import (
-    steps_from_reference_clock,
-    validate_coordinates,
-)
 from fly_brain.comparison.models import SpikeSteps
+from fly_brain.qualification.spike_comparison_ports import (
+    CoordinateValidator,
+    ReferenceClockConverter,
+)
 from fly_brain.simulation.models import Connectome
 
 from .observer_evidence import array_record
 
 
 def load(
-    connectome: Connectome, steps: int, paired: Path, cpu: Path
+    connectome: Connectome,
+    steps: int,
+    paired: Path,
+    cpu: Path,
+    *,
+    validate: CoordinateValidator,
+    convert_clock: ReferenceClockConverter,
 ) -> tuple[dict[str, SpikeSteps], dict[str, object]]:
     spikes: dict[str, SpikeSteps] = {}
     native: dict[str, object] = {}
@@ -40,7 +46,7 @@ def load(
                 if neurons.dtype != np.int32:
                     raise ValueError('Reference spike neurons must retain native int32')
                 indices = neurons.astype(np.int64)
-                coordinates = steps_from_reference_clock(times, steps)
+                coordinates = convert_clock(times, steps)
             else:
                 indices = cast(NDArray[np.int64], neurons)
                 coordinates = cast(NDArray[np.int64], times)
@@ -61,7 +67,7 @@ def load(
                         for name in (*names, 'spike_trials')
                     },
                 }
-            validate_coordinates(
+            validate(
                 SpikeSteps(indices, coordinates), len(connectome.neuron_ids), steps
             )
             spikes[engine] = SpikeSteps(connectome.neuron_ids[indices], coordinates)

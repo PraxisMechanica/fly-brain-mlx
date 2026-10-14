@@ -4,6 +4,11 @@ from pathlib import Path
 import numpy as np
 import pytest
 
+from fly_brain.comparison.module import (
+    build_case_scoring,
+    build_coordinate_validation,
+    build_reference_clock_conversion,
+)
 from fly_brain.qualification.adapters.brian_jobs import build
 from fly_brain.qualification.adapters.case_execution import execute
 from fly_brain.qualification.adapters.case_report import write
@@ -74,7 +79,15 @@ def test_each_engine_replays_fresh_state_with_complete_retained_evidence(
         )
     pin = InputPin('fixture', 'fixture', 6, len(case.connectome.sources))
     report = write(
-        ParityCase('sugar', 101, 0), case.connectome, pin, stimulus, output, tmp_path
+        ParityCase('sugar', 101, 0),
+        case.connectome,
+        pin,
+        stimulus,
+        output,
+        tmp_path,
+        score=build_case_scoring(),
+        validate=build_coordinate_validation(),
+        convert_clock=build_reference_clock_conversion(),
     )
     assert (
         report['case_accepted'] is False
@@ -101,4 +114,7 @@ def test_each_engine_replays_fresh_state_with_complete_retained_evidence(
             stimulus,
             output,
             tmp_path,
+            score=build_case_scoring(),
+            validate=build_coordinate_validation(),
+            convert_clock=build_reference_clock_conversion(),
         )

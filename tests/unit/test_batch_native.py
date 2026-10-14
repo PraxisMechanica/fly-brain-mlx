@@ -2,6 +2,9 @@ import numpy as np
 import pytest
 from numpy.typing import NDArray
 
+from fly_brain.comparison.module import (
+    build_coordinate_validation,
+)
 from fly_brain.qualification.adapters.batch_native import (
     Engine,
     compare_final_trial,
@@ -80,11 +83,16 @@ def test_identical_neuron_steps_in_different_trials_keep_their_own_identity() ->
     arrays['spike_trials'] = np.array([3, 1, 0, 2], dtype=np.int64)
     arrays['spike_neurons'] = np.array([2, 2, 2, 2], dtype=np.int64)
     arrays['spike_steps'] = np.array([4, 4, 4, 4], dtype=np.int64)
-    result = trial_spikes(arrays, 4, 6, 35)
+    result = trial_spikes(arrays, 4, 6, 35, validate=build_coordinate_validation())
     assert [(row.neurons.tolist(), row.steps.tolist()) for row in result] == [
         ([2], [4])
     ] * 4
-    assert trial_spikes(native('mlx', 1), 1, 6, 35)[0].steps.size == 0
+    assert (
+        trial_spikes(
+            native('mlx', 1), 1, 6, 35, validate=build_coordinate_validation()
+        )[0].steps.size
+        == 0
+    )
 
 
 @pytest.mark.parametrize(
@@ -118,7 +126,7 @@ def test_invalid_batch_spikes_cannot_hide_behind_equal_pooled_counts(
     else:
         arrays['spike_neurons'] = np.zeros((1, 1), dtype=np.int64)
     with pytest.raises(ValueError):
-        trial_spikes(arrays, 4, 6, 35)
+        trial_spikes(arrays, 4, 6, 35, validate=build_coordinate_validation())
 
 
 @pytest.mark.parametrize('engine', ('mlx', 'cpu'))
@@ -127,16 +135,54 @@ def test_final_native_comparison_separates_exact_spikes_from_unresolved_floats(
 ) -> None:
     batch, singleton = native(engine, 4), native(engine, 1)
     for trial in range(4):
-        assert compare_final_trial(batch, singleton, engine, trial, 6, 3, 2, 35) == ()
+        assert (
+            compare_final_trial(
+                batch,
+                singleton,
+                engine,
+                trial,
+                6,
+                3,
+                2,
+                35,
+                validate=build_coordinate_validation(),
+            )
+            == ()
+        )
     state = 'end_v' if engine == 'mlx' else 'v'
     batch[state][3, 2] += np.float32(0.0001)
-    assert compare_final_trial(batch, singleton, engine, 3, 6, 3, 2, 35) == (state,)
-    assert compare_final_trial(batch, singleton, engine, 2, 6, 3, 2, 35) == ()
+    assert compare_final_trial(
+        batch, singleton, engine, 3, 6, 3, 2, 35, validate=build_coordinate_validation()
+    ) == (state,)
+    assert (
+        compare_final_trial(
+            batch,
+            singleton,
+            engine,
+            2,
+            6,
+            3,
+            2,
+            35,
+            validate=build_coordinate_validation(),
+        )
+        == ()
+    )
     batch['spike_trials'] = np.array([3], dtype=np.int64)
     batch['spike_neurons'] = np.array([2], dtype=np.int64)
     batch['spike_steps'] = np.array([4], dtype=np.int64)
     with pytest.raises(ValueError, match='spike raster differs'):
-        compare_final_trial(batch, singleton, engine, 3, 6, 3, 2, 35)
+        compare_final_trial(
+            batch,
+            singleton,
+            engine,
+            3,
+            6,
+            3,
+            2,
+            35,
+            validate=build_coordinate_validation(),
+        )
 
 
 @pytest.mark.parametrize(
@@ -149,12 +195,22 @@ def test_same_engine_discrete_final_differences_cannot_use_a_tolerance(
     batch, singleton = native(engine, 4), native(engine, 1)
     batch[field].flat[-1] = 1
     with pytest.raises(ValueError, match='discrete batch state differs'):
-        compare_final_trial(batch, singleton, engine, 3, 6, 3, 2, 35)
+        compare_final_trial(
+            batch,
+            singleton,
+            engine,
+            3,
+            6,
+            3,
+            2,
+            35,
+            validate=build_coordinate_validation(),
+        )
 
 
 def test_cpu_payload_queue_difference_is_unresolved_and_preserves_all_slots() -> None:
     batch, singleton = native('cpu', 4), native('cpu', 1)
     batch['delay_buffer'][3, 18, 5] = np.float32(-0.0)
-    assert compare_final_trial(batch, singleton, 'cpu', 3, 6, 3, 2, 35) == (
-        'delay_buffer',
-    )
+    assert compare_final_trial(
+        batch, singleton, 'cpu', 3, 6, 3, 2, 35, validate=build_coordinate_validation()
+    ) == ('delay_buffer',)

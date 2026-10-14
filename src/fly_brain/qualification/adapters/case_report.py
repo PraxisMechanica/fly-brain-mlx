@@ -6,9 +6,13 @@ from pathlib import Path
 
 import numpy as np
 
-from fly_brain.comparison.acceptance import evaluate_case
 from fly_brain.qualification.matrix import required_cases
 from fly_brain.qualification.models import ParityCase
+from fly_brain.qualification.spike_comparison_ports import (
+    CaseScorer,
+    CoordinateValidator,
+    ReferenceClockConverter,
+)
 from fly_brain.simulation.experiments import EXPERIMENTS
 from fly_brain.simulation.models import Connectome, InputPin, Stimulus
 
@@ -35,11 +39,22 @@ def write(
     stimulus: Stimulus,
     observations: Path,
     output: Path,
+    *,
+    score: CaseScorer,
+    validate: CoordinateValidator,
+    convert_clock: ReferenceClockConverter,
 ) -> dict[str, object]:
     paired, cpu = observations / 'paired-first', observations / 'cpu-first'
     verify_paired(paired, observations / 'paired-repeat')
     verify_cpu(cpu, observations / 'cpu-repeat')
-    spikes, native = load(connectome, case.steps, paired, cpu)
+    spikes, native = load(
+        connectome,
+        case.steps,
+        paired,
+        cpu,
+        validate=validate,
+        convert_clock=convert_clock,
+    )
     causal = json.loads((paired / 'causal.json').read_text())
     pending = (
         verify_pending(paired, case.steps, len(connectome.sources))
@@ -68,7 +83,7 @@ def write(
         'actual_final_pending_events_equal_when_history_is_common': pending is not None
         or causal['first_spike_step'] is not None,
     }
-    acceptance = evaluate_case(
+    acceptance = score(
         spikes['brian'], spikes['mlx'], spikes['torch'], case.steps * 0.0001
     )
     with (output / 'normalized-spikes.npz').open('xb') as artifact:

@@ -91,6 +91,7 @@ source_modules = [
     "fly_brain.qualification.fan_in_service",
     "fly_brain.qualification.fan_in_ports",
     "fly_brain.qualification.stimulus_ports",
+    "fly_brain.qualification.spike_comparison_ports",
     "fly_brain.qualification.session_expectations",
     "fly_brain.qualification.session_observer",
     "fly_brain.qualification.session_blocks",

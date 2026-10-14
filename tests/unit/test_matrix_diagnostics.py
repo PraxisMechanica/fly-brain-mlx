@@ -2,6 +2,7 @@ import numpy as np
 import pytest
 
 from fly_brain.comparison.models import SpikeSteps
+from fly_brain.comparison.module import build_time_bin_counting, build_trial_measurement
 from fly_brain.qualification.matrix_diagnostics import CaseRasters, coverage, summarize
 from fly_brain.qualification.models import ParityCase
 
@@ -57,7 +58,12 @@ def test_partial_group_reports_keep_failure_even_when_pooled_counts_cancel() -> 
         CaseRasters(ParityCase('sugar', 1000, 1), empty, active, empty),
         CaseRasters(ParityCase('sugar', 1000, 0), active, empty, active),
     )
-    group = summarize(cases, failed=tuple(row.case for row in cases))[0]
+    group = summarize(
+        cases,
+        failed=tuple(row.case for row in cases),
+        measure=build_trial_measurement(),
+        count_bins=build_time_bin_counting(),
+    )[0]
     assert group.coverage.failed == (0, 1) and group.coverage.missing == (2, 3, 4)
     assert (
         group.metrics is not None
@@ -70,5 +76,7 @@ def test_partial_group_reports_keep_failure_even_when_pooled_counts_cancel() -> 
 def test_unobserved_groups_have_unavailable_metrics_and_counts() -> None:
     assert all(
         group.metrics is None and group.pooled_bin_counts is None
-        for group in summarize(())
+        for group in summarize(
+            (), measure=build_trial_measurement(), count_bins=build_time_bin_counting()
+        )
     )

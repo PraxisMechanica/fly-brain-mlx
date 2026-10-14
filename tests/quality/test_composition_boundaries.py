@@ -16,6 +16,11 @@ pytestmark = pytest.mark.integration
         ('comparison.ports', 'comparison.storage', 'comparison.models'),
         ('comparison.reporting', 'comparison.storage', 'comparison.models'),
         (
+            'qualification.spike_comparison_ports',
+            'qualification.adapters',
+            'comparison.models',
+        ),
+        (
             'simulation.stimulus_service',
             'infrastructure.seeded_random',
             'simulation.models',

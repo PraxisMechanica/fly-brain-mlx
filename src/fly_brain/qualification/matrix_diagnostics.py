@@ -3,13 +3,12 @@ from dataclasses import dataclass
 import numpy as np
 from numpy.typing import NDArray
 
-from fly_brain.comparison.diagnostics import time_bin_counts
 from fly_brain.comparison.models import ParityMetrics, SpikeSteps
-from fly_brain.comparison.pooling import measure_trials
 from fly_brain.simulation.models import ExperimentName
 
 from .matrix import required_cases
 from .models import ParityCase
+from .spike_comparison_ports import TimeBinCounter, TrialMeasurer
 
 
 @dataclass(frozen=True)
@@ -71,6 +70,9 @@ def summarize(
     cases: tuple[CaseRasters, ...],
     invalid: tuple[ParityCase, ...] = (),
     failed: tuple[ParityCase, ...] = (),
+    *,
+    measure: TrialMeasurer,
+    count_bins: TimeBinCounter,
 ) -> tuple[GroupDiagnostics, ...]:
     results: list[GroupDiagnostics] = []
     for group in coverage(tuple(row.case for row in cases), invalid, failed):
@@ -96,12 +98,12 @@ def summarize(
             )
         )
         metrics = {
-            'mlx': measure_trials(
+            'mlx': measure(
                 tuple((row.brian, row.mlx) for row in rows),
                 support,
                 group.steps * 0.0001,
             ),
-            'torch': measure_trials(
+            'torch': measure(
                 tuple((row.brian, row.torch) for row in rows),
                 support,
                 group.steps * 0.0001,
@@ -110,7 +112,7 @@ def summarize(
         bins = {
             row.case.trial: {
                 engine: tuple(
-                    int(value) for value in time_bin_counts(spikes.steps, group.steps)
+                    int(value) for value in count_bins(spikes.steps, group.steps)
                 )
                 for engine, spikes in (
                     ('brian', row.brian),

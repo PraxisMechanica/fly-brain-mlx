@@ -1,7 +1,17 @@
+from collections.abc import Callable
 from pathlib import Path
 from typing import Protocol
 
-from .models import ComparisonRequest, ComparisonResult
+import numpy as np
+from numpy.typing import NDArray
+
+from .models import (
+    ComparisonRequest,
+    ComparisonResult,
+    MetricAcceptance,
+    ParityMetrics,
+    SpikeSteps,
+)
 
 
 class ComparisonUseCase(Protocol):
@@ -20,3 +30,13 @@ class ComparisonReport(Protocol):
 
 class ComparisonCommand(Protocol):
     def __call__(self, request: ComparisonRequest, output: Path, /) -> int: ...
+
+
+CaseScoring = Callable[[SpikeSteps, SpikeSteps, SpikeSteps, float], MetricAcceptance]
+CoordinateValidation = Callable[[SpikeSteps, int, int], None]
+ReferenceClockConversion = Callable[[NDArray[np.float64], int], NDArray[np.int64]]
+
+TrialMeasurement = Callable[
+    [tuple[tuple[SpikeSteps, SpikeSteps], ...], NDArray[np.int64], float], ParityMetrics
+]
+TimeBinCounting = Callable[[NDArray[np.int64], int], NDArray[np.int64]]

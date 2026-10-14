@@ -13,6 +13,11 @@ import torch
 from fly_brain.qualification.matrix import required_cases
 from fly_brain.qualification.models import ParityCase
 from fly_brain.qualification.ports import ObservationAssembly
+from fly_brain.qualification.spike_comparison_ports import (
+    CaseScorer,
+    CoordinateValidator,
+    ReferenceClockConverter,
+)
 from fly_brain.qualification.stimulus_ports import StimulusGenerator
 from fly_brain.simulation.experiments import EXPERIMENTS
 from fly_brain.simulation.models import Connectome, InputPin
@@ -34,6 +39,9 @@ def run(
     *,
     generate: StimulusGenerator,
     assemble_observations: ObservationAssembly,
+    score: CaseScorer,
+    validate: CoordinateValidator,
+    convert_clock: ReferenceClockConverter,
 ) -> dict[str, object]:
     if case not in required_cases():
         raise ValueError('Qualification requires a prescribed frozen case')
@@ -119,6 +127,16 @@ def run(
         progress,
         read_rows=read_rows,
     )
-    report = write(case, connectome, pin, stimulus, output / 'observations', output)
+    report = write(
+        case,
+        connectome,
+        pin,
+        stimulus,
+        output / 'observations',
+        output,
+        score=score,
+        validate=validate,
+        convert_clock=convert_clock,
+    )
     progress('case-recorded')
     return report

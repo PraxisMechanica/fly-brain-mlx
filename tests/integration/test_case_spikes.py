@@ -4,6 +4,10 @@ import numpy as np
 import pytest
 from numpy.typing import NDArray
 
+from fly_brain.comparison.module import (
+    build_coordinate_validation,
+    build_reference_clock_conversion,
+)
 from fly_brain.qualification.adapters.case_spikes import load
 from fly_brain.qualification.adapters.observer_evidence import array_record
 from fly_brain.simulation.identifiers import FlyWireIds64, NeuronRows32
@@ -70,9 +74,23 @@ def test_native_coordinates_are_validated_before_pinned_identifier_mapping(
             np.savez_compressed(archive, **arrays)
     if fault != 'none':
         with pytest.raises(ValueError):
-            load(connectome, 3, paired, cpu)
+            load(
+                connectome,
+                3,
+                paired,
+                cpu,
+                validate=build_coordinate_validation(),
+                convert_clock=build_reference_clock_conversion(),
+            )
         return
-    spikes, native = load(connectome, 3, paired, cpu)
+    spikes, native = load(
+        connectome,
+        3,
+        paired,
+        cpu,
+        validate=build_coordinate_validation(),
+        convert_clock=build_reference_clock_conversion(),
+    )
     assert all(
         value.neurons.tolist() == [23] and value.steps.tolist() == [1]
         for value in spikes.values()

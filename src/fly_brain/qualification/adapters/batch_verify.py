@@ -13,6 +13,7 @@ from fly_brain.qualification.batch_evidence import (
     native_difference,
     phase_difference,
 )
+from fly_brain.qualification.spike_comparison_ports import CoordinateValidator
 
 from .batch_native import Engine, NativeArrays, compare_final_trial
 
@@ -58,6 +59,8 @@ def compare(
     neurons: int,
     edges: int,
     channels: int,
+    *,
+    validate: CoordinateValidator,
 ) -> tuple[PhaseDifference | NativeDifference | None, dict[int, tuple[str, ...]]]:
     if set(singletons) != {0, 1, 2, 3}:
         raise ValueError(
@@ -86,6 +89,6 @@ def compare(
         with np.load(path / filename, allow_pickle=False) as archive:
             one = cast(NativeArrays, {name: archive[name] for name in archive.files})
         finals[trial] = compare_final_trial(
-            many, one, engine, trial, neurons, edges, channels, steps
+            many, one, engine, trial, neurons, edges, channels, steps, validate=validate
         )
     return difference, finals
