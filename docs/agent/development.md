@@ -47,7 +47,9 @@ current operational `reason`, and `release_when` condition to
 `tools/code_quality/retention.json`. No blanket scientific exception applies.
 Register unfinished repeat, batch, scoring or failure-review work before
 committing; remove its exception when that consumer finishes. Record concise
-outcomes in `milestone.md`, without generated reports or preservation copies.
+current status in `milestone.md` and completed component checks in
+[refactor evidence](refactor-evidence.md), without generated reports or
+preservation copies.
 
 Quality checks print short success summaries. Failures show bounded output and
 retain a diagnostic file under `logs/quality`, capped at 64 KiB of text with
@@ -94,8 +96,9 @@ choosing a repository-local pytest temporary root, use a fresh path under
 `executions/`: application fixtures create scientific working data and must not
 run under `logs/`. Timing summaries and JUnit diagnostics belong under `logs/`.
 Per-test timings (`--durations=20`) can identify quality-harness overhead without
-running a new full scientific matrix. Current measured evidence belongs in
-[milestone.md](../../milestone.md).
+running a new full scientific matrix. Completed timing measurements belong in
+[refactor evidence](refactor-evidence.md);
+[milestone.md](../../milestone.md) owns the current work and acceptance status.
 `qualify` exercises the independent reference and MLX scientific suites on a
 real Metal device. Its logs, reports and state/event arrays are working inputs
 to verification. They expire at the next successful commit unless an explicit
