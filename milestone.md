@@ -41,8 +41,19 @@ success alone must never be reported as case acceptance.
 The inspected host has Apple M1 Max, 32 GiB memory, approximately 225 GiB free
 disk, Python 3.10.14, MLX/Metal 0.32.3, NumPy 1.26.4, Brian2 2.8.0 and PyTorch
 2.11.0. Metal is available and the precision setting is zero. Compilation stays
-disabled. Fresh baseline local qualification and host input audit are running;
-their output is retained for diagnosis and measured planning.
+disabled. Fresh baseline local qualification is running; its output is retained
+for diagnosis and measured planning. The host input audit passed all 15,091,983
+rows: pinned hashes, orientation/identifier ordering, stable reversible grouping,
+exact count conversion and outgoing-only silencing. Maximum absolute-count sum
+is 69,948 (guard: 2^40); maximum in-degree is 10,356. This is input equivalence,
+not dynamic or full-network scientific acceptance.
+
+The first implementation repair makes `qualify` prepare its required four-trial,
+1,000-step frozen sugar stimulus and explicit pinned dataset environment, then
+run the existing native-artifact consumer after its producers. The former runner
+omitted both prerequisites and omitted that consumer. Numerical code is unchanged.
+Automatic affected tests and a fresh full command must establish the repair;
+source inspection alone is not a qualification pass.
 
 ### Bounded implementation plan and completion criteria
 

@@ -132,7 +132,9 @@ running a new full scientific matrix. Completed timing measurements belong in
 [refactor evidence](refactor-evidence.md);
 [milestone.md](../../milestone.md) owns the current work and acceptance status.
 `qualify` exercises the independent reference and MLX scientific suites on a
-real Metal device. Its logs, reports and state/event arrays are working inputs
+real Metal device. It prepares a fresh canonical four-trial, 1,000-step sugar
+stimulus, sets the pinned dataset root explicitly, and runs the native-artifact
+integration consumer after the scientific producers. Its logs, reports and state/event arrays are working inputs
 to verification. They expire at the next successful commit unless an explicit
 remaining consumer is registered. Skipped, missing, empty, or failed required
 results prevent acceptance.
