@@ -134,7 +134,10 @@ running a new full scientific matrix. Completed timing measurements belong in
 `qualify` exercises the independent reference and MLX scientific suites on a
 real Metal device. It prepares a fresh canonical four-trial, 1,000-step sugar
 stimulus, sets the pinned dataset root explicitly, and runs the native-artifact
-integration consumer after the scientific producers. Its logs, reports and state/event arrays are working inputs
+integration consumer after the scientific producers. Historical reference
+preservation tests load the exact pinned Git revision in memory and check the
+independent original Torch source hash; they require complete Git history, not
+an external baseline checkout. Its logs, reports and state/event arrays are working inputs
 to verification. They expire at the next successful commit unless an explicit
 remaining consumer is registered. Skipped, missing, empty, or failed required
 results prevent acceptance.

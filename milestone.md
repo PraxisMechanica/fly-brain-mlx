@@ -55,6 +55,23 @@ omitted both prerequisites and omitted that consumer. Numerical code is unchange
 Automatic affected tests and a fresh full command must establish the repair;
 source inspection alone is not a qualification pass.
 
+The baseline finished unaccepted in 290.35 seconds: 375 collected, 351 passed,
+five failures (missing explicit pinned dataset path) and 19 setup errors (missing
+`FLY_BRAIN_REFERENCE_BASELINE`). Zero skips; no numerical failure was reported
+among the checks that executed. The historical-reference fixture is being repaired
+to execute exact source bytes from immutable commit `79f62adee10b092fcaaaed0ea4043da3f5b9c415`
+directly from Git, preserving the independently recorded full Torch source hash
+and all native tensor comparisons. It needs no deleted external checkout or
+preservation copy. This fixes test setup, not reference arithmetic.
+
+Delivery: `614ed23` (plan/retention) and `85630e1` (local runner prerequisites and
+consumer) passed commit/push hooks and exact-revision hosted CI runs `38637520665`
+and `38637855298`. The runner commit's first hook attempt exposed a new test's
+global subprocess patch intercepting NumPy's lazy testing import; using a direct
+array-equality assertion repaired that test isolation issue. Its succeeding
+automatic affected invocation passed all 133 selected tests. This routine evidence
+does not replace scientific qualification.
+
 ### Bounded implementation plan and completion criteria
 
 1. Establish fresh input/source identity and local reference/core/factored

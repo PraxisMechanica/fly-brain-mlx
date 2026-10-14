@@ -1,6 +1,4 @@
 import importlib
-import os
-import subprocess
 from functools import partial
 from pathlib import Path
 from types import MappingProxyType, ModuleType
@@ -84,16 +82,8 @@ def test_actual_schedule_diagnostic_uses_injected_values_at_original_model_posit
     original_schedule = importlib.import_module(
         'preserved_torch_reference.schedule_probe'
     )
-    baseline_root = Path(os.environ['FLY_BRAIN_REFERENCE_BASELINE'])
-    assert original_schedule.__file__ is not None
-    assert Path(original_schedule.__file__).read_bytes() == subprocess.check_output(
-        [
-            'git',
-            '-C',
-            str(baseline_root),
-            'show',
-            ORIGINAL_COMMIT + ':src/fly_brain/qualification/adapters/schedule_probe.py',
-        ]
+    assert original_schedule.__file__ == (
+        ORIGINAL_COMMIT + ':src/fly_brain/qualification/adapters/schedule_probe.py'
     )
     expected = original_schedule.run(tmp_path / 'original-schedule')
     actual = schedule_probe.run(

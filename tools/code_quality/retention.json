@@ -2,6 +2,11 @@
   "version": 1,
   "exceptions": [
     {
+      "path": "executions/implementation-20261014-local-complete",
+      "reason": "Fresh complete local scientific qualification, frozen pinned input and native proof artifacts are consumed by required numerical, observation, repeat and batch verification and comparison with the failed baseline setup.",
+      "release_when": "Every current local-qualification and native-artifact consumer finishes, all failures are resolved or explicitly held, and milestone.md records the verified bounded results."
+    },
+    {
       "path": "executions/implementation-20261014-local-baseline",
       "reason": "Fresh 9f89ef6 scientific-suite traces and test results are consumed by the implementation baseline audit, failure diagnosis and comparison with any numerical repair.",
       "release_when": "The baseline audit and all repair-comparison consumers have verified these results and milestone.md records their bounded conclusions."

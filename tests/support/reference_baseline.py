@@ -1,6 +1,4 @@
 import hashlib
-import importlib.util
-import os
 import subprocess
 import sys
 from collections.abc import Iterator
@@ -15,45 +13,39 @@ ORIGINAL_SHA256 = 'bf52258041a464156ce05b267601dbefceb893356fbf8401b358b036a29ba
 
 @pytest.fixture(scope='module')
 def original() -> Iterator[tuple[ModuleType, ModuleType]]:
-    root = Path(os.environ['FLY_BRAIN_REFERENCE_BASELINE']).resolve()
-    assert sys.dont_write_bytecode
-    assert (
-        subprocess.check_output(
-            ['git', '-C', str(root), 'rev-parse', 'HEAD'], text=True
-        ).strip()
-        == ORIGINAL_COMMIT
-    )
-    directory = root / 'src/fly_brain/qualification/adapters'
-    assert (
-        hashlib.sha256((directory / 'torch_reference.py').read_bytes()).hexdigest()
-        == ORIGINAL_SHA256
-    )
+    root = Path(__file__).resolve().parents[2]
     package = ModuleType('preserved_torch_reference')
-    package.__path__ = [str(directory)]
-    loaded: list[ModuleType] = []
+    package.__path__ = []
+    loaded: dict[str, ModuleType] = {}
     with pytest.MonkeyPatch.context() as patch:
         patch.setitem(sys.modules, package.__name__, package)
-        for name in ('torch_reference', 'torch_setup'):
-            path = directory / (name + '.py')
-            expected = subprocess.check_output(
+        for name in (
+            'brian_reference',
+            'torch_reference',
+            'torch_setup',
+            'schedule_probe',
+        ):
+            identity = (
+                ORIGINAL_COMMIT
+                + ':src/fly_brain/qualification/adapters/'
+                + name
+                + '.py'
+            )
+            source = subprocess.check_output(
                 [
                     'git',
                     '-C',
                     str(root),
                     'show',
-                    ORIGINAL_COMMIT
-                    + ':src/fly_brain/qualification/adapters/'
-                    + name
-                    + '.py',
+                    identity,
                 ]
             )
-            assert path.read_bytes() == expected
-            spec = importlib.util.spec_from_file_location(
-                package.__name__ + '.' + name, path
-            )
-            assert spec is not None and spec.loader is not None
-            module = importlib.util.module_from_spec(spec)
-            patch.setitem(sys.modules, spec.name, module)
-            spec.loader.exec_module(module)
-            loaded.append(module)
-        yield loaded[0], loaded[1]
+            if name == 'torch_reference':
+                assert hashlib.sha256(source).hexdigest() == ORIGINAL_SHA256
+            module = ModuleType(package.__name__ + '.' + name)
+            module.__file__ = identity
+            patch.setitem(sys.modules, module.__name__, module)
+            setattr(package, name, module)
+            exec(compile(source, identity, 'exec'), module.__dict__)
+            loaded[name] = module
+        yield loaded['torch_reference'], loaded['torch_setup']
