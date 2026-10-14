@@ -21,7 +21,7 @@ TARGETS = (
     'fly_brain.simulation.observation_module',
 )
 NEUTRAL = 'from fly_brain.qualification.ports import VALUE\n'
-CONTRACT = 'DEP001/DEP003: Active qualification uses injected observation sessions'
+CONTRACT = 'Active qualification uses injected observation sessions'
 
 
 def policy(root: Path, scopes: tuple[str, ...] = SCOPES) -> str:
@@ -109,6 +109,7 @@ def test_active_boundary_resolves_alias_type_only_transitive_capture_factory_and
     assert repaired.returncode == 0, repaired.stdout + repaired.stderr
 
 
+@pytest.mark.checker
 def test_omitting_active_consumer_scope_hides_unchanged_implementation_debt(
     tmp_path: Path,
 ) -> None:

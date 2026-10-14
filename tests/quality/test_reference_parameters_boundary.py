@@ -9,7 +9,7 @@ pytestmark = pytest.mark.unit
 SOURCE = 'fly_brain.qualification.reference_parameters'
 TARGET = 'fly_brain.qualification.adapters.torch_reference'
 ENTRY = '    "' + SOURCE + '",\n'
-RULE = 'DEP001/DEP004'
+RULE = 'Scientific calculations avoid workflow and storage dependencies'
 
 
 def sources(root: Path, code: str) -> Path:
@@ -87,6 +87,7 @@ def test_pure_defaults_reject_implementation_paths_then_accept_neutral_values(
     assert result == 0, evidence
 
 
+@pytest.mark.checker
 def test_omitting_new_module_scope_hides_its_same_dependency(tmp_path: Path) -> None:
     config = sources(tmp_path, 'from ' + TARGET + ' import VALUE\n')
     result, evidence = lint(tmp_path, config)

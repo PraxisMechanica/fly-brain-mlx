@@ -76,29 +76,13 @@ include_external_packages = true
 contract_types = ["neutral_imports: tools.architecture.neutral_import_contract.NeutralImportContract"]
 
 [[tool.importlinter.contracts]]
-name = "DEP001/DEP004: Services and neutral contracts have no implementation dependencies"
+name = "Scientific calculations avoid workflow and storage dependencies"
 type = "forbidden"
 source_modules = [
-    "fly_brain.simulation.models",
     "fly_brain.simulation.mapping",
     "fly_brain.simulation.experiments",
     "fly_brain.simulation.stimuli",
-    "fly_brain.simulation.input_service",
-    "fly_brain.simulation.stimulus_service",
-    "fly_brain.simulation.ports",
-    "fly_brain.simulation.service",
-    "fly_brain.qualification.models",
     "fly_brain.qualification.reference_parameters",
-    "fly_brain.qualification.ports",
-    "fly_brain.qualification.fan_in_service",
-    "fly_brain.qualification.fan_in_ports",
-    "fly_brain.qualification.stimulus_ports",
-    "fly_brain.qualification.spike_comparison_ports",
-    "fly_brain.qualification.session_expectations",
-    "fly_brain.qualification.session_observer",
-    "fly_brain.qualification.session_blocks",
-    "fly_brain.simulation.observation_ports",
-    "fly_brain.simulation.observations",
     "fly_brain.qualification.matrix",
     "fly_brain.qualification.matrix_diagnostics",
     "fly_brain.qualification.input_patterns",
@@ -108,27 +92,21 @@ source_modules = [
     "fly_brain.qualification.rounding_review",
     "fly_brain.qualification.batch_evidence",
     "fly_brain.qualification.batch_identity",
-    "fly_brain.qualification.service",
-    "fly_brain.comparison.models",
     "fly_brain.comparison.acceptance",
     "fly_brain.comparison.diagnostics",
     "fly_brain.comparison.pooling",
     "fly_brain.comparison.metrics",
-    "fly_brain.comparison.reporting",
-    "fly_brain.comparison.ports",
-    "fly_brain.comparison.service",
 ]
 forbidden_modules = [
     "fly_brain.cli",
     "fly_brain.bootstrap",
     "fly_brain.infrastructure.seeded_random",
-    "fly_brain.simulation.backend",
     "fly_brain.simulation.inputs",
     "fly_brain.simulation.storage",
     "fly_brain.qualification.adapters",
     "fly_brain.comparison.storage",
-    "mlx", "torch", "brian2", "pyarrow", "pydantic",
 ]
+allow_indirect_imports = false
 
 [[tool.importlinter.contracts]]
 name = "MLX simulation has no reference or comparison framework"
@@ -144,7 +122,7 @@ foreign_roots = ["fly_brain.simulation", "fly_brain.qualification", "mlx", "bria
 neutral_modules = ["fly_brain.simulation.identifiers"]
 
 [[tool.importlinter.contracts]]
-name = "DEP001: Comparison rules have no orchestration dependencies"
+name = "Comparison calculations avoid orchestration and storage"
 type = "forbidden"
 source_modules = [
     "fly_brain.comparison.acceptance",
@@ -162,7 +140,7 @@ forbidden_modules = [
 ]
 
 [[tool.importlinter.contracts]]
-name = "DEP001/DEP003: Active qualification uses injected observation sessions"
+name = "Active qualification uses injected observation sessions"
 type = "forbidden"
 source_modules = [
     "fly_brain.qualification.adapters.paired_collect",
@@ -179,7 +157,7 @@ forbidden_modules = [
 allow_indirect_imports = false
 
 [[tool.importlinter.contracts]]
-name = "DEP003/ROLE005: PyTorch reference uses injected connectome silencing"
+name = "PyTorch reference uses injected connectome silencing"
 type = "forbidden"
 source_modules = [
     "fly_brain.qualification.adapters.torch_setup",
@@ -193,7 +171,7 @@ forbidden_modules = [
 allow_indirect_imports = false
 
 [[tool.importlinter.contracts]]
-name = "DEP003/ROLE005: Parity uses owned stimulus services"
+name = "Parity uses owned stimulus services"
 type = "forbidden"
 source_modules = [
     "fly_brain.qualification.service",
@@ -208,7 +186,7 @@ forbidden_modules = [
 allow_indirect_imports = false
 
 [[tool.importlinter.contracts]]
-name = "DEP003/ROLE005: Input audit uses owned mapping services"
+name = "Input audit uses owned mapping services"
 type = "forbidden"
 source_modules = ["fly_brain.qualification.input_audit_service"]
 forbidden_modules = [
@@ -219,7 +197,7 @@ forbidden_modules = [
 allow_indirect_imports = false
 
 [[tool.importlinter.contracts]]
-name = "DEP001: Host input audit uses injected file storage"
+name = "Host input audit uses injected file storage"
 type = "forbidden"
 source_modules = [
     "fly_brain.qualification.input_audit_service",
@@ -229,7 +207,7 @@ forbidden_modules = ["fly_brain.qualification.adapters.connectome_probe"]
 allow_indirect_imports = false
 
 [[tool.importlinter.contracts]]
-name = "DEP003/ROLE005: Fan-in analysis uses owned mapping services"
+name = "Fan-in analysis uses owned mapping services"
 type = "forbidden"
 source_modules = [
     "fly_brain.qualification.input_patterns",

@@ -7,7 +7,7 @@ from tests.quality.test_parity_stimulus_boundary import lint
 from tests.quality.test_reference_silencing_boundary import typed
 
 pytestmark = pytest.mark.unit
-RULE = 'DEP003/ROLE005: Input audit uses owned mapping services'
+RULE = 'Input audit uses owned mapping services'
 SOURCE = 'fly_brain.qualification.input_audit_service'
 TARGETS = (
     'fly_brain.simulation.mapping',
@@ -88,6 +88,7 @@ def test_new_contract_rejects_each_private_target_and_accepts_consumer_values(
     assert lint(tmp_path, config)[0] == 0
 
 
+@pytest.mark.checker
 def test_new_contract_preserves_transitive_reexport_rejection_and_weakening(
     tmp_path: Path,
 ) -> None:

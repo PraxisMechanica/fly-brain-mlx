@@ -6,7 +6,7 @@ from tests.quality.support import PROJECT, run
 from tests.quality.test_parity_stimulus_boundary import lint
 
 pytestmark = pytest.mark.unit
-RULE = 'DEP003/ROLE005: PyTorch reference uses injected connectome silencing'
+RULE = 'PyTorch reference uses injected connectome silencing'
 SOURCES = (
     'fly_brain.qualification.adapters.torch_setup',
     'fly_brain.qualification.adapters.parity_case',
@@ -86,6 +86,7 @@ def test_actual_contract_rejects_native_private_paths_and_accepts_injected_port(
     assert result == 0, output
 
 
+@pytest.mark.checker
 def test_parity_reexport_rejects_and_transitivity_weakening_hides_same_path(
     tmp_path: Path,
 ) -> None:

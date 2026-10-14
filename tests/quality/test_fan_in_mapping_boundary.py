@@ -15,7 +15,7 @@ from tests.quality.test_input_audit_boundary import sources as mapping_sources
 from tests.quality.test_parity_stimulus_boundary import lint
 
 pytestmark = pytest.mark.unit
-RULE = 'DEP003/ROLE005: Fan-in analysis uses owned mapping services'
+RULE = 'Fan-in analysis uses owned mapping services'
 SOURCES = (
     'fly_brain.qualification.input_patterns',
     'fly_brain.qualification.adapters.fan_in_probe',
@@ -60,6 +60,7 @@ def test_native_mapping_contract_rejects_each_target_then_repairs(
     assert lint(tmp_path, config)[0] == 0
 
 
+@pytest.mark.checker
 def test_transitive_reexport_weakening_close_literal_and_actual_sources(
     tmp_path: Path,
 ) -> None:
@@ -90,6 +91,7 @@ def test_transitive_reexport_weakening_close_literal_and_actual_sources(
     assert (lint(tmp_path, config)[0], lint(PROJECT, config)[0]) == (0, 0)
 
 
+@pytest.mark.checker
 def test_required_count_reader_rejects_omission_result_then_repairs_and_weakens(
     tmp_path: Path,
 ) -> None:

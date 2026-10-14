@@ -11,7 +11,7 @@ from tests.quality.hook_fixture import (
 )
 from tests.quality.support import git, run
 
-pytestmark = pytest.mark.integration
+pytestmark = [pytest.mark.integration, pytest.mark.checker]
 
 
 def test_installed_hooks_allow_compliant_commit(tmp_path: Path) -> None:
@@ -58,7 +58,7 @@ def test_document_commit_does_not_repeat_unchanged_source_analysis(
     repo, environment = hook_repository(tmp_path, BAD)
     result = commit_document(repo, environment)
     assert result.returncode == 0, result.stdout + result.stderr
-    assert 'fly_brain.simulation.backend' not in result.stdout + result.stderr
+    assert 'fly_brain.qualification.adapters' not in result.stdout + result.stderr
 
 
 def test_unstaged_repair_cannot_hide_staged_dependency(tmp_path: Path) -> None:
@@ -69,7 +69,7 @@ def test_unstaged_repair_cannot_hide_staged_dependency(tmp_path: Path) -> None:
     source.write_text(GOOD)
     result = commit_document(repo, environment)
     assert result.returncode != 0
-    assert 'fly_brain.simulation.backend' in result.stdout + result.stderr
+    assert 'fly_brain.qualification.adapters' in result.stdout + result.stderr
     assert source.read_text() == GOOD
 
 
@@ -96,7 +96,7 @@ def test_actual_push_hook_blocks_changed_dependency_debt(tmp_path: Path) -> None
     git(repo, 'update-ref', 'HEAD', broken)
     result = run(['git', 'push', 'origin', 'main'], repo, environment)
     assert result.returncode != 0
-    assert 'fly_brain.simulation.backend' in result.stdout + result.stderr
+    assert 'fly_brain.qualification.adapters' in result.stdout + result.stderr
 
 
 def test_document_only_commit_has_no_checker_regression_replay(tmp_path: Path) -> None:

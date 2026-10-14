@@ -52,6 +52,7 @@ def test_changed_source_keeps_static_guards_without_full_suite_commands() -> Non
     assert tasks['format'][-1] == 'src/fly_brain/simulation/service.py'
     assert tasks['types'] == ('pyright', *plan.python)
     assert 'ownership' in tasks and 'boundaries' in tasks and 'metrics' in tasks
+    assert tasks['ownership'] == ('python', '-m', 'tools.code_quality.ownership')
     assert 'tests' not in tasks
     assert tasks['metrics'][-2:] == ('--stage', 'push')
 

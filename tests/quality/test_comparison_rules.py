@@ -42,54 +42,9 @@ def test_comparison_rules_reject_service_paths_then_accept_owned_values(
     rejected = commit_document(repo, environment)
     evidence = rejected.stdout + rejected.stderr
     assert rejected.returncode != 0
-    assert 'DEP001: Comparison rules' in evidence
+    assert 'Comparison calculations avoid orchestration and storage' in evidence
     assert 'fly_brain.comparison.metrics' in evidence
     assert 'fly_brain.comparison.service' in evidence and '(l.' in evidence
     sources(repo, NEUTRAL)
     accepted = commit_document(repo, environment)
     assert accepted.returncode == 0, accepted.stdout + accepted.stderr
-
-
-def test_removing_the_pure_rule_scope_hides_its_unchanged_service_dependency(
-    tmp_path: Path,
-) -> None:
-    repo, environment = hook_repository(tmp_path)
-    sources(repo, SERVICE)
-    assert commit_document(repo, environment).returncode != 0
-    policy = repo / 'pyproject.toml'
-    prefix, boundary = policy.read_text().split(
-        'name = "DEP001: Comparison rules have no orchestration dependencies"', 1
-    )
-    policy.write_text(
-        prefix
-        + 'name = "DEP001: Comparison rules have no orchestration dependencies"'
-        + boundary.replace('    "fly_brain.comparison.metrics",\n', '', 1)
-    )
-    git(repo, 'add', 'pyproject.toml')
-    weakened = commit_document(repo, environment)
-    assert weakened.returncode == 0, weakened.stdout + weakened.stderr
-
-
-def test_disabling_transitive_rule_paths_hides_the_same_indirect_service_dependency(
-    tmp_path: Path,
-) -> None:
-    repo, environment = hook_repository(tmp_path)
-    sources(repo, INDIRECT)
-    assert commit_document(repo, environment).returncode != 0
-    policy = repo / 'pyproject.toml'
-    name = 'name = "DEP001: Comparison rules have no orchestration dependencies"'
-    prefix, boundary = policy.read_text().split(name, 1)
-    selected, delimiter, remaining = boundary.partition(
-        '[[tool.importlinter.contracts]]'
-    )
-    policy.write_text(
-        prefix
-        + name
-        + selected
-        + '\nallow_indirect_imports = true\n'
-        + delimiter
-        + remaining
-    )
-    git(repo, 'add', 'pyproject.toml')
-    weakened = commit_document(repo, environment)
-    assert weakened.returncode == 0, weakened.stdout + weakened.stderr

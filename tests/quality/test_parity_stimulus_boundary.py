@@ -15,7 +15,7 @@ TARGETS = (
     'fly_brain.simulation.stimuli',
     'fly_brain.simulation.storage',
 )
-CONTRACT = 'DEP003/ROLE005: Parity uses owned stimulus services'
+CONTRACT = 'Parity uses owned stimulus services'
 CONFIG = f'''[tool.importlinter]
 root_package = "fly_brain"
 include_external_packages = true
@@ -87,6 +87,7 @@ def test_private_stimulus_imports_reject_native_paths_and_accept_neutral_values(
     assert result == 0, output
 
 
+@pytest.mark.checker
 def test_transitive_reexport_rejection_and_independent_weakening(
     tmp_path: Path,
 ) -> None:

@@ -17,7 +17,7 @@ from tests.quality.test_reference_silencing_boundary import typed
 from tests.support.observation_fixtures import fixture
 
 pytestmark = pytest.mark.integration
-RULE = 'DEP001: Host input audit uses injected file storage'
+RULE = 'Host input audit uses injected file storage'
 SOURCES = (
     'fly_brain.qualification.input_audit_service',
     'fly_brain.qualification.input_audit_rules',

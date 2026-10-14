@@ -7,7 +7,7 @@ from pathlib import Path
 from tests.quality.support import PROJECT, git, repository, run
 
 GOOD = 'from fly_brain.simulation.models import VALUE\n'
-BAD = 'from fly_brain.simulation.backend import VALUE\n'
+BAD = 'from fly_brain.qualification.adapters import VALUE\n'
 SERVICE = 'src/fly_brain/simulation/service.py'
 
 

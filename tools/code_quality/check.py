@@ -58,9 +58,6 @@ def tasks(plan: Plan, stage: Stage) -> tuple[tuple[str, tuple[str, ...]], ...]:
                     'python',
                     '-m',
                     'tools.code_quality.ownership',
-                    '--base',
-                    plan.base or 'HEAD',
-                    *plan.changed,
                 ),
             )
         )
