@@ -381,6 +381,25 @@ Worker metrics improve mean 15.06 to 15.05 and health 40.41 to 40.44 across
 repaired without removed operands or waivers. The indirect absolute-count
 mapping dependency and mixed provider roles remain unresolved.
 
+The nine-file late fan-in count boundary is pushed at `992f5a4` after normal
+commit/push checks and exact hosted run `38579010733`: nine changed inputs,
+33 affected Python files, seven reviewed sources and 359 retained records.
+Its quality step took 17 seconds, with no pytest and zero artifacts. Twenty-six
+distinct affected controls are qualified; three initial unused-import fixture
+failures were repaired, and only five controls with changed inputs repeated.
+Worker metrics improve mean 15.03 to 15.02 and health 40.52 to 40.60 across
+390 to 391 files, with maximum 96 unchanged.
+
+The probe preserves preparation → required count read → pure completion →
+grouping → case construction and original failure order. Four host cases prove
+32 exact field snapshots, 28 aliases and three matched errors. Numerical,
+evaluator and NPZ-writer syntax remains exact after seam binding; no backend
+trajectory ran or produced a replay archive. Six report source keys are retained
+and four reviewed provider/seed modules added; this bounded capture is not
+complete execution provenance. Five protected hashes and seven fixtures remain
+exact. The configured mapping guard now covers both input-pattern and probe
+modules; all six findings and complete structural/scientific limits remain.
+
 The five-file native type-import guard is pushed at `c4084be` after normal
 commit/push checks and exact hosted run `38568072694`: five changed inputs,
 one affected Python source, one reviewed source and 361 retained records.
@@ -410,13 +429,12 @@ canonical live session. Actual Module, scope, symbol-table and original-file
 identity guards stay intact; a measured per-file metric failure justifies one
 separate enrollment owner, without a metric waiver. The historical 14-path
 declaration tree remains unaccepted; dormant occurrences and lexical-versus-resolved identities must stay
-explicit. A implements the bounded preparation → late absolute-count read →
-pure completion split in existing input-pattern/probe/factory files, with the
-exact mapping contract and named report-source capture. Grouping injection is
-delivered and cannot alone establish a complete module guard.
+explicit. A has delivered the preparation → late count read → pure completion
+boundary and exact mapping contract. It assesses the literal rule classification
+of the existing Advance finding without source edits or numerical changes.
 C has delivered the four `NetworkCase` selector annotations and authored
-catalog elements. It assesses the next qualification-side row selector boundary
-without edits. Passed-tuple/scalar identity, values/order and host projections
+catalog elements. It implements only the three qualification-side target
+annotations in Torch setup/observation and their existing consumers. Passed-tuple/scalar identity, values/order and host projections
 are preserved; historical cross-site literal-tuple coalescing is outside the
 contract. Canonical batch labels are delivered. Local array positions, collectors, digest
 streams and original numeric behavior remain unchanged. Positional artifact
