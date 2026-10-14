@@ -33,8 +33,8 @@ source/dependency evidence and run meaningful regressions once; repeat only
 changed or failed controls. Automatic regression scheduling and a persistent
 metric verdict cache are outside the minimum solution.
 
-The user also requires incremental coherent commits. Current source checkpoint
-`83d7252` contains four focused local commits:
+The user also requires incremental coherent commits. The following focused
+workflow commits are delivered to `origin/main`:
 
 - `fd55d95`: scoped ownership review, with metadata parsing separated from source
   review. The existing controls and affected relocation/weakening controls passed;
@@ -81,8 +81,11 @@ inputs and 89 affected Python files. Inputs, formatting/lint, strict typing,
 90 import module/contract checks, ownership of 27 selected sources and every
 commit/merge-parent metric comparison all passed in 12.85 seconds. Regression
 tests were not replayed. The two worker holds are released against this checked
-parent. Remote delivery and an actually scoped hosted result for the correction
-are still pending; the earlier zero-file result remains explicitly incomplete.
+parent. The correction and source-preservation clarification are pushed through
+`6e64ca5`. Exact hosted run `38539655453` passed with seven changed inputs and
+seven affected Python files; its quality step took 21 seconds and its complete
+job took 87 seconds. It ran no pytest and uploaded zero artifacts. The earlier
+zero-file result remains explicitly incomplete.
 
 The parent owns shared policy, canonical commands/configuration, retention,
 documentation and serial integration. Recovery is complete. The same worker
@@ -144,8 +147,10 @@ The following components are committed on parent `main`:
 | Experiment, stimulus and observation-session identifiers | `e41d03f` | 346 worker input/type cases and 102 native cases; 43 normalized modules and 239 old assertions preserved |
 | Native partial construction facts | `1610c6a` | 44 worker cases and 19 independent parent controls; static constructor/capture facts only |
 | Qualification case trial labels | `f27a75b` | 193 worker cases and three native checks; all 52 catalog values/order unchanged |
+| Consumer-owned parity stimulus preparation | `eb6fe8f`, `86038e0` | Both catalog reads, seed, persistence/silencing order and errors retained; sixth live import contract checked |
+| Owned spike array identifiers | `f20d6ec` | 106 CPU cases and one real Metal case passed once; eight normalized modules, 67 original assertions, array identity/bytes/layout and seven fixtures preserved |
 
-Every component passed its normal full commit checks and default cleanup. Joined
+Every component passed its required normal commit checks and default cleanup. Joined
 metric regressions were repaired without thresholds, suppressions or removed
 production guards. At `f27a75b`, ownership reconciles 321 Python/stub sources with
 zero mapping findings and six recorded findings. Native metrics cover 342 files:
@@ -174,15 +179,21 @@ changes preserve numerical bodies and old assertions; NewType supplies nominal
 typing without new runtime validation or complete conversion-origin proof.
 No full native proof bundle or scientific matrix was recreated.
 
-`38ce609` is pushed to `origin/main`; its exact hosted run `38505093226` passed
-all steps. It repairs the preceding hosted compiler-layout failure. The four
-later component commits and this documentation update still require normal push
-and exact-revision hosted checks before remote delivery is reported complete.
+All listed source components are pushed to `origin/main` through `f20d6ec`.
+The spike identifier component passed the installed normal commit and push hooks
+and default cleanup without replaying its completed regressions. Delivery uses
+one ten-file component commit; the worker's earlier private ancestry is preserved
+without republishing already delivered refactors. Exact hosted run `38543167157`
+passed with ten changed inputs, 159 affected Python files, nine reviewed sources
+and 69 import module/contract checks. The quality step took 26 seconds; the job
+took 82 seconds, with no pytest and zero artifacts. `38ce609` previously repaired
+the hosted compiler-layout failure in exact passing run `38505093226`.
 
 ## Remaining order and unresolved decisions
 
-1. Deliver the current checked components and documentation; verify the exact
-   remote revision and leave no expired output exception.
+1. Finish and integrate the reviewed reference-default extraction with its
+   preserved native evidence and actual quality checks. Verify exact hosted
+   revisions and leave no expired output exception.
 2. Complete native declaration-only observation and reviewed live version 2
    contexts. A source-only prototype observes 314 worker sources, but raw native
    binding tables omit dormant declarations and mix import target URIs with
@@ -190,11 +201,11 @@ and exact-revision hosted checks before remote delivery is reported complete.
    Await the native TOML parser before observing canonical configuration. The
    existing manual diagnostic rules match strict rules, but canonical import,
    virtual-environment and source-origin equivalence remain unproved.
-3. Repair the selected qualification parity path's private experiment lookup,
-   neuron mapping and stimulus storage dependencies through consumer-owned ports.
-   Preserve both catalog-read positions, seed 20261004, generation/persistence/
-   silencing order and errors. This follows the committed case-trial migration;
-   the separate private `torch_setup` mapping call and wider provider roles remain.
+3. Repair the separate private `torch_setup` mapping call and wider provider
+   roles after checked source-preserving separation. The selected parity path's
+   experiment lookup, neuron mapping and stimulus storage dependencies are
+   already consumer-owned; preserve both catalog-read positions, seed 20261004,
+   generation/persistence/silencing order and errors.
 4. Complete callable/slot origins, implicit calls, runtime targets, source/export
    predicates, injection/lifetime checks, control flow/failure disposition and
    alias/effect closure. Bind every applicable rule into the required gate with
