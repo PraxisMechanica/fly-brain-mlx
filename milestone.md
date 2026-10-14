@@ -97,11 +97,12 @@ does not replace scientific qualification.
    limitations before working outputs expire. Deliver incremental hooked commits
    to `origin/main`, require successful exact-revision CI and a clean tree.
 
-Progress: **10%** of this implementation goal, based on an explicit work breakdown:
+Progress: **12%** of this implementation goal, based on an explicit work breakdown:
 baseline/scope inventory 10%, end-to-end workflows 10%, local scientific gates
 15%, demonstrated implementation repairs 15%, 52-case qualification 30%, batches
-10%, final evidence/delivery 10%. Only the inventory credit is currently earned;
-scientific acceptance is 0/52, not 10%. Reassess weights if measured work changes
+10%, final evidence/delivery 10%. Inventory earns 10 points and the fresh input
+and independent-reference checks earn two of the local-gate points;
+scientific acceptance remains 0/52. Reassess weights if measured work changes
 the scope; do not derive scientific acceptance from code coverage or test counts.
 
 Remaining-time estimate (90% confidence planning interval): **7–42 elapsed days**
@@ -111,6 +112,24 @@ performance claim. The matrix alone requires 1,231,000 steps per engine per
 repetition (2,462,000 with fresh repeats), plus local and batch work. Replace this
 interval with measured throughput and revised repair uncertainty after the first
 paired case; revise again after each material implementation/measurement result.
+
+Current timing evidence: ordinary full-connectome observation proof blocks
+0–480 took 60.1475 seconds between writes, or 0.12531 seconds per step including
+proof serialization. This is a partial producer measurement, not an ordinary
+simulation benchmark or paired-observer throughput. It does not yet justify
+narrowing the interval; full paired timing and repair uncertainty remain open.
+
+Fresh CPU reference diagnostics passed on this host. `probe-replay` regenerated,
+reloaded and prefix-checked canonical fixture hash
+`f1da12a8a7f3a44198fe04a385f897f991eadea36f680bf5d668ed19343fa09d`;
+two NumPy runs and two independent C++ builds each produced 43 spikes, zero
+state difference and exact discrete/last-spike/repeat equality. The threshold
+quarter-ULP counterexample and serial cancellation limitation remain explicit.
+`inspect-reference` reproduced the native phase ordering and unchanged PyTorch
+conductance/voltage delay steps 20/21. No reference arithmetic was changed.
+These diagnostic reports were inspected before their verification consumers
+finished; their raw working outputs expire under the normal cleanup policy.
+Their bounded conclusions are not full-network or MLX acceptance.
 
 Execution holds: full-matrix acceptance and production adoption of new arithmetic
 remain held until their gates pass. No hold prevents fresh baseline diagnosis or
@@ -151,7 +170,7 @@ callback removals. The parent completed the retired-platform removal directly in
 local checks and are pushed. No parent test replay was added. Hosted verification
 passed for all three exact code revisions; the evidence record contains run IDs.
 
-## Bounded completion criteria
+## Historical refactor completion criteria
 
 - Keep simulation, qualification and comparison responsibilities understandable;
   retain useful boundaries and remove duplication only when it has an actual
@@ -254,8 +273,9 @@ contract, in this order:
 3. Complete the prescribed 52-case paired matrix and sugar/P9 four-trial batch
    comparisons, with fresh repeats and causal diagnosis of any failed gate.
 
-There is no prerequisite to finish the retired analyzer plan. The current agent
-does not resume simulator implementation after this cleanup handoff.
+There is no prerequisite to finish the retired analyzer plan. The former cleanup
+agent stopped implementation at this handoff. The current implementation phase
+is governed by the newer task and criteria above.
 
 The complete 52-case scientific matrix and prescribed sugar/P9 four-trial
 comparisons remain unfinished. Removed historical records do not establish current
