@@ -16,6 +16,7 @@ from fly_brain.qualification.adapters.paired_collect import collect as collect_p
 from fly_brain.qualification.adapters.replay_evidence import verify
 from fly_brain.qualification.adapters.torch_collect import collect as collect_cpu
 from fly_brain.qualification.adapters.torch_setup import prepare as prepare_cpu
+from fly_brain.simulation.identifiers import NeuronRow, TrialId
 from fly_brain.simulation.models import Stimulus
 from fly_brain.simulation.observation_module import build_observation_sessions
 from tests.qualification.test_mlx_observer import fixture
@@ -45,13 +46,13 @@ def test_actual_batch_native_evidence_matches_fresh_independent_trial_collection
     )
     output.mkdir(parents=True, exist_ok=False)
     execution, read_rows = build_observation_sessions(
-        case.connectome, case.targets, (3,), precision
+        case.connectome, case.targets, (NeuronRow(3),), precision
     )
     stimulus = Stimulus(
         case.events,
         case.targets,
         (200.0,) * len(case.targets),
-        (0, 1, 2, 3),
+        (TrialId(0), TrialId(1), TrialId(2), TrialId(3)),
         0,
         0,
         hashlib.sha256(case.events.tobytes()).hexdigest(),
@@ -79,7 +80,7 @@ def test_actual_batch_native_evidence_matches_fresh_independent_trial_collection
             events,
             case.targets,
             stimulus.rates_hz,
-            (trial,),
+            (TrialId(trial),),
             0,
             0,
             hashlib.sha256(events.tobytes()).hexdigest(),

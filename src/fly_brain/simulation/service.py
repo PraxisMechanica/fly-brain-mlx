@@ -2,6 +2,7 @@ from collections.abc import Callable
 from pathlib import Path
 
 from .experiments import EXPERIMENTS
+from .identifiers import NeuronRow, TrialId
 from .models import (
     Connectome,
     Experiment,
@@ -19,7 +20,7 @@ def simulate(
     request: SimulationRequest,
     load: Callable[[Path], tuple[Connectome, InputPin]],
     persist: Callable[[Path, Experiment, InputPin, Stimulus], Stimulus],
-    execute: Callable[[Connectome, Stimulus, tuple[int, ...]], SimulationRun],
+    execute: Callable[[Connectome, Stimulus, tuple[NeuronRow, ...]], SimulationRun],
     write: Callable[
         [
             SimulationRequest,
@@ -44,7 +45,7 @@ def simulate(
         connectome,
         experiment,
         round(request.duration_s * 10000),
-        tuple(range(request.trials)),
+        tuple(map(TrialId, range(request.trials))),
         request.seed,
     )
     silenced = neuron_indices(connectome, experiment.silenced_ids)

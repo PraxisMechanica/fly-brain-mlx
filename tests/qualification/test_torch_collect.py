@@ -8,6 +8,7 @@ from fly_brain.qualification.adapters.replay_evidence import cpu as verify_repea
 from fly_brain.qualification.adapters.torch_collect import collect
 from fly_brain.qualification.adapters.torch_observer import observe
 from fly_brain.qualification.adapters.torch_setup import prepare
+from fly_brain.simulation.identifiers import TrialId
 from tests.support.observation_fixtures import fixture, stimulus_for
 
 pytestmark = [pytest.mark.integration, pytest.mark.reference]
@@ -19,7 +20,10 @@ def test_cpu_collection_preserves_all_native_state_hashes_and_trial_spikes(
 ) -> None:
     case = fixture(empty)
     stimulus = stimulus_for(
-        case.events, case.targets, (200.0,) * len(case.targets), (0, 1, 2, 3)
+        case.events,
+        case.targets,
+        (200.0,) * len(case.targets),
+        (TrialId(0), TrialId(1), TrialId(2), TrialId(3)),
     )
     model = prepare(case.connectome, case.targets, (3,), 4)
     expected = list(observe(model, case.events, case.targets))

@@ -14,6 +14,7 @@ from fly_brain.qualification.session_blocks import SessionBlock
 from fly_brain.qualification.session_observer import observe_session
 from fly_brain.simulation.backend import core
 from fly_brain.simulation.backend.bucketed import prepare
+from fly_brain.simulation.identifiers import NeuronRow, TrialId
 from fly_brain.simulation.models import Connectome, Stimulus
 from fly_brain.simulation.observation_module import build_observation_sessions
 from tests.support.legacy_mlx_ledger import EventLedger
@@ -29,7 +30,9 @@ def test_batch_collection_preserves_every_trial_native_phase_queue_and_spike(
     precision: str, tmp_path: Path, empty: bool
 ) -> None:
     case = fixture(empty)
-    stimulus = stimulus_for(case.events, case.targets, (), (0, 1, 2, 3))
+    stimulus = stimulus_for(
+        case.events, case.targets, (), (TrialId(0), TrialId(1), TrialId(2), TrialId(3))
+    )
     execution = prepare(case.connectome, case.targets, (3,), precision)
     expected = list(
         observe(
@@ -41,7 +44,7 @@ def test_batch_collection_preserves_every_trial_native_phase_queue_and_spike(
     )
     outputs = (tmp_path / 'first', tmp_path / 'repeat')
     factory, _ = build_observation_sessions(
-        case.connectome, case.targets, (3,), precision
+        case.connectome, case.targets, (NeuronRow(3),), precision
     )
     for output in outputs:
         mlx_batch_collect.collect(factory, case.connectome, stimulus, output)
@@ -107,13 +110,21 @@ def test_failed_actual_ledger_check_cannot_be_recorded_as_success(
     factory, _ = build_observation_sessions(
         case.connectome, case.targets, (), precision
     )
-    stimulus = Stimulus(case.events, case.targets, (), (0, 1, 2, 3), 0, 0, 'fixture')
+    stimulus = Stimulus(
+        case.events,
+        case.targets,
+        (),
+        (TrialId(0), TrialId(1), TrialId(2), TrialId(3)),
+        0,
+        0,
+        'fixture',
+    )
 
     def fault(
         factory: ObservationSessionFactory,
         connectome: Connectome,
-        targets: tuple[int, ...],
-        trials: tuple[int, ...],
+        targets: tuple[NeuronRow, ...],
+        trials: tuple[TrialId, ...],
         events: NDArray[np.uint8],
     ) -> Generator[SessionBlock, None, None]:
         for block in observe_session(factory, connectome, targets, trials, events):

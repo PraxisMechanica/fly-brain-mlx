@@ -20,6 +20,7 @@ from fly_brain.qualification.adapters.paired_observer import (
 from fly_brain.qualification.adapters.reference_queues import ReferenceQueues
 from fly_brain.qualification.causality import CausalAudit
 from fly_brain.qualification.session_observer import observe_session
+from fly_brain.simulation.identifiers import NeuronRow, TrialId
 from fly_brain.simulation.observation_module import build_observation_sessions
 from tests.qualification.test_mlx_observer import fixture
 from tests.support.session_block_values import replace_block
@@ -36,13 +37,13 @@ def paired(
     events = case.events[:1]
     job = build(case.connectome, case.targets, (3,), events[0], tmp_path / 'build')
     factory, _ = build_observation_sessions(
-        case.connectome, case.targets, (3,), precision
+        case.connectome, case.targets, (NeuronRow(3),), precision
     )
     mlx = observe_session(
         factory,
         case.connectome,
         case.targets,
-        (0,),
+        (TrialId(0),),
         events,
     )
     ledger = ReferenceQueues(case.connectome.sources, 6, events[0])

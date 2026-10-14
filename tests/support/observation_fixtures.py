@@ -6,7 +6,12 @@ from numpy.typing import NDArray
 
 from fly_brain.qualification.session_blocks import SessionBlock
 from fly_brain.qualification.session_observer import observe_session
-from fly_brain.simulation.identifiers import FlyWireIds64, NeuronRows32
+from fly_brain.simulation.identifiers import (
+    FlyWireIds64,
+    NeuronRow,
+    NeuronRows32,
+    TrialId,
+)
 from fly_brain.simulation.models import Connectome, Stimulus
 from fly_brain.simulation.observation_module import build_observation_sessions
 from fly_brain.simulation.observations import ObservationInitialState
@@ -15,7 +20,7 @@ from fly_brain.simulation.observations import ObservationInitialState
 @dataclass(frozen=True)
 class Fixture:
     connectome: Connectome
-    targets: tuple[int, ...]
+    targets: tuple[NeuronRow, ...]
     events: NDArray[np.uint8]
 
 
@@ -32,7 +37,7 @@ def fixture(empty: bool = False) -> Fixture:
         counts,
         counts.astype(np.float64) * 0.275,
     )
-    targets = () if empty else (0, 0, 1)
+    targets = () if empty else (NeuronRow(0), NeuronRow(0), NeuronRow(1))
     events = np.zeros((4, 101, len(targets)), dtype=np.uint8)
     if targets:
         for trial in range(4):
@@ -57,14 +62,14 @@ def session_blocks(
     case: Fixture, precision: str, block_size: int
 ) -> list[SessionBlock]:
     factory, _ = build_observation_sessions(
-        case.connectome, case.targets, (3,), precision
+        case.connectome, case.targets, (NeuronRow(3),), precision
     )
     return list(
         observe_session(
             factory,
             case.connectome,
             case.targets,
-            tuple(range(case.events.shape[0])),
+            tuple(map(TrialId, range(case.events.shape[0]))),
             case.events,
             initial(case),
             block_size,
@@ -74,9 +79,9 @@ def session_blocks(
 
 def stimulus_for(
     events: NDArray[np.uint8],
-    targets: tuple[int, ...],
+    targets: tuple[NeuronRow, ...],
     rates_hz: tuple[float, ...],
-    trial_indices: tuple[int, ...],
+    trial_indices: tuple[TrialId, ...],
 ) -> Stimulus:
     return Stimulus(
         events,

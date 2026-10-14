@@ -8,7 +8,12 @@ import pytest
 from pydantic import ValidationError
 
 from fly_brain.comparison.storage import read_spikes
-from fly_brain.simulation.identifiers import FlyWireIds64, NeuronRows32
+from fly_brain.simulation.identifiers import (
+    FlyWireIds64,
+    FlyWireNeuronId,
+    NeuronRows32,
+    TrialId,
+)
 from fly_brain.simulation.models import (
     Connectome,
     Experiment,
@@ -38,8 +43,8 @@ def test_persisted_schedule_reloads_exact_bytes_and_trial_provenance(
     tmp_path: Path,
 ) -> None:
     c = network()
-    experiment = Experiment('p9', 1, 1, (20,), (100.0,))
-    stimulus = generate(c, experiment, 1000, (2, 4))
+    experiment = Experiment('p9', 1, 1, (FlyWireNeuronId(20),), (100.0,))
+    stimulus = generate(c, experiment, 1000, (TrialId(2), TrialId(4)))
     output = tmp_path / 'run'
     restored = persist_stimulus(
         output, experiment, InputPin('csv', 'parquet', 2, 0), stimulus
@@ -60,8 +65,8 @@ def test_spike_export_preserves_original_types_and_is_readable_when_empty(
     tmp_path: Path, count: int
 ) -> None:
     c = network()
-    experiment = Experiment('p9', 1, 1, (20,), (100.0,))
-    stimulus = generate(c, experiment, 1000, (0,))
+    experiment = Experiment('p9', 1, 1, (FlyWireNeuronId(20),), (100.0,))
+    stimulus = generate(c, experiment, 1000, (TrialId(0),))
     output = tmp_path / 'run'
     pin = InputPin('csv', 'parquet', 2, 0)
     persist_stimulus(output, experiment, pin, stimulus)
@@ -96,7 +101,7 @@ def test_spike_export_preserves_original_types_and_is_readable_when_empty(
 def test_export_timings_use_the_injected_clock(tmp_path: Path) -> None:
     c = network()
     experiment = Experiment('silent', 0, 0, (), ())
-    stimulus = generate(c, experiment, 10, (0,))
+    stimulus = generate(c, experiment, 10, (TrialId(0),))
     pin = InputPin('csv', 'parquet', 2, 0)
     request = SimulationRequest(tmp_path, tmp_path / 'run', 'silent', 0.001, 1, 0)
     persist_stimulus(request.output, experiment, pin, stimulus)

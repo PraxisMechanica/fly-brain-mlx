@@ -4,6 +4,7 @@ import numpy as np
 import pytest
 
 from fly_brain.qualification.session_expectations import expect_step, initial_ledger
+from fly_brain.simulation.identifiers import TrialId
 from fly_brain.simulation.observations import (
     NativeComparison,
     NativeObservation,
@@ -24,7 +25,7 @@ def test_actual_phase_bits_and_due_identities_are_detached_and_immutable() -> No
     )
     edges = np.array([2, 0], dtype=np.int32)
     fields['pre_v'] = bits
-    actual = NativeObservation(1, (0,), fields, (edges,), ('digest',))
+    actual = NativeObservation(1, (TrialId(0),), fields, (edges,), ('digest',))
     before = bits.tobytes(), edges.tobytes()
     bits[:] = 0
     edges[:] = 1
@@ -69,7 +70,7 @@ def test_native_comparisons_require_all_eight_supplied_gates(columns: int) -> No
     with pytest.raises(ValueError, match='every supplied gate'):
         NativeComparison(
             1,
-            (0,),
+            (TrialId(0),),
             np.ones((1, columns), dtype=np.bool_),
             np.ones((1, 19), dtype=np.bool_),
         )
@@ -85,7 +86,7 @@ def test_queue_and_comparison_operands_keep_detached_read_only_ownership() -> No
         (),
     )
     queue = np.ones((19, 1, 3), dtype=np.bool_)
-    actual = PhysicalQueueObservation(1, (0,), queue)
+    actual = PhysicalQueueObservation(1, (TrialId(0),), queue)
     original = actual.queue.tobytes()
     queue[:] = False
     assert actual.queue.tobytes() == original

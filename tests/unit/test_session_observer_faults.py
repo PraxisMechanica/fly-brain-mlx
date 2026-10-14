@@ -8,6 +8,7 @@ from fly_brain.qualification.session_expectations import (
     require_configuration,
 )
 from fly_brain.qualification.session_observer import observe_session
+from fly_brain.simulation.identifiers import TrialId
 from fly_brain.simulation.observations import (
     NativeComparison,
     NativeObservation,
@@ -34,7 +35,7 @@ class Session:
             2,
             19,
             0,
-            (0,),
+            (TrialId(0),),
             network.sources,
             network.destinations,
             np.array([], dtype=np.int32),
@@ -59,7 +60,7 @@ class Session:
         if self.fault == 'trial':
             return NativeObservation(
                 actual.completed_steps,
-                (1,),
+                (TrialId(1),),
                 actual.fields,
                 actual.due_edges,
                 actual.due_sha256,
@@ -76,7 +77,7 @@ class Session:
             queues[0, 0] = False
         return NativeComparison(
             self.step + int(self.fault == 'comparison-clock'),
-            (1,) if self.fault == 'comparison-trial' else (0,),
+            (TrialId(1),) if self.fault == 'comparison-trial' else (TrialId(0),),
             gates,
             queues[:, :-1] if self.fault == 'omitted-slot' else queues,
         )
@@ -86,7 +87,7 @@ class Session:
         queues = np.zeros((19, 1, 3), dtype=np.bool_)
         if self.fault == 'boundary-slot':
             queues[0, 0, 0] = True
-        return PhysicalQueueObservation(self.step, (0,), queues)
+        return PhysicalQueueObservation(self.step, (TrialId(0),), queues)
 
 
 @pytest.mark.parametrize(
@@ -108,7 +109,7 @@ def test_missing_reordered_or_wrong_comparisons_never_advance_or_emit_accepted_b
     session = Session(fault)
 
     def create(
-        trial_indices: tuple[int, ...], initial: ObservationInitialState | None
+        trial_indices: tuple[TrialId, ...], initial: ObservationInitialState | None
     ) -> ObservationSession:
         return session
 
@@ -119,7 +120,7 @@ def test_missing_reordered_or_wrong_comparisons_never_advance_or_emit_accepted_b
                 factory,
                 connectome(),
                 (),
-                (0,),
+                (TrialId(0),),
                 np.zeros((1, 2, 0), dtype=np.uint8),
                 block_size=1,
             )
@@ -149,7 +150,7 @@ def test_qualification_pins_actual_maps_clocks_trials_and_every_queue_slot(
         configuration.neurons,
         18 if field == 'queue_slots' else configuration.queue_slots,
         1 if field == 'initial_step' else configuration.initial_step,
-        (1,) if field == 'trial_indices' else configuration.trial_indices,
+        (TrialId(1),) if field == 'trial_indices' else configuration.trial_indices,
         configuration.sources[::-1] if field == 'sources' else configuration.sources,
         configuration.destinations[::-1]
         if field == 'destinations'
@@ -166,5 +167,10 @@ def test_qualification_pins_actual_maps_clocks_trials_and_every_queue_slot(
     )
     with pytest.raises(ValueError, match='independent pinned inputs'):
         require_configuration(
-            actual, network, (), (0,), None, initial_ledger(network, (), 1, None)
+            actual,
+            network,
+            (),
+            (TrialId(0),),
+            None,
+            initial_ledger(network, (), 1, None),
         )

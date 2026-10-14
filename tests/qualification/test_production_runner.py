@@ -6,7 +6,12 @@ import numpy as np
 import pytest
 
 from fly_brain.simulation.backend.runner import run
-from fly_brain.simulation.identifiers import FlyWireIds64, NeuronRows32
+from fly_brain.simulation.identifiers import (
+    FlyWireIds64,
+    NeuronRow,
+    NeuronRows32,
+    TrialId,
+)
 from fly_brain.simulation.models import Connectome, Stimulus
 
 pytestmark = [pytest.mark.integration, pytest.mark.metal]
@@ -26,9 +31,9 @@ def test_production_collection_keeps_trial_identity_and_steps_across_blocks(
     events[0, :, 1] = 0
     stimulus = Stimulus(
         events,
-        (0, 1),
+        (NeuronRow(0), NeuronRow(1)),
         (10000.0, 10000.0),
-        (2, 4),
+        (TrialId(2), TrialId(4)),
         20261004,
         2,
         hashlib.sha256(events.tobytes()).hexdigest(),

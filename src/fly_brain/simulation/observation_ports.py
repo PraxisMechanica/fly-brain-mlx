@@ -3,6 +3,7 @@ from typing import Protocol
 import numpy as np
 from numpy.typing import NDArray
 
+from .identifiers import TrialId
 from .observations import (
     NativeComparison,
     NativeObservation,
@@ -26,5 +27,8 @@ class ObservationSession(Protocol):
 
 class ObservationSessionFactory(Protocol):
     def __call__(
-        self, trial_indices: tuple[int, ...], initial: ObservationInitialState | None, /
+        self,
+        trial_indices: tuple[TrialId, ...],
+        initial: ObservationInitialState | None,
+        /,
     ) -> ObservationSession: ...

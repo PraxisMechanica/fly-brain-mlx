@@ -5,6 +5,7 @@ from fly_brain.infrastructure.seeded_random import permutation, uniforms
 from fly_brain.qualification.fan_in import FanInCases
 from fly_brain.qualification.fan_in_service import prepare_masks
 from fly_brain.qualification.module import build_fan_in_cases
+from fly_brain.simulation.identifiers import TrialId
 from fly_brain.simulation.models import Connectome, Experiment, Stimulus
 from fly_brain.simulation.module import build_stimulus
 
@@ -13,7 +14,7 @@ def generate(
     connectome: Connectome,
     experiment: Experiment,
     steps: int,
-    trials: tuple[int, ...],
+    trials: tuple[TrialId, ...],
     seed: int = 20261004,
 ) -> Stimulus:
     operation = build_stimulus(uniforms)

@@ -8,7 +8,12 @@ import pytest
 
 from fly_brain.qualification.adapters.observer_stream import StreamShape
 from fly_brain.qualification.adapters.reference_identity import create, file_record
-from fly_brain.simulation.identifiers import FlyWireIds64, NeuronRows32
+from fly_brain.simulation.identifiers import (
+    FlyWireIds64,
+    NeuronRow,
+    NeuronRows32,
+    TrialId,
+)
 from fly_brain.simulation.models import Connectome, Stimulus
 from tests.quality.test_reference_digest import LegacyProducer, preserved_identity
 
@@ -62,7 +67,9 @@ def test_reference_identity_binds_each_scientific_input_category(
         np.asarray([1, -1], dtype=np.int32),
         np.asarray([0.275, -0.275], dtype=np.float64),
     )
-    stimulus = Stimulus(np.zeros((1, 2, 1), np.uint8), (0,), (200,), (0,), 0, 0, '')
+    stimulus = Stimulus(
+        np.zeros((1, 2, 1), np.uint8), (NeuronRow(0),), (200,), (TrialId(0),), 0, 0, ''
+    )
     shape = StreamShape(3, 2, 1, (2, 1), 2)
     context = {
         name: 'original'
@@ -110,7 +117,7 @@ def test_unused_candidate_executable_is_separate_from_sealed_producer(
         np.empty(0, np.int32),
         np.empty(0, np.float64),
     )
-    stimulus = Stimulus(np.zeros((1, 2, 0), np.uint8), (), (), (0,), 0, 0, '')
+    stimulus = Stimulus(np.zeros((1, 2, 0), np.uint8), (), (), (TrialId(0),), 0, 0, '')
     shape = StreamShape(1, 2, 0, (), 2)
     (tmp_path / 'main').write_bytes(b'original executable')
     before = file_record(tmp_path / 'main')

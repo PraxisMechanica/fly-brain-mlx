@@ -24,6 +24,7 @@ from fly_brain.qualification.causality import (
     advance_audit,
 )
 from fly_brain.qualification.session_blocks import SessionBlock
+from fly_brain.simulation.identifiers import TrialId
 from fly_brain.simulation.observations import HostArray
 from tests.support.session_block_values import replace_block
 
@@ -154,7 +155,7 @@ def block(
     mlx = SessionBlock(
         begin,
         rows,
-        (0,),
+        (TrialId(0),),
         actual,
         np.ones((rows, 1, 30), dtype=np.bool_),
         ('queue',),

@@ -14,6 +14,7 @@ from fly_brain.simulation.backend import core
 from fly_brain.simulation.backend.arrays import as_host, boolean_input, evaluate
 from fly_brain.simulation.backend.bucketed import prepare
 from fly_brain.simulation.backend.engines import Advance, Execution
+from fly_brain.simulation.identifiers import TrialId
 from fly_brain.simulation.models import Connectome, Stimulus
 from fly_brain.simulation.observation_module import build_observation_sessions
 from fly_brain.simulation.observations import (
@@ -69,7 +70,7 @@ class RecordingFactory:
 
     def __call__(
         self,
-        trial_indices: tuple[int, ...],
+        trial_indices: tuple[TrialId, ...],
         initial: ObservationInitialState | None = None,
     ) -> ObservationSession:
         return RecordingSession(self.factory(trial_indices, initial), self.recorder)

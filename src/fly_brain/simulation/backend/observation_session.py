@@ -4,6 +4,7 @@ import mlx.core as mx
 import numpy as np
 from numpy.typing import NDArray
 
+from fly_brain.simulation.identifiers import TrialId
 from fly_brain.simulation.observations import (
     NativeComparison,
     NativeObservation,
@@ -35,7 +36,7 @@ class NativeObservationSession:
         advance: Advance,
         network: core.Network,
         state: core.State,
-        trial_indices: tuple[int, ...],
+        trial_indices: tuple[TrialId, ...],
     ) -> None:
         self._advance = advance
         self._network = network

@@ -2,6 +2,7 @@ from collections.abc import Callable
 from functools import partial
 from typing import TYPE_CHECKING
 
+from .identifiers import NeuronRow, TrialId
 from .models import Connectome
 from .observation_ports import ObservationSession, ObservationSessionFactory
 from .observations import ObservationInitialState, ReductionReader
@@ -11,16 +12,16 @@ if TYPE_CHECKING:
     from .backend.engines import Advance, Execution
 
     Preparation = Callable[
-        [Connectome, tuple[int, ...], tuple[int, ...], str],
+        [Connectome, tuple[NeuronRow, ...], tuple[NeuronRow, ...], str],
         tuple[Execution, ReductionReader],
     ]
     SessionConstructor = Callable[
-        [Advance, Network, State, tuple[int, ...]], ObservationSession
+        [Advance, Network, State, tuple[TrialId, ...]], ObservationSession
     ]
 
 
 def _new_session(
-    trial_indices: tuple[int, ...],
+    trial_indices: tuple[TrialId, ...],
     initial: ObservationInitialState | None,
     execution: 'Execution',
     construct: 'SessionConstructor',
@@ -42,8 +43,8 @@ def _new_session(
 
 def _build_observation_sessions(
     connectome: Connectome,
-    targets: tuple[int, ...],
-    silenced: tuple[int, ...],
+    targets: tuple[NeuronRow, ...],
+    silenced: tuple[NeuronRow, ...],
     precision: str,
     *,
     prepare: 'Preparation',
@@ -54,7 +55,7 @@ def _build_observation_sessions(
 
 
 def build_observation_assembly() -> Callable[
-    [Connectome, tuple[int, ...], tuple[int, ...], str],
+    [Connectome, tuple[NeuronRow, ...], tuple[NeuronRow, ...], str],
     tuple[ObservationSessionFactory, ReductionReader],
 ]:
     from .backend.bucketed import prepare_observed
@@ -69,8 +70,8 @@ def build_observation_assembly() -> Callable[
 
 def build_observation_sessions(
     connectome: Connectome,
-    targets: tuple[int, ...],
-    silenced: tuple[int, ...],
+    targets: tuple[NeuronRow, ...],
+    silenced: tuple[NeuronRow, ...],
     precision: str,
 ) -> tuple[ObservationSessionFactory, ReductionReader]:
     return build_observation_assembly()(connectome, targets, silenced, precision)

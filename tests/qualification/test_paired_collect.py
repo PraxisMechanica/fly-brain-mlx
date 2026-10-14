@@ -21,6 +21,7 @@ from fly_brain.qualification.adapters.paired_collect import collect
 from fly_brain.qualification.adapters.paired_observer import PairedBlock, phase_hash
 from fly_brain.qualification.adapters.pending_queues import verify as verify_pending
 from fly_brain.qualification.adapters.replay_evidence import paired as verify_repeat
+from fly_brain.simulation.identifiers import NeuronRow, TrialId
 from fly_brain.simulation.observation_module import build_observation_sessions
 from tests.support.observation_fixtures import fixture, stimulus_for
 from tests.support.session_block_values import replace_block
@@ -34,10 +35,12 @@ def test_live_collection_retains_complete_native_and_physical_replay(
 ) -> None:
     case = fixture(empty)
     events = case.events[:1]
-    stimulus = stimulus_for(events, case.targets, (200.0,) * len(case.targets), (0,))
+    stimulus = stimulus_for(
+        events, case.targets, (200.0,) * len(case.targets), (TrialId(0),)
+    )
     job = build(case.connectome, case.targets, (3,), events[0], tmp_path / 'build')
     execution, read_rows = build_observation_sessions(
-        case.connectome, case.targets, (3,), precision
+        case.connectome, case.targets, (NeuronRow(3),), precision
     )
     outputs = (tmp_path / 'first', tmp_path / 'repeat')
     for output in outputs:
@@ -155,10 +158,10 @@ def test_injected_first_budget_fault_retains_actual_inputs_and_reference_weights
 ) -> None:
     case = fixture()
     events = case.events[:1]
-    stimulus = stimulus_for(events, case.targets, (200.0,) * 3, (0,))
+    stimulus = stimulus_for(events, case.targets, (200.0,) * 3, (TrialId(0),))
     job = build(case.connectome, case.targets, (3,), events[0], tmp_path / 'build')
     execution, read_rows = build_observation_sessions(
-        case.connectome, case.targets, (3,), precision
+        case.connectome, case.targets, (NeuronRow(3),), precision
     )
     capture = CausalCapture()
     check = capture.check

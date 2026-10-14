@@ -3,12 +3,16 @@ import hashlib
 import numpy as np
 from numpy.typing import NDArray
 
+from .identifiers import FlyWireNeuronId, NeuronRow, TrialId
 from .models import Connectome, Experiment, Stimulus
 
 
-def neuron_indices(connectome: Connectome, ids: tuple[int, ...]) -> tuple[int, ...]:
+def neuron_indices(
+    connectome: Connectome, ids: tuple[FlyWireNeuronId, ...]
+) -> tuple[NeuronRow, ...]:
     lookup = {
-        int(identifier): index for index, identifier in enumerate(connectome.neuron_ids)
+        FlyWireNeuronId(int(identifier)): NeuronRow(index)
+        for index, identifier in enumerate(connectome.neuron_ids)
     }
     missing = set(ids) - lookup.keys()
     if missing:
@@ -31,7 +35,7 @@ def generate(
     connectome: Connectome,
     experiment: Experiment,
     steps: int,
-    trials: tuple[int, ...],
+    trials: tuple[TrialId, ...],
     seed: int = 20261004,
     *,
     prepared: tuple[NDArray[np.uint8], ...],

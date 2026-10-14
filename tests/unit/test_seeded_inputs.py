@@ -16,7 +16,11 @@ from fly_brain.qualification.fan_in_service import prepare_cases
 from fly_brain.qualification.input_patterns import threshold_uniforms
 from fly_brain.simulation import models
 from fly_brain.simulation.experiments import EXPERIMENTS, P9_IDS, SUGAR_IDS
-from fly_brain.simulation.identifiers import FlyWireIds64, NeuronRows32
+from fly_brain.simulation.identifiers import (
+    FlyWireIds64,
+    NeuronRows32,
+    TrialId,
+)
 from fly_brain.simulation.models import Connectome, Experiment, ExperimentName, Stimulus
 from fly_brain.simulation.stimuli import trial_events
 from fly_brain.simulation.stimulus_service import schedule
@@ -91,9 +95,12 @@ def same(left: object, right: object) -> None:
 
 @pytest.mark.parametrize('name', tuple(EXPERIMENTS))
 @pytest.mark.parametrize('seed', (0, 20261004, 91))
-@pytest.mark.parametrize('trials', ((0,), (2, 0, 4), (0, 0)))
+@pytest.mark.parametrize(
+    'trials',
+    ((TrialId(0),), (TrialId(2), TrialId(0), TrialId(4)), (TrialId(0), TrialId(0))),
+)
 def test_every_stimulus_field_matches_the_exact_original_source(
-    original: Original, name: ExperimentName, seed: int, trials: tuple[int, ...]
+    original: Original, name: ExperimentName, seed: int, trials: tuple[TrialId, ...]
 ) -> None:
     network, experiment = connectome(), EXPERIMENTS[name]
     old = original.generate(network, experiment, 137, trials, seed)
@@ -137,7 +144,7 @@ def test_trial_request_order_and_immediate_preparation_survive_shared_buffers() 
         connectome(),
         EXPERIMENTS['sugar-silenced'],
         5,
-        (2, 0, 4),
+        (TrialId(2), TrialId(0), TrialId(4)),
         31,
         draw_uniforms=draw,
     )
@@ -187,7 +194,9 @@ def test_empty_inputs_still_issue_the_original_draw_and_permutation_calls() -> N
         calls.append((seed, size))
         return permutation(seed, size)
 
-    schedule(connectome(), EXPERIMENTS['silent'], 17, (4,), 0, draw_uniforms=draw)
+    schedule(
+        connectome(), EXPERIMENTS['silent'], 17, (TrialId(4),), 0, draw_uniforms=draw
+    )
     prepare_cases(
         3,
         np.array([], dtype=np.int32),
@@ -205,7 +214,9 @@ def test_wrong_native_sample_shape_is_rejected_before_it_can_broadcast() -> None
         return np.zeros((1, size[1]), dtype=np.float64)
 
     with pytest.raises(ValueError, match='shape'):
-        schedule(connectome(), EXPERIMENTS['sugar'], 5, (0,), 31, draw_uniforms=draw)
+        schedule(
+            connectome(), EXPERIMENTS['sugar'], 5, (TrialId(0),), 31, draw_uniforms=draw
+        )
 
 
 def test_wrong_seed_reused_generator_and_substitute_permutation_lose_original_bytes(
@@ -219,7 +230,12 @@ def test_wrong_seed_reused_generator_and_substitute_permutation_lose_original_by
         return uniforms((seed[0] + 1, seed[1], seed[2]), size)
 
     changed = schedule(
-        connectome(), EXPERIMENTS['p9'], 1000, (3,), 20261004, draw_uniforms=wrong_seed
+        connectome(),
+        EXPERIMENTS['p9'],
+        1000,
+        (TrialId(3),),
+        20261004,
+        draw_uniforms=wrong_seed,
     )
     assert changed.sha256 != expected.sha256
     c, s = (
@@ -259,7 +275,9 @@ def test_duplicate_zero_rate_channels_keep_draw_shape_and_strict_threshold() -> 
         calls.append((seed, size))
         return values
 
-    result = schedule(connectome(), experiment, 2, (4,), 31, draw_uniforms=draw)
+    result = schedule(
+        connectome(), experiment, 2, (TrialId(4),), 31, draw_uniforms=draw
+    )
     assert calls == [((31, 2, 4), (2, 2))] and result.targets == (0, 0)
     np.testing.assert_array_equal(result.events, [[[0, 0], [0, 1]]])
     assert values.tobytes() == before

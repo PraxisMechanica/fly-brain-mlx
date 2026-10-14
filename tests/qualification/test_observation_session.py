@@ -12,7 +12,12 @@ from fly_brain.qualification.session_expectations import (
     observation_checks,
     require_configuration,
 )
-from fly_brain.simulation.identifiers import FlyWireIds64, NeuronRows32
+from fly_brain.simulation.identifiers import (
+    FlyWireIds64,
+    NeuronRow,
+    NeuronRows32,
+    TrialId,
+)
 from fly_brain.simulation.models import Connectome
 from fly_brain.simulation.observation_module import build_observation_sessions
 from fly_brain.simulation.observations import ObservationInitialState
@@ -139,15 +144,15 @@ def test_session_chunk_continuation_preserves_native_phases_due_and_all_queues(
     case = fixture()
     ordinary = stock(case, precision)
     factory, _ = build_observation_sessions(
-        case.connectome, case.targets, (3,), precision
+        case.connectome, case.targets, (NeuronRow(3),), precision
     )
-    session = factory((0, 1, 2, 3), initial(case))
+    session = factory((TrialId(0), TrialId(1), TrialId(2), TrialId(3)), initial(case))
     ledger = initial_ledger(case.connectome, case.targets, 4, initial(case))
     require_configuration(
         session.configuration,
         case.connectome,
         case.targets,
-        (0, 1, 2, 3),
+        (TrialId(0), TrialId(1), TrialId(2), TrialId(3)),
         initial(case),
         ledger,
     )
@@ -184,7 +189,7 @@ def test_observation_factory_keeps_actual_reduction_rows_unchanged(
     case = fixture()
     _, old_reader = prepare_observed(case.connectome, case.targets, (3,), precision)
     _, new_reader = build_observation_sessions(
-        case.connectome, case.targets, (3,), precision
+        case.connectome, case.targets, (NeuronRow(3),), precision
     )
     expected, actual = old_reader(tuple(range(6))), new_reader(tuple(range(6)))
     assert expected.order == actual.order
@@ -225,13 +230,17 @@ def test_actual_native_threshold_equality_and_neighbors_match_independent_predic
         np.zeros((3, 1), dtype=np.float64),
         np.full((3, 1), -100000000, dtype=np.int32),
     )
-    factory, _ = build_observation_sessions(network, (0,), (), precision)
-    session = factory((0, 1, 2), starting)
+    factory, _ = build_observation_sessions(network, (NeuronRow(0),), (), precision)
+    session = factory((TrialId(0), TrialId(1), TrialId(2)), starting)
     inputs = np.zeros((3, 1), dtype=np.bool_)
     actual = session.advance(inputs)
     assert actual.fields['pre_v'].tobytes() == wanted.tobytes()
     state, operands = expect_step(
-        initial_ledger(network, (0,), 3, starting), actual, inputs, network, (0,)
+        initial_ledger(network, (NeuronRow(0),), 3, starting),
+        actual,
+        inputs,
+        network,
+        (NeuronRow(0),),
     )
     assert operands.spikes.tolist() == [[False], [False], [True]]
     assert state.history[0].tolist() == [[False], [False], [True]]

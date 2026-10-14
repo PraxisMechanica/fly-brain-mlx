@@ -14,6 +14,7 @@ from fly_brain.qualification.adapters.case_execution import execute
 from fly_brain.qualification.adapters.case_report import write
 from fly_brain.qualification.adapters.torch_setup import prepare as prepare_cpu
 from fly_brain.qualification.models import ParityCase
+from fly_brain.simulation.identifiers import NeuronRow, TrialId
 from fly_brain.simulation.models import InputPin
 from fly_brain.simulation.observation_module import build_observation_sessions
 from tests.support.observation_fixtures import fixture, stimulus_for
@@ -27,10 +28,12 @@ def test_each_engine_replays_fresh_state_with_complete_retained_evidence(
 ) -> None:
     case = fixture(empty)
     events = case.events[:1]
-    stimulus = stimulus_for(events, case.targets, (200.0,) * len(case.targets), (0,))
+    stimulus = stimulus_for(
+        events, case.targets, (200.0,) * len(case.targets), (TrialId(0),)
+    )
     job = build(case.connectome, case.targets, (3,), events[0], tmp_path / 'build')
     mlx, read_rows = build_observation_sessions(
-        case.connectome, case.targets, (3,), precision
+        case.connectome, case.targets, (NeuronRow(3),), precision
     )
     cpu = prepare_cpu(case.connectome, case.targets, (3,), 1)
     progress: list[str] = []

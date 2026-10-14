@@ -8,8 +8,11 @@ from numpy.typing import ArrayLike, NDArray
 from .identifiers import (
     EdgeRows32,
     FlyWireIds64,
+    FlyWireNeuronId,
+    NeuronRow,
     NeuronRows32,
     PaddedEdgeRows32,
+    TrialId,
 )
 
 
@@ -67,17 +70,17 @@ class Experiment:
     name: ExperimentName
     code: int
     generator_code: int
-    activated_ids: tuple[int, ...]
+    activated_ids: tuple[FlyWireNeuronId, ...]
     rates_hz: tuple[float, ...]
-    silenced_ids: tuple[int, ...] = ()
+    silenced_ids: tuple[FlyWireNeuronId, ...] = ()
 
 
 @dataclass(frozen=True)
 class Stimulus:
     events: NDArray[np.uint8]
-    targets: tuple[int, ...]
+    targets: tuple[NeuronRow, ...]
     rates_hz: tuple[float, ...]
-    trial_indices: tuple[int, ...]
+    trial_indices: tuple[TrialId, ...]
     seed: int
     generator_code: int
     sha256: str

@@ -9,7 +9,12 @@ from fly_brain.qualification.session_expectations import (
     initial_ledger,
     observation_checks,
 )
-from fly_brain.simulation.identifiers import FlyWireIds64, NeuronRows32
+from fly_brain.simulation.identifiers import (
+    FlyWireIds64,
+    NeuronRow,
+    NeuronRows32,
+    TrialId,
+)
 from fly_brain.simulation.models import Connectome
 from fly_brain.simulation.observations import (
     PHASE_DTYPES,
@@ -48,7 +53,7 @@ def observation(
     fields['accepted_inputs'] = np.zeros((1, channels), dtype=np.bool_)
     return NativeObservation(
         step,
-        (0,),
+        (TrialId(0),),
         fields,
         (np.array([], dtype=np.int32),),
         (hashlib.sha256(np.zeros(3, dtype=np.bool_).tobytes()).hexdigest(),),
@@ -67,7 +72,10 @@ def test_corrupt_candidate_spike_claims_never_drive_qualification_history() -> N
     assert state.last_spike_step.tolist() == [[0, -100000000]]
     assert state.history[0].tolist() == [[True, False]]
     claim_only = NativeComparison(
-        1, (0,), np.ones((1, 8), dtype=np.bool_), np.ones((1, 19), dtype=np.bool_)
+        1,
+        (TrialId(0),),
+        np.ones((1, 8), dtype=np.bool_),
+        np.ones((1, 19), dtype=np.bool_),
     )
     flags = observation_checks(first, claim_only, operands)
     assert not flags[0, CHECK_NAMES.index('threshold')]
@@ -98,11 +106,11 @@ def test_qualification_threshold_uses_exact_neighboring_float32_values(
     network = connectome()
     actual = observation(1, (float(value), -52), channels=1)
     state, operands = expect_step(
-        initial_ledger(network, (0,), 1, None),
+        initial_ledger(network, (NeuronRow(0),), 1, None),
         actual,
         np.zeros((1, 1), dtype=np.bool_),
         network,
-        (0,),
+        (NeuronRow(0),),
     )
     assert bool(operands.spikes[0, 0]) == expected
     assert bool(state.history[0][0, 0]) == expected
@@ -132,7 +140,10 @@ def test_native_comparison_cannot_hide_corrupt_due_identities_or_digest() -> Non
         (),
     )
     comparison = NativeComparison(
-        1, (0,), np.ones((1, 8), dtype=np.bool_), np.ones((1, 19), dtype=np.bool_)
+        1,
+        (TrialId(0),),
+        np.ones((1, 8), dtype=np.bool_),
+        np.ones((1, 19), dtype=np.bool_),
     )
     for changed in (
         NativeObservation(
@@ -177,7 +188,10 @@ def test_qualification_rejects_nonfinite_values_in_each_actual_phase(
         (),
     )
     comparison = NativeComparison(
-        1, (0,), np.ones((1, 8), dtype=np.bool_), np.ones((1, 19), dtype=np.bool_)
+        1,
+        (TrialId(0),),
+        np.ones((1, 8), dtype=np.bool_),
+        np.ones((1, 19), dtype=np.bool_),
     )
     assert not observation_checks(actual, comparison, operands)[
         0, CHECK_NAMES.index('finite_' + phase)

@@ -4,6 +4,7 @@ from typing import Protocol
 import numpy as np
 from numpy.typing import NDArray
 
+from .identifiers import NeuronRow, TrialId
 from .models import (
     Connectome,
     Experiment,
@@ -37,7 +38,11 @@ class StimulusWriter(Protocol):
 
 class SimulationExecutor(Protocol):
     def __call__(
-        self, connectome: Connectome, stimulus: Stimulus, silenced: tuple[int, ...], /
+        self,
+        connectome: Connectome,
+        stimulus: Stimulus,
+        silenced: tuple[NeuronRow, ...],
+        /,
     ) -> SimulationRun: ...
 
 
@@ -61,7 +66,7 @@ class Clock(Protocol):
 
 class UniformDraws(Protocol):
     def __call__(
-        self, seed: tuple[int, int, int], size: tuple[int, int], /
+        self, seed: tuple[int, int, TrialId], size: tuple[int, int], /
     ) -> NDArray[np.float64]: ...
 
 
@@ -71,7 +76,7 @@ class StimulusGenerator(Protocol):
         connectome: Connectome,
         experiment: Experiment,
         steps: int,
-        trials: tuple[int, ...],
+        trials: tuple[TrialId, ...],
         seed: int,
         /,
     ) -> Stimulus: ...

@@ -3,6 +3,7 @@ from collections.abc import Generator
 import numpy as np
 from numpy.typing import NDArray
 
+from fly_brain.simulation.identifiers import NeuronRow, TrialId
 from fly_brain.simulation.models import Connectome
 from fly_brain.simulation.observations import (
     HostArray,
@@ -24,8 +25,8 @@ from .session_expectations import (
 def observe_session(
     factory: ObservationSessionFactory,
     connectome: Connectome,
-    targets: tuple[int, ...],
-    trial_indices: tuple[int, ...],
+    targets: tuple[NeuronRow, ...],
+    trial_indices: tuple[TrialId, ...],
     events: NDArray[np.uint8],
     initial: ObservationInitialState | None = None,
     block_size: int = 32,

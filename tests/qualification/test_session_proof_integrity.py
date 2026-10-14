@@ -1,6 +1,7 @@
 import numpy as np
 import pytest
 
+from fly_brain.simulation.identifiers import TrialId
 from fly_brain.simulation.models import Stimulus
 from tests.qualification.test_mlx_observer import fixture
 from tests.support.session_pinned import (
@@ -80,7 +81,15 @@ def test_probe_records_actual_small_network_blocks_without_changing_native_bytes
     precision: str, request: pytest.FixtureRequest
 ) -> None:
     case = fixture()
-    stimulus = Stimulus(case.events, case.targets, (), (0, 1, 2, 3), 0, 0, '')
+    stimulus = Stimulus(
+        case.events,
+        case.targets,
+        (),
+        (TrialId(0), TrialId(1), TrialId(2), TrialId(3)),
+        0,
+        0,
+        '',
+    )
     root = proof_root(request)
     ordinary = record_mode(
         'ordinary', case.connectome, stimulus, root / 'small-ordinary', precision

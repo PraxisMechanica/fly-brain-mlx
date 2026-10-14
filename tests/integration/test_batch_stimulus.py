@@ -7,6 +7,7 @@ import pytest
 
 from fly_brain.qualification.adapters.batch_stimulus import load
 from fly_brain.simulation.experiments import EXPERIMENTS
+from fly_brain.simulation.identifiers import TrialId
 from fly_brain.simulation.models import InputPin
 from fly_brain.simulation.storage import persist_stimulus
 from tests.support.seeded_inputs import generate
@@ -15,9 +16,11 @@ from tests.unit.test_stimuli import connectome
 pytestmark = pytest.mark.integration
 
 
-@pytest.mark.parametrize('trials', ((0,), (0, 1, 2, 3)))
+@pytest.mark.parametrize(
+    'trials', ((TrialId(0),), (TrialId(0), TrialId(1), TrialId(2), TrialId(3)))
+)
 def test_saved_batch_input_preserves_native_bytes_and_trial_provenance(
-    tmp_path: Path, trials: tuple[int, ...]
+    tmp_path: Path, trials: tuple[TrialId, ...]
 ) -> None:
     experiment = EXPERIMENTS['sugar']
     pin = InputPin('csv', 'parquet', len(connectome().neuron_ids), 0)
@@ -55,7 +58,9 @@ def test_saved_input_cannot_hide_corruption_or_silently_convert_native_evidence(
 ) -> None:
     experiment = EXPERIMENTS['p9']
     pin = InputPin('csv', 'parquet', len(connectome().neuron_ids), 0)
-    expected = generate(connectome(), experiment, 35, (0, 1, 2, 3))
+    expected = generate(
+        connectome(), experiment, 35, (TrialId(0), TrialId(1), TrialId(2), TrialId(3))
+    )
     directory = tmp_path / 'input'
     persist_stimulus(directory, experiment, pin, expected)
     path = directory / 'stimulus.json'

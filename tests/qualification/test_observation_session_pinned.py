@@ -10,6 +10,7 @@ import pytest
 
 from fly_brain.infrastructure.seeded_random import uniforms
 from fly_brain.simulation.experiments import EXPERIMENTS
+from fly_brain.simulation.identifiers import TrialId
 from fly_brain.simulation.input_service import load_pinned_inputs
 from fly_brain.simulation.inputs import file_sha256, load_connectome
 from fly_brain.simulation.models import Stimulus
@@ -20,7 +21,7 @@ from tests.support.session_pinned import (
 from tests.support.session_proof_values import proof_root
 
 
-def frozen_stimulus(root: Path, trials: tuple[int, ...]) -> Stimulus:
+def frozen_stimulus(root: Path, trials: tuple[TrialId, ...]) -> Stimulus:
     with np.load(root / 'frozen-stimulus/stimulus.npz', allow_pickle=False) as saved:
         events = saved['events'][list(trials)]
     events.setflags(write=False)
@@ -40,7 +41,11 @@ def test_complete_shortest_pinned_observation_preservation(
     if project is None:
         raise ValueError('Pinned proof requires an explicit read-only dataset root')
     connectome, pin = load_pinned_inputs(Path(project), lambda: load_connectome)
-    trials = (0, 1, 2, 3) if mode == 'four-session' else (0,)
+    trials = (
+        (TrialId(0), TrialId(1), TrialId(2), TrialId(3))
+        if mode == 'four-session'
+        else (TrialId(0),)
+    )
     generated = schedule(
         connectome, EXPERIMENTS['sugar'], 1000, trials, 20261004, draw_uniforms=uniforms
     )

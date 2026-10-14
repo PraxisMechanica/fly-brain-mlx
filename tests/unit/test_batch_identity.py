@@ -6,6 +6,7 @@ import pytest
 
 from fly_brain.qualification.batch_identity import require_stimuli
 from fly_brain.simulation.experiments import EXPERIMENTS
+from fly_brain.simulation.identifiers import TrialId
 from fly_brain.simulation.models import ExperimentName
 from tests.support.seeded_inputs import generate
 from tests.unit.test_stimuli import connectome
@@ -17,16 +18,28 @@ pytestmark = pytest.mark.unit
 def test_batch_identity_binds_every_native_trial_to_canonical_generation(
     name: ExperimentName,
 ) -> None:
-    expected = generate(connectome(), EXPERIMENTS[name], 10000, (0, 1, 2, 3))
-    batch = generate(connectome(), EXPERIMENTS[name], 10000, (0, 1, 2, 3))
+    expected = generate(
+        connectome(),
+        EXPERIMENTS[name],
+        10000,
+        (TrialId(0), TrialId(1), TrialId(2), TrialId(3)),
+    )
+    batch = generate(
+        connectome(),
+        EXPERIMENTS[name],
+        10000,
+        (TrialId(0), TrialId(1), TrialId(2), TrialId(3)),
+    )
     singles = {
-        trial: generate(connectome(), EXPERIMENTS[name], 10000, (trial,))
+        TrialId(trial): generate(
+            connectome(), EXPERIMENTS[name], 10000, (TrialId(trial),)
+        )
         for trial in range(4)
     }
     assert require_stimuli(expected, batch, singles) == tuple(
-        singles[trial].sha256 for trial in range(4)
+        singles[TrialId(trial)].sha256 for trial in range(4)
     )
-    singles[0], singles[1] = singles[1], singles[0]
+    singles[TrialId(0)], singles[TrialId(1)] = singles[TrialId(1)], singles[TrialId(0)]
     with pytest.raises(ValueError, match='actual trial'):
         require_stimuli(expected, batch, singles)
 
@@ -50,16 +63,25 @@ def test_batch_identity_binds_every_native_trial_to_canonical_generation(
 def test_input_metadata_or_event_corruption_cannot_grant_batch_identity(
     fault: str,
 ) -> None:
-    expected = generate(connectome(), EXPERIMENTS['p9'], 100, (0, 1, 2, 3))
+    expected = generate(
+        connectome(),
+        EXPERIMENTS['p9'],
+        100,
+        (TrialId(0), TrialId(1), TrialId(2), TrialId(3)),
+    )
     batch = expected
     singles = {
-        trial: generate(connectome(), EXPERIMENTS['p9'], 100, (trial,))
+        TrialId(trial): generate(
+            connectome(), EXPERIMENTS['p9'], 100, (TrialId(trial),)
+        )
         for trial in range(4)
     }
     if fault == 'missing':
-        del singles[3]
+        del singles[TrialId(3)]
     elif fault == 'order':
-        batch = replace(batch, trial_indices=(1, 0, 2, 3))
+        batch = replace(
+            batch, trial_indices=(TrialId(1), TrialId(0), TrialId(2), TrialId(3))
+        )
     elif fault == 'seed':
         batch = replace(batch, seed=0)
     elif fault == 'generator':

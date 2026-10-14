@@ -4,6 +4,7 @@ from typing import Protocol
 import numpy as np
 from numpy.typing import NDArray
 
+from fly_brain.simulation.identifiers import NeuronRow, TrialId
 from fly_brain.simulation.models import Connectome, InputPin
 from fly_brain.simulation.observations import (
     NativeComparison,
@@ -85,7 +86,10 @@ class ObservationSession(Protocol):
 
 class ObservationSessionFactory(Protocol):
     def __call__(
-        self, trial_indices: tuple[int, ...], initial: ObservationInitialState | None, /
+        self,
+        trial_indices: tuple[TrialId, ...],
+        initial: ObservationInitialState | None,
+        /,
     ) -> ObservationSession: ...
 
 
@@ -93,8 +97,8 @@ class ObservationAssembly(Protocol):
     def __call__(
         self,
         connectome: Connectome,
-        targets: tuple[int, ...],
-        silenced: tuple[int, ...],
+        targets: tuple[NeuronRow, ...],
+        silenced: tuple[NeuronRow, ...],
         precision: str,
         /,
     ) -> tuple[ObservationSessionFactory, ReductionReader]: ...

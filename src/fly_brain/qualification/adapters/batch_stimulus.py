@@ -6,6 +6,7 @@ import numpy as np
 from numpy.typing import NDArray
 from pydantic import BaseModel, ConfigDict
 
+from fly_brain.simulation.identifiers import NeuronRow, TrialId
 from fly_brain.simulation.models import Experiment, ExperimentName, InputPin, Stimulus
 
 
@@ -86,9 +87,9 @@ def load(directory: Path, experiment: Experiment, pin: InputPin) -> Stimulus:
     events.setflags(write=False)
     return Stimulus(
         events,
-        metadata.targets,
+        tuple(map(NeuronRow, metadata.targets)),
         metadata.rates_hz,
-        metadata.trial_indices,
+        tuple(map(TrialId, metadata.trial_indices)),
         metadata.seed,
         metadata.generator_code,
         metadata.canonical_event_sha256,

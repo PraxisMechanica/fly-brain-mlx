@@ -3,11 +3,12 @@ from collections.abc import Mapping
 
 import numpy as np
 
+from fly_brain.simulation.identifiers import TrialId
 from fly_brain.simulation.models import Stimulus
 
 
 def require_stimuli(
-    canonical: Stimulus, batch: Stimulus, singletons: Mapping[int, Stimulus]
+    canonical: Stimulus, batch: Stimulus, singletons: Mapping[TrialId, Stimulus]
 ) -> tuple[str, ...]:
     if set(singletons) != {0, 1, 2, 3}:
         raise ValueError(
@@ -45,7 +46,7 @@ def require_stimuli(
         raise ValueError('Batch events differ from canonical generation')
     hashes: list[str] = []
     for trial in range(4):
-        actual = singletons[trial]
+        actual = singletons[TrialId(trial)]
         expected = canonical.events[trial : trial + 1]
         if actual.trial_indices != (trial,) or (
             actual.events.shape,

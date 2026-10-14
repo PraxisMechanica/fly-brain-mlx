@@ -17,6 +17,7 @@ from fly_brain.simulation.backend import core
 from fly_brain.simulation.backend.bucketed import prepare
 from fly_brain.simulation.backend.engines import Execution
 from fly_brain.simulation.backend.observation_session import NativeObservationSession
+from fly_brain.simulation.identifiers import NeuronRow, TrialId
 from fly_brain.simulation.observation_module import build_observation_sessions
 from fly_brain.simulation.observations import (
     ObservationInitialState,
@@ -37,7 +38,7 @@ def firing_initial(trials: int = 1) -> ObservationInitialState:
 
 def fault_factory(execution: Execution) -> ObservationSessionFactory:
     def create(
-        trial_indices: tuple[int, ...], initial: ObservationInitialState | None
+        trial_indices: tuple[TrialId, ...], initial: ObservationInitialState | None
     ) -> ObservationSession:
         if initial is None:
             state = core.initial_state(execution.network, len(trial_indices))
@@ -123,7 +124,7 @@ def test_neutral_comparator_detects_each_actual_discrete_fault(
         return state, trace
 
     factory = fault_factory(Execution(execution.network, changed))
-    session = factory((0,), firing_initial())
+    session = factory((TrialId(0),), firing_initial())
     inputs = np.ones((1, len(case.targets)), dtype=np.bool_)
     actual = session.advance(inputs)
     _, operands = expect_step(
@@ -156,7 +157,7 @@ def test_neutral_comparator_reads_every_actual_physical_slot(
         return state, trace
 
     session = fault_factory(Execution(execution.network, changed))(
-        (0,), firing_initial()
+        (TrialId(0),), firing_initial()
     )
     inputs = np.zeros((1, len(case.targets)), dtype=np.bool_)
     actual = session.advance(inputs)
@@ -183,7 +184,7 @@ def test_wrong_supplied_operands_block_further_native_advance(
     factory, _ = build_observation_sessions(
         case.connectome, case.targets, (), precision
     )
-    session = factory((0,), firing_initial())
+    session = factory((TrialId(0),), firing_initial())
     inputs = np.zeros((1, len(case.targets)), dtype=np.bool_)
     actual = session.advance(inputs)
     _, operands = expect_step(
@@ -208,9 +209,9 @@ def test_supplied_source_and_destination_factors_are_used_without_policy_reconst
     factor: str,
 ) -> None:
     case = fixture()
-    targets = tuple(range(6))
+    targets = tuple(map(NeuronRow, range(6)))
     factory, _ = build_observation_sessions(case.connectome, targets, (), precision)
-    session = factory((0,), firing_initial())
+    session = factory((TrialId(0),), firing_initial())
     state = initial_ledger(case.connectome, targets, 1, firing_initial())
     inputs = np.zeros((1, 6), dtype=np.bool_)
     operands: ObservationOperands | None = None
@@ -234,7 +235,7 @@ def test_missing_comparison_blocks_advance_and_complete_data_can_release_it(
     factory, _ = build_observation_sessions(
         case.connectome, case.targets, (), precision
     )
-    session = factory((0,), firing_initial())
+    session = factory((TrialId(0),), firing_initial())
     inputs = np.zeros((1, len(case.targets)), dtype=np.bool_)
     actual = session.advance(inputs)
     with pytest.raises(ValueError, match='complete matching comparison'):
@@ -277,7 +278,7 @@ def test_actual_nonfinite_phase_data_remains_visible_to_qualification(
                 fault_factory(Execution(execution.network, changed)),
                 case.connectome,
                 case.targets,
-                (0,),
+                (TrialId(0),),
                 case.events[:1, :1],
                 firing_initial(),
             )
@@ -312,7 +313,7 @@ def test_independently_pinned_configuration_rejects_changed_actual_maps(
                 factory,
                 case.connectome,
                 case.targets,
-                (0,),
+                (TrialId(0),),
                 case.events[:1, :1],
                 firing_initial(),
             )

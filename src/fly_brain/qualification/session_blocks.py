@@ -4,6 +4,7 @@ from dataclasses import dataclass, field
 import numpy as np
 from numpy.typing import NDArray
 
+from fly_brain.simulation.identifiers import TrialId
 from fly_brain.simulation.observations import (
     HostArray,
     HostFieldSnapshots,
@@ -27,7 +28,7 @@ def capture_due_rows(
 class SessionBlock:
     begin: int
     rows: int
-    trial_indices: tuple[int, ...]
+    trial_indices: tuple[TrialId, ...]
     _fields_snapshot: HostFieldSnapshots = field(init=False, repr=False)
     _checks_snapshot: HostSnapshot[np.bool_] = field(init=False, repr=False)
     queue_sha256: tuple[str, ...]
@@ -42,7 +43,7 @@ class SessionBlock:
         self,
         begin: int,
         rows: int,
-        trial_indices: tuple[int, ...],
+        trial_indices: tuple[TrialId, ...],
         fields: Mapping[str, HostArray],
         checks: NDArray[np.bool_],
         queue_sha256: tuple[str, ...],

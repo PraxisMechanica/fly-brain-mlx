@@ -4,6 +4,7 @@ from dataclasses import dataclass, field
 import numpy as np
 from numpy.typing import NDArray
 
+from fly_brain.simulation.identifiers import NeuronRow, TrialId
 from fly_brain.simulation.models import Connectome
 from fly_brain.simulation.observations import (
     HostSnapshot,
@@ -89,7 +90,7 @@ class LedgerState:
 
 def initial_ledger(
     connectome: Connectome,
-    targets: tuple[int, ...],
+    targets: tuple[NeuronRow, ...],
     trials: int,
     initial: ObservationInitialState | None,
 ) -> LedgerState:
@@ -108,8 +109,8 @@ def initial_ledger(
 def require_configuration(
     actual: ObservationConfiguration,
     connectome: Connectome,
-    targets: tuple[int, ...],
-    trial_indices: tuple[int, ...],
+    targets: tuple[NeuronRow, ...],
+    trial_indices: tuple[TrialId, ...],
     initial: ObservationInitialState | None,
     ledger: LedgerState,
 ) -> None:
@@ -153,7 +154,7 @@ def expect_step(
     actual: NativeObservation,
     events: NDArray[np.bool_],
     connectome: Connectome,
-    targets: tuple[int, ...],
+    targets: tuple[NeuronRow, ...],
 ) -> tuple[LedgerState, ObservationOperands]:
     step = ledger.step
     if (
@@ -247,7 +248,7 @@ def require_physical_queue(
     actual: PhysicalQueueObservation,
     operands: ObservationOperands,
     completed_steps: int,
-    trial_indices: tuple[int, ...],
+    trial_indices: tuple[TrialId, ...],
 ) -> None:
     if (
         actual.completed_steps != completed_steps

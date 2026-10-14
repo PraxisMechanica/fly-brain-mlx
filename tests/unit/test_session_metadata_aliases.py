@@ -6,6 +6,7 @@ from numpy.typing import NDArray
 
 from fly_brain.qualification.session_blocks import SessionBlock
 from fly_brain.qualification.session_expectations import expect_step, initial_ledger
+from fly_brain.simulation.identifiers import TrialId
 from fly_brain.simulation.observations import (
     NativeComparison,
     ObservationInitialState,
@@ -54,7 +55,10 @@ def test_phase_due_configuration_operand_and_comparison_aliases_cannot_change_ca
         (),
     )
     comparison = NativeComparison(
-        1, (0,), np.ones((1, 8), dtype=np.bool_), np.ones((1, 19), dtype=np.bool_)
+        1,
+        (TrialId(0),),
+        np.ones((1, 8), dtype=np.bool_),
+        np.ones((1, 19), dtype=np.bool_),
     )
     configuration = Session('').configuration
     initial = ObservationInitialState(
@@ -87,11 +91,13 @@ def test_physical_queue_block_and_reduction_row_views_preserve_canonical_dtype_s
     None
 ):
     actual = observation(1, (-52, -52))
-    queue = PhysicalQueueObservation(1, (0,), np.zeros((19, 1, 3), dtype=np.bool_))
+    queue = PhysicalQueueObservation(
+        1, (TrialId(0),), np.zeros((19, 1, 3), dtype=np.bool_)
+    )
     block = SessionBlock(
         0,
         1,
-        (0,),
+        (TrialId(0),),
         {name: np.stack([value]) for name, value in actual.fields.items()},
         np.ones((1, 1, 30), dtype=np.bool_),
         queue.sha256,

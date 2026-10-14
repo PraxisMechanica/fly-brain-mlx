@@ -7,6 +7,8 @@ from typing import Generic, TypeVar
 import numpy as np
 from numpy.typing import NDArray
 
+from .identifiers import TrialId
+
 HostArray = NDArray[np.float32 | np.float64 | np.int32 | np.int64 | np.bool_]
 Scalar = TypeVar('Scalar', bound=np.generic, covariant=True)
 SnapshotScalar = TypeVar('SnapshotScalar', bound=np.generic)
@@ -185,7 +187,7 @@ class ObservationConfiguration:
     neurons: int
     queue_slots: int
     initial_step: int
-    trial_indices: tuple[int, ...]
+    trial_indices: tuple[TrialId, ...]
     _sources_snapshot: HostSnapshot[np.int32] = field(init=False, repr=False)
     _destinations_snapshot: HostSnapshot[np.int32] = field(init=False, repr=False)
     _targets_snapshot: HostSnapshot[np.int32] = field(init=False, repr=False)
@@ -205,7 +207,7 @@ class ObservationConfiguration:
         neurons: int,
         queue_slots: int,
         initial_step: int,
-        trial_indices: tuple[int, ...],
+        trial_indices: tuple[TrialId, ...],
         sources: NDArray[np.int32],
         destinations: NDArray[np.int32],
         targets: NDArray[np.int32],
@@ -294,7 +296,7 @@ class ObservationConfiguration:
 @dataclass(frozen=True, init=False)
 class NativeObservation:
     completed_steps: int
-    trial_indices: tuple[int, ...]
+    trial_indices: tuple[TrialId, ...]
     _fields_snapshot: HostFieldSnapshots = field(init=False, repr=False)
     _due_edges_snapshot: tuple[HostSnapshot[np.int32], ...] = field(
         init=False, repr=False
@@ -304,7 +306,7 @@ class NativeObservation:
     def __init__(
         self,
         completed_steps: int,
-        trial_indices: tuple[int, ...],
+        trial_indices: tuple[TrialId, ...],
         fields: Mapping[str, HostArray],
         due_edges: tuple[NDArray[np.int32], ...],
         due_sha256: tuple[str, ...],
@@ -482,14 +484,14 @@ class ObservationOperands:
 @dataclass(frozen=True, init=False)
 class NativeComparison:
     completed_steps: int
-    trial_indices: tuple[int, ...]
+    trial_indices: tuple[TrialId, ...]
     _gates_equal_snapshot: HostSnapshot[np.bool_] = field(init=False, repr=False)
     _queue_equal_snapshot: HostSnapshot[np.bool_] = field(init=False, repr=False)
 
     def __init__(
         self,
         completed_steps: int,
-        trial_indices: tuple[int, ...],
+        trial_indices: tuple[TrialId, ...],
         gates_equal: NDArray[np.bool_],
         queue_equal: NDArray[np.bool_],
     ) -> None:
@@ -523,13 +525,13 @@ class NativeComparison:
 @dataclass(frozen=True, init=False)
 class PhysicalQueueObservation:
     completed_steps: int
-    trial_indices: tuple[int, ...]
+    trial_indices: tuple[TrialId, ...]
     _queue_snapshot: HostSnapshot[np.bool_] = field(init=False, repr=False)
 
     def __init__(
         self,
         completed_steps: int,
-        trial_indices: tuple[int, ...],
+        trial_indices: tuple[TrialId, ...],
         queue: NDArray[np.bool_],
     ) -> None:
         if (
