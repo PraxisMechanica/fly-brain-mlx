@@ -420,7 +420,8 @@
     "tests/unit/test_raster_identifier_contracts.py": {"owner":"system_tests","role":"system_test","declaration_count":8,"declaration_sha256":"218deea656eb6d7e3f131776470b658ded9387adf6eeaeedd3749345d2d9b7ec","binding_sha256":"56c734071be5024bbe194501c2efc3bfd2bae2272384661c6d44a550cb0e947e"},
     "src/fly_brain/qualification/input_audit_rules.py": {"owner":"qualification","role":"rules","declaration_count":7,"declaration_sha256":"e69d2698ccd17516851a216b250f46b4c7cf7f6b25e4792f21edee440853d9b1","binding_sha256":"18132bdc5bc54a0f0856ed890c7244a9f0208be5db790faa3c423d2b9da696b9"},
     "src/fly_brain/qualification/input_audit_service.py": {"owner":"qualification","role":"service","declaration_count":1,"declaration_sha256":"8ac772dad4c261f28d45d0e01e6c9cd124229c3f93558da83e1316776ff805bf","binding_sha256":"7205367871c946e8061fad84bcebd317ff9c165832c6d31fcb6eefba86fa8ad8"},
-    "tests/integration/test_input_audit_storage.py": {"owner":"qualification","role":"test","declaration_count":22,"declaration_sha256":"cfa6e9521ad36006085d78a5a71d866eda003e2ad6c83998117b9de0d6a08282","binding_sha256":"cbc5f1249ddf28086a26e927b7a3616f785f0a940fb2d81e5de5d6d182594c80"}
+    "tests/integration/test_input_audit_storage.py": {"owner":"qualification","role":"test","declaration_count":22,"declaration_sha256":"cfa6e9521ad36006085d78a5a71d866eda003e2ad6c83998117b9de0d6a08282","binding_sha256":"cbc5f1249ddf28086a26e927b7a3616f785f0a940fb2d81e5de5d6d182594c80"},
+    "tests/quality/test_native_type_imports.py": {"owner":"architecture","role":"test","declaration_count":13,"declaration_sha256":"fbae08086b2e10437c84e464cd5a99a4ce444c56fcd067d68f4b1d0112ac674a","binding_sha256":"992c40d6c11eb6bc0dbd9dc3d3bbc2518920f2fe970de83e9e2867a34b2b74b1"}
   },
   "resources": {
   "simulation_run": {

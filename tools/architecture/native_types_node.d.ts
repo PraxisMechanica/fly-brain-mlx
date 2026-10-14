@@ -36,7 +36,7 @@ declare namespace NativeTypes {
   }
   interface Services { dispose(): void; }
   interface Parsed {
-    parserOutput: {parseTree: unknown};
+    parserOutput: {parseTree: unknown; importedModules: unknown};
     tokenizerOutput: {lines: unknown};
   }
   interface NameNode { nodeType: number; start: number; length: number; }
@@ -49,6 +49,7 @@ declare namespace NativeTypes {
   }
   interface Program {
     evaluator: Evaluator;
+    readonly analyzerNodeInfoReader: unknown;
     setTrackedFiles(uris: Uri[]): unknown;
     analyze(settings: {openFilesTimeInMs: number; noOpenFilesTimeInMs: number}): boolean;
     getParseResults(uri: Uri): Parsed | undefined;

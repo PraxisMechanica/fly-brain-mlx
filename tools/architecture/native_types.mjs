@@ -5,6 +5,7 @@ import { fail, object, array, string, hash, inside } from './native_types_values
 import { VERSION, HASHES, pinnedPackage, loader } from './native_types_loading.mjs';
 import { setup } from './native_types_context.mjs';
 import { NativeSources } from './native_types_sources.mjs';
+import { verifyImports } from './native_types_imports.mjs';
 import { Projector } from './native_types_projector.mjs';
 import { query } from './native_types_query.mjs';
 /** @param {unknown} value @returns {NativeTypes.RecordValue} */
@@ -45,6 +46,7 @@ function inspect(value) {
       if (sources.has(realpathSync(path)) && context.program.getParseDiagnostics(info.uri)?.length) fail(`native discovered source parse failed: ${path}`);
     }
     const sites = queries.map((item) => query(context, sources, projector, object(item, 'native type query')));
+    verifyImports(source);
     source.verify();
     pinnedPackage(packageRoot);
     return { schema: 1, version: VERSION, artifacts: HASHES, node: process.versions.node, python: '3.10', sites, types: projector.nodes, inputs: [...source.files].map(([path, sha256]) => ({ path, sha256 })) };
