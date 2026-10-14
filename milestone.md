@@ -153,6 +153,7 @@ The following components are committed on parent `main`:
 | Consumer-owned parity stimulus preparation | `eb6fe8f`, `86038e0` | Both catalog reads, seed, persistence/silencing order and errors retained; sixth live import contract checked |
 | Owned spike array identifiers | `f20d6ec` | 106 CPU cases and one real Metal case passed once; eight normalized modules, 67 original assertions, array identity/bytes/layout and seven fixtures preserved |
 | Injected pure reference parameters | `4c87409` | Exact factory extraction and five protected hashes; 100 CPU, six boundary, five native and two composition cases; 6,120 native tensor-byte pairs preserved without replay |
+| Comparison scalar identifier keys | `fe14b74` | 32 focused cases; three identity wrappers, four unchanged calculation functions and 16 byte-exact original/new JSON/CSV outputs |
 
 Every component passed its required normal commit checks and default cleanup. Joined
 metric regressions were repaired without thresholds, suppressions or removed
@@ -183,7 +184,7 @@ The identifier changes preserve numerical bodies and old assertions; NewType sup
 typing without new runtime validation or complete conversion-origin proof.
 No full native proof bundle or scientific matrix was recreated.
 
-All listed source components are pushed to `origin/main` through `4c87409`.
+All listed source components are pushed to `origin/main` through `fe14b74`.
 The spike identifier component passed the installed normal commit and push hooks
 and default cleanup without replaying its completed regressions. Delivery uses
 one ten-file component commit; the worker's earlier private ancestry is preserved
@@ -192,6 +193,17 @@ passed with ten changed inputs, 159 affected Python files, nine reviewed sources
 and 69 import module/contract checks. The quality step took 26 seconds; the job
 took 82 seconds, with no pytest and zero artifacts. `38ce609` previously repaired
 the hosted compiler-layout failure in exact passing run `38505093226`.
+
+The four-file Metrics slice passed installed commit/push hooks and exact hosted
+run `38548469719`: four changed inputs, 45 affected Python files, 26 import
+module/contract checks and 28 ownership sources. Its component owner ran 32
+unique cases once; only the repaired weakening control and three simplified
+runtime instances repeated after actual failures. The fixture's measured
+complexity is 11, cognitive complexity 5 and health 48.50; repository CQ001–CQ003
+passed, with no final rounded repository values retained after cleanup. The new
+fixture is reviewed as `comparison/test`. Generic report identities, mixed
+rasters, batch label/position contracts and lawful origins remain unresolved;
+all six recorded findings remain. Hosted execution ran no pytest and uploaded zero artifacts.
 
 ## Remaining order and unresolved decisions
 
