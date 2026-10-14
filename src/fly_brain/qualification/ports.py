@@ -1,3 +1,4 @@
+from collections.abc import Mapping
 from pathlib import Path
 from typing import Protocol
 
@@ -21,7 +22,25 @@ from fly_brain.simulation.observations import (
     ReductionEvidence,
 )
 
-from .models import ParityCase, QualificationRequest, QualificationResult
+from .models import (
+    InputAuditArtifact,
+    MappedArray,
+    ParityCase,
+    QualificationRequest,
+    QualificationResult,
+)
+
+
+class InputAuditFiles(Protocol):
+    def create_output(self, output: Path, /) -> None: ...
+
+    def write_arrays(
+        self, output: Path, arrays: Mapping[str, MappedArray], /
+    ) -> Path: ...
+
+    def read_artifact_identity(self, artifact: Path, /) -> InputAuditArtifact: ...
+
+    def write_report(self, output: Path, report: dict[str, object], /) -> None: ...
 
 
 class ReductionReader(Protocol):

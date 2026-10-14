@@ -8,33 +8,34 @@ from tests.quality.test_reference_silencing_boundary import typed
 
 pytestmark = pytest.mark.unit
 RULE = 'DEP003/ROLE005: Input audit uses owned mapping services'
-SOURCE = 'fly_brain.qualification.adapters.connectome_probe'
+SOURCE = 'fly_brain.qualification.input_audit_service'
 TARGETS = (
     'fly_brain.simulation.mapping',
     'fly_brain.simulation.input_service',
     'fly_brain.simulation.module',
 )
 TYPES = """from pathlib import Path
-from fly_brain.qualification.adapters.connectome_probe import run, bucket_report
-from fly_brain.qualification.ports import AbsoluteCountReader, DestinationGroupingReader, DestinationBucketsReader
+from fly_brain.qualification.input_audit_service import run
+from fly_brain.qualification.input_audit_rules import bucket_report
+from fly_brain.qualification.ports import AbsoluteCountReader, DestinationGroupingReader, DestinationBucketsReader, InputAuditFiles
 from fly_brain.simulation.models import Connectome, InputPin
 from fly_brain.simulation.module import build_absolute_count_reader, build_destination_grouping_reader, build_destination_buckets_reader, build_connectome_silencer
 absolute: AbsoluteCountReader = build_absolute_count_reader()
 grouping: DestinationGroupingReader = build_destination_grouping_reader()
 buckets: DestinationBucketsReader = build_destination_buckets_reader()
-def execute(connectome: Connectome, pin: InputPin, output: Path) -> dict[str, object]:
+def execute(connectome: Connectome, pin: InputPin, output: Path, files: InputAuditFiles) -> dict[str, object]:
     bucket_report(connectome, pin, buckets=buckets(connectome))
-    return run(connectome, pin, output, read_grouping=grouping, read_absolute_counts=absolute, silence=build_connectome_silencer(), read_buckets=buckets)
+    return run(connectome, pin, output, read_grouping=grouping, read_absolute_counts=absolute, silence=build_connectome_silencer(), files=files, read_buckets=buckets)
 """
 
 
-def contract() -> str:
+def contract(name: str = RULE) -> str:
     block = next(
         value
         for value in (PROJECT / 'pyproject.toml')
         .read_text()
         .split('[[tool.importlinter.contracts]]')
-        if 'name = "' + RULE + '"' in value
+        if 'name = "' + name + '"' in value
     )
     return (
         '[tool.importlinter]\nroot_package = "fly_brain"\n\n[[tool.importlinter.contracts]]'
@@ -42,8 +43,13 @@ def contract() -> str:
     )
 
 
-def sources(root: Path, target: str, code: str) -> Path:
-    names = {SOURCE: code, **{name: 'VALUE = 1\n' for name in TARGETS}}
+def sources(root: Path, target: str, code: str, source: str = SOURCE) -> Path:
+    names = {
+        SOURCE: 'VALUE = 1\n',
+        'fly_brain.qualification.input_audit_rules': 'VALUE = 1\n',
+        **{name: 'VALUE = 1\n' for name in (*TARGETS, target)},
+    }
+    names[source] = code
     names['fly_brain.qualification.mapping_helper'] = f'from {target} import VALUE\n'
     names['fly_brain.qualification.ports'] = 'VALUE = 1\n'
     for name in (
@@ -76,7 +82,7 @@ def test_new_contract_rejects_each_private_target_and_accepts_consumer_values(
         target in output,
         '(l.1)' in output,
     ) == (True,) * 5
-    (tmp_path / 'src/fly_brain/qualification/adapters/connectome_probe.py').write_text(
+    (tmp_path / 'src/fly_brain/qualification/input_audit_service.py').write_text(
         'from fly_brain.qualification.ports import VALUE\n'
     )
     assert lint(tmp_path, config)[0] == 0

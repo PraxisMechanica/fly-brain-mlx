@@ -209,10 +209,20 @@ allow_indirect_imports = false
 [[tool.importlinter.contracts]]
 name = "DEP003/ROLE005: Input audit uses owned mapping services"
 type = "forbidden"
-source_modules = ["fly_brain.qualification.adapters.connectome_probe"]
+source_modules = ["fly_brain.qualification.input_audit_service"]
 forbidden_modules = [
     "fly_brain.simulation.mapping",
     "fly_brain.simulation.input_service",
     "fly_brain.simulation.module",
 ]
+allow_indirect_imports = false
+
+[[tool.importlinter.contracts]]
+name = "DEP001: Host input audit uses injected file storage"
+type = "forbidden"
+source_modules = [
+    "fly_brain.qualification.input_audit_service",
+    "fly_brain.qualification.input_audit_rules",
+]
+forbidden_modules = ["fly_brain.qualification.adapters.connectome_probe"]
 allow_indirect_imports = false

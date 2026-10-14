@@ -2,8 +2,27 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Protocol
 
+import numpy as np
+from numpy.typing import NDArray
+
 from fly_brain.simulation.identifiers import TrialId
 from fly_brain.simulation.models import ExperimentName
+
+MappedArray = NDArray[np.int32] | NDArray[np.int64] | NDArray[np.float64]
+
+
+@dataclass(frozen=True)
+class InputAuditPreparation:
+    arrays: dict[str, MappedArray]
+    degree: NDArray[np.int64]
+    duplicate: NDArray[np.bool_]
+    checksums: dict[str, dict[str, str | list[int]]]
+
+
+@dataclass(frozen=True)
+class InputAuditArtifact:
+    path: str
+    sha256: str
 
 
 @dataclass(frozen=True)

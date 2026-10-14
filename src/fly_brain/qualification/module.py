@@ -5,6 +5,10 @@ from .fan_in_ports import FanInCaseBuilder, PermutationDraws, UniformDraws
 from .fan_in_service import prepare_cases
 from .models import ResultWriter, TestRunner
 from .ports import (
+    AbsoluteCountReader,
+    ConnectomeSilencer,
+    DestinationBucketsReader,
+    DestinationGroupingReader,
     DiagnosticCommand,
     InputProbe,
     OutputProbe,
@@ -42,6 +46,25 @@ def build_output_probe(execute: OutputProbe) -> DiagnosticCommand:
 def build_input_probe(load: PinnedInputs, execute: InputProbe) -> DiagnosticCommand:
     use_case = partial(service.audit_inputs, load=load, execute=execute)
     return partial(commands.diagnostic, use_case=use_case)
+
+
+def build_host_input_probe(
+    read_grouping: DestinationGroupingReader,
+    read_absolute_counts: AbsoluteCountReader,
+    silence: ConnectomeSilencer,
+    read_buckets: DestinationBucketsReader,
+) -> InputProbe:
+    from fly_brain.qualification.adapters.connectome_probe import InputAuditRepository
+    from fly_brain.qualification.input_audit_service import run
+
+    return partial(
+        run,
+        read_grouping=read_grouping,
+        read_absolute_counts=read_absolute_counts,
+        silence=silence,
+        read_buckets=read_buckets,
+        files=InputAuditRepository(),
+    )
 
 
 def build_parity_case(load: PinnedInputs, execute: ParityProbe) -> ParityCommand:

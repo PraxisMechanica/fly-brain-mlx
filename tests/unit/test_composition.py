@@ -14,6 +14,7 @@ from fly_brain.comparison.models import ComparisonRequest, ComparisonResult, Spi
 from fly_brain.comparison.module import build_comparison
 from fly_brain.infrastructure.seeded_random import uniforms
 from fly_brain.qualification import commands as qualification_commands
+from fly_brain.qualification.adapters.connectome_probe import InputAuditRepository
 from fly_brain.qualification.fan_in_ports import FanInCaseBuilder
 from fly_brain.qualification.models import (
     ParityCase,
@@ -424,11 +425,15 @@ def test_bootstrap_factories_preserve_configuration_order_without_workflow_effec
             'write_run',
             'evaluate_cases',
             'set_num_threads',
+            'InputAuditRepository',
         ):
             setattr(
                 module,
                 attribute,
-                threads if attribute == 'set_num_threads' else forbidden,
+                {
+                    'set_num_threads': threads,
+                    'InputAuditRepository': InputAuditRepository,
+                }.get(attribute, forbidden),
             )
         monkeypatch.setitem(sys.modules, name, module)
 

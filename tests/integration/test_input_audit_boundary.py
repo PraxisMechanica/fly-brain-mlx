@@ -7,7 +7,9 @@ from typing import ParamSpec, TypeVar
 
 import pytest
 
-from fly_brain.qualification.adapters.connectome_probe import run
+from fly_brain.qualification.adapters.connectome_probe import InputAuditRepository
+from fly_brain.qualification.input_audit_service import run
+from fly_brain.qualification.ports import InputAuditFiles
 from fly_brain.simulation.models import Connectome, InputPin
 from fly_brain.simulation.module import (
     build_absolute_count_reader,
@@ -83,6 +85,7 @@ def current(
     output: Path,
     calls: list[str],
     fail_at: str | None,
+    files: InputAuditFiles,
 ) -> dict[str, object]:
     return run(
         connectome,
@@ -98,6 +101,7 @@ def current(
         read_buckets=traced(
             'buckets', build_destination_buckets_reader(), calls, output, fail_at
         ),
+        files=files,
     )
 
 
@@ -115,7 +119,9 @@ def test_actual_host_driver_preserves_every_archive_and_report_byte(
     expected = baseline().run(connectome, pin, Path('audit'))
     monkeypatch.chdir(roots[1])
     calls: list[str] = []
-    actual = current(connectome, pin, Path('audit'), calls, None)
+    actual = current(
+        connectome, pin, Path('audit'), calls, None, InputAuditRepository()
+    )
     assert (actual, calls, payload(connectome)) == (expected, list(PHASES), before)
     for name in ('mapped-inputs.npz', 'mapping.json'):
         assert (roots[1] / 'audit' / name).read_bytes() == (
@@ -133,12 +139,22 @@ def test_callback_errors_keep_original_directory_and_file_positions(
     output = tmp_path / 'audit'
     with pytest.raises(ValueError, match='injected ' + phase):
         current(
-            fixture().connectome, InputPin('csv', 'parquet', 6, 8), output, calls, phase
+            fixture().connectome,
+            InputPin('csv', 'parquet', 6, 8),
+            output,
+            calls,
+            phase,
+            InputAuditRepository(),
         )
     assert calls == list(PHASES[: PHASES.index(phase) + 1])
     with pytest.raises(FileExistsError):
         current(
-            fixture().connectome, InputPin('csv', 'parquet', 6, 8), output, calls, None
+            fixture().connectome,
+            InputPin('csv', 'parquet', 6, 8),
+            output,
+            calls,
+            None,
+            InputAuditRepository(),
         )
     assert calls == list(PHASES[: PHASES.index(phase) + 1])
 
@@ -153,7 +169,7 @@ def test_empty_edge_error_still_follows_archive_and_precedes_bucket_acquisition(
     with pytest.raises(ValueError) as original:
         baseline().run(connectome, pin, tmp_path / 'original')
     with pytest.raises(ValueError) as actual:
-        current(connectome, pin, output, calls, None)
+        current(connectome, pin, output, calls, None, InputAuditRepository())
     assert (
         str(actual.value),
         calls,
