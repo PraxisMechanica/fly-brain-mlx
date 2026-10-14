@@ -9,6 +9,7 @@ from fly_brain.comparison.acceptance import (
     validate_coordinates,
 )
 from fly_brain.comparison.models import SpikeSteps
+from fly_brain.simulation.identifiers import NeuronRows64
 
 pytestmark = pytest.mark.unit
 
@@ -18,7 +19,7 @@ def test_valid_coordinates_include_silence_and_every_horizon_boundary(
     events: tuple[tuple[int, int], ...],
 ) -> None:
     spikes = SpikeSteps(
-        np.asarray([neuron for neuron, _ in events], dtype=np.int64),
+        NeuronRows64(np.asarray([neuron for neuron, _ in events], dtype=np.int64)),
         np.asarray([step for _, step in events], dtype=np.int64),
     )
     validate_coordinates(spikes, 4, 100)
@@ -40,7 +41,8 @@ def test_invalid_or_duplicate_coordinates_cannot_receive_a_parity_score(
     neurons: list[int], steps: list[int]
 ) -> None:
     spikes = SpikeSteps(
-        np.asarray(neurons, dtype=np.int64), np.asarray(steps, dtype=np.int64)
+        NeuronRows64(np.asarray(neurons, dtype=np.int64)),
+        np.asarray(steps, dtype=np.int64),
     )
     with pytest.raises(ValueError):
         validate_coordinates(spikes, 4, 100)
@@ -54,7 +56,8 @@ def test_coordinates_refuse_implicit_precision_conversion(
     wrong = cast(NDArray[np.int64], np.array([0], dtype=dtype))
     native = np.array([0], dtype=np.int64)
     spikes = SpikeSteps(
-        wrong if field == 'neurons' else native, wrong if field == 'steps' else native
+        NeuronRows64(wrong if field == 'neurons' else native),
+        wrong if field == 'steps' else native,
     )
     with pytest.raises(ValueError, match='native int64'):
         validate_coordinates(spikes, 4, 100)

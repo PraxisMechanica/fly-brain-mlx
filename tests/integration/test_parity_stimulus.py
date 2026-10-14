@@ -7,7 +7,7 @@ from typing import get_args
 import numpy as np
 import pytest
 
-from fly_brain.comparison.models import SpikeSteps
+from fly_brain.comparison.models import FlyWireSpikeSteps, SpikeSteps
 from fly_brain.comparison.module import (
     build_case_scoring,
     build_coordinate_validation,
@@ -183,9 +183,11 @@ def test_report_reads_catalog_again_after_native_evidence_and_pending_checks(
         *,
         validate: CoordinateValidator,
         convert_clock: ReferenceClockConverter,
-    ) -> tuple[dict[str, SpikeSteps], dict[str, object]]:
+    ) -> tuple[dict[str, FlyWireSpikeSteps], dict[str, object]]:
         calls.append('load')
-        empty = SpikeSteps(np.array([], dtype=np.int64), np.array([], dtype=np.int64))
+        empty = SpikeSteps(
+            FlyWireIds64(np.array([], dtype=np.int64)), np.array([], dtype=np.int64)
+        )
         return {engine: empty for engine in ('brian', 'mlx', 'torch')}, {}
 
     def pending(first: Path, steps: int, edges: int) -> tuple[int, ...]:

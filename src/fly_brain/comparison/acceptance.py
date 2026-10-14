@@ -3,11 +3,13 @@ from fractions import Fraction
 import numpy as np
 from numpy.typing import NDArray
 
+from fly_brain.simulation.identifiers import FlyWireIds64, FlyWireNeuronId
+
 from .metrics import pearson_or_none
-from .models import MetricAcceptance, ParityMetrics, SpikeSteps
+from .models import FlyWireSpikeSteps, MetricAcceptance, ParityMetrics, RowSpikeSteps
 
 
-def validate_coordinates(spikes: SpikeSteps, neurons: int, steps: int) -> None:
+def validate_coordinates(spikes: RowSpikeSteps, neurons: int, steps: int) -> None:
     if (
         spikes.neurons.ndim != 1
         or spikes.steps.ndim != 1
@@ -46,38 +48,44 @@ def steps_from_reference_clock(
 
 
 def common_support(
-    reference: SpikeSteps, mlx: SpikeSteps, torch: SpikeSteps
-) -> NDArray[np.int64]:
-    return np.unique(np.concatenate((reference.neurons, mlx.neurons, torch.neurons)))
-
-
-def counts_on_support(
-    spikes: SpikeSteps, support: NDArray[np.int64]
-) -> NDArray[np.int64]:
-    neurons, counts = np.unique(spikes.neurons, return_counts=True)
-    lookup = {
-        int(neuron): int(count) for neuron, count in zip(neurons, counts, strict=True)
-    }
-    return np.asarray(
-        [lookup.get(int(neuron), 0) for neuron in support], dtype=np.int64
+    reference: FlyWireSpikeSteps, mlx: FlyWireSpikeSteps, torch: FlyWireSpikeSteps
+) -> FlyWireIds64:
+    return FlyWireIds64(
+        np.unique(np.concatenate((reference.neurons, mlx.neurons, torch.neurons)))
     )
 
 
-def groups_by_neuron(spikes: SpikeSteps) -> dict[int, NDArray[np.int64]]:
+def counts_on_support(
+    spikes: FlyWireSpikeSteps, support: FlyWireIds64
+) -> NDArray[np.int64]:
+    neurons, counts = np.unique(spikes.neurons, return_counts=True)
+    lookup = {
+        FlyWireNeuronId(int(neuron)): int(count)
+        for neuron, count in zip(neurons, counts, strict=True)
+    }
+    return np.asarray(
+        [lookup.get(FlyWireNeuronId(int(neuron)), 0) for neuron in support],
+        dtype=np.int64,
+    )
+
+
+def groups_by_neuron(
+    spikes: FlyWireSpikeSteps,
+) -> dict[FlyWireNeuronId, NDArray[np.int64]]:
     order = np.lexsort((spikes.steps, spikes.neurons))
     neurons = spikes.neurons[order]
     steps = spikes.steps[order]
     values, starts, counts = np.unique(neurons, return_index=True, return_counts=True)
     ends = starts + counts
     return {
-        int(neuron): steps[int(begin) : int(end)]
+        FlyWireNeuronId(int(neuron)): steps[int(begin) : int(end)]
         for neuron, begin, end in zip(values, starts, ends, strict=True)
     }
 
 
 def match_steps(
-    reference: dict[int, NDArray[np.int64]],
-    candidate: dict[int, NDArray[np.int64]],
+    reference: dict[FlyWireNeuronId, NDArray[np.int64]],
+    candidate: dict[FlyWireNeuronId, NDArray[np.int64]],
     window: int,
 ) -> list[int]:
     differences: list[int] = []
@@ -163,9 +171,9 @@ def assemble_metrics(
 
 
 def measure(
-    reference: SpikeSteps,
-    candidate: SpikeSteps,
-    support: NDArray[np.int64],
+    reference: FlyWireSpikeSteps,
+    candidate: FlyWireSpikeSteps,
+    support: FlyWireIds64,
     duration_s: float,
 ) -> ParityMetrics:
     first_groups = groups_by_neuron(reference)
@@ -213,7 +221,10 @@ def apply_gates(mlx: ParityMetrics, torch: ParityMetrics) -> dict[str, bool]:
 
 
 def evaluate_case(
-    reference: SpikeSteps, mlx: SpikeSteps, torch: SpikeSteps, duration_s: float
+    reference: FlyWireSpikeSteps,
+    mlx: FlyWireSpikeSteps,
+    torch: FlyWireSpikeSteps,
+    duration_s: float,
 ) -> MetricAcceptance:
     support = common_support(reference, mlx, torch)
     mlx_metrics = measure(reference, mlx, support, duration_s)

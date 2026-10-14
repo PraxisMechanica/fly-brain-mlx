@@ -4,11 +4,12 @@ from typing import cast
 import numpy as np
 from numpy.typing import NDArray
 
-from fly_brain.comparison.models import SpikeSteps
+from fly_brain.comparison.models import FlyWireSpikeSteps, SpikeSteps
 from fly_brain.qualification.spike_comparison_ports import (
     CoordinateValidator,
     ReferenceClockConverter,
 )
+from fly_brain.simulation.identifiers import FlyWireIds64, NeuronRows64
 from fly_brain.simulation.models import Connectome
 
 from .observer_evidence import array_record
@@ -22,8 +23,8 @@ def load(
     *,
     validate: CoordinateValidator,
     convert_clock: ReferenceClockConverter,
-) -> tuple[dict[str, SpikeSteps], dict[str, object]]:
-    spikes: dict[str, SpikeSteps] = {}
+) -> tuple[dict[str, FlyWireSpikeSteps], dict[str, object]]:
+    spikes: dict[str, FlyWireSpikeSteps] = {}
     native: dict[str, object] = {}
     paths = (
         ('brian', paired / 'reference-native.npz'),
@@ -68,7 +69,11 @@ def load(
                     },
                 }
             validate(
-                SpikeSteps(indices, coordinates), len(connectome.neuron_ids), steps
+                SpikeSteps(NeuronRows64(indices), coordinates),
+                len(connectome.neuron_ids),
+                steps,
             )
-            spikes[engine] = SpikeSteps(connectome.neuron_ids[indices], coordinates)
+            spikes[engine] = SpikeSteps(
+                FlyWireIds64(connectome.neuron_ids[indices]), coordinates
+            )
     return spikes, native

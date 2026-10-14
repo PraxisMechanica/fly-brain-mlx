@@ -3,22 +3,28 @@ from typing import Protocol
 import numpy as np
 from numpy.typing import NDArray
 
-from fly_brain.comparison.models import MetricAcceptance, ParityMetrics, SpikeSteps
+from fly_brain.comparison.models import (
+    FlyWireSpikeSteps,
+    MetricAcceptance,
+    ParityMetrics,
+    RowSpikeSteps,
+)
+from fly_brain.simulation.identifiers import FlyWireIds64
 
 
 class CaseScorer(Protocol):
     def __call__(
         self,
-        reference: SpikeSteps,
-        mlx: SpikeSteps,
-        torch: SpikeSteps,
+        reference: FlyWireSpikeSteps,
+        mlx: FlyWireSpikeSteps,
+        torch: FlyWireSpikeSteps,
         duration_s: float,
         /,
     ) -> MetricAcceptance: ...
 
 
 class CoordinateValidator(Protocol):
-    def __call__(self, spikes: SpikeSteps, neurons: int, steps: int, /) -> None: ...
+    def __call__(self, spikes: RowSpikeSteps, neurons: int, steps: int, /) -> None: ...
 
 
 class ReferenceClockConverter(Protocol):
@@ -30,8 +36,8 @@ class ReferenceClockConverter(Protocol):
 class TrialMeasurer(Protocol):
     def __call__(
         self,
-        trials: tuple[tuple[SpikeSteps, SpikeSteps], ...],
-        support: NDArray[np.int64],
+        trials: tuple[tuple[FlyWireSpikeSteps, FlyWireSpikeSteps], ...],
+        support: FlyWireIds64,
         duration_s: float,
         /,
     ) -> ParityMetrics: ...

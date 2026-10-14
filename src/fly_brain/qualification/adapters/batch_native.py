@@ -4,8 +4,9 @@ from typing import Literal, cast
 import numpy as np
 from numpy.typing import NDArray
 
-from fly_brain.comparison.models import SpikeSteps
+from fly_brain.comparison.models import RowSpikeSteps, SpikeSteps
 from fly_brain.qualification.spike_comparison_ports import CoordinateValidator
+from fly_brain.simulation.identifiers import NeuronRows64
 
 NativeArrays = Mapping[str, NDArray[np.generic]]
 Engine = Literal['mlx', 'cpu']
@@ -63,7 +64,7 @@ def trial_spikes(
     steps: int,
     *,
     validate: CoordinateValidator,
-) -> tuple[SpikeSteps, ...]:
+) -> tuple[RowSpikeSteps, ...]:
     if steps < 1 or neurons < 1 or trials not in (1, 4):
         raise ValueError('Spike evidence requires valid trial/network dimensions')
     indices, times = arrays['spike_neurons'], arrays['spike_steps']
@@ -84,16 +85,18 @@ def trial_spikes(
         or np.any(positions >= trials)
     ):
         raise ValueError('Spike trial coordinates must be aligned native int64')
-    result: list[SpikeSteps] = []
+    result: list[RowSpikeSteps] = []
     for trial in range(trials):
         selected = positions == trial
         spikes = SpikeSteps(
-            cast(NDArray[np.int64], indices[selected]),
+            NeuronRows64(cast(NDArray[np.int64], indices[selected])),
             cast(NDArray[np.int64], times[selected]),
         )
         validate(spikes, neurons, steps)
         order = np.lexsort((spikes.neurons, spikes.steps))
-        result.append(SpikeSteps(spikes.neurons[order], spikes.steps[order]))
+        result.append(
+            SpikeSteps(NeuronRows64(spikes.neurons[order]), spikes.steps[order])
+        )
     return tuple(result)
 
 

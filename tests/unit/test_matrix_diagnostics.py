@@ -5,7 +5,7 @@ from fly_brain.comparison.models import SpikeSteps
 from fly_brain.comparison.module import build_time_bin_counting, build_trial_measurement
 from fly_brain.qualification.matrix_diagnostics import CaseRasters, coverage, summarize
 from fly_brain.qualification.models import ParityCase
-from fly_brain.simulation.identifiers import TrialId
+from fly_brain.simulation.identifiers import FlyWireIds64, TrialId
 
 pytestmark = pytest.mark.unit
 
@@ -51,9 +51,12 @@ def test_unprescribed_case_cannot_expand_the_frozen_matrix() -> None:
 
 
 def test_partial_group_reports_keep_failure_even_when_pooled_counts_cancel() -> None:
-    empty = SpikeSteps(np.asarray([], dtype=np.int64), np.asarray([], dtype=np.int64))
+    empty = SpikeSteps(
+        FlyWireIds64(np.asarray([], dtype=np.int64)), np.asarray([], dtype=np.int64)
+    )
     active = SpikeSteps(
-        np.asarray([1], dtype=np.int64), np.asarray([99], dtype=np.int64)
+        FlyWireIds64(np.asarray([1], dtype=np.int64)),
+        np.asarray([99], dtype=np.int64),
     )
     cases = (
         CaseRasters(ParityCase('sugar', 1000, TrialId(1)), empty, active, empty),

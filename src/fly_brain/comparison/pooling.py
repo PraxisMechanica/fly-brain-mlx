@@ -1,18 +1,20 @@
 import numpy as np
 from numpy.typing import NDArray
 
+from fly_brain.simulation.identifiers import FlyWireIds64
+
 from .acceptance import (
     assemble_metrics,
     counts_on_support,
     groups_by_neuron,
     match_steps,
 )
-from .models import ParityMetrics, SpikeSteps
+from .models import FlyWireSpikeSteps, ParityMetrics
 
 
 def measure_trials(
-    trials: tuple[tuple[SpikeSteps, SpikeSteps], ...],
-    support: NDArray[np.int64],
+    trials: tuple[tuple[FlyWireSpikeSteps, FlyWireSpikeSteps], ...],
+    support: FlyWireIds64,
     duration_s: float,
 ) -> ParityMetrics:
     if not trials:

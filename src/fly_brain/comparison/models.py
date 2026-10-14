@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from fractions import Fraction
 from pathlib import Path
-from typing import Protocol
+from typing import Generic, Protocol, TypeAlias, TypeVar
 
 import numpy as np
 from numpy.typing import NDArray
@@ -9,11 +9,13 @@ from numpy.typing import NDArray
 from fly_brain.simulation.identifiers import (
     FlyWireIds64,
     FlyWireNeuronId,
+    NeuronRows64,
     TrialId,
     TrialIds16,
 )
 
 MetricValue = str | int | float | None
+RasterIds = TypeVar('RasterIds', NeuronRows64, FlyWireIds64)
 
 
 @dataclass(frozen=True)
@@ -24,9 +26,13 @@ class Spikes:
 
 
 @dataclass(frozen=True)
-class SpikeSteps:
-    neurons: NDArray[np.int64]
+class SpikeSteps(Generic[RasterIds]):
+    neurons: RasterIds
     steps: NDArray[np.int64]
+
+
+RowSpikeSteps: TypeAlias = SpikeSteps[NeuronRows64]
+FlyWireSpikeSteps: TypeAlias = SpikeSteps[FlyWireIds64]
 
 
 @dataclass(frozen=True)

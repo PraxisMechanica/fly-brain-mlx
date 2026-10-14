@@ -1,10 +1,9 @@
 from dataclasses import dataclass
 
 import numpy as np
-from numpy.typing import NDArray
 
-from fly_brain.comparison.models import ParityMetrics, SpikeSteps
-from fly_brain.simulation.identifiers import TrialId
+from fly_brain.comparison.models import FlyWireSpikeSteps, ParityMetrics
+from fly_brain.simulation.identifiers import FlyWireIds64, TrialId
 from fly_brain.simulation.models import ExperimentName
 
 from .matrix import required_cases
@@ -26,9 +25,9 @@ class GroupCoverage:
 @dataclass(frozen=True)
 class CaseRasters:
     case: ParityCase
-    brian: SpikeSteps
-    mlx: SpikeSteps
-    torch: SpikeSteps
+    brian: FlyWireSpikeSteps
+    mlx: FlyWireSpikeSteps
+    torch: FlyWireSpikeSteps
 
 
 @dataclass(frozen=True)
@@ -89,13 +88,15 @@ def summarize(
         if not rows:
             results.append(GroupDiagnostics(group, None, {}, None))
             continue
-        support: NDArray[np.int64] = np.unique(
-            np.concatenate(
-                [
-                    spikes.neurons
-                    for row in rows
-                    for spikes in (row.brian, row.mlx, row.torch)
-                ]
+        support = FlyWireIds64(
+            np.unique(
+                np.concatenate(
+                    [
+                        spikes.neurons
+                        for row in rows
+                        for spikes in (row.brian, row.mlx, row.torch)
+                    ]
+                )
             )
         )
         metrics = {

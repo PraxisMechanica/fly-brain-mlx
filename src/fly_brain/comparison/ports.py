@@ -5,12 +5,15 @@ from typing import Protocol
 import numpy as np
 from numpy.typing import NDArray
 
+from fly_brain.simulation.identifiers import FlyWireIds64
+
 from .models import (
     ComparisonRequest,
     ComparisonResult,
+    FlyWireSpikeSteps,
     MetricAcceptance,
     ParityMetrics,
-    SpikeSteps,
+    RowSpikeSteps,
 )
 
 
@@ -32,11 +35,14 @@ class ComparisonCommand(Protocol):
     def __call__(self, request: ComparisonRequest, output: Path, /) -> int: ...
 
 
-CaseScoring = Callable[[SpikeSteps, SpikeSteps, SpikeSteps, float], MetricAcceptance]
-CoordinateValidation = Callable[[SpikeSteps, int, int], None]
+CaseScoring = Callable[
+    [FlyWireSpikeSteps, FlyWireSpikeSteps, FlyWireSpikeSteps, float], MetricAcceptance
+]
+CoordinateValidation = Callable[[RowSpikeSteps, int, int], None]
 ReferenceClockConversion = Callable[[NDArray[np.float64], int], NDArray[np.int64]]
 
 TrialMeasurement = Callable[
-    [tuple[tuple[SpikeSteps, SpikeSteps], ...], NDArray[np.int64], float], ParityMetrics
+    [tuple[tuple[FlyWireSpikeSteps, FlyWireSpikeSteps], ...], FlyWireIds64, float],
+    ParityMetrics,
 ]
 TimeBinCounting = Callable[[NDArray[np.int64], int], NDArray[np.int64]]

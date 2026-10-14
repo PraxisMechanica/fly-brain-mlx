@@ -5,14 +5,15 @@ import numpy as np
 import pytest
 
 from fly_brain.comparison.acceptance import apply_gates, evaluate_case
-from fly_brain.comparison.models import ParityMetrics, SpikeSteps
+from fly_brain.comparison.models import FlyWireSpikeSteps, ParityMetrics, SpikeSteps
+from fly_brain.simulation.identifiers import FlyWireIds64
 
 pytestmark = pytest.mark.unit
 
 
-def spikes(*events: tuple[int, int]) -> SpikeSteps:
+def spikes(*events: tuple[int, int]) -> FlyWireSpikeSteps:
     return SpikeSteps(
-        np.asarray([neuron for neuron, _ in events], dtype=np.int64),
+        FlyWireIds64(np.asarray([neuron for neuron, _ in events], dtype=np.int64)),
         np.asarray([step for _, step in events], dtype=np.int64),
     )
 
