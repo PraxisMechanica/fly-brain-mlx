@@ -4,6 +4,7 @@ import mlx.core as mx
 import numpy as np
 from numpy.typing import NDArray
 
+from fly_brain.simulation.identifiers import NeuronRow
 from fly_brain.simulation.observations import (
     COMPENSATED_ORDER,
     EXACT_ORDER,
@@ -17,7 +18,7 @@ if TYPE_CHECKING:
     from .bucketed import Layout
 
 
-def read_rows(layout: 'Layout', neurons: tuple[int, ...]) -> ReductionEvidence:
+def read_rows(layout: 'Layout', neurons: tuple[NeuronRow, ...]) -> ReductionEvidence:
     records: list[ReductionRow] = []
     for neuron in neurons:
         for bucket in layout.buckets:

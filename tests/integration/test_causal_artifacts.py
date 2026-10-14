@@ -8,6 +8,7 @@ import pytest
 from fly_brain.qualification.adapters.causal_artifacts import write_context
 from fly_brain.qualification.adapters.causal_capture import CauseContext, ObservedStep
 from fly_brain.qualification.adapters.observer_stream import StepSnapshot, read_frames
+from fly_brain.simulation.identifiers import NeuronRow
 from tests.unit.test_observer_stream import queued_stream
 
 pytestmark = pytest.mark.integration
@@ -29,7 +30,7 @@ def context() -> CauseContext:
         reference={'pre_v': np.array([-0.046, -0.045], dtype=np.float64)},
         mlx={'pre_v': np.array([-46, -45], dtype=np.float32)},
     )
-    return CauseContext((1,), row, previous)
+    return CauseContext((NeuronRow(1),), row, previous)
 
 
 def test_cause_archive_preserves_native_phases_and_all_actual_queue_slots(

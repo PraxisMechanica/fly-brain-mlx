@@ -4,6 +4,8 @@ from dataclasses import dataclass
 import numpy as np
 from numpy.typing import NDArray
 
+from fly_brain.simulation.identifiers import NeuronRow
+
 StateFields = Mapping[str, NDArray[np.float32 | np.float64]]
 
 
@@ -12,7 +14,7 @@ class BudgetViolation:
     step: int
     phase: str
     field: str
-    neuron: int
+    neuron: NeuronRow
     reference_mv: float
     mlx_mv: float
     budget_mv: float
@@ -23,7 +25,7 @@ class CausalAudit:
     step: int = 0
     first_budget_violation: BudgetViolation | None = None
     first_spike_step: int | None = None
-    first_spike_neurons: tuple[int, ...] = ()
+    first_spike_neurons: tuple[NeuronRow, ...] = ()
 
 
 def advance_audit(
@@ -56,7 +58,7 @@ def advance_audit(
                 budget = 1e-3 + 1e-5 * np.abs(expected)
                 failed = np.flatnonzero(np.abs(actual - expected) > budget)
                 if failed.size and violation is None:
-                    neuron = int(failed[0])
+                    neuron = NeuronRow(int(failed[0]))
                     violation = BudgetViolation(
                         step,
                         phase,
@@ -68,5 +70,5 @@ def advance_audit(
                     )
         if changed.size:
             first_spike_step = step
-            first_spike_neurons = tuple(int(index) for index in changed)
+            first_spike_neurons = tuple(NeuronRow(int(index)) for index in changed)
     return CausalAudit(audit.step + 1, violation, first_spike_step, first_spike_neurons)

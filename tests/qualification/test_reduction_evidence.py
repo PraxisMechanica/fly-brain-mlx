@@ -6,7 +6,7 @@ import pytest
 
 from fly_brain.simulation.backend.bucketed import make_layout, prepare_observed
 from fly_brain.simulation.backend.reduction_evidence import read_rows
-from fly_brain.simulation.identifiers import FlyWireIds64, NeuronRows32
+from fly_brain.simulation.identifiers import FlyWireIds64, NeuronRow, NeuronRows32
 from fly_brain.simulation.models import Connectome
 from fly_brain.simulation.observations import COMPENSATED_ORDER, EXACT_ORDER
 from tests.qualification.test_mlx_observer import fixture
@@ -55,7 +55,7 @@ def test_reader_observes_changed_actual_device_leaves_instead_of_reconstructing_
         layout,
         buckets=tuple(changed if item is bucket else item for item in layout.buckets),
     )
-    target = int(np.asarray(bucket.targets)[0])
+    target = NeuronRow(int(np.asarray(bucket.targets)[0]))
     observed = read_rows(actual, (target,)).rows[0]
     assert observed.counts.tobytes() == np.asarray(counts[0]).tobytes()
     assert observed.counts.tobytes() != np.asarray(bucket.counts[0]).tobytes()
@@ -65,7 +65,7 @@ def test_reader_rejects_a_neuron_missing_from_the_actual_layout(precision: str) 
     case = fixture()
     _, read = prepare_observed(case.connectome, case.targets, (), precision)
     with pytest.raises(ValueError, match='absent from the actual device layout'):
-        read((case.connectome.neuron_ids.size,))
+        read((NeuronRow(case.connectome.neuron_ids.size),))
 
 
 def test_reader_rejects_changed_actual_native_dtype(precision: str) -> None:
@@ -75,6 +75,6 @@ def test_reader_rejects_changed_actual_native_dtype(precision: str) -> None:
     with mx.stream(mx.gpu):
         changed = replace(bucket, counts=bucket.counts.astype(mx.float16))
     actual = replace(layout, buckets=(changed, *layout.buckets[1:]))
-    target = int(np.asarray(bucket.targets)[0])
+    target = NeuronRow(int(np.asarray(bucket.targets)[0]))
     with pytest.raises(ValueError, match='equal native one-dimensional fields'):
         read_rows(actual, (target,))

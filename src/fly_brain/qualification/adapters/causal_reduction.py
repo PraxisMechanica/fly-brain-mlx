@@ -2,11 +2,12 @@ import numpy as np
 from numpy.typing import NDArray
 
 from fly_brain.qualification.ports import ReductionReader
+from fly_brain.simulation.identifiers import NeuronRow
 
 
 def reduction_inputs(
     read_rows: ReductionReader,
-    neurons: tuple[int, ...],
+    neurons: tuple[NeuronRow, ...],
     reference_weights: NDArray[np.float64],
 ) -> dict[str, NDArray[np.generic]]:
     evidence = read_rows(neurons)

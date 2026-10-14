@@ -191,7 +191,10 @@ def test_observation_factory_keeps_actual_reduction_rows_unchanged(
     _, new_reader = build_observation_sessions(
         case.connectome, case.targets, (NeuronRow(3),), precision
     )
-    expected, actual = old_reader(tuple(range(6))), new_reader(tuple(range(6)))
+    expected, actual = (
+        old_reader(tuple(map(NeuronRow, range(6)))),
+        new_reader(tuple(map(NeuronRow, range(6)))),
+    )
     assert expected.order == actual.order
     for old, new in zip(expected.rows, actual.rows, strict=True):
         assert old.neuron == new.neuron

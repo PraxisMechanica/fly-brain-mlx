@@ -7,7 +7,7 @@ from typing import Generic, TypeVar
 import numpy as np
 from numpy.typing import NDArray
 
-from .identifiers import TrialId
+from .identifiers import NeuronRow, TrialId
 
 HostArray = NDArray[np.float32 | np.float64 | np.int32 | np.int64 | np.bool_]
 Scalar = TypeVar('Scalar', bound=np.generic, covariant=True)
@@ -59,14 +59,14 @@ def capture_edges(
 
 @dataclass(frozen=True, init=False)
 class ReductionRow:
-    neuron: int
+    neuron: NeuronRow
     _edges_snapshot: HostSnapshot[np.int32] = field(init=False, repr=False)
     _counts_snapshot: HostSnapshot[np.float32] = field(init=False, repr=False)
     _occupied_snapshot: HostSnapshot[np.bool_] = field(init=False, repr=False)
 
     def __init__(
         self,
-        neuron: int,
+        neuron: NeuronRow,
         edges: NDArray[np.int32],
         counts: NDArray[np.float32],
         occupied: NDArray[np.bool_],
@@ -106,7 +106,7 @@ class ReductionEvidence:
     order: str
 
 
-ReductionReader = Callable[[tuple[int, ...]], ReductionEvidence]
+ReductionReader = Callable[[tuple[NeuronRow, ...]], ReductionEvidence]
 
 PHASE_DTYPES = MappingProxyType(
     {

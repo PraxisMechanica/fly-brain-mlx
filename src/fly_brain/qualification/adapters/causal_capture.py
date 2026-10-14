@@ -5,6 +5,7 @@ import numpy as np
 from numpy.typing import NDArray
 
 from fly_brain.qualification.causality import CausalAudit
+from fly_brain.simulation.identifiers import NeuronRow
 
 from .observer_stream import StepSnapshot
 from .paired_observer import PairedBlock, audit_block
@@ -24,7 +25,7 @@ class ObservedStep:
 
 @dataclass(frozen=True)
 class CauseContext:
-    neurons: tuple[int, ...]
+    neurons: tuple[NeuronRow, ...]
     current: ObservedStep
     previous: ObservedStep | None
 
@@ -50,7 +51,7 @@ class CausalCapture:
         self.previous: ObservedStep | None = None
 
     def context(
-        self, block: PairedBlock, step: int, neurons: tuple[int, ...]
+        self, block: PairedBlock, step: int, neurons: tuple[NeuronRow, ...]
     ) -> CauseContext:
         row = step - block.reference.begin
         return CauseContext(

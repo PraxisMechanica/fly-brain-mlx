@@ -9,7 +9,7 @@ import pytest
 from fly_brain.qualification.adapters.case_binding import require_cause_binding
 from fly_brain.qualification.causality import CausalAudit
 from fly_brain.qualification.models import ParityCase
-from fly_brain.simulation.identifiers import TrialId
+from fly_brain.simulation.identifiers import NeuronRow, TrialId
 
 pytestmark = pytest.mark.integration
 
@@ -123,7 +123,7 @@ def test_completed_cause_cannot_apply_to_changed_or_incomplete_evidence(
     elif fault == 'execution_changed':
         (paired / 'spike-context.npz').write_bytes(b'changed cause')
     audit = CausalAudit(
-        step=10000, first_spike_step=5719, first_spike_neurons=(100750,)
+        step=10000, first_spike_step=5719, first_spike_neurons=(NeuronRow(100750),)
     )
     if fault == 'none':
         hashes = require_cause_binding(run, review, case, audit, 'launch')

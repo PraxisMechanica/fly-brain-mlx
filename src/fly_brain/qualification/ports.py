@@ -44,7 +44,7 @@ class InputAuditFiles(Protocol):
 
 
 class ReductionReader(Protocol):
-    def __call__(self, neurons: tuple[int, ...], /) -> ReductionEvidence: ...
+    def __call__(self, neurons: tuple[NeuronRow, ...], /) -> ReductionEvidence: ...
 
 
 class ConnectomeSilencer(Protocol):

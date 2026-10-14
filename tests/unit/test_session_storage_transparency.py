@@ -5,6 +5,7 @@ import numpy as np
 
 from fly_brain.qualification.session_blocks import SessionBlock
 from fly_brain.qualification.session_expectations import LedgerState
+from fly_brain.simulation.identifiers import NeuronRow
 from fly_brain.simulation.observations import (
     HostSnapshot,
     NativeComparison,
@@ -50,7 +51,7 @@ def test_frozen_records_declare_actual_snapshot_storage_and_typed_view_propertie
 
 def test_snapshot_storage_fields_match_their_declared_runtime_type() -> None:
     row = ReductionRow(
-        2,
+        NeuronRow(2),
         np.array([0, -1], dtype=np.int32),
         np.array([1, 0], dtype=np.float32),
         np.array([True, False], dtype=np.bool_),

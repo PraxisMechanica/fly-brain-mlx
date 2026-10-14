@@ -6,7 +6,7 @@ from numpy.typing import NDArray
 
 from fly_brain.qualification.session_blocks import SessionBlock
 from fly_brain.qualification.session_expectations import expect_step, initial_ledger
-from fly_brain.simulation.identifiers import TrialId
+from fly_brain.simulation.identifiers import NeuronRow, TrialId
 from fly_brain.simulation.observations import (
     NativeComparison,
     ObservationInitialState,
@@ -107,7 +107,7 @@ def test_physical_queue_block_and_reduction_row_views_preserve_canonical_dtype_s
         (actual.due_sha256,),
     )
     row = ReductionRow(
-        0,
+        NeuronRow(0),
         np.array([0, -1], dtype=np.int32),
         np.array([0.0, -0.0], dtype=np.float32),
         np.array([True, False], dtype=np.bool_),

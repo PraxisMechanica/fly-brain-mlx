@@ -2,6 +2,7 @@ import numpy as np
 import pytest
 
 from fly_brain.qualification.adapters.causal_reduction import reduction_inputs
+from fly_brain.simulation.identifiers import NeuronRow
 from fly_brain.simulation.observations import (
     COMPENSATED_ORDER,
     ReductionEvidence,
@@ -17,7 +18,7 @@ def test_native_row_bits_are_detached_and_cannot_be_made_writable() -> None:
         np.float32
     )
     occupied = np.array([True, False, True], dtype=np.bool_)
-    row = ReductionRow(3, edges, counts, occupied)
+    row = ReductionRow(NeuronRow(3), edges, counts, occupied)
     original = tuple(value.tobytes() for value in (edges, counts, occupied))
     edges[:] = 0
     counts[:] = 1
@@ -34,7 +35,7 @@ def test_native_row_bits_are_detached_and_cannot_be_made_writable() -> None:
 def test_reduction_rows_reject_different_native_field_coverage(size: int) -> None:
     with pytest.raises(ValueError, match='equal native one-dimensional fields'):
         ReductionRow(
-            0,
+            NeuronRow(0),
             np.array([0, 1], dtype=np.int32),
             np.zeros(size, dtype=np.float32),
             np.array([True, True], dtype=np.bool_),
@@ -43,10 +44,16 @@ def test_reduction_rows_reject_different_native_field_coverage(size: int) -> Non
 
 @pytest.mark.parametrize(
     'returned,requested',
-    (((), (0,)), ((1,), (0,)), ((0, 1), (0,)), ((1, 0), (0, 1)), ((0, 0), (0,))),
+    (
+        ((), (NeuronRow(0),)),
+        ((NeuronRow(1),), (NeuronRow(0),)),
+        ((NeuronRow(0), NeuronRow(1)), (NeuronRow(0),)),
+        ((NeuronRow(1), NeuronRow(0)), (NeuronRow(0), NeuronRow(1))),
+        ((NeuronRow(0), NeuronRow(0)), (NeuronRow(0),)),
+    ),
 )
 def test_reader_rejects_missing_extra_or_reordered_neurons(
-    returned: tuple[int, ...], requested: tuple[int, ...]
+    returned: tuple[NeuronRow, ...], requested: tuple[NeuronRow, ...]
 ) -> None:
     rows = tuple(
         ReductionRow(
@@ -58,7 +65,7 @@ def test_reader_rejects_missing_extra_or_reordered_neurons(
         for neuron in returned
     )
 
-    def read(neurons: tuple[int, ...]) -> ReductionEvidence:
+    def read(neurons: tuple[NeuronRow, ...]) -> ReductionEvidence:
         return ReductionEvidence(rows, COMPENSATED_ORDER)
 
     with pytest.raises(ValueError, match='requested coverage'):
@@ -67,16 +74,18 @@ def test_reader_rejects_missing_extra_or_reordered_neurons(
 
 def test_reader_binds_reference_weights_to_actual_occupied_edges() -> None:
     row = ReductionRow(
-        3,
+        NeuronRow(3),
         np.array([2, -1, 0], dtype=np.int32),
         np.array([5, 0, -2], dtype=np.float32),
         np.array([True, False, True], dtype=np.bool_),
     )
 
-    def read(neurons: tuple[int, ...]) -> ReductionEvidence:
+    def read(neurons: tuple[NeuronRow, ...]) -> ReductionEvidence:
         return ReductionEvidence((row,), COMPENSATED_ORDER)
 
-    actual = reduction_inputs(read, (3,), np.array([2, 3, 4], dtype=np.float64))
+    actual = reduction_inputs(
+        read, (NeuronRow(3),), np.array([2, 3, 4], dtype=np.float64)
+    )
     assert (
         actual['neuron_3_reference_native_weight_si'].tobytes()
         == np.array([4, 2], dtype=np.float64).tobytes()
