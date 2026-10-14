@@ -34,8 +34,10 @@ No incomplete rule is treated as clean or inapplicable.
 The [shared commands](../../justfile) select changed inputs and affected
 dependents. Ruff checks changed files, strict Pyright checks affected Python
 sources, and native import contracts evaluate affected source modules. Native
-bridge checks load imported type context; complete reverse-consumer coverage
-for those JavaScript sources remains unproved. Component owners run meaningful
+bridge checks derive reverse static type consumers from pinned TypeScript
+dependencies; changed ambient/global declarations invalidate their native cohort.
+The compiler loads supporting context, while computed provider acquisition and
+runtime/effect resolution remain unproved. Component owners run meaningful
 regressions once before commit and record source/dependency identity. Hooks and
 hosted checks do not replay those tests. Unsupported Python deletion/rename
 impact fails COV002, as do native removals without a proved affected scope.
@@ -103,7 +105,10 @@ live session supplies source-bound native reads, guards original/refreshed loade
 origins and rejects unregistered or post-disposal reads. Selected unreferenced
 stubs receive native interim enrollment and forced binding; the actual Module,
 scope, symbol table and original-file identity are checked. Tracking remains
-unchanged and repeated reads retain cached file/tree identity. The
+unchanged and repeated reads retain cached file/tree identity. Loaded parsed
+import descriptors share the checked native reachability guard. Non-forcing
+readiness checks keep unrequested pending inputs lazy and preserve their origin/
+hash accounting; complete `active_imports` capability remains missing. The
 [native bound-declaration observer](../../tools/architecture/native_python_declarations.mjs)
 retains actual parser-node and Symbol IDs, report-local scope/declaration indexes,
 and native reachability. Raw declaration URI/range remain separate from lexical
@@ -165,8 +170,10 @@ configured imports reject service/rule dependencies on its storage implementatio
 Row-space coordinate validation and FlyWire-space
 comparison/pooling now use separate constrained raster specializations while
 preserving the record and arrays. Native type arguments are qualified with the
-actual NumPy dependency root. Conversion-origin and complete ancestry precision
-remain unproved; nominal wrappers do not establish those predicates.
+actual NumPy dependency root. Reduction selectors now carry global `NeuronRow` identities through capture,
+audit and provider ports; local bucket positions remain integers. Conversion-origin
+and complete ancestry precision remain unproved; nominal wrappers do not establish
+those predicates.
 Their bounded checks preserve behavior within their tested scope. Complete type/alias/effect/control-flow analysis and the remaining
 architecture findings still require work; these boundaries grant no new
 scientific acceptance.

@@ -89,16 +89,15 @@ acceptance. Current limitations remain below and in
 
 Current bounded assignments (confidence 95%): B has delivered selected-source
 enrollment and the native bound-declaration observer using the canonical live
-session. It repairs the shared active-import guard before canonical type-query
-reuse. The superseded 14-path declaration candidate is retired; dormant
+session. The checked shared active-import guard is delivered at `1dce138`;
+complete active-import capability and canonical type-query reuse remain missing. The superseded 14-path declaration candidate is retired; dormant
 occurrences and lexical-versus-resolved identities stay explicit.
 A has delivered the fan-in count boundary and the reviewed source-only neutral
-value/primitive proof. It assesses the remaining observation neuron-row/reduction
-selector boundary; DEP004 remains open and no live backend is substituted.
+value/primitive proof. The observation neuron-row/reduction selector boundary is delivered at
+`b2f4dfd`; DEP004 remains open and no live backend is substituted.
 C has delivered the `NetworkCase` and Torch qualification target selectors,
-verified through exact hosted run `38583143321`. It implements the bounded
-native type-consumer selection repair using pinned compiler dependencies and
-shared checker options. The TypeScript loader has a literal SDK type import;
+verified through exact hosted run `38583143321`. The bounded native type-consumer selection repair is committed at `dcf27bb`,
+using pinned compiler dependencies and shared checker options. The TypeScript loader has a literal SDK type import;
 the Pyright loader has a global Loader declaration, with opaque vendor runtime
 calls. Computed provider acquisition and runtime effects remain unproved.
 Unsupported native module dependencies still fail COV002. Passed-tuple/scalar identity, values/order and host projections
@@ -107,6 +106,18 @@ contract. Canonical batch labels are delivered. Local array positions, collector
 streams and original numeric behavior remain unchanged. Positional artifact
 provenance and joint stimulus-identity enforcement remain missing. Owners use separate main execution checkouts,
 qualify affected controls once and commit before serial parent integration.
+
+The user requests architecture-test profiling on 2026-10-14 (confidence 99%).
+The parent completed one instrumented quality-suite diagnostic and one whole
+changed-range gate at `1dce138` in an isolated checkout; A reviewed gate composition
+and C reviewed fixture repetition without additional executions. Results are in
+[refactor evidence](docs/agent/refactor-evidence.md): 9m38s for 1,049 profiled
+quality cases (two failures), and 13.94s for the checked range. Repeated external
+process setup dominates; metrics take 10.11s of that gate. The stale contract-count
+assertion is repaired at `9d13c96`; B repairs independent disposed-session
+weakening evidence without production changes. Only failed/changed controls repeat.
+This diagnostic does not restore automatic regression replay or supply missing
+architecture/scientific acceptance. Root owns results and output consumers.
 
 1. Keep checked components and current documentation delivered incrementally.
    Verify exact hosted revisions and leave no expired output exception.

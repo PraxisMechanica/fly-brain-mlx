@@ -505,3 +505,133 @@ passed with 23 changed inputs, 33 affected Python files, 21 reviewed sources and
 pytest and zero artifacts. The [coverage report](quality-coverage.md)
 owns remaining mechanism limits.
 
+## Neuron-row reduction selectors
+
+The 17-path selector component is delivered at `b2f4dfd`. Normal commit/push
+checks and exact hosted run `38598083015` passed: 17 changed inputs, 113 affected
+Python files, 30 import module/contract checks, 16 reviewed ownership sources
+and 356 retained records. The hosted quality step took 20 seconds, ran no pytest
+and uploaded zero artifacts. Eighty-two affected cases passed in 10.76 seconds;
+only 12 genuinely changed native fixture cases repeated, passing in 11.02 seconds.
+
+`NeuronRow` identifies global Connectome rows through reduction/audit ports;
+local bucket positions remain integers. Borrowed tuples, duplicate/order/missing
+behavior and existing scalar constructions remain unchanged. Six normalized
+production ASTs, 73 original assertions and 14 exception contexts are preserved.
+Eight actual inert-reader lookups cover both modes. Actual capture/fold/reduction
+and context writing produce byte-identical old/new 62-field NPZ and JSON outputs:
+SHA-256 `7ae35ee6571b5e474abe3fb86db7e350dbabe78e43d666cad8a059fdae17b7cd`
+and `b7154f70536a48dc5b2305c6d759b1de61d013e6d224ce217950ddd56e200711`.
+The actual batch-environment reader verifies the current source identities;
+synthetic environment metadata does not establish hardware execution acceptance.
+Fourteen exact registry-row deltas preserve other current policy. Five protected
+sources and seven fixtures remain exact. No Metal trajectory was run; conversion
+origin, aliases, VALUE001, six findings and full37 coverage remain unresolved.
+
+## Native static type-consumer selection
+
+The 12-path component is committed at `dcf27bb` after normal incremental hooks.
+Pinned TypeScript 5.9.3 dependency facts select changed modules and static type
+consumers; ambient/global changes invalidate their native cohort. Compiler flags
+have one owner, semantic checks receive the affected roots and syntax checks
+receive changed files. Independently discovered inventory and source/compiler/
+configuration/read hashes remain guarded. Missing, removed, nonliteral or
+unsupported module scope and swallowed host-read failures fail COV002.
+
+Fifty-one distinct controls qualify over 58 executions: the initial 46 yielded
+40 passes and six failures in 23.810 seconds; six repaired failures passed in
+8.878 seconds; five new guards and one genuinely changed control passed in
+3.102 seconds. Original 24 assertion ASTs and seven exact ownership-row deltas
+are checked independently. Worker metrics retain mean 14.93 and maximum 96
+while health improves 40.86 to 40.96 across 395 to 402 files. Shared metadata,
+364 other Python files, five protected sources and seven fixtures remain exact.
+No parent test replay occurs. Computed provider acquisition, runtime/effect
+resolution, complete architecture enforcement and scientific acceptance remain
+unproved. The immediate diagnostic consumer completed before default cleanup.
+
+## Canonical loaded-import observation
+
+The five-path repair is committed at `1dce138` after normal incremental hooks.
+The shared parsed-import descriptor body is preserved under parameter substitution.
+Non-forcing source readiness checks retain origin/hash accounting; tracked and
+selected sources bind, while pending unrequested inputs remain lazy. This repairs
+the false rejection of native-unreachable imports without a vendor-directory
+exemption. Complete `active_imports` capability remains COV002.
+
+Thirty-one distinct controls qualify. Twenty-four changed relocation controls
+passed in 8.809 seconds; the repaired lazy-read/hash assertion and existing shared
+type-driver control passed in 1.251 seconds. Unchanged controls were reused.
+Strict checked JavaScript, native syntax, Ruff and Pyright pass. Worker metrics
+improve mean 14.89 to 14.86 and health 41.05 to 41.13 across 398 to 400 files;
+maximum 96 remains. Only the allocated test registry row is added; descriptor
+predicates and shared metadata are independently checked. No query migration,
+runtime/effect proof, full37 result or scientific acceptance is claimed.
+Consumed diagnostics were removed before the clean handoff.
+
+## Architecture-test performance profile
+
+The user-requested diagnostic at `1dce138` runs only `tests/quality` in an
+isolated checkout. One instrumented pass took 578.389 seconds (9m38s): 1,047
+passed and two failed, over 1,049 cases. This is a profiled quality-suite result,
+not a new ordinary full-suite time or an all-pass qualification. The previous
+706-case quality selection took 370.26 summed test seconds; case count has
+increased by 343. Profiling overhead is not separately measured. Application
+and scientific suites were not run.
+
+Python cProfile, per-test phases, 4,807 directly observed subprocesses and four
+native Node CPU samples establish the bottleneck. Parent poll/select waits take
+525.299 seconds, 90.8% of wall time. Setup/call/teardown totals are respectively
+34.694, 540.744 and 0.363 seconds. Child lifetime categories below are diagnostic
+attributions, not independent end-to-end runs or pure compiler-startup timings.
+
+| Direct subprocess category | Count | Seconds |
+| --- | ---: | ---: |
+| Git commit/push, including hooks | 736 | 183.385 |
+| Native compiler bridges | 256 | 96.333 |
+| Pyright language server | 145 | 91.607 |
+| Other Node/compiler commands | 139 | 52.756 |
+| Metric analyzer | 69 | 34.259 |
+| Pyright CLI | 64 | 33.353 |
+| Other Git operations | 3,129 | 30.795 |
+| Import Linter | 152 | 18.379 |
+| Hook installation/invocation | 97 | 15.406 |
+
+The three boundary matrix modules take 132.583 seconds and construct 49 hook
+repositories with 145 commit attempts. Schema-policy cases start 49 language
+servers totaling 22.154 seconds despite largely unchanged authored input.
+Decoded-report corruption controls alone repeat six call observations (1.847
+seconds), 15 partial observations (4.773 seconds) and eight native-impact
+observations (3.534 seconds). CPU samples confirm compiler loading, parsing,
+filesystem access and garbage collection; no single startup-only percentage or
+prospective speedup is claimed.
+
+A separate single complete changed-range gate over `b2f4dfd..1dce138` passed in
+13.941 seconds: 16 changed inputs, ten affected Python files and no pytest.
+Metrics take 10.107 seconds (72.5%); Python typing 1.264 seconds, native
+TypeScript checking 0.860 seconds, native dependency selection 0.731 seconds,
+six changed native syntax checks together 0.391 seconds, ownership 0.210 seconds,
+and input/format/lint tasks together 0.136 seconds. It preserves nine affected
+ownership reviews, 368 retained records and six findings. This range does not
+activate application import-boundary evaluation; other ranges can take longer.
+Nested metric Python processes are confirmed by source, not individually timed
+by this parent-process tracer. The metric adapter launches Python/Radon for each
+uncached blob and performs both native visitors.
+
+The measured optimization targets are run-local immutable observations for
+schema/decoded-data tests and batched native Radon calculation, preserving both
+visitors, every per-file error, complete inventory arithmetic and CQ predicates.
+Source/SDK/configuration/hash/lifecycle mutations still require independent
+observations. Reusing a mutable repository or deleting integrity checks is not
+the proposed repair. No performance optimization is yet delivered by this profile.
+
+The first failure is a stale assertion expecting six contracts instead of the
+actual ten; both success/contract predicates remain and its repaired case passes
+in 0.26 seconds. An initial focused attempt failed before test execution because
+the temporary parent directory was absent after cleanup; creating that parent
+resolved setup. A format-only commit-hook failure was repaired without another
+test run. The second failure is the disposed-session weakening fixture: after
+removing the active guard, a later native binding guard rejects it. Its owner
+repairs independent lifecycle evidence without weakening production checks.
+The full profiling cohort is not replayed. Raw diagnostics expire after the
+record and immediate failure-review consumers finish.
+

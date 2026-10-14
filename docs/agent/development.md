@@ -27,6 +27,9 @@ imports and every submitted changed path select affected dependents. Python
 deletions and renames with unproved impact fail COV002; they do not receive an
 empty pass. Changed compiler/tool/configuration inputs invalidate their scope.
 Import/type tools load supporting context without re-evaluating every source.
+Pinned TypeScript dependencies select changed native modules and static type
+consumers; ambient/global changes invalidate that native cohort. Native syntax
+checks receive changed files. Unsupported module scope fails COV002.
 Metrics preserve complete inventory arithmetic and every commit/merge-parent
 comparison using native calculations within the command. No persistent test or
 quality verdict cache is used. This gate does not run the complete application
