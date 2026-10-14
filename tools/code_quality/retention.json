@@ -2,6 +2,16 @@
   "version": 1,
   "exceptions": [
     {
+      "path": "executions/implementation-20261014-local-baseline",
+      "reason": "Fresh 9f89ef6 scientific-suite traces and test results are consumed by the implementation baseline audit, failure diagnosis and comparison with any numerical repair.",
+      "release_when": "The baseline audit and all repair-comparison consumers have verified these results and milestone.md records their bounded conclusions."
+    },
+    {
+      "path": "executions/implementation-20261014-inputs",
+      "reason": "Fresh pinned-input, row-identity and grouping proof is consumed by current implementation qualification and verification of its input equivalence.",
+      "release_when": "All current input/layout qualification consumers finish and milestone.md records the checked pin/grouping conclusions."
+    },
+    {
       "path": "tests/data/reference/numerical-contract-replay.npz",
       "reason": "Independent fixed reference states, events and spikes consumed by tests/qualification/test_mlx_core.py:test_retained_reference_replay_qualifies_exact_events_and_integer_times.",
       "release_when": "The named consumer is removed or receives an independently validated replacement fixture."

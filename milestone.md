@@ -8,6 +8,88 @@ acceptance, and [developer workflow](docs/agent/development.md) owns commands.
 
 ## Current task and latest user amendment
 
+The user's 2026-10-14 implementation instruction supersedes the completed
+refactor-only scope below. Continue from `9f89ef6` on current `origin/main` in
+`/Users/ocasta/.codex/worktrees/pr-split/fly-brain` until the pinned model has a
+scientifically qualified end-to-end MLX implementation. Work in this chat only;
+the newer explicit single-thread instruction overrides standing delegation and
+scientific-subagent procedures. Preserve the practical architecture, protected
+references, pinned inputs, numerical tolerances and every acceptance gate.
+Decision confidence: 99%, inspected at `9f89ef6` (clean and equal to fetched
+`origin/main`). No new arithmetic or execution mode is accepted by this amendment.
+
+### Implementation baseline and unverified requirements
+
+Source inspection at `9f89ef6` finds working code paths for the five experiments,
+canonical persisted/reloaded replay, uncompiled float32 Metal simulation,
+factored destination-bucket reduction, six-column Parquet output (including
+typed empty output), diagnostic comparison, paired Brian2/MLX observations,
+fresh repeats, CPU PyTorch comparison and first-cause capture. Batch collectors
+and verifiers exist; a complete-matrix/batch orchestration command does not.
+The production voltage update is still the original coupled expression; the
+increment expression in the numerical contract is prospective only.
+
+Only the seven independent fixtures and two operational quality caches survive.
+No full-network execution bundles survive. Historical suite counts, removed raw
+outputs and passing routine tests establish **zero currently verified cases out
+of 52**. Current source has not yet passed fresh local scientific, layout,
+fan-in, pulse, repeatability, four-trial batch or end-to-end export checks in
+this implementation phase. A case with a first spike difference is conservatively
+unaccepted by the existing reporter pending a bound causal decision; metric
+success alone must never be reported as case acceptance.
+
+The inspected host has Apple M1 Max, 32 GiB memory, approximately 225 GiB free
+disk, Python 3.10.14, MLX/Metal 0.32.3, NumPy 1.26.4, Brian2 2.8.0 and PyTorch
+2.11.0. Metal is available and the precision setting is zero. Compilation stays
+disabled. Fresh baseline local qualification and host input audit are running;
+their output is retained for diagnosis and measured planning.
+
+### Bounded implementation plan and completion criteria
+
+1. Establish fresh input/source identity and local reference/core/factored
+   qualification. Run the prescribed 157-case scalar, pinned fan-in, production
+   layout, device-row and connectome-pulse audits. Inspect all failures and
+   skips. Measure a shortest paired case before extrapolating matrix runtime.
+2. Repair demonstrated causes using the smallest change. The already approved
+   voltage-increment prototype may be tested if evidence warrants it; adoption
+   requires all prescribed local numerical, discrete, repeat, batch/chunk and
+   observation checks. Do not change the independent references or budgets.
+3. Complete simulation/export/comparison and minimal matrix/batch orchestration.
+   Preserve per-case outputs, provenance, exact schedules, fresh repeats,
+   common-history state-budget coverage and explicit first-cause evidence.
+4. On the delivered arithmetic/mode, run all 52 prescribed paired cases twice
+   per engine, check canonical prefixes and distinct trials, and report every
+   absolute/paired gate without pooling away failures. Diagnose and repair
+   failed gates; rerun affected scientific evidence after numerical changes.
+5. Compare prescribed sugar and P9 four-trial one-second batches with independent
+   trials 0–3, including exact events/discrete state, state budgets, final queues
+   and repeats. Produce pooled and 100 ms localization reports separately.
+6. Verify required output formats/provenance and every applicable numerical,
+   discrete, repeatability, batch and causal gate. Record bounded results and
+   limitations before working outputs expire. Deliver incremental hooked commits
+   to `origin/main`, require successful exact-revision CI and a clean tree.
+
+Progress: **10%** of this implementation goal, based on an explicit work breakdown:
+baseline/scope inventory 10%, end-to-end workflows 10%, local scientific gates
+15%, demonstrated implementation repairs 15%, 52-case qualification 30%, batches
+10%, final evidence/delivery 10%. Only the inventory credit is currently earned;
+scientific acceptance is 0/52, not 10%. Reassess weights if measured work changes
+the scope; do not derive scientific acceptance from code coverage or test counts.
+
+Remaining-time estimate (90% confidence planning interval): **7–42 elapsed days**
+on this one local host, provisionally including serial qualification and repairs.
+This is engineering judgment before timing a current paired case, not a measured
+performance claim. The matrix alone requires 1,231,000 steps per engine per
+repetition (2,462,000 with fresh repeats), plus local and batch work. Replace this
+interval with measured throughput and revised repair uncertainty after the first
+paired case; revise again after each material implementation/measurement result.
+
+Execution holds: full-matrix acceptance and production adoption of new arithmetic
+remain held until their gates pass. No hold prevents fresh baseline diagnosis or
+the smallest authorized implementation repairs. No scientific acceptance claimed.
+
+### Historical refactor scope (complete)
+
 Finish rearchitecture/refactor and cleanup for handoff to the prior implementation
 agent. The user's latest amendment rejects architecture whose complexity outweighs
 the application. Concrete backend dependencies are acceptable: production remains
@@ -55,8 +137,9 @@ passed for all three exact code revisions; the evidence record contains run IDs.
   deliver small commits to `origin/main`, leave a clean tree, and provide a concise
   handoff with scientific implementation still outstanding.
 
-New simulator features, numerical remedies, complete scientific qualification and
-performance work remain outside this refactor agent's scope.
+These were the refactor-only criteria. The implementation amendment above now
+authorizes numerical implementation and complete scientific qualification;
+unrequested performance features remain outside scope.
 
 ## Delivered cleanup and verification
 
