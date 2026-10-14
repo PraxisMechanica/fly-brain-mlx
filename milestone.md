@@ -58,7 +58,7 @@ model rule. Keep the six spike columns, pinned schedules and reference arithmeti
 make these required scientific records explicit. No new backend abstraction is
 needed. Decision confidence: 95%, reviewed at `e519de7`.
 
-The pending implementation now records channel class and amplitude without
+Commit `e4f9d92` now records channel class and amplitude without
 changing event bytes, persists the bound reference producer/compiler/header/input
 and executable provenance, and records launch/source identity for singleton and
 batch execution. New matrix and batch commands compose the existing collectors,
@@ -66,8 +66,24 @@ repeat verifiers, metric rules and source validators. The matrix independently
 checks all canonical prefixes/trials, rescores native outputs, and reports group
 coverage and 100 ms localization. Batch comparison uses exact equality as a
 sufficient state-budget proof; differences remain unaccepted. No numerical kernel,
-protected reference, pinned input or tolerance changes are included. Automatic
-affected checks and real scientific execution remain required for these changes.
+protected reference, pinned input or tolerance changes are included. Commit/push
+hooks and all selected automatic affected tests passed. The changed
+paired driver passed its focused real-framework check in 20.12 seconds; inspection
+verified its reference producer digest, executable hash, actual frozen compiler
+flags, 442 consumed headers and 63 generated/input files. Two earlier direct test
+launches stopped during fixture setup because the explicit precision environment
+and fresh temporary parent were missing; neither executed numerical checks.
+Hosted exact-revision CI `38645807445` remains pending at this checkpoint.
+
+Fresh scalar audits both passed: 157/157 one-step and trajectory cases in the
+factored and production-layout paths, with exact count expansions, fresh-repeat
+and singleton/batch component equality. Command times were 1.464 and 3.195 seconds.
+Maximum factored one-step budget fraction was 0.023660. Pinned fan-in, layout,
+device-row and pulse audits remain in progress. No broad preservation rerun was
+launched. The six changed existing sources since the completed pinned proof are
+workflow/storage/metadata files; numerical kernels and observation producers are
+unchanged. Added package source provenance does not make the old raw proof a
+current-source full-network scientific acceptance record.
 
 The inspected host has Apple M1 Max, 32 GiB memory, approximately 225 GiB free
 disk, Python 3.10.14, MLX/Metal 0.32.3, NumPy 1.26.4, Brian2 2.8.0 and PyTorch
