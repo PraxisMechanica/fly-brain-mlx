@@ -6,7 +6,7 @@ from importlinter.contracts.forbidden import ForbiddenContract
 from importlinter.domain.contract import Contract, ContractCheck, InvalidContractOptions
 from pydantic import TypeAdapter
 
-from tools.architecture.neutral_import_scope import source_scope
+from tools.code_quality.neutral_import_scope import source_scope
 
 SOURCE_ROOT = 'fly_brain.comparison'
 FOREIGN_ROOTS = (

@@ -11,7 +11,7 @@ from fly_brain.simulation.stimuli import neuron_indices
 from tests.quality.support import PROJECT
 from tests.unit.test_identifier_type_contracts import typed
 from tests.unit.test_stimuli import connectome
-from tools.architecture.compiler import object_value
+from tools.code_quality.json_values import object_value
 
 pytestmark = pytest.mark.unit
 

@@ -19,7 +19,8 @@ just check commit
 `just bootstrap` installs locked development/qualification dependencies, validates
 pre-commit configuration, and installs commit/push hooks. `just check commit`
 selects changed indexed inputs and affected dependents for formatting, lint,
-strict typing, import boundaries, reviewed ownership and metric regression. It
+strict typing, project import boundaries, protected scientific-source hashes and
+advisory numerical metrics. It
 runs the selected tests automatically after those checks and blocks a failing
 commit. The selection includes staged and pending delivery changes since
 `origin/main`, so it covers the revision CI will receive. CI uses the same
@@ -27,12 +28,12 @@ affected-test runner. Agents do not add manual pre-commit pytest calls.
 `just check push` validates the submitted static source range without running
 tests; `just check manual` also leaves test execution to the automatic boundaries. Current native
 imports and every submitted changed path select affected dependents. Python
-deletions and renames with unproved impact fail COV002; they do not receive an
-empty pass. Changed compiler/tool/configuration inputs invalidate their scope.
+deletions and renames conservatively widen static type/import checks while tests
+remain selected by actual surviving changes and consumers. Changed compiler/tool/configuration inputs invalidate their scope.
 Import/type tools load supporting context without re-evaluating every source.
-Pinned TypeScript dependencies select changed native modules and static type
-consumers; ambient/global changes invalidate that native cohort. Native syntax
-checks receive changed files. Unsupported module scope fails COV002.
+The custom compiler/native SDK and its impact platform are removed. The changed
+metric bridge receives a Node syntax check; ordinary Python uses Pyright. Invalid
+required inputs and actual tool failures remain blocking.
 Metrics preserve complete inventory arithmetic and every commit/merge-parent
 comparison. Numeric per-blob facts are reused across commands in
 `logs/quality/metric-facts.json`; unchanged warm blobs are not read or recalculated.

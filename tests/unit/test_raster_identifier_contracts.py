@@ -1,4 +1,3 @@
-import hashlib
 from dataclasses import asdict, fields, replace
 from pathlib import Path
 
@@ -13,12 +12,10 @@ from fly_brain.comparison.models import RowSpikeSteps, SpikeSteps
 from fly_brain.qualification.adapters.case_spikes import load
 from fly_brain.simulation.identifiers import FlyWireIds64, NeuronRows32, NeuronRows64
 from fly_brain.simulation.models import Connectome
-from tests.quality.native_type_support import BRIDGE, PACKAGE, query, write
 from tests.quality.support import PROJECT
 from tests.unit.test_identifier_type_contracts import typed
 from tests.unit.test_metric_identifier_contracts import array_state
-from tools.architecture.compiler import object_value
-from tools.architecture.native_types import inspect_types
+from tools.code_quality.json_values import object_value
 
 pytestmark = pytest.mark.unit
 
@@ -193,74 +190,6 @@ def test_erasing_raster_specializations_restores_wrong_space_forwarding(
     )
     path.write_text(weakened)
     assert (weakened != original, typed(tmp_path, source)) == (True, [])
-
-
-@pytest.mark.checker
-def test_pinned_native_projector_retains_actual_raster_constraints_and_arguments(
-    tmp_path: Path,
-) -> None:
-    numpy_source = Path(np.__file__).resolve()
-    sources = write(
-        tmp_path,
-        {
-            'consumer.py': 'from fly_brain.comparison.models import '
-            'RasterIds, RowSpikeSteps, FlyWireSpikeSteps\n'
-            'def preserve(value: RasterIds, rows: RowSpikeSteps, wire: FlyWireSpikeSteps)'
-            ' -> RasterIds:\n    return value\n',
-        },
-    )
-    result = inspect_types(
-        tmp_path,
-        sources,
-        (
-            query(tmp_path, 'consumer.py', 2, 'value'),
-            query(tmp_path, 'consumer.py', 2, 'rows'),
-            query(tmp_path, 'consumer.py', 2, 'wire'),
-        ),
-        PACKAGE,
-        extra_paths=(PROJECT / 'src', numpy_source.parent.parent),
-        stub_path=PROJECT / 'typings',
-        bridge=BRIDGE,
-    )
-    variable = result.type_at(result.sites[0])
-    rows = result.type_at(result.sites[1])
-    wire = result.type_at(result.sites[2])
-    for site in result.sites:
-        result.require_precise(site)
-    model = PROJECT / 'src/fly_brain/comparison/models.py'
-    numpy_stub = numpy_source.with_suffix('.pyi')
-    assert (
-        variable.category,
-        variable.name,
-        tuple(result.types[index].name for index in variable.constraints),
-        rows.name,
-        wire.name,
-        tuple(result.types[index].name for index in rows.arguments),
-        tuple(result.types[index].name for index in wire.arguments),
-        dict(result.inputs)[str(model)],
-        dict(result.inputs)[str(numpy_stub)],
-        tuple(
-            result.types[index].name for index in result.types[rows.arguments[0]].bases
-        ),
-        tuple(
-            result.types[index].name for index in result.types[wire.arguments[0]].bases
-        ),
-    ) == (
-        'typevar',
-        'RasterIds',
-        (
-            'fly_brain.simulation.identifiers.NeuronRows64',
-            'fly_brain.simulation.identifiers.FlyWireIds64',
-        ),
-        'fly_brain.comparison.models.SpikeSteps',
-        'fly_brain.comparison.models.SpikeSteps',
-        ('fly_brain.simulation.identifiers.NeuronRows64',),
-        ('fly_brain.simulation.identifiers.FlyWireIds64',),
-        hashlib.sha256(model.read_bytes()).hexdigest(),
-        hashlib.sha256(numpy_stub.read_bytes()).hexdigest(),
-        ('numpy.ndarray',),
-        ('numpy.ndarray',),
-    )
 
 
 @pytest.mark.parametrize('fault', (False, True))

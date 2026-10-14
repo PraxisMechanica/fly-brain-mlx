@@ -5,8 +5,8 @@ from pathlib import Path
 import pytest
 
 from tests.quality.support import PROJECT, run
-from tools.architecture import neutral_import_contract as adapter
-from tools.architecture import neutral_import_scope as scope_adapter
+from tools.code_quality import neutral_import_contract as adapter
+from tools.code_quality import neutral_import_scope as scope_adapter
 
 pytestmark = pytest.mark.unit
 NEUTRAL = 'neutral_modules = ["fly_brain.simulation.identifiers"]'
@@ -14,7 +14,7 @@ FOREIGN = 'foreign_roots = ["fly_brain.simulation", "fly_brain.qualification", "
 CONFIG = f"""[tool.importlinter]
 root_package = "fly_brain"
 include_external_packages = true
-contract_types = ["neutral_imports: tools.architecture.neutral_import_contract.NeutralImportContract"]
+contract_types = ["neutral_imports: tools.code_quality.neutral_import_contract.NeutralImportContract"]
 
 [[tool.importlinter.contracts]]
 name = "Spike comparison has no execution framework"
@@ -75,7 +75,7 @@ def checker_source() -> str:
         inspect.getsource(scope_adapter)
         + '\n'
         + inspect.getsource(adapter).replace(
-            'from tools.architecture.neutral_import_scope import source_scope\n', ''
+            'from tools.code_quality.neutral_import_scope import source_scope\n', ''
         )
     )
 
@@ -84,7 +84,7 @@ def checker(root: Path, source: str) -> None:
     (root / 'mutant.py').write_text(source)
     (root / 'pyproject.toml').write_text(
         CONFIG.replace(
-            'tools.architecture.neutral_import_contract.NeutralImportContract',
+            'tools.code_quality.neutral_import_contract.NeutralImportContract',
             'mutant.NeutralImportContract',
         )
     )

@@ -24,7 +24,7 @@ from tests.quality.python_metric_fixture import (
     unavailable_radon,
 )
 from tests.quality.support import ENGINE, git, measure, repository, run
-from tools.architecture.compiler import JsonValue, object_value
+from tools.code_quality.json_values import JsonValue, object_value
 
 pytestmark = pytest.mark.integration
 CASES = (

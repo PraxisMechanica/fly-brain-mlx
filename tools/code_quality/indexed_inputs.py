@@ -1,10 +1,16 @@
 import subprocess
 from pathlib import Path
 
+from .git_environment import isolated_environment
+
 
 def require_indexed_inputs() -> None:
     indexed = set(
-        subprocess.check_output(['git', 'ls-files', '--cached', '-z'], text=True)
+        subprocess.check_output(
+            ['git', 'ls-files', '--cached', '-z'],
+            text=True,
+            env=isolated_environment(),
+        )
         .strip()
         .split('\0')
     )
@@ -23,7 +29,7 @@ def require_indexed_inputs() -> None:
             'pnpm-lock.yaml',
             'justfile',
             '.pre-commit-config.yaml',
-            'tools/architecture/ownership.json',
+            'tools/code_quality/scientific_sources.json',
             'tools/code-quality/provenance.json',
             'tools/code-quality/vendor/eng-metrics-code-quality-0.1.0.tgz',
             'tools/code-quality/vendor/eng-metrics-code-quality-0.1.1.tgz',

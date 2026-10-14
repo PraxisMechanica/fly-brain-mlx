@@ -10,8 +10,7 @@ from fly_brain.qualification.adapters.reference_identity import create
 from fly_brain.qualification.reference_values import ReferenceProducerDigest
 from fly_brain.simulation.models import Connectome, Stimulus
 from tests.quality.support import PROJECT, run
-from tools.architecture.compiler import Compiler, JsonValue, object_value
-from tools.architecture.resolution import unique_location
+from tools.code_quality.json_values import JsonValue, object_value
 
 pytestmark = pytest.mark.unit
 IMPORT = (
@@ -153,31 +152,6 @@ def test_brand_preserves_string_identity_and_primitive_serialization() -> None:
     )
 
 
-def test_actual_producer_and_digest_resolve_to_the_owned_native_definitions(
-    tmp_path: Path,
-) -> None:
-    source = (
-        IMPORT
-        + 'from fly_brain.qualification.adapters.reference_identity import create\n'
-        + CONSUMER
-        + 'producer = create\n'
-    )
-    assert diagnostics(typed(tmp_path, source)) == []
-    path = tmp_path / 'consumer.py'
-    with Compiler(tmp_path, PROJECT / '.venv/bin/pyright-langserver') as compiler:
-        brand = compiler.resolve(path, 3, 20)
-        producer = compiler.resolve(path, 5, 12)
-    assert (
-        unique_location(brand['definitions'], 'digest').path,
-        unique_location(producer['definitions'], 'producer').path,
-        'ReferenceProducerDigest' in str(producer['signature']),
-    ) == (
-        str(PROJECT / 'src/fly_brain/qualification/reference_values.py'),
-        str(PROJECT / 'src/fly_brain/qualification/adapters/reference_identity.py'),
-        True,
-    )
-
-
 def test_native_close_primitive_serialization_and_explicit_rebranding_limit(
     tmp_path: Path,
 ) -> None:
@@ -229,15 +203,3 @@ def test_weakening_the_consumer_parameter_loses_the_same_foreign_brand_defect(
         )
         == []
     )
-
-
-def test_empty_scope_and_unresolved_digest_target_are_analysis_failures(
-    tmp_path: Path,
-) -> None:
-    with pytest.raises(ValueError, match='COV002:.*no source scope'):
-        typed(tmp_path, '')
-    path = tmp_path / 'unknown.py'
-    path.write_text('value = MissingDigest("abc")\n')
-    with Compiler(tmp_path, PROJECT / '.venv/bin/pyright-langserver') as compiler:
-        with pytest.raises(ValueError, match='COV002: unresolved source symbol'):
-            compiler.resolve(path, 1, 12)

@@ -13,10 +13,10 @@ not certify every semantic property of the application.
 
 | Required mechanism | Practical scope and limit |
 | --- | --- |
-| Ruff formatting and lint | Changed Python sources; native syntax checks receive changed bridge files. These do not prove architecture. |
+| Ruff formatting and lint | Changed Python sources; changed metric-bridge code receives Node syntax checking. These do not prove architecture. |
 | Strict Pyright | Changed sources and affected dependents, with configured supporting context and recorded third-party typing limits. |
-| Ten configured import contracts | Existing simulation/qualification/comparison and selected observation/input boundaries. They do not ban concrete MLX types inside the backend. |
-| Reviewed ownership and source identity | Changed file/declaration/binding records, complete file inventory accounting and protected source hashes. Historical strict findings are reviewed under the current project policy. |
+| Ten project import contracts | Production/reference and comparison/execution separation, a narrow scientific-calculation/workflow boundary, and existing observation/input consumers. Services and data contracts have no blanket implementation-type ban. |
+| Protected scientific source identity | Exact five protected paths and reviewed hashes. Ordinary declaration/binding changes and historical strict findings do not block refactors. Indexed-source checks still account for required inputs. |
 | Automatic affected tests | One invocation per commit and CI gate. Push/manual stages do not run tests. Native/process consumers still need explicit selection evidence where Python imports cannot prove consumption. |
 | Native numerical metrics | Reuse per-blob calculations; report CQ001–CQ003 regressions as advisory. Invalid inputs/results or tool failures still block. |
 
@@ -37,15 +37,14 @@ standard.
 
 The [shared commands](../../justfile) select changed inputs and affected
 dependents. Ruff checks changed files, strict Pyright checks affected Python
-sources, and native import contracts evaluate affected source modules. Native
-bridge checks derive reverse static type consumers from pinned TypeScript
-dependencies; changed ambient/global declarations invalidate their native cohort.
-The compiler loads supporting context, while computed provider acquisition and
-runtime/effect resolution remain unproved. Component owners author focused tests and record
+sources, and native import contracts evaluate affected source modules. Python
+removals widen static scope conservatively; ordinary changes retain incremental
+selection. The type checker loads supporting context without claiming complete
+runtime or effect resolution. Component owners author focused tests and record
 source/dependency identity. The commit hook automatically runs affected tests
 and blocks failures before delivery; CI uses the same selection. Push/manual
-stages and agents do not add separate test runs. Unsupported Python deletion/rename
-impact fails COV002, as do native removals without a proved affected scope.
+stages and agents do not add separate test runs. Missing required tools, invalid source/configuration and omitted intended scope
+still fail. Retiring unused modules no longer requires an experimental proof.
 
 Configured first-party forbidden targets must exist exactly in the native graph,
 including when their source scope is inactive. The runner derives first-party
@@ -75,105 +74,27 @@ or unindexed inputs use a fresh graph. [Developer workflow](development.md) owns
 installation, diagnostics and exact output retention. The required gate does
 not execute the complete application or scientific suite.
 
-The [ownership registry and loader](architecture-ownership.md) reject invalid
-metadata, changed declarations/bindings, missing mappings, broken resource/export/
-composition links, and changed frozen provenance. Discovery fails on separately
-empty roots, parse failures, workspace escapes, and untraversed directory links.
-Empty reconciliation findings do not establish structural compliance.
+The [scientific source guard](architecture-ownership.md) uses the existing
+compact manifest to protect five reviewed source identities. It rejects missing or changed
+protected sources and an invalid protected inventory. Ordinary file declarations,
+bindings and role labels are not automatic rejection conditions. The historical
+registry/reconciliation APIs and their general predicates are removed.
 
-## Experimental analysis inventory
+## Removed analysis platform
 
-The following native APIs and the semantic schema were developed for the former
-strict objective. These are retained capability records, not a remaining task list.
-Do not extend or integrate them merely to obtain a 37-rule certificate. Their
-existing failures and limitations remain honest when they are explicitly invoked.
-Required incremental checks above may reuse their bounded working components.
+The experimental semantic schema, role/resource predicates, language-server
+transport, native compiler/type/call/partial/context projections, prototype graph
+and purity witnesses are removed with their exclusive tests. The neutral numerical
+provider experiment is also removed; the actual kernel-expression guard remains.
+Small JSON test helpers and the useful comparison import contract are retained in
+appropriate test/quality modules. There is no custom analyzer left to complete.
 
-The lexical resolver uses the locked Pyright language server. It resolves named
-definitions through aliases, re-exports, type-only references, captures, exact
-Unicode coordinates, and limited unconditional callable aliases. Its source/call
-graphs retain located, hashed evidence. Lexical declarations do not establish
-possible runtime dispatch targets.
-
-The integrated [native type API](../../tools/architecture/native_types.py) uses
-Pyright 1.1.414's evaluator to export immutable structured graphs for classes,
-protocols, generics, unions, signatures and supported type variables, with exact
-declaration and input identities. `require_precise` rejects Any/Unknown surfaces.
-Unsupported projection forms, including ParamSpec/TypeVarTuple and recursive
-shapes, fail COV002 rather than receiving a fabricated type. Actual bound import
-records use native reachability: active unresolved/partial imports and invalid
-native records fail with source-located COV002 after queries. Namespace-package
-origins and unreachable version branches remain valid; loaded-file and actual
-read hashes remain guarded. This does not prove computed imports, full ancestry
-precision or equivalence of the manually supplied type context.
-
-The [native call API](../../tools/architecture/native_calls.py) exports selected
-signatures/overloads, receiver types, argument/result graph references and exact
-UTF-16 ranges for explicit calls. Fixtures cover aliases, re-exports, captures,
-inferred factory returns, methods, protocols, constructors, builtins and unpacked
-argument expressions. Erased or ambiguous static signatures, missing artifacts
-and changed inputs fail COV002. Unpacked expressions are not argument-to-parameter
-expansion proof; protocol calls are not concrete dispatch proof.
-
-The [checked JavaScript source API](../../tools/architecture/native_sources.py)
-uses TypeScript 5.9.3 to reconcile bridge declarations, bindings, imports,
-exports and actual input hashes. This bounded inventory does not supply complete
-live JavaScript or authored C++ contexts to semantic-policy validation.
-
-The [native Python context API](../../tools/architecture/native_python_context.py)
-observes the actual pinned compiler configuration, complete source enumeration,
-ordered import roots and loaded-source origins. It uses the native command-line
-host and file system, reconciles discovery independently and hashes configuration,
-request, compiler, bridge and read inputs. Shared editable dependency paths are
-observed; runtime-environment equivalence is not established. It supplies no
-declaration, type, call, effect, control-flow or runtime-target verdict. The shared
-live session supplies source-bound native reads, guards original/refreshed loaded
-origins and rejects unregistered or post-disposal reads. Selected unreferenced
-stubs receive native interim enrollment and forced binding; the actual Module,
-scope, symbol table and original-file identity are checked. Tracking remains
-unchanged and repeated reads retain cached file/tree identity. Loaded parsed
-import descriptors share the checked native reachability guard. Non-forcing
-readiness checks keep unrequested pending inputs lazy and preserve their origin/
-hash accounting; complete `active_imports` capability remains missing. The
-[native bound-declaration observer](../../tools/architecture/native_python_declarations.mjs)
-retains actual parser-node and Symbol IDs, report-local scope/declaration indexes,
-and native reachability. Raw declaration URI/range remain separate from lexical
-UTF-16 spans. Intrinsic and unmatched native nodes are explicit. Dormant parsed
-names can lack native bindings; complete authored bindings, parsed-name roles,
-declaration payloads, alias resolution, types, calls, effects, control flow and
-runtime targets remain missing. Enrollment and observation do not fill those
-absent semantic capabilities.
-
-The [native partial API](../../tools/architecture/native_partials.py) exports
-source-bound constructor and wrapped-expression identities, ordered captures,
-native residual signatures and raw Any/ellipsis/gradual/error flags. Unsupported
-unpack/residual forms and incomplete or changed provenance fail COV002. Native
-conditional types may collapse targets; closure rebinding and keyword mutation
-remain unproved. These are static facts, not origins or runtime/effect proof.
-
-The [placement predicate](../../tools/architecture/ownership_placement.py) executes
-OWN001 over independently validated domain bindings. It preserves coverage
-failures separately from located placement findings; this does not make the
-canonical live analyzer complete.
-
-These components do not add absent capabilities to `SemanticModel`. Complete
-callable/slot origins, partial dispatch, implicit calls, runtime target sets,
-alias ownership, control flow and effect summaries remain missing. The existing
-native type/call/partial setup still manually supplies strict rules and paths;
-the new canonical context observations have not yet replaced those contexts or
-proved runtime-environment equivalence. Complete authored declaration
-reconciliation and reviewed live version 2 inputs would be dependencies of that
-experimental analyzer, not of the current project refactor.
-
-The [semantic input schema](../../tools/architecture/semantic_policy_schema.py)
-defines version 2 with required sections and the exact 37-rule/context
-inventory. Validation compares native source/UTF-16 anchors, configuration,
-artifact hashes/versions, and cross-record references against independent
-observations and actual bytes. Unsupported languages/kinds and absent
-observations fail COV002. `require_semantic_compliance()` always raises COV002:
-validated records cannot manufacture missing analysis or executed predicates.
-The experimental full analyzer and its gate integration remain unimplemented;
-neither is required by the current project policy.
+The remaining authored JavaScript is the metric bridge. Its changed source receives
+`node --check`; its existing metric behavior tests remain. The self-referential
+TypeScript/native-impact platform is removed. Standard Pyright checks Python.
+Python module deletions/renames conservatively widen static type/import scope;
+pytest still selects actual changed/affected behavior. Ordinary edits remain
+incremental. This does not claim complete historical or dynamic dependency proof.
 
 ## Current metric and application boundaries
 
@@ -199,14 +120,10 @@ orchestration from four repository operations behind required `InputAuditFiles`;
 configured imports reject service/rule dependencies on its storage implementation.
 Row-space coordinate validation and FlyWire-space
 comparison/pooling now use separate constrained raster specializations while
-preserving the record and arrays. Native type arguments are qualified with the
-actual NumPy dependency root. Reduction selectors now carry global `NeuronRow` identities through capture,
-audit and provider ports; local bucket positions remain integers. Conversion-origin
-and complete ancestry precision remain unproved; nominal wrappers do not establish
-those predicates.
-Their bounded checks preserve behavior within their tested scope. Complete
-type/alias/effect/control-flow analysis remains unimplemented and outside the
-required project scope. These boundaries grant no new scientific acceptance.
+preserving the record and arrays. Reduction selectors carry global `NeuronRow`
+identities while local bucket positions remain integers. The bounded behavior tests
+and normal type checks remain; no SDK projection or complete ancestry proof is
+required. These boundaries grant no new scientific acceptance.
 
 ## Maintenance scope
 

@@ -10,7 +10,7 @@ from fly_brain.simulation.identifiers import NeuronRow
 from fly_brain.simulation.models import NetworkCase
 from tests.quality.support import PROJECT
 from tests.unit.test_identifier_type_contracts import typed
-from tools.architecture.compiler import JsonValue, object_value
+from tools.code_quality.json_values import JsonValue, object_value
 
 pytestmark = pytest.mark.unit
 

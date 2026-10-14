@@ -130,12 +130,14 @@ def test_submitted_catalog_and_cache_identity_ignore_unrelated_index_state(
 @pytest.mark.parametrize(
     'arguments', (('rm', VALUES), ('mv', VALUES, 'src/fly_brain/replacement.py'))
 )
-def test_unproved_deleted_native_target_fails_closed(
+def test_python_removal_widens_static_scope_without_replaying_tests(
     checkout: Path, arguments: tuple[str, ...]
 ) -> None:
     git(checkout, *arguments)
-    with pytest.raises(ValueError, match='COV002: unproved affected scope'):
-        build_plan(checkout, 'commit', {})
+    plan = build_plan(checkout, 'commit', {})
+    assert set(APP) - {VALUES} <= set(plan.python)
+    assert VALUES not in plan.python and plan.tests == ()
+    assert plan.boundaries
 
 
 @pytest.mark.parametrize(
@@ -159,18 +161,9 @@ def test_context_changes_invalidate_their_native_check_scopes(
     assert_context(plan, context)
 
 
-@pytest.fixture
-def runtime_checkout(checkout: Path) -> Path:
-    (checkout / 'node_modules').symlink_to(
-        Path(__file__).resolve().parents[2] / 'node_modules'
-    )
-    write(checkout, 'tools/architecture/native_value.mjs', 'export const value = 1;\n')
-    return checkout
-
-
-def test_runtime_change_invalidates_native_check_scopes(runtime_checkout: Path) -> None:
-    write(runtime_checkout, 'uv.lock', 'class Value: ...\n')
-    assert_context(build_plan(runtime_checkout, 'commit', {}), 'runtime')
+def test_runtime_change_invalidates_python_check_scopes(checkout: Path) -> None:
+    write(checkout, 'uv.lock', 'class Value: ...\n')
+    assert_context(build_plan(checkout, 'commit', {}), 'runtime')
 
 
 def assert_context(plan: Plan, context: str) -> None:

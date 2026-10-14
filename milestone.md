@@ -21,9 +21,23 @@ model execution is outside this refactor. Retained experimental tools are not a
 required development roadmap, and their missing capabilities are not project
 completion blockers. Do not claim those tools provide complete analysis.
 
-The current change records the per-rule assessment and reconciles active agent
-documents. It changes no application code, numerical behavior, scientific gates,
-source identity guards, import contracts or automatic test selection.
+The user now requests executable project-specific checks followed by a new
+practical refactor. At `3d56937` the plan is: replace broad role/fingerprint gates
+with checks for actual project boundaries and protected scientific sources, then
+remove a demonstrated source of application indirection. Decision confidence: 95%.
+The required tests must accept concrete MLX backend contracts and framework-based
+qualification models while rejecting real production/reference mixing, invalid
+source identity, type failures and changed-behavior regressions.
+
+The user's latest instruction requires single-threaded execution. All three
+subagents are stopped. The parent owns all remaining code, tests, documents and
+delivery; do not delegate again without a newer user instruction. Inspect current
+files and commits rather than relying on historical worker context. The enforcement
+worker completed clean commit `feebbea348b33f1979acdc763c8de1af01bbf496` in
+`/private/tmp/fly-brain-metric-facts-20261014-01`; the other two workers left no
+new changes. That commit is adopted and pushed. `d24754d` also delivers the five comparison
+callback removals with automatic checks. No parent test replay was added. The
+parent now removes the retired platform and its exclusive tests directly.
 
 ## Bounded completion criteria
 
@@ -89,19 +103,29 @@ branding and unproved conversion origins, not demonstrated incorrect calculation
 Use typed identities where they prevent actual confusion; ordinary array positions
 remain numeric coordinates. Apply review and affected tests to real mapping changes.
 
-The unchanged strict registry still contains those historical observations and
-capability limits. Its source hashes and inventory guards remain useful; its
-strict findings are not the acceptance standard for this project. The
+The retired strict registry is replaced by a compact five-source scientific
+manifest, preserving every hash and provenance field. Old capability records and
+ordinary binding/classification fingerprints are removed. The
 [coverage record](docs/agent/quality-coverage.md) distinguishes required checks,
 review guidance and experimental mechanisms.
 
-## Remaining handoff work
+## Remaining work
 
-The project-rule reassessment and its bounded handoff are recorded in the current
-agent documents. The three read-only component reviews established no additional
-application defect behind the former six findings. Delivery uses the existing
-mandatory commit/push checks; no runtime tests are needed for these document-only
-changes. Any subsequent source cleanup must identify a concrete problem,
+1. Deliver project-specific executable rules and meaningful affected tests. Remove
+   automatic rejection for ordinary declaration/binding changes while retaining
+   protected scientific-source identity and actual import/type/input checks.
+2. The latest user amendment requires retired components to be deleted now.
+   Remove retired analyzer implementations and their exclusive tests, with actual
+   consumer checks. Simplify circular tooling dependencies rather than preserving
+   an analyzer solely to check its own retired components. Preserve required Python,
+   import, metric and scientific checks; add no historical whole-program engine.
+3. Remove the five comparison callback getters and wire their existing functions
+   directly, with actual callers and behavior tests.
+4. Adopt checked worker commits, push small changes, verify exact hosted revisions,
+   update the current evidence and leave a clean implementation handoff.
+
+The preceding rule assessment established no application defect behind the former
+six findings. Any source cleanup must identify a concrete problem,
 its affected callers, the smallest repair and meaningful verification before
 implementation. Do not resume the generalized analyzer or tensor-contract program.
 The prior implementation agent can continue scientific work under the unchanged

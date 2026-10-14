@@ -39,10 +39,14 @@ def hook_repository(root: Path, source: str = GOOD) -> tuple[Path, dict[str, str
     retention = repo / 'tools/code_quality/retention.json'
     retention.parent.mkdir(parents=True)
     shutil.copyfile(PROJECT / 'tools/code_quality/retention.json', retention)
-    boundary_adapter = repo / 'tools/architecture/neutral_import_contract.py'
-    boundary_adapter.parent.mkdir(parents=True)
+    boundary_adapter = repo / 'tools/code_quality/neutral_import_contract.py'
+    boundary_adapter.parent.mkdir(parents=True, exist_ok=True)
     shutil.copyfile(
-        PROJECT / 'tools/architecture/neutral_import_contract.py', boundary_adapter
+        PROJECT / 'tools/code_quality/neutral_import_contract.py', boundary_adapter
+    )
+    shutil.copyfile(
+        PROJECT / 'tools/code_quality/neutral_import_scope.py',
+        boundary_adapter.with_name('neutral_import_scope.py'),
     )
     tools = repo / 'executables'
     tools.mkdir()

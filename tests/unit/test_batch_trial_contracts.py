@@ -17,7 +17,7 @@ from fly_brain.simulation.identifiers import TrialId
 from tests.quality.support import PROJECT, run
 from tests.unit.test_batch_native import native
 from tests.unit.test_identifier_type_contracts import typed
-from tools.architecture.compiler import JsonValue, object_value
+from tools.code_quality.json_values import JsonValue, object_value
 
 pytestmark = pytest.mark.unit
 HASHES = ('1' * 64, '2' * 64, '3' * 64, '4' * 64)

@@ -11,6 +11,58 @@ Consumed raw diagnostics and execution outputs were deleted under the current
 output policy. These bounded summaries do not claim those raw proofs remain
 reproducible from this checkout.
 
+## Project-specific rules and direct refactor
+
+The user's 2026-10-14 amendments replace the generic strict profile with practical
+project rules, require retired components to be removed now, and require the parent
+to work alone. All subagents are stopped; their actual checkouts were inspected.
+The enforcement worker left clean commit `feebbea`; the other two left no new
+changes. The parent adopted that descendant without an integration commit or test
+replay and performs the remaining changes directly.
+
+- `feebbea` narrows the first import contract to real scientific calculations,
+  allows concrete backend/framework types, and removes ordinary declaration/binding
+  fingerprint rejection. Initial automatic verification passed static checks and
+  205 tests but found six stale contract-name assertions; those were repaired and
+  the two obsolete comparison guard-erasure exercises were removed. The normal
+  commit completed. Exact hosted run `38629545114` passed.
+- `d24754d` removes five comparison callback getters, retains the actual command
+  builder and wires the same function objects directly. All caller imports and
+  existing tests are migrated. Composition checks preserve callback identity and
+  lazy runtime/configuration order. An initial typing error in the test helper was
+  repaired before pytest ran; the normal commit then passed. Exact hosted run
+  `38630196350` passed.
+- The retirement removes the experimental semantic/ownership/graph/purity platform,
+  language-server/native SDK, its self-referential impact checker, the neutral-value
+  prototype and their exclusive tests. Required import checking moves unchanged
+  into `tools/code_quality`; small typed JSON fixture helpers are retained without
+  the compiler process/transport. The actual kernel-expression/constant guard and
+  all meaningful runtime/scientific tests remain.
+
+The scientific manifest contains exactly the original five protected records:
+kind, hash, lineage commit and origin text compare equal to the previous registry.
+Ordinary role metadata and fingerprints are removed. Deterministic AST comparison
+confirms all 18 retained functions in the three mixed SDK-consumer files have
+unchanged bodies; only four retired SDK/LSP exercises were removed there.
+No application, pinned-input or independent-fixture source changes occur in the
+retirement. Python removals widen static checks conservatively while pytest stays
+selected by actual surviving changes and consumers. No historical/dynamic dependency
+proof or new generalized analyzer is claimed.
+
+The first retirement attempt stopped on one missing fixture type annotation before
+pytest. The next automatic run passed static checks and 353 tests, with 128
+deselected, but returned six failures and 25 fixture errors in 176.18 seconds.
+The moved manifest needed an existing-directory fixture fix; managed-worktree Git
+variables also leaked into two read-only Git queries. Those queries now use the
+existing isolated Git environment, and relevant fixture tests explicitly supply a
+foreign repository context so the behavior is checked on standalone CI too.
+No manual pytest or test-scope bypass was used for these repairs.
+
+The scientific matrix was not run for these structural/tooling changes. This work
+changes neither numerical acceptance nor the remaining scientific implementation.
+The current milestone and coverage documents supersede historical analyzer goals
+in the older checkpoints below.
+
 ## Incremental workflow qualification
 
 The user also requires incremental coherent commits. The following focused

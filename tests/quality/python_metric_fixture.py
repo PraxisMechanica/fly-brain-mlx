@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import cast
 
 from tests.quality.support import ENGINE, PROJECT, git, repository, run
-from tools.architecture.compiler import JsonValue, object_value
+from tools.code_quality.json_values import JsonValue, object_value
 
 VENDOR = PROJECT / 'tools/code-quality/vendor'
 BASE_ARCHIVE = VENDOR / 'eng-metrics-code-quality-0.1.0.tgz'

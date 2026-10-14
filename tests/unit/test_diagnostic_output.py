@@ -10,7 +10,7 @@ from fly_brain.qualification.commands import diagnostic
 from fly_brain.qualification.models import QualificationRequest
 from fly_brain.qualification.schemas import ParityOptions, QualificationOptions
 from fly_brain.simulation.schemas import SimulationOptions
-from tools.architecture.compiler import JsonValue, object_value
+from tools.code_quality.json_values import JsonValue, object_value
 
 pytestmark = pytest.mark.unit
 

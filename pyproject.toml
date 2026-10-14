@@ -73,7 +73,7 @@ markers = [
 [tool.importlinter]
 root_package = "fly_brain"
 include_external_packages = true
-contract_types = ["neutral_imports: tools.architecture.neutral_import_contract.NeutralImportContract"]
+contract_types = ["neutral_imports: tools.code_quality.neutral_import_contract.NeutralImportContract"]
 
 [[tool.importlinter.contracts]]
 name = "Scientific calculations avoid workflow and storage dependencies"

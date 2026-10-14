@@ -5,7 +5,7 @@ from typing import cast
 import pytest
 
 from tests.quality.support import COMPLEX, ENGINE, SIMPLE, git, measure, repository, run
-from tools.architecture.compiler import JsonValue, object_value
+from tools.code_quality.json_values import JsonValue, object_value
 
 pytestmark = pytest.mark.integration
 

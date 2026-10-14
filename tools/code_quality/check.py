@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import Literal
 
 from .changes import Plan, build_plan
-from .native_impact import commands
+from .git_environment import isolated_environment
 from .run import check
 from .test_selection import commands as test_commands
 from .test_selection import execution_arguments
@@ -34,7 +34,10 @@ def tasks(plan: Plan, stage: Stage) -> tuple[tuple[str, tuple[str, ...]], ...]:
         )
     if plan.python:
         result.append(('types', ('pyright', *plan.python)))
-    result.extend(commands(plan.changed, plan.native))
+    if 'tools/code_quality/metrics.mjs' in plan.changed:
+        result.append(
+            ('native-syntax', ('node', '--check', 'tools/code_quality/metrics.mjs'))
+        )
     if plan.boundaries:
         result.append(
             (
@@ -49,7 +52,7 @@ def tasks(plan: Plan, stage: Stage) -> tuple[tuple[str, tuple[str, ...]], ...]:
             )
         )
     if plan.changed and (
-        plan.python or 'tools/architecture/ownership.json' in plan.changed
+        plan.python or 'tools/code_quality/scientific_sources.json' in plan.changed
     ):
         result.append(
             (
@@ -93,6 +96,7 @@ def verify_checkout(stage: Stage, head: str | None) -> None:
             '.pre-commit-config.yaml',
         ],
         check=False,
+        env=isolated_environment(),
     )
     if result.returncode:
         raise ValueError(

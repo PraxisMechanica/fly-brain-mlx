@@ -5,7 +5,7 @@ from typing import cast
 import pytest
 
 from tests.quality.support import PROJECT, run
-from tools.architecture.compiler import Compiler, JsonValue, object_value
+from tools.code_quality.json_values import JsonValue, object_value
 
 pytestmark = [pytest.mark.unit, pytest.mark.checker]
 
@@ -140,13 +140,3 @@ def test_erasing_brand_loses_primitive_rejection(tmp_path: Path) -> None:
         original.replace("NewType('NeuronRow', int)", 'int')
     )
     assert typed(tmp_path, source) == []
-
-
-def test_empty_scope_and_unknown_type_are_analysis_failures(tmp_path: Path) -> None:
-    with pytest.raises(ValueError, match='COV002:.*no source scope'):
-        typed(tmp_path, '')
-    path = tmp_path / 'unknown.py'
-    path.write_text('value = MissingIdentity(0)\n')
-    with Compiler(tmp_path, PROJECT / '.venv/bin/pyright-langserver') as compiler:
-        with pytest.raises(ValueError, match='COV002: unresolved source symbol'):
-            compiler.resolve(path, 1, 12)

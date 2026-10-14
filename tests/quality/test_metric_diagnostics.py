@@ -6,7 +6,7 @@ import pytest
 
 from tests.quality.python_metric_fixture import protocol_tool
 from tests.quality.support import COMPLEX, PROJECT, SIMPLE, git, repository, run
-from tools.architecture.compiler import JsonValue, object_value
+from tools.code_quality.json_values import JsonValue, object_value
 
 pytestmark = pytest.mark.integration
 ADAPTER = PROJECT / 'tools/code_quality/metrics.mjs'

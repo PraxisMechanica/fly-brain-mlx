@@ -3,7 +3,7 @@ from pathlib import Path
 import pytest
 
 from tests.unit.test_identifier_type_contracts import typed
-from tools.architecture.compiler import object_value
+from tools.code_quality.json_values import object_value
 
 pytestmark = [pytest.mark.unit, pytest.mark.checker]
 

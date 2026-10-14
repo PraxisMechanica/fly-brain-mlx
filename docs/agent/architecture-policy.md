@@ -77,12 +77,39 @@ alias/effect/control-flow analyzer is required.
 | COV003 | Adapt | Keep automatic affected checks/tests at commit and CI, plus static push checks. Reuse unchanged results; no full-codebase or manual test replay and no new merge-protection requirement. |
 | COV004 | Adapt | Test changed behavior with focused tests. Do not require broad checker self-tests, hook simulations or disabling every guard as routine work. |
 
+## Executable checks and behavior tests
+
+The executable policy uses the existing runner and tools; the 37-row review above
+is guidance rather than 37 mandatory new analyzers. Required checks are:
+
+| Check | Reject | Permit |
+| --- | --- | --- |
+| Ruff and Pyright | Adopted syntax/format/type failures | Concrete MLX types, typed callables and legitimate framework reference models |
+| Production imports | Simulation depending on Torch/Brian or qualification code | Direct MLX backend collaboration and private numerical helpers |
+| Comparison imports | Scoring/calculation code depending on execution frameworks or workflow/storage mechanics | Numerical library operations and the useful owned identity types |
+| Scientific source identity | Missing/invalid protection records or an unreviewed protected-source hash change | Ordinary function, argument, declaration and module changes outside protected scientific sources |
+| Indexed inputs and affected selection | Missing committed check/source inputs or an unsupported required scope | Changed sources and affected consumers without a full-source replay |
+| Automatic behavior tests | A failure in selected changed/affected behavior | One invocation at commit and CI; no manual or push test replay |
+
+The scientific guard uses a compact five-source manifest with the original
+hashes and provenance. The general registry, declaration/binding fingerprints,
+semantic analyzer and custom compiler bridge are removed. Ordinary refactors need
+no classification approval or synchronized fingerprint updates.
+Existing independent input, mapping, state, repeatability and numerical checks
+retain their actual acceptance contracts. Numerical quality scores are advisory.
+
+Tests for changed enforcement exercise useful outcomes: an ordinary refactor and
+concrete backend contract pass, a protected source change fails, and production
+reference contamination fails. Application refactor tests retain validation,
+ordering, outputs and error behavior. Add no universal purity, call-target or
+alias-proof assertions, numeric score ratchets, or blanket checker simulation
+matrices. Manual architectural review is not advertised as an automated proof.
+
 ## Former six strict-profile observations
 
-The unchanged [ownership registry](../../tools/architecture/ownership.json) records
-source identities and historical strict-profile observations. The required loader
-checks changed source/inventory records; it does not reject those six recorded
-observations as application defects. Their current project dispositions are:
+The former strict registry is removed. The [scientific manifest](../../tools/code_quality/scientific_sources.json)
+preserves all five scientific identities and their provenance. The old observations
+have these project dispositions:
 
 - `DEP004`, `simulation/backend/engines.py:Advance`: accepted private MLX contract.
   `Execution`, `Compiler` and `Factory` may carry the concrete backend types they

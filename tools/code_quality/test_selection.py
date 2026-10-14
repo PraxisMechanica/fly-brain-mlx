@@ -16,7 +16,7 @@ from .change_inputs import Inputs, Stage, git, paths
 
 APP = ('tests/unit/', 'tests/integration/')
 QUALITY = 'tests/quality/'
-CHECKERS = ('tools/architecture/', 'tools/code_quality/', QUALITY)
+CHECKERS = ('tools/code_quality/', QUALITY)
 PROOF = 'tests/integration/test_session_proof_artifacts.py'
 
 

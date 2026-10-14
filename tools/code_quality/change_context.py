@@ -53,8 +53,8 @@ def compiler_context(inputs: Inputs) -> Invalidation:
         or bool(
             inputs.changed
             & {
-                'tools/architecture/neutral_import_contract.py',
-                'tools/architecture/neutral_import_scope.py',
+                'tools/code_quality/neutral_import_contract.py',
+                'tools/code_quality/neutral_import_scope.py',
                 'tools/code_quality/boundaries.py',
             }
         ),

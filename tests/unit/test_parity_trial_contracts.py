@@ -11,7 +11,7 @@ from fly_brain.qualification.schemas import ParityOptions
 from fly_brain.simulation.identifiers import TrialId
 from tests.quality.support import PROJECT
 from tests.unit.test_identifier_type_contracts import typed
-from tools.architecture.compiler import object_value
+from tools.code_quality.json_values import object_value
 
 pytestmark = pytest.mark.unit
 

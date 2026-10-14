@@ -21,7 +21,7 @@ from fly_brain.simulation.module import build_connectome_silencer
 from tests.quality.support import PROJECT
 from tests.support.observation_fixtures import fixture
 from tests.unit.test_identifier_type_contracts import typed
-from tools.architecture.compiler import JsonValue, object_value
+from tools.code_quality.json_values import JsonValue, object_value
 
 pytestmark = pytest.mark.unit
 SETUP = 'fly_brain.qualification.adapters.torch_setup'

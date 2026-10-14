@@ -9,7 +9,7 @@ from importlinter import api
 from importlinter.contracts.forbidden import ForbiddenContract
 from pydantic import BaseModel, ConfigDict
 
-from tools.architecture.neutral_import_contract import (
+from tools.code_quality.neutral_import_contract import (
     NeutralImportContract,
     modules_option,
 )

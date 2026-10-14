@@ -1,7 +1,7 @@
 """Changed/current scopes with automatic commit and CI behavior tests.
 
-Runtime imports, historical deletion closure and complete architecture coverage
-are unsupported. The runner must verify checkout/index consistency before planning.
+The runner verifies checkout/index consistency. Ordinary edits use the current
+import graph; Python removals conservatively widen static checks, not pytest.
 """
 
 import subprocess
@@ -16,7 +16,6 @@ from .change_inputs import RANGES as RANGES
 from .change_inputs import Stage as Stage
 from .change_inputs import resolve_inputs
 from .impact import current_graph, module_name
-from .native_impact import affected as native_affected
 from .test_selection import delivery_inputs, select_tests
 
 
@@ -31,14 +30,13 @@ class Plan:
     head: str | None
     boundary_files: tuple[str, ...] = ()
     tree: str | None = None
-    native: tuple[str, ...] = ()
     tests: tuple[str, ...] = ()
 
 
 def build_plan(root: Path, stage: Stage, environment: Mapping[str, str]) -> Plan:
     """Preserve range seeds and current consumers; never certify architecture rules.
 
-    Unproved Python deletions/renames fail COV002. Stubs invalidate typing globally.
+    Python removals/renames widen static checking. Stubs invalidate typing globally.
     main.py conservatively consumes app modules. Test scope precedes type widening.
     """
     try:
@@ -53,10 +51,7 @@ def build_plan(root: Path, stage: Stage, environment: Mapping[str, str]) -> Plan
         python = set(actual)
         removed = {path for path in testing.changed if path.endswith('.py')} - existing
         if removed:
-            raise ValueError(
-                'unproved affected scope for removed Python input: '
-                + ', '.join(sorted(removed))
-            )
+            python |= python_sources
         impacts: dict[str, set[str]] = {}
         if seeds:
             graph = current_graph(inputs.root, inputs.tree)
@@ -74,7 +69,7 @@ def build_plan(root: Path, stage: Stage, environment: Mapping[str, str]) -> Plan
                 impacts[path] = {sources[name] for name in affected & sources.keys()}
             python.update(*map(impacts.__getitem__, changed_python - {'main.py'}))
         app = {path for path in python_sources if path.startswith('src/')}
-        boundary_files = app if context.boundaries else python & app
+        boundary_files = app if context.boundaries or removed else python & app
         if python & app and 'main.py' in existing:
             python.add('main.py')
         if context.types:
@@ -96,7 +91,6 @@ def build_plan(root: Path, stage: Stage, environment: Mapping[str, str]) -> Plan
             inputs.head,
             tuple(sorted(boundary_files)),
             inputs.tree,
-            native_affected(inputs, context.runtime),
             select_tests(testing, impacts, stage),
         )
     except (

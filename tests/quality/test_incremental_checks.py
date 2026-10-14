@@ -110,6 +110,59 @@ def test_metric_stage_does_not_measure_both_staged_and_submitted_range(
     assert calls == expected
 
 
+@pytest.mark.parametrize('stage', ('commit', 'push', 'ci'))
+@pytest.mark.parametrize('path', ('main.py', 'tests/test_value.py'))
+def test_uncommitted_source_cannot_hide_selected_index_or_delivery_debt(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    stage: workflow.Stage,
+    path: str,
+) -> None:
+    repository(tmp_path)
+    source = tmp_path / path
+    source.parent.mkdir(parents=True, exist_ok=True)
+    source.write_text('VALUE = 1\n')
+    git(tmp_path, 'add', path)
+    git(tmp_path, 'commit', '-qm', 'Declare checked input')
+    foreign = tmp_path / 'outer-repository'
+    foreign.mkdir()
+    repository(foreign)
+    monkeypatch.setenv('GIT_DIR', str(foreign / '.git'))
+    monkeypatch.setenv('GIT_WORK_TREE', str(foreign))
+    monkeypatch.setenv('GIT_INDEX_FILE', str(foreign / '.git/index'))
+    monkeypatch.chdir(tmp_path)
+    workflow.verify_checkout(stage, 'HEAD')
+    source.write_text('VALUE = 2\n')
+    with pytest.raises(ValueError, match='COV002.*execution inputs'):
+        workflow.verify_checkout(stage, 'HEAD')
+
+
+@pytest.mark.parametrize(
+    'checker',
+    (
+        'tools/code_quality/neutral_import_scope.py',
+        'tools/code_quality/boundaries.py',
+    ),
+)
+def test_boundary_implementation_change_invalidates_the_application_scope(
+    tmp_path: Path, checker: str
+) -> None:
+    repository(tmp_path)
+    config = tmp_path / 'pyproject.toml'
+    config.write_text('[tool.importlinter]\nroot_package="fly_brain"\n')
+    git(tmp_path, 'add', 'pyproject.toml')
+    git(tmp_path, 'commit', '-qm', 'Declare native boundary context')
+    selected = Inputs(tmp_path, frozenset({checker}), frozenset(), None, None, None)
+    assert compiler_context(selected).boundaries
+
+
+def test_changed_metric_bridge_receives_a_native_syntax_check() -> None:
+    path = 'tools/code_quality/metrics.mjs'
+    tasks = dict(workflow.tasks(replace(inputs(), changed=(path,)), 'push'))
+    assert tasks['native-syntax'] == ('node', '--check', path)
+    assert 'native-types' not in tasks
+
+
 def test_changed_native_helpers_must_be_indexed_check_inputs(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -129,10 +182,12 @@ def test_changed_native_helpers_must_be_indexed_check_inputs(
                 'pnpm-lock.yaml',
                 'justfile',
                 '.pre-commit-config.yaml',
-                'tools/architecture/ownership.json',
+                'tools/code_quality/scientific_sources.json',
                 'tools/code-quality/provenance.json',
                 'tools/code-quality/vendor/eng-metrics-code-quality-0.1.0.tgz',
                 'tools/code-quality/vendor/eng-metrics-code-quality-0.1.1.tgz',
+                'tools/code-quality/vendor/eng-metrics-code-quality-0.1.2.tgz',
+                'tools/code-quality/metric-facts.patch',
                 'tools/code-quality/python-aggregation.patch',
                 'tools/code_quality/metrics.mjs',
                 'tools/code_quality/retention.json',
@@ -142,78 +197,3 @@ def test_changed_native_helpers_must_be_indexed_check_inputs(
     monkeypatch.setattr(indexed_inputs.subprocess, 'check_output', indexed)
     with pytest.raises(ValueError, match='unindexed.*metric_cache'):
         gate.require_indexed_inputs()
-
-
-@pytest.mark.parametrize('stage', ('commit', 'push', 'ci'))
-@pytest.mark.parametrize('path', ('main.py', 'tests/test_value.py'))
-def test_uncommitted_source_cannot_hide_selected_index_or_delivery_debt(
-    tmp_path: Path,
-    monkeypatch: pytest.MonkeyPatch,
-    stage: workflow.Stage,
-    path: str,
-) -> None:
-    repository(tmp_path)
-    source = tmp_path / path
-    source.parent.mkdir(parents=True, exist_ok=True)
-    source.write_text('VALUE = 1\n')
-    git(tmp_path, 'add', path)
-    git(tmp_path, 'commit', '-qm', 'Declare checked input')
-    monkeypatch.chdir(tmp_path)
-    workflow.verify_checkout(stage, 'HEAD')
-    source.write_text('VALUE = 2\n')
-    with pytest.raises(ValueError, match='COV002.*execution inputs'):
-        workflow.verify_checkout(stage, 'HEAD')
-
-
-def test_native_bridge_checks_select_only_changed_sources_and_load_type_context(
-    tmp_path: Path,
-    monkeypatch: pytest.MonkeyPatch,
-) -> None:
-    monkeypatch.chdir(tmp_path)
-    changed = 'tools/architecture/native_changed.mjs'
-    untouched = 'tools/architecture/native_unchanged.mjs'
-    for name in (changed, untouched):
-        path = tmp_path / name
-        path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text('export const value = 1;\n')
-    tasks = dict(
-        workflow.tasks(replace(inputs(), changed=(changed,), native=(changed,)), 'push')
-    )
-    assert tasks['native-syntax'] == ('node', '--check', changed)
-    assert tasks['native-types'][-1] == changed
-    assert untouched not in tasks['native-types']
-
-
-@pytest.mark.parametrize('surviving', (False, True))
-def test_removed_native_source_without_a_checked_consumer_fails_analysis(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, surviving: bool
-) -> None:
-    monkeypatch.chdir(tmp_path)
-    existing = tmp_path / 'tools/architecture/native_surviving.mjs'
-    existing.parent.mkdir(parents=True)
-    existing.write_text('export const value = 1;\n')
-    changed = ('tools/architecture/native_removed.mjs',) + (
-        ('tools/architecture/native_surviving.mjs',) if surviving else ()
-    )
-    plan = replace(inputs(), changed=changed)
-    with pytest.raises(ValueError, match='COV002: removed native source'):
-        workflow.tasks(plan, 'push')
-
-
-@pytest.mark.parametrize(
-    'checker',
-    (
-        'tools/architecture/neutral_import_scope.py',
-        'tools/code_quality/boundaries.py',
-    ),
-)
-def test_boundary_implementation_change_invalidates_the_application_scope(
-    tmp_path: Path, checker: str
-) -> None:
-    repository(tmp_path)
-    config = tmp_path / 'pyproject.toml'
-    config.write_text('[tool.importlinter]\nroot_package="fly_brain"\n')
-    git(tmp_path, 'add', 'pyproject.toml')
-    git(tmp_path, 'commit', '-qm', 'Declare native boundary context')
-    selected = Inputs(tmp_path, frozenset({checker}), frozenset(), None, None, None)
-    assert compiler_context(selected).boundaries

@@ -38,11 +38,17 @@ def indexed_repository(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
         target = repo / name
         target.parent.mkdir(parents=True, exist_ok=True)
         target.touch()
-    policy = repo / 'tools/architecture/ownership.json'
-    policy.parent.mkdir(parents=True)
+    policy = repo / 'tools/code_quality/scientific_sources.json'
+    policy.parent.mkdir(parents=True, exist_ok=True)
     policy.write_text('{}\n')
     git(repo, 'add', '.')
     git(repo, 'update-ref', 'refs/remotes/origin/main', 'HEAD')
+    foreign = repo / 'outer-repository'
+    foreign.mkdir()
+    repository(foreign)
+    monkeypatch.setenv('GIT_DIR', str(foreign / '.git'))
+    monkeypatch.setenv('GIT_WORK_TREE', str(foreign))
+    monkeypatch.setenv('GIT_INDEX_FILE', str(foreign / '.git/index'))
     monkeypatch.chdir(repo)
     monkeypatch.setattr(gate, 'git', partial(git, repo))
     for name in (
@@ -104,7 +110,7 @@ def test_disabling_index_guard_hides_uncommitted_source(
 @pytest.mark.parametrize(
     'name',
     (
-        'tools/architecture/ownership.json',
+        'tools/code_quality/scientific_sources.json',
         'tools/code-quality/provenance.json',
         'tools/code-quality/vendor/eng-metrics-code-quality-0.1.0.tgz',
         'tools/code-quality/vendor/eng-metrics-code-quality-0.1.1.tgz',
@@ -140,7 +146,7 @@ def matching_literals(tree: ast.AST, value: str) -> list[ast.Constant]:
 @pytest.mark.parametrize(
     'name,remaining_guard',
     (
-        ('tools/architecture/ownership.json', nullcontext()),
+        ('tools/code_quality/scientific_sources.json', nullcontext()),
         ('tools/code-quality/provenance.json', nullcontext()),
         ('tools/code-quality/vendor/eng-metrics-code-quality-0.1.0.tgz', nullcontext()),
         ('tools/code-quality/vendor/eng-metrics-code-quality-0.1.1.tgz', nullcontext()),
