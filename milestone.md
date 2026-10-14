@@ -29,17 +29,11 @@ handoff: `architecture_symbols` owns native type/call/source facts;
 predicate; `composition_refactor` owns coordinated simulation identifiers.
 Shared registry changes are merged by exact row deltas; only the parent pushes.
 
-Generated outputs belong in ignored `logs/` or `executions/`. Successful commit
-and push hooks delete those folders and legacy `.quality-reports/` outputs
-unless an exact path, current operational reason and release condition appears
-in `tools/code_quality/retention.json`. Failed hooks retain diagnostics while the
-failure is unresolved. Scientific output receives no blanket exception.
-Complete its repeat, batch, scoring and review consumers before deletion, or
-register unfinished work before it crosses a commit. Remove expired exceptions.
-
-Scientific qualification compares fresh MLX and CPU reference results for the
-same case, fresh repeats, and individual versus batched trials. It does not
-perform automatic MLX commit-N versus commit-N-minus-one output comparisons.
+Output policy belongs to [AGENTS.md](AGENTS.md); diagnostic commands belong to
+[developer workflow](docs/agent/development.md). The
+[retention manifest](tools/code_quality/retention.json) owns exact consumers and
+release conditions. Keep it current before a verification output crosses a
+commit boundary.
 
 Historical execution records, generated outputs, archived verification scripts,
 review logs and handoff histories have been removed. Seven independently
@@ -48,9 +42,8 @@ recorded regression fixtures remain as current test data under
 current consumer and release condition. All seven bytes/hash identities were
 preserved during relocation; production/reference arithmetic is unchanged.
 The four active reference/oracle source files remain byte exact. Pinned FlyWire
-input datasets and licences remain intact. The previously recorded P9 process
-62191 no longer exists; no live-process output exception is registered and no
-process was signalled.
+input datasets and licences remain intact. No generated-output exception is
+currently registered.
 
 Success requires:
 
@@ -68,66 +61,91 @@ Success requires:
   exception, and hand off a concise ordered implementation plan with verified
   limits. Full scientific implementation remains with the prior agent.
 
-## Resumed work verification
+## Current refactor evidence
 
-The standalone cleanup guard fix is committed at
-`3c6865f29cb81f1bb471e24a3452c2e178aaa5d5`. Git environment isolation is now
-shared by fixture commands and cleanup, so an inherited hook index cannot
-replace the requested checkout's index. Two foreign-index negative fixtures
-failed before the fix; the close compliant case passed. All 52 focused cleanup
-and hook cases passed after the fix. Required normal commit checks and cleanup
-passed without changing predicates or thresholds. Generated diagnostics expired
-at that successful commit; the four frozen source hashes remain exact.
+The historical-record cleanup is delivered at `79f62ad`; generated historical
+records are absent. `3c6865f` separately fixed foreign Git-index inheritance in
+fixture cleanup. Their source/input preservation remains intact; deleted raw
+outputs are not current reproducible proofs.
 
-Five coherent components are integrated on parent `main`:
+The following components are committed on parent `main`:
 
-| Component | Parent commit | Bounded verification |
+| Component | Parent commit | Bounded evidence |
 | --- | --- | --- |
-| Native structured types and checked JavaScript source inventory | `9d73531` | 44 source-only intent cases; strict native/compiler checks |
-| Exact neutral comparison import boundary | `76f1e5d` | 38 boundary cases and 15 existing commit/push fixture cases |
-| Connectome neuron and recurrent-edge array identities | `fd0a54f` | 193 CPU/input/type cases and 107 real Metal/reference cases |
-| Injected qualification scoring, coordinates, clock conversion and diagnostics | `6b495a8` | 761 application tests, the new composition boundary, and five worker Metal/reference cases |
-| Native explicit-call selected signatures and overloads | `c46f98f` | 48 focused final-worker cases and the parent's required full commit gate |
+| Native structured types and checked JavaScript inventory | `9d73531`, `38ce609` | 44 type intent cases; pinned compiler inputs work inside or outside the checkout |
+| Exact neutral comparison import boundary | `76f1e5d` | 38 import cases and 15 existing commit/push cases |
+| Connectome neuron and recurrent-edge array identities | `fd0a54f` | 193 input/type cases and 107 Metal/reference cases |
+| Injected qualification comparison operations | `6b495a8` | Unchanged calculation files; consumer-owned scoring, coordinates, clock conversion and diagnostics |
+| Native explicit-call selected signatures | `c46f98f` | 48 final-worker cases; no runtime-dispatch claim |
+| Reviewed domain binding placement (OWN001) | `c688ab1` | 30 final focused cases; independently validated version 2 inputs required |
+| Experiment, stimulus and observation-session identifiers | `e41d03f` | 346 worker input/type cases and 102 native cases; 43 normalized modules and 239 old assertions preserved |
+| Native partial construction facts | `1610c6a` | 44 worker cases and 19 independent parent controls; static constructor/capture facts only |
+| Qualification case trial labels | `f27a75b` | 193 worker cases and three native checks; all 52 catalog values/order unchanged |
 
-Each parent commit passed its normal required checks and output cleanup. The
-call integration initially failed CQ002; removing an unused helper and a proved
-duplicate check repaired it without changing thresholds or fixtures. The final
-parent comparison kept mean complexity at 15.49 and maximum 96, with zero metric
-findings. At `c46f98f`, ownership reconciles 304 Python/stub sources with zero
-mapping findings and the unchanged six recorded findings.
+Every component passed its normal full commit checks and default cleanup. Joined
+metric regressions were repaired without thresholds, suppressions or removed
+production guards. At `f27a75b`, ownership reconciles 321 Python/stub sources with
+zero mapping findings and six recorded findings. Native metrics cover 342 files:
+mean complexity 15.40, maximum 96, health/maintainability 39.41, zero findings.
+These are component checks, not complete architecture acceptance.
 
-The 761-test application run excludes only the existing proof-artifact consumer,
-which needs a fresh full native proof bundle; it reported 27 dependency warnings.
-No full bundle or scientific matrix was recreated. All five comparison calculation
-files, four frozen sources, six pinned input files, both licences and seven
-independent fixtures remain byte exact. These checks establish preservation of
-the bounded changes, not complete scientific or architecture acceptance.
+At `f27a75b`, the combined ordinary pytest selection passed **1,499 tests** with
+27 dependency warnings in 423.47 seconds (423.99 seconds wall time). It contains
+793 application tests and 706 quality tests. It excludes only the existing
+`tests/integration/test_session_proof_artifacts.py` consumer, which requires a
+fresh full native proof bundle; scientific qualification is outside this run.
+Summed per-test durations are 50.95 seconds for application tests and 370.26
+seconds for quality tests. The slowest case took 3.70 seconds. Import-boundary,
+metric and compiler/hook fixtures dominate; this does not establish that all
+historical scientific performance problems are fixed.
 
-Delivery of these five components and this documentation checkpoint is pending
-normal push and exact-revision hosted checks; local commits alone are not remote
-delivery. Their generated verification outputs completed their consumers and
-expired through normal hooks.
+The first timing attempt put execution-producing fixtures under `logs`; all 71
+observed failures were the unchanged scientific output-path guard. It was
+interrupted and rerun with fresh fixtures under `executions`. The failed run is
+not acceptance evidence. Timings and failure classification completed their
+consumers; their raw outputs have no retention exception.
 
-## Next work and unresolved decisions
+Five comparison calculation files, four frozen sources, six pinned input files,
+both licences and seven independent fixtures remain byte exact. The identifier
+changes preserve numerical bodies and old assertions; NewType supplies nominal
+typing without new runtime validation or complete conversion-origin proof.
+No full native proof bundle or scientific matrix was recreated.
 
-The identifier worker is implementing Experiment FlyWire identities through
-Stimulus neuron rows and requested trial labels to observation sessions. Local
-array positions remain separate; ParityCase/catalog/JSON ingress is outside this
-slice. The placement worker is implementing only OWN001 over independently
-validated semantic inputs. Both use committed `6b495a8` in isolated checkouts and
-must hand off checked commits; neither component grants complete compliance.
+`38ce609` is pushed to `origin/main`; its exact hosted run `38505093226` passed
+all steps. It repairs the preceding hosted compiler-layout failure. The four
+later component commits and this documentation update still require normal push
+and exact-revision hosted checks before remote delivery is reported complete.
 
-Then complete reviewed live semantic contexts, callable/slot origins, source and
-export predicates, injection/lifetime checks, control flow/failure disposition,
-and alias/effect closure before binding every applicable rule into the required
-gate. The [coverage report](docs/agent/quality-coverage.md) owns mechanism limits.
+## Remaining order and unresolved decisions
 
-A fresh scientific boundary review found that full separation of model rules and
-provider implementations conflicts with the exact four-source freeze. Its
-[reviewed boundaries](docs/agent/numerical-boundaries.md) specify the affected
-symbols, minimum repair and preservation requirements. No amendment or deviation
-is approved; keep all four source hashes exact until that conflict is resolved.
-The remaining non-frozen components can proceed independently.
+1. Deliver the current checked components and documentation; verify the exact
+   remote revision and leave no expired output exception.
+2. Complete native declaration-only observation and reviewed live version 2
+   contexts. A source-only prototype observes 314 worker sources, but raw native
+   binding tables omit dormant declarations and mix import target URIs with
+   lexical ranges. Reconcile every authored occurrence; do not invent identities.
+   Await the native TOML parser before observing canonical configuration. The
+   existing manual diagnostic rules match strict rules, but canonical import,
+   virtual-environment and source-origin equivalence remain unproved.
+3. Repair the selected qualification parity path's private experiment lookup,
+   neuron mapping and stimulus storage dependencies through consumer-owned ports.
+   Preserve both catalog-read positions, seed 20261004, generation/persistence/
+   silencing order and errors. This follows the committed case-trial migration;
+   the separate private `torch_setup` mapping call and wider provider roles remain.
+4. Complete callable/slot origins, implicit calls, runtime targets, source/export
+   predicates, injection/lifetime checks, control flow/failure disposition and
+   alias/effect closure. Bind every applicable rule into the required gate with
+   independent rejection, repair, nearby-compliant and weakening controls.
+5. Resolve the exact-source freeze conflict before the dependent inner repairs,
+   complete all authorized refactor verification, and prepare the ordered handoff
+   to `[Fly Brain] implementation`. That chat is idle; no message has been sent.
+
+A fresh scientific review found complete model/provider separation incompatible
+with the exact four-source freeze. The [reviewed boundaries](docs/agent/numerical-boundaries.md)
+identify affected symbols, the minimum repair and preservation requirements.
+No structural amendment or exact rule deviation is approved. Keep all four
+hashes exact while independent non-frozen work proceeds. The
+[coverage report](docs/agent/quality-coverage.md) owns remaining mechanism limits.
 
 ## Current scientific scope
 
@@ -156,30 +174,3 @@ import contracts, source ownership reconciliation and qualified native metric
 checks are useful components, not a full structural or scientific approval.
 Current coverage is in [quality-coverage.md](docs/agent/quality-coverage.md) and
 classifications in [architecture-ownership.md](docs/agent/architecture-ownership.md).
-
-## Completed cleanup verification
-
-At the `5f7b0d7` base, 157 targeted retention, hook, indexed-input and ownership
-tests passed; strict typing returned zero errors. All 745 application unit and
-integration tests passed (27 dependency warnings). The complete proof-artifact
-integration consumer was explicitly excluded because it requires a fresh
-full native proof bundle; no old bundle was retained or recreated for this task.
-The relocated fixed replay passed on actual Metal against a fresh CPU reference
-(one test, 86 dependency warnings). The staged native source-metric gate passed.
-
-An independent read-only audit, reproduced for fixture/source byte identity,
-confirmed all seven fixture moves, four frozen sources, six retained input files
-and both licences are unchanged. Current source ownership reconciles 276 source
-files with zero mapping findings and the unchanged six recorded findings. Active
-document destinations and live consumers contain no removed-archive dependency.
-The current index contains no historical archive or generated-output paths.
-
-Remote reconciliation fetched `origin/main` and found it exactly equal to this
-checkout at `5f7b0d7`; mandatory commit, push and hosted checks must cover the
-delivery revision. Fresh verification outputs have finished their consumers and
-have no retention exception; the successful delivery hooks delete them.
-
-The historical-record cleanup was delivered at `79f62adee10b092fcaaaed0ea4043da3f5b9c415`.
-The refactor coordinator now works on `main` in its managed checkout and preserves
-independent work in the original checkout and other threads. Worker clones use
-separate indexes; the coordinator alone pushes integrated commits to `origin/main`.

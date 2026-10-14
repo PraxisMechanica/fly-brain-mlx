@@ -8,12 +8,14 @@ owns the active work order and verification status.
 
 **ANALYSIS FAILED — COV002: complete structural enforcement is not implemented.**
 The strict catalog contains 37 rules. Native checks and five import contracts
-cannot prove them all. Six recorded architecture/identifier findings remain.
+cannot prove them all. Recorded debt is described in
+[source ownership](architecture-ownership.md).
 No incomplete rule is treated as clean or inapplicable.
 
 | Rules | Working mechanism and limit |
 | --- | --- |
-| OWN001–OWN006 | The reviewed registry/loader reconcile exact Python files, named declarations, binding sets and frozen provenance. Complete binding/type/effect classification and deterministic role placement remain missing. |
+| OWN001 | The placement predicate checks domain bindings against exact owner roots and its explicitly reviewed outside role over independently validated version 2 inputs. Missing native identities, sources, hashes or relevant scope fail COV002. Whole live contexts and required gate integration remain missing. |
+| OWN002–OWN006 | The reviewed registry/loader reconcile exact Python files, named declarations, binding sets and frozen provenance. Complete resource, binding/type/effect classification and role predicates remain missing. |
 | DEP001 | Import Linter checks five configured domain/framework/role boundaries, including neutral observation ports and active session consumers. Fixtures cover aliases, type-only imports, re-exports and transitive paths. Other role boundaries and same-module interactions are not covered. |
 | DEP002–DEP004 | Some forbidden paths fail existing contracts. Complete logical owner cycles, public-contract exports and resolved foreign symbol/type checks are missing. |
 | DI001–DI004 | Strict typing and bounded native facts expose declared/instantiated signatures and selected explicit calls. Complete collaborator/slot origins, hidden construction, ambient dependencies and lifecycle analysis are missing. |
@@ -67,10 +69,24 @@ uses TypeScript 5.9.3 to reconcile bridge declarations, bindings, imports,
 exports and actual input hashes. This bounded inventory does not supply complete
 live JavaScript or authored C++ contexts to semantic-policy validation.
 
-These separate components do not add absent capabilities to `SemanticModel`.
-Complete callable/slot origin analysis, partial application, implicit calls,
-runtime target sets, alias ownership, control flow and effect summaries remain
-missing. Native facts alone execute no complete architecture predicate.
+The [native partial API](../../tools/architecture/native_partials.py) exports
+source-bound constructor and wrapped-expression identities, ordered captures,
+native residual signatures and raw Any/ellipsis/gradual/error flags. Unsupported
+unpack/residual forms and incomplete or changed provenance fail COV002. Native
+conditional types may collapse targets; closure rebinding and keyword mutation
+remain unproved. These are static facts, not origins or runtime/effect proof.
+
+The [placement predicate](../../tools/architecture/ownership_placement.py) executes
+OWN001 over independently validated domain bindings. It preserves coverage
+failures separately from located placement findings; this does not make the
+canonical live analyzer complete.
+
+These components do not add absent capabilities to `SemanticModel`. Complete
+callable/slot origins, partial dispatch, implicit calls, runtime target sets,
+alias ownership, control flow and effect summaries remain missing. The current
+native type/call/partial setup manually supplies strict rules and paths; it does
+not prove canonical virtual-environment/import-context equivalence. Declaration-
+only observation and reviewed live version 2 inputs are the next dependency.
 
 The [semantic input schema](../../tools/architecture/semantic_policy_schema.py)
 defines version 2 with required sections and the exact 37-rule/context
@@ -92,9 +108,9 @@ independent architecture evidence.
 Current implementation boundaries include explicit clock injection, injected
 comparison scoring/coordinates/clock conversion/diagnostics, command composition,
 consumer-owned seeded acquisition, immutable causal-audit transitions, typed
-reference digests, branded Connectome/grouping arrays and injected observation
-sessions. Their bounded checks preserve behavior within their tested
-scope. Complete type/alias/effect/control-flow analysis and the remaining
+reference digests, branded Connectome/grouping arrays, Experiment/Stimulus
+scalars, requested session/case trial labels and injected observation sessions.
+Their bounded checks preserve behavior within their tested scope. Complete type/alias/effect/control-flow analysis and the remaining
 architecture findings still require work; these boundaries grant no new
 scientific acceptance.
 

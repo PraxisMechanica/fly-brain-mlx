@@ -114,10 +114,14 @@ FlyWire neuron identity, neuron-row identity, original edge-row identity and
 trial identity have distinct meanings. Connectome FlyWire IDs and neuron rows,
 grouped original edge rows, and bucket neuron/padded-edge rows now use the existing
 simulation-owned array brands. Their lawful producer and constructor boundaries
-retain the same objects, array bytes and numerical operations. Experiment/stimulus
-scalar tuples, session trial labels, rasters and other conversion sites remain
-incomplete; the four simulation `VALUE001` findings are not retired by one array
-slice. The reference producer digest uses qualification-owned
+retain the same objects, array bytes and numerical operations. Experiment FlyWire
+scalars, stimulus neuron rows, requested observation-session labels and
+`ParityCase.trial` now use the existing owned scalar brands. Catalog, validated
+option and persisted-stimulus ingress retain their existing values and guards;
+ordinary steps/counts and local reference array positions remain coordinates.
+Rasters and complete lawful-conversion origins remain unproved. The four
+simulation `VALUE001` findings are not retired by these nominal type slices.
+The reference producer digest uses qualification-owned
 `ReferenceProducerDigest`. Native typing rejects primitive and foreign-brand
 consumers; explicit rebranding and complete conversion-origin enforcement remain
 unproved.

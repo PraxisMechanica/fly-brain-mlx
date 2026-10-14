@@ -77,7 +77,14 @@ uv run --locked --group qualification fly-brain qualify --output executions/qual
 ```
 
 Default pytest selection covers unit, file/process integration and source-only
-quality tests.
+quality tests. The proof-artifact integration consumer needs a fresh full native
+proof bundle; refactor verification reports its exclusion explicitly. When
+choosing a repository-local pytest temporary root, use a fresh path under
+`executions/`: application fixtures create scientific working data and must not
+run under `logs/`. Timing summaries and JUnit diagnostics belong under `logs/`.
+Per-test timings (`--durations=20`) can identify quality-harness overhead without
+running a new full scientific matrix. Current measured evidence belongs in
+[milestone.md](../../milestone.md).
 `qualify` exercises the independent reference and MLX scientific suites on a
 real Metal device. Its logs, reports and state/event arrays are working inputs
 to verification. They expire at the next successful commit unless an explicit
