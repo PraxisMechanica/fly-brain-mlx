@@ -16,7 +16,7 @@ installation, simulation, and spike comparison instructions.
 | [Numerical boundaries](numerical-boundaries.md) | Accepted MLX/reference boundaries and preservation required for actual numerical changes |
 | [Developer workflow](development.md) | Quality tools, application/scientific commands, diagnostics, and code ownership |
 | [Typing limits](typing.md) | Local third-party stubs and narrow suppressions |
-| [Quality coverage](quality-coverage.md) | Required project checks, review limits and retained experimental analysis |
+| [Quality coverage](quality-coverage.md) | Required project checks, review limits and removed analysis platform |
 | [Source ownership](architecture-ownership.md) | Five protected scientific source identities, provenance and preservation rules |
 | [Output retention manifest](../../tools/code_quality/retention.json) | Exact current exceptions, operational consumers, and release conditions |
 

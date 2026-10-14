@@ -56,7 +56,16 @@ The moved manifest needed an existing-directory fixture fix; managed-worktree Gi
 variables also leaked into two read-only Git queries. Those queries now use the
 existing isolated Git environment, and relevant fixture tests explicitly supply a
 foreign repository context so the behavior is checked on standalone CI too.
-No manual pytest or test-scope bypass was used for these repairs.
+No manual pytest or test-scope bypass was used for these repairs. The repaired
+retirement passed its normal commit hook and output cleanup in `b439fdf`; its
+normal push checks also passed. The commit removes 15,729 net lines across 150
+paths (Git's rename display changes the separate insertion/deletion totals).
+Exact hosted run `38634165371` passed every job step in 4m26s. Its 35 selected
+test targets passed 384 cases, with 128 checker cases deselected and two dependency
+warnings, in 194.59 seconds. Static scope covered 309 affected Python files and
+all five protected scientific sources. No full-suite timing is inferred from this
+affected selection, and no extra test invocation was added to recover a hidden
+local case count.
 
 The scientific matrix was not run for these structural/tooling changes. This work
 changes neither numerical acceptance nor the remaining scientific implementation.

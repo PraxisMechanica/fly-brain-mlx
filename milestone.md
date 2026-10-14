@@ -17,9 +17,9 @@ strict profile blindly. Decision confidence: 99%, reviewed at `5249fc5`.
 This amendment supersedes the former requirement to finish all 37 strict predicates
 and the architecture hold tied to that analyzer. Completing runtime call-target,
 alias/effect/control-flow analysis, portable numerical values and provider-neutral
-model execution is outside this refactor. Retained experimental tools are not a
-required development roadmap, and their missing capabilities are not project
-completion blockers. Do not claim those tools provide complete analysis.
+model execution is outside this refactor. The experimental analyzer is retired;
+its former roadmap and missing capabilities are not project completion blockers.
+Do not claim the retained checks provide complete semantic analysis.
 
 The user now requests executable project-specific checks followed by a new
 practical refactor. At `3d56937` the plan is: replace broad role/fingerprint gates
@@ -35,9 +35,11 @@ delivery; do not delegate again without a newer user instruction. Inspect curren
 files and commits rather than relying on historical worker context. The enforcement
 worker completed clean commit `feebbea348b33f1979acdc763c8de1af01bbf496` in
 `/private/tmp/fly-brain-metric-facts-20261014-01`; the other two workers left no
-new changes. That commit is adopted and pushed. `d24754d` also delivers the five comparison
-callback removals with automatic checks. No parent test replay was added. The
-parent now removes the retired platform and its exclusive tests directly.
+new changes. That commit is adopted and pushed. `d24754d` delivers the five comparison
+callback removals. The parent completed the retired-platform removal directly in
+`b439fdf497bcbbcbc1d575dc0a0ccd65e5ac4584`. All three commits passed automatic
+local checks and are pushed. No parent test replay was added. Hosted verification
+passed for all three exact code revisions; the evidence record contains run IDs.
 
 ## Bounded completion criteria
 
@@ -58,7 +60,7 @@ performance work remain outside this refactor agent's scope.
 
 ## Delivered cleanup and verification
 
-The tool/test cleanup is delivered through `5249fc5` on `origin/main`. Its
+The earlier tool/test cleanup is delivered through `5249fc5` on `origin/main`. Its
 [verification records](docs/agent/refactor-evidence.md) include failed attempts,
 repairs, exact hosted results and timing limits. Delivered components include
 injected observations and external facts, immutable causal-audit values, typed
@@ -79,8 +81,8 @@ The latest workflow avoids repeated tests:
 - CQ001/CQ002/CQ003 numerical metrics are advisory. No 0.01-point ratchet or
   mandatory score improvement applies. Actual check failures still block.
 
-The final code-change hosted check passed 177 selected tests, with 9 deselected,
-in 74.13 seconds; this is not a full application-suite benchmark. The final
+At that earlier checkpoint, the code-change hosted check passed 177 selected tests,
+with 9 deselected, in 74.13 seconds; this is not a full application-suite benchmark. The final
 handoff-only hosted check passed without replaying application tests. No scientific
 qualification was run for that tool cleanup.
 
@@ -109,27 +111,40 @@ ordinary binding/classification fingerprints are removed. The
 [coverage record](docs/agent/quality-coverage.md) distinguishes required checks,
 review guidance and experimental mechanisms.
 
-## Remaining work
+## Refactor completion and handoff
 
-1. Deliver project-specific executable rules and meaningful affected tests. Remove
-   automatic rejection for ordinary declaration/binding changes while retaining
-   protected scientific-source identity and actual import/type/input checks.
-2. The latest user amendment requires retired components to be deleted now.
-   Remove retired analyzer implementations and their exclusive tests, with actual
-   consumer checks. Simplify circular tooling dependencies rather than preserving
-   an analyzer solely to check its own retired components. Preserve required Python,
-   import, metric and scientific checks; add no historical whole-program engine.
-3. Remove the five comparison callback getters and wire their existing functions
-   directly, with actual callers and behavior tests.
-4. Adopt checked worker commits, push small changes, verify exact hosted revisions,
-   update the current evidence and leave a clean implementation handoff.
+The practical checks are delivered at `feebbea`, the five callback getters are
+removed at `d24754d`, and the retired platform and exclusive tests are removed at
+`b439fdf`. The retirement removes 15,729 net lines while retaining the actual
+import/type/input/metric checks and five-source scientific guard. No application,
+pinned-input or independent-fixture source changes occur in that retirement.
+Local automatic checks and exact hosted run `38634165371` passed: 384 affected
+tests passed, 128 checker cases were deselected and two dependency warnings were
+reported in 194.59 seconds. All static checks and five scientific-source checks
+passed. This is a retirement/tooling selection, not a full-suite benchmark.
+The code is pushed to `origin/main`; this document records the final handoff.
+The bounded refactor/cleanup is complete and ready for the prior implementation
+agent. Completion decision confidence: 95%, reviewed at `b439fdf` against the
+criteria above. Scientific implementation and qualification remain unfinished.
 
 The preceding rule assessment established no application defect behind the former
 six findings. Any source cleanup must identify a concrete problem,
 its affected callers, the smallest repair and meaningful verification before
 implementation. Do not resume the generalized analyzer or tensor-contract program.
-The prior implementation agent can continue scientific work under the unchanged
-numerical contract; there is no prerequisite to finish the retired analyzer plan.
+The prior implementation agent can continue under the unchanged numerical
+contract, in this order:
+
+1. Read this milestone, the numerical contract and the current source. Establish
+   the implementation's actual qualification status from surviving inputs and
+   fresh evidence; deleted historical outputs are not reproducible current proof.
+2. Choose a bounded next scientific implementation/qualification step. Preserve
+   the five protected sources, seven fixtures, exact model rules and existing
+   numerical budgets. Qualify changed arithmetic or execution modes before adoption.
+3. Complete the prescribed 52-case paired matrix and sugar/P9 four-trial batch
+   comparisons, with fresh repeats and causal diagnosis of any failed gate.
+
+There is no prerequisite to finish the retired analyzer plan. The current agent
+does not resume simulator implementation after this cleanup handoff.
 
 The complete 52-case scientific matrix and prescribed sugar/P9 four-trial
 comparisons remain unfinished. Removed historical records do not establish current
@@ -142,6 +157,6 @@ execution mode is approved by the architecture amendment.
 Use current `origin/main`. The delivery checkout is
 `/Users/ocasta/.codex/worktrees/pr-split/fly-brain`; the original
 `/Users/ocasta/Code/fly-brain` remains an unchanged detached historical checkout.
-The parent owns shared policy, documents, retention and serial integration.
-Existing worker assignments retain their owners; committed components must be
-verified before adoption. No message has been sent to the implementation chat.
+The parent owns shared policy, documents, retention and serial delivery. All
+workers are stopped; do not resume or delegate without a newer user instruction.
+No message has been sent to the implementation chat.
