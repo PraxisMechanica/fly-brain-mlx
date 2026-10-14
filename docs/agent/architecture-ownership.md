@@ -111,13 +111,16 @@ lifetime, representation and scientific adoption remain separate debt; this
 decision grants no boundary exemption.
 
 FlyWire neuron identity, neuron-row identity, original edge-row identity and
-trial identity have distinct meanings but currently cross neutral contracts as
-unbranded integer/array values. The reference producer digest uses the
-qualification-owned `ReferenceProducerDigest` type. The four simulation
-identifiers retain recorded `VALUE001` findings. Native typing rejects primitive
-and foreign-brand consumers;
-explicit foreign-brand reconstruction and lawful conversion sites still require
-complete semantic enforcement.
+trial identity have distinct meanings. Connectome FlyWire IDs and neuron rows,
+grouped original edge rows, and bucket neuron/padded-edge rows now use the existing
+simulation-owned array brands. Their lawful producer and constructor boundaries
+retain the same objects, array bytes and numerical operations. Experiment/stimulus
+scalar tuples, session trial labels, rasters and other conversion sites remain
+incomplete; the four simulation `VALUE001` findings are not retired by one array
+slice. The reference producer digest uses qualification-owned
+`ReferenceProducerDigest`. Native typing rejects primitive and foreign-brand
+consumers; explicit rebranding and complete conversion-origin enforcement remain
+unproved.
 `ExperimentName` is an owned closed literal; `ParityCase` is a distinct compound
 value. A time step, numerical dimension, ordinary count or numeric voltage is a
 coordinate/fact, not an invented independent resource identifier.
@@ -142,6 +145,9 @@ their exact provenance in the registry.
 The adapted Brian2/PyTorch reference records freeze the local source and name the
 upstream commit, source path and original blob hash obtained from local Git.
 They are first-party qualification references, not blanket vendor exemptions.
+The [numerical boundary review](numerical-boundaries.md) records the conflict
+between exact source preservation and complete model/provider separation; no
+freeze amendment or rule deviation has been approved.
 The Brian2/PyArrow stubs are handwritten, checked source contracts and have no
 generator provenance. The separately pinned JavaScript metric tool's provenance
 is outside this Python/stub registry; its existing native gate remains required.

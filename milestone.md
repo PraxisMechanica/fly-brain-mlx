@@ -22,13 +22,12 @@ only when needed to verify a refactor. Full coverage and findings cannot receive
 PASS while incomplete; configured component checks are separate evidence.
 
 The parent owns shared policy, canonical commands/configuration, retention,
-documentation and serial integration. The same worker owners first recover their
-unfinished work: `architecture_symbols` owns native structured types/source
-inventory; `architecture_ownership` owns the exact neutral import boundary;
-`composition_refactor` owns coordinated simulation identifier propagation.
-Temporary candidate clones have lost their source and Git metadata; recovery must
-use durable source evidence rather than assume prior candidates survive. Workers
-commit verified components before handoff, and retain disjoint source scopes.
+documentation and serial integration. Recovery is complete. The same worker
+owners use isolated execution checkouts and commit verified components before
+handoff: `architecture_symbols` owns native type/call/source facts;
+`architecture_ownership` owns the neutral import boundary and allocated placement
+predicate; `composition_refactor` owns coordinated simulation identifiers.
+Shared registry changes are merged by exact row deltas; only the parent pushes.
 
 Generated outputs belong in ignored `logs/` or `executions/`. Successful commit
 and push hooks delete those folders and legacy `.quality-reports/` outputs
@@ -80,16 +79,55 @@ and hook cases passed after the fix. Required normal commit checks and cleanup
 passed without changing predicates or thresholds. Generated diagnostics expired
 at that successful commit; the four frozen source hashes remain exact.
 
-The native structured-type and exact import-boundary workers have resolved their
-current-base metric failures with responsibility and duplication repairs. The
-identifier worker is separating actual Connectome tests from generic identifier
-foundation tests and reusing existing source-fault controls. Worker commits and
-parent integration remain pending; focused worker results do not establish
-complete architecture enforcement.
+Five coherent components are integrated on parent `main`:
 
-The parent is repairing qualification's private comparison calls with narrow
-injected scoring, coordinate, clock-conversion and diagnostic contracts. The
-comparison calculations and existing acceptance predicates remain unchanged.
+| Component | Parent commit | Bounded verification |
+| --- | --- | --- |
+| Native structured types and checked JavaScript source inventory | `9d73531` | 44 source-only intent cases; strict native/compiler checks |
+| Exact neutral comparison import boundary | `76f1e5d` | 38 boundary cases and 15 existing commit/push fixture cases |
+| Connectome neuron and recurrent-edge array identities | `fd0a54f` | 193 CPU/input/type cases and 107 real Metal/reference cases |
+| Injected qualification scoring, coordinates, clock conversion and diagnostics | `6b495a8` | 761 application tests, the new composition boundary, and five worker Metal/reference cases |
+| Native explicit-call selected signatures and overloads | `c46f98f` | 48 focused final-worker cases and the parent's required full commit gate |
+
+Each parent commit passed its normal required checks and output cleanup. The
+call integration initially failed CQ002; removing an unused helper and a proved
+duplicate check repaired it without changing thresholds or fixtures. The final
+parent comparison kept mean complexity at 15.49 and maximum 96, with zero metric
+findings. At `c46f98f`, ownership reconciles 304 Python/stub sources with zero
+mapping findings and the unchanged six recorded findings.
+
+The 761-test application run excludes only the existing proof-artifact consumer,
+which needs a fresh full native proof bundle; it reported 27 dependency warnings.
+No full bundle or scientific matrix was recreated. All five comparison calculation
+files, four frozen sources, six pinned input files, both licences and seven
+independent fixtures remain byte exact. These checks establish preservation of
+the bounded changes, not complete scientific or architecture acceptance.
+
+Delivery of these five components and this documentation checkpoint is pending
+normal push and exact-revision hosted checks; local commits alone are not remote
+delivery. Their generated verification outputs completed their consumers and
+expired through normal hooks.
+
+## Next work and unresolved decisions
+
+The identifier worker is implementing Experiment FlyWire identities through
+Stimulus neuron rows and requested trial labels to observation sessions. Local
+array positions remain separate; ParityCase/catalog/JSON ingress is outside this
+slice. The placement worker is implementing only OWN001 over independently
+validated semantic inputs. Both use committed `6b495a8` in isolated checkouts and
+must hand off checked commits; neither component grants complete compliance.
+
+Then complete reviewed live semantic contexts, callable/slot origins, source and
+export predicates, injection/lifetime checks, control flow/failure disposition,
+and alias/effect closure before binding every applicable rule into the required
+gate. The [coverage report](docs/agent/quality-coverage.md) owns mechanism limits.
+
+A fresh scientific boundary review found that full separation of model rules and
+provider implementations conflicts with the exact four-source freeze. Its
+[reviewed boundaries](docs/agent/numerical-boundaries.md) specify the affected
+symbols, minimum repair and preservation requirements. No amendment or deviation
+is approved; keep all four source hashes exact until that conflict is resolved.
+The remaining non-frozen components can proceed independently.
 
 ## Current scientific scope
 
