@@ -322,6 +322,18 @@ unadopted and full 37-rule coverage remains COV002.
 
 ## Remaining order and unresolved decisions
 
+Current bounded assignments at `20a2cb7` (confidence 95%): B owns active
+native-import rejection through bound nodes and native reachability, including
+lazy-loaded inputs and invalid native records; ancestry precision is separate.
+A owns only the required grouping-reader seam in the two fan-in factories and
+probe. The existing indirect `input_patterns → mapping.absolute_count_sums`
+dependency remains; grouping injection cannot establish a complete module guard.
+C owns batch singleton-label fields/map keys and explicit canonical crossings;
+local array positions, collectors, digest streams and original numeric behavior
+remain unchanged. Positional artifact provenance and joint stimulus-identity
+enforcement remain missing. Owners use separate main execution checkouts,
+qualify affected controls once and commit before serial parent integration.
+
 1. Keep checked components and current documentation delivered incrementally.
    Verify exact hosted revisions and leave no expired output exception.
 2. Complete native declaration-only observation and reviewed live version 2
