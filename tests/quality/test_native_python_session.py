@@ -13,6 +13,13 @@ from tests.quality.test_native_python_context import context_root as context_roo
 from tools.architecture.inventory import discover
 from tools.architecture.native_sources import source_inputs
 
+DISPOSED_READ = (
+    'const nativeParse=program.getParseResults;'
+    'program.getParseResults=function(...args){'
+    'if(this._disposed)process.stderr.write("disposed-native-read:"+JSON.stringify([this._disposed,this.analyzerNodeInfoReader._disposed]));'
+    'return nativeParse.apply(this,args);};'
+)
+
 
 def session_probe(
     root: Path,
@@ -187,7 +194,7 @@ def test_real_native_resources_dispose_on_consumer_success_and_failure(
 
 
 @pytest.mark.parametrize(
-    'consumer,after,mutation,module,guard,replacement,exit_code,admitted,value',
+    'consumer,after,mutation,module,guard,replacement,exit_code,admitted,value,message',
     (
         (
             'session.parsed(request.root+"/outside.py"); process.stderr.write("outside-read"); return 1;',
@@ -199,19 +206,34 @@ def test_real_native_resources_dispose_on_consumer_success_and_failure(
             2,
             'outside-read',
             None,
+            'foreign or unregistered first-party resolution',
         ),
         (
             'session.parsed(request.root+"/src/context_pkg/model.py"); return 1;',
             'borrowed.parsed(request.root+"/src/context_pkg/model.py");',
+            DISPOSED_READ,
+            'native_python_session.mjs',
+            'if (!active)',
+            'if (!active)',
+            2,
             '',
+            None,
+            'native Python session is closed',
+        ),
+        (
+            'session.parsed(request.root+"/src/context_pkg/model.py"); return 1;',
+            'borrowed.parsed(request.root+"/src/context_pkg/model.py");',
+            DISPOSED_READ,
             'native_python_session.mjs',
             'if (!active)',
             'if (false)',
-            0,
-            '',
-            1,
+            2,
+            'disposed-native-read:[true,true]',
+            None,
+            'native selected scope is not an object',
         ),
     ),
+    ids=('unregistered_weakened', 'closed_normal', 'closed_weakened'),
 )
 def test_disabling_each_read_guard_admits_the_same_unsupported_read(
     context_root: Path,
@@ -224,6 +246,7 @@ def test_disabling_each_read_guard_admits_the_same_unsupported_read(
     exit_code: int,
     admitted: str,
     value: bool | int | None,
+    message: str,
 ) -> None:
     (context_root / 'outside.py').write_text('value = 1\n')
     (context_root / 'typings/late.pyi').write_text('value: int\n')
@@ -242,10 +265,12 @@ def test_disabling_each_read_guard_admits_the_same_unsupported_read(
         result.returncode,
         result.stderr,
         json.loads(result.stdout).get('value'),
+        message in result.stdout,
     ) == (
         exit_code,
         admitted,
         value,
+        True,
     ), result.stdout
 
 
