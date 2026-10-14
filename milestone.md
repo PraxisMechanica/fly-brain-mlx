@@ -159,6 +159,7 @@ The following components are committed on parent `main`:
 | Shared canonical compiler session lifetime | `7ab7d04` | 11 session and six affected context cases; unchanged report/config/hash/disposal logic and loaded-origin projection; selected-unbound stubs remain missing |
 | Consumer-owned reference connectome silencing | `1b64d51` | 36 focused controls; 18 normalized modules, 70 original assertions, unchanged mapping, five protected sources and seven fixtures |
 | Consumer-owned host input mapping | `9019148` | 19 focused cases without reruns; byte-exact original/candidate NPZ and JSON, four callback positions, six normalized modules and 15 original assertions |
+| Injected fan-in grouping | `d0c1d6f` | Nine distinct controls; actual ordered probe flow with inert backend, existing lazy factories, required-reader type rejection and unchanged numerical bodies |
 | Pure host audit rules and injected file storage | `b56caf2` | 28 affected cases; exact old/new archive/report, original assertion and error order, lazy assembly and returned artifact identity |
 | Distinct row/FlyWire rasters | `6dfede5` | 117 distinct focused cases; native type arguments with resolved NumPy, 14 normalized modules, 54 old assertions, exact borrowed arrays and numerical bodies |
 
@@ -191,7 +192,7 @@ The identifier changes preserve numerical bodies and old assertions; NewType sup
 typing without new runtime validation or complete conversion-origin proof.
 No full native proof bundle or scientific matrix was recreated.
 
-All listed source components are pushed to `origin/main` through `c4084be`.
+All listed source components are pushed to `origin/main` through `d0c1d6f`.
 The spike identifier component passed the installed normal commit and push hooks
 and default cleanup without replaying its completed regressions. Delivery uses
 one ten-file component commit; the worker's earlier private ancestry is preserved
@@ -321,6 +322,26 @@ unchanged. Selected, unreferenced stubs remain natively unbound; this is not
 complete declaration enrollment. The historical declaration candidate remains
 unadopted and full 37-rule coverage remains COV002.
 
+The five-file fan-in grouping seam is pushed at `d0c1d6f` after normal
+commit/push checks and exact hosted run `38571157980`: five changed inputs,
+16 affected Python files, four reviewed sources and 359 retained records.
+Hosted execution ran no pytest and uploaded zero artifacts. Nine distinct
+controls are qualified; only changed assertion/harness controls repeated.
+The first Metal-dependent collection attempt executed zero cases. Ordered
+runtime controls execute actual probe source with inert backend dependencies,
+ending before numerical evaluation; no kernel/layout cohort was replayed.
+
+The same Connectome reaches the required grouping reader exactly once after
+analysis. Both factories preserve their existing argument evaluation, default
+or layout evaluator and scope. Numerical/report bodies, five protected sources
+and seven fixtures remain exact. Forty-eight old composition assertions are
+syntax exact; one approved joined assertion preserves its old callable predicate
+and adds the reader predicate, with independent rejection checks for both.
+Worker metrics improve mean 15.06 to 15.05 and health 40.41 to 40.44 across
+386 to 387 files, with maximum 96 unchanged. Earlier metric failures were
+repaired without removed operands or waivers. The indirect absolute-count
+mapping dependency and mixed provider roles remain unresolved.
+
 The five-file native type-import guard is pushed at `c4084be` after normal
 commit/push checks and exact hosted run `38568072694`: five changed inputs,
 one affected Python source, one reviewed source and 361 retained records.
@@ -344,13 +365,13 @@ its historical failing tree is preserved, not delivered or accepted.
 
 ## Remaining order and unresolved decisions
 
-Current bounded assignments (confidence 95%): B assesses the historical
-14-path declaration candidate against the checked canonical live session;
-dormant occurrences and lexical-versus-resolved identities must remain explicit.
-Active type-import rejection is delivered; ancestry precision is separate.
-A owns only the required grouping-reader seam in the two fan-in factories and
-probe. The existing indirect `input_patterns → mapping.absolute_count_sums`
-dependency remains; grouping injection cannot establish a complete module guard.
+Current bounded assignments (confidence 95%): B qualifies selected-source
+enrollment through the pinned native interim-registration/binder APIs and checked
+canonical live session. The historical 14-path declaration tree remains
+unaccepted; dormant occurrences and lexical-versus-resolved identities must stay
+explicit. A assesses the remaining absolute-count mapping seam and late
+acquisition/pure-rule separation. Grouping injection is delivered and cannot
+alone establish a complete module guard.
 C owns batch singleton-label fields/map keys and explicit canonical crossings;
 local array positions, collectors, digest streams and original numeric behavior
 remain unchanged. Positional artifact provenance and joint stimulus-identity

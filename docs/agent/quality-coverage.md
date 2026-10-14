@@ -146,7 +146,9 @@ consumer-owned seeded acquisition, immutable causal-audit transitions, typed
 reference digests, branded Connectome/grouping arrays, Experiment/Stimulus
 scalars, requested session/case trial labels, injected observation sessions, pure
 reference parameters, consumer-owned connectome silencing and host mapping
-readers used by the input audit. The host audit separates pure rules and
+readers used by the input audit and required grouping for fan-in audits.
+Fan-in grouping retains the indirect absolute-count dependency, so this does
+not establish a complete mapping prohibition. The host audit separates pure rules and
 orchestration from four repository operations behind required `InputAuditFiles`;
 configured imports reject service/rule dependencies on its storage implementation.
 Row-space coordinate validation and FlyWire-space
