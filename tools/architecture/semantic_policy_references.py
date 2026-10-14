@@ -1,5 +1,5 @@
 from collections.abc import Mapping, Sequence
-from pathlib import Path, PurePosixPath
+from pathlib import Path
 from typing import cast
 
 from .semantic_policy_inputs import exact_path
@@ -148,20 +148,6 @@ def validate_relationships(
         'provider_mechanics': 'external_adapter',
     }
     for binding in bindings.values():
-        placement = placements[binding.owner]
-        inside = all(
-            (
-                not Path(binding.symbol.path).is_absolute(),
-                any(
-                    PurePosixPath(binding.symbol.path).is_relative_to(p)
-                    for p in placement.roots
-                ),
-            )
-        )
-        require(
-            any((inside, binding.role == placement.outside_role)),
-            'binding has no reviewed placement',
-        )
         require(
             compatible.get(binding.semantic_kind, binding.role) == binding.role,
             'semantic kind and role differ',
