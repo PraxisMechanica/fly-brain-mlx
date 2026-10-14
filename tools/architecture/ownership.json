@@ -593,7 +593,7 @@
         "name": "Spikes.neuron_ids"
       }
     ],
-    "decision": "Public connectome, experiment, file-spike fields and Metrics scalar keys use owned nominal brands. Generic report rows and mapped raster contracts still erase FlyWire identity; lawful conversion origins remain unproved."
+    "decision": "Public connectome, experiment, file-spike fields and Metrics scalar keys use owned nominal brands. Mapped raster comparison/pooling contracts use FlyWire specialization. Generic report rows still erase FlyWire identity; lawful conversion origins remain unproved."
   },
   "neuron_row": {
     "owner": "simulation",
@@ -613,7 +613,7 @@
         "name": "ReductionRow.neuron"
       }
     ],
-    "decision": "Connectome, stimulus and spike-event fields use owned nominal brands. NetworkCase selectors, observation maps, reduction selectors and row-space raster contracts remain primitive."
+    "decision": "Connectome, stimulus and spike-event fields use owned nominal brands. Row-space coordinate validation uses its own raster specialization. NetworkCase selectors, observation maps and reduction selectors remain primitive."
   },
   "edge_row": {
     "owner": "simulation",

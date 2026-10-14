@@ -141,7 +141,11 @@ consumer-owned seeded acquisition, immutable causal-audit transitions, typed
 reference digests, branded Connectome/grouping arrays, Experiment/Stimulus
 scalars, requested session/case trial labels, injected observation sessions, pure
 reference parameters, consumer-owned connectome silencing and host mapping
-readers used by the input audit.
+readers used by the input audit. Row-space coordinate validation and FlyWire-space
+comparison/pooling now use separate constrained raster specializations while
+preserving the record and arrays. Native type arguments are qualified with the
+actual NumPy dependency root. Conversion-origin and complete ancestry precision
+remain unproved; nominal wrappers do not establish those predicates.
 Their bounded checks preserve behavior within their tested scope. Complete type/alias/effect/control-flow analysis and the remaining
 architecture findings still require work; these boundaries grant no new
 scientific acceptance.

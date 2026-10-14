@@ -158,6 +158,7 @@ The following components are committed on parent `main`:
 | Shared canonical compiler session lifetime | `7ab7d04` | 11 session and six affected context cases; unchanged report/config/hash/disposal logic and loaded-origin projection; selected-unbound stubs remain missing |
 | Consumer-owned reference connectome silencing | `1b64d51` | 36 focused controls; 18 normalized modules, 70 original assertions, unchanged mapping, five protected sources and seven fixtures |
 | Consumer-owned host input mapping | `9019148` | 19 focused cases without reruns; byte-exact original/candidate NPZ and JSON, four callback positions, six normalized modules and 15 original assertions |
+| Distinct row/FlyWire rasters | `6dfede5` | 117 distinct focused cases; native type arguments with resolved NumPy, 14 normalized modules, 54 old assertions, exact borrowed arrays and numerical bodies |
 
 Every component passed its required normal commit checks and default cleanup. Joined
 metric regressions were repaired without thresholds, suppressions or removed
@@ -188,7 +189,7 @@ The identifier changes preserve numerical bodies and old assertions; NewType sup
 typing without new runtime validation or complete conversion-origin proof.
 No full native proof bundle or scientific matrix was recreated.
 
-All listed source components are pushed to `origin/main` through `7ab7d04`.
+All listed source components are pushed to `origin/main` through `6dfede5`.
 The spike identifier component passed the installed normal commit and push hooks
 and default cleanup without replaying its completed regressions. Delivery uses
 one ten-file component commit; the worker's earlier private ancestry is preserved
@@ -265,15 +266,27 @@ The pure bucket report receives completed data; `MappedArray` is reviewed as
 `qualification/types`. Eight import contracts are configured. Direct file
 persistence and mixed role responsibilities still require a separate repair.
 
-The raster specialization candidate has 116 qualified focused controls. Its
-remaining native proof initially queried a context with unresolved NumPy imports:
-both NewType bases were native Any, promoting both aliases to the later constraint.
-One targeted comparison kept source bytes/nodes unchanged and supplied the actual
-installed dependency root; row and FlyWire arguments then differ correctly, with
-no unresolved authored/NumPy imports. Dormant Python 3.14 branches in upstream
-typeshed still name absent annotationlib. C is repairing only that fixture context and the failed
-control before adoption. B separately assesses missing-import rejection; neither
-projector substitution nor relaxed specialization expectations are authorized.
+The raster identifier component is pushed at `6dfede5` after normal commit/push
+checks and default cleanup. All 117 distinct focused controls are qualified:
+106 passed initially, ten repaired fixture-import cases then passed, and the
+remaining native type case passed after supplying the installed NumPy root.
+Completed cohorts were not replayed. The first native context had active
+unresolved NumPy imports; both NewType bases were native Any, promoting both
+aliases to the later constraint. The repaired context resolves authored/NumPy
+imports, retains their actual input hashes and observes separate row/FlyWire
+arguments with known ndarray bases. Dormant Python 3.14 branches in upstream
+typeshed still name absent annotationlib. Projector code and specialization
+expectations are unchanged; active-import rejection is a separate owned change.
+
+Fourteen normalized modules and 54 original assertions retain their meaning;
+340 other Python files, five protected sources and seven fixtures remain exact.
+The record still borrows the original arrays with unchanged field order,
+bytes, dtypes, layouts and numerical calculations. Final worker CQ001–CQ003
+and parent checks passed; final rounded worker values were removed by cleanup
+and are not reproduced here. Exact hosted run `38564314747` passed with 16
+changed inputs, 47 affected Python files, 15 reviewed sources and 343 retained
+records. It ran no pytest and uploaded zero artifacts. The six recorded findings
+and lawful conversion-origin limitations remain unresolved.
 
 The seven-file compiler-session component is pushed at `7ab7d04` after normal
 commit/push checks and exact hosted run `38560890820`: seven changed inputs,
