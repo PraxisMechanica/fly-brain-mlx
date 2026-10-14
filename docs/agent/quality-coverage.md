@@ -4,30 +4,34 @@ Audience: agents and maintainers. This records executable coverage, not an
 application-wide architecture approval. [milestone.md](../../milestone.md)
 owns the active work order and verification status.
 
-## Current architecture result
+## Current project coverage
 
-**ANALYSIS FAILED — COV002: complete structural enforcement is not implemented.**
-The strict catalog contains 37 rules. Native checks and ten import contracts
-cannot prove them all. Recorded debt is described in
-[source ownership](architecture-ownership.md).
-No incomplete rule is treated as clean or inapplicable.
+The user's 2026-10-14 amendment replaces the generic strict profile with the
+[project architecture policy](architecture-policy.md), which assesses all 37
+rules separately. The required project gate provides the checks below; it does
+not certify every semantic property of the application.
 
-| Rules | Working mechanism and limit |
+| Required mechanism | Practical scope and limit |
 | --- | --- |
-| OWN001 | The placement predicate checks domain bindings against exact owner roots and its explicitly reviewed outside role over independently validated version 2 inputs. Missing native identities, sources, hashes or relevant scope fail COV002. Whole live contexts and required gate integration remain missing. |
-| OWN002–OWN006 | The reviewed registry/loader reconcile exact Python files, named declarations, binding sets and frozen provenance. Complete resource, binding/type/effect classification and role predicates remain missing. |
-| DEP001 | Import Linter checks ten configured domain/framework/role boundaries, including neutral observation ports and active session consumers. Fixtures cover aliases, type-only imports, re-exports and transitive paths. Other role boundaries and same-module interactions are not covered. |
-| DEP002–DEP004 | Some forbidden paths fail existing contracts. Complete logical owner cycles, public-contract exports and resolved foreign symbol/type checks are missing. |
-| DI001–DI004 | Strict typing and bounded native facts expose declared/instantiated signatures and selected explicit calls. Complete collaborator/slot origins, hidden construction, ambient dependencies and lifecycle analysis are missing. |
-| ROLE001–ROLE007 | Complete resolved call/control-flow, role, persistence and neutral-contract checks are missing. |
-| STATE001–STATE003 | Bounded native call witnesses check seeded acquisition boundaries. Complete effect summaries and ownership/alias analysis are missing. |
-| ISP001, OCP001, LSP001, VALUE001, COMP001, ERR001 | Type checking covers native structural compatibility. Complete consumer-capability, dispatch, unsupported implementation, identifier conversion, inheritance and failure-flow predicates are missing. |
-| TYPE001 | Strict Pyright checks changed sources and affected dependents while loading their configured type context, using the recorded third-party typing limits. This does not resolve all architectural call/effect identities. |
-| CODE001, STYLE001 | Ruff detects configured unused bindings/syntax failures and checks formatting. Named-declaration/binding reconciliation and frozen provenance guards are implemented. Complete contract/stub and semantic catalog coverage remain missing. |
-| COV001 | Hook mode rejects unindexed Python/check inputs, including canonical policy and metric prerequisites. The loader rejects missing/changed file/declaration/binding inputs and frozen provenance. Source fixtures prove repair and weakening; complete semantic bindings, source languages, roles/resources and build variants still require coverage. |
-| COV002 | Missing capabilities raise analysis failures in the bounded analyzer components. Complete required executable coverage/error analysis remains to be implemented and integrated. |
-| COV003 | Commit, push and hosted checks use explicit stage modes. Changed sources and affected dependents receive static checks; commit and CI gates each execute one selected-test command. Push/manual stages do not run tests; parent fast-forward integration reuses the checked worker revision. Global inventory and metric aggregates remain accounted for. Required merge protection is not configured. |
-| COV004 | Native import and metric fixtures exercise rejection and repair; hook probes exercise child-error propagation and staged-source handling. Transitive paths, source selection and canonical-input weakening are covered. Unimplemented predicates remain unproved. Focused tests verify actual changes; broad checker simulations and guard weakening are no longer routine requirements. |
+| Ruff formatting and lint | Changed Python sources; native syntax checks receive changed bridge files. These do not prove architecture. |
+| Strict Pyright | Changed sources and affected dependents, with configured supporting context and recorded third-party typing limits. |
+| Ten configured import contracts | Existing simulation/qualification/comparison and selected observation/input boundaries. They do not ban concrete MLX types inside the backend. |
+| Reviewed ownership and source identity | Changed file/declaration/binding records, complete file inventory accounting and protected source hashes. Historical strict findings are reviewed under the current project policy. |
+| Automatic affected tests | One invocation per commit and CI gate. Push/manual stages do not run tests. Native/process consumers still need explicit selection evidence where Python imports cannot prove consumption. |
+| Native numerical metrics | Reuse per-blob calculations; report CQ001–CQ003 regressions as advisory. Invalid inputs/results or tool failures still block. |
+
+A missing required tool, parse failure, invalid input, or unsupported affected
+scope remains a blocking analysis error (`COV002`). An unfinished experimental
+whole-program analyzer is no longer a required project mechanism. Its missing
+capabilities therefore do not block refactor completion. Existing diagnostic
+identifiers retain their actual meanings; no failure is converted to a false PASS.
+
+Practical responsibility, reproducibility, state ownership, failure handling and
+identity mapping also require focused source review and meaningful behavior tests.
+Those review expectations are not advertised as complete automated proofs.
+The former global **ANALYSIS FAILED — COV002** assessment described the retired
+strict-analyzer objective, not a failed application test or the present acceptance
+standard.
 
 ## Working mechanisms
 
@@ -61,7 +65,8 @@ in the project gate. Native findings/status/measurements remain visible; the
 project policy annotation records that these findings do not block. Analysis,
 protocol, source-input and coverage errors remain blocking. The native standalone
 engine retains its qualified comparator; project aliases use the project policy.
-This does not weaken architecture or scientific predicates. The duplicate custom
+This numeric policy is separate from the project architecture assessment;
+scientific predicates and failures of adopted checks remain binding. The duplicate custom
 health/maintainability score and whole-file complexity are not proof of quality.
 Reliable per-function complexity review remains a proposed diagnostic improvement,
 not an implemented gate or a numerical acceptance requirement. The native import-fact cache
@@ -75,6 +80,14 @@ metadata, changed declarations/bindings, missing mappings, broken resource/expor
 composition links, and changed frozen provenance. Discovery fails on separately
 empty roots, parse failures, workspace escapes, and untraversed directory links.
 Empty reconciliation findings do not establish structural compliance.
+
+## Experimental analysis inventory
+
+The following native APIs and the semantic schema were developed for the former
+strict objective. These are retained capability records, not a remaining task list.
+Do not extend or integrate them merely to obtain a 37-rule certificate. Their
+existing failures and limitations remain honest when they are explicitly invoked.
+Required incremental checks above may reuse their bounded working components.
 
 The lexical resolver uses the locked Pyright language server. It resolves named
 definitions through aliases, re-exports, type-only references, captures, exact
@@ -149,7 +162,8 @@ alias ownership, control flow and effect summaries remain missing. The existing
 native type/call/partial setup still manually supplies strict rules and paths;
 the new canonical context observations have not yet replaced those contexts or
 proved runtime-environment equivalence. Complete authored declaration
-reconciliation and reviewed live version 2 inputs remain dependencies.
+reconciliation and reviewed live version 2 inputs would be dependencies of that
+experimental analyzer, not of the current project refactor.
 
 The [semantic input schema](../../tools/architecture/semantic_policy_schema.py)
 defines version 2 with required sections and the exact 37-rule/context
@@ -158,7 +172,10 @@ artifact hashes/versions, and cross-record references against independent
 observations and actual bytes. Unsupported languages/kinds and absent
 observations fail COV002. `require_semantic_compliance()` always raises COV002:
 validated records cannot manufacture missing analysis or executed predicates.
-Actual global inventory and required gate integration remain incomplete.
+The experimental full analyzer and its gate integration remain unimplemented;
+neither is required by the current project policy.
+
+## Current metric and application boundaries
 
 The pinned metric package counts whole-file native Python decisions with a file
 baseline. Its qualified aggregation preserves native decision weights and the
@@ -187,15 +204,15 @@ actual NumPy dependency root. Reduction selectors now carry global `NeuronRow` i
 audit and provider ports; local bucket positions remain integers. Conversion-origin
 and complete ancestry precision remain unproved; nominal wrappers do not establish
 those predicates.
-Their bounded checks preserve behavior within their tested scope. Complete type/alias/effect/control-flow analysis and the remaining
-architecture findings still require work; these boundaries grant no new
-scientific acceptance.
+Their bounded checks preserve behavior within their tested scope. Complete
+type/alias/effect/control-flow analysis remains unimplemented and outside the
+required project scope. These boundaries grant no new scientific acceptance.
 
-## Remaining work
+## Maintenance scope
 
-Maintain the reviewed inventory as source changes, complete remaining binding,
-resource, effect, and composition coverage, and bind all 37 rules to it. Unknown
-targets and absent mechanisms must fail separately from violations. Integrate
-the complete analyzer into `just check`, prove each predicate, report existing
-findings, and resolve authorized repairs before claiming full compliance or
-returning to feature/numerical development.
+Maintain the reviewed inventory and meaningful source/import boundaries when
+actual code changes. Preserve failure propagation and accurate affected-test
+selection. Review practical responsibilities and scientific invariants under the
+project architecture policy; repair demonstrated problems with focused checks.
+The former task to bind every strict predicate into a universal analyzer is
+retired. Its completion is not a prerequisite for handoff or scientific development.

@@ -1,17 +1,22 @@
 # Reviewed Python ownership registry
 
 This registry records current source responsibilities. It does not certify
-application architecture or change scientific behavior.
+application architecture or change scientific behavior. The user's 2026-10-14
+amendment and [project architecture policy](architecture-policy.md) supersede the
+strict-profile requirements discussed below. Historical recorded findings and
+incomplete alias/effect proofs are not present refactor acceptance blockers.
+The source inventory and protected-hash checks remain active.
 
 The intended outcome is a typed, deterministic input to the structural analyzer:
 every retained first-party Python or stub file has an exact reviewed entry,
 every named declaration has an owner and role, new bindings cannot inherit
-permission without review, and unresolved classifications stay visible. Success
-also requires source-only rejection, repair, nearby compliant and weakening
-fixtures, strict typing, Ruff and the existing commit gate. The full 37-rule
-result remains **ANALYSIS FAILED (COV002)**.
+permission without review, and unresolved classifications stay visible. Historical
+qualification included source-only rejection, repair, nearby compliant and weakening
+fixtures, strict typing, Ruff and the commit gate. Current changes use the developer
+workflow verification scope. The experimental full 37-rule result remains
+incomplete; completing it is outside the current project scope.
 
-## Contract and coverage
+## Registry mechanics and historical strict scope
 
 [ownership.json](../../tools/architecture/ownership.json) has one explicit row
 per file across `src`, `tests`, `tools`, `typings`, and `main.py`.
@@ -129,7 +134,8 @@ setup/observation targets use the existing owned scalar brands. Catalog, validat
 option and persisted-stimulus ingress retain their existing values and guards;
 ordinary steps/counts and local reference array positions remain coordinates.
 Rasters and complete lawful-conversion origins remain unproved. The four
-simulation `VALUE001` findings are not retired by these nominal type slices.
+simulation `VALUE001` records remain historical strict-profile observations;
+current policy does not require generic conversion-origin proof.
 The reference producer digest uses qualification-owned
 `ReferenceProducerDigest`. Native typing rejects primitive and foreign-brand
 consumers; explicit rebranding and complete conversion-origin enforcement remain
@@ -170,13 +176,13 @@ The Brian2/PyArrow stubs are handwritten, checked source contracts and have no
 generator provenance. The separately pinned JavaScript metric tool's provenance
 is outside this Python/stub registry; its existing native gate remains required.
 
-Six architecture/identifier findings remain: the concrete `Advance` callback
-contract, mixed model/framework responsibilities in the frozen `TorchModel`,
-and four simulation identity findings covering residual primitive or mixed
-contracts and unproved lawful origins. Neutral observation values,
-ports, and local assembly sites have exact entries; private helpers and snapshots
-are not public contracts. Complete type/alias/effect/control-flow coverage stays
-incomplete until the complete analyzer is verified.
+The strict registry retains six historical observations: the concrete `Advance`
+callback, framework/model definitions in `TorchModel`, and four primitive-identity
+records. Their project dispositions are in the architecture policy. The first two
+are accepted project structures; the latter four do not demonstrate incorrect
+mapping or arithmetic. Do not implement wrappers or reorder scientific code just
+to remove these records. Actual invalid mappings, unintended aliases and failure
+loss still require a focused repair when observed.
 
 `ownership.json` is a canonical indexed check input. Source-only controls
 reject missing-index and ignored policy inputs, accept explicit staging, permit

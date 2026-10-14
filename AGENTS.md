@@ -21,6 +21,14 @@ NVIDIA backends, and non-essential dependencies. Brian2 and PyTorch are
 qualification-only references, never production backends.
 Keep the application database-free.
 
+Apply the [project architecture policy](docs/agent/architecture-policy.md).
+The user's 2026-10-14 amendment supersedes the generic strict architecture
+profile: use rules only where they protect this application's actual behavior
+or maintainability. Concrete MLX backend types and framework-specific scientific
+references are permitted. Do not introduce portable tensor abstractions or make
+completion depend on a general 37-rule analyzer. Preserve useful existing
+boundaries, scientific gates and automatic affected-test checks.
+
 Preserve source, pinned model inputs, authored scientific rules and incoming
 work. Write runs to fresh output directories. Current holds and their releases
 belong in `milestone.md`.

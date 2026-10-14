@@ -1,6 +1,14 @@
-# Numerical implementation boundaries
+# Historical numerical abstraction review
 
-Audience: agents. Reviewed 2026-10-13 by a fresh GPT-6 Astra review at `xhigh`,
+Audience: agents. The user's 2026-10-14 amendment supersedes the proposed
+provider-neutral refactor below. Concrete MLX backend contracts and framework-based
+qualification models are accepted by the [project architecture policy](architecture-policy.md).
+The reviewed abstraction experiment is historical evidence, not an implementation
+order or handoff blocker. No neutral tensor carrier, generic primitive-operation
+port, or Torch/Brian model/provider split is required. Scientific preservation
+requirements in the final section still apply to any actual numerical change.
+
+Reviewed 2026-10-13 by a fresh GPT-6 Astra review at `xhigh`,
 against `9d73531edb2f9974cfeda1623348239401529bc6`. The coordinator checked the
 source declarations and all four frozen hashes. No numerical changes or
 scientific executions were made for this review.
@@ -16,9 +24,9 @@ structural repair at `4c87409` extracts `model_parameters` into the pure owned
 through composition. Both source pieces have current hash guards and original
 lineage; all actual identity consumers include the factory. The numerical
 Torch declarations and all ten ordered default values are preserved. The wider
-model/provider responsibilities below remain unresolved.
+model/provider separation below was not implemented and is no longer required.
 
-## Conflict with complete separation
+## Historical conflict under the strict profile
 
 Keeping these four sources byte exact is incompatible with complete separation
 of owned model rules and provider implementations under the strict profile.
@@ -37,10 +45,11 @@ responsibilities. Neither constitutes a complete repair.
 same members does not repair DEP004. The finding is recorded as DEP004: the
 reviewed ports depend on implementation types, although `Advance` is excluded
 from neutral public exports. The earlier ROLE006 public-contract label was
-misclassified. The same debt remains open; the six findings are not a complete
-analysis or a sufficient blanket deviation list.
+misclassified. That was the strict-profile diagnosis; current project policy
+accepts this private MLX callback. The historical six findings were never a complete
+correctness analysis.
 
-## Smallest sound implementation boundary
+## Retired provider-neutral proposal
 
 Simulation owns model constants, preparation rules, state transitions, queue
 semantics, and the selected reducers. Qualification owns independent reference
@@ -68,14 +77,15 @@ consumers are verified. Keep the guard and provenance; never change a hash merel
 to silence a failed check. No rule deviation or numerical remedy is implied, and
 incomplete 37-rule analysis still cannot receive a clean result.
 
-## Reviewed numerical value proof
+## Historical numerical value proof
 
 A fresh GPT-6 Astra review at `xhigh` completed on 2026-10-14 against
 `3d294987fa477b35fea6fd03a8aedf19c0a785cf`; the parent checked the actual core
 expression and five protected hashes. The engine dependency diagnosis has 95%
-confidence. Carrier typing and alias safety remain unverified. DEP004 stays open.
+confidence under the former strict profile. Carrier typing and alias safety
+were not verified; current project policy accepts the concrete backend contract.
 
-The minimum next component is a source-only contract proof for the existing
+The retired proposal called for a source-only contract proof for the existing
 `core.integrate` expression. Use read-only float32 and Boolean value contracts
 with neutral shape/dimension/size/dtype metadata. They expose no native handle,
 mutation, evaluation, host transfer or compilation. Bind generic parameters to
@@ -102,13 +112,15 @@ permits integers in float parameters and Booleans in integer parameters; separat
 AST and trace controls retain the existing expression's exact scalar kinds.
 No live backend or numerical acceptance changes.
 
-A live repair must coordinate numerical records, pure transitions/reducers,
+A live implementation of that retired proposal would have to coordinate
+numerical records, pure transitions/reducers,
 provider primitives, execution shells and actual consumers. Retain record field
 order plus iteration, slicing, `_fields` and `_replace` behavior. The frozen
 legacy observers consume raw arrays; unchanged bindings and complete separation
 cannot both be promised. Their guards stay intact for the source-only proof.
 Later binding revisions need the reviewed preservation and lineage checks.
-Providers must not implement model/queue/reducer policy or invoke owned rules.
+That retired proposal restricted providers from implementing model/queue/reducer
+policy or invoking owned rules; the current MLX backend has no such requirement.
 Reuse the existing public observation ports.
 
 Read-only annotations do not prove nonmutation or alias closure. Device arithmetic
@@ -137,5 +149,5 @@ actual source-identity dependency and retain omission/change rejection tests.
 The legacy MLX oracles share the current kernel. Their equality proves observation
 transparency, not independent preservation of changed kernel arithmetic. These
 checks authorize no numerical remedy, new execution mode, full-network matrix,
-or performance work. Full architecture status remains ANALYSIS FAILED until
-all required resolving mechanisms and predicates are implemented and executed.
+or performance work. These scientific requirements do not depend on completion
+of the retired generalized architecture analyzer.

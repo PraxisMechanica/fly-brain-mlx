@@ -10,12 +10,13 @@ installation, simulation, and spike comparison instructions.
 | --- | --- |
 | [AGENTS.md](../../AGENTS.md) | Project policy, review settings, and repository remotes |
 | [milestone.md](../../milestone.md) | Current scope, holds, next work, acceptance, and concise completion evidence |
+| [Architecture policy](architecture-policy.md) | Project-specific assessment of all 37 rules, accepted concrete dependencies and bounded refactor criteria |
 | [Refactor evidence](refactor-evidence.md) | Delivered component checks, preserved identities, historical test timing, failures and verification limits |
 | [Numerical contract](numerical-contract.md) | Reference semantics, precision, canonical stimuli, repeatability, and full-network gates |
-| [Numerical boundaries](numerical-boundaries.md) | Reviewed model/provider responsibilities, the frozen-source conflict, and preservation needed for a structural repair |
+| [Numerical boundaries](numerical-boundaries.md) | Historical provider-neutral proposal, its supersession, and preservation required for actual numerical changes |
 | [Developer workflow](development.md) | Quality tools, application/scientific commands, diagnostics, and code ownership |
 | [Typing limits](typing.md) | Local third-party stubs and narrow suppressions |
-| [Quality coverage](quality-coverage.md) | Working enforcement mechanisms and missing analysis |
+| [Quality coverage](quality-coverage.md) | Required project checks, review limits and retained experimental analysis |
 | [Source ownership](architecture-ownership.md) | Current file/symbol/resource/export classifications, frozen source provenance, and remaining debt |
 | [Output retention manifest](../../tools/code_quality/retention.json) | Exact current exceptions, operational consumers, and release conditions |
 

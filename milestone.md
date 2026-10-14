@@ -1,279 +1,123 @@
 # MLX fly-brain milestones
 
 Audience: agents. Updated 2026-10-14 (America/Los_Angeles).
-This is the current work order. Project policy is in [AGENTS.md](AGENTS.md),
-scientific requirements in the [numerical contract](docs/agent/numerical-contract.md),
-and commands in the [developer workflow](docs/agent/development.md).
+Project policy is in [AGENTS.md](AGENTS.md); the
+[architecture policy](docs/agent/architecture-policy.md) owns the practical rule
+review. The [numerical contract](docs/agent/numerical-contract.md) owns scientific
+acceptance, and [developer workflow](docs/agent/development.md) owns commands.
 
-## Current task
+## Current task and latest user amendment
 
-The user requests a neat wrap-up and handoff on 2026-10-14. Finish only the
-current automatic-test and numeric metric-reuse changes, deliver checked commits,
-and leave no uncommitted task code. Stop broader development at this checkpoint.
-The remaining refactor below is unfinished and must not be reported as complete.
+Finish rearchitecture/refactor and cleanup for handoff to the prior implementation
+agent. The user's latest amendment rejects architecture whose complexity outweighs
+the application. Concrete backend dependencies are acceptable: production remains
+MLX-only. Assess each rule for this project instead of following the generic
+strict profile blindly. Decision confidence: 99%, reviewed at `5249fc5`.
 
-The final user amendment rejects strict numerical score ratchets, including both
-health and complexity increases. The project gate reports valid CQ001/CQ002/CQ003
-regressions as advisory while preserving their native values/findings; concrete
-verification and analysis errors remain blocking. No 0.01-point tolerance is
-adopted. Whole-file aggregates are trends, not an assertion that code got worse.
-Changed-function review thresholds (cyclomatic above 20, cognitive above 15) are
-proposed review prompts only; a qualified per-function analyzer is not yet
-implemented. Do not turn those prompts into mandatory rejection or force splitting
-that merely improves the score.
+This amendment supersedes the former requirement to finish all 37 strict predicates
+and the architecture hold tied to that analyzer. Completing runtime call-target,
+alias/effect/control-flow analysis, portable numerical values and provider-neutral
+model execution is outside this refactor. Retained experimental tools are not a
+required development roadmap, and their missing capabilities are not project
+completion blockers. Do not claim those tools provide complete analysis.
 
-Complete the rearchitecture/refactor and prepare a verified handoff to the prior
-implementation agent. The user resumes this scope on 2026-10-13 after the
-historical-record cleanup was delivered at
-`79f62adee10b092fcaaaed0ea4043da3f5b9c415`. Decision confidence: 99%.
+The current change records the per-rule assessment and reconciles active agent
+documents. It changes no application code, numerical behavior, scientific gates,
+source identity guards, import contracts or automatic test selection.
 
-Completion requires the remaining architecture and dependency repairs, complete
-applicable 37-rule enforcement without weakened predicates, current human/agent
-documentation, meaningful preservation checks, small checked commits delivered
-to `origin/main`, a clean tree and a concise ordered implementation handoff.
-New simulator features, numerical remedies, the full scientific matrix and
-performance work remain outside this agent's scope. Scientific runs are required
-only when needed to verify a refactor. Full coverage and findings cannot receive
-PASS while incomplete; configured component checks are separate evidence.
+## Bounded completion criteria
 
-The latest user amendment on 2026-10-13 prioritizes eliminating duplicate test
-runs. Static architecture analysis must run only for changed source and affected
-dependencies; reuse unchanged verification rather than repeating a full scan or
-the complete checker regression suite at each worker, commit, push and hosted
-boundary. This supersedes the previous unconditional full-snapshot workflow.
-The checked workflow now uses that model. Preserve exact predicates, complete
-source discovery, changed-input invalidation and honest coverage; incremental
-results do not establish missing 37-rule mechanisms. Component owners retain source/dependency evidence. The latest user correction
-requires automatic affected tests in the commit hook, using the same selection
-as CI. No separate manual pytest or push-hook test run is required. Adopt a
-checked worker descendant by fast-forward instead of making a second integration
-commit that repeats local tests. CI independently verifies the delivered revision;
-a persistent test-verdict cache is outside the minimum solution.
+- Keep simulation, qualification and comparison responsibilities understandable;
+  retain useful boundaries and remove duplication only when it has an actual
+  maintenance cost. Do not add role layers or interfaces to satisfy a catalog.
+- Address demonstrated correctness or maintenance problems found in the existing
+  components. A concrete MLX type, legitimate framework inheritance, array index,
+  or incomplete experimental static proof is not by itself such a problem.
+- Preserve the pinned model inputs, reference lineage, five protected source
+  identities, seven regression fixtures, scientific behavior and output contracts.
+- Verify actual changes through existing automatic affected checks and tests;
+  deliver small commits to `origin/main`, leave a clean tree, and provide a concise
+  handoff with scientific implementation still outstanding.
 
-The latest user amendment on 2026-10-14 requires tests of actual changes, not
-broad checker self-testing. Remove the quality suite from default pytest and the
-blanket checker-test command. Do not require hook-simulation matrices or disabling
-individual guards as routine verification. Focus ordinary tests on changed
-behavior and affected consumers; unchanged controls are reused. This supersedes
-the former blanket checker rejection/repair/weakening qualification workflow.
-The latest user clarification requires relevant tests automatically in the
-commit hook to catch failures before delivery, and in CI through the same runner.
-B owns one affected-test invocation per commit/CI gate; push and manual gate
-stages do not run pytest. This supersedes the prior CI-only interpretation and
-manual pre-commit pytest instructions. Directly changed tests and proved affected
-application tests are selected; typing-context invalidation must not restore the
-entire checker suite. The architecture and scientific predicates remain unchanged. The
-application-only timing at `f3b02b3` passes 951 cases in 128.73 seconds, but reveals
-checker exercises mixed into unit/integration folders. The marker component is integrated at `7fba34d`: 13 reviewed files exclude
-109 checker cases, with all 88 original function bodies and 101 assertions
-preserved. Ownership fingerprints are unchanged; root owns default marker
-selection. Preserve all actual runtime/scientific test bodies. Reuse completed
-timing data instead of making additional manual test runs.
+New simulator features, numerical remedies, complete scientific qualification and
+performance work remain outside this refactor agent's scope.
 
-The user also identifies repeated full metric baselines. A owns the minimal
-numeric per-blob fact reuse component (confidence 95%, starting `2a54911`), in an
-isolated main checkout. Preserve complete Git inventory and aggregate/per-file
-comparisons; warm runs must read/analyze only changed or newly encountered blobs.
-Cache facts bind source and analyzer identity; no green verdict is cached. Cold
-bootstrap and incompatible analyzer inputs require fresh calculation. Root owns
-package/lock integration, retention and shared workflow documentation.
+## Delivered cleanup and verification
 
-The parent owns shared policy, canonical commands/configuration, retention,
-documentation and serial integration. Recovery is complete. The same worker
-owners use isolated execution checkouts and commit verified components before
-handoff: `architecture_symbols` owns native type/call/source facts;
-`architecture_ownership` owns the neutral import boundary and allocated placement
-predicate; `composition_refactor` owns coordinated simulation identifiers.
-Shared registry changes are merged by exact row deltas; only the parent pushes.
+The tool/test cleanup is delivered through `5249fc5` on `origin/main`. Its
+[verification records](docs/agent/refactor-evidence.md) include failed attempts,
+repairs, exact hosted results and timing limits. Delivered components include
+injected observations and external facts, immutable causal-audit values, typed
+reference digests and selected identifiers, pure reference parameters, scoped
+ownership/import/type checks, metric calculation reuse, and separate human/agent
+documentation.
 
-Output policy belongs to [AGENTS.md](AGENTS.md); diagnostic commands belong to
-[developer workflow](docs/agent/development.md). The
-[retention manifest](tools/code_quality/retention.json) owns exact consumers and
-release conditions. Keep it current before a verification output crosses a
-commit boundary.
+The latest workflow avoids repeated tests:
 
-Historical execution records, generated outputs, archived verification scripts,
-review logs and handoff histories have been removed. Seven independently
-recorded regression fixtures remain as current test data under
-`tests/data/reference`, totaling 45,360 bytes. Their manifest names the exact
-current consumer and release condition. All seven bytes/hash identities were
-preserved during relocation; production/reference arithmetic is unchanged.
-Five current reference/oracle sources have reviewed hash guards. The pure
-parameter factory is extracted exactly from the original Torch reference; its
-remaining numerical declarations retain their original syntax. The Brian2 and
-two legacy MLX oracles remain byte exact. Pinned FlyWire inputs and licences
-remain intact. The native import and numeric metric-fact caches have active operational
-exceptions in the retention manifest; no scientific run output is retained.
+- Commit and continuous integration (CI) each run one affected-test invocation.
+  Agents do not add manual pytest runs; push/manual stages do not run tests.
+- Adopt checked worker descendants by fast-forward, without a second integration
+  commit that repeats local tests. Only the parent pushes shared project delivery.
+- Static checks evaluate changed sources and affected dependents. Existing
+  calculations are reused with input/tool identity invalidation.
+- Broad checker simulations and guard-weakening exercises are excluded from
+  routine application runs. Focus verification on actual changed behavior.
+- CQ001/CQ002/CQ003 numerical metrics are advisory. No 0.01-point ratchet or
+  mandatory score improvement applies. Actual check failures still block.
 
-Success requires:
+The final code-change hosted check passed 177 selected tests, with 9 deselected,
+in 74.13 seconds; this is not a full application-suite benchmark. The final
+handoff-only hosted check passed without replaying application tests. No scientific
+qualification was run for that tool cleanup.
 
-- Complete applicable 37-rule analysis, focused verification of changed behavior,
-  required gate integration, and resolution of authorized architecture findings. Missing
-  capabilities remain an analysis failure.
-- Preserve pinned inputs, reviewed reference/oracle lineage, the seven independent
-  regression fixtures, scientific predicates, numerical behavior and output contracts.
-- Keep human usage in `README.md` and current agent contracts in the indexed
-  agent documents, with one owner per fact and valid destinations.
-- Integrate committed worker components serially, then pass meaningful behavior
-  and native preservation checks plus commit, push and exact-revision hosted
-  checks. Deliver small coherent commits to `origin/main`.
-- Finish all refactor assignments, leave a clean tree with no expired output
-  exception, and hand off a concise ordered implementation plan with verified
-  limits. Full scientific implementation remains with the prior agent.
+Historical records and generated output archives were removed under the user's
+output policy. Seven independent fixtures remain under `tests/data/reference`,
+totaling 45,360 bytes. Five protected sources preserve the adapted Brian2/Torch
+references, extracted parameter factory and two legacy MLX observation oracles.
+Pinned FlyWire inputs and licences remain intact. Import and metric-fact caches
+have explicit operational consumers in the retention manifest; completed
+scientific/timing outputs have no continuing exception.
 
-## Verification status
+## Disposition of the former six findings
 
-Delivered component checks and exact hosted results are in
-[refactor evidence](docs/agent/refactor-evidence.md). They include failures,
-repairs, skipped scientific collection, test timing and preserved source/input
-identities. These records do not establish complete architecture or scientific
-acceptance. Current limitations remain below and in
-[quality coverage](docs/agent/quality-coverage.md).
+The [architecture policy](docs/agent/architecture-policy.md) records the decision
+for each catalog rule and the relevant source scopes. The former `Advance`
+implementation-type finding is accepted for the private MLX backend. Framework
+model definitions in qualification references are permitted; no portability-driven
+Torch/Brian separation is required. The four identifier records describe partial
+branding and unproved conversion origins, not demonstrated incorrect calculations.
+Use typed identities where they prevent actual confusion; ordinary array positions
+remain numeric coordinates. Apply review and affected tests to real mapping changes.
 
-## Remaining order and unresolved decisions
+The unchanged strict registry still contains those historical observations and
+capability limits. Its source hashes and inventory guards remain useful; its
+strict findings are not the acceptance standard for this project. The
+[coverage record](docs/agent/quality-coverage.md) distinguishes required checks,
+review guidance and experimental mechanisms.
 
-Current bounded assignments (confidence 95%): B has delivered selected-source
-enrollment and the native bound-declaration observer using the canonical live
-session. The checked shared active-import guard is delivered at `1dce138`;
-complete active-import capability and canonical type-query reuse remain missing. The superseded 14-path declaration candidate is retired; dormant
-occurrences and lexical-versus-resolved identities stay explicit.
-A has delivered the fan-in count boundary and the reviewed source-only neutral
-value/primitive proof. The observation neuron-row/reduction selector boundary is delivered at
-`b2f4dfd`; DEP004 remains open and no live backend is substituted.
-C has delivered the `NetworkCase` and Torch qualification target selectors,
-verified through exact hosted run `38583143321`. The bounded native type-consumer selection repair is committed at `dcf27bb`,
-using pinned compiler dependencies and shared checker options. The TypeScript loader has a literal SDK type import;
-the Pyright loader has a global Loader declaration, with opaque vendor runtime
-calls. Computed provider acquisition and runtime effects remain unproved.
-Unsupported native module dependencies still fail COV002. Passed-tuple/scalar identity, values/order and host projections
-are preserved; historical cross-site literal-tuple coalescing is outside the
-contract. Canonical batch labels are delivered. Local array positions, collectors, digest
-streams and original numeric behavior remain unchanged. Positional artifact
-provenance and joint stimulus-identity enforcement remain missing. Owners use separate main execution checkouts,
-commit components through the automatic affected-test hook before parent
-fast-forward integration. CI independently verifies delivery; neither worker nor
-parent adds separate manual pytest calls, and pushes do not run tests.
+## Remaining handoff work
 
-The user requests architecture-test profiling on 2026-10-14 (confidence 99%).
-The parent completed one instrumented quality-suite diagnostic and one whole
-changed-range gate at `1dce138` in an isolated checkout; A reviewed gate composition
-and C reviewed fixture repetition without additional executions. Results are in
-[refactor evidence](docs/agent/refactor-evidence.md): 9m38s for 1,049 profiled
-quality cases (two failures), and 13.94s for the checked range. Repeated external
-process setup dominates; metrics take 10.11s of that gate. The stale contract-count
-assertion is repaired at `9d13c96`; independent disposed-session weakening
-evidence is repaired at `84d257d` without production changes. Only failed/changed
-controls repeated. Raw diagnostic consumers are complete and outputs are expired.
-This diagnostic does not restore automatic regression replay or supply missing
-architecture/scientific acceptance. Root owns results and output consumers.
+The project-rule reassessment and its bounded handoff are recorded in the current
+agent documents. The three read-only component reviews established no additional
+application defect behind the former six findings. Delivery uses the existing
+mandatory commit/push checks; no runtime tests are needed for these document-only
+changes. Any subsequent source cleanup must identify a concrete problem,
+its affected callers, the smallest repair and meaningful verification before
+implementation. Do not resume the generalized analyzer or tensor-contract program.
+The prior implementation agent can continue scientific work under the unchanged
+numerical contract; there is no prerequisite to finish the retired analyzer plan.
 
-1. Keep checked components and current documentation delivered incrementally.
-   Verify exact hosted revisions and leave no expired output exception.
-2. Complete authored declaration reconciliation and reviewed live version 2
-   contexts. A source-only prototype observes 314 worker sources, but raw native
-   binding tables omit dormant declarations and mix import target URIs with
-   lexical ranges. Reconcile every authored occurrence; do not invent identities.
-   Canonical configuration, native command-line host/file-system behavior,
-   complete source enumeration and loaded-source origins are observed at
-   `39c4556`. Replace manual downstream contexts with those verified facts;
-   runtime-environment equivalence and complete live analysis remain unproved.
-3. Continue wider provider-role separation after the checked pure parameter and
-   private `torch_setup` mapping repairs. The selected parity path's experiment
-   lookup, neuron mapping, stimulus storage and connectome silencing now use
-   consumer-owned services; preserve both catalog-read positions, seed 20261004,
-   generation/persistence/silencing order and errors.
-4. Complete callable/slot origins, implicit calls, runtime targets, source/export
-   predicates, injection/lifetime checks, control flow/failure disposition and
-   alias/effect closure. Bind every applicable rule into the required gate and
-   verify changed behavior with focused tests under the latest user amendment.
-5. Verify source-preserving structural repairs before the dependent inner repairs,
-   complete all authorized refactor verification, and prepare the ordered handoff
-   to `[Fly Brain] implementation`. That chat is idle; no message has been sent.
+The complete 52-case scientific matrix and prescribed sugar/P9 four-trial
+comparisons remain unfinished. Removed historical records do not establish current
+source or execution-mode acceptance. Fresh qualification must satisfy all existing
+scientific gates before its working outputs expire. No scientific acceptance or new
+execution mode is approved by the architecture amendment.
 
-A fresh scientific review found complete model/provider separation incompatible
-with the exact four-source freeze. The [reviewed boundaries](docs/agent/numerical-boundaries.md)
-identify affected symbols, the minimum repair and preservation requirements.
-The prior requirement for a separate human freeze amendment was an overbroad
-interpretation. The authorized refactor can reclassify a reviewed source revision
-only after preserving scientific behavior, independent lineage and every actual
-source-identity consumer. Current hashes remain enforced until that specific
-repair is checked; no numerical remedy, new execution mode or rule deviation is
-approved. Checked extraction and preservation evidence is recorded in
-[refactor evidence](docs/agent/refactor-evidence.md).
+## Checkout and ownership
 
-## Current scientific scope
-
-Run the pinned FlyWire v783 leaky integrate-and-fire model on Apple silicon,
-using MLX and uv. Brian2 and PyTorch are independent qualification references.
-Preserve model equations, input identity, experiment definitions, native state,
-events, queues and spike formats. Keep compilation and alternative arithmetic
-modes subject to their explicit qualification requirements.
-
-Numerical development remains on hold until the complete 37-rule architecture
-enforcement is implemented, verified and accepted. This cleanup does not release
-that hold.
-
-The complete 52-case matrix and prescribed sugar/P9 four-trial comparisons are
-not complete. Removed historical records do not establish current source or
-execution-mode acceptance. Any new qualification must produce complete fresh
-working data and satisfy every unchanged scientific gate before cleanup.
-Future reference reuse needs verified input/source/build identity and complete
-native equivalence; retain no archive simply in anticipation of possible reuse.
-
-## Current architecture scope
-
-Complete 37-rule structural enforcement remains **ANALYSIS FAILED (COV002)**.
-Six recorded architecture/identifier findings remain. Strict typing, configured
-import contracts, source ownership reconciliation and qualified native metric
-checks are useful components, not a full structural or scientific approval.
-Current coverage is in [quality-coverage.md](docs/agent/quality-coverage.md) and
-classifications in [architecture-ownership.md](docs/agent/architecture-ownership.md).
-
-## Ordered continuation handoff
-
-This wrap-up closes the current tool/test cleanup; the complete rearchitecture
-is unfinished. Read the delivered component and failure evidence before resuming.
-Use current `origin/main`, not the historical detached checkout or retired
-declaration candidate. The delivery checkout on this host is
+Use current `origin/main`. The delivery checkout is
 `/Users/ocasta/.codex/worktrees/pr-split/fly-brain`; the original
-`/Users/ocasta/Code/fly-brain` checkout is an unchanged detached historical view.
-
-1. Complete the existing authored-declaration reconciliation and live version 2
-   context work, then native call/slot origins, alias/effect/control-flow and
-   failure disposition. The detailed remaining order above and quality coverage
-   own the unresolved mechanisms. Full 37-rule analysis remains COV002.
-2. Resolve the six recorded findings: concrete Advance dependency, mixed
-   TorchModel responsibilities and four simulation identity/origin findings.
-   Preserve the reviewed numerical boundaries and exact reference lineage.
-3. Verify each structural repair through the automatic affected-test commit
-   boundary, adopt worker commits by fast-forward, and deliver small commits.
-   Do not reintroduce blanket checker qualification, manual pytest duplicates
-   or numerical score ratchets. Native/process test consumption still needs
-   explicit evidence where Python import edges do not prove it.
-4. Finish architecture acceptance and the implementation handoff before releasing
-   numerical development. New simulator features, numerical remedies and the
-   complete scientific matrix remain outside this completed tool-cleanup slice.
-
-Pinned inputs, five protected source identities, seven independent fixtures and
-all scientific acceptance predicates remain required. Active import/numeric-fact
-caches have exact operational retention consumers; completed timing/profile
-outputs have no continuing exception. Final delivery checks are recorded in
-refactor evidence, with limitations and failed attempts retained explicitly.
-
-## Wrap-up delivery checkpoint
-
-Current tool/test cleanup is delivered through `2140a61`: checker selection
-(`7fba34d`), automatic affected-test runner (`45146bc`), native metric-fact reuse
-(`c22e943`), published audit-fixture identity (`3bd3ffe`) and advisory numerical
-metric policy (`2140a61`). Each final component passes its required local boundary;
-worker commits are adopted by fast-forward without a second parent test run.
-Push/manual stages do not run pytest. The audit correction's hosted run
-`38621098579` and policy run `38622709325` both pass; exact results and timing
-limits are recorded in refactor evidence.
-
-Five frozen source hashes and all seven independent fixtures remain exact; fixture
-bytes total 45,360. Full scientific qualification and the fresh-native-proof
-bundle consumer were not run during this tool cleanup. Dynamic native/process
-test consumption, reliable per-function metrics and the broader architecture
-repairs remain explicit limitations. Do not report complete architecture, complete
-scientific acceptance or the original refactor objective as achieved.
+`/Users/ocasta/Code/fly-brain` remains an unchanged detached historical checkout.
+The parent owns shared policy, documents, retention and serial integration.
+Existing worker assignments retain their owners; committed components must be
+verified before adoption. No message has been sent to the implementation chat.
