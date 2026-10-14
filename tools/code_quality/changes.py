@@ -16,6 +16,7 @@ from .change_inputs import RANGES as RANGES
 from .change_inputs import Stage as Stage
 from .change_inputs import resolve_inputs
 from .impact import current_graph, module_name
+from .native_impact import affected as native_affected
 
 
 @dataclass(frozen=True)
@@ -29,6 +30,7 @@ class Plan:
     head: str | None
     boundary_files: tuple[str, ...] = ()
     tree: str | None = None
+    native: tuple[str, ...] = ()
 
 
 def build_plan(root: Path, stage: Stage, environment: Mapping[str, str]) -> Plan:
@@ -89,12 +91,14 @@ def build_plan(root: Path, stage: Stage, environment: Mapping[str, str]) -> Plan
             inputs.head,
             tuple(sorted(boundary_files)),
             inputs.tree,
+            native_affected(inputs, context.runtime),
         )
     except (
         OSError,
         ValueError,
         KeyError,
         subprocess.CalledProcessError,
+        subprocess.TimeoutExpired,
         GrimpException,
     ) as error:
         raise ValueError('COV002: ' + str(error)) from error

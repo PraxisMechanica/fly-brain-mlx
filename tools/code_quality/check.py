@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Literal
 
 from .changes import Plan, build_plan
+from .native_impact import commands
 from .run import check
 
 Stage = Literal['commit', 'push', 'ci', 'manual']
@@ -31,41 +32,7 @@ def tasks(plan: Plan, stage: Stage) -> tuple[tuple[str, tuple[str, ...]], ...]:
         )
     if plan.python:
         result.append(('types', ('pyright', *plan.python)))
-    native_changed = tuple(
-        path
-        for path in plan.changed
-        if path.startswith('tools/architecture/native_')
-        and path.endswith(('.mjs', '.d.ts'))
-    )
-    native = tuple(path for path in native_changed if Path(path).is_file())
-    if len(native) != len(native_changed):
-        raise ValueError('COV002: removed native source has no checked dependent scope')
-    if native:
-        result.append(
-            (
-                'native-types',
-                (
-                    'node',
-                    'node_modules/.pnpm/typescript@5.9.3/node_modules/typescript/bin/tsc',
-                    '--allowJs',
-                    '--checkJs',
-                    '--noEmit',
-                    '--strict',
-                    '--noUncheckedIndexedAccess',
-                    '--exactOptionalPropertyTypes',
-                    '--target',
-                    'ES2022',
-                    '--module',
-                    'NodeNext',
-                    '--moduleResolution',
-                    'NodeNext',
-                    *native,
-                ),
-            )
-        )
-    for path in native:
-        if path.endswith('.mjs'):
-            result.append(('native-syntax', ('node', '--check', path)))
+    result.extend(commands(plan.changed, plan.native))
     if plan.boundaries:
         result.append(
             (

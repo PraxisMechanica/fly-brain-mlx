@@ -175,7 +175,9 @@ def test_native_bridge_checks_select_only_changed_sources_and_load_type_context(
         path = tmp_path / name
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text('export const value = 1;\n')
-    tasks = dict(workflow.tasks(replace(inputs(), changed=(changed,)), 'push'))
+    tasks = dict(
+        workflow.tasks(replace(inputs(), changed=(changed,), native=(changed,)), 'push')
+    )
     assert tasks['native-syntax'] == ('node', '--check', changed)
     assert tasks['native-types'][-1] == changed
     assert untouched not in tasks['native-types']

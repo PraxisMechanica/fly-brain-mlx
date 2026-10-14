@@ -149,7 +149,6 @@ def test_unproved_deleted_native_target_fails_closed(
             CONFIG.replace('root_package="fly_brain"', 'root_package="other"'),
         ),
         ('stub', 'typings/provider.pyi', 'class Value: ...\n'),
-        ('runtime', 'uv.lock', 'class Value: ...\n'),
     ),
 )
 def test_context_changes_invalidate_their_native_check_scopes(
@@ -157,6 +156,24 @@ def test_context_changes_invalidate_their_native_check_scopes(
 ) -> None:
     write(checkout, path, source)
     plan = build_plan(checkout, 'commit', {})
+    assert_context(plan, context)
+
+
+@pytest.fixture
+def runtime_checkout(checkout: Path) -> Path:
+    (checkout / 'node_modules').symlink_to(
+        Path(__file__).resolve().parents[2] / 'node_modules'
+    )
+    write(checkout, 'tools/architecture/native_value.mjs', 'export const value = 1;\n')
+    return checkout
+
+
+def test_runtime_change_invalidates_native_check_scopes(runtime_checkout: Path) -> None:
+    write(runtime_checkout, 'uv.lock', 'class Value: ...\n')
+    assert_context(build_plan(runtime_checkout, 'commit', {}), 'runtime')
+
+
+def assert_context(plan: Plan, context: str) -> None:
     current = set(APP) | {'main.py', 'tests/__init__.py', 'tools/__init__.py'}
     assert (set(plan.python), set(plan.format_files), set(plan.boundary_files)) == (
         current | {'typings/provider.pyi'}
