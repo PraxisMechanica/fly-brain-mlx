@@ -138,4 +138,6 @@ def test_actual_active_consumers_use_ports_without_native_or_assembly_paths(
         check=False,
     )
     assert result.returncode == 0, result.stdout + result.stderr
-    assert CONTRACT in result.stdout and 'Contracts: 6 kept, 0 broken.' in result.stdout
+    assert (
+        CONTRACT in result.stdout and 'Contracts: 10 kept, 0 broken.' in result.stdout
+    )
