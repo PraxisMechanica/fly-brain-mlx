@@ -10,6 +10,7 @@ installation, simulation, and spike comparison instructions.
 | --- | --- |
 | [AGENTS.md](../../AGENTS.md) | Project policy, review settings, and repository remotes |
 | [milestone.md](../../milestone.md) | Current scope, holds, next work, acceptance, and concise completion evidence |
+| [Refactor evidence](refactor-evidence.md) | Delivered component checks, preserved identities, historical test timing, failures and verification limits |
 | [Numerical contract](numerical-contract.md) | Reference semantics, precision, canonical stimuli, repeatability, and full-network gates |
 | [Numerical boundaries](numerical-boundaries.md) | Reviewed model/provider responsibilities, the frozen-source conflict, and preservation needed for a structural repair |
 | [Developer workflow](development.md) | Quality tools, application/scientific commands, diagnostics, and code ownership |
