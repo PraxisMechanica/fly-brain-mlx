@@ -92,15 +92,16 @@ enrollment and the native bound-declaration observer using the canonical live
 session. It assesses the smallest canonical-session seam for existing type
 queries. The historical 14-path declaration tree remains unaccepted; dormant
 occurrences and lexical-versus-resolved identities stay explicit.
-A has delivered the fan-in count boundary and completed the literal Advance
-rule assessment. Its next bounded component is the reviewed source-only neutral
-value/primitive proof; DEP004 remains open and no live backend is substituted.
+A has delivered the fan-in count boundary and the reviewed source-only neutral
+value/primitive proof. It assesses the remaining observation neuron-row/reduction
+selector boundary; DEP004 remains open and no live backend is substituted.
 C has delivered the `NetworkCase` and Torch qualification target selectors,
 verified through exact hosted run `38583143321`. It implements the bounded
 native type-consumer selection repair using pinned compiler dependencies and
-shared checker options. Existing computed SDK acquisition has observed static ABI
-inputs; runtime effects remain unproved. Unsupported native module dependencies
-still fail COV002. Passed-tuple/scalar identity, values/order and host projections
+shared checker options. The TypeScript loader has a literal SDK type import;
+the Pyright loader has a global Loader declaration, with opaque vendor runtime
+calls. Computed provider acquisition and runtime effects remain unproved.
+Unsupported native module dependencies still fail COV002. Passed-tuple/scalar identity, values/order and host projections
 are preserved; historical cross-site literal-tuple coalescing is outside the
 contract. Canonical batch labels are delivered. Local array positions, collectors, digest
 streams and original numeric behavior remain unchanged. Positional artifact

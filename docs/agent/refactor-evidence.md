@@ -436,6 +436,33 @@ guard weakenings qualified. Complete authored bindings and dormant declarations
 remain missing. The historical 14-path prototype is unchanged and unaccepted;
 all six findings and complete architecture/scientific limits remain.
 
+## Source-only neutral numerical proof
+
+The three-file symbolic proof is pushed at `5eddbf6` after normal commit/push
+checks. Exact hosted run `38589126596` passed the two-commit submitted range:
+six changed inputs, two affected Python sources, two reviewed sources and 369
+retained records. Its quality step took 12 seconds, ran no pytest and uploaded
+zero artifacts. Sixteen distinct controls qualified: the initial native closure passed
+in 0.92 seconds and the remaining 15 in 6.16 seconds. After moving the actual
+shared test provider into its support owner, only its origin/closure and runtime
+trace consumers repeated, passing in 0.94 seconds. Three moved class AST hashes
+and all 13 retained negative fixture input sets remained exact. Ruff and strict
+typing passed. The initial metric failure was repaired without changing a gate:
+final worker metrics across 395 to 397 files keep mean 14.93 and maximum 96,
+while health improves 40.86 to 40.89. Only two simulation/test registry rows were
+added; other metadata, five protected sources and seven fixtures are unchanged.
+
+Native controls establish bounded float32/Boolean kinds, the actual primitive
+overloads, concrete symbolic-provider result closure and wrong-kind/vendor/
+mutable-surface rejection. Each generic bound has independent weakening.
+The actual core expression and coefficient ASTs are anchored; a runtime recorder
+checks all eight ordered operations and integer/float scalar kinds. Core bytes
+remain SHA-256 `c4079b5d32cb05e701fcb89856a8b48066185bb5c470203e56f4785316461132`.
+No device arithmetic or trajectory ran. Actual MLX carrier feasibility, aliases,
+nonmutation, primitive purity and lawful provider fields remain unproved.
+DEP004, all six findings and complete 37-rule COV002 remain open. The
+[numerical boundary](numerical-boundaries.md) owns the constraints on live adoption.
+
 ## Reference parameter preservation
 
 The pure reference-default extraction is checked and pushed at

@@ -92,6 +92,16 @@ generic closure, provider exclusion, the absence of cast escapes and exact call
 order in focused fixtures. Keep this proof outside the live backend; commit no
 unused production abstractions.
 
+The source-only fixture is delivered at `5eddbf6`; its
+[verification record](refactor-evidence.md) owns the controls and measurements.
+Concrete symbolic values prove the bounded type closure and eight-call order.
+They do not establish a usable MLX carrier. Structural protocols permit additional
+provider fields, and read-only annotations cannot establish private-handle
+origins, truthful metadata, nonmutation, aliases or primitive purity. Python also
+permits integers in float parameters and Booleans in integer parameters; separate
+AST and trace controls retain the existing expression's exact scalar kinds.
+No live backend or numerical acceptance changes.
+
 A live repair must coordinate numerical records, pure transitions/reducers,
 provider primitives, execution shells and actual consumers. Retain record field
 order plus iteration, slicing, `_fields` and `_replace` behavior. The frozen
