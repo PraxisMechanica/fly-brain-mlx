@@ -21,11 +21,11 @@ from .identifiers import (
 @dataclass(frozen=True)
 class NetworkCase:
     neurons: int
-    sources: tuple[int, ...] = ()
-    destinations: tuple[int, ...] = ()
+    sources: tuple[NeuronRow, ...] = ()
+    destinations: tuple[NeuronRow, ...] = ()
     weights: tuple[float, ...] = ()
-    targets: tuple[int, ...] = ()
-    silenced: tuple[int, ...] = ()
+    targets: tuple[NeuronRow, ...] = ()
+    silenced: tuple[NeuronRow, ...] = ()
     voltage: ArrayLike = -52
     synaptic: ArrayLike = 0
     last_spike: ArrayLike = -100000000

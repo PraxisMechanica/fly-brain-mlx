@@ -10,6 +10,7 @@ from numpy.typing import ArrayLike, NDArray
 from fly_brain.qualification.adapters import brian_reference as reference
 from fly_brain.simulation.backend import core
 from fly_brain.simulation.backend.arrays import as_host, evaluate
+from fly_brain.simulation.identifiers import NeuronRow
 from fly_brain.simulation.models import NetworkCase as Case
 from tests.support.qualification import BoolArray, Harness, events_for, replay_events
 
@@ -172,13 +173,26 @@ def test_quarter_ulp_rounding_is_an_asserted_precision_limitation(
         ('rest-empty', Case(2), 60, ()),
         (
             'reset-weights',
-            Case(2, (0,), (1,), (1,), voltage=(-44, -52), synaptic=(1, 0)),
+            Case(
+                2,
+                (NeuronRow(0),),
+                (NeuronRow(1),),
+                (1,),
+                voltage=(-44, -52),
+                synaptic=(1, 0),
+            ),
             60,
             (),
         ),
         (
             'positive-negative',
-            Case(3, (0, 0), (1, 2), (4, -4), voltage=(-44, -52, -52)),
+            Case(
+                3,
+                (NeuronRow(0), NeuronRow(0)),
+                (NeuronRow(1), NeuronRow(2)),
+                (4, -4),
+                voltage=(-44, -52, -52),
+            ),
             80,
             (),
         ),
@@ -186,8 +200,8 @@ def test_quarter_ulp_rounding_is_an_asserted_precision_limitation(
             'balanced-duplicates',
             Case(
                 4,
-                (0, 1, 0, 1),
-                (2, 2, 3, 3),
+                (NeuronRow(0), NeuronRow(1), NeuronRow(0), NeuronRow(1)),
+                (NeuronRow(2), NeuronRow(2), NeuronRow(3), NeuronRow(3)),
                 (1.1, -1.1, 0.275, 0.275),
                 voltage=(-44, -44, -52, -52),
             ),
@@ -196,7 +210,13 @@ def test_quarter_ulp_rounding_is_an_asserted_precision_limitation(
         ),
         (
             'fanout-self-wrap',
-            Case(3, (0, 0, 0), (0, 1, 2), (1, 2, -2), (0,)),
+            Case(
+                3,
+                (NeuronRow(0), NeuronRow(0), NeuronRow(0)),
+                (NeuronRow(0), NeuronRow(1), NeuronRow(2)),
+                (1, 2, -2),
+                (NeuronRow(0),),
+            ),
             160,
             ((0, 0), (25, 0), (50, 0), (75, 0), (100, 0)),
         ),
@@ -205,8 +225,8 @@ def test_quarter_ulp_rounding_is_an_asserted_precision_limitation(
             'target-released-at-arrival',
             Case(
                 2,
-                (0,),
-                (1,),
+                (NeuronRow(0),),
+                (NeuronRow(1),),
                 (1,),
                 voltage=(-44, -50),
                 synaptic=(0, 1),
@@ -217,7 +237,7 @@ def test_quarter_ulp_rounding_is_an_asserted_precision_limitation(
         ),
         (
             'zero-refractory-loss',
-            Case(1, targets=(0,)),
+            Case(1, targets=(NeuronRow(0),)),
             12,
             tuple((step, 0) for step in range(12)),
         ),
@@ -225,10 +245,10 @@ def test_quarter_ulp_rounding_is_an_asserted_precision_limitation(
             'outgoing-silencing',
             Case(
                 3,
-                (0, 1, 2),
-                (1, 2, 1),
+                (NeuronRow(0), NeuronRow(1), NeuronRow(2)),
+                (NeuronRow(1), NeuronRow(2), NeuronRow(1)),
                 (100, 3, 2),
-                silenced=(1,),
+                silenced=(NeuronRow(1),),
                 voltage=(-44, -52, -52),
             ),
             80,
@@ -236,7 +256,7 @@ def test_quarter_ulp_rounding_is_an_asserted_precision_limitation(
         ),
         (
             'classes-overlap-zero-rate',
-            Case(2, targets=(0, 0, 1)),
+            Case(2, targets=(NeuronRow(0), NeuronRow(0), NeuronRow(1))),
             80,
             ((0, 0), (0, 1), (5, 0), (12, 1), (24, 0), (24, 1)),
         ),
@@ -244,8 +264,8 @@ def test_quarter_ulp_rounding_is_an_asserted_precision_limitation(
             'thirty-two-event-fanin',
             Case(
                 2,
-                (0,) * 32,
-                (1,) * 32,
+                (NeuronRow(0),) * 32,
+                (NeuronRow(1),) * 32,
                 (0.275, -0.275) * 15 + (0.55, 0.275),
                 voltage=(-44, -52),
             ),
@@ -287,10 +307,10 @@ def test_refractory_boundary_discards_due_at_21_but_accepts_due_at_22(
 ) -> None:
     case = Case(
         3,
-        (0, 1),
-        (2, 2),
+        (NeuronRow(0), NeuronRow(1)),
+        (NeuronRow(2), NeuronRow(2)),
         (1, 2),
-        (0, 1),
+        (NeuronRow(0), NeuronRow(1)),
         voltage=(-52, -52, -50),
         synaptic=(0, 0, 1),
         last_spike=(core.INITIAL_LAST_SPIKE, core.INITIAL_LAST_SPIKE, 0),
@@ -302,7 +322,13 @@ def test_refractory_boundary_discards_due_at_21_but_accepts_due_at_22(
     assert not observed['due'][22, 0, 0]
 
 
-REPLAY_CASE = Case(3, (0, 0, 1, 2), (1, 2, 2, 1), (0.275, 100, -0.55, 0.825), (0, 0, 1))
+REPLAY_CASE = Case(
+    3,
+    (NeuronRow(0), NeuronRow(0), NeuronRow(1), NeuronRow(2)),
+    (NeuronRow(1), NeuronRow(2), NeuronRow(2), NeuronRow(1)),
+    (0.275, 100, -0.55, 0.825),
+    (NeuronRow(0), NeuronRow(0), NeuronRow(1)),
+)
 
 
 def test_retained_reference_replay_qualifies_exact_events_and_integer_times(
@@ -440,10 +466,10 @@ def test_firing_discards_same_step_recurrent_events_at_both_refractory_durations
 ) -> None:
     case = Case(
         3,
-        (0, 0),
-        (1, 2),
+        (NeuronRow(0), NeuronRow(0)),
+        (NeuronRow(1), NeuronRow(2)),
         (3, 3),
-        (0, 1),
+        (NeuronRow(0), NeuronRow(1)),
         voltage=(-52, -52, -44),
         synaptic=(0, 0, 1),
         last_spike=(core.INITIAL_LAST_SPIKE, core.INITIAL_LAST_SPIKE, 0),

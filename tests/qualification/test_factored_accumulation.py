@@ -10,6 +10,7 @@ from fly_brain.simulation.backend import core
 from fly_brain.simulation.backend.accumulation import SCALE
 from fly_brain.simulation.backend.arrays import as_host
 from fly_brain.simulation.backend.engines import Factory, factored
+from fly_brain.simulation.identifiers import NeuronRow
 from fly_brain.simulation.models import NetworkCase as Case
 from tests.support.bucketed import bucketed_case, exact_bucketed_case
 from tests.support.qualification import Harness, events_for, replay_events
@@ -36,13 +37,26 @@ def weights(counts: Sequence[int]) -> tuple[float, ...]:
         ('rest-empty', Case(2), 60, ()),
         (
             'reset-weights',
-            Case(2, (0,), (1,), weights([4]), voltage=(-44, -52), synaptic=(1, 0)),
+            Case(
+                2,
+                (NeuronRow(0),),
+                (NeuronRow(1),),
+                weights([4]),
+                voltage=(-44, -52),
+                synaptic=(1, 0),
+            ),
             60,
             (),
         ),
         (
             'positive-negative',
-            Case(3, (0, 0), (1, 2), weights([15, -15]), voltage=(-44, -52, -52)),
+            Case(
+                3,
+                (NeuronRow(0), NeuronRow(0)),
+                (NeuronRow(1), NeuronRow(2)),
+                weights([15, -15]),
+                voltage=(-44, -52, -52),
+            ),
             80,
             (),
         ),
@@ -50,8 +64,8 @@ def weights(counts: Sequence[int]) -> tuple[float, ...]:
             'balanced-duplicates',
             Case(
                 4,
-                (0, 1, 0, 1),
-                (2, 2, 3, 3),
+                (NeuronRow(0), NeuronRow(1), NeuronRow(0), NeuronRow(1)),
+                (NeuronRow(2), NeuronRow(2), NeuronRow(3), NeuronRow(3)),
                 weights([4, -4, 1, 1]),
                 voltage=(-44, -44, -52, -52),
             ),
@@ -61,14 +75,24 @@ def weights(counts: Sequence[int]) -> tuple[float, ...]:
         (
             'cast-drift-triplet',
             Case(
-                2, (0, 0, 0), (1, 1, 1), weights([2405, -2404, -1]), voltage=(-44, -52)
+                2,
+                (NeuronRow(0), NeuronRow(0), NeuronRow(0)),
+                (NeuronRow(1), NeuronRow(1), NeuronRow(1)),
+                weights([2405, -2404, -1]),
+                voltage=(-44, -52),
             ),
             60,
             (),
         ),
         (
             'fanout-self-wrap',
-            Case(3, (0, 0, 0), (0, 1, 2), weights([4, 7, -7]), (0,)),
+            Case(
+                3,
+                (NeuronRow(0), NeuronRow(0), NeuronRow(0)),
+                (NeuronRow(0), NeuronRow(1), NeuronRow(2)),
+                weights([4, 7, -7]),
+                (NeuronRow(0),),
+            ),
             160,
             ((0, 0), (25, 0), (50, 0), (75, 0), (100, 0)),
         ),
@@ -77,8 +101,8 @@ def weights(counts: Sequence[int]) -> tuple[float, ...]:
             'released-at-arrival',
             Case(
                 2,
-                (0,),
-                (1,),
+                (NeuronRow(0),),
+                (NeuronRow(1),),
                 weights([4]),
                 voltage=(-44, -50),
                 synaptic=(0, 1),
@@ -91,10 +115,10 @@ def weights(counts: Sequence[int]) -> tuple[float, ...]:
             'outgoing-silencing',
             Case(
                 3,
-                (0, 1, 2),
-                (1, 2, 1),
+                (NeuronRow(0), NeuronRow(1), NeuronRow(2)),
+                (NeuronRow(1), NeuronRow(2), NeuronRow(1)),
                 weights([364, 11, 7]),
-                silenced=(1,),
+                silenced=(NeuronRow(1),),
                 voltage=(-44, -52, -52),
             ),
             80,
@@ -102,13 +126,13 @@ def weights(counts: Sequence[int]) -> tuple[float, ...]:
         ),
         (
             'overlapping-inputs',
-            Case(2, targets=(0, 0, 1)),
+            Case(2, targets=(NeuronRow(0), NeuronRow(0), NeuronRow(1))),
             80,
             ((0, 0), (0, 1), (5, 0), (12, 1), (24, 0), (24, 1)),
         ),
         (
             'zero-refractory-loss',
-            Case(1, targets=(0,)),
+            Case(1, targets=(NeuronRow(0),)),
             12,
             tuple((step, 0) for step in range(12)),
         ),
@@ -116,8 +140,8 @@ def weights(counts: Sequence[int]) -> tuple[float, ...]:
             '32-edge-fanin',
             Case(
                 2,
-                (0,) * 32,
-                (1,) * 32,
+                (NeuronRow(0),) * 32,
+                (NeuronRow(1),) * 32,
                 weights([1, -1] * 15 + [2, 1]),
                 voltage=(-44, -52),
             ),
@@ -148,10 +172,10 @@ def test_factored_refractory_boundary_and_firing_step_discard_events(
 ) -> None:
     case = Case(
         3,
-        (0, 1),
-        (2, 2),
+        (NeuronRow(0), NeuronRow(1)),
+        (NeuronRow(2), NeuronRow(2)),
         weights([4, 7]),
-        (0, 1),
+        (NeuronRow(0), NeuronRow(1)),
         voltage=(-52, -52, -50),
         synaptic=(0, 0, 1),
         last_spike=(INITIAL, INITIAL, 0),
@@ -162,10 +186,10 @@ def test_factored_refractory_boundary_and_firing_step_discard_events(
     assert not observed['due'][22, 0, 0]
     case = Case(
         3,
-        (0, 0),
-        (1, 2),
+        (NeuronRow(0), NeuronRow(0)),
+        (NeuronRow(1), NeuronRow(2)),
         weights([11, 11]),
-        (0, 1),
+        (NeuronRow(0), NeuronRow(1)),
         voltage=(-52, -52, -44),
         synaptic=(0, 0, 1),
         last_spike=(INITIAL, INITIAL, 0),
@@ -177,7 +201,13 @@ def test_factored_refractory_boundary_and_firing_step_discard_events(
     np.testing.assert_array_equal(observed['discarded'][22, 0], [True, True])
 
 
-REPLAY = Case(3, (0, 0, 1, 2), (1, 2, 2, 1), weights([1, 364, -2, 3]), (0, 0, 1))
+REPLAY = Case(
+    3,
+    (NeuronRow(0), NeuronRow(0), NeuronRow(1), NeuronRow(2)),
+    (NeuronRow(1), NeuronRow(2), NeuronRow(2), NeuronRow(1)),
+    weights([1, 364, -2, 3]),
+    (NeuronRow(0), NeuronRow(0), NeuronRow(1)),
+)
 
 
 def test_factored_replay_preserves_reference_states_and_events(
@@ -211,7 +241,11 @@ def test_factored_large_fanin_meets_delayed_reference_trace(
     name: str, counts: list[int], harness: Harness
 ) -> None:
     case = Case(
-        2, (0,) * len(counts), (1,) * len(counts), weights(counts), voltage=(-44, -52)
+        2,
+        (NeuronRow(0),) * len(counts),
+        (NeuronRow(1),) * len(counts),
+        weights(counts),
+        voltage=(-44, -52),
     )
     events = events_for(case, 40)
     expected = run_reference(case, events)
@@ -258,7 +292,9 @@ def test_factored_adapter_uses_metal_with_cpu_default_and_resets_pending_trials(
     harness: Harness,
 ) -> None:
     with mx.stream(mx.cpu):
-        execution = harness.compile(Case(2, (0,), (1,), weights([1])))
+        execution = harness.compile(
+            Case(2, (NeuronRow(0),), (NeuronRow(1),), weights([1]))
+        )
         network = execution.network
         state = core.initial_state(network, voltage_mv=[-44, -52])
         state, trace = execution.advance(state, mx.zeros((1, 0), dtype=mx.bool_))

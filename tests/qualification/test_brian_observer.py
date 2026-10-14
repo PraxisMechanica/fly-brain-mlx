@@ -20,6 +20,7 @@ from fly_brain.qualification.adapters.observer_stream import (
     StreamShape,
     read_frames,
 )
+from fly_brain.simulation.identifiers import NeuronRow
 from fly_brain.simulation.models import NetworkCase
 
 pytestmark = [pytest.mark.integration, pytest.mark.reference]
@@ -177,11 +178,29 @@ def runs(
     )
     case = NetworkCase(
         6,
-        sources=(0, 0, 0, 1, 2, 3, 4, 4),
-        destinations=(1, 1, 0, 2, 3, 0, 5, 5),
+        sources=(
+            NeuronRow(0),
+            NeuronRow(0),
+            NeuronRow(0),
+            NeuronRow(1),
+            NeuronRow(2),
+            NeuronRow(3),
+            NeuronRow(4),
+            NeuronRow(4),
+        ),
+        destinations=(
+            NeuronRow(1),
+            NeuronRow(1),
+            NeuronRow(0),
+            NeuronRow(2),
+            NeuronRow(3),
+            NeuronRow(0),
+            NeuronRow(5),
+            NeuronRow(5),
+        ),
         weights=(100, 0, 0.275, -0.55, 0.825, 100, -0.275, -0.275),
-        targets=(0, 0, 1),
-        silenced=(3,),
+        targets=(NeuronRow(0), NeuronRow(0), NeuronRow(1)),
+        silenced=(NeuronRow(3),),
         voltage=np.array([-52, -52, -44, -44, -44, -52]),
         synaptic=np.array([0, 0, 100, 0, 0, 0]),
     )
