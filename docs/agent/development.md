@@ -73,7 +73,8 @@ checks; required scientific qualification remains separate.
 ```sh
 uv run --locked --group qualification fly-brain qualify-parity --experiment p9 --duration-s 0.1 --trial 0 --output executions/parity-01
 uv run --locked --group qualification python -m tools.qualify_matrix --output executions/matrix-01
-uv run --locked --group qualification python -m tools.qualify_batch --experiment sugar --singletons executions/matrix-01/cases --output executions/sugar-batch-01
+uv run --locked --group qualification python -m tools.qualify_matrix --resume-from executions/matrix-01 --reviews executions/matrix-01/reviews --verify-only --output executions/matrix-preflight-01
+uv run --locked --group qualification python -m tools.qualify_batch --experiment sugar --singletons executions/matrix-01/matrix.json --output executions/sugar-batch-01
 ```
 
 Check the milestone's current scope before launching. The matrix preserves all 52
@@ -83,6 +84,14 @@ native scoring, stops on an unaccepted case and reports incomplete coverage as
 unaccepted. Batch input requires accepted compatible singletons 0–3; exact native
 phase/final equality suffices for the state budgets. Differences require diagnosis.
 No source edits, commits or push-hook stashing while a run consumes those sources.
+
+`--resume-from` validates retained cases against current sources, canonical inputs,
+native repeats, scoring and bound artifact hashes. `--verify-only` launches no
+engines and grants no matrix acceptance. After it succeeds for the available
+cases, omit that flag to continue missing cases in a fresh output directory.
+`--reviews` supplies case-named directories of completed bound causal reviews.
+Matrix checkpoints record original case paths; the batch tool reads that index
+and validates its four corresponding singletons again before execution.
 
 Case records include persisted channel metadata, `launch.json`, `environment.json`,
 bound reference build provenance, native replay evidence and `case.json`.

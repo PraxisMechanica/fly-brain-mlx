@@ -15,9 +15,7 @@ from fly_brain.qualification.models import ParityCase, QualificationRequest
 from fly_brain.simulation.models import Connectome, ExperimentName, InputPin
 from fly_brain.simulation.ports import StimulusGenerator
 
-
-def case_name(case: ParityCase) -> str:
-    return f'{case.experiment}-{case.steps}-{case.trial}'
+from .qualification_cases import case_name, read_index, verify_case
 
 
 def canonical_inputs(
@@ -105,27 +103,24 @@ def canonical_inputs(
     return hashes
 
 
-def run(request: QualificationRequest) -> dict[str, object]:
+def run(
+    request: QualificationRequest,
+    *,
+    resume_from: Path | None = None,
+    reviews: Path | None = None,
+    verify_only: bool = False,
+) -> dict[str, object]:
     from fly_brain.bootstrap import pinned_inputs, stimulus
-    from fly_brain.comparison.acceptance import (
-        evaluate_case,
-        steps_from_reference_clock,
-        validate_coordinates,
-    )
     from fly_brain.comparison.diagnostics import time_bin_counts
     from fly_brain.comparison.pooling import measure_trials
-    from fly_brain.qualification.adapters.batch_environment import (
-        read_environment,
-    )
-    from fly_brain.qualification.adapters.case_replay import require_complete_replay
     from fly_brain.qualification.adapters.case_report import encode
-    from fly_brain.qualification.adapters.case_spikes import load as load_spikes
     from fly_brain.qualification.matrix_diagnostics import CaseRasters
     from fly_brain.qualification.matrix_diagnostics import (
         summarize as group_diagnostics,
     )
 
     request.output.mkdir(parents=True, exist_ok=False)
+    prior = read_index(resume_from / 'matrix.json') if resume_from is not None else {}
     checkpoint = subprocess.check_output(
         ['git', '-C', str(request.project), 'rev-parse', 'HEAD'], text=True
     ).strip()
@@ -142,6 +137,9 @@ def run(request: QualificationRequest) -> dict[str, object]:
                 'controller': relative,
                 'controller_sha256': hashlib.sha256(script.read_bytes()).hexdigest(),
                 'python_executable': sys.executable,
+                'resume_from': str(resume_from) if resume_from is not None else None,
+                'reviews': str(reviews) if reviews is not None else None,
+                'verify_only': verify_only,
                 'scope': 'Controller launch; individual cases record their own environment and source inventories.',
             },
             artifact,
@@ -159,11 +157,6 @@ def run(request: QualificationRequest) -> dict[str, object]:
     invalid: list[ParityCase] = []
     failed: list[ParityCase] = []
 
-    def read_launch(commit: str, path: str) -> bytes:
-        return subprocess.check_output(
-            ['git', '-C', str(request.project), 'show', commit + ':' + path]
-        )
-
     def summarize() -> dict[str, object]:
         complete = len(completed) == len(cases) and set(batches) == {'sugar', 'p9'}
         accepted = (
@@ -180,6 +173,7 @@ def run(request: QualificationRequest) -> dict[str, object]:
             'cases': completed,
             'missing': [asdict(case) for case in cases[len(completed) :]],
             'batches': batches,
+            'verify_only': verify_only,
             'groups': [
                 asdict(group)
                 for group in group_diagnostics(
@@ -192,13 +186,27 @@ def run(request: QualificationRequest) -> dict[str, object]:
             ],
             'scope': 'Frozen paired matrix with fresh engine repeats and prescribed batches. Stops on an unaccepted or invalid case; incomplete coverage never grants acceptance.',
         }
-        with (request.output / 'matrix.json').open('x') as artifact:
+        with (request.output / 'matrix.json').open('w') as artifact:
             json.dump(result, artifact, indent=2, default=encode, allow_nan=False)
         return result
 
+    summary = summarize()
     for number, case in enumerate(cases, 1):
         name = case_name(case)
-        destination = request.output / 'cases' / name
+        previous = prior.get(case)
+        reused = previous is not None and (previous.directory / 'case.json').is_file()
+        if verify_only and not reused:
+            return summarize()
+        destination = (
+            previous.directory
+            if previous is not None and reused
+            else request.output / 'cases' / name
+        )
+        review = (
+            reviews / name
+            if reviews is not None and (reviews / name).is_dir()
+            else (previous.review if previous is not None else None)
+        )
         command = [
             sys.executable,
             '-m',
@@ -215,62 +223,71 @@ def run(request: QualificationRequest) -> dict[str, object]:
             '--trial',
             str(case.trial),
         ]
-        print(json.dumps({'case': number, 'of': len(cases), 'name': name}), flush=True)
-        with (request.output / 'commands' / (name + '.log')).open('x') as log:
-            process = subprocess.run(
-                command,
-                cwd=request.project,
-                stdout=log,
-                stderr=subprocess.STDOUT,
-                check=False,
-            )
+        print(
+            json.dumps(
+                {'case': number, 'of': len(cases), 'name': name, 'reused': reused}
+            ),
+            flush=True,
+        )
+        if reused and previous is not None:
+            exit_code = previous.exit_code
+        else:
+            with (request.output / 'commands' / (name + '.log')).open('x') as log:
+                process = subprocess.run(
+                    command,
+                    cwd=request.project,
+                    stdout=log,
+                    stderr=subprocess.STDOUT,
+                    check=False,
+                )
+            exit_code = process.returncode
         path = destination / 'case.json'
         accepted = False
+        record: dict[str, object] = {}
         if path.exists():
-            report = json.loads(path.read_text())
-            if report['case'] != asdict(case):
-                raise ValueError('Recorded case identity differs from its invocation')
-            if report['stimulus_sha256'] != hashes[case]:
-                raise ValueError('Engine case input differs from canonical preflight')
-            require_complete_replay(destination, case.steps)
-            launch = json.loads((destination / 'launch.json').read_text())
-            read_environment(
-                request.project, (destination, launch['commit']), read_launch
-            )
-            spikes, _ = load_spikes(
+            verified = verify_case(
+                request.project,
+                destination,
+                case,
                 connectome,
-                case.steps,
-                destination / 'observations/paired-first',
-                destination / 'observations/cpu-first',
-                validate=validate_coordinates,
-                convert_clock=steps_from_reference_clock,
+                pin,
+                canonical_sha256=hashes[case],
+                review=review,
+                bound_files=previous.artifact_sha256
+                if previous is not None and reused
+                else None,
             )
-            measured = evaluate_case(
-                spikes['brian'], spikes['mlx'], spikes['torch'], case.steps * 0.0001
+            if (
+                previous is not None
+                and previous.review_sha256
+                and review == previous.review
+                and verified.review_sha256 != previous.review_sha256
+            ):
+                raise ValueError('Previously bound causal decision changed')
+            rasters.append(verified.rasters)
+            accepted = verified.accepted and (
+                exit_code == 0 or bool(verified.review_sha256)
             )
-            if measured.checks != report['metric_acceptance']['checks']:
-                raise ValueError('Recorded metric gates differ from native rescoring')
-            rasters.append(
-                CaseRasters(case, spikes['brian'], spikes['mlx'], spikes['torch'])
-            )
-            accepted = (
-                process.returncode == 0
-                and report['case_accepted'] is True
-                and measured.accepted
-            )
+            record = verified.record()
             if not accepted:
                 failed.append(case)
         else:
             invalid.append(case)
         completed.append(
             {
+                **record,
                 'case': asdict(case),
-                'exit_code': process.returncode,
+                'directory': str(destination),
+                'exit_code': exit_code,
+                'reused': reused,
                 'accepted': accepted,
             }
         )
+        summary = summarize()
         if not accepted:
-            return summarize()
+            return summary
+    if verify_only:
+        return summary
     for experiment in ('sugar', 'p9'):
         destination = request.output / 'batches' / experiment
         with (request.output / 'commands' / (experiment + '-batch.log')).open(
@@ -288,7 +305,7 @@ def run(request: QualificationRequest) -> dict[str, object]:
                     '--experiment',
                     experiment,
                     '--singletons',
-                    str(request.output / 'cases'),
+                    str(request.output / 'matrix.json'),
                 ],
                 cwd=request.project,
                 stdout=log,
@@ -313,11 +330,23 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--project', type=Path, default=Path.cwd())
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--resume-from', type=Path)
+    parser.add_argument('--reviews', type=Path)
+    parser.add_argument('--verify-only', action='store_true')
     arguments = parser.parse_args()
     request = QualificationOptions(
         project=arguments.project, output=arguments.output
     ).to_request()
-    report = run(request)
+    if arguments.verify_only and arguments.resume_from is None:
+        parser.error('--verify-only requires --resume-from')
+    report = run(
+        request,
+        resume_from=arguments.resume_from.resolve()
+        if arguments.resume_from is not None
+        else None,
+        reviews=arguments.reviews.resolve() if arguments.reviews is not None else None,
+        verify_only=arguments.verify_only,
+    )
     exit_code = 0 if report['accepted'] else 1
     print(json.dumps(diagnostic_display(report, request.output, exit_code), indent=2))
     return exit_code

@@ -12,6 +12,8 @@ from typing import Literal
 from fly_brain.qualification.models import ParityCase, QualificationRequest
 from fly_brain.simulation.identifiers import TrialId
 
+from .qualification_cases import read_index, verify_case
+
 
 def run(
     request: QualificationRequest,
@@ -30,7 +32,6 @@ def run(
     from fly_brain.qualification.adapters.batch_environment import require_environments
     from fly_brain.qualification.adapters.batch_stimulus import load
     from fly_brain.qualification.adapters.batch_verify import compare
-    from fly_brain.qualification.adapters.case_replay import require_complete_replay
     from fly_brain.qualification.adapters.environment import write as write_environment
     from fly_brain.qualification.adapters.mlx_batch_collect import (
         collect as collect_mlx,
@@ -48,26 +49,41 @@ def run(
     torch.set_num_threads(1)
     mx.disable_compile()
     started = perf_counter()
-    paths: dict[TrialId, Path] = {}
-    launches: dict[TrialId, tuple[Path, str]] = {}
-    for trial in map(TrialId, range(4)):
-        directory = singletons / f'{experiment}-10000-{trial}'
-        record = json.loads((directory / 'case.json').read_text())
-        if (
-            record['case'] != asdict(ParityCase(experiment, 10000, trial))
-            or record['case_accepted'] is not True
-        ):
-            raise ValueError(f'Batch requires its accepted singleton case: {directory}')
-        require_complete_replay(directory, 10000)
-        paths[trial] = directory
-        launch = json.loads((directory / 'launch.json').read_text())
-        launches[trial] = directory, launch['commit']
-
     connectome, pin = pinned_inputs()(request.project)
     configuration = read_experiment(experiment)
     canonical = stimulus()(
         connectome, configuration, 10000, tuple(map(TrialId, range(4))), 20261004
     )
+    entries = read_index(singletons)
+    paths: dict[TrialId, Path] = {}
+    launches: dict[TrialId, tuple[Path, str]] = {}
+    accepted_cases: list[dict[str, object]] = []
+    for trial in map(TrialId, range(4)):
+        case = ParityCase(experiment, 10000, trial)
+        entry = entries[case]
+        verified = verify_case(
+            request.project,
+            entry.directory,
+            case,
+            connectome,
+            pin,
+            canonical_sha256=hashlib.sha256(
+                canonical.events[trial].tobytes()
+            ).hexdigest(),
+            review=entry.review,
+            bound_files=entry.artifact_sha256,
+        )
+        if not verified.accepted or (
+            entry.exit_code != 0 and not verified.review_sha256
+        ):
+            raise ValueError(
+                f'Batch requires its accepted singleton case: {entry.directory}'
+            )
+        if entry.review_sha256 and verified.review_sha256 != entry.review_sha256:
+            raise ValueError('Previously bound singleton causal decision changed')
+        paths[trial] = verified.directory
+        launches[trial] = verified.directory, verified.launch
+        accepted_cases.append(verified.record())
     persist_stimulus(request.output, configuration, pin, canonical)
     batch = load(request.output, configuration, pin)
     hashes = require_stimuli(
@@ -159,6 +175,7 @@ def run(
         'steps': 10000,
         'trial_indices': [0, 1, 2, 3],
         'fresh_repeats_bit_identical': True,
+        'singletons': accepted_cases,
         'canonical_singleton_event_sha256': list(hashes),
         'common_source_sha256': common_sources,
         'comparisons': comparisons,
@@ -179,7 +196,9 @@ def main() -> int:
     parser.add_argument('--project', type=Path, default=Path.cwd())
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--experiment', choices=('sugar', 'p9'), required=True)
-    parser.add_argument('--singletons', type=Path, required=True)
+    parser.add_argument(
+        '--singletons', type=Path, required=True, help='Verified matrix.json case index'
+    )
     arguments = parser.parse_args()
     request = QualificationOptions(
         project=arguments.project, output=arguments.output

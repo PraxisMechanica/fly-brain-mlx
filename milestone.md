@@ -53,17 +53,20 @@ Sugar/1,000 steps/trial 1 completed both paired and CPU executions with fresh
 repeats. All 11 metric gates passed, with no common-history budget violation.
 Its first different spike is step 999, neuron 41514. The opposite threshold
 margins are small, but the required bound causal decision is missing. The
-controller stopped unaccepted and cannot yet consume a reviewed case or resume.
-Preserve both raw reports and verify compatibility before reusing their evidence.
+controller stopped unaccepted. Qualification tools now validate and reuse original
+case paths, bind scientific bytes and consume completed causal reviews separately
+from immutable raw reports. Offline validation of both retained cases took 6.812
+seconds: trial 0 passed; trial 1 remained unaccepted. A bound first-observation
+bundle and host proof reconstruct trial 1's native float32 threshold update bit
+for bit; inherited state error dominates its 0.0000306 mV gap. These mechanical
+facts do not replace the required independent causal classification.
 **Scientific acceptance is 1/52 cases; the full matrix remains unaccepted.**
 
 ## Remaining plan and completion
 
-1. Use retained artifacts to implement and verify causal-review consumption and
-   safe resumption in the qualification tools. Keep raw case reports immutable.
-   Source/environment, canonical-input, native-replay and scoring gates must all
-   pass before a completed case can count toward the delivered implementation.
-2. Resolve trial 1's causal review. Work remains in this chat; any required
+1. Verify the committed controller's resumption preflight using retained cases;
+   source/environment, canonical-input, native-replay and scoring gates must pass.
+2. Resolve trial 1's causal review. Work remains in this chat; the required
    external reviewer needs the user's explicit delegation authorization.
 3. Complete affected local scientific requirements, then the missing prescribed
    matrix cases and fresh repeats for every engine on stable scientific sources.
