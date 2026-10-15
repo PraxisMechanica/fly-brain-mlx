@@ -1,7 +1,18 @@
 import subprocess
+from collections.abc import Collection
 from pathlib import Path
 
 from .git_environment import isolated_environment
+
+
+def require_documentation_budget(indexed: Collection[str]) -> None:
+    words = sum(
+        len(Path(name).read_text().split())
+        for name in indexed
+        if Path(name).suffix.lower() in ('.md', '.rst', '.adoc', '.txt', '.tex')
+    )
+    if words > 10000:
+        raise ValueError(f'DOC001: documentation has {words} words; maximum is 10000')
 
 
 def require_indexed_inputs() -> None:
@@ -42,3 +53,4 @@ def require_indexed_inputs() -> None:
     )
     if missing := sorted(inputs - indexed):
         raise ValueError('COV001: unindexed check inputs: ' + ', '.join(missing))
+    require_documentation_budget(indexed)

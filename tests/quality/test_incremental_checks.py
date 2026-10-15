@@ -197,3 +197,18 @@ def test_changed_native_helpers_must_be_indexed_check_inputs(
     monkeypatch.setattr(indexed_inputs.subprocess, 'check_output', indexed)
     with pytest.raises(ValueError, match='unindexed.*metric_cache'):
         gate.require_indexed_inputs()
+
+
+@pytest.mark.parametrize('words', (10000, 10001))
+def test_documentation_limit_counts_the_combined_documents(
+    tmp_path: Path, words: int
+) -> None:
+    first, second = tmp_path / 'README.md', tmp_path / 'contract.rst'
+    first.write_text('model ' * 6000)
+    second.write_text('gate ' * (words - 6000))
+    documents = {str(first), str(second)}
+    if words > 10000:
+        with pytest.raises(ValueError, match='DOC001.*10001.*10000'):
+            indexed_inputs.require_documentation_budget(documents)
+    else:
+        indexed_inputs.require_documentation_budget(documents)

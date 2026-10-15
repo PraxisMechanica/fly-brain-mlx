@@ -5,28 +5,16 @@ interpretation of architecture rules and refactor acceptance.
 
 ## Authority and purpose
 
-On 2026-10-14 the user explicitly accepted concrete backend dependencies because
-production will remain MLX-only, rejected architecture more complex than the
-application, and required each rule to be assessed for its actual benefit.
-This amendment supersedes conflicting generic strict-profile requirements and
-the former 37-rule completion prerequisite. Decision confidence: 99%; source
-review checkpoint: `5249fc5`. Three bounded read-only reviews covered ownership
-and dependencies, injection/roles/state, and design/coverage rules. The parent
-checked their findings against the registry, backend contracts and current
-service, observation and comparison sources.
+The user's 2026-10-14 amendment accepts concrete backend dependencies and
+supersedes the generic strict profile and 37-rule analyzer prerequisite.
+Keep simulation, qualification and comparison understandable. Add structure only
+for a current responsibility or consumer problem. Preserve reproducible inputs,
+failures, scientific contracts and protected reference lineage.
 
-The goal is understandable scientific code with useful responsibility boundaries,
-explicit reproducible inputs, reliable failures and meaningful verification.
-Keep simulation, qualification and comparison recognizable. A small function or
-module is often sufficient; do not manufacture domain layers, interfaces, factories
-or services around every call. A new abstraction needs an actual consumer problem,
-not a hypothetical alternative backend or a better numerical code-health score.
-
-Production MLX operations may directly use `mx.array`, `core.State`,
-`core.StepTrace`, streams and compilation inside the simulation backend.
-Qualification may directly use Torch/Brian types, model equations and required
-framework inheritance. Independent references should remain recognizable and
-independent. Preserve the numerical contract and current lineage/hash guards.
+MLX arrays, states, traces, streams and existing compilation operations belong
+directly in the backend. Qualification may use recognizable Torch/Brian models
+and legitimate framework inheritance. No portable tensor layer or compulsory
+framework rewrite is required.
 
 ## Rule-by-rule decisions
 
@@ -105,30 +93,14 @@ ordering, outputs and error behavior. Add no universal purity, call-target or
 alias-proof assertions, numeric score ratchets, or blanket checker simulation
 matrices. Manual architectural review is not advertised as an automated proof.
 
-## Former six strict-profile observations
+## Former strict-profile observations
 
-The former strict registry is removed. The [scientific manifest](../../tools/code_quality/scientific_sources.json)
-preserves all five scientific identities and their provenance. The old observations
-have these project dispositions:
-
-- `DEP004`, `simulation/backend/engines.py:Advance`: accepted private MLX contract.
-  `Execution`, `Compiler` and `Factory` may carry the concrete backend types they
-  actually use. No neutral numerical carrier or primitive-operation port is needed.
-- `OWN005`, `qualification/adapters/torch_reference.py:TorchModel`: accepted
-  framework-specific scientific reference. Preserve its independent equations,
-  lineage and qualification tests. The same principle applies to the Brian
-  reference and existing legacy MLX observation consumers.
-- `VALUE001`, FlyWire neuron, neuron-row, edge-row and trial records: the strict
-  loader creates these records from the reviewed `primitive` classification, not
-  from demonstrated invalid cross-index use. Many public fields are already
-  branded. Residual report dictionaries and numerical coordinates do not justify
-  new array wrappers or generic lawful-origin analysis. Preserve actual identity,
-  ordering, range, trial, occupancy and independent-reference checks.
-
-These are explicit project decisions authorized by the latest user amendment, not
-repairs or a PASS under the former generic strict profile. No additional application
-defect was established by this bounded review; it is not an exhaustive correctness
-proof. Update a classification only after reviewing its actual source and consumers.
+Private `Advance`/`Execution` backend contracts and qualification `TorchModel`
+framework types are accepted. Useful identifier brands remain; residual numeric
+coordinates do not justify universal wrappers or conversion-origin analysis.
+Preserve actual bounds, ordering, dtype, shape, occupancy and independent checks.
+The retired findings are superseded policy decisions, not automated correctness
+proofs. The scientific manifest retains all five reviewed identities.
 
 ## Bounded refactor acceptance
 

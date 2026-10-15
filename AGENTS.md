@@ -7,6 +7,11 @@ current holds, acceptance criteria, progress, unresolved issues, and completion
 evidence. Follow its latest user amendments over historical checkpoints and
 keep it updated after significant work.
 
+Keep all repository documentation within 10,000 whitespace-delimited words
+combined. The input gate counts tracked Markdown, reStructuredText, AsciiDoc,
+plain-text and LaTeX documents. License texts and generated execution data are
+separate. Keep current rules and bounded evidence; use Git for detailed history.
+
 Use the [agent documentation index](docs/agent/README.md) to find detailed
 contracts, review records, and historical evidence.
 
