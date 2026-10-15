@@ -15,7 +15,7 @@ The development guide owns the authoritative streamlined approach and execution
 budgets. Each document owns its subject; Git retains detailed history. Decision:
 finish the retained-case causal-review and resumption path before more long model
 executions. Confidence: 99% at `538fabb`. No simulation is active. Routine hooks
-and exact-revision CI passed for that implementation: 480 tests in 28.22 seconds.
+and exact-revision CI passed for `5f9db09`: 12 affected tests in 1.65 seconds.
 
 ## Current implementation and evidence
 
@@ -59,20 +59,26 @@ from immutable raw reports. Offline validation of both retained cases took 6.812
 seconds: trial 0 passed; trial 1 remained unaccepted. A bound first-observation
 bundle and host proof reconstruct trial 1's native float32 threshold update bit
 for bit; inherited state error dominates its 0.0000306 mV gap. These mechanical
-facts do not replace the required independent causal classification.
+facts do not replace the required independent causal classification. The
+committed controller's preflight reused both cases with zero engine launches.
 **Scientific acceptance is 1/52 cases; the full matrix remains unaccepted.**
+
+Fresh production workflow checks passed: sugar/100 steps/two trials produced 100
+spikes; silent/one step produced typed empty output. Six-column schemas, integer
+time recovery, neuron mapping, stimulus bits, source/input provenance and both
+self-comparison JSON/CSV outputs were verified. These short runs took 14.214 and
+6.425 seconds. They establish workflow I/O, not independent scientific parity.
 
 ## Remaining plan and completion
 
-1. Verify the committed controller's resumption preflight using retained cases;
-   source/environment, canonical-input, native-replay and scoring gates must pass.
-2. Resolve trial 1's causal review. Work remains in this chat; the required
+1. Resolve trial 1's causal review using the prepared native bundle and host proof.
+   Work remains in this chat; the required
    external reviewer needs the user's explicit delegation authorization.
-3. Complete affected local scientific requirements, then the missing prescribed
+2. Complete affected local scientific requirements, then the missing prescribed
    matrix cases and fresh repeats for every engine on stable scientific sources.
-4. Complete sugar/P9 one-second four-trial comparisons, causal audits, pooled
+3. Complete sugar/P9 one-second four-trial comparisons, causal audits, pooled
    metrics and 100 ms localization. Verify required outputs and provenance.
-5. Record accurate results and limitations, push all changes, pass required
+4. Record accurate results and limitations, push all changes, pass required
    checks and release outputs only after their verification consumers finish.
 
 Progress: **32%**: inventory 10 points, workflows 8, local evidence 8, repairs 5

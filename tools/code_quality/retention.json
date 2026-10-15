@@ -2,6 +2,11 @@
   "version": 1,
   "exceptions": [
     {
+      "path": "executions/implementation-20261014-workflows",
+      "reason": "Fresh production MLX populated/empty spike files, canonical stimuli, simulation provenance and explicitly labelled self-comparison JSON/CSV are consumed by final workflow acceptance and compatibility checks for the delivered scientific implementation. verification.json records the completed bounded checks and their limits.",
+      "release_when": "All schema, integer-time, identity, source/input-provenance, comparison-format and final adoption consumers finish, and milestone.md records the verified results and remaining scientific limits."
+    },
+    {
       "path": "executions/cleanup-20261014-scientific",
       "reason": "Current local scientific qualification after duplicate removal: 319 full-suite passes and the corrected diagnostic assertion's targeted pass, with native observation/reference artifacts. Final scientific acceptance and review of the surviving test coverage consume this bundle.",
       "release_when": "Coverage and native evidence are verified, all related failures are resolved, final matrix/adoption consumers finish, and milestone.md records the bounded results and limitations."
