@@ -15,7 +15,7 @@ acceptance gate.
 The development guide owns the authoritative streamlined approach and execution
 budgets. Decision:
 qualify the increment candidate and queue throughput before more matrix runs.
-Confidence: 95% at `a5de7f7`. Checkpoint hooks and exact-revision CI passed;
+Confidence: 95% at `47efa55`. Checkpoint hooks and exact-revision CI passed;
 candidate arithmetic needs fresh qualification.
 
 ## Current implementation and evidence
@@ -84,9 +84,10 @@ self-comparison JSON/CSV outputs were verified. These short runs took 14.214 and
    all 157 scalars. Observed steps improved 145→63 ms; warm production 35→22 ms.
    Guarded count reduction saved only 6% and remains unselected. The 15 ms target
    and full qualification remain pending.
-3. Overlap independent reference processes with MLX; score first replays and stop
-   proven failures. Demonstrate one-second sugar accuracy and throughput before
-   resuming the complete matrix and fresh repeats on stable sources.
+3. The controller now overlaps a spawned, single-thread CPU reference with MLX
+   and scores the first replay before its paired repeat. Qualify process ownership,
+   failure stopping and native equivalence. Demonstrate one-second sugar accuracy
+   and throughput before the complete matrix on stable sources.
 4. Complete sugar/P9 four-trial batches, causal audits, pooled metrics, 100 ms
    localization and provenance. Record results and limitations, push all changes,
    pass required checks and release outputs after their verification consumers finish.

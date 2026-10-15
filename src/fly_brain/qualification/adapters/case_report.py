@@ -32,6 +32,46 @@ def encode(value: object) -> dict[str, int | float]:
     raise TypeError(type(value).__name__)
 
 
+def require_first_replay(
+    observations: Path,
+    *,
+    connectome: Connectome,
+    steps: int,
+    score: CaseScorer,
+    validate: CoordinateValidator,
+    convert_clock: ReferenceClockConverter,
+) -> None:
+    paired = observations / 'paired-first'
+    spikes, native = load(
+        connectome,
+        steps,
+        paired,
+        observations / 'cpu-first',
+        validate=validate,
+        convert_clock=convert_clock,
+    )
+    acceptance = score(spikes['brian'], spikes['mlx'], spikes['torch'], steps * 0.0001)
+    causal = json.loads((paired / 'causal.json').read_text())
+    checks = {
+        **acceptance.checks,
+        'complete_common_history_budget_check': causal['steps'] == steps
+        and causal['first_budget_violation'] is None,
+    }
+    report = {
+        'case_accepted': False,
+        'full_matrix_accepted': False,
+        'first_replay_gates': checks,
+        'metric_acceptance': asdict(acceptance),
+        'native_inputs_before_conversion': native,
+        'scope': 'First complete replay only. Paired repeat and final causal acceptance remain required. A failed fixed gate stops further execution.',
+    }
+    with (observations / 'first-replay.json').open('x') as artifact:
+        json.dump(report, artifact, indent=2, default=encode, allow_nan=False)
+    failed = [name for name, passed in checks.items() if not passed]
+    if failed:
+        raise ValueError('First replay failed fixed gates: ' + ', '.join(failed))
+
+
 def write(
     case: ParityCase,
     connectome: Connectome,

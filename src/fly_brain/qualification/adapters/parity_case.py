@@ -1,6 +1,7 @@
 import json
 from collections.abc import Mapping
 from dataclasses import asdict
+from functools import partial
 from pathlib import Path
 from time import perf_counter
 
@@ -23,7 +24,7 @@ from fly_brain.simulation.models import Connectome, InputPin
 
 from .brian_jobs import build
 from .case_execution import execute
-from .case_report import write
+from .case_report import require_first_replay, write
 from .environment import write as write_environment
 from .reference_identity import create as reference_identity
 from .reference_identity import file_record
@@ -118,6 +119,14 @@ def run(
         output / 'observations',
         progress,
         read_rows=read_rows,
+        check_first=partial(
+            require_first_replay,
+            connectome=connectome,
+            steps=case.steps,
+            score=score,
+            validate=validate,
+            convert_clock=convert_clock,
+        ),
     )
     report = write(
         case,
