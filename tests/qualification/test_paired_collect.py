@@ -92,7 +92,9 @@ def test_live_collection_retains_complete_native_and_physical_replay(
             assert [physical_hash(frame) for frame in recorded_steps] == [
                 row['sha256'] for row in physical
             ]
-        pending = verify_pending(output, 101, len(case.connectome.sources))
+        pending = verify_pending(
+            output, 101, case.connectome.sources, len(case.connectome.neuron_ids)
+        )
         assert len(pending) == 18
         metadata = json.loads((output / 'reference-final-physical.json').read_text())
         assert metadata['step'] == metadata['clock_step'] == 101

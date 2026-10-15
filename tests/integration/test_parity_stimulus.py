@@ -6,6 +6,7 @@ from typing import get_args
 
 import numpy as np
 import pytest
+from numpy.typing import NDArray
 
 from fly_brain.comparison.acceptance import (
     evaluate_case,
@@ -190,7 +191,11 @@ def test_report_reads_catalog_again_after_native_evidence_and_pending_checks(
         )
         return {engine: empty for engine in ('brian', 'mlx', 'torch')}, {}
 
-    def pending(first: Path, steps: int, edges: int) -> tuple[int, ...]:
+    def pending(
+        first: Path, steps: int, sources: NDArray[np.int32], neurons: int
+    ) -> tuple[int, ...]:
+        np.testing.assert_array_equal(sources, connectome.sources)
+        assert neurons == len(connectome.neuron_ids)
         calls.append('pending')
         return (0,) * 18
 

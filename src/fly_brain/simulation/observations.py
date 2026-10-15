@@ -532,6 +532,8 @@ class NativeComparison:
 
 @dataclass(frozen=True, init=False)
 class PhysicalQueueObservation:
+    """Native pending source spikes in slot/trial/neuron order."""
+
     completed_steps: int
     trial_indices: tuple[TrialId, ...]
     _queue_snapshot: HostSnapshot[np.bool_] = field(init=False, repr=False)
@@ -548,7 +550,7 @@ class PhysicalQueueObservation:
             or queue.shape[1] != len(trial_indices)
         ):
             raise ValueError(
-                'Physical queue observations require native slot/trial/edge coverage'
+                'Physical queue observations require native slot/trial/neuron coverage'
             )
         object.__setattr__(self, 'completed_steps', completed_steps)
         object.__setattr__(self, 'trial_indices', trial_indices)

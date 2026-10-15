@@ -160,7 +160,11 @@ def verify_case(
     if causal['first_spike_step'] is None and (
         causal['first_spike_neurons']
         or report['final_pending_original_row_counts']
-        != list(verify_pending(paired, case.steps, len(connectome.sources)))
+        != list(
+            verify_pending(
+                paired, case.steps, connectome.sources, len(connectome.neuron_ids)
+            )
+        )
     ):
         raise ValueError('Case final pending events differ from native evidence')
     spikes, _ = load_spikes(

@@ -84,7 +84,7 @@ class Session:
 
     def physical_queue(self) -> PhysicalQueueObservation:
         self.calls.append('queue')
-        queues = np.zeros((19, 1, 3), dtype=np.bool_)
+        queues = np.zeros((19, 1, 2), dtype=np.bool_)
         if self.fault == 'boundary-slot':
             queues[0, 0, 0] = True
         return PhysicalQueueObservation(self.step, (TrialId(0),), queues)

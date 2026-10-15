@@ -104,7 +104,7 @@ def advance(
         spikes = core.threshold_spikes(voltage, available)
         last_spike = mx.where(spikes, state.step, state.last_spike_step)
         receiving = available & ~spikes
-        due = state.queue[state.step % core.QUEUE_SLOTS]
+        due = state.queue[state.step % core.QUEUE_SLOTS][:, network.sources]
         accepted = due & receiving[:, network.destinations]
         discarded = due & ~receiving[:, network.destinations]
         synaptic, _, _ = accumulate(layout, accepted, synaptic)
@@ -120,7 +120,7 @@ def advance(
         queue = mx.where(slots == state.step % core.QUEUE_SLOTS, False, state.queue)
         queue = mx.where(
             slots == (state.step + core.DELAY_STEPS) % core.QUEUE_SLOTS,
-            spikes[:, network.sources][None, :, :],
+            spikes[None, :, :],
             queue,
         )
         trace = core.StepTrace(

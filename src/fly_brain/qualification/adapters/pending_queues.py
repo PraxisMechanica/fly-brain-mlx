@@ -6,7 +6,18 @@ import numpy as np
 from numpy.typing import NDArray
 
 
-def verify(paired: Path, steps: int, edges: int) -> tuple[int, ...]:
+def verify(
+    paired: Path, steps: int, sources: NDArray[np.int32], neurons: int
+) -> tuple[int, ...]:
+    if (
+        sources.dtype != np.int32
+        or sources.ndim != 1
+        or neurons < 1
+        or np.any(sources < 0)
+        or np.any(sources >= neurons)
+    ):
+        raise ValueError('Pending verification requires the original native source map')
+    edges = len(sources)
     metadata = json.loads((paired / 'reference-final-physical.json').read_text())
     if metadata['step'] != steps or metadata['clock_step'] != steps:
         raise ValueError('Final physical queues have a different clock')
@@ -17,7 +28,7 @@ def verify(paired: Path, steps: int, edges: int) -> tuple[int, ...]:
         ) as reference,
     ):
         queue = mlx['queue']
-        if queue.dtype != np.bool_ or queue.shape != (19, 1, edges):
+        if queue.dtype != np.bool_ or queue.shape != (19, 1, neurons):
             raise ValueError('Actual MLX final queue has invalid native geometry')
         if queue[(steps - 1) % 19].any():
             raise ValueError('Actual MLX delivered slot was not cleared')
@@ -45,7 +56,7 @@ def verify(paired: Path, steps: int, edges: int) -> tuple[int, ...]:
             ):
                 raise ValueError('Actual reference pending identities are invalid')
             if not np.array_equal(
-                np.flatnonzero(queue[(steps + delay) % 19, 0]), np.sort(ids)
+                np.flatnonzero(queue[(steps + delay) % 19, 0, sources]), np.sort(ids)
             ):
                 raise ValueError(
                     f'Actual final pending events differ at step {steps + delay}'

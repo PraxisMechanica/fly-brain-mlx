@@ -78,7 +78,7 @@ def pulse_mode(
         device_due = boolean_input(due)
         device_accepted = boolean_input(accepted)
         device_discarded = boolean_input(discarded)
-        pending = (mx.arange(core.QUEUE_SLOTS)[:, None, None] == 18) & device_due[
+        pending = (mx.arange(core.QUEUE_SLOTS)[:, None, None] == 18) & device_spikes[
             None, :, :
         ]
         channels = mx.zeros((2, 0), dtype=mx.bool_)

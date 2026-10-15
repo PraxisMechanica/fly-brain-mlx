@@ -50,8 +50,9 @@ class NativeObservationSession:
         self._comparison_maps: (
             tuple[NDArray[np.int32], NDArray[np.int32], mx.array, mx.array] | None
         ) = None
+        self._source_map_matches = False
         self._pending_sources: NDArray[np.bool_] | None = None
-        self._pending_edges: tuple[mx.array, ...] = ()
+        self._pending_slots: tuple[mx.array, ...] = ()
 
     @property
     def configuration(self) -> ObservationConfiguration:
@@ -152,6 +153,9 @@ class NativeObservationSession:
                     mx.array(destination_map),
                 )
                 self._comparison_maps = maps
+                self._source_map_matches = bool(
+                    np.array_equal(source_map, _native_int32(self._network.sources))
+                )
                 self._pending_sources = None
             sources, destinations = maps[2], maps[3]
             due = boolean_input(operands.due_sources)[:, sources]
@@ -177,14 +181,14 @@ class NativeObservationSession:
             pending = operands.pending_sources
             previous = self._pending_sources
             if previous is None:
-                expected_slots = [boolean_input(row)[:, sources] for row in pending]
+                expected_slots = [boolean_input(row) for row in pending]
             else:
-                expected_slots = list(self._pending_edges)
+                expected_slots = list(self._pending_slots)
                 changed_slots = np.flatnonzero(np.any(pending != previous, axis=(1, 2)))
                 for slot in changed_slots:
-                    expected_slots[slot] = boolean_input(pending[slot])[:, sources]
+                    expected_slots[slot] = boolean_input(pending[slot])
             self._pending_sources = pending
-            self._pending_edges = tuple(expected_slots)
+            self._pending_slots = tuple(expected_slots)
             queues = mx.stack(
                 [
                     mx.all(self._state.queue[slot] == expected, axis=1)
@@ -192,6 +196,7 @@ class NativeObservationSession:
                 ],
                 axis=1,
             )
+            queues = queues & self._source_map_matches
             gates = mx.stack(columns, axis=1)
             evaluate(gates, queues)
             result = NativeComparison(

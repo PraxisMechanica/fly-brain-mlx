@@ -15,7 +15,7 @@ acceptance gate. The practical architecture refactor is complete.
 The development guide owns the authoritative streamlined approach and execution
 budgets. Each document owns its subject; Git retains detailed history. Decision:
 qualify the increment candidate and queue throughput before more matrix runs.
-Confidence: 95% at `7e54641`. Checkpoint hooks and exact-revision CI passed;
+Confidence: 95% at `b43b880`. Checkpoint hooks and exact-revision CI passed;
 candidate arithmetic needs fresh qualification.
 
 ## Current implementation and evidence
@@ -26,7 +26,8 @@ controllers exist. Channel class/amplitude and qualification source, compiler,
 header, input and executable provenance are recorded. The candidate evaluates the
 coupled float32 voltage solution as an increment using the existing coefficients
 and old synaptic state. Compensated reduction and uncompiled Metal remain;
-the changed evaluation order is unqualified.
+the changed evaluation order needs full qualification. A source-neuron delay
+queue expands to unchanged original edges at delivery.
 
 Current native tests directly verify phase bytes, all 19 queue slots,
 due events, faults, repeats, chunks and standalone/batch behavior. The three
@@ -78,9 +79,11 @@ self-comparison JSON/CSV outputs were verified. These short runs took 14.214 and
 1. Repair integration using the validated frozen replay: 5,720 steps and 152
    incoming edges reproduce native states in 1.34 seconds. The increment candidate
    passes actual MLX replay in 13.53 seconds. Local/full-network adoption is pending.
-2. Measure and reduce simulation/observation cost. Replace the 287 MB per-trial
-   edge queue with a 2.6 MB source-neuron queue, retaining original edge delivery.
-   Qualify all queue/discrete behavior. Target 15 ms per paired step versus 158 ms.
+2. Queue storage fell from 287 MB to 2.6 MB. The retained 64-step comparison
+   preserves all phase hashes, spikes, original-edge deliveries and 19 logical
+   slots exactly. Observed steps improved 145→89 ms (1.63×); warm production
+   improved 35→32 ms. Profile the remaining cost toward 15 ms; qualify all
+   queue/discrete behavior before adoption.
 3. Overlap independent reference processes with MLX; score first replays and stop
    proven failures. Demonstrate one-second sugar accuracy and throughput before
    resuming the complete matrix and fresh repeats on stable sources.
@@ -95,6 +98,7 @@ The working target is **7–10 days of agent elapsed execution**, with a
 availability. Three completed fresh cases project 5.3 days for the remaining
 1,226,000 steps per engine, including both paired and CPU repeats and preparation.
 Batch execution, causal diagnosis, repairs and delivery remain additional costs.
-The focused replay identifies a correction; its local/full-network qualification
-and throughput remain unverified. A one-day target depends on the accuracy and
-throughput checkpoints. Revise after those measurements.
+The focused replay identifies a correction; full-network accuracy remains
+unverified. The measured queue gain does not establish tenfold campaign throughput.
+Retain this estimate until the accuracy and remaining-cost checkpoints resolve
+the dominant uncertainty; a one-day target remains conditional.

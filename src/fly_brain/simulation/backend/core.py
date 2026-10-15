@@ -129,7 +129,7 @@ def initial_state(
             mx.array(voltage.astype(np.float32)),
             mx.array(synaptic.astype(np.float32)),
             mx.array(last.astype(np.int32)),
-            mx.zeros((QUEUE_SLOTS, trials, network.sources.size), dtype=mx.bool_),
+            mx.zeros((QUEUE_SLOTS, trials, network.neurons), dtype=mx.bool_),
             0,
         )
 
@@ -165,7 +165,7 @@ def advance(
         spikes = threshold_spikes(voltage, available)
         last_spike = mx.where(spikes, state.step, state.last_spike_step)
         receiving = available & ~spikes
-        due = state.queue[state.step % QUEUE_SLOTS]
+        due = state.queue[state.step % QUEUE_SLOTS][:, network.sources]
         accepted = due & receiving[:, network.destinations]
         discarded = due & ~receiving[:, network.destinations]
         neurons = mx.arange(network.neurons)
@@ -187,7 +187,7 @@ def advance(
         queue = mx.where(slots == state.step % QUEUE_SLOTS, False, state.queue)
         queue = mx.where(
             slots == (state.step + DELAY_STEPS) % QUEUE_SLOTS,
-            spikes[:, network.sources][None, :, :],
+            spikes[None, :, :],
             queue,
         )
         trace = StepTrace(

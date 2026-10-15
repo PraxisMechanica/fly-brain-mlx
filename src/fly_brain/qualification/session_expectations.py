@@ -282,12 +282,12 @@ def require_physical_queue(
     if (
         actual.completed_steps != completed_steps
         or actual.trial_indices != trial_indices
-        or actual.queue.shape != (19, len(trial_indices), operands.sources.size)
+        or actual.queue.shape != operands.pending_sources.shape
     ):
         raise ValueError('Actual physical queue has incomplete boundary coverage')
     for slot in range(19):
         for trial in range(len(trial_indices)):
-            expected = operands.pending_sources[slot, trial, operands.sources]
+            expected = operands.pending_sources[slot, trial]
             if not np.array_equal(actual.queue[slot, trial], expected):
                 raise ValueError(
                     'Actual boundary physical queue differs from independent history'

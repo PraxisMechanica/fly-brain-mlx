@@ -58,7 +58,9 @@ def write(
     )
     causal = json.loads((paired / 'causal.json').read_text())
     pending = (
-        verify_pending(paired, case.steps, len(connectome.sources))
+        verify_pending(
+            paired, case.steps, connectome.sources, len(connectome.neuron_ids)
+        )
         if causal['first_spike_step'] is None
         else None
     )
