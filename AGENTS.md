@@ -4,16 +4,19 @@
 
 Read [milestone.md](milestone.md) before project work. It owns the plan,
 current holds, acceptance criteria, progress, unresolved issues, and completion
-evidence. Follow its latest user amendments over historical checkpoints and
-keep it updated after significant work.
+evidence. Keep it updated after significant work.
 
 Keep all repository documentation within 10,000 whitespace-delimited words
 combined. The input gate counts tracked Markdown, reStructuredText, AsciiDoc,
 plain-text and LaTeX documents. License texts and generated execution data are
 separate. Keep current rules and bounded evidence; use Git for detailed history.
 
-Use the [agent documentation index](docs/agent/README.md) to find detailed
-contracts, review records, and historical evidence.
+Use the [agent documentation index](docs/agent/README.md) to find each document's
+owner. The [development guide](docs/agent/development.md) defines the required
+streamlined workflow: one bounded change, automatic affected tests, focused
+scientific diagnosis, then necessary qualification on stable sources. Reuse
+compatible evidence after validation. Keep one implementation and one owner per
+rule; read only the material needed for the current outcome.
 
 Preserve the FlyWire v783 leaky integrate-and-fire model and the
 [reviewed numerical contract](docs/agent/numerical-contract.md), including pinned
@@ -27,12 +30,9 @@ qualification-only references, never production backends.
 Keep the application database-free.
 
 Apply the [project architecture policy](docs/agent/architecture-policy.md).
-The user's 2026-10-14 amendment supersedes the generic strict architecture
-profile: use rules only where they protect this application's actual behavior
-or maintainability. Concrete MLX backend types and framework-specific scientific
-references are permitted. Do not introduce portable tensor abstractions or make
-completion depend on a general 37-rule analyzer. Preserve useful existing
-boundaries, scientific gates and automatic affected-test checks.
+Use rules where they protect actual behavior or maintainability. Concrete MLX
+backend types and framework-specific scientific references are permitted.
+Preserve the practical architecture, useful boundaries and scientific gates.
 
 Preserve source, pinned model inputs, authored scientific rules and incoming
 work. Write runs to fresh output directories. Current holds and their releases
@@ -70,8 +70,8 @@ the delegated engineering judgment. For deeper scientific, numerical, or
 kernel-design judgment, use the installed `bounded-subagent` skill.
 Spawn `gpt-6-astra` explicitly at `xhigh` with fresh context; await completion,
 verify the evidence, and record the decision and limits before dependent work.
-Sol then resumes implementation. Keep assigned reviews with their current
-owners; future reviews use this workflow instead of historical manual switches.
+Sol then resumes implementation. The active milestone controls delegation
+authorization. Keep assigned reviews with their current owners.
 
 ## Repository remotes
 

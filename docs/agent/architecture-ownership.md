@@ -20,18 +20,9 @@ scientific preservation, independent lineage and every actual source-identity
 consumer. Do not rebaseline a hash merely to silence a check. The
 [numerical contract](numerical-contract.md) owns acceptance.
 
-The general ownership registry, role/resource classifiers, declaration/binding
-fingerprints and experimental analyzer are removed. Ordinary functions, parameters
-and modules need no metadata approval. Ruff, Pyright, project import checks and
-automatic affected tests enforce their actual requirements. Required input discovery
-still rejects unindexed source/check inputs. A source-hash pass is not full scientific
-qualification or a semantic architecture proof.
-
-The former six strict-profile observations are resolved by the project policy:
-concrete backend `Advance` types and framework-based `TorchModel` definitions are
-accepted; primitive numerical coordinates and serialized fields do not by themselves
-establish an identity defect. Keep useful brands and actual mapping, bounds, shape,
-order, trial and state checks. No general alias/conversion-origin proof is required.
+Required input discovery rejects unindexed source/check inputs. A source-hash pass
+establishes protected-byte identity; scientific acceptance still requires the
+numerical contract's gates.
 
 Preserve the seven active independent regression fixtures and pinned FlyWire inputs.
 Use the [developer workflow](development.md) for checks and output handling. The

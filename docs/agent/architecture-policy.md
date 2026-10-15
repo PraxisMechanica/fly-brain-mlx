@@ -1,12 +1,10 @@
 # Project architecture policy
 
 Audience: agents and maintainers. This document owns the project-specific
-interpretation of architecture rules and refactor acceptance.
+interpretation of architecture rules and change acceptance.
 
 ## Authority and purpose
 
-The user's 2026-10-14 amendment accepts concrete backend dependencies and
-supersedes the generic strict profile and 37-rule analyzer prerequisite.
 Keep simulation, qualification and comparison understandable. Add structure only
 for a current responsibility or consumer problem. Preserve reproducible inputs,
 failures, scientific contracts and protected reference lineage.
@@ -22,8 +20,7 @@ framework rewrite is required.
 below; **not applicable** identifies a responsibility absent from this application.
 These decisions are project policy, not a claim of complete automatic proof.
 Review expectations use source review and affected behavior tests. Existing native
-checks continue to reject actual failures in their implemented scope; no general
-alias/effect/control-flow analyzer is required.
+checks reject actual failures in their implemented scope.
 
 | Rule | Decision | Requirement for this project |
 | --- | --- | --- |
@@ -67,8 +64,7 @@ alias/effect/control-flow analyzer is required.
 
 ## Executable checks and behavior tests
 
-The executable policy uses the existing runner and tools; the 37-row review above
-is guidance rather than 37 mandatory new analyzers. Required checks are:
+The executable policy uses the existing runner and tools. Required checks are:
 
 | Check | Reject | Permit |
 | --- | --- | --- |
@@ -79,39 +75,31 @@ is guidance rather than 37 mandatory new analyzers. Required checks are:
 | Indexed inputs and affected selection | Missing committed check/source inputs or an unsupported required scope | Changed sources and affected consumers without a full-source replay |
 | Automatic behavior tests | A failure in selected changed/affected behavior | One invocation at commit and CI; no manual or push test replay |
 
-The scientific guard uses a compact five-source manifest with the original
-hashes and provenance. The general registry, declaration/binding fingerprints,
-semantic analyzer and custom compiler bridge are removed. Ordinary refactors need
-no classification approval or synchronized fingerprint updates.
+The scientific guard uses the three-source manifest owned by
+[source ownership](architecture-ownership.md), with reviewed hashes and provenance.
 Existing independent input, mapping, state, repeatability and numerical checks
 retain their actual acceptance contracts. Numerical quality scores are advisory.
 
-Tests for changed enforcement exercise useful outcomes: an ordinary refactor and
-concrete backend contract pass, a protected source change fails, and production
-reference contamination fails. Application refactor tests retain validation,
-ordering, outputs and error behavior. Add no universal purity, call-target or
-alias-proof assertions, numeric score ratchets, or blanket checker simulation
-matrices. Manual architectural review is not advertised as an automated proof.
+Tests for changed enforcement exercise useful outcomes: a concrete backend
+contract passes, a protected source change fails, and production reference
+contamination fails. Application tests retain validation, ordering, outputs and
+error behavior. Source review covers properties outside the automatic checks.
 
-## Former strict-profile observations
+## Concrete implementation boundaries
 
 Private `Advance`/`Execution` backend contracts and qualification `TorchModel`
 framework types are accepted. Useful identifier brands remain; residual numeric
 coordinates do not justify universal wrappers or conversion-origin analysis.
 Preserve actual bounds, ordering, dtype, shape, occupancy and independent checks.
-The retired findings are superseded policy decisions, not automated correctness
-proofs. The scientific manifest retains the three independent reference identities.
 
-## Bounded refactor acceptance
+## Bounded change acceptance
 
-The refactor protects actual invariants and simplifies actual maintenance. A new
-source repair must name the concrete problem, affected callers, smallest useful
-change and meaningful verification. Do not resume the general analyzer, introduce
-provider-neutral numerical wrappers, or reorganize reference models solely to
-satisfy the old catalog.
+A source repair must name the concrete problem, affected callers, smallest useful
+change and meaningful verification. Preserve the current practical architecture
+and add structure only for an actual consumer need.
 
 [Quality coverage](quality-coverage.md) owns implemented checks and their limits;
 [milestone.md](../../milestone.md) owns remaining work and handoff. The
 [numerical contract](numerical-contract.md) retains all scientific acceptance gates.
-Refactor completion does not mean scientific implementation or full qualification
-is complete. Keep independent evidence and report skipped verification honestly.
+Keep independent evidence and report failed, skipped and incomplete verification
+honestly.

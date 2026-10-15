@@ -1,4 +1,4 @@
-# Numerical preservation during refactoring
+# Numerical implementation boundaries
 
 Audience: agents. The [numerical contract](numerical-contract.md) owns scientific
 acceptance; [project architecture policy](architecture-policy.md) owns practical
@@ -40,11 +40,10 @@ Preserve pinned FlyWire inputs and the seven independent regression fixtures.
 | Brian reference execution | Generated numerical code, inputs, initialization, schedule, build settings and failure handling |
 | Producer source dependencies | Every actual source-identity consumer and existing omission/change rejection cases |
 
-Use the automatic affected-test boundaries for ordinary refactors. Do not replay
-unaffected scientific suites for documentation, deleted analysis prototypes or
-unchanged callback wiring. Any new arithmetic, representation or execution mode
+Use the automatic affected-test boundaries for ordinary changes. Scientific
+checks follow the affected numerical behavior. Any new arithmetic, representation
+or execution mode
 still needs the qualification required by the numerical contract; source structure
 or mathematical equivalence alone is insufficient.
 
-These rules grant no numerical remedy, new execution mode, performance result or
-full-network acceptance. The full scientific matrix remains implementation work.
+The numerical contract owns full-network acceptance.

@@ -6,26 +6,33 @@ Read `milestone.md` for current holds and `numerical-contract.md` for acceptance
 ## Development loop
 
 1. Read the current milestone and affected source. Choose one bounded outcome.
+   Reuse verified task state; inspect immediate dependencies only as needed to
+   resolve a concrete uncertainty.
 2. Implement the smallest change. Remove superseded paths and duplicate checks;
    keep one implementation and direct assertions of its required behavior.
 3. Let commit hooks and CI select routine affected tests. Do not run those tests
    manually as well. Fix a failure with a targeted check before retrying delivery.
 4. Run scientific checks only when the changed behavior needs their evidence.
-   Use small native/reference probes to diagnose a failure before another long run.
-5. Once the scientific implementation is stable, run the required independent
-   matrix, fresh repeats and sugar/P9 batches. These are necessary qualification
-   executions, not per-edit regression tests. Run them again only when relevant
-   code, inputs, execution mode or an unresolved failure requires new evidence.
+   Diagnose from retained native evidence and the smallest sufficient probe.
+   Verify collection, causal-review consumption, acceptance and resumption on
+   existing artifacts before launching another long execution.
+5. Once that path works and the scientific implementation is stable, run the
+   required matrix, fresh repeats and sugar/P9 batches. These are necessary qualification
+   executions. Reuse completed cases only after canonical-input, source,
+   environment, native-replay and scoring checks establish compatibility with the
+   delivered implementation. Resume missing work. New code, inputs, execution
+   mode or unresolved failures determine which evidence must be regenerated.
 6. Update the milestone with results, missing acceptance and revised estimates;
    commit, push and verify CI. Keep detailed history in Git.
 
 Routine test commands have a five-minute maximum. Assess any overrun before
-retrying. Long scientific executions, including a justified 44-minute run, are
-allowed only for necessary diagnosis or contract-required acceptance. Never
-shorten an experiment or weaken its gates to fit the routine test budget. Target
+retrying. Long scientific executions run only for a concrete unresolved diagnosis
+or contract-required acceptance. Never shorten an experiment or weaken its gates
+to fit the routine test budget. Target
 less than 10% idle waiting; continue useful independent work without changing
 sources consumed by an active run. Stop unnecessary runs instead of inventing
-work to occupy their duration.
+work to occupy their duration. Concentrate on implementation and acceptance;
+further checker/report performance tuning is outside the current scope.
 
 ## Tools and delivery
 
@@ -80,8 +87,10 @@ No source edits, commits or push-hook stashing while a run consumes those source
 Case records include persisted channel metadata, `launch.json`, `environment.json`,
 bound reference build provenance, native replay evidence and `case.json`.
 `matrix.json` includes per-case/pooled metrics and 100 ms localization. A first
-spike difference needs the prescribed causal decision; good summary metrics alone
-do not establish acceptance.
+spike difference needs the prescribed causal decision, bound to the original
+artifacts. Preserve the unaccepted raw report and record any reviewed acceptance
+separately. Good summary metrics or small threshold margins alone do not establish
+acceptance.
 
 ## Diagnostics and outputs
 
