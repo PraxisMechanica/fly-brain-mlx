@@ -13,7 +13,12 @@ from fly_brain.simulation.backend.engines import Factory, factored
 from fly_brain.simulation.identifiers import NeuronRow
 from fly_brain.simulation.models import NetworkCase as Case
 from tests.support.bucketed import bucketed_case, exact_bucketed_case
-from tests.support.qualification import Harness, events_for, replay_events
+from tests.support.qualification import (
+    Harness,
+    assert_reference_phases,
+    events_for,
+    replay_events,
+)
 
 pytestmark = [pytest.mark.integration, pytest.mark.reference, pytest.mark.metal]
 INITIAL = core.INITIAL_LAST_SPIKE
@@ -251,17 +256,7 @@ def test_factored_large_fanin_meets_delayed_reference_trace(
     expected = run_reference(case, events)
     observed = harness.run_candidate(case, events)
     repeated = harness.run_candidate(case, events)
-    errors = {}
-    for key, wanted in expected.items():
-        if key.endswith('_mv'):
-            error = np.abs(
-                np.asarray(observed[key], dtype=np.float64)
-                - np.asarray(wanted, dtype=np.float64)
-            )
-            assert np.all(error <= 1e-3 + 1e-5 * np.abs(wanted))
-            errors[key] = float(error.max(initial=0))
-        else:
-            np.testing.assert_array_equal(observed[key], wanted)
+    errors = assert_reference_phases(name, case, observed, expected)
     for key in observed:
         np.testing.assert_array_equal(observed[key], repeated[key])
     assert observed['accepted'][18, 0].all()

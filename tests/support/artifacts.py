@@ -8,7 +8,7 @@ import mlx.core as mx
 import numpy as np
 from numpy.typing import NDArray
 
-from fly_brain.simulation.backend.core import COEFFICIENTS
+from fly_brain.simulation.backend.core import COEFFICIENTS, VOLTAGE_INCREMENT
 
 TraceArrays = dict[
     str, NDArray[np.float32 | np.float64 | np.int32 | np.int64 | np.bool_]
@@ -49,6 +49,9 @@ class ArtifactRecorder:
             'device': mx.device_info(),
             'MLX_ENABLE_TF32': '0',
             'coefficients_float32': dict(zip('abc', COEFFICIENTS, strict=True)),
+            'voltage_increment_float32': VOLTAGE_INCREMENT,
+            'native_queue_axes': ('step', 'trial', 'slot', 'neuron'),
+            'reference_queue_axes': ('step', 'trial', 'slot', 'original-edge'),
             'measurements': self.measurements,
         }
         with (self.output / filename).open('x') as destination:

@@ -39,18 +39,16 @@ Baseline local qualification: 319/320 passed in 268.189 seconds; its schedule
 assertion repair passed separately. The latest candidate attempt stopped after
 64.36 seconds: 16 passed and two batch validators expected obsolete edge-width
 queues. Rescoring all eight retained batch/repeat combinations with neuron-width
-geometry passes. A fresh complete suite remains pending after the coefficient
-correction; neither partial run establishes acceptance.
+geometry passes. The corrected-coefficient suite reached 53 passes before a
+test oracle compared source storage directly with edge storage. Its repair checks
+every source slot and original-edge expansion. Complete local acceptance is pending.
 
-Retained scalar/layout/pulse audits cover all 157 scalar cases, pinned fan-in,
-every original device row and the full-connectome pulse. Input pin, row identity
-and grouping checks remain retained. Older consumed outputs have expired.
+Retained audits cover pinned inputs, grouping, fan-in, device rows and pulse.
+Shared scaling preserves all 2,355 retained arrays across 157 scalar cases exactly.
 
-The 52-case canonical preflight passed. On `c53af8a`, five sugar/1,000-step trials pass
-derived acceptance with complete fresh repeats. Four match Brian2 spikes exactly.
-Trial 1's first difference at step 999, neuron 41514, has a completed bound Astra
-roundoff review and native host reconstruction; its raw unaccepted report remains
-unchanged. These proofs qualify their producing implementation only.
+On `c53af8a`, five sugar/1,000-step trials passed with fresh repeats; four match
+Brian2 spikes exactly. Trial 1 has a bound roundoff review; its raw unaccepted
+report remains unchanged. These proofs qualify that producer only.
 
 **Current hold: sugar/10,000 steps/trial 0 fails the fixed timing gate.** On
 `c53af8a`, its complete first paired replay took 1,576.930 seconds, with no preceding
@@ -77,7 +75,8 @@ self-comparison JSON/CSV outputs were verified. These short runs took 14.214 and
 
 1. Repair integration using the validated frozen replay: 5,720 steps and 152
    incoming edges reproduce native states in 1.34 seconds. The increment candidate
-   passes actual MLX replay in 13.53 seconds. Local/full-network adoption is pending.
+   passes reviewed-coefficient MLX replay in 11.47 seconds; critical voltage error
+   is 0.00000143 mV. Local/full-network adoption is pending.
 2. Queue storage fell from 287 MB to 2.6 MB. Sparse due-set validation preserves
    exact membership, multiplicity and dense-bitmap hashes. Retained 64-step
    comparisons preserve all phase hashes, spikes, edge deliveries and 19 logical

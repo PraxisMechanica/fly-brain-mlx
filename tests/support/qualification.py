@@ -40,6 +40,43 @@ def replay_events(steps: int = 1000, trials: int = 1) -> BoolArray:
     )
 
 
+def assert_reference_phases(
+    name: str, case: Case, observed: TraceArrays, expected: TraceArrays
+) -> dict[str, float]:
+    spikes = expected['spikes']
+    pending = np.zeros(
+        (spikes.shape[0], spikes.shape[1], 19, case.neurons), dtype=np.bool_
+    )
+    for step, trial, neuron in zip(*np.nonzero(spikes), strict=True):
+        pending[step : min(len(spikes), step + 18), trial, (step + 18) % 19, neuron] = (
+            True
+        )
+    np.testing.assert_array_equal(
+        observed['queue'], pending, err_msg=f'{name}: source queue'
+    )
+    errors: dict[str, float] = {}
+    for key, wanted in expected.items():
+        actual = observed[key]
+        if key == 'queue':
+            actual = actual[..., np.asarray(case.sources, dtype=np.int32)]
+        if key.endswith('_mv'):
+            assert np.all(np.isfinite(actual))
+            error = np.abs(
+                np.asarray(actual, dtype=np.float64)
+                - np.asarray(wanted, dtype=np.float64)
+            )
+            budget = 1e-3 + 1e-5 * np.abs(wanted)
+            assert np.all(error <= budget), (
+                name,
+                key,
+                np.unravel_index(error.argmax(), error.shape),
+            )
+            errors[key] = float(error.max(initial=0))
+        else:
+            np.testing.assert_array_equal(actual, wanted, err_msg=f'{name}: {key}')
+    return errors
+
+
 @dataclass
 class Harness:
     compile: Compiler
@@ -83,24 +120,7 @@ class Harness:
     def qualify(self, name: str, case: Case, events: BoolArray) -> TraceArrays:
         expected = run_reference(case, events)
         observed = self.run_candidate(case, events)
-        errors = {}
-        for key, wanted in expected.items():
-            actual = observed[key]
-            if key.endswith('_mv'):
-                assert np.all(np.isfinite(actual))
-                error = np.abs(
-                    np.asarray(actual, dtype=np.float64)
-                    - np.asarray(wanted, dtype=np.float64)
-                )
-                budget = 1e-3 + 1e-5 * np.abs(wanted)
-                assert np.all(error <= budget), (
-                    name,
-                    key,
-                    np.unravel_index(error.argmax(), error.shape),
-                )
-                errors[key] = float(error.max(initial=0))
-            else:
-                np.testing.assert_array_equal(actual, wanted, err_msg=f'{name}: {key}')
+        errors = assert_reference_phases(name, case, observed, expected)
         margin = np.abs(np.asarray(expected['pre_voltage_mv'], dtype=np.float64) + 45)
         budget = 1e-3 + 1e-5 * np.abs(expected['pre_voltage_mv'])
         assert np.all(
