@@ -13,7 +13,7 @@ from fly_brain.simulation.models import Connectome
 from fly_brain.simulation.observations import ReductionReader
 
 from . import core
-from .accumulation import exact_count_sum, factored_sum
+from .accumulation import compensated_tree, scaled_count_sum
 from .arrays import boolean_input
 from .engines import Execution
 from .reduction_evidence import read_rows
@@ -71,21 +71,22 @@ def accumulate(
         padded_events = mx.concatenate(
             [mx.zeros((accepted.shape[0], 1), dtype=mx.bool_), accepted], axis=1
         )
-        outputs: list[mx.array] = []
         high_counts: list[mx.array] = []
         low_counts: list[mx.array] = []
         for bucket in layout.buckets:
             active = padded_events[:, bucket.edge_ids + 1] & bucket.occupied
             counts = mx.where(active, bucket.counts, 0)
-            reduce_counts = exact_count_sum if layout.exact_counts else factored_sum
-            result, high, low = reduce_counts(counts, initial[:, bucket.targets])
-            outputs.append(result)
+            if layout.exact_counts:
+                high = mx.sum(counts, axis=-1)
+                low = mx.zeros_like(high)
+            else:
+                high, low = compensated_tree(counts)
             high_counts.append(high)
             low_counts.append(low)
-        return (
-            mx.concatenate(outputs, axis=1)[:, layout.inverse_targets],
+        return scaled_count_sum(
             mx.concatenate(high_counts, axis=1)[:, layout.inverse_targets],
             mx.concatenate(low_counts, axis=1)[:, layout.inverse_targets],
+            initial,
         )
 
 

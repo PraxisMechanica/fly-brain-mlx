@@ -15,7 +15,7 @@ acceptance gate.
 The development guide owns the authoritative streamlined approach and execution
 budgets. Decision:
 qualify the increment candidate and queue throughput before more matrix runs.
-Confidence: 95% at `39a04f7`. Checkpoint hooks and exact-revision CI passed;
+Confidence: 95% at `a5de7f7`. Checkpoint hooks and exact-revision CI passed;
 candidate arithmetic needs fresh qualification.
 
 ## Current implementation and evidence
@@ -80,9 +80,10 @@ self-comparison JSON/CSV outputs were verified. These short runs took 14.214 and
 2. Queue storage fell from 287 MB to 2.6 MB. Sparse due-set validation preserves
    exact membership, multiplicity and dense-bitmap hashes. Retained 64-step
    comparisons preserve all phase hashes, spikes, edge deliveries and 19 logical
-   slots. Observed steps improved 145→72 ms; warm production remains 32–35 ms.
-   Guarded count reduction passed 157 scalars but saved only 6%; keep the reviewed
-   arithmetic. Profile remaining cost toward 15 ms; full qualification is pending.
+   slots. Shared scaling preserves the reviewed operation sequence and passes
+   all 157 scalars. Observed steps improved 145→63 ms; warm production 35→22 ms.
+   Guarded count reduction saved only 6% and remains unselected. The 15 ms target
+   and full qualification remain pending.
 3. Overlap independent reference processes with MLX; score first replays and stop
    proven failures. Demonstrate one-second sugar accuracy and throughput before
    resuming the complete matrix and fresh repeats on stable sources.
@@ -92,12 +93,10 @@ self-comparison JSON/CSV outputs were verified. These short runs took 14.214 and
 
 Progress: **31%**: inventory 10 points, workflows 8, baseline local evidence 8,
 repairs 5 and 0/52 of 49 matrix points. Batches and final acceptance remain incomplete.
-The working target is **7–10 days of agent elapsed execution**, with a
-**90%-confidence remaining estimate of 6–21 days**, assuming continuous Mac
-availability. Three completed fresh cases project 5.3 days for the remaining
-1,226,000 steps per engine, including both paired and CPU repeats and preparation.
-Batch execution, causal diagnosis, repairs and delivery remain additional costs.
-The focused replay identifies a correction; full-network accuracy remains
-unverified. The measured queue gain does not establish tenfold campaign throughput.
-Retain this estimate until the accuracy and remaining-cost checkpoints resolve
-the dominant uncertainty; a one-day target remains conditional.
+The working target is **4–6 days of agent elapsed execution**, with a
+**90%-confidence remaining estimate of 3–14 days**, assuming continuous Mac
+availability. All fresh cases require 1,231,000 steps per engine, twice with
+repeats. Extrapolating 63 ms observed steps plus earlier pairing/CPU overhead
+projects 2.8 matrix days before overlap, batches, diagnosis and repairs.
+Full-network accuracy and sustained throughput remain unverified; confirm both
+in the one-second checkpoint. A one-day target remains conditional.
