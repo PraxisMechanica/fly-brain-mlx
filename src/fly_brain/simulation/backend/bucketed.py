@@ -102,7 +102,7 @@ def advance(
             state.voltage_offset_mv, state.synaptic_mv, available
         )
         pre_voltage, pre_synaptic = voltage, synaptic
-        pre_physical_voltage = pre_voltage - 52
+        pre_physical_voltage = pre_voltage - 45
         spikes = core.threshold_spikes(pre_physical_voltage, available)
         last_spike = mx.where(spikes, state.step, state.last_spike_step)
         receiving = available & ~spikes
@@ -135,13 +135,13 @@ def advance(
             accepted,
             discarded,
             accepted_inputs,
-            voltage - 52,
+            voltage - 45,
             synaptic,
             pre_voltage,
             voltage,
         )
         updated = core.State(
-            mx.where(spikes, 0, voltage),
+            mx.where(spikes, -7, voltage),
             mx.where(spikes, 0, synaptic),
             last_spike,
             queue,

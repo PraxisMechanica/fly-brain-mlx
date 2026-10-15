@@ -45,9 +45,9 @@ def test_initial_configuration_exposes_actual_offset_and_rejects_lossy_physical_
         np.full((1, 6), -100000000, dtype=np.int32),
     )
     configuration = factory((TrialId(0),), starting).configuration
-    encoded = voltage.astype(np.float32) + np.float32(52)
+    encoded = voltage.astype(np.float32) + np.float32(45)
     assert configuration.initial_voltage_offset_mv.tobytes() == encoded.tobytes()
-    decoded = encoded - np.float32(52)
+    decoded = encoded - np.float32(45)
     assert configuration.initial_voltage_mv.tobytes() == decoded.tobytes()
     assert (
         configuration.initial_voltage_mv.tobytes()

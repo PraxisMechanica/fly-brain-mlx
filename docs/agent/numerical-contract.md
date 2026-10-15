@@ -114,13 +114,14 @@ Milestone 2 must prove input equivalence and the stable grouping permutation bef
 
 ### Prospective single-state voltage representation
 
-The absolute-voltage increment `v + (d*(v+52) + c*g)` failed ten-second timing
-acceptance. A failure-only review and parent native probes support a candidate
-storing one float32 offset `u=v+52` and one float32 `g`. Compute
-`u_pre=u+(d*u+c*g_old)`, `g_pre=b*g_old`; decode float32 `v_pre=u_pre-52` before
-the unchanged strict physical predicate. Never substitute `u>7`. Construct
+The current prospective candidate stores one float32 offset `u=v+45` and one
+float32 `g`. Rest-relative decoding double-rounded an above-threshold reference
+state to equality in failed sugar trial 2. Native frozen-target and six-state
+linear probes support centering at the pinned threshold. Compute
+`u_pre=u+(d*(u+7)+c*g_old)`, `g_pre=b*g_old`; decode float32 `v_pre=u_pre-45` before
+the unchanged strict physical predicate. Never substitute `u>0`. Construct
 `d=float32(expm1(-0.1/20))=-0.004987520631402731` on the host; retain `b,c`,
-uncompiled GPU operations and every model phase. Reset `u,g` to zero and freeze
+uncompiled GPU operations and every model phase. Reset `u=-7,g=0` and freeze
 both exactly when unavailable; carry no correction state.
 
 Cast initial physical voltage to float32 before encoding. Encoding is not

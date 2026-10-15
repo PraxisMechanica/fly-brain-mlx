@@ -43,7 +43,7 @@ class Session:
             np.full((1, 2), -52, dtype=np.float32),
             np.zeros((1, 2), dtype=np.float32),
             np.full((1, 2), -100000000, dtype=np.int32),
-            np.zeros((1, 2), dtype=np.float32),
+            np.full((1, 2), -7, dtype=np.float32),
         )
 
     def advance(self, events: NDArray[np.bool_]) -> NativeObservation:

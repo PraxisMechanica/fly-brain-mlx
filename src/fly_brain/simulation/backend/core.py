@@ -42,7 +42,7 @@ class State(NamedTuple):
     @property
     def voltage_mv(self) -> mx.array:
         with mx.stream(mx.gpu):
-            return self.voltage_offset_mv - 52
+            return self.voltage_offset_mv - 45
 
 
 class StepTrace(NamedTuple):
@@ -134,7 +134,7 @@ def initial_state(
         )
     with mx.stream(mx.gpu):
         return State(
-            mx.array(voltage.astype(np.float32)) + 52,
+            mx.array(voltage.astype(np.float32)) + 45,
             mx.array(synaptic.astype(np.float32)),
             mx.array(last.astype(np.int32)),
             mx.zeros((QUEUE_SLOTS, trials, network.neurons), dtype=mx.bool_),
@@ -147,9 +147,9 @@ def integrate(
 ) -> tuple[mx.array, mx.array]:
     _, b, c = COEFFICIENTS
     with mx.stream(mx.gpu):
-        # Store the deviation from rest to avoid accumulating absolute-voltage rounding.
+        # Center at threshold to limit physical-voltage projection rounding at spikes.
         voltage = voltage_offset_mv + (
-            VOLTAGE_INCREMENT * voltage_offset_mv + c * synaptic_mv
+            VOLTAGE_INCREMENT * (voltage_offset_mv + 7) + c * synaptic_mv
         )
         synaptic = b * synaptic_mv
         return mx.where(available, voltage, voltage_offset_mv), mx.where(
@@ -174,7 +174,7 @@ def advance(
             state.voltage_offset_mv, state.synaptic_mv, available
         )
         pre_voltage, pre_synaptic = voltage, synaptic
-        pre_physical_voltage = pre_voltage - 52
+        pre_physical_voltage = pre_voltage - 45
         spikes = threshold_spikes(pre_physical_voltage, available)
         last_spike = mx.where(spikes, state.step, state.last_spike_step)
         receiving = available & ~spikes
@@ -213,13 +213,13 @@ def advance(
             accepted,
             discarded,
             accepted_inputs,
-            voltage - 52,
+            voltage - 45,
             synaptic,
             pre_voltage,
             voltage,
         )
         next_state = State(
-            mx.where(spikes, 0, voltage),
+            mx.where(spikes, -7, voltage),
             mx.where(spikes, 0, synaptic),
             last_spike,
             queue,
