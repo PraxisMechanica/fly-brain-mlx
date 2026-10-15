@@ -116,13 +116,21 @@ Milestone 2 must prove input equivalence and the stable grouping permutation bef
 
 The prospective candidate stores one float32 offset `u=v+45` and one float32 `g`.
 Native frozen-target and six-state linear probes support this origin. Compute
-`u_pre=u+(d*(u+7)+c*g_old)`, `g_pre=b*g_old`. The bounded candidate evaluates
+`u_pre=u+(d*(u+7)+c*g_old)` with transient compensation: `TwoSum(u,7)` gives
+`h,l`; apply `TwoProduct` to `h*d`, `l*d` and `g_old*c`. Reduce the eight leaves
+`[u,p_hd,e_hd,p_ld,e_ld,p_gc,e_gc,0]` with the existing compensated tree, then
+collapse to one float32 voltage. No correction persists between timesteps.
+The synaptic candidate uses
+`g_pre=g_old+beta*g_old`, with host `beta=float32(expm1(-0.1/5))=-0.019801326096057892`.
+This changes the finite-precision decay approximation while preserving the pinned
+time constant. Native target and fixed linear probes support these operations;
+full qualification remains required. The bounded candidate evaluates
 strict `u_pre>0` before the lossy physical projection `v_pre=float32(u_pre-45)`.
 Positive offsets can fire while that projection equals -45; record this changed
 finite-precision behavior explicitly. Independently validate the actual offset
 predicate and exact physical projection. This engineering decision needs
 qualification, not separate human approval. Construct
-`d=float32(expm1(-0.1/20))=-0.004987520631402731` on the host; retain `b,c`,
+`d=float32(expm1(-0.1/20))=-0.004987520631402731` on the host; retain `c`,
 uncompiled GPU operations and every model phase. Reset `u=-7,g=0` and freeze
 both exactly when unavailable; carry no correction state.
 

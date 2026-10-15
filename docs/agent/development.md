@@ -64,17 +64,23 @@ adopted checks block delivery; numerical code-quality scores remain advisory.
 
 ## Local scientific checks
 
+Reuse compatible scientific records for unchanged producers and inputs. Run
+affected checks in bounded groups with the CLI's existing pytest selection. For
+example, one module can be selected with:
+
 ```sh
-uv run --locked --group qualification fly-brain qualify --output executions/local-01
+PYTEST_ADDOPTS='-k test_mlx_core' uv run --locked --group qualification fly-brain qualify --output executions/local-core-01
 ```
 
-Local qualification covers independent-reference and MLX scientific behavior;
-routine hooks do not replace it.
+Record the full current collected inventory, each selection and completed JUnit
+node identities. Require exact coverage by disjoint fresh passes and verified
+compatible records, with zero failures/errors/skips. A selected subset does not
+certify the whole inventory. Routine hooks do not replace scientific checks.
 
-The runner stops at the first failure and enforces five minutes including setup, kills its owned process group
-on expiry and returns unaccepted exit 124. Partial counts are untrusted. Diagnose
-failures directly; do not repeat unaffected expensive suites. Hooks own routine
-checks; required scientific qualification remains separate.
+The runner stops at the first failure, enforces five minutes including setup,
+kills its owned process group on expiry and returns unaccepted exit 124.
+Retain timed-out runs; untrusted partial counts grant no acceptance. Diagnose
+scope and cost before another invocation; avoid repeating unaffected suites.
 
 ## Full scientific qualification
 

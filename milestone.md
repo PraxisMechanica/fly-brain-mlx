@@ -1,85 +1,77 @@
 # MLX fly-brain milestone
 
-Updated 2026-10-15. The numerical contract owns scientific acceptance; the agent
-index owns document navigation. Git retains earlier checkpoints.
+Updated 2026-10-15. The numerical contract owns acceptance; the agent index owns
+navigation. Detailed evidence remains under the registered root
+`executions/implementation-20261014-matrix`; paths below are relative to it.
 
-## Scope and execution limits
+## Scope and implementation
 
-Continue from `origin/main` in `/Users/ocasta/.codex/worktrees/pr-split/fly-brain`.
-`AGENTS.md` owns platform, reference, retention and failure-only escalation policies.
-Preserve every scientific acceptance gate.
+Worktree: `/Users/ocasta/.codex/worktrees/pr-split/fly-brain`, `origin/main`.
+Preserve all gates, pinned inputs, protected references, seven fixtures and
+practical architecture. `AGENTS.md` owns execution policies.
 
-## Current implementation and evidence
+Simulation, comparison, canonical replay and qualification workflows exist.
+Production uses float32 threshold-relative voltage, stable synaptic decay and
+transient compensated integration. The contract specifies its order; no
+correction state persists. Accumulation and source queues are unchanged.
 
-All five experiments, canonical replay, six-column Parquet including typed empty
-output, comparison JSON/CSV and qualification controllers exist with provenance.
-The unqualified candidate stores one voltage offset from threshold, with unchanged
-coefficients, guarded exact float32 count sums, compensated scaling, uncompiled
-Metal and source-neuron queues.
-Protected references, seven independent fixtures, spike schemas and gates are unchanged.
+Delivery baseline: `810359d`. Current commit, push and CI evidence belongs in
+`compensated-voltage-candidate-01/delivery.json` when those checks finish.
 
-The stored-offset predicate candidate passes **323/323**, zero failures,
-errors or skips, in **260.46 seconds**. All six required audits pass in **226.48
-seconds**, with 223 native archive hashes verified. They cover 157 scalar
-cases in each reducer, 24,576 primitive and production-layout fan-in cases each,
-full pinned device layout and original/silenced/blocked connectome pulses.
-Each fan-in audit retains 99 original-state casting limitations. Scientific
-producing sources remain unchanged. Current evidence:
-`executions/implementation-20261014-matrix/offset-predicate-candidate-01`.
+## Current scientific evidence
 
-**Current arithmetic: 0/52 accepted; all matrix cases and batches remain.**
-The decoded-predicate retry at `415f005` fails timing F1 **0.9105285060 < 0.95**, after
-601.20 seconds; no paired repeat ran. First difference moved to step 7898,
-neuron 117657. Native/host reconstruction is exact; even the correctly rounded
-reference physical float32 voltage equals threshold. Both origins and synaptic
-update variants retain this mismatch. The completed failure-only Astra review
-identifies lossy physical projection as the first cause. The mistaken human
-approval hold is released; representation decisions remain delegated.
-Review and parent verification:
-`matrix-threshold-target-01/diagnostics/threshold-projection-review`.
-No acceptance gate was waived.
-Preceding rest-relative arithmetic accepted seven cases under `matrix-offset-exact-01`
-before the same trial failed at step 3388 under `matrix-offset-exact-02`.
-Those cases qualify only their original arithmetic.
+The ten-second sugar trial-0 screen at `810359d` fails timing F1 **0.4705927123**.
+Synaptic-increment arithmetic also fails, with optimistic F1 at most **0.93406**.
+Native-bound diagnosis identifies inherited voltage-operation rounding. See
+`decay-first-difference-03` and
+`decay-timing-continuation-01/timing-upper-bound.json`.
 
-The absolute-voltage predecessor failed ten-second sugar trial 0:
-F1 **0.6064396002 < 0.95** (`matrix-increment-02`). Long-horizon repair remains unverified.
+The current whole-network ten-second screen matches **all 170,752 reference
+spikes exactly**, timing F1 **1.0**, and satisfies every primary metric gate.
+Six continuous native chunks take **1,279.66 seconds**; scoring takes **1.82
+seconds** without another simulation. Evidence: `voltage-first-difference-01`
+through `-06`, `voltage-timing-screen-01`. This screen grants no case acceptance.
+Native target/linear probes pass. A bundled prototype hit its 295-second guard;
+only missing work reran, passing in 27.82 seconds.
 
-The stored-offset predicate probe passes in **15.91 seconds** under
-`native-offset-predicate-01`: both retained target baselines match native bytes;
-the candidate matches reference target spikes, changing only step 7898.
-Boundary, initial-cast, reset/freeze, repeat, chunk and batch checks pass.
-Production and independent predicate/projection checks implement that repair.
-Paired qualification remains.
-Initial encoding can be lossy; actual configuration remains visible and its exact
-physical gate stays unchanged. Earlier diagnostics retain Metal-flushed synaptic
-subnormal host-bit differences below 1.2e-38 mV; required state budgets passed.
+**Local scientific inventory: all 323 checks covered**, with **222 fresh passes
+and 101 unchanged reference passes verified and reused**. Fresh groups contain
+210/6/6 tests, with exact disjoint node coverage and zero failures/errors/skips.
+Two broader commands hit their 300-second limits; both remain unaccepted.
+Only affected checks were subsequently run. Five unchanged accumulation/layout
+audits are source/input/device compatible; all 221 retained archive hashes verify.
+The changed-integration connectome pulse passes fresh, with two archive hashes
+verified. The 99 original-state conversion and other contract limitations remain.
+Evidence: `compensated-voltage-candidate-01/local-verification.json`,
+`unchanged-reference-verification.json` and `audit-verification.json` there.
 
-Current CLI workflows pass under `workflows-offset-predicate-01`: 100 sugar spikes
-across two trials match independent Brian2 prefixes exactly; silent output is
-typed empty. Schemas, identities, times, inputs, provenance and comparison
-JSON/CSV pass. Simulation elapsed: 10.23 and 9.09 seconds. These bounded checks do
-not replace scientific batches. Delivery requires successful hooks and exact-revision CI.
+Fresh CLI workflows pass under `workflows-compensated-voltage-01`: two sugar
+trials match Brian2 prefixes; silent output is typed empty. Schemas, provenance
+and comparison JSON/CSV pass. Post-run verification corrects a prematurely hashed
+diagnostic transcript; scientific artifact bindings verify.
+
+**Previous arithmetic: 10/52 accepted** (sugar trials 0–4 at 0.1 and 1 second).
+Those passes remain recorded for that implementation. **Current arithmetic:
+0/52 accepted**; changed numerical updates require renewed MLX qualification.
 
 ## Remaining plan and completion
 
-The production failure screen reproduces the old native raster exactly in 104.66
-seconds versus 601.20 seconds paired. The repaired candidate passes all fixed and
-paired metrics with **16,801 exact reference events**, F1 **1.0**, in **128.84
-seconds** (`fast-screen-offset-predicate-01`). This grants no state/repeat/causal acceptance.
+1. Deliver the candidate with required hooks and exact-revision CI.
+2. **Next step: complete all 52 paired cases**, fresh repeats for all engines,
+   causal audits, pooled/localized metrics and sugar/P9 one-second four-trial
+   comparisons. Resume only verified compatible evidence. Stop failed gates and
+   diagnose their causes before continuing; a first spike difference alone is
+   not a failed timing metric.
+3. Record results and limitations, commit and push, pass delivery checks, finish
+   clean and release outputs after their verification consumers end.
 
-1. Screen the retained ten-second failure before
-   starting longer paired qualification (estimated 18–24 minutes; deadline 30).
-   A passing candidate still needs all 52 cases,
-   repeats, causal audits, pooled/localized metrics and sugar/P9 batches.
-2. Record results and limitations, push changes, pass required checks and release
-   outputs after their verification consumers finish.
+Progress: **36%** (inventory 10 points, workflows 8, candidate 10, local acceptance
+8). Matrix, batch and final delivery acceptance remain. Routine tests belong to
+hooks and CI; scientific runs use bounded scope and compatible retained evidence.
 
-Progress: **36%**: inventory 10 points, workflow implementation 8, candidate
-implementation 10 and local evidence 8. Matrix, batch and delivery acceptance remain.
-The repair and review/screen checkpoints met their estimates; the retry failed
-after 10 minutes. Native prototype and recurrent screen met their estimates.
-Total duration depends on timing acceptance. The matrix requires 1,231,000 steps
-per engine twice. Previous paired throughput of 55.22 ms/step projects 38 hours
-if representative, before batches, setup or repairs. Long-horizon throughput and
-a 90%-confidence total remain unsupported. Independent coding can overlap gates.
+Remaining elapsed execution time: working estimate **48–72 hours**;
+**90%-confidence planning range: 40–120 hours**, including further repair and
+requalification risk. This is engineering judgment, assuming continuous Mac
+availability. Previous paired throughput projects **38–45 hours** of required
+qualification; revise after measuring the new candidate's paired cases.
+Storage preflight projects 49 GiB; doubled allowance and batches fit 192 GiB free.

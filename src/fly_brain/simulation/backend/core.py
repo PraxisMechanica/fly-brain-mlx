@@ -6,6 +6,8 @@ import mlx.core as mx
 import numpy as np
 from numpy.typing import ArrayLike, NDArray
 
+from .accumulation import compensated_tree, two_product, two_sum
+
 DT_MS = 0.1
 DELAY_STEPS = 18
 QUEUE_SLOTS = DELAY_STEPS + 1
@@ -20,6 +22,7 @@ COEFFICIENTS = tuple(
     )
 )
 VOLTAGE_INCREMENT = float(np.float32(math.expm1(-DT_MS / 20)))
+SYNAPTIC_INCREMENT = float(np.float32(math.expm1(-DT_MS / 5)))
 
 
 @dataclass(frozen=True)
@@ -145,13 +148,24 @@ def initial_state(
 def integrate(
     voltage_offset_mv: mx.array, synaptic_mv: mx.array, available: mx.array
 ) -> tuple[mx.array, mx.array]:
-    _, b, c = COEFFICIENTS
+    _, _, c = COEFFICIENTS
     with mx.stream(mx.gpu):
-        # Center at threshold so its sign retains near-threshold decisions.
-        voltage = voltage_offset_mv + (
-            VOLTAGE_INCREMENT * (voltage_offset_mv + 7) + c * synaptic_mv
+        centered, centered_error = two_sum(
+            voltage_offset_mv, mx.array(7, dtype=mx.float32)
         )
-        synaptic = b * synaptic_mv
+        d = mx.array(VOLTAGE_INCREMENT, dtype=mx.float32)
+        coupling = mx.array(c, dtype=mx.float32)
+        terms = [voltage_offset_mv]
+        for left, right in (
+            (centered, d),
+            (centered_error, d),
+            (synaptic_mv, coupling),
+        ):
+            terms.extend(two_product(left, right))
+        terms.append(mx.zeros_like(voltage_offset_mv))
+        high, low = compensated_tree(mx.stack(terms, axis=-1))
+        voltage = high + low
+        synaptic = synaptic_mv + SYNAPTIC_INCREMENT * synaptic_mv
         return mx.where(available, voltage, voltage_offset_mv), mx.where(
             available, synaptic, synaptic_mv
         )
