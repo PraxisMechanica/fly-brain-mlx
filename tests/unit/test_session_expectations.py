@@ -165,6 +165,54 @@ def test_native_comparison_cannot_hide_corrupt_due_identities_or_digest() -> Non
         assert not flags[0, CHECK_NAMES.index('due')]
 
 
+@pytest.mark.parametrize(
+    'edges,digest_fault,accepted',
+    (
+        ((0, 1), False, True),
+        ((0,), False, False),
+        ((0, 0), False, False),
+        ((0, 2), False, False),
+        ((0, 1, 2), False, False),
+        ((1, 0), False, False),
+        ((-1, 1), False, False),
+        ((0, 3), False, False),
+        ((0, 1), True, False),
+    ),
+)
+def test_due_membership_preserves_every_original_edge_and_digest(
+    edges: tuple[int, ...], digest_fault: bool, accepted: bool
+) -> None:
+    network = connectome()
+    state = initial_ledger(network, (), 1, None)
+    events = np.zeros((1, 0), dtype=np.bool_)
+    state, _ = expect_step(state, observation(1, (-44, -52)), events, network, ())
+    for step in range(1, 18):
+        state, _ = expect_step(
+            state, observation(step + 1, (-52, -52)), events, network, ()
+        )
+    original = observation(19, (-52, -52))
+    _, operands = expect_step(state, original, events, network, ())
+    expected = np.array([True, True, False], dtype=np.bool_)
+    digest = hashlib.sha256(expected.data).hexdigest()
+    actual = NativeObservation(
+        19,
+        original.trial_indices,
+        original.fields,
+        (np.asarray(edges, dtype=np.int32),),
+        ('0' * 64 if digest_fault else digest,),
+    )
+    comparison = NativeComparison(
+        19,
+        original.trial_indices,
+        np.ones((1, 8), dtype=np.bool_),
+        np.ones((1, 19), dtype=np.bool_),
+    )
+    counts = np.array([2, 1], dtype=np.int64)
+    for cache in (None, counts):
+        flags = observation_checks(actual, comparison, operands, source_counts=cache)
+        assert bool(flags[0, CHECK_NAMES.index('due')]) == accepted
+
+
 @pytest.mark.parametrize('phase', ('pre', 'before', 'end'))
 def test_qualification_rejects_nonfinite_values_in_each_actual_phase(
     phase: str,

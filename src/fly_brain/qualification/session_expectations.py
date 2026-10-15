@@ -230,6 +230,8 @@ def observation_checks(
     actual: NativeObservation,
     comparison: NativeComparison,
     operands: ObservationOperands,
+    *,
+    source_counts: NDArray[np.int64] | None = None,
 ) -> NDArray[np.bool_]:
     if (
         comparison.completed_steps != actual.completed_steps
@@ -250,15 +252,25 @@ def observation_checks(
         for name in names:
             gates[:, column] &= np.all(actual.fields[name] == expected, axis=1)
     sources = operands.sources
+    if source_counts is None:
+        source_counts = np.bincount(sources, minlength=operands.due_sources.shape[1])
+    if source_counts.shape != (operands.due_sources.shape[1],):
+        raise ValueError('Due verification requires every source multiplicity')
+    due_edges = actual.due_edges
     for trial, due_sources in enumerate(operands.due_sources):
-        value = due_sources[sources]
-        gates[trial, 3] &= (
-            np.array_equal(
-                actual.due_edges[trial], np.flatnonzero(value).astype(np.int32)
-            )
-            and actual.due_sha256[trial]
-            == hashlib.sha256(memoryview(value)).hexdigest()
+        indices = due_edges[trial]
+        # A sorted unique subset with the complete count is the exact edge set.
+        matches = (
+            len(indices) == source_counts[due_sources].sum()
+            and (not len(indices) or 0 <= indices[0] <= indices[-1] < len(sources))
+            and np.all(indices[1:] > indices[:-1])
+            and np.all(due_sources[sources[indices]])
         )
+        if matches:
+            value = np.zeros(len(sources), dtype=np.bool_)
+            value[indices] = True
+            matches = actual.due_sha256[trial] == hashlib.sha256(value.data).hexdigest()
+        gates[trial, 3] &= matches
     finite = np.stack(
         [
             np.all(

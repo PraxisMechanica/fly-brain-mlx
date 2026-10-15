@@ -45,6 +45,10 @@ def observe_session(
     session = factory(trial_indices, initial)
     configuration = session.configuration
     ledger = initial_ledger(connectome, targets, len(trial_indices), initial)
+    source_counts = np.bincount(
+        ledger.sources, minlength=ledger.last_spike_step.shape[1]
+    )
+    source_counts.setflags(write=False)
     require_configuration(
         configuration, connectome, targets, trial_indices, initial, ledger
     )
@@ -62,7 +66,9 @@ def observe_session(
             if actual.trial_indices != trial_indices:
                 raise ValueError('Actual observation trial order differs')
             ledger, operands = expect_step(ledger, actual, inputs, connectome, targets)
-            flags = observation_checks(actual, session.compare(operands), operands)
+            flags = observation_checks(
+                actual, session.compare(operands), operands, source_counts=source_counts
+            )
             if not flags.all():
                 raise ValueError(
                     'Actual native observation failed independent qualification checks'

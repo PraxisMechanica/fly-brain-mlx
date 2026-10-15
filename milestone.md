@@ -10,12 +10,12 @@ Continue implementation from the latest `origin/main` in
 Apple silicon, uv-managed and database-free. Implementation stays in this chat;
 `AGENTS.md` owns the user's failure-only Astra escalation rule.
 Preserve pinned inputs, independent references, tolerances and every scientific
-acceptance gate. The practical architecture refactor is complete.
+acceptance gate.
 
 The development guide owns the authoritative streamlined approach and execution
-budgets. Each document owns its subject; Git retains detailed history. Decision:
+budgets. Decision:
 qualify the increment candidate and queue throughput before more matrix runs.
-Confidence: 95% at `b43b880`. Checkpoint hooks and exact-revision CI passed;
+Confidence: 95% at `39a04f7`. Checkpoint hooks and exact-revision CI passed;
 candidate arithmetic needs fresh qualification.
 
 ## Current implementation and evidence
@@ -49,9 +49,7 @@ The 52-case canonical preflight passed. On `c53af8a`, five sugar/1,000-step tria
 derived acceptance with complete fresh repeats. Four match Brian2 spikes exactly.
 Trial 1's first difference at step 999, neuron 41514, has a completed bound Astra
 roundoff review and native host reconstruction; its raw unaccepted report remains
-unchanged. Resumption validates original scientific bytes, current producing
-sources, native repeats, scoring and separate bound decisions. Validator identities
-are recorded separately. Trials 2–4 needed no specialist review.
+unchanged. These proofs qualify their producing implementation only.
 
 **Current hold: sugar/10,000 steps/trial 0 fails the fixed timing gate.** On
 `c53af8a`, its complete first paired replay took 1,576.930 seconds, with no preceding
@@ -79,11 +77,12 @@ self-comparison JSON/CSV outputs were verified. These short runs took 14.214 and
 1. Repair integration using the validated frozen replay: 5,720 steps and 152
    incoming edges reproduce native states in 1.34 seconds. The increment candidate
    passes actual MLX replay in 13.53 seconds. Local/full-network adoption is pending.
-2. Queue storage fell from 287 MB to 2.6 MB. The retained 64-step comparison
-   preserves all phase hashes, spikes, original-edge deliveries and 19 logical
-   slots exactly. Observed steps improved 145→89 ms (1.63×); warm production
-   improved 35→32 ms. Profile the remaining cost toward 15 ms; qualify all
-   queue/discrete behavior before adoption.
+2. Queue storage fell from 287 MB to 2.6 MB. Sparse due-set validation preserves
+   exact membership, multiplicity and dense-bitmap hashes. Retained 64-step
+   comparisons preserve all phase hashes, spikes, edge deliveries and 19 logical
+   slots. Observed steps improved 145→72 ms; warm production remains 32–35 ms.
+   Guarded count reduction passed 157 scalars but saved only 6%; keep the reviewed
+   arithmetic. Profile remaining cost toward 15 ms; full qualification is pending.
 3. Overlap independent reference processes with MLX; score first replays and stop
    proven failures. Demonstrate one-second sugar accuracy and throughput before
    resuming the complete matrix and fresh repeats on stable sources.
