@@ -5,25 +5,25 @@ Read `milestone.md` for current holds and `numerical-contract.md` for acceptance
 
 ## Development loop
 
-1. Implement first; validate at the end. Finish the candidate's planned changes,
-   affected callers, collectors and tests before discretionary testing. Use source
-   review and retained evidence while coding. Remove superseded paths; avoid
-   optional cleanup, abstractions and checker/report work.
+1. Choose a bounded behavioral outcome. Complete its related implementation,
+   affected callers, collectors and tests as one diagnosable batch, then validate
+   before dependent work. Use source review and retained evidence. Remove
+   superseded paths; avoid optional cleanup, abstractions and checker/report work.
 2. Preserve failure attribution: keep subchanges separable in the diff and know
    which focused observation distinguishes their failures. Combine low-risk
    fixes when attribution remains clear. Separate independent numerical changes
    if their failures cannot be distinguished by a small deterministic replay.
 3. Let hooks and CI run affected routine tests once per completed batch. Do not
-   test after each edit or pre-run their selected tests manually. Before the
-   candidate is complete, run a diagnostic only when a specific unresolved failure
-   prevents confident progress. Use the smallest discriminating replay; repair
-   related causes together before checking again.
+   test after each edit or pre-run their selected tests manually. Use a focused
+   diagnostic when it resolves a concrete uncertainty or failure before dependent
+   changes compound it. Choose the smallest discriminating replay; repair related
+   causes together before checking again.
 4. Reuse retained native evidence for diagnosis and rescoring. Validate a small
    replay against native bytes before trying a scientific correction. After the
-   planned implementation stabilizes, complete required local checks once, then
-   the scientific campaign. Defer full suites, full-network cases, fresh repeats
-   and batch comparisons until this point unless needed for a blocking diagnosis.
-   Retain compatible checkpoints for matrix resumption.
+   batch, verify affected scientific behavior before building on it; do not defer
+   a discriminating check because unrelated implementation remains. Once the
+   candidate stabilizes, complete required local checks and the scientific
+   campaign. Avoid unaffected suite reruns; retain compatible checkpoints.
 5. Before an expensive run, identify its unanswered question or required gate,
    relevant changes, expected duration and stopping condition in the existing
    execution record or milestone. Run only if retained evidence cannot answer it.

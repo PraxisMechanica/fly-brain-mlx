@@ -13,10 +13,10 @@ Preserve pinned inputs, independent references, tolerances and every scientific
 acceptance gate.
 
 The development guide owns batching, validation frequency and execution budgets.
-Decision: finish planned implementation before discretionary testing. Early
-diagnostics require a failure that blocks confident progress. Hooks/CI remain;
-qualify stable sources once with compatible retained evidence. Confidence: 95%
-at `8b1facc`. No new throughput target blocks acceptance.
+Decision: validate complete, diagnosable batches before dependent work; use focused
+checks for concrete uncertainties, hooks/CI for routine checks and stable sources
+for full qualification. Confidence: 95% at `612b363`.
+No new throughput target blocks acceptance.
 
 ## Current implementation and evidence
 
