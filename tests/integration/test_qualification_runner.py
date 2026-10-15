@@ -41,6 +41,7 @@ def test_local_qualification_runs_complete_current_scope_with_time_limit(
         assert cwd == request.project
         assert env['MLX_ENABLE_TF32'] == '0'
         assert command[4:6] == ('tests/qualification', '--disable-warnings')
+        assert '--maxfail=1' in command
         assert not any(value.startswith('--ignore') for value in command)
         assert f'--basetemp={request.output / "temporary"}' in command
         assert stderr == subprocess.STDOUT and start_new_session is True

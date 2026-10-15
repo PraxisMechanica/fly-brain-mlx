@@ -37,7 +37,7 @@ def require_fields(
             specifications[name] = ('bool', shape)
         specifications['end_last_spike_step'] = ('int32', shape)
         specifications['accepted_inputs'] = ('bool', inputs)
-        specifications['queue'] = ('bool', (19, trials, edges))
+        specifications['queue'] = ('bool', (19, trials, neurons))
     else:
         for name in ('g', 'spikes', 'v', 'refrac'):
             specifications[name] = ('float32', (trials, neurons))

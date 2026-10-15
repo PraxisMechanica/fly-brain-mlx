@@ -67,7 +67,7 @@ uv run --locked --group qualification fly-brain qualify --output executions/loca
 This runs local independent-reference and MLX scientific tests, including bounded
 observation transparency, all-slot faults, repeats, chunks and batch regressions.
 
-The runner enforces five minutes including setup, kills its owned process group
+The runner stops at the first failure and enforces five minutes including setup, kills its owned process group
 on expiry and returns unaccepted exit 124. Partial counts are untrusted. Diagnose
 failures directly; do not repeat unaffected expensive suites. Hooks own routine
 checks; required scientific qualification remains separate.

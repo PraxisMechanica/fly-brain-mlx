@@ -89,6 +89,7 @@ def test_ten_thousand_linear_steps_stay_within_the_reviewed_budget(
         0.9801986813545227,
         0.004937935154885054,
     )
+    assert core.VOLTAGE_INCREMENT == -0.004987520631402731
     harness.recorder.record(
         'linear-10000',
         {'reference': expected, 'mlx': actual},

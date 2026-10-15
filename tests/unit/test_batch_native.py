@@ -30,7 +30,7 @@ def native(engine: Engine, trials: int) -> dict[str, NDArray[np.generic]]:
         arrays['accepted_inputs'] = np.zeros(
             (2,) if trials == 1 else (trials, 2), dtype=np.bool_
         )
-        arrays['queue'] = np.zeros((19, trials, 3), dtype=np.bool_)
+        arrays['queue'] = np.zeros((19, trials, 6), dtype=np.bool_)
     else:
         for name in ('g', 'spikes', 'v', 'refrac'):
             arrays[name] = np.zeros((trials, 6), dtype=np.float32)

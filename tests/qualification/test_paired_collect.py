@@ -119,7 +119,7 @@ def test_live_collection_retains_complete_native_and_physical_replay(
             assert reference['v'].dtype == np.float64
             assert mlx['end_v'].dtype == np.float32
             assert mlx['queue'].dtype == np.bool_
-            assert mlx['queue'].shape == (19, 1, len(case.connectome.sources))
+            assert mlx['queue'].shape == (19, 1, len(case.connectome.neuron_ids))
             assert reference['clock_step'].tolist() == [101]
             assert reference['spike_i'].tolist() == mlx['spike_neurons'].tolist()
             assert np.array_equal(reference['spike_t'], mlx['spike_steps'] * 0.0001)

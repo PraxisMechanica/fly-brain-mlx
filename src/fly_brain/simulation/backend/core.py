@@ -19,6 +19,7 @@ COEFFICIENTS = tuple(
         _a * -math.expm1(-DT_MS * (1 / 5 - 1 / 20)) / 3,
     )
 )
+VOLTAGE_INCREMENT = float(np.float32(math.expm1(-DT_MS / 20)))
 
 
 @dataclass(frozen=True)
@@ -137,10 +138,10 @@ def initial_state(
 def integrate(
     voltage_mv: mx.array, synaptic_mv: mx.array, available: mx.array
 ) -> tuple[mx.array, mx.array]:
-    a, b, c = COEFFICIENTS
+    _, b, c = COEFFICIENTS
     with mx.stream(mx.gpu):
         # Add the analytic increment to avoid rounding the full voltage twice.
-        voltage = voltage_mv + ((a - 1) * (voltage_mv + 52) + c * synaptic_mv)
+        voltage = voltage_mv + (VOLTAGE_INCREMENT * (voltage_mv + 52) + c * synaptic_mv)
         synaptic = b * synaptic_mv
         return mx.where(available, voltage, voltage_mv), mx.where(
             available, synaptic, synaptic_mv

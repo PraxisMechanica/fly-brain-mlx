@@ -15,7 +15,7 @@ acceptance gate.
 The development guide owns the authoritative streamlined approach and execution
 budgets. Decision:
 qualify the increment candidate and queue throughput before more matrix runs.
-Confidence: 95% at `47efa55`. Checkpoint hooks and exact-revision CI passed;
+Confidence: 95% at `ff39e46`. Checkpoint hooks and exact-revision CI passed;
 candidate arithmetic needs fresh qualification.
 
 ## Current implementation and evidence
@@ -24,8 +24,8 @@ All five experiments, canonical persisted replay, six-column Parquet output,
 typed empty output, comparison JSON/CSV, paired collectors and matrix/batch
 controllers exist. Channel class/amplitude and qualification source, compiler,
 header, input and executable provenance are recorded. The candidate evaluates the
-coupled float32 voltage solution as an increment using the existing coefficients
-and old synaptic state. Compensated reduction and uncompiled Metal remain;
+coupled float32 voltage solution using the reviewed host-`expm1` increment,
+unchanged `b,c` and old synaptic state. Compensated reduction and uncompiled Metal remain;
 the changed evaluation order needs full qualification. A source-neuron delay
 queue expands to unchanged original edges at delivery.
 
@@ -35,11 +35,12 @@ independent reference sources, their protection records and all seven independen
 regression fixtures retain their reviewed bytes. Required spike columns and
 scientific acceptance gates are unchanged.
 
-Baseline local qualification: 319/320 tests passed in 268.189 seconds, none
-skipped. One schedule assertion used the wrong serialized dtype and activated
-refractory period; its targeted repair passed in 1.299 seconds. References were
-unchanged. The full run was not repeated. Both results and native evidence remain
-retained. Candidate scientific checks remain pending.
+Baseline local qualification: 319/320 passed in 268.189 seconds; its schedule
+assertion repair passed separately. The latest candidate attempt stopped after
+64.36 seconds: 16 passed and two batch validators expected obsolete edge-width
+queues. Rescoring all eight retained batch/repeat combinations with neuron-width
+geometry passes. A fresh complete suite remains pending after the coefficient
+correction; neither partial run establishes acceptance.
 
 Retained scalar/layout/pulse audits cover all 157 scalar cases, pinned fan-in,
 every original device row and the full-connectome pulse. Input pin, row identity

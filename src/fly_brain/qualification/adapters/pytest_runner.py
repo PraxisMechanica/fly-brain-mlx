@@ -22,6 +22,7 @@ def run_tests(request: QualificationRequest) -> QualificationResult:
         '-q',
         'tests/qualification',
         '--disable-warnings',
+        '--maxfail=1',
         '--artifact-output',
         str(request.output),
         f'--junitxml={request.output / "tests.xml"}',
