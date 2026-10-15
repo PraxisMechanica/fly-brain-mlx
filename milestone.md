@@ -43,12 +43,14 @@ scalar paths, both 24,576-case fan-in paths, complete device rows and pulse.
 All 223 bound archive hashes were verified under
 `executions/implementation-20261014-matrix/local-audits-4af07fb`.
 
-Retained audits cover pinned inputs, grouping, fan-in, device rows and pulse.
 Shared scaling preserves all 2,355 retained arrays across 157 scalar cases exactly.
 
-On `c53af8a`, five sugar/1,000-step trials passed with fresh repeats; four match
-Brian2 spikes exactly. Trial 1 has a bound roundoff review; its raw unaccepted
-report remains unchanged. These proofs qualify that producer only.
+All five current sugar/1,000-step trials pass with exact Brian2 spikes and fresh
+engine repeats: 953.07 seconds combined, maximum 196.25 seconds per case.
+The existing controller verifies all six retained cases for reuse, launching no
+engines; 46 cases remain. Its incomplete-matrix exit 1 is preserved. Evidence:
+`qualified-increment-01` and `preflight-increment-01` under the matrix root.
+Older `c53af8a` proofs qualify their producer only.
 
 **Sugar/10,000 steps/trial 0 is accepted after bound parent causal review.** The
 fresh `8b1facc` checkpoint finished in 1,447.08 seconds with unchanged source bytes.
@@ -64,20 +66,20 @@ in `verified-case.json` under
 First paired replay fell from 1,576.93 seconds on `c53af8a` to about 704.27 seconds:
 55% less time, 2.24 times faster. The old failed timing F1 was 0.798815; its partial
 raw evidence remains retained. Changed arithmetic requires fresh affected cases.
-**Candidate acceptance is 1/52; prior 5/52 `c53af8a` proofs remain retained.**
+**Candidate acceptance is 6/52; all prescribed batch comparisons remain.**
 
-Fresh production workflow checks passed: sugar/100 steps/two trials produced 100
-spikes; silent/one step produced typed empty output. Six-column schemas, integer
-time recovery, neuron mapping, stimulus bits, source/input provenance and both
-self-comparison JSON/CSV outputs were verified. These short runs took 14.214 and
-6.425 seconds. They establish workflow I/O, not independent scientific parity.
+Current production workflows passed under `workflows-current-01` in the matrix
+root. Sugar/100 steps/two trials produced 100 spikes, exactly matching two native
+Brian2 prefixes; silent/one step produced typed empty output. Six-column schema,
+integer times, identities, canonical inputs, source/input hashes and comparison
+JSON/CSV passed. Simulation times were 19.53 and 9.87 seconds, concurrent with
+the engine-free preflight. These are bounded workflow proofs, not matrix acceptance.
 
 ## Remaining plan and completion
 
-1. Run the five required sugar/1,000-step trials on current sources. Combine their
-   verified records with the accepted one-second checkpoint into the prescribed
-   six-case prefix; verify matrix resumption before more long executions.
-2. Resume missing prescribed cases on stable sources. Source queues reduced storage 287→2.6 MB;
+1. Resume the remaining 46 cases from the verified six-case prefix. Required local
+   evidence matches current source/test bytes; do not rerun unchanged suites.
+2. Keep sources stable. Source queues reduced storage 287→2.6 MB;
    sparse due verification and shared scaling preserve observed phase bytes.
    Actual one-second throughput is about 70 ms/step. Further optimization must
    justify its implementation and requalification cost.
@@ -88,8 +90,8 @@ self-comparison JSON/CSV outputs were verified. These short runs took 14.214 and
    localization and provenance. Record results and limitations, push all changes,
    pass required checks and release outputs after their verification consumers finish.
 
-Progress: **37%**: inventory 10 points, workflows 8, current local evidence 8,
-implementation 10 and 1/52 of 49 matrix points. Batches and delivery retain
+Progress: **42%**: inventory 10 points, workflows 8, current local evidence 8,
+implementation 10 and 6/52 of 49 matrix points. Batches and delivery retain
 10 and 5 points; their acceptance remains incomplete.
 The working target is **3–5 days of agent elapsed execution**, with a
 **90%-confidence remaining estimate of 3–14 days**, assuming continuous Mac
