@@ -18,63 +18,58 @@ coefficients, guarded exact float32 count sums, compensated scaling, uncompiled
 Metal and source-neuron queues.
 Protected references, seven independent fixtures, spike schemas and gates are unchanged.
 
-The current threshold-relative candidate passes **322/322**, zero failures,
-errors or skips, in **230.78 seconds**. Six required audits pass in **184.65
-seconds**, with all 223 native archive hashes verified. They cover 157 scalar
+The stored-offset predicate candidate passes **323/323**, zero failures,
+errors or skips, in **260.46 seconds**. All six required audits pass in **226.48
+seconds**, with 223 native archive hashes verified. They cover 157 scalar
 cases in each reducer, 24,576 primitive and production-layout fan-in cases each,
 full pinned device layout and original/silenced/blocked connectome pulses.
-Each fan-in audit retains 99 original-state casting limitations. Source inventories
-remain exact. Evidence under
-`executions/implementation-20261014-matrix/threshold-candidate-01`.
+Each fan-in audit retains 99 original-state casting limitations. Scientific
+producing sources remain unchanged. Current evidence:
+`executions/implementation-20261014-matrix/offset-predicate-candidate-01`.
 
 **Current arithmetic: 0/52 accepted; all matrix cases and batches remain.**
-The retry at `415f005` still fails timing F1 **0.9105285060 < 0.95**, after
+The decoded-predicate retry at `415f005` fails timing F1 **0.9105285060 < 0.95**, after
 601.20 seconds; no paired repeat ran. First difference moved to step 7898,
 neuron 117657. Native/host reconstruction is exact; even the correctly rounded
 reference physical float32 voltage equals threshold. Both origins and synaptic
 update variants retain this mismatch. The completed failure-only Astra review
-requires explicit user amendment before comparing stored `u>0` before decoding;
-the current contract forbids it. Hold numerical changes and further full runs.
+identifies lossy physical projection as the first cause. The mistaken human
+approval hold is released; representation decisions remain delegated.
 Review and parent verification:
 `matrix-threshold-target-01/diagnostics/threshold-projection-review`.
-The proposed amendment is unapproved; no acceptance gate was waived.
+No acceptance gate was waived.
 Preceding rest-relative arithmetic accepted seven cases under `matrix-offset-exact-01`
 before the same trial failed at step 3388 under `matrix-offset-exact-02`.
 Those cases qualify only their original arithmetic.
 
-The absolute-voltage predecessor failed ten-second sugar trial 0 timing:
-F1 **0.6064396002 < 0.95**. `matrix-increment-02` retains its replay and diagnosis.
-Fixing a first cause cannot waive the timing floor.
+The absolute-voltage predecessor failed ten-second sugar trial 0:
+F1 **0.6064396002 < 0.95** (`matrix-increment-02`). Long-horizon repair remains unverified.
 
-The new native target/linear probe passes in **10.18 seconds**: first-target
-difference removed, actual state repeats/chunks/batches exact, unchanged six-state
-linear budgets and strict decoded physical threshold/reset/freeze pass. The
-prospective decision and raw evidence are under
-`matrix-offset-exact-02/diagnostics/sugar-10000-2`. This is not recurrent acceptance.
+The stored-offset predicate probe passes in **15.91 seconds** under
+`native-offset-predicate-01`: both retained target baselines match native bytes;
+the candidate matches reference target spikes, changing only step 7898.
+Boundary, initial-cast, reset/freeze, repeat, chunk and batch checks pass.
+Production and independent predicate/projection checks implement that repair.
+Paired qualification remains.
 Initial encoding can be lossy; actual configuration remains visible and its exact
 physical gate stays unchanged. Earlier diagnostics retain Metal-flushed synaptic
 subnormal host-bit differences below 1.2e-38 mV; required state budgets passed.
 
-Current CLI workflows pass under `workflows-threshold-01`: 100 sugar spikes
+Current CLI workflows pass under `workflows-offset-predicate-01`: 100 sugar spikes
 across two trials match independent Brian2 prefixes exactly; silent output is
 typed empty. Schemas, identities, times, inputs, provenance and comparison
-JSON/CSV pass. Simulation elapsed: 7.69 and 6.18 seconds. These bounded checks do
-not replace scientific batches. `415f005` hooks and exact-revision CI pass.
-
-Count modes match all native bytes in four fresh 64-step runs. Mean native step
-time falls **23.14 to 13.24 ms (1.75×)**, excluding reference/observation overhead.
-Decision and measurements: `offset-candidate-a242597/exact-count-profile`.
+JSON/CSV pass. Simulation elapsed: 10.23 and 9.09 seconds. These bounded checks do
+not replace scientific batches. Delivery requires successful hooks and exact-revision CI.
 
 ## Remaining plan and completion
 
-The production MLX failure screen reproduces all **16,841 native spikes exactly**
-in **104.66 seconds**, versus 601.20 seconds paired: **5.74× faster**, 82.6% less
-time for this counterexample. Evidence: `fast-screen-baseline-415f005`.
-It rejects the same candidate and grants no state/repeat/causal acceptance.
+The production failure screen reproduces the old native raster exactly in 104.66
+seconds versus 601.20 seconds paired. The repaired candidate passes all fixed and
+paired metrics with **16,801 exact reference events**, F1 **1.0**, in **128.84
+seconds** (`fast-screen-offset-predicate-01`). This grants no state/repeat/causal acceptance.
 
-1. Obtain explicit approval of the stored-offset predicate amendment before
-   changing production or independent expectations. Then run bounded native
-   target/boundary/repeat/chunk/batch probes and the faithful fast failure screen.
+1. Screen the retained ten-second failure before
+   starting longer paired qualification (estimated 18–24 minutes; deadline 30).
    A passing candidate still needs all 52 cases,
    repeats, causal audits, pooled/localized metrics and sugar/P9 batches.
 2. Record results and limitations, push changes, pass required checks and release
@@ -83,7 +78,7 @@ It rejects the same candidate and grants no state/repeat/causal acceptance.
 Progress: **36%**: inventory 10 points, workflow implementation 8, candidate
 implementation 10 and local evidence 8. Matrix, batch and delivery acceptance remain.
 The repair and review/screen checkpoints met their estimates; the retry failed
-after 10 minutes. After approval, next native prototype: estimated 10–20 minutes.
+after 10 minutes. Native prototype and recurrent screen met their estimates.
 Total duration depends on timing acceptance. The matrix requires 1,231,000 steps
 per engine twice. Previous paired throughput of 55.22 ms/step projects 38 hours
 if representative, before batches, setup or repairs. Long-horizon throughput and

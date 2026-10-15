@@ -238,6 +238,7 @@ def verify_case(
             require_rounding_prerequisites(
                 context['current_reference_pre_v'],
                 context['current_mlx_pre_v'],
+                context['current_mlx_pre_u'],
                 available,
                 context['current_mlx_pre_not_refractory'],
                 reference_spikes,

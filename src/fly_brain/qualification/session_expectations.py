@@ -192,7 +192,7 @@ def expect_step(
     ):
         raise ValueError('Qualification events have incomplete trial/channel coverage')
     available = step - ledger.last_spike_step >= ledger.refractory_steps
-    spikes = available & (actual.fields['pre_v'] > np.float32(-45))
+    spikes = available & (actual.fields['pre_u'] > np.float32(0))
     receiving = available & ~spikes
     empty = np.zeros_like(spikes)
     due_sources = ledger.history[(step - 18) % 19] if step >= 18 else empty
@@ -272,12 +272,17 @@ def observation_checks(
             value[indices] = True
             matches = actual.due_sha256[trial] == hashlib.sha256(value.data).hexdigest()
         gates[trial, 3] &= matches
+    # Each finite-phase gate also requires its exact physical projection.
     finite = np.stack(
         [
             np.all(
                 np.isfinite(actual.fields[phase + '_v'])
                 & np.isfinite(actual.fields[phase + '_u'])
-                & np.isfinite(actual.fields[phase + '_g']),
+                & np.isfinite(actual.fields[phase + '_g'])
+                & (
+                    actual.fields[phase + '_v']
+                    == actual.fields[phase + '_u'] - np.float32(45)
+                ),
                 axis=1,
             )
             for phase in ('pre', 'before', 'end')

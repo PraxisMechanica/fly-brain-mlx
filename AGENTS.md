@@ -64,7 +64,9 @@ instruction overrides general schema and database approval requirements.
 Use GPT-6.1 Sol for implementation at the user-selected effort (currently
 `xhigh`). Only the user may change the parent model.
 
-Resolve engineering and causal decisions here using verified evidence. Use Astra
+Resolve engineering, precision, representation and causal decisions here using
+verified evidence. Agent-authored implementation notes do not create human
+approval requirements. Use Astra
 only when something is broken and we cannot resolve it ourselves after diagnosis
 and repair attempts. State the concrete failure, attempted fixes and remaining
 blocker before dispatch. Routine reviews and design decisions stay here. For a

@@ -147,7 +147,7 @@ def integrate(
 ) -> tuple[mx.array, mx.array]:
     _, b, c = COEFFICIENTS
     with mx.stream(mx.gpu):
-        # Center at threshold to limit physical-voltage projection rounding at spikes.
+        # Center at threshold so its sign retains near-threshold decisions.
         voltage = voltage_offset_mv + (
             VOLTAGE_INCREMENT * (voltage_offset_mv + 7) + c * synaptic_mv
         )
@@ -157,9 +157,9 @@ def integrate(
         )
 
 
-def threshold_spikes(voltage_mv: mx.array, available: mx.array) -> mx.array:
+def threshold_spikes(voltage_offset_mv: mx.array, available: mx.array) -> mx.array:
     with mx.stream(mx.gpu):
-        return available & (voltage_mv > -45)
+        return available & (voltage_offset_mv > 0)
 
 
 def advance(
@@ -175,7 +175,7 @@ def advance(
         )
         pre_voltage, pre_synaptic = voltage, synaptic
         pre_physical_voltage = pre_voltage - 45
-        spikes = threshold_spikes(pre_physical_voltage, available)
+        spikes = threshold_spikes(pre_voltage, available)
         last_spike = mx.where(spikes, state.step, state.last_spike_step)
         receiving = available & ~spikes
         due = state.queue[state.step % QUEUE_SLOTS][:, network.sources]

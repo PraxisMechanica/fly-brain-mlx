@@ -59,7 +59,8 @@ def write(
                 'neuron': neuron,
                 'reference': (float(context.current.reference['pre_v'][neuron]) + 0.045)
                 * 1000,
-                'mlx': float(context.current.mlx['pre_v'][neuron]) + 45,
+                'mlx': float(context.current.mlx['pre_u'][neuron]),
+                'mlx_projected': float(context.current.mlx['pre_v'][neuron]) + 45,
             }
             for neuron in context.neurons
         ]

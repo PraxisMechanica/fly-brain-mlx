@@ -5,6 +5,7 @@ from numpy.typing import NDArray
 def require_rounding_prerequisites(
     reference_si: NDArray[np.float64],
     mlx_mv: NDArray[np.float32],
+    mlx_offset_mv: NDArray[np.float32],
     reference_available: NDArray[np.bool_],
     mlx_available: NDArray[np.bool_],
     reference_spikes: NDArray[np.bool_],
@@ -14,6 +15,7 @@ def require_rounding_prerequisites(
     arrays = (
         reference_si,
         mlx_mv,
+        mlx_offset_mv,
         reference_available,
         mlx_available,
         reference_spikes,
@@ -26,16 +28,20 @@ def require_rounding_prerequisites(
     if (
         reference_si.dtype != np.float64
         or mlx_mv.dtype != np.float32
-        or any(value.dtype != np.bool_ for value in arrays[2:])
+        or mlx_offset_mv.dtype != np.float32
+        or any(value.dtype != np.bool_ for value in arrays[3:])
         or not np.isfinite(reference_si).all()
         or not np.isfinite(mlx_mv).all()
+        or not np.isfinite(mlx_offset_mv).all()
     ):
         raise ValueError('Cause requires finite native precision and Boolean masks')
+    if not np.array_equal(mlx_mv, mlx_offset_mv - np.float32(45)):
+        raise ValueError('Cause requires the exact native physical voltage projection')
     if not np.array_equal(reference_available, mlx_available):
         raise ValueError('Cause eligibility must agree')
     if not np.array_equal(
         reference_spikes, reference_available & (reference_si > -0.045)
-    ) or not np.array_equal(mlx_spikes, mlx_available & (mlx_mv > -45)):
+    ) or not np.array_equal(mlx_spikes, mlx_available & (mlx_offset_mv > 0)):
         raise ValueError('Cause spikes must match actual strict native predicates')
     changed = tuple(
         int(index) for index in np.flatnonzero(reference_spikes != mlx_spikes)

@@ -44,7 +44,9 @@ def observation(
         name: np.full(shape, False if dtype == np.bool_ else 0, dtype=dtype)
         for name, dtype in PHASE_DTYPES.items()
     }
-    fields['pre_v'] = np.asarray([voltage], dtype=np.float32)
+    for phase in ('pre', 'before', 'end'):
+        fields[phase + '_v'] = np.asarray([voltage], dtype=np.float32)
+        fields[phase + '_u'] = fields[phase + '_v'] + np.float32(45)
     fields['pre_not_refractory'] = np.ones(shape, dtype=np.bool_)
     fields['spikes'] = np.full(shape, claim, dtype=np.bool_)
     fields['before_not_refractory'] = np.ones(shape, dtype=np.bool_)
@@ -244,5 +246,42 @@ def test_qualification_rejects_nonfinite_values_in_each_actual_phase(
         np.ones((1, 19), dtype=np.bool_),
     )
     assert not observation_checks(actual, comparison, operands)[
+        0, CHECK_NAMES.index('finite_' + phase)
+    ]
+
+
+@pytest.mark.parametrize('phase', ('pre', 'before', 'end'))
+def test_offset_predicate_and_physical_projection_are_independently_verified(
+    phase: str,
+) -> None:
+    network = connectome()
+    actual = observation(1, (-45, -45))
+    fields = dict(actual.fields)
+    fields['pre_u'] = np.array([[1e-6, -1e-6]], dtype=np.float32)
+    actual = NativeObservation(
+        1, actual.trial_indices, fields, actual.due_edges, actual.due_sha256
+    )
+    _, operands = expect_step(
+        initial_ledger(network, (), 1, None),
+        actual,
+        np.zeros((1, 0), dtype=np.bool_),
+        network,
+        (),
+    )
+    assert operands.spikes.tolist() == [[True, False]]
+    comparison = NativeComparison(
+        1,
+        (TrialId(0),),
+        np.ones((1, 8), dtype=np.bool_),
+        np.ones((1, 19), dtype=np.bool_),
+    )
+    assert observation_checks(actual, comparison, operands)[
+        0, CHECK_NAMES.index('finite_' + phase)
+    ]
+    fields[phase + '_v'] = np.full((1, 2), -44, dtype=np.float32)
+    corrupt = NativeObservation(
+        1, actual.trial_indices, fields, actual.due_edges, actual.due_sha256
+    )
+    assert not observation_checks(corrupt, comparison, operands)[
         0, CHECK_NAMES.index('finite_' + phase)
     ]

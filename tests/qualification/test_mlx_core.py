@@ -9,7 +9,7 @@ from numpy.typing import ArrayLike, NDArray
 
 from fly_brain.qualification.adapters import brian_reference as reference
 from fly_brain.simulation.backend import core
-from fly_brain.simulation.backend.arrays import as_host, evaluate
+from fly_brain.simulation.backend.arrays import as_host, boolean_input, evaluate
 from fly_brain.simulation.identifiers import NeuronRow
 from fly_brain.simulation.models import NetworkCase as Case
 from tests.support.qualification import BoolArray, Harness, events_for, replay_events
@@ -146,7 +146,9 @@ def test_strict_threshold_and_neighboring_float32_values() -> None:
     )
     available = np.array([True, True, True, False])
     with mx.stream(mx.gpu):
-        observed = as_host(core.threshold_spikes(mx.array(values), mx.array(available)))
+        observed = as_host(
+            core.threshold_spikes(mx.array(values) + 45, mx.array(available))
+        )
     expected = threshold_reference(values, available)
     np.testing.assert_array_equal(observed, expected)
     np.testing.assert_array_equal(observed, [False, False, True, False])
@@ -159,7 +161,9 @@ def test_quarter_ulp_rounding_is_an_asserted_precision_limitation(
     expected = threshold_reference([value], [True])
     with mx.stream(mx.gpu):
         observed = as_host(
-            core.threshold_spikes(mx.array([value], dtype=mx.float32), mx.array([True]))
+            core.threshold_spikes(
+                mx.array([value], dtype=mx.float32) + 45, mx.array([True])
+            )
         )
     np.testing.assert_array_equal(expected, [True])
     np.testing.assert_array_equal(observed, [False])
@@ -170,6 +174,33 @@ def test_quarter_ulp_rounding_is_an_asserted_precision_limitation(
             'input_mv': value,
             'expected_difference': True,
             'universal_float64_spike_equivalence': False,
+        },
+    )
+
+
+def test_stored_offset_predicate_preserves_crossings_lost_in_physical_projection(
+    harness: Harness,
+) -> None:
+    ulp = np.spacing(np.float32(45))
+    values = np.array(
+        [-ulp, -ulp / 2, -ulp / 4, -0.0, 0.0, ulp / 4, ulp / 2, ulp],
+        dtype=np.float32,
+    )
+    available = np.ones(values.size, dtype=np.bool_)
+    with mx.stream(mx.gpu):
+        offsets = mx.array(values, dtype=mx.float32)
+        projected = as_host(offsets - 45)
+        observed = as_host(core.threshold_spikes(offsets, boolean_input(available)))
+        blocked = as_host(core.threshold_spikes(offsets, boolean_input(~available)))
+    np.testing.assert_array_equal(observed, [False] * 5 + [True] * 3)
+    np.testing.assert_array_equal(projected[1:-1], np.float32(-45))
+    assert not blocked.any()
+    harness.recorder.record(
+        'stored-offset-threshold',
+        {'offset_mv': values, 'projected_mv': projected, 'spikes': observed},
+        {
+            'strict_offset_predicate': True,
+            'physical_projection_can_lose_crossing': True,
         },
     )
 

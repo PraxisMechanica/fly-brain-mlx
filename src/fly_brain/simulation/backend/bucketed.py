@@ -103,7 +103,7 @@ def advance(
         )
         pre_voltage, pre_synaptic = voltage, synaptic
         pre_physical_voltage = pre_voltage - 45
-        spikes = core.threshold_spikes(pre_physical_voltage, available)
+        spikes = core.threshold_spikes(pre_voltage, available)
         last_spike = mx.where(spikes, state.step, state.last_spike_step)
         receiving = available & ~spikes
         due = state.queue[state.step % core.QUEUE_SLOTS][:, network.sources]
