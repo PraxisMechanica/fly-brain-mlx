@@ -33,11 +33,16 @@ class Network:
 
 
 class State(NamedTuple):
-    voltage_mv: mx.array
+    voltage_offset_mv: mx.array
     synaptic_mv: mx.array
     last_spike_step: mx.array
     queue: mx.array
     step: int
+
+    @property
+    def voltage_mv(self) -> mx.array:
+        with mx.stream(mx.gpu):
+            return self.voltage_offset_mv - 52
 
 
 class StepTrace(NamedTuple):
@@ -52,6 +57,8 @@ class StepTrace(NamedTuple):
     accepted_inputs: mx.array
     before_reset_voltage_mv: mx.array
     before_reset_synaptic_mv: mx.array
+    pre_voltage_offset_mv: mx.array
+    before_reset_voltage_offset_mv: mx.array
 
 
 def _indices(values: ArrayLike, neurons: int) -> NDArray[np.int32]:
@@ -127,7 +134,7 @@ def initial_state(
         )
     with mx.stream(mx.gpu):
         return State(
-            mx.array(voltage.astype(np.float32)),
+            mx.array(voltage.astype(np.float32)) + 52,
             mx.array(synaptic.astype(np.float32)),
             mx.array(last.astype(np.int32)),
             mx.zeros((QUEUE_SLOTS, trials, network.neurons), dtype=mx.bool_),
@@ -136,14 +143,16 @@ def initial_state(
 
 
 def integrate(
-    voltage_mv: mx.array, synaptic_mv: mx.array, available: mx.array
+    voltage_offset_mv: mx.array, synaptic_mv: mx.array, available: mx.array
 ) -> tuple[mx.array, mx.array]:
     _, b, c = COEFFICIENTS
     with mx.stream(mx.gpu):
-        # Add the analytic increment to avoid rounding the full voltage twice.
-        voltage = voltage_mv + (VOLTAGE_INCREMENT * (voltage_mv + 52) + c * synaptic_mv)
+        # Store the deviation from rest to avoid accumulating absolute-voltage rounding.
+        voltage = voltage_offset_mv + (
+            VOLTAGE_INCREMENT * voltage_offset_mv + c * synaptic_mv
+        )
         synaptic = b * synaptic_mv
-        return mx.where(available, voltage, voltage_mv), mx.where(
+        return mx.where(available, voltage, voltage_offset_mv), mx.where(
             available, synaptic, synaptic_mv
         )
 
@@ -156,14 +165,17 @@ def threshold_spikes(voltage_mv: mx.array, available: mx.array) -> mx.array:
 def advance(
     network: Network, state: State, events: mx.array
 ) -> tuple[State, StepTrace]:
-    trials = state.voltage_mv.shape[0]
+    trials = state.voltage_offset_mv.shape[0]
     if events.shape != (trials, network.input_targets.size) or events.dtype != mx.bool_:
         raise ValueError('Events must be Boolean with shape (trials, input channels)')
     with mx.stream(mx.gpu):
         available = state.step - state.last_spike_step >= network.refractory_steps
-        voltage, synaptic = integrate(state.voltage_mv, state.synaptic_mv, available)
+        voltage, synaptic = integrate(
+            state.voltage_offset_mv, state.synaptic_mv, available
+        )
         pre_voltage, pre_synaptic = voltage, synaptic
-        spikes = threshold_spikes(voltage, available)
+        pre_physical_voltage = pre_voltage - 52
+        spikes = threshold_spikes(pre_physical_voltage, available)
         last_spike = mx.where(spikes, state.step, state.last_spike_step)
         receiving = available & ~spikes
         due = state.queue[state.step % QUEUE_SLOTS][:, network.sources]
@@ -192,7 +204,7 @@ def advance(
             queue,
         )
         trace = StepTrace(
-            pre_voltage,
+            pre_physical_voltage,
             pre_synaptic,
             available,
             spikes,
@@ -201,11 +213,13 @@ def advance(
             accepted,
             discarded,
             accepted_inputs,
-            voltage,
+            voltage - 52,
             synaptic,
+            pre_voltage,
+            voltage,
         )
         next_state = State(
-            mx.where(spikes, -52, voltage),
+            mx.where(spikes, 0, voltage),
             mx.where(spikes, 0, synaptic),
             last_spike,
             queue,

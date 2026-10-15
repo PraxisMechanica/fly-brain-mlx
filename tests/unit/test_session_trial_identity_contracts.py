@@ -24,7 +24,7 @@ pytestmark = pytest.mark.unit
     (
         (
             'ObservationConfiguration',
-            'ObservationConfiguration(base.neurons, base.queue_slots, base.initial_step, (value,), base.sources, base.destinations, base.targets, base.refractory_steps, base.initial_voltage_mv, base.initial_synaptic_mv, base.initial_last_spike_step)',
+            'ObservationConfiguration(base.neurons, base.queue_slots, base.initial_step, (value,), base.sources, base.destinations, base.targets, base.refractory_steps, base.initial_voltage_mv, base.initial_synaptic_mv, base.initial_last_spike_step, base.initial_voltage_offset_mv)',
         ),
         (
             'NativeObservation',
@@ -127,6 +127,7 @@ def test_neutral_session_values_keep_requested_label_tuple_without_using_positio
         np.full((2, 2), -52, dtype=np.float32),
         np.zeros((2, 2), dtype=np.float32),
         np.full((2, 2), -100000000, dtype=np.int32),
+        np.zeros((2, 2), dtype=np.float32),
     )
     comparison = NativeComparison(
         1, trials, np.ones((2, 8), dtype=np.bool_), np.ones((2, 19), dtype=np.bool_)

@@ -25,7 +25,10 @@ def run(
     state = core.initial_state(execution.network, len(stimulus.trial_indices))
     with mx.stream(mx.gpu):
         evaluate(
-            state.voltage_mv, state.synaptic_mv, state.last_spike_step, state.queue
+            state.voltage_offset_mv,
+            state.synaptic_mv,
+            state.last_spike_step,
+            state.queue,
         )
     setup_s = perf_counter() - started
     steps = stimulus.events.shape[1]
@@ -40,7 +43,7 @@ def run(
                 events = boolean_input(stimulus.events[:, step, :].astype(np.bool_))
                 state, trace = execution.advance(state, events)
                 evaluate(
-                    state.voltage_mv,
+                    state.voltage_offset_mv,
                     state.synaptic_mv,
                     state.last_spike_step,
                     state.queue,

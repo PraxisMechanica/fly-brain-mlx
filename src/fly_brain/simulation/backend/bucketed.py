@@ -93,16 +93,17 @@ def accumulate(
 def advance(
     network: core.Network, layout: Layout, state: core.State, events: mx.array
 ) -> tuple[core.State, core.StepTrace]:
-    trials = state.voltage_mv.shape[0]
+    trials = state.voltage_offset_mv.shape[0]
     if events.shape != (trials, network.input_targets.size) or events.dtype != mx.bool_:
         raise ValueError('Events must be Boolean with shape (trials, input channels)')
     with mx.stream(mx.gpu):
         available = state.step - state.last_spike_step >= network.refractory_steps
         voltage, synaptic = core.integrate(
-            state.voltage_mv, state.synaptic_mv, available
+            state.voltage_offset_mv, state.synaptic_mv, available
         )
         pre_voltage, pre_synaptic = voltage, synaptic
-        spikes = core.threshold_spikes(voltage, available)
+        pre_physical_voltage = pre_voltage - 52
+        spikes = core.threshold_spikes(pre_physical_voltage, available)
         last_spike = mx.where(spikes, state.step, state.last_spike_step)
         receiving = available & ~spikes
         due = state.queue[state.step % core.QUEUE_SLOTS][:, network.sources]
@@ -125,7 +126,7 @@ def advance(
             queue,
         )
         trace = core.StepTrace(
-            pre_voltage,
+            pre_physical_voltage,
             pre_synaptic,
             available,
             spikes,
@@ -134,11 +135,13 @@ def advance(
             accepted,
             discarded,
             accepted_inputs,
-            voltage,
+            voltage - 52,
             synaptic,
+            pre_voltage,
+            voltage,
         )
         updated = core.State(
-            mx.where(spikes, -52, voltage),
+            mx.where(spikes, 0, voltage),
             mx.where(spikes, 0, synaptic),
             last_spike,
             queue,

@@ -73,6 +73,7 @@ def test_phase_due_configuration_operand_and_comparison_aliases_cannot_change_ca
         lambda: configuration.sources,
         lambda: configuration.refractory_steps,
         lambda: configuration.initial_last_spike_step,
+        lambda: configuration.initial_voltage_offset_mv,
         lambda: initial.voltage_mv,
         lambda: operands.sources,
         lambda: operands.spikes,

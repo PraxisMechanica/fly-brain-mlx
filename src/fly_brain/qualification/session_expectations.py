@@ -154,6 +154,7 @@ def require_configuration(
         (actual.refractory_steps, ledger.refractory_steps),
         (actual.initial_last_spike_step, ledger.last_spike_step),
         (actual.initial_voltage_mv, voltage),
+        (actual.initial_voltage_offset_mv, voltage + np.float32(52)),
         (actual.initial_synaptic_mv, synaptic),
     )
     if (
@@ -275,6 +276,7 @@ def observation_checks(
         [
             np.all(
                 np.isfinite(actual.fields[phase + '_v'])
+                & np.isfinite(actual.fields[phase + '_u'])
                 & np.isfinite(actual.fields[phase + '_g']),
                 axis=1,
             )

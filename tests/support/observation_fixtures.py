@@ -129,13 +129,16 @@ def ordinary_phases(
             evaluate(*state[:-1], trace.spikes)
         for name, value in (
             ('pre_v', trace.pre_voltage_mv),
+            ('pre_u', trace.pre_voltage_offset_mv),
             ('pre_g', trace.pre_synaptic_mv),
             ('pre_not_refractory', trace.available),
             ('spikes', trace.spikes),
             ('before_v', trace.before_reset_voltage_mv),
+            ('before_u', trace.before_reset_voltage_offset_mv),
             ('before_g', trace.before_reset_synaptic_mv),
             ('before_not_refractory', trace.receiving),
             ('end_v', state.voltage_mv),
+            ('end_u', state.voltage_offset_mv),
             ('end_g', state.synaptic_mv),
             ('end_last_spike_step', state.last_spike_step),
             ('end_not_refractory', trace.receiving),

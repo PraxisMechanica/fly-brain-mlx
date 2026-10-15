@@ -26,8 +26,9 @@ def require_fields(
     if engine == 'mlx':
         shape = (neurons,) if trials == 1 else (trials, neurons)
         inputs = (channels,) if trials == 1 else (trials, channels)
-        for name in ('pre_v', 'pre_g', 'before_v', 'before_g', 'end_v', 'end_g'):
-            specifications[name] = ('float32', shape)
+        for phase in ('pre', 'before', 'end'):
+            for field in ('v', 'u', 'g'):
+                specifications[phase + '_' + field] = ('float32', shape)
         for name in (
             'pre_not_refractory',
             'spikes',

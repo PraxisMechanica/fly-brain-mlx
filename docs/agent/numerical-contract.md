@@ -103,11 +103,25 @@ Qualification: all 157 scalar cases satisfy both unchanged budgets against origi
 
 Milestone 2 must prove input equivalence and the stable grouping permutation before adapting this design. Use destination buckets of width `next_power_of_two(max(1,in_degree))` and preserve the existing queue meaning. Audit actual count guards and replay the fixed representative source masks and states through the selected arithmetic; all individual cases must pass. Then rerun the 157-case scalar and complete 61-test reference/core/factored qualification against the adapted implementation. Any failed gate or representation/precision change requires a new bounded scientific decision. The frozen full-network metrics and all subsequent milestones remain mandatory.
 
-### Prospective single-state voltage increment prototype
+### Prospective single-state voltage representation
 
-The completed timing remediation review selects an isolated prototype of the same coupled linear voltage solution: `v_next = v + (d*(v+52) + c*g)`, using old voltage and old conductance. Construct `d` as host float64 `expm1(-0.1/20)`, then cast once to float32: `-0.004987520631402731`. Retain current `b` and `c`; do not derive `d` from rounded `a`. Keep compilation disabled, device-native float32 operations, one rounded state per variable, and every existing gate, threshold, schedule and model parameter.
+The absolute-voltage increment `v + (d*(v+52) + c*g)` failed ten-second timing
+acceptance. A failure-only review and parent native probes support a candidate
+storing one float32 offset `u=v+52` and one float32 `g`. Compute
+`u_pre=u+(d*u+c*g_old)`, `g_pre=b*g_old`; decode float32 `v_pre=u_pre-52` before
+the unchanged strict physical predicate. Never substitute `u>7`. Construct
+`d=float32(expm1(-0.1/20))=-0.004987520631402731` on the host; retain `b,c`,
+uncompiled GPU operations and every model phase. Reset `u,g` to zero and freeze
+both exactly when unavailable; carry no correction state.
 
-The parent independently reproduced the complete host diagnostic and recorded the prospective decision. This permits bounded native qualification, not production adoption or full-case acceptance. The existing numerical source remains unchanged until the native local replay, complete scientific/scalar/cancellation and representative layout checks, observer transparency, exact fresh repeats, batch/chunk agreement and state/event/queue checks pass. Preserve the single-state rounding limitation. Any later adoption requires the complete 52-case matrix and prescribed batch evidence for that implementation; old accepted executions remain evidence for their original arithmetic.
+Cast initial physical voltage to float32 before encoding. Encoding is not
+universally lossless: expose actual decoded and encoded initial state and retain
+the exact physical configuration gate. Record actual `u` at pre/before/end phases
+and in final, repeat, chunk and batch evidence. Bounded target/linear probes
+support implementation, not adoption: all unchanged local/reference, scalar,
+fan-in/layout, observation, discrete, state and repeat gates, the complete 52-case
+matrix and prescribed batches remain required. Prior executions qualify only
+their original arithmetic.
 
 ## Shared stimuli and repeatability protocol
 

@@ -38,7 +38,9 @@ def test_actual_phase_bits_and_due_identities_are_detached_and_immutable() -> No
             value.setflags(write=True)
 
 
-@pytest.mark.parametrize('field', ('pre_v', 'spikes', 'accepted_inputs'))
+@pytest.mark.parametrize(
+    'field', ('pre_v', 'pre_u', 'before_u', 'end_u', 'spikes', 'accepted_inputs')
+)
 def test_actual_phase_snapshots_reject_missing_native_fields(field: str) -> None:
     actual = observation(1, (-52, -52))
     fields = dict(actual.fields)

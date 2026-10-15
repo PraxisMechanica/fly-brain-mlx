@@ -30,7 +30,10 @@ Read `milestone.md` for current holds and `numerical-contract.md` for acceptance
    Profile briefly only for a measured bottleneck; pursue an optimization when
    expected savings justify implementation and requalification. Throughput goals
    are estimates, not additional scientific acceptance gates.
-6. Freeze scientific sources for qualification. Overlap independent CPU references
+6. Freeze scientific sources in the qualification checkout. While a gate runs,
+   implement a ready independent batch in a separate worktree and environment;
+   integrate after its prerequisite passes. Avoid device contention and changes that would
+   invalidate the running qualification. Overlap independent CPU references
    with MLX, retaining fresh initial states, settings, repeats and provenance.
    Score the first replay and stop decisive failures. Complete all 52 paired cases,
    fresh repeats and sugar/P9 batches for the stable implementation. Regenerate

@@ -32,11 +32,13 @@ def test_isolated_step_preserves_the_coupled_linear_solution(
     )
     with mx.stream(mx.gpu):
         v, g = core.integrate(
-            mx.array([voltage], dtype=mx.float32),
+            mx.array([voltage], dtype=mx.float32) + 52,
             mx.array([synaptic], dtype=mx.float32),
             mx.array([True]),
         )
-    observed = np.array([as_host(v)[0], as_host(g)[0]])
+    with mx.stream(mx.gpu):
+        physical = v - 52
+    observed = np.array([as_host(physical)[0], as_host(g)[0]])
     assert np.all(np.abs(observed - expected) <= 2e-5 + 2e-6 * np.abs(expected))
     if synaptic == 100:
         euler = np.array(
@@ -69,19 +71,19 @@ def test_ten_thousand_linear_steps_stay_within_the_reviewed_budget(
         trace: list[mx.array] = []
         with mx.stream(mx.gpu):
             v, g, available = (
-                mx.array(initial_v.astype(np.float32)),
+                mx.array(initial_v.astype(np.float32)) + 52,
                 mx.array(initial_g.astype(np.float32)),
                 mx.ones((6,), dtype=mx.bool_),
             )
             for _ in range(10000):
                 v, g = core.integrate(v, g, available)
                 evaluate(v, g)
-                trace.append(mx.stack([v, g], axis=-1))
+                trace.append(mx.stack([v - 52, g, v], axis=-1))
             actual = mx.stack(trace)
             evaluate(actual)
         runs.append(as_host(actual))
-    actual = runs[0]
-    np.testing.assert_array_equal(actual, runs[1])
+    np.testing.assert_array_equal(runs[0], runs[1])
+    actual = runs[0][..., :2]
     error = np.abs(actual - expected)
     assert np.all(error <= 1e-3 + 1e-5 * np.abs(expected))
     assert tuple(core.COEFFICIENTS) == (
@@ -92,7 +94,11 @@ def test_ten_thousand_linear_steps_stay_within_the_reviewed_budget(
     assert core.VOLTAGE_INCREMENT == -0.004987520631402731
     harness.recorder.record(
         'linear-10000',
-        {'reference': expected, 'mlx': actual},
+        {
+            'reference': expected,
+            'mlx': actual,
+            'mlx_voltage_offset_mv': runs[0][..., 2],
+        },
         {
             'steps': 10000,
             'max_abs_error_mv_v_g': error.max(axis=(0, 1)).tolist(),
@@ -421,6 +427,7 @@ def test_reset_and_frozen_state_are_exact_within_the_engine(harness: Harness) ->
         updated, trace = core.advance(network, state, mx.zeros((1, 0), dtype=mx.bool_))
         evaluate(*updated[:-1], *trace)
     np.testing.assert_array_equal(as_host(updated.voltage_mv), [[-52, -50]])
+    np.testing.assert_array_equal(as_host(updated.voltage_offset_mv), [[0, 2]])
     np.testing.assert_array_equal(as_host(updated.synaptic_mv), [[0, 1]])
     np.testing.assert_array_equal(as_host(trace.receiving), [[False, False]])
 

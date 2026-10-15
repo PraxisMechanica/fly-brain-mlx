@@ -17,8 +17,9 @@ def native(engine: Engine, trials: int) -> dict[str, NDArray[np.generic]]:
     arrays: dict[str, NDArray[np.generic]] = {}
     if engine == 'mlx':
         shape = (6,) if trials == 1 else (trials, 6)
-        for name in ('pre_v', 'pre_g', 'before_v', 'before_g', 'end_v', 'end_g'):
-            arrays[name] = np.full(shape, -52, dtype=np.float32)
+        for phase in ('pre', 'before', 'end'):
+            for field in ('v', 'u', 'g'):
+                arrays[phase + '_' + field] = np.full(shape, -52, dtype=np.float32)
         for name in (
             'pre_not_refractory',
             'spikes',

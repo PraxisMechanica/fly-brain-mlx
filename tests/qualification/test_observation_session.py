@@ -33,6 +33,37 @@ from tests.support.observation_fixtures import (
 pytestmark = [pytest.mark.integration, pytest.mark.metal]
 
 
+def test_initial_configuration_exposes_actual_offset_and_rejects_lossy_physical_claim(
+    precision: str,
+) -> None:
+    case = fixture(True)
+    factory, _ = build_observation_sessions(case.connectome, (), (), precision)
+    voltage = np.full((1, 6), 0.1, dtype=np.float64)
+    starting = ObservationInitialState(
+        voltage,
+        np.zeros((1, 6), dtype=np.float64),
+        np.full((1, 6), -100000000, dtype=np.int32),
+    )
+    configuration = factory((TrialId(0),), starting).configuration
+    encoded = voltage.astype(np.float32) + np.float32(52)
+    assert configuration.initial_voltage_offset_mv.tobytes() == encoded.tobytes()
+    decoded = encoded - np.float32(52)
+    assert configuration.initial_voltage_mv.tobytes() == decoded.tobytes()
+    assert (
+        configuration.initial_voltage_mv.tobytes()
+        != voltage.astype(np.float32).tobytes()
+    )
+    with pytest.raises(ValueError, match='independent pinned inputs'):
+        require_configuration(
+            configuration,
+            case.connectome,
+            (),
+            (TrialId(0),),
+            starting,
+            initial_ledger(case.connectome, (), 1, starting),
+        )
+
+
 @pytest.mark.parametrize('block_size', (1, 17, 32))
 @pytest.mark.parametrize('empty', (False, True))
 def test_sessions_preserve_ordinary_and_repeat_native_bytes(

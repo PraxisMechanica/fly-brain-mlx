@@ -43,6 +43,7 @@ class Session:
             np.full((1, 2), -52, dtype=np.float32),
             np.zeros((1, 2), dtype=np.float32),
             np.full((1, 2), -100000000, dtype=np.int32),
+            np.zeros((1, 2), dtype=np.float32),
         )
 
     def advance(self, events: NDArray[np.bool_]) -> NativeObservation:
@@ -136,6 +137,7 @@ def test_missing_reordered_or_wrong_comparisons_never_advance_or_emit_accepted_b
         'targets',
         'refractory_steps',
         'initial_last_spike_step',
+        'initial_voltage_offset_mv',
         'initial_step',
         'trial_indices',
         'queue_slots',
@@ -164,6 +166,9 @@ def test_qualification_pins_actual_maps_clocks_trials_and_every_queue_slot(
         configuration.initial_last_spike_step + np.int32(1)
         if field == 'initial_last_spike_step'
         else configuration.initial_last_spike_step,
+        configuration.initial_voltage_offset_mv + np.float32(1)
+        if field == 'initial_voltage_offset_mv'
+        else configuration.initial_voltage_offset_mv,
     )
     with pytest.raises(ValueError, match='independent pinned inputs'):
         require_configuration(

@@ -119,13 +119,16 @@ ReductionReader = Callable[[tuple[NeuronRow, ...]], ReductionEvidence]
 PHASE_DTYPES = MappingProxyType(
     {
         'pre_v': np.dtype(np.float32),
+        'pre_u': np.dtype(np.float32),
         'pre_g': np.dtype(np.float32),
         'pre_not_refractory': np.dtype(np.bool_),
         'spikes': np.dtype(np.bool_),
         'before_v': np.dtype(np.float32),
+        'before_u': np.dtype(np.float32),
         'before_g': np.dtype(np.float32),
         'before_not_refractory': np.dtype(np.bool_),
         'end_v': np.dtype(np.float32),
+        'end_u': np.dtype(np.float32),
         'end_g': np.dtype(np.float32),
         'end_last_spike_step': np.dtype(np.int32),
         'end_not_refractory': np.dtype(np.bool_),
@@ -203,6 +206,9 @@ class ObservationConfiguration:
     _initial_voltage_mv_snapshot: HostSnapshot[np.float32] = field(
         init=False, repr=False
     )
+    _initial_voltage_offset_mv_snapshot: HostSnapshot[np.float32] = field(
+        init=False, repr=False
+    )
     _initial_synaptic_mv_snapshot: HostSnapshot[np.float32] = field(
         init=False, repr=False
     )
@@ -223,6 +229,7 @@ class ObservationConfiguration:
         initial_voltage_mv: NDArray[np.float32],
         initial_synaptic_mv: NDArray[np.float32],
         initial_last_spike_step: NDArray[np.int32],
+        initial_voltage_offset_mv: NDArray[np.float32],
     ) -> None:
         for value in (sources, destinations, targets, refractory_steps):
             if value.dtype != np.int32 or value.ndim != 1:
@@ -230,12 +237,14 @@ class ObservationConfiguration:
         shape = (len(trial_indices), neurons)
         if (
             initial_voltage_mv.dtype != np.float32
+            or initial_voltage_offset_mv.dtype != np.float32
             or initial_synaptic_mv.dtype != np.float32
             or initial_last_spike_step.dtype != np.int32
             or any(
                 value.shape != shape
                 for value in (
                     initial_voltage_mv,
+                    initial_voltage_offset_mv,
                     initial_synaptic_mv,
                     initial_last_spike_step,
                 )
@@ -260,6 +269,11 @@ class ObservationConfiguration:
             self,
             '_initial_voltage_mv_snapshot',
             HostSnapshot.capture(initial_voltage_mv),
+        )
+        object.__setattr__(
+            self,
+            '_initial_voltage_offset_mv_snapshot',
+            HostSnapshot.capture(initial_voltage_offset_mv),
         )
         object.__setattr__(
             self,
@@ -291,6 +305,10 @@ class ObservationConfiguration:
     @property
     def initial_voltage_mv(self) -> NDArray[np.float32]:
         return self._initial_voltage_mv_snapshot.array
+
+    @property
+    def initial_voltage_offset_mv(self) -> NDArray[np.float32]:
+        return self._initial_voltage_offset_mv_snapshot.array
 
     @property
     def initial_synaptic_mv(self) -> NDArray[np.float32]:

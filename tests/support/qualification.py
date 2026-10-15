@@ -97,6 +97,7 @@ class Harness:
             inputs = boolean_input(events)
         rows: dict[str, list[mx.array]] = {name: [] for name in core.StepTrace._fields}
         rows.update({name: [] for name in core.State._fields[:-1]})
+        rows['voltage_mv'] = []
         for length in chunks or [len(events)]:
             end = state.step + length
             while state.step < end:
@@ -109,6 +110,7 @@ class Harness:
                     core.State._fields[:-1], state[:-1], strict=True
                 ):
                     rows[name].append(value)
+                rows['voltage_mv'].append(state.voltage_mv)
         assert state.step == len(events)
         with mx.stream(mx.gpu):
             arrays = {name: mx.stack(values) for name, values in rows.items()}

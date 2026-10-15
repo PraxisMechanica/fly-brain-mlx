@@ -44,6 +44,7 @@ class NativeObservationSession:
         self._trial_indices = trial_indices
         self._initial_step = state.step
         self._initial_voltage = state.voltage_mv
+        self._initial_voltage_offset = state.voltage_offset_mv
         self._initial_synaptic = state.synaptic_mv
         self._initial_last = state.last_spike_step
         self._trace: core.StepTrace | None = None
@@ -69,6 +70,7 @@ class NativeObservationSession:
                 _native_float32(self._initial_voltage),
                 _native_float32(self._initial_synaptic),
                 _native_int32(self._initial_last),
+                _native_float32(self._initial_voltage_offset),
             )
 
     def advance(self, events: NDArray[np.bool_]) -> NativeObservation:
@@ -81,13 +83,16 @@ class NativeObservationSession:
             self._state, trace = self._advance(self._state, inputs)
             fields = {
                 'pre_v': trace.pre_voltage_mv,
+                'pre_u': trace.pre_voltage_offset_mv,
                 'pre_g': trace.pre_synaptic_mv,
                 'pre_not_refractory': trace.available,
                 'spikes': trace.spikes,
                 'before_v': trace.before_reset_voltage_mv,
+                'before_u': trace.before_reset_voltage_offset_mv,
                 'before_g': trace.before_reset_synaptic_mv,
                 'before_not_refractory': trace.receiving,
                 'end_v': self._state.voltage_mv,
+                'end_u': self._state.voltage_offset_mv,
                 'end_g': self._state.synaptic_mv,
                 'end_last_spike_step': self._state.last_spike_step,
                 'end_not_refractory': trace.receiving,
@@ -120,7 +125,7 @@ class NativeObservationSession:
         trace = self._trace
         if trace is None:
             raise ValueError('Comparison requires an actual pending observation')
-        trials, neurons = self._state.voltage_mv.shape
+        trials, neurons = self._state.voltage_offset_mv.shape
         if (
             operands.available.shape != (trials, neurons)
             or operands.sources.shape != (self._network.sources.size,)

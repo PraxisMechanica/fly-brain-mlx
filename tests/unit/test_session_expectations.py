@@ -214,13 +214,15 @@ def test_due_membership_preserves_every_original_edge_and_digest(
 
 
 @pytest.mark.parametrize('phase', ('pre', 'before', 'end'))
+@pytest.mark.parametrize('field', ('g', 'u'))
 def test_qualification_rejects_nonfinite_values_in_each_actual_phase(
     phase: str,
+    field: str,
 ) -> None:
     network = connectome()
     actual = observation(1, (-52, -52))
     fields = dict(actual.fields)
-    fields[phase + '_g'] = np.full((1, 2), np.nan, dtype=np.float32)
+    fields[phase + '_' + field] = np.full((1, 2), np.nan, dtype=np.float32)
     actual = NativeObservation(
         actual.completed_steps,
         actual.trial_indices,
