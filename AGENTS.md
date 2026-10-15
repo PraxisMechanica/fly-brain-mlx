@@ -66,12 +66,13 @@ Use GPT-6.1 Sol for implementation at the user-selected effort (currently
 `xhigh`). Only the user may change the parent model.
 
 Resolve engineering and causal decisions here using verified evidence. Use Astra
-only when a specific unresolved uncertainty blocks further confident progress
-after bounded diagnosis. State that uncertainty before dispatch. Astra is not a
-routine check or a required reviewer for every case. For a necessary escalation,
-use `bounded-subagent`, `gpt-6-astra` at `xhigh`, fresh context, one reviewer at a
-time and no implementation delegation. Await completion, verify the evidence and
-record the decision and limits. Keep assigned reviews with their current owners.
+only when something is broken and we cannot resolve it ourselves after diagnosis
+and repair attempts. State the concrete failure, attempted fixes and remaining
+blocker before dispatch. Routine reviews and design decisions stay here. For a
+necessary escalation, use `bounded-subagent`, `gpt-6-astra` at `xhigh`, fresh
+context, one reviewer at a time and no implementation delegation. Await
+completion, verify the evidence and record the decision and limits. Keep assigned
+reviews with their current owners.
 
 ## Repository remotes
 
