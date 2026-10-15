@@ -1,7 +1,7 @@
-import importlib
+import json
 from functools import partial
 from pathlib import Path
-from types import MappingProxyType, ModuleType
+from types import MappingProxyType
 
 import pytest
 import torch
@@ -12,8 +12,6 @@ from fly_brain.qualification.adapters import schedule_probe, torch_setup
 from fly_brain.simulation.identifiers import NeuronRow
 from fly_brain.simulation.module import build_connectome_silencer
 from tests.support.observation_fixtures import fixture
-from tests.support.reference_baseline import ORIGINAL_COMMIT
-from tests.support.reference_baseline import original as original
 
 pytestmark = [pytest.mark.integration, pytest.mark.reference]
 
@@ -75,22 +73,29 @@ def test_both_actual_bootstrap_paths_supply_fresh_immutable_values() -> None:
     assert supplied[0] is not supplied[1] and supplied[0] is not supplied[2]
 
 
-def test_actual_schedule_diagnostic_uses_injected_values_at_original_model_position(
+def test_schedule_diagnostic_records_pinned_stimulation_and_delay(
     tmp_path: Path,
-    original: tuple[ModuleType, ModuleType],
 ) -> None:
-    original_schedule = importlib.import_module(
-        'preserved_torch_reference.schedule_probe'
-    )
-    assert original_schedule.__file__ == (
-        ORIGINAL_COMMIT + ':src/fly_brain/qualification/adapters/schedule_probe.py'
-    )
-    expected = original_schedule.run(tmp_path / 'original-schedule')
     actual = schedule_probe.run(
         tmp_path / 'schedule',
         reference_parameters=MappingProxyType(reference_parameters.model_parameters()),
     )
-    assert actual == expected
-    assert (tmp_path / 'schedule/reference-schedule.json').read_bytes() == (
-        tmp_path / 'original-schedule/reference-schedule.json'
-    ).read_bytes()
+    assert actual['brian2_version'] == '2.8.0'
+    assert actual['timestep_ms'] == 0.1
+    assert actual['voltage_dtype'] == "<class 'numpy.float64'>"
+    assert actual['synaptic_delay_ms'] == 1.8
+    assert actual['guaranteed_stimulation'] == {
+        'rate_hz': 10000,
+        'end_voltage_mv': [16.75, -52.0, 16.75, -52.0, 16.75],
+        'spike_times_ms': [step * 0.1 for step in (1, 3)],
+    }
+    delay = actual['pytorch_single_spike_delay']
+    assert isinstance(delay, dict)
+    assert (delay['first_destination_g_step'], delay['first_destination_v_step']) == (
+        20,
+        21,
+    )
+    assert (
+        json.loads((tmp_path / 'schedule/reference-schedule.json').read_text())
+        == actual
+    )

@@ -8,7 +8,7 @@ from fly_brain.qualification.adapters.causal_reduction import reduction_inputs
 from fly_brain.simulation.backend.bucketed import prepare_observed
 from fly_brain.simulation.identifiers import NeuronRow
 from fly_brain.simulation.mapping import silence_sources
-from tests.qualification.test_mlx_observer import fixture
+from tests.support.observation_fixtures import fixture
 
 pytestmark = [pytest.mark.integration, pytest.mark.metal]
 

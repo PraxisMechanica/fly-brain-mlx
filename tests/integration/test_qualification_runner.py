@@ -12,7 +12,7 @@ pytestmark = pytest.mark.integration
 
 
 @pytest.mark.parametrize('timed_out', (False, True))
-def test_local_qualification_excludes_historical_full_model_preservation(
+def test_local_qualification_runs_complete_current_scope_with_time_limit(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, timed_out: bool
 ) -> None:
     request = QualificationRequest(tmp_path, tmp_path / 'fresh')
@@ -40,16 +40,9 @@ def test_local_qualification_excludes_historical_full_model_preservation(
     ) -> Process:
         assert cwd == request.project
         assert env['MLX_ENABLE_TF32'] == '0'
-        assert command[4:6] == (
-            'tests/qualification',
-            '--ignore=tests/qualification/test_observation_session_pinned.py',
-        )
-        assert [value for value in command if value.startswith('--ignore=')] == [
-            '--ignore=tests/qualification/test_observation_session_pinned.py'
-        ]
-        assert 'tests/integration/test_session_proof_artifacts.py' not in command
+        assert command[4:6] == ('tests/qualification', '--disable-warnings')
+        assert not any(value.startswith('--ignore') for value in command)
         assert f'--basetemp={request.output / "temporary"}' in command
-        assert not (request.output / 'frozen-stimulus').exists()
         assert stderr == subprocess.STDOUT and start_new_session is True
         stdout.write('scientific checks executed\n')
         (request.output / 'tests.xml').write_text(

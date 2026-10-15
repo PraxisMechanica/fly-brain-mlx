@@ -16,10 +16,16 @@ pytestmark = pytest.mark.integration
 
 
 @pytest.mark.parametrize(
-    'column,values', [('time_ms', [1.0]), ('time_s', [0.001]), ('t', [1.0])]
+    'column,value,expected',
+    [
+        ('time_ms', 1.0, 0.001),
+        ('time_s', 0.001, 0.001),
+        ('t', 0.001, 0.001),
+        ('t', 1.0, 1.0),
+    ],
 )
-def test_reader_preserves_existing_time_column_contracts(
-    tmp_path: Path, column: str, values: list[float]
+def test_reader_uses_explicit_time_column_units(
+    tmp_path: Path, column: str, value: float, expected: float
 ) -> None:
     path = tmp_path / 'spikes.parquet'
     table = pa.table(
@@ -27,12 +33,12 @@ def test_reader_preserves_existing_time_column_contracts(
             'trial': np.array([0], dtype=np.int16),
             'flywire_id': np.array([720575940000000001], dtype=np.int64),
             'neuron_index': [0],
-            column: values,
+            column: [value],
         }
     )
     pq.write_table(table, path)
-    spikes = read_spikes(path, 0.1)
-    np.testing.assert_array_equal(spikes.time_s, [0.001])
+    spikes = read_spikes(path)
+    np.testing.assert_array_equal(spikes.time_s, [expected])
     np.testing.assert_array_equal(spikes.neuron_ids, [720575940000000001])
 
 
@@ -47,14 +53,14 @@ def test_reader_preserves_canonical_empty_parquet(tmp_path: Path) -> None:
         }
     )
     pq.write_table(table, path)
-    assert read_spikes(path, 0.1).time_s.size == 0
+    assert read_spikes(path).time_s.size == 0
 
 
 def test_reader_rejects_missing_contract_columns(tmp_path: Path) -> None:
     path = tmp_path / 'invalid.parquet'
     pq.write_table(pa.table({'time_ms': [1.0]}), path)
     with pytest.raises(ValueError, match='Spike columns'):
-        read_spikes(path, 0.1)
+        read_spikes(path)
 
 
 def test_reader_rejects_nonfinite_times(tmp_path: Path) -> None:
@@ -66,7 +72,7 @@ def test_reader_rejects_nonfinite_times(tmp_path: Path) -> None:
         path,
     )
     with pytest.raises(ValueError, match='finite'):
-        read_spikes(path, 0.1)
+        read_spikes(path)
 
 
 def test_reader_rejects_null_identifiers(tmp_path: Path) -> None:
@@ -78,7 +84,7 @@ def test_reader_rejects_null_identifiers(tmp_path: Path) -> None:
         path,
     )
     with pytest.raises(ValueError, match='null'):
-        read_spikes(path, 0.1)
+        read_spikes(path)
 
 
 @pytest.mark.parametrize('empty', (False, True))
@@ -127,6 +133,7 @@ def test_installed_comparison_command_reads_and_writes_the_file_contract(
     )
     assert process.returncode == 0, process.stderr
     report = json.loads((output / 'pairwise_summary.json').read_text())[0]
+    assert not {'framework_a', 'framework_b'} & report.keys()
     assert (report['spikes_a'], report['spikes_b'], report['timing_matches']) == (
         (0, 0, 0) if empty else (2, 1, 1)
     )
@@ -134,9 +141,7 @@ def test_installed_comparison_command_reads_and_writes_the_file_contract(
         reader = csv.DictReader(source)
         assert reader.fieldnames == [
             'backend_a',
-            'framework_a',
             'backend_b',
-            'framework_b',
             't_run',
             'n_run',
             'flywire_id',

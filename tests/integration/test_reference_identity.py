@@ -1,7 +1,5 @@
-import subprocess
 from dataclasses import replace
 from pathlib import Path
-from typing import cast
 
 import numpy as np
 import pytest
@@ -15,26 +13,8 @@ from fly_brain.simulation.identifiers import (
     TrialId,
 )
 from fly_brain.simulation.models import Connectome, Stimulus
-from tests.quality.test_reference_digest import LegacyProducer, preserved_identity
 
 pytestmark = pytest.mark.integration
-BASE = 'e923c316342978e03a74c1455336e43a651ef6b0'
-
-
-@pytest.fixture
-def legacy_producer() -> LegacyProducer:
-    source = subprocess.check_output(
-        [
-            'git',
-            'show',
-            BASE + ':src/fly_brain/qualification/adapters/reference_identity.py',
-        ],
-        cwd=Path(__file__).resolve().parents[2],
-        text=True,
-    )
-    namespace = dict(create.__globals__)
-    exec(compile(source, BASE + ':reference_identity.py', 'exec'), namespace)
-    return cast(LegacyProducer, namespace['create'])
 
 
 @pytest.mark.parametrize(
@@ -58,7 +38,7 @@ def legacy_producer() -> LegacyProducer:
     ],
 )
 def test_reference_identity_binds_each_scientific_input_category(
-    tmp_path: Path, changed: str, legacy_producer: LegacyProducer
+    tmp_path: Path, changed: str
 ) -> None:
     connectome = Connectome(
         FlyWireIds64(np.arange(3, dtype=np.int64)),
@@ -78,9 +58,7 @@ def test_reference_identity_binds_each_scientific_input_category(
     (tmp_path / 'main.cpp').write_text('original code')
     (tmp_path / 'static_arrays').mkdir()
     (tmp_path / 'static_arrays/input').write_bytes(b'original input')
-    original = preserved_identity(
-        legacy_producer, connectome, stimulus, (), shape, tmp_path, context
-    )
+    original = create(connectome, stimulus, (), shape, {}, tmp_path, context)[0]
     silenced: tuple[int, ...] = ()
     if changed in ('neuron_ids', 'sources', 'destinations', 'counts', 'weights_mv'):
         values = getattr(connectome, changed).copy()
@@ -100,15 +78,12 @@ def test_reference_identity_binds_each_scientific_input_category(
         (tmp_path / 'main.cpp').write_text('changed code')
     else:
         (tmp_path / 'static_arrays/input').write_bytes(b'changed input')
-    actual = preserved_identity(
-        legacy_producer, connectome, stimulus, silenced, shape, tmp_path, context
-    )
+    actual = create(connectome, stimulus, silenced, shape, {}, tmp_path, context)[0]
     assert actual != original
 
 
 def test_unused_candidate_executable_is_separate_from_sealed_producer(
     tmp_path: Path,
-    legacy_producer: LegacyProducer,
 ) -> None:
     connectome = Connectome(
         FlyWireIds64(np.arange(1, dtype=np.int64)),
@@ -121,13 +96,9 @@ def test_unused_candidate_executable_is_separate_from_sealed_producer(
     shape = StreamShape(1, 2, 0, (), 2)
     (tmp_path / 'main').write_bytes(b'original executable')
     before = file_record(tmp_path / 'main')
-    original = preserved_identity(
-        legacy_producer, connectome, stimulus, (), shape, tmp_path, {}
-    )
+    original = create(connectome, stimulus, (), shape, {}, tmp_path, {})[0]
     (tmp_path / 'main').write_bytes(b'changed executable')
     (tmp_path / 'unused-mlx.py').write_text('changed candidate')
-    actual = preserved_identity(
-        legacy_producer, connectome, stimulus, (), shape, tmp_path, {}
-    )
+    actual = create(connectome, stimulus, (), shape, {}, tmp_path, {})[0]
     assert actual == original
     assert file_record(tmp_path / 'main') != before

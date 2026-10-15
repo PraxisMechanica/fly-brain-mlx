@@ -14,14 +14,12 @@ PROTECTED = (
     'src/fly_brain/qualification/adapters/brian_reference.py',
     'src/fly_brain/qualification/adapters/torch_reference.py',
     'src/fly_brain/qualification/reference_parameters.py',
-    'tests/support/legacy_mlx_ledger.py',
-    'tests/support/legacy_mlx_observer.py',
 )
 
 
 class SourceIdentity(BaseModel):
     model_config = ConfigDict(extra='forbid', frozen=True)
-    kind: Literal['reference_source', 'historical_source']
+    kind: Literal['reference_source']
     sha256: Annotated[str, Field(pattern=r'^[a-f0-9]{64}$')]
     commit: Annotated[str, Field(pattern=r'^[a-f0-9]{40}$')]
     origin: Annotated[str, Field(min_length=1)]

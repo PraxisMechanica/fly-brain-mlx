@@ -21,7 +21,6 @@ def run_tests(request: QualificationRequest) -> QualificationResult:
         'pytest',
         '-q',
         'tests/qualification',
-        '--ignore=tests/qualification/test_observation_session_pinned.py',
         '--disable-warnings',
         '--artifact-output',
         str(request.output),

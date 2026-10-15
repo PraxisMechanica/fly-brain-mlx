@@ -5,6 +5,7 @@ from typing import cast
 import numpy as np
 import pytest
 
+from fly_brain.qualification.adapters.paired_observer import trial_block
 from fly_brain.qualification.session_expectations import (
     CHECK_NAMES,
     expect_step,
@@ -21,35 +22,40 @@ from fly_brain.simulation.identifiers import (
 from fly_brain.simulation.models import Connectome
 from fly_brain.simulation.observation_module import build_observation_sessions
 from fly_brain.simulation.observations import ObservationInitialState
-from tests.qualification.test_mlx_observer import observed, stock
-from tests.support.observation_fixtures import Fixture, fixture, initial, session_blocks
+from tests.support.observation_fixtures import (
+    Fixture,
+    fixture,
+    initial,
+    ordinary_phases,
+    session_blocks,
+)
 
 pytestmark = [pytest.mark.integration, pytest.mark.metal]
 
 
 @pytest.mark.parametrize('block_size', (1, 17, 32))
 @pytest.mark.parametrize('empty', (False, True))
-def test_opaque_sessions_preserve_ordinary_legacy_and_repeat_native_bytes(
+def test_sessions_preserve_ordinary_and_repeat_native_bytes(
     precision: str,
     block_size: int,
     empty: bool,
     request: pytest.FixtureRequest,
 ) -> None:
     case = fixture(empty)
-    ordinary = stock(case, precision)
-    legacy = observed(case, precision, block_size)
+    ordinary = ordinary_phases(case, precision, initial(case))
     actual = session_blocks(case, precision, block_size)
     repeat = session_blocks(case, precision, block_size)
     assert sum(block.rows for block in actual) == 101
-    for old, new, repeated in zip(legacy, actual, repeat, strict=True):
-        assert (new.begin, new.rows, new.queue_sha256, new.due_sha256) == (
-            old.begin,
-            old.rows,
-            old.queue_sha256,
-            old.due_sha256,
+    assert set(actual[0].fields) == set(ordinary) - {'due', 'queue'}
+    for index, (new, repeated) in enumerate(zip(actual, repeat, strict=True)):
+        assert (new.begin, new.rows) == (
+            index * block_size,
+            min(block_size, 101 - index * block_size),
         )
+        assert (new.begin, new.rows) == (repeated.begin, repeated.rows)
+        assert (new.final_queue is not None) == (new is actual[-1])
         assert new.checks.shape == (new.rows, 4, len(CHECK_NAMES)) and new.checks.all()
-        assert new.checks.tobytes() == old.checks.tobytes() == repeated.checks.tobytes()
+        assert new.checks.tobytes() == repeated.checks.tobytes()
         assert new.queue_sha256 == repeated.queue_sha256
         assert new.queue_slot_sha256 == repeated.queue_slot_sha256
         for name, value in new.fields.items():
@@ -59,11 +65,7 @@ def test_opaque_sessions_preserve_ordinary_legacy_and_repeat_native_bytes(
                 expected.shape,
                 expected.tobytes(),
             ), name
-            assert (
-                value.tobytes()
-                == old.fields[name].tobytes()
-                == repeated.fields[name].tobytes()
-            ), name
+            assert value.tobytes() == repeated.fields[name].tobytes(), name
             with pytest.raises(ValueError):
                 value.setflags(write=True)
         queues = ordinary['queue'][new.begin + new.rows - 1]
@@ -74,14 +76,23 @@ def test_opaque_sessions_preserve_ordinary_legacy_and_repeat_native_bytes(
             )
             for trial in range(4)
         )
-        for new_row, old_row, repeated_row in zip(
-            new.due_edges, old.due_edges, repeated.due_edges, strict=True
+        assert new.queue_sha256 == tuple(
+            hashlib.sha256(queues[:, trial].tobytes()).hexdigest() for trial in range(4)
+        )
+        assert new.due_sha256 == repeated.due_sha256
+        for row, (new_row, repeated_row) in enumerate(
+            zip(new.due_edges, repeated.due_edges, strict=True)
         ):
-            assert (
-                tuple(value.tobytes() for value in new_row)
-                == tuple(value.tobytes() for value in old_row)
-                == tuple(value.tobytes() for value in repeated_row)
-            )
+            for trial, (edges, repeated_edges) in enumerate(
+                zip(new_row, repeated_row, strict=True)
+            ):
+                due = ordinary['due'][new.begin + row, trial]
+                assert np.array_equal(edges, np.flatnonzero(due))
+                assert edges.tobytes() == repeated_edges.tobytes()
+                assert (
+                    new.due_sha256[row][trial]
+                    == hashlib.sha256(due.tobytes()).hexdigest()
+                )
     final = actual[-1].final_queue
     repeated_final = repeat[-1].final_queue
     assert final is not None and repeated_final is not None
@@ -119,6 +130,12 @@ def test_real_four_trial_sessions_match_fresh_singletons(precision: str) -> None
         )
         singles = session_blocks(single_case, precision, 32)
         for many, one in zip(batch, singles, strict=True):
+            sliced = trial_block(many, trial)
+            assert sliced.checks.tobytes() == one.checks.tobytes()
+            assert sliced.queue_sha256 == one.queue_sha256
+            assert sliced.due_sha256 == one.due_sha256
+            for name, value in one.fields.items():
+                assert sliced.fields[name].tobytes() == value.tobytes()
             assert one.checks.tobytes() == many.checks[:, trial : trial + 1].tobytes()
             assert one.queue_sha256 == (many.queue_sha256[trial],)
             assert one.queue_slot_sha256 == (many.queue_slot_sha256[trial],)
@@ -142,7 +159,7 @@ def test_session_chunk_continuation_preserves_native_phases_due_and_all_queues(
     chunks: tuple[int, ...],
 ) -> None:
     case = fixture()
-    ordinary = stock(case, precision)
+    ordinary = ordinary_phases(case, precision, initial(case))
     factory, _ = build_observation_sessions(
         case.connectome, case.targets, (NeuronRow(3),), precision
     )
@@ -248,3 +265,11 @@ def test_actual_native_threshold_equality_and_neighbors_match_independent_predic
     assert operands.spikes.tolist() == [[False], [False], [True]]
     assert state.history[0].tolist() == [[False], [False], [True]]
     assert observation_checks(actual, session.compare(operands), operands).all()
+
+
+@pytest.mark.parametrize('block_size', (0, 33))
+def test_sessions_refuse_empty_or_unbounded_capture_blocks(
+    precision: str, block_size: int
+) -> None:
+    with pytest.raises(ValueError, match='1 to 32'):
+        session_blocks(fixture(True), precision, block_size)

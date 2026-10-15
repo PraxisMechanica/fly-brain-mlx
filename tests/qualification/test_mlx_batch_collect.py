@@ -1,3 +1,4 @@
+import hashlib
 import json
 from collections.abc import Generator
 from pathlib import Path
@@ -12,15 +13,11 @@ from fly_brain.qualification.adapters.replay_evidence import verify
 from fly_brain.qualification.ports import ObservationSessionFactory
 from fly_brain.qualification.session_blocks import SessionBlock
 from fly_brain.qualification.session_observer import observe_session
-from fly_brain.simulation.backend import core
-from fly_brain.simulation.backend.bucketed import prepare
 from fly_brain.simulation.identifiers import NeuronRow, TrialId
 from fly_brain.simulation.models import Connectome, Stimulus
 from fly_brain.simulation.observation_module import build_observation_sessions
-from tests.support.legacy_mlx_ledger import EventLedger
-from tests.support.legacy_mlx_observer import observe
-from tests.support.observation_fixtures import fixture, stimulus_for
-from tests.support.session_block_values import replace_block, trial_fields
+from tests.support.observation_fixtures import fixture, ordinary_phases, stimulus_for
+from tests.support.session_block_values import replace_block
 
 pytestmark = [pytest.mark.integration, pytest.mark.metal]
 
@@ -33,15 +30,10 @@ def test_batch_collection_preserves_every_trial_native_phase_queue_and_spike(
     stimulus = stimulus_for(
         case.events, case.targets, (), (TrialId(0), TrialId(1), TrialId(2), TrialId(3))
     )
-    execution = prepare(case.connectome, case.targets, (3,), precision)
-    expected = list(
-        observe(
-            execution,
-            core.initial_state(execution.network, 4),
-            case.events,
-            EventLedger(case.connectome, case.targets, 4),
-        )
-    )
+    ordinary = ordinary_phases(case, precision, None)
+    fields = {
+        name: value for name, value in ordinary.items() if name not in ('queue', 'due')
+    }
     outputs = (tmp_path / 'first', tmp_path / 'repeat')
     factory, _ = build_observation_sessions(
         case.connectome, case.targets, (NeuronRow(3),), precision
@@ -58,33 +50,44 @@ def test_batch_collection_preserves_every_trial_native_phase_queue_and_spike(
             (64, 32),
             (96, 5),
         ]
-        for saved, actual in zip(rows, expected, strict=True):
+        for saved in rows:
+            begin, end = saved['begin'], saved['begin'] + saved['rows']
             assert saved['native_phase_sha256'] == [
-                phase_hash(trial_fields(actual.fields, trial).fields)
+                phase_hash(
+                    {
+                        name: value[begin:end, trial : trial + 1]
+                        for name, value in fields.items()
+                    }
+                )
                 for trial in range(4)
             ]
-            assert saved['mlx_queue_sha256'] == list(actual.queue_sha256)
-            assert saved['mlx_due_sha256'] == [list(row) for row in actual.due_sha256]
+            queue = ordinary['queue'][end - 1]
+            assert saved['mlx_queue_sha256'] == [
+                hashlib.sha256(queue[:, trial].tobytes()).hexdigest()
+                for trial in range(4)
+            ]
+            assert saved['mlx_due_sha256'] == [
+                [hashlib.sha256(due.tobytes()).hexdigest() for due in row]
+                for row in ordinary['due'][begin:end]
+            ]
         with np.load(output / 'native.npz') as native:
-            assert set(native.files) == set(expected[-1].fields) | {
+            assert set(native.files) == set(fields) | {
                 'queue',
                 'spike_trials',
                 'spike_neurons',
                 'spike_steps',
             }
-            for name, value in expected[-1].fields.items():
+            for name, value in fields.items():
                 assert (
                     native[name].dtype,
                     native[name].shape,
                     native[name].tobytes(),
                 ) == (value.dtype, value[-1].shape, value[-1].tobytes())
-            assert expected[-1].final_queue is not None
-            assert native['queue'].tobytes() == expected[-1].final_queue.tobytes()
+            assert native['queue'].tobytes() == ordinary['queue'][-1].tobytes()
             raster = [
-                (trial, neuron, block.begin + row)
-                for block in expected
+                (trial, neuron, row)
                 for row, trial, neuron in zip(
-                    *np.nonzero(block.fields['spikes']), strict=True
+                    *np.nonzero(fields['spikes']), strict=True
                 )
             ]
             assert (

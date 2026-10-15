@@ -3,10 +3,6 @@ from .models import ComparisonRequest, ComparisonResult, SpikeReader
 
 
 def compare(request: ComparisonRequest, reader: SpikeReader) -> ComparisonResult:
-    first = prepare_metrics(
-        reader(request.first, request.duration_s), request.duration_s, request.trials
-    )
-    second = prepare_metrics(
-        reader(request.second, request.duration_s), request.duration_s, request.trials
-    )
+    first = prepare_metrics(reader(request.first), request.duration_s, request.trials)
+    second = prepare_metrics(reader(request.second), request.duration_s, request.trials)
     return compare_metrics(request, first, second)

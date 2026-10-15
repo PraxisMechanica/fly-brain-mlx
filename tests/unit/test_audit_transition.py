@@ -1,10 +1,5 @@
-import subprocess
-import sys
-from collections.abc import Callable
 from dataclasses import FrozenInstanceError, asdict, replace
-from pathlib import Path
-from types import ModuleType
-from typing import Protocol, cast
+from typing import cast
 
 import numpy as np
 import pytest
@@ -20,46 +15,14 @@ from fly_brain.qualification.adapters.paired_observer import PairedBlock
 from fly_brain.qualification.causality import (
     BudgetViolation,
     CausalAudit,
-    StateFields,
     advance_audit,
 )
 from fly_brain.qualification.session_blocks import SessionBlock
-from fly_brain.simulation.identifiers import TrialId
+from fly_brain.simulation.identifiers import NeuronRow, TrialId
 from fly_brain.simulation.observations import HostArray
 from tests.support.session_block_values import replace_block
 
 pytestmark = pytest.mark.unit
-BASE = '8e90dc665b0c89616eacb4d62415970de955828d'
-ROOT = Path(__file__).resolve().parents[2]
-
-
-class Legacy(Protocol):
-    step: int
-    first_budget_violation: BudgetViolation | None
-    first_spike_step: int | None
-    first_spike_neurons: tuple[int, ...]
-
-    def check(
-        self,
-        step: int,
-        reference: StateFields,
-        mlx: StateFields,
-        reference_spikes: NDArray[np.bool_],
-        mlx_spikes: NDArray[np.bool_],
-    ) -> None: ...
-
-
-@pytest.fixture
-def legacy(monkeypatch: pytest.MonkeyPatch) -> Legacy:
-    module = ModuleType('tests._legacy_audit')
-    monkeypatch.setitem(sys.modules, module.__name__, module)
-    source = subprocess.check_output(
-        ['git', 'show', BASE + ':src/fly_brain/qualification/causality.py'],
-        cwd=ROOT,
-        text=True,
-    )
-    exec(compile(source, BASE + ':causality.py', 'exec'), module.__dict__)
-    return cast(Callable[[], Legacy], module.__dict__['CausalAudit'])()
 
 
 def state_fields() -> dict[str, NDArray[np.float64]]:
@@ -70,7 +33,7 @@ def state_fields() -> dict[str, NDArray[np.float64]]:
     }
 
 
-def payload(audit: Legacy | CausalAudit) -> tuple[object, ...]:
+def payload(audit: CausalAudit) -> tuple[object, ...]:
     return (
         audit.step,
         asdict(audit.first_budget_violation)
@@ -83,8 +46,8 @@ def payload(audit: Legacy | CausalAudit) -> tuple[object, ...]:
 
 @pytest.mark.parametrize('fork', (None, 0, 17, 33))
 @pytest.mark.parametrize('violation', (None, 0, 16, 17))
-def test_every_successful_prefix_matches_frozen_source_without_mutating_inputs(
-    legacy: Legacy, fork: int | None, violation: int | None
+def test_first_cause_stops_at_spike_fork_without_mutating_inputs(
+    fork: int | None, violation: int | None
 ) -> None:
     current = CausalAudit()
     for step in range(36):
@@ -103,9 +66,21 @@ def test_every_successful_prefix_matches_frozen_source_without_mutating_inputs(
             }.items()
         }
         prior, saved = current, payload(current)
-        legacy.check(step, reference, mlx, quiet, actual)
         current = advance_audit(current, step, reference, mlx, quiet, actual)
-        assert payload(current) == payload(legacy)
+        recorded_fork = fork if fork is not None and fork <= step else None
+        recorded_violation = (
+            BudgetViolation(violation, 'pre', 'g', NeuronRow(2), 0.0, 0.002, 0.001)
+            if violation is not None
+            and violation <= step
+            and (fork is None or violation <= fork)
+            else None
+        )
+        assert current == CausalAudit(
+            step + 1,
+            recorded_violation,
+            recorded_fork,
+            (NeuronRow(1), NeuronRow(3)) if recorded_fork is not None else (),
+        )
         assert payload(prior) == saved and current is not prior
         assert before == {
             name: value.tobytes()
@@ -211,19 +186,14 @@ def test_wrong_step_precedes_nonfinite_and_state_can_retry() -> None:
     assert initial == CausalAudit()
 
 
-def test_missing_field_exposes_old_partial_mutation_but_new_retry_is_clean(
-    legacy: Legacy,
-) -> None:
+def test_missing_field_leaves_audit_unchanged_and_retry_is_clean() -> None:
     reference, actual = state_fields(), state_fields()
     actual['pre_v'][1] = 0.002
     del reference['pre_g']
     quiet = np.zeros(4, dtype=np.bool_)
     initial = CausalAudit()
     with pytest.raises(KeyError, match='pre_g'):
-        legacy.check(0, reference, actual, quiet, quiet)
-    with pytest.raises(KeyError, match='pre_g'):
         advance_audit(initial, 0, reference, actual, quiet, quiet)
-    assert legacy.step == 0 and legacy.first_budget_violation is not None
     assert initial == CausalAudit()
     actual['pre_v'][1] = 0
     reference['pre_g'] = np.zeros(4, dtype=np.float64)

@@ -4,10 +4,8 @@ Run the FlyWire v783 leaky integrate-and-fire model on Apple silicon with MLX.
 This project is based on [Eon Systems' simulation](https://github.com/eonsystemspbc/fly-brain),
 pinned at `a3db62f9436074e485c0278290c2164ed6150808`.
 
-Historical verification covered the complete shortest sugar experiment and
-silent control. Full-network scientific parity and performance qualification
-remain unfinished. See [project status](milestone.md) for current evidence and
-limits.
+Local scientific checks are implemented. Full-network scientific parity remains
+unqualified. See [project status](milestone.md) for current evidence and limits.
 
 ## Install
 
@@ -63,6 +61,8 @@ uv run --locked --no-dev fly-brain compare \
 Use a new output directory. Comparison writes `pairwise_summary.json`,
 `pairwise_summary.csv`, and `parity_rates.csv`; it leaves the input files intact.
 These diagnostic scores do not establish full scientific acceptance.
+Times use explicit column units: `time_ms` is milliseconds; `time_s` and `t` are
+seconds. Reports use `backend_a` and `backend_b` labels.
 
 ## Development
 

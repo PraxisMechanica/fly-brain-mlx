@@ -4,13 +4,11 @@ Audience: agents and maintainers. The [project architecture policy](architecture
 owns design requirements; [quality coverage](quality-coverage.md) owns check scope.
 
 The [scientific manifest](../../tools/code_quality/scientific_sources.json) is the
-single owner of five reviewed source hashes and their independent provenance:
+single owner of three reviewed source hashes and their independent provenance:
 
 - `src/fly_brain/qualification/adapters/brian_reference.py`
 - `src/fly_brain/qualification/adapters/torch_reference.py`
 - `src/fly_brain/qualification/reference_parameters.py`
-- `tests/support/legacy_mlx_observer.py`
-- `tests/support/legacy_mlx_ledger.py`
 
 The [source guard](../../tools/code_quality/ownership.py) validates the manifest,
 requires this exact protected set, and compares actual file hashes. Missing files,

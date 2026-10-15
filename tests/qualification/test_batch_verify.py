@@ -19,7 +19,7 @@ from fly_brain.simulation.identifiers import NeuronRow, TrialId
 from fly_brain.simulation.models import Stimulus
 from fly_brain.simulation.module import build_connectome_silencer
 from fly_brain.simulation.observation_module import build_observation_sessions
-from tests.qualification.test_mlx_observer import fixture
+from tests.support.observation_fixtures import fixture
 
 pytestmark = [pytest.mark.integration, pytest.mark.reference, pytest.mark.metal]
 

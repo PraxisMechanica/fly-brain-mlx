@@ -40,7 +40,7 @@ def test_ordinary_names_bindings_and_modules_need_no_registry_approval(
     (protected_project / 'new_module.py').write_text('NEW_VALUE = 2\n')
     assert ownership.main([]) == 0
     output = capsys.readouterr().out
-    assert '5 protected scientific sources checked' in output
+    assert '3 protected scientific sources checked' in output
     assert '37-rule' not in output and 'recorded findings' not in output
 
 
@@ -76,5 +76,5 @@ def test_removed_or_invalid_protection_records_fail(
     assert ownership.main([]) == 2
 
 
-def test_actual_five_scientific_source_guards_still_match() -> None:
+def test_actual_scientific_source_guards_still_match() -> None:
     assert ownership.review(PROJECT) == ()

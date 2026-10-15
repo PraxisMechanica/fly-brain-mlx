@@ -1,11 +1,20 @@
 import hashlib
 from dataclasses import dataclass
 
+import mlx.core as mx
 import numpy as np
 from numpy.typing import NDArray
 
 from fly_brain.qualification.session_blocks import SessionBlock
 from fly_brain.qualification.session_observer import observe_session
+from fly_brain.simulation.backend import core
+from fly_brain.simulation.backend.arrays import (
+    HostArray,
+    as_host,
+    boolean_input,
+    evaluate,
+)
+from fly_brain.simulation.backend.bucketed import prepare
 from fly_brain.simulation.identifiers import (
     FlyWireIds64,
     NeuronRow,
@@ -49,12 +58,14 @@ def fixture(empty: bool = False) -> Fixture:
 
 def initial(case: Fixture) -> ObservationInitialState:
     shape = (case.events.shape[0], 6)
+    last = np.full(shape, -100000000, dtype=np.int32)
+    last[:, 5] = -10
     return ObservationInitialState(
         np.broadcast_to(
             np.array([-52, -52, -44, -44, -44, -52], dtype=np.float64), shape
         ),
         np.broadcast_to(np.array([0, 0, 100, 0, 0, 0], dtype=np.float64), shape),
-        np.full(shape, -100000000, dtype=np.int32),
+        last,
     )
 
 
@@ -92,3 +103,48 @@ def stimulus_for(
         0,
         hashlib.sha256(events.tobytes()).hexdigest(),
     )
+
+
+def ordinary_phases(
+    case: Fixture, precision: str, starting: ObservationInitialState | None
+) -> dict[str, HostArray]:
+    execution = prepare(case.connectome, case.targets, (3,), precision)
+    trials = case.events.shape[0]
+    state = (
+        core.initial_state(execution.network, trials)
+        if starting is None
+        else core.initial_state(
+            execution.network,
+            trials,
+            starting.voltage_mv,
+            starting.synaptic_mv,
+            starting.last_spike_step,
+        )
+    )
+    rows: dict[str, list[mx.array]] = {}
+    for step in range(case.events.shape[1]):
+        with mx.stream(mx.gpu):
+            inputs = boolean_input(case.events[:, step, :].astype(np.bool_))
+            state, trace = execution.advance(state, inputs)
+            evaluate(*state[:-1], trace.spikes)
+        for name, value in (
+            ('pre_v', trace.pre_voltage_mv),
+            ('pre_g', trace.pre_synaptic_mv),
+            ('pre_not_refractory', trace.available),
+            ('spikes', trace.spikes),
+            ('before_v', trace.before_reset_voltage_mv),
+            ('before_g', trace.before_reset_synaptic_mv),
+            ('before_not_refractory', trace.receiving),
+            ('end_v', state.voltage_mv),
+            ('end_g', state.synaptic_mv),
+            ('end_last_spike_step', state.last_spike_step),
+            ('end_not_refractory', trace.receiving),
+            ('accepted_inputs', trace.accepted_inputs),
+            ('due', trace.due),
+        ):
+            rows.setdefault(name, []).append(value)
+        rows.setdefault('queue', []).append(state.queue)
+    with mx.stream(mx.gpu):
+        arrays = {name: mx.stack(values) for name, values in rows.items()}
+        evaluate(*arrays.values())
+        return {name: as_host(value) for name, value in arrays.items()}

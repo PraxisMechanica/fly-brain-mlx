@@ -260,8 +260,8 @@ def test_comparison_reads_in_order_and_writes_before_printing(
     calls: list[object] = []
     results: list[ComparisonResult] = []
 
-    def reader(path: Path, duration_s: float) -> Spikes:
-        calls.append((path, duration_s))
+    def reader(path: Path) -> Spikes:
+        calls.append(path)
         return spikes
 
     def writer(destination: Path, result: ComparisonResult) -> None:
@@ -272,7 +272,7 @@ def test_comparison_reads_in_order_and_writes_before_printing(
     command = build_comparison(reader, writer)
     assert calls == []
     assert command(request, output) == 0
-    assert calls == [(request.first, 0.1), (request.second, 0.1), output]
+    assert calls == [request.first, request.second, output]
     assert capsys.readouterr().out == json.dumps(results[0].summary, indent=2) + '\n'
     assert results[0].summary['timing_f1'] == 1.0
     assert results[0].rates[0]['flywire_id'] == 10

@@ -16,7 +16,7 @@ from fly_brain.qualification.reference_parameters import model_parameters
 from fly_brain.simulation.identifiers import FlyWireIds64, NeuronRow, NeuronRows32
 from fly_brain.simulation.models import Connectome
 from fly_brain.simulation.module import build_connectome_silencer
-from tests.qualification.test_mlx_observer import fixture
+from tests.support.observation_fixtures import fixture
 
 pytestmark = [pytest.mark.integration, pytest.mark.reference]
 

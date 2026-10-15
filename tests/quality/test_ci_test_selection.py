@@ -14,9 +14,7 @@ from tools.code_quality.changes import build_plan
 
 APP = 'tests/unit/test_value.py'
 QUALITY = 'tests/quality/test_checker.py'
-CATALOG = frozenset(
-    (APP, QUALITY, test_selection.PROOF, 'tests/qualification/test_matrix.py')
-)
+CATALOG = frozenset((APP, QUALITY, 'tests/qualification/test_matrix.py'))
 
 
 @pytest.mark.parametrize(
@@ -29,11 +27,7 @@ def test_automatic_boundaries_dispatch_one_explicit_test_task(
     selected = [
         arguments for name, arguments in workflow.tasks(plan, stage) if name == 'tests'
     ]
-    assert (
-        selected
-        == [('python', '-m', 'pytest', '-q', '--ignore=' + test_selection.PROOF, APP)]
-        * count
-    )
+    assert selected == [('python', '-m', 'pytest', '-q', APP)] * count
 
 
 @pytest.mark.parametrize(
@@ -50,7 +44,7 @@ def test_automatic_boundaries_dispatch_one_explicit_test_task(
             (QUALITY, APP),
         ),
         ({QUALITY}, {}, (QUALITY,)),
-        ({test_selection.PROOF, 'tests/qualification/test_matrix.py'}, {}, ()),
+        ({'tests/qualification/test_matrix.py'}, {}, ()),
         ({'typings/provider.pyi'}, {}, ()),
     ),
 )

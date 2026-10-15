@@ -79,9 +79,9 @@ def compare_pair(
     active_union = active_a | active_b
     active_shared = active_a & active_b
 
-    jaccard = len(active_shared) / len(active_union) if active_union else 0.0
-    precision = len(active_shared) / len(active_b) if active_b else 0.0
-    recall = len(active_shared) / len(active_a) if active_a else 0.0
+    jaccard = len(active_shared) / len(active_union) if active_union else 1.0
+    precision = len(active_shared) / len(active_b) if active_b else float(not active_a)
+    recall = len(active_shared) / len(active_a) if active_a else float(not active_b)
 
     if active_shared:
         shared_ids = sorted(active_shared)
@@ -113,14 +113,12 @@ def compare_pair(
     spikes_a = data_a.spikes
     spikes_b = data_b.spikes
     timing_f1 = (
-        2.0 * timing_matches / (spikes_a + spikes_b) if (spikes_a + spikes_b) else 0.0
+        2.0 * timing_matches / (spikes_a + spikes_b) if (spikes_a + spikes_b) else 1.0
     )
-    timing_precision = timing_matches / spikes_b if spikes_b else 0.0
-    timing_recall = timing_matches / spikes_a if spikes_a else 0.0
+    timing_precision = timing_matches / spikes_b if spikes_b else float(not spikes_a)
+    timing_recall = timing_matches / spikes_a if spikes_a else float(not spikes_b)
 
     return {
-        'framework_a': key_a,
-        'framework_b': key_b,
         'backend_a': key_a,
         'backend_b': key_b,
         't_run': t_run,
@@ -168,9 +166,7 @@ def compare_metrics(
     rates: tuple[dict[str, MetricValue], ...] = tuple(
         {
             'backend_a': request.first_label,
-            'framework_a': request.first_label,
             'backend_b': request.second_label,
-            'framework_b': request.second_label,
             't_run': request.duration_s,
             'n_run': request.trials,
             'flywire_id': neuron,

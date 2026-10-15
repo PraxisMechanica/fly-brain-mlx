@@ -118,7 +118,7 @@ def test_spike_export_preserves_original_types_and_is_readable_when_empty(
         str(schema)
         == 't: double\ntime_ms: double\ntrial: int64\nneuron_index: int64\nflywire_id: int64\nexp_name: string'
     )
-    spikes = read_spikes(result.spike_file, 0.1)
+    spikes = read_spikes(result.spike_file)
     np.testing.assert_array_equal(spikes.neuron_ids, np.full(count, 20, dtype=np.int64))
     np.testing.assert_allclose(spikes.time_s, events.steps * 0.0001, rtol=0, atol=1e-18)
     assert result.spikes == count and result.active_neurons == bool(count)

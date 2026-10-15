@@ -3,7 +3,31 @@
 Read `milestone.md` for current holds and `numerical-contract.md` for acceptance.
 `README.md` owns installation, simulation and comparison instructions.
 
-## Delivery
+## Development loop
+
+1. Read the current milestone and affected source. Choose one bounded outcome.
+2. Implement the smallest change. Remove superseded paths and duplicate checks;
+   keep one implementation and direct assertions of its required behavior.
+3. Let commit hooks and CI select routine affected tests. Do not run those tests
+   manually as well. Fix a failure with a targeted check before retrying delivery.
+4. Run scientific checks only when the changed behavior needs their evidence.
+   Use small native/reference probes to diagnose a failure before another long run.
+5. Once the scientific implementation is stable, run the required independent
+   matrix, fresh repeats and sugar/P9 batches. These are necessary qualification
+   executions, not per-edit regression tests. Run them again only when relevant
+   code, inputs, execution mode or an unresolved failure requires new evidence.
+6. Update the milestone with results, missing acceptance and revised estimates;
+   commit, push and verify CI. Keep detailed history in Git.
+
+Routine test commands have a five-minute maximum. Assess any overrun before
+retrying. Long scientific executions, including a justified 44-minute run, are
+allowed only for necessary diagnosis or contract-required acceptance. Never
+shorten an experiment or weaken its gates to fit the routine test budget. Target
+less than 10% idle waiting; continue useful independent work without changing
+sources consumed by an active run. Stop unnecessary runs instead of inventing
+work to occupy their duration.
+
+## Tools and delivery
 
 Use Apple silicon/macOS, Python 3.10.14 and uv. Metric tooling uses the versions
 in `package.json`; shared commands are in `justfile`.
@@ -29,14 +53,8 @@ bounded evidence; use Git for detailed history.
 uv run --locked --group qualification fly-brain qualify --output executions/local-01
 ```
 
-This runs local independent-reference and MLX scientific tests, including fast
+This runs local independent-reference and MLX scientific tests, including bounded
 observation transparency, all-slot faults, repeats, chunks and batch regressions.
-It excludes the five historical full-connectome observation-preservation producers
-and their separate archive consumer. Those compare the same MLX implementation
-through old/new observation paths and are retained only for explicitly justified
-investigation under the current runtime budget. They do not define independent
-scientific acceptance. Default local qualification no longer loads the full pinned
-connectome solely to prepare their four-trial frozen stimulus.
 
 The runner enforces five minutes including setup, kills its owned process group
 on expiry and returns unaccepted exit 124. Partial counts are untrusted. Diagnose
@@ -51,7 +69,7 @@ uv run --locked --group qualification python -m tools.qualify_matrix --output ex
 uv run --locked --group qualification python -m tools.qualify_batch --experiment sugar --singletons executions/matrix-01/cases --output executions/sugar-batch-01
 ```
 
-Check the milestone's runtime hold before launching. The matrix preserves all 52
+Check the milestone's current scope before launching. The matrix preserves all 52
 prescribed cases, fresh repeats and sugar/P9 one-second four-trial comparisons.
 It independently verifies canonical inputs, source/execution identities and
 native scoring, stops on an unaccepted case and reports incomplete coverage as
@@ -78,6 +96,4 @@ runs under ignored `executions/`. Before a commit, register unfinished consumers
 with exact paths, reasons and release conditions in `tools/code_quality/retention.json`.
 Successful hooks remove unregistered outputs; failed hooks retain diagnostics.
 Remove exceptions when consumers finish. Preserve the seven independent fixtures.
-Report skipped, failed and incomplete verification honestly. Idle scientific,
-hook and CI waiting counts toward the user's <10% target; do useful independent
-work where available without inventing work to occupy a long run.
+Report skipped, failed and incomplete verification honestly.

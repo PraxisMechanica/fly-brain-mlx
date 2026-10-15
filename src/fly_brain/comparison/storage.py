@@ -10,7 +10,7 @@ from fly_brain.simulation.identifiers import FlyWireIds64, TrialIds16
 from .models import ComparisonResult, Spikes
 
 
-def read_spikes(path: Path, duration_s: float) -> Spikes:
+def read_spikes(path: Path) -> Spikes:
     columns = set(pq.read_schema(path).names)
     time_column = next(
         (name for name in ('time_ms', 'time_s', 't') if name in columns), None
@@ -25,12 +25,7 @@ def read_spikes(path: Path, duration_s: float) -> Spikes:
     if any(table[name].null_count for name in table.column_names):
         raise ValueError('Spike columns must not contain null values')
     times = np.asarray(table[time_column].to_numpy(), dtype=np.float64)
-    if (
-        time_column == 'time_ms'
-        or time_column == 't'
-        and times.size
-        and np.nanmax(times) > duration_s * 2
-    ):
+    if time_column == 'time_ms':
         times = times / 1000.0
     if not np.all(np.isfinite(times)):
         raise ValueError('Spike times must be finite')
@@ -57,9 +52,7 @@ def write_comparison(output: Path, result: ComparisonResult) -> None:
                 if rows
                 else (
                     'backend_a',
-                    'framework_a',
                     'backend_b',
-                    'framework_b',
                     't_run',
                     'n_run',
                     'flywire_id',

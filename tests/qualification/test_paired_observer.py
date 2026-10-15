@@ -22,7 +22,7 @@ from fly_brain.qualification.causality import CausalAudit
 from fly_brain.qualification.session_observer import observe_session
 from fly_brain.simulation.identifiers import NeuronRow, TrialId
 from fly_brain.simulation.observation_module import build_observation_sessions
-from tests.qualification.test_mlx_observer import fixture
+from tests.support.observation_fixtures import fixture
 from tests.support.session_block_values import replace_block
 
 pytestmark = [pytest.mark.integration, pytest.mark.reference, pytest.mark.metal]

@@ -2,6 +2,11 @@
   "version": 1,
   "exceptions": [
     {
+      "path": "executions/cleanup-20261014-scientific",
+      "reason": "Current local scientific qualification after duplicate removal: 319 full-suite passes and the corrected diagnostic assertion's targeted pass, with native observation/reference artifacts. Final scientific acceptance and review of the surviving test coverage consume this bundle.",
+      "release_when": "Coverage and native evidence are verified, all related failures are resolved, final matrix/adoption consumers finish, and milestone.md records the bounded results and limitations."
+    },
+    {
       "path": "executions/implementation-20261014-local-audits",
       "reason": "Fresh required scalar, pinned fan-in, production-layout, device-row and connectome-pulse evidence is consumed by local scientific acceptance and the delivered matrix's input/arithmetic qualification.",
       "release_when": "All six audit reports and native arrays have been verified, affected failures are resolved or held, matrix/adoption consumers have finished, and milestone.md records the bounded results."

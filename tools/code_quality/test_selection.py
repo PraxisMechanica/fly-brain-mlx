@@ -17,7 +17,6 @@ from .change_inputs import Inputs, Stage, git, paths
 APP = ('tests/unit/', 'tests/integration/')
 QUALITY = 'tests/quality/'
 CHECKERS = ('tools/code_quality/', QUALITY)
-PROOF = 'tests/integration/test_session_proof_artifacts.py'
 
 
 def delivery_inputs(inputs: Inputs, stage: Stage) -> Inputs:
@@ -74,7 +73,7 @@ def select_tests(
     selected = inputs.changed & tests | affected & app | checker & tests
     if application_context(inputs):
         selected |= app
-    return tuple(sorted(selected - {PROOF}))
+    return tuple(sorted(selected))
 
 
 def commands(
@@ -82,7 +81,7 @@ def commands(
 ) -> tuple[tuple[str, tuple[str, ...]], ...]:
     if stage not in ('commit', 'ci') or not tests:
         return ()
-    return (('tests', ('python', '-m', 'pytest', '-q', '--ignore=' + PROOF, *tests)),)
+    return (('tests', ('python', '-m', 'pytest', '-q', *tests)),)
 
 
 def execution_arguments(

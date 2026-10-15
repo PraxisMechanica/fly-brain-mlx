@@ -1,14 +1,10 @@
 import json
-from collections.abc import Callable, Mapping
 from pathlib import Path
 from typing import cast
 
 import pytest
 
-from fly_brain.qualification.adapters.observer_stream import StreamShape
-from fly_brain.qualification.adapters.reference_identity import create
 from fly_brain.qualification.reference_values import ReferenceProducerDigest
-from fly_brain.simulation.models import Connectome, Stimulus
 from tests.quality.support import PROJECT, run
 from tools.code_quality.json_values import JsonValue, object_value
 
@@ -18,45 +14,6 @@ IMPORT = (
     'ReferenceProducerDigest as Digest\n'
 )
 CONSUMER = 'def consume(value: Digest) -> Digest:\n    return value\n'
-
-LegacyProducer = Callable[
-    [
-        Connectome,
-        Stimulus,
-        tuple[int, ...],
-        StreamShape,
-        Mapping[str, str],
-        Path,
-        Mapping[str, object],
-    ],
-    tuple[str, dict[str, object]],
-]
-
-
-def preserved_identity(
-    legacy: LegacyProducer,
-    connectome: Connectome,
-    stimulus: Stimulus,
-    silenced: tuple[int, ...],
-    shape: StreamShape,
-    directory: Path,
-    context: Mapping[str, object],
-) -> ReferenceProducerDigest:
-    actual, record = create(
-        connectome, stimulus, silenced, shape, {}, directory, context
-    )
-    original, prior = legacy(
-        connectome, stimulus, silenced, shape, {}, directory, context
-    )
-    encoded = json.dumps(record, sort_keys=True, separators=(',', ':')).encode()
-    prior_encoded = json.dumps(prior, sort_keys=True, separators=(',', ':')).encode()
-    assert (record, tuple(record), encoded, actual) == (
-        prior,
-        tuple(prior),
-        prior_encoded,
-        original,
-    )
-    return actual
 
 
 def typed(root: Path, source: str) -> dict[str, JsonValue]:

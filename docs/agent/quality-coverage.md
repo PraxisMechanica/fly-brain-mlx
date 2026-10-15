@@ -7,7 +7,7 @@ certify every semantic property or grant scientific acceptance.
 | --- | --- |
 | Ruff, strict Pyright | Changed Python and affected type consumers; third-party limits remain documented. |
 | Import contracts | Production/reference, comparison/execution and configured input/observation boundaries. |
-| Scientific identity | Five protected sources and reviewed provenance; missing or changed protected bytes fail. |
+| Scientific identity | Three independent reference sources and reviewed provenance; missing or changed protected bytes fail. |
 | Indexed inputs | Required source/configuration/tool inputs must be indexed. |
 | Documentation budget | All tracked documentation formats share a 10,000-word maximum. |
 | Affected tests | One automatic invocation at commit and CI; no push/manual replay. |

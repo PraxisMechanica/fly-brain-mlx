@@ -100,7 +100,7 @@ framework types are accepted. Useful identifier brands remain; residual numeric
 coordinates do not justify universal wrappers or conversion-origin analysis.
 Preserve actual bounds, ordering, dtype, shape, occupancy and independent checks.
 The retired findings are superseded policy decisions, not automated correctness
-proofs. The scientific manifest retains all five reviewed identities.
+proofs. The scientific manifest retains the three independent reference identities.
 
 ## Bounded refactor acceptance
 

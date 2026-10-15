@@ -7,18 +7,6 @@
       "commit": "79f62adee10b092fcaaaed0ea4043da3f5b9c415",
       "origin": "Pure qualification-owned value factory extracted verbatim from src/fly_brain/qualification/adapters/torch_reference.py:model_parameters at 79f62adee10b092fcaaaed0ea4043da3f5b9c415; original full-source sha256 bf52258041a464156ce05b267601dbefceb893356fbf8401b358b036a29ba6cb. This new module did not exist at that lineage commit. Factory AST sha256 6b2429d83880084fb62f492dd0c78f893583081f04e418f22997e3c025b3665e. First-party adapted frozen qualification reference; derived from a3db62f9436074e485c0278290c2164ed6150808:code/run_pytorch.py upstream sha256 699655db7a56045271ba467268be153d0a3318d4cc4cecc0a13f33e69ce79667. Not a vendor/generated exclusion."
     },
-    "tests/support/legacy_mlx_observer.py": {
-      "kind": "historical_source",
-      "sha256": "f36f9496388727fbed9b1e112ee13442245fcd53da3ee3184d4ff4c14c7e01a1",
-      "commit": "e923c316342978e03a74c1455336e43a651ef6b0",
-      "origin": "src/fly_brain/qualification/adapters/mlx_observer.py"
-    },
-    "tests/support/legacy_mlx_ledger.py": {
-      "kind": "historical_source",
-      "sha256": "925135bf6bf4ed55fcb3323eb05a7c6e0a43b805141ba89e956bbe3c905ac265",
-      "commit": "e923c316342978e03a74c1455336e43a651ef6b0",
-      "origin": "src/fly_brain/qualification/adapters/mlx_ledger.py"
-    },
     "src/fly_brain/qualification/adapters/brian_reference.py": {
       "kind": "reference_source",
       "sha256": "8e46193a8f0f330f072c19c12f650e118a068cff13e70ce1e806c067787dd1c5",

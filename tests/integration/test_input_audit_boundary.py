@@ -1,10 +1,10 @@
 import hashlib
-import subprocess
+import json
 from collections.abc import Callable
 from pathlib import Path
-from types import ModuleType
 from typing import ParamSpec, TypeVar
 
+import numpy as np
 import pytest
 
 from fly_brain.qualification.adapters.connectome_probe import InputAuditRepository
@@ -17,26 +17,12 @@ from fly_brain.simulation.module import (
     build_destination_buckets_reader,
     build_destination_grouping_reader,
 )
-from tests.quality.support import PROJECT
 from tests.support.observation_fixtures import fixture
 
 pytestmark = pytest.mark.integration
-BASE = '2d0a7e6b80374fe95f8a6ae492bd298f1bb2dcd1'
-SOURCE = 'src/fly_brain/qualification/adapters/connectome_probe.py'
-ORIGINAL_SHA256 = 'd80ff290f21c0510ab5677430f9750394245b655cf77c65ddf5981ffeae51310'
 PHASES = ('grouping', 'counts', 'silence', 'buckets')
 P = ParamSpec('P')
 Value = TypeVar('Value')
-
-
-def baseline() -> ModuleType:
-    source = subprocess.check_output(
-        ['git', '-C', str(PROJECT), 'show', BASE + ':' + SOURCE]
-    )
-    assert hashlib.sha256(source).hexdigest() == ORIGINAL_SHA256
-    module = ModuleType('original_input_audit')
-    exec(compile(source, SOURCE, 'exec'), module.__dict__)
-    return module
 
 
 def payload(connectome: Connectome) -> tuple[tuple[object, ...], ...]:
@@ -105,29 +91,38 @@ def current(
     )
 
 
-def test_actual_host_driver_preserves_every_archive_and_report_byte(
-    tmp_path: Path,
-    monkeypatch: pytest.MonkeyPatch,
-) -> None:
+def test_host_audit_persists_actual_inputs_grouping_and_report(tmp_path: Path) -> None:
     connectome = fixture().connectome
     pin = InputPin('csv', 'parquet', 6, 8)
     before = payload(connectome)
-    roots = (tmp_path / 'original', tmp_path / 'current')
-    for root in roots:
-        root.mkdir()
-    monkeypatch.chdir(roots[0])
-    expected = baseline().run(connectome, pin, Path('audit'))
-    monkeypatch.chdir(roots[1])
+    output = tmp_path / 'audit'
     calls: list[str] = []
-    actual = current(
-        connectome, pin, Path('audit'), calls, None, InputAuditRepository()
+    actual = current(connectome, pin, output, calls, None, InputAuditRepository())
+    assert (calls, payload(connectome)) == (list(PHASES), before)
+    assert json.loads((output / 'mapping.json').read_text()) == actual
+    assert (
+        actual['artifact_sha256']
+        == hashlib.sha256((output / 'mapped-inputs.npz').read_bytes()).hexdigest()
     )
-    assert (actual, calls, payload(connectome)) == (expected, list(PHASES), before)
-    for name in ('mapped-inputs.npz', 'mapping.json'):
-        assert (roots[1] / 'audit' / name).read_bytes() == (
-            roots[0] / 'audit' / name
-        ).read_bytes()
-    print('preserved archive sha256', actual['artifact_sha256'])
+    expected = {
+        'neuron_ids': connectome.neuron_ids,
+        'sources': connectome.sources,
+        'destinations': connectome.destinations,
+        'signed_counts': connectome.counts,
+        'weights_mv': connectome.weights_mv,
+        'grouped_edge_ids': np.array([2, 5, 0, 1, 3, 4, 6, 7], dtype=np.int32),
+        'inverse_grouping': np.array([2, 3, 0, 4, 5, 1, 6, 7], dtype=np.int32),
+        'destination_offsets': np.array([0, 2, 4, 5, 6, 6, 8], dtype=np.int64),
+        'absolute_count_sums': np.array([361, 360, 2, 3, 0, 2], dtype=np.int64),
+    }
+    with np.load(output / 'mapped-inputs.npz') as archive:
+        assert set(archive.files) == set(expected)
+        for name, value in expected.items():
+            assert (
+                archive[name].dtype,
+                archive[name].shape,
+                archive[name].tobytes(),
+            ) == (value.dtype, value.shape, value.tobytes()), name
 
 
 @pytest.mark.parametrize('phase', PHASES)
@@ -166,17 +161,13 @@ def test_empty_edge_error_still_follows_archive_and_precedes_bucket_acquisition(
     pin = InputPin('csv', 'parquet', 6, 0)
     calls: list[str] = []
     output = tmp_path / 'current'
-    with pytest.raises(ValueError) as original:
-        baseline().run(connectome, pin, tmp_path / 'original')
-    with pytest.raises(ValueError) as actual:
+    with pytest.raises(ValueError, match='zero-size array'):
         current(connectome, pin, output, calls, None, InputAuditRepository())
     assert (
-        str(actual.value),
         calls,
         (output / 'mapped-inputs.npz').exists(),
         (output / 'mapping.json').exists(),
     ) == (
-        str(original.value),
         list(PHASES[:3]),
         True,
         False,

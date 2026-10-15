@@ -12,11 +12,6 @@ qualification references may define their models through Brian2/PyTorch and use
 legitimate framework inheritance. No provider-neutral tensor interface, numerical
 primitive dispatcher, or model/provider rewrite is required for portability.
 
-The former neutral-value/primitive proof and complete provider-separation proposal
-are retired. Their component results in [refactor evidence](refactor-evidence.md)
-do not create further implementation requirements. Do not preserve dead prototype
-code or tests solely to complete that proposal.
-
 Keep useful application-facing observation contracts. Simplifying composition or
 removing a pass-through getter should preserve the actual callback, arguments,
 loading/initialization order, outputs and failures rather than introduce a second
@@ -24,15 +19,15 @@ implementation. Numerical expressions and array operations need no new wrapper.
 
 ## Protected source identity and independent lineage
 
-The [source guard](architecture-ownership.md) names the five protected sources.
+The [source guard](architecture-ownership.md) names the three independent reference sources.
 Keep their current reviewed hashes unless a specific authorized structural repair
 has verified scientific preservation, independent lineage and all source-identity
 consumers. Do not rebaseline a hash to silence a check.
 
 The extracted reference parameter factory and remaining Torch source have separate
-hash guards and original lineage. Brian2 is an independent reference. Legacy MLX
-observation oracles share the current kernel: their equality proves observation
-transparency, not independent preservation of changed kernel arithmetic.
+hash guards and original lineage. Brian2 is an independent reference. Direct MLX
+observation comparisons establish transparency, not independent preservation of
+changed kernel arithmetic.
 Preserve pinned FlyWire inputs and the seven independent regression fixtures.
 
 ## Verification required for actual numerical changes

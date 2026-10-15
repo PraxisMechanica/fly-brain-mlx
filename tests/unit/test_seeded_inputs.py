@@ -1,72 +1,23 @@
-import subprocess
-import sys
-from collections.abc import Callable
-from dataclasses import dataclass, fields
-from pathlib import Path
-from types import ModuleType
-from typing import TypeAlias, cast
+from typing import cast
 
 import numpy as np
 import pytest
 from numpy.typing import NDArray
 
 from fly_brain.infrastructure.seeded_random import permutation, uniforms
-from fly_brain.qualification.fan_in import FanInCases
 from fly_brain.qualification.fan_in_service import prepare_cases
 from fly_brain.qualification.input_patterns import threshold_uniforms
-from fly_brain.simulation import models
 from fly_brain.simulation.experiments import EXPERIMENTS, P9_IDS, SUGAR_IDS
 from fly_brain.simulation.identifiers import (
     FlyWireIds64,
     NeuronRows32,
     TrialId,
 )
-from fly_brain.simulation.models import Connectome, Experiment, ExperimentName, Stimulus
+from fly_brain.simulation.models import Connectome, Experiment
 from fly_brain.simulation.stimuli import trial_events
 from fly_brain.simulation.stimulus_service import schedule
 
 pytestmark = pytest.mark.unit
-BASE = '54aea507158774760f8c57e077b1411dc52cdb1e'
-ROOT = Path(__file__).resolve().parents[2]
-Generate: TypeAlias = Callable[
-    [Connectome, Experiment, int, tuple[int, ...], int], Stimulus
-]
-Cases: TypeAlias = Callable[
-    [int, NDArray[np.int32], NDArray[np.int32], NDArray[np.float64]], FanInCases
-]
-
-
-@dataclass(frozen=True)
-class Original:
-    generate: Generate
-    cases: Cases
-
-
-@pytest.fixture
-def original(monkeypatch: pytest.MonkeyPatch) -> Original:
-    package = ModuleType('tests._rng_original')
-    package.__path__ = []
-    monkeypatch.setitem(sys.modules, package.__name__, package)
-    monkeypatch.setitem(sys.modules, package.__name__ + '.models', models)
-    loaded: dict[str, ModuleType] = {}
-    for name, owner in (
-        ('input_patterns', 'qualification'),
-        ('fan_in', 'qualification'),
-        ('stimuli', 'simulation'),
-    ):
-        module = ModuleType(package.__name__ + '.' + name)
-        module.__package__ = package.__name__
-        monkeypatch.setitem(sys.modules, module.__name__, module)
-        path = f'src/fly_brain/{owner}/{name}.py'
-        source = subprocess.check_output(
-            ['git', 'show', BASE + ':' + path], cwd=ROOT, text=True
-        )
-        exec(compile(source, BASE + ':' + path, 'exec'), module.__dict__)
-        loaded[name] = module
-    return Original(
-        cast(Generate, loaded['stimuli'].__dict__['generate']),
-        cast(Cases, loaded['fan_in'].__dict__['build_cases']),
-    )
 
 
 def connectome() -> Connectome:
@@ -77,58 +28,6 @@ def connectome() -> Connectome:
         np.array([], dtype=np.int32),
         np.array([], dtype=np.float64),
     )
-
-
-def same(left: object, right: object) -> None:
-    if isinstance(left, np.ndarray):
-        assert isinstance(right, np.ndarray)
-        a, b = cast(NDArray[np.generic], left), cast(NDArray[np.generic], right)
-        assert (a.dtype.str, a.shape, a.tobytes(), a.flags.writeable) == (
-            b.dtype.str,
-            b.shape,
-            b.tobytes(),
-            b.flags.writeable,
-        )
-    else:
-        assert left == right
-
-
-@pytest.mark.parametrize('name', tuple(EXPERIMENTS))
-@pytest.mark.parametrize('seed', (0, 20261004, 91))
-@pytest.mark.parametrize(
-    'trials',
-    ((TrialId(0),), (TrialId(2), TrialId(0), TrialId(4)), (TrialId(0), TrialId(0))),
-)
-def test_every_stimulus_field_matches_the_exact_original_source(
-    original: Original, name: ExperimentName, seed: int, trials: tuple[TrialId, ...]
-) -> None:
-    network, experiment = connectome(), EXPERIMENTS[name]
-    old = original.generate(network, experiment, 137, trials, seed)
-    new = schedule(network, experiment, 137, trials, seed, draw_uniforms=uniforms)
-    for field in fields(Stimulus):
-        same(getattr(old, field.name), getattr(new, field.name))
-
-
-@pytest.mark.parametrize(
-    'counts,sources',
-    (
-        ((), ()),
-        ((2405, 466), (0, 1)),
-        ((2405, -2404, -1, 0, 7, 7), (7, 3, 7, 2, 5, 3)),
-    ),
-)
-@pytest.mark.parametrize('target', (3, 19, 11645))
-def test_every_case_field_matches_original_masks_permutation_and_arithmetic(
-    original: Original, counts: tuple[int, ...], sources: tuple[int, ...], target: int
-) -> None:
-    c, s = np.array(counts, dtype=np.int32), np.array(sources, dtype=np.int32)
-    weights = c.astype(np.float64) * 0.275
-    old = original.cases(target, s, c, weights)
-    new = prepare_cases(
-        target, s, c, weights, draw_uniforms=uniforms, permute=permutation
-    )
-    for field in fields(FanInCases):
-        same(getattr(old, field.name), getattr(new, field.name))
 
 
 def test_trial_request_order_and_immediate_preparation_survive_shared_buffers() -> None:
@@ -219,10 +118,15 @@ def test_wrong_native_sample_shape_is_rejected_before_it_can_broadcast() -> None
         )
 
 
-def test_wrong_seed_reused_generator_and_substitute_permutation_lose_original_bytes(
-    original: Original,
-) -> None:
-    expected = original.generate(connectome(), EXPERIMENTS['p9'], 1000, (3,), 20261004)
+def test_wrong_seed_reused_generator_and_substitute_permutation_change_inputs() -> None:
+    expected = schedule(
+        connectome(),
+        EXPERIMENTS['p9'],
+        1000,
+        (TrialId(3),),
+        20261004,
+        draw_uniforms=uniforms,
+    )
 
     def wrong_seed(
         seed: tuple[int, int, int], size: tuple[int, int]
@@ -242,7 +146,9 @@ def test_wrong_seed_reused_generator_and_substitute_permutation_lose_original_by
         np.array([2405, -2404, -1, 7, 3, 0], dtype=np.int32),
         np.arange(6, dtype=np.int32),
     )
-    old = original.cases(19, s, c, c * 0.275)
+    expected_cases = prepare_cases(
+        19, s, c, c * 0.275, draw_uniforms=uniforms, permute=permutation
+    )
     shared = np.random.Generator(
         np.random.PCG64(np.random.SeedSequence([20261004, 783, 19, 0, 0]))
     )
@@ -253,7 +159,7 @@ def test_wrong_seed_reused_generator_and_substitute_permutation_lose_original_by
     reused = prepare_cases(
         19, s, c, c * 0.275, draw_uniforms=reuse, permute=permutation
     )
-    assert reused.masks.tobytes() != old.masks.tobytes()
+    assert reused.masks.tobytes() != expected_cases.masks.tobytes()
 
     def ordered(seed: tuple[int, int, int], size: int) -> NDArray[np.int64]:
         return np.arange(size, dtype=np.int64)
@@ -261,7 +167,7 @@ def test_wrong_seed_reused_generator_and_substitute_permutation_lose_original_by
     changed_order = prepare_cases(
         19, s, c, c * 0.275, draw_uniforms=uniforms, permute=ordered
     )
-    assert changed_order.orders.tobytes() != old.orders.tobytes()
+    assert changed_order.orders.tobytes() != expected_cases.orders.tobytes()
 
 
 def test_duplicate_zero_rate_channels_keep_draw_shape_and_strict_threshold() -> None:

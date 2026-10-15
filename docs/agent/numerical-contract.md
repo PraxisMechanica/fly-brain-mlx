@@ -14,7 +14,7 @@ verification consumers finish, or have an explicit cross-commit retention reason
 
 ## Reviewed discrete contract
 
-Authority: the pinned Brian2 2.8.0 CPU model, with float64 state, the non-legacy refractory comparison, `dt=0.1 ms`, and the pinned parameters. Use NumPy runtime for small state traces and C++ standalone for full-network reference trials. The review replay agreed bit for bit across these two paths on the measured network; this is not a guarantee for every reduction or compiler. Record the actual compiler flags and versions in later evidence. The retained C++ build used `-O3 -ffast-math -fno-finite-math-only`; do not silently substitute a different reference.
+Authority: the pinned Brian2 2.8.0 CPU model, with float64 state, integer-step refractory comparison, `dt=0.1 ms`, and the pinned parameters. Use NumPy runtime for small state traces and C++ standalone for full-network reference trials. The review replay agreed bit for bit across these two paths on the measured network; this is not a guarantee for every reduction or compiler. Record the actual compiler flags and versions in later evidence. The retained C++ build used `-O3 -ffast-math -fno-finite-math-only`; do not silently substitute a different reference.
 
 Pinned parameters: resting/reset voltage `-52 mV`, strict threshold `-45 mV`,
 membrane constant `20 ms`, synaptic constant `5 ms`, refractory duration `2.2 ms`,
@@ -159,7 +159,7 @@ All primary gates are conjunctive, for every case. For paired rational metrics, 
 
 Empty/undefined rules are explicit:
 
-- If Brian2 is silent, MLX must have zero spikes exactly; any added spike fails. With both empty, Jaccard and timing F1 are defined as 1 for agreement, count/normalized errors as 0, and correlation as not applicable. The acceptance layer uses these conventions; the separate legacy diagnostic comparator retains its zero-for-empty convention. Non-silent PyTorch cannot invalidate an exact empty MLX result.
+- If Brian2 is silent, MLX must have zero spikes exactly; any added spike fails. With both empty, Jaccard and timing F1 are defined as 1 for agreement, count/normalized errors as 0, and correlation as not applicable. Diagnostic comparisons use the same empty-agreement convention. Non-silent PyTorch cannot invalidate an exact empty MLX result.
 - With nonempty Brian2 and empty candidate, overlap and F1 are zero, count and neuronwise errors are 1, so the candidate fails regardless of undefined correlation.
 - If a rate vector is constant or `|U|<2`, Pearson is undefined. Mark it not applicable; exact equality of the complete candidate/reference count vectors is then required for MLX instead. If only PyTorch's correlation is undefined, its paired correlation comparison is not applicable, but all other paired gates and MLX's own defined correlation gate remain mandatory. Never replace an undefined correlation with 1 or silently drop the case.
 - Missing outputs, wrong data/schedule hashes, duplicate `(trial, neuron, step)` spikes, invalid times/mapping, non-finite metrics, or unequal experiment setup invalidate the case rather than receiving a score. Test empty output through the integration schema review before treating missing files as silence.
