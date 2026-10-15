@@ -12,17 +12,24 @@ Read `milestone.md` for current holds and `numerical-contract.md` for acceptance
    keep one implementation and direct assertions of its required behavior.
 3. Let commit hooks and CI select routine affected tests. Do not run those tests
    manually as well. Fix a failure with a targeted check before retrying delivery.
-4. Run scientific checks only when the changed behavior needs their evidence.
-   Diagnose from retained native evidence and the smallest sufficient probe.
-   Verify collection, causal-review consumption, acceptance and resumption on
-   existing artifacts before launching another long execution.
-5. Once that path works and the scientific implementation is stable, run the
-   required matrix, fresh repeats and sugar/P9 batches. These are necessary qualification
-   executions. Reuse completed cases only after canonical-input, source,
+4. Reproduce a scientific failure in the smallest deterministic replay using
+   retained native inputs and state. Verify the replay against actual native
+   bytes before testing a correction. A representative full-network case then
+   checks accuracy; the milestone owns its choice.
+5. Profile simulation and observation with short runs. Remove the measured
+   dominant cost. Demonstrate accuracy and the milestone's throughput target
+   before starting the full campaign. Qualify changed arithmetic, representation
+   or execution modes before adoption.
+6. Overlap independent CPU references with MLX execution, preserving fresh
+   initial states, single-thread settings per process, repeats and provenance.
+   Score the first completed replay. Stop decisively rejected candidates and
+   preserve partial evidence without granting full-case acceptance.
+7. Once the implementation is stable, run the required matrix, fresh repeats and
+   sugar/P9 batches. Reuse completed cases only after canonical-input, source,
    environment, native-replay and scoring checks establish compatibility with the
    delivered implementation. Resume missing work. New code, inputs, execution
    mode or unresolved failures determine which evidence must be regenerated.
-6. Update the milestone with results, missing acceptance and revised estimates;
+8. Update the milestone with results, missing acceptance and revised estimates;
    commit, push and verify CI. Keep detailed history in Git.
 
 Routine test commands have a five-minute maximum. Assess any overrun before
@@ -32,7 +39,7 @@ to fit the routine test budget. Target
 less than 10% idle waiting; continue useful independent work without changing
 sources consumed by an active run. Stop unnecessary runs instead of inventing
 work to occupy their duration. Concentrate on implementation and acceptance;
-further checker/report performance tuning is outside the current scope.
+further code-quality checker/report tuning is outside the current scope.
 
 ## Tools and delivery
 
@@ -49,10 +56,7 @@ Push performs static delivery checks without another pytest run. Do not add
 manual routine test replays. Missing tools, malformed results and failed adopted
 checks block delivery; numerical code-quality scores remain advisory.
 
-The input check enforces a combined 10,000-word documentation limit, counting
-tracked `.md`, `.rst`, `.adoc`, `.txt` and `.tex` files by whitespace. License texts,
-code and generated execution data are separate. Keep decisions and current
-bounded evidence; use Git for detailed history.
+`AGENTS.md` owns the documentation budget and retention policy.
 
 ## Local scientific checks
 
@@ -71,10 +75,8 @@ checks; required scientific qualification remains separate.
 ## Full scientific qualification
 
 ```sh
-uv run --locked --group qualification fly-brain qualify-parity --experiment p9 --duration-s 0.1 --trial 0 --output executions/parity-01
 uv run --locked --group qualification python -m tools.qualify_matrix --output executions/matrix-01
 uv run --locked --group qualification python -m tools.qualify_matrix --resume-from executions/matrix-01 --reviews executions/matrix-01/reviews --verify-only --output executions/matrix-preflight-01
-uv run --locked --group qualification python -m tools.qualify_batch --experiment sugar --singletons executions/matrix-01/matrix.json --output executions/sugar-batch-01
 ```
 
 Check the milestone's current scope before launching. The matrix preserves all 52
@@ -110,9 +112,6 @@ Each diagnostic uses `fly-brain <command> --output executions/<fresh-directory>`
 `qualify-device-layout`, `qualify-connectome-pulse`. Their contract-defined local
 scope does not replace full-network qualification.
 
-Use fresh output directories. Store diagnostics under ignored `logs/` and working
-runs under ignored `executions/`. Before a commit, register unfinished consumers
-with exact paths, reasons and release conditions in `tools/code_quality/retention.json`.
-Successful hooks remove unregistered outputs; failed hooks retain diagnostics.
-Remove exceptions when consumers finish. Preserve the seven independent fixtures.
-Report skipped, failed and incomplete verification honestly.
+Use fresh directories under ignored `logs/` and `executions/`. Follow `AGENTS.md`
+and the retention manifest for unfinished consumers. Report failed, skipped and
+incomplete verification honestly.

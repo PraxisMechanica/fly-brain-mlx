@@ -13,10 +13,9 @@ separate. Keep current rules and bounded evidence; use Git for detailed history.
 
 Use the [agent documentation index](docs/agent/README.md) to find each document's
 owner. The [development guide](docs/agent/development.md) defines the required
-streamlined workflow: one bounded change, automatic affected tests, focused
-scientific diagnosis, then necessary qualification on stable sources. Reuse
-compatible evidence after validation. Keep one implementation and one owner per
-rule; read only the material needed for the current outcome.
+streamlined workflow, with accuracy and throughput checkpoints before full
+qualification. Keep one implementation and one owner per rule; read only the
+material needed for the current outcome.
 
 Preserve the FlyWire v783 leaky integrate-and-fire model and the
 [reviewed numerical contract](docs/agent/numerical-contract.md), including pinned

@@ -74,13 +74,18 @@ self-comparison JSON/CSV outputs were verified. These short runs took 14.214 and
 
 ## Remaining plan and completion
 
-1. Explain the first differing threshold update from native state and common
-   history. Repair its numerical cause, qualify affected local behavior, then run
-   the prescribed matrix with fresh repeats on stable scientific sources.
-2. Complete sugar/P9 one-second four-trial comparisons, causal audits, pooled
-   metrics and 100 ms localization. Verify required outputs and provenance.
-3. Record accurate results and limitations, push all changes, pass required
-   checks and release outputs only after their verification consumers finish.
+1. Repair integration using the validated frozen replay: 5,720 steps and 152
+   incoming edges reproduce native states in 1.34 seconds. Increment evaluation
+   with existing coefficients fixes this first difference; adoption is pending.
+2. Measure and reduce simulation/observation cost. Replace the 287 MB per-trial
+   edge queue with a 2.6 MB source-neuron queue, retaining original edge delivery.
+   Qualify all queue/discrete behavior. Target 15 ms per paired step versus 158 ms.
+3. Overlap independent reference processes with MLX; score first replays and stop
+   proven failures. Demonstrate one-second sugar accuracy and throughput before
+   resuming the complete matrix and fresh repeats on stable sources.
+4. Complete sugar/P9 four-trial batches, causal audits, pooled metrics, 100 ms
+   localization and provenance. Record results and limitations, push all changes,
+   pass required checks and release outputs after their verification consumers finish.
 
 Progress: **36%**: inventory 10 points, workflows 8, local evidence 8, repairs 5
 and 5/52 of 49 matrix points. Batches and final acceptance remain incomplete.
@@ -89,5 +94,6 @@ The working target is **7–10 days of agent elapsed execution**, with a
 availability. Three completed fresh cases project 5.3 days for the remaining
 1,226,000 steps per engine, including both paired and CPU repeats and preparation.
 Batch execution, causal diagnosis, repairs and delivery remain additional costs.
-The first one-second replay now proves a timing failure; repair cost and full-case
-runtime remain unmeasured. Revise after the focused repair probe.
+The focused replay identifies a correction; its local/full-network qualification
+and throughput remain unverified. A one-day target depends on the accuracy and
+throughput checkpoints. Revise after those measurements.
