@@ -178,7 +178,7 @@ def prepare(
     silenced: tuple[int, ...],
     precision: str,
     *,
-    exact_counts: bool = False,
+    exact_counts: bool = True,
 ) -> Execution:
     network, layout = _components(
         connectome, input_targets, silenced, precision, exact_counts=exact_counts
@@ -192,7 +192,7 @@ def prepare_observed(
     silenced: tuple[int, ...],
     precision: str,
     *,
-    exact_counts: bool = False,
+    exact_counts: bool = True,
 ) -> tuple[Execution, ReductionReader]:
     network, layout = _components(
         connectome, input_targets, silenced, precision, exact_counts=exact_counts

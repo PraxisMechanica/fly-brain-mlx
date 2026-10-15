@@ -93,7 +93,16 @@ The qualified small core remains unchanged, with Milestone 1 acceptance restrict
 
 The reopened bounded review selects **uncompiled factored connectivity with compensated scaling** for Milestone 2 implementation/qualification. This is a design approval supported by finite Metal and Brian2 evidence, not approval of an unloaded connectome, an integrated backend, or a performance claim.
 
-Preserve one signed integer count per original edge, its direction, multiplicity, and exact due/accepted/discarded decisions. Validate `abs(count)<=2^24`, exact float32 conversion, and a per-target all-edge absolute-count sum ≤`2^40` on the host. These are arithmetic guards for exact count accumulation, not blanket scientific bounds. In a stable destination/edge ordering, mask each edge's count by its accepted-event Boolean and pad with zeros. Reduce these float32 count leaves with the fixed two-component tree from the review. Corrections remain float32; neither integer device accumulation nor float64 device operations are introduced.
+Preserve one signed integer count per original edge, its direction, multiplicity, and exact due/accepted/discarded decisions. Validate `abs(count)<=2^24`, exact float32 conversion, and a per-target all-edge absolute-count sum ≤`2^40` on the host. These are arithmetic guards for exact count accumulation, not blanket scientific bounds. In a stable destination/edge ordering, mask each edge's count by its accepted-event Boolean and pad with zeros. Unless the tighter guard below applies, reduce these float32 count leaves with the fixed two-component tree from the review. Corrections remain float32; neither integer device accumulation nor float64 device operations are introduced.
+
+The existing guarded mode uses float32 `mx.sum` with zero low component only
+when every target's all-edge absolute-count sum is at most `2^24`. Every integer
+partial sum is then exactly representable. Otherwise retain the compensated
+tree. The pinned maximum is 69,948. Four fresh 64-step native runs match every
+state, phase, discrete mask and queue byte across modes; mean native step time
+decreases from 23.14 to 13.24 ms. This supports selecting the mode for qualification,
+with unchanged compensated scaling and all local/full-network gates. It does not
+establish paired-pipeline throughput or full-case acceptance.
 
 Apply the shared scale only after obtaining `(count_high,count_low)`. Use `scale_high=0.2750000059604645` and `scale_low=-5.9604645663569045e-09`, constructed once from the authoritative float64 `0.275`. Compute each of the four count-component × scale-component products with float32 `TwoProduct`, using splitter `4097` and preserving its specified operation order. The final compensated tree has exactly 16 leaves: current post-integration `g`, the four products and their four residuals in high/high, high/low, low/high, low/low order, followed by seven zeros. Round to one float32 synaptic state only at the root. When both count components are zero, copy current state exactly. Preserve the ordinary receiving/reset gates and carry no correction state between timesteps. The [prototype source](../../src/fly_brain/qualification/adapters/factored_probe.py) fixes the arithmetic sequence; `mx.compile`, reassociation, atomic accumulation and custom kernels remain unqualified.
 

@@ -25,7 +25,15 @@ def test_reader_reports_the_actual_bound_reduction_mode(
     assert read(()).order == (EXACT_ORDER if exact else COMPENSATED_ORDER)
 
 
-def test_requested_exact_mode_reports_original_fallback_outside_the_guard(
+def test_production_default_selects_the_guarded_exact_count_reduction(
+    precision: str,
+) -> None:
+    case = fixture()
+    _, read = prepare_observed(case.connectome, case.targets, (), precision)
+    assert read(()).order == EXACT_ORDER
+
+
+def test_production_default_retains_compensation_outside_the_guard(
     precision: str,
 ) -> None:
     counts = np.array([2**24, 2**24], dtype=np.int32)
@@ -36,7 +44,7 @@ def test_requested_exact_mode_reports_original_fallback_outside_the_guard(
         counts,
         counts.astype(np.float64) * 0.275,
     )
-    _, read = prepare_observed(connectome, (), (), precision, exact_counts=True)
+    _, read = prepare_observed(connectome, (), (), precision)
     assert read(()).order == COMPENSATED_ORDER
 
 

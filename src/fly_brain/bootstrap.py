@@ -66,7 +66,7 @@ def bucketed_scalars() -> DiagnosticCommand:
     from fly_brain.qualification.adapters.bucketed_scalars import run
     from fly_brain.qualification.module import build_project_probe
 
-    return build_project_probe(partial(run, precision=precision))
+    return build_project_probe(partial(run, precision=precision, exact_counts=True))
 
 
 def replay() -> DiagnosticCommand:
@@ -154,7 +154,7 @@ def layout_fan_in_audit() -> DiagnosticCommand:
         partial(
             run,
             precision=precision,
-            evaluator=evaluate_cases,
+            evaluator=partial(evaluate_cases, exact_counts=True),
             build_cases=fan_in_cases(),
             scope='All prescribed pinned fan-in cases through production layout; not full-network dynamics.',
             read_grouping=build_destination_grouping_reader(),
@@ -168,7 +168,9 @@ def device_layout_audit() -> DiagnosticCommand:
     from fly_brain.qualification.adapters.device_layout_probe import run
     from fly_brain.qualification.module import build_input_probe
 
-    return build_input_probe(pinned_inputs(), partial(run, precision=precision))
+    return build_input_probe(
+        pinned_inputs(), partial(run, precision=precision, exact_counts=True)
+    )
 
 
 def connectome_pulse() -> DiagnosticCommand:

@@ -490,7 +490,7 @@ def test_bootstrap_factories_preserve_configuration_order_without_workflow_effec
     assert events == list(expected)
 
 
-def test_layout_fan_in_factory_preserves_precision_evaluator_and_scope(
+def test_layout_fan_in_factory_selects_exact_mode_and_preserves_context(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     request = QualificationRequest(Path('/project'), Path('/fresh'))
@@ -504,7 +504,7 @@ def test_layout_fan_in_factory_preserves_precision_evaluator_and_scope(
     def compose_inputs() -> PinnedInputs:
         return load
 
-    def evaluator() -> None:
+    def evaluate_cases() -> None:
         raise AssertionError('Wiring must not evaluate cases')
 
     def run(
@@ -519,19 +519,22 @@ def test_layout_fan_in_factory_preserves_precision_evaluator_and_scope(
         read_absolute_counts: AbsoluteCountReader,
     ) -> dict[str, object]:
         assert network is connectome and inputs is pin
+        assert isinstance(evaluator, partial)
+        assert evaluator.func is evaluate_cases
+        assert evaluator.keywords == {'exact_counts': True}
         assert (
             callable(build_cases),
             callable(read_grouping),
             callable(read_absolute_counts),
         ) == (True, True, True)
-        calls.append((output, precision, evaluator, scope))
+        calls.append((output, precision, evaluator.keywords['exact_counts'], scope))
         return {'accepted': True}
 
     fan_in = ModuleType('fly_brain.qualification.adapters.fan_in_probe')
     layout = ModuleType('fly_brain.qualification.adapters.bucketed_fan_in')
     for module, name, value in (
         (fan_in, 'run', run),
-        (layout, 'evaluate_cases', evaluator),
+        (layout, 'evaluate_cases', evaluate_cases),
     ):
         setattr(module, name, value)
         monkeypatch.setitem(sys.modules, module.__name__, module)
@@ -545,7 +548,7 @@ def test_layout_fan_in_factory_preserves_precision_evaluator_and_scope(
         (
             request.output,
             '0',
-            evaluator,
+            True,
             'All prescribed pinned fan-in cases through production layout; not full-network dynamics.',
         ),
     ]
