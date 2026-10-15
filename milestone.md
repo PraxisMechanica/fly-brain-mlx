@@ -50,18 +50,21 @@ On `c53af8a`, five sugar/1,000-step trials passed with fresh repeats; four match
 Brian2 spikes exactly. Trial 1 has a bound roundoff review; its raw unaccepted
 report remains unchanged. These proofs qualify that producer only.
 
-**Current hold: complete causal acceptance for sugar/10,000 steps/trial 0.** The
+**Sugar/10,000 steps/trial 0 is accepted after bound parent causal review.** The
 fresh `8b1facc` checkpoint finished in 1,447.08 seconds with unchanged source bytes.
 All fixed and paired metrics pass: timing F1 **1.0**, exact activity and per-neuron
 counts, 16,752 spikes each. Common-history budgets pass. One spike differs by one
-step, first at step 9588/neuron 10133; the raw case remains unaccepted and requires
-its bound causal review. Fresh paired and CPU repeats completed; final case
-verification/adjudication remains pending. Evidence is under
+step, first at step 9588/neuron 10133. Native repeats, all context-array records,
+original artifact hashes, canonical input and source compatibility passed. Host
+reconstruction is bit exact; the 0.00001857 mV voltage gap is within the unchanged
+0.00145 mV budget. Existing case verification accepted the bound classification in
+3.59 seconds. The original unaccepted report is unchanged; derived acceptance is
+in `verified-case.json` under
 `executions/implementation-20261014-matrix/checkpoint-8b1facc-sugar-10000-0`.
 First paired replay fell from 1,576.93 seconds on `c53af8a` to about 704.27 seconds:
 55% less time, 2.24 times faster. The old failed timing F1 was 0.798815; its partial
 raw evidence remains retained. Changed arithmetic requires fresh affected cases.
-**Candidate acceptance is 0/52; prior 5/52 `c53af8a` proofs remain retained.**
+**Candidate acceptance is 1/52; prior 5/52 `c53af8a` proofs remain retained.**
 
 Fresh production workflow checks passed: sugar/100 steps/two trials produced 100
 spikes; silent/one step produced typed empty output. Six-column schemas, integer
@@ -71,11 +74,10 @@ self-comparison JSON/CSV outputs were verified. These short runs took 14.214 and
 
 ## Remaining plan and completion
 
-1. Bind the one-second case's causal evidence and verify fresh repeats and full
-   case acceptance. The native-validated frozen replay and current local gates
-   support the integration repair; broader adoption still requires the matrix.
-2. Reuse the completed checkpoint after compatibility verification; run the missing
-   prescribed cases on stable sources. Source queues reduced storage 287→2.6 MB;
+1. Run the five required sugar/1,000-step trials on current sources. Combine their
+   verified records with the accepted one-second checkpoint into the prescribed
+   six-case prefix; verify matrix resumption before more long executions.
+2. Resume missing prescribed cases on stable sources. Source queues reduced storage 287→2.6 MB;
    sparse due verification and shared scaling preserve observed phase bytes.
    Actual one-second throughput is about 70 ms/step. Further optimization must
    justify its implementation and requalification cost.
@@ -86,8 +88,8 @@ self-comparison JSON/CSV outputs were verified. These short runs took 14.214 and
    localization and provenance. Record results and limitations, push all changes,
    pass required checks and release outputs after their verification consumers finish.
 
-Progress: **36%**: inventory 10 points, workflows 8, current local evidence 8,
-implementation 10 and 0/52 of 49 matrix points. Batches and delivery retain
+Progress: **37%**: inventory 10 points, workflows 8, current local evidence 8,
+implementation 10 and 1/52 of 49 matrix points. Batches and delivery retain
 10 and 5 points; their acceptance remains incomplete.
 The working target is **3–5 days of agent elapsed execution**, with a
 **90%-confidence remaining estimate of 3–14 days**, assuming continuous Mac
