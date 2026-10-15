@@ -18,13 +18,14 @@ coefficients, guarded exact float32 count sums, compensated scaling, uncompiled
 Metal and source-neuron queues.
 Protected references, seven independent fixtures, spike schemas and gates are unchanged.
 
-At `a242597`, local scientific qualification passes **321/321**, zero failures,
-errors or skips, in **232.68 seconds**. Six required audits pass in **217.07
+At `af39d9e`, local scientific qualification passes **322/322**, zero failures,
+errors or skips, in **231.79 seconds**. Six required audits pass in **186.33
 seconds**, with all 223 native archive hashes verified. They cover 157 scalar
 cases in each reducer, 24,576 primitive and production-layout fan-in cases each,
 full pinned device layout and original/silenced/blocked connectome pulses.
-Source inventories remain exact. Evidence under
-`executions/implementation-20261014-matrix/offset-candidate-a242597`.
+Each fan-in audit retains 99 original-state casting limitations. Source inventories
+remain exact. Evidence under
+`executions/implementation-20261014-matrix/selected-mode-af39d9e`.
 
 The preceding arithmetic accepted all five sugar trials at 1,000 and 10,000 steps,
 with timing F1 1.0, exact activity/counts and fresh repeats. Two one-second cases
@@ -52,35 +53,34 @@ Integration includes actual offset configuration, phase and final evidence.
 These results grant no full-network acceptance.
 Records remain under this run's `diagnostics/ten-second-timing-review`.
 
-CLI workflows at `a242597` pass under `workflows-offset-a242597`: 100 sugar spikes
+CLI workflows at `af39d9e` pass under `workflows-selected-af39d9e`: 100 sugar spikes
 across two trials match independent Brian2 prefixes exactly; silent output is
 typed empty. Schemas, identities, times, inputs, provenance and comparison
-JSON/CSV pass. Simulation elapsed: 9.56 and 5.61 seconds. These bounded checks do
+JSON/CSV pass. Simulation elapsed: 8.51 and 5.95 seconds. These bounded checks do
 not replace scientific batches. Commit/push hooks and exact-revision CI pass.
 
 The guarded count mode is selected for production and its audits. Four fresh
 64-step native runs match all state, phase, discrete and queue
 bytes across both modes. Mean native step time falls **23.14 to 13.24 ms (1.75×)**;
 reference/observation overhead is excluded. The retained decision and measurements
-are under `offset-candidate-a242597/exact-count-profile`. Fresh qualification of
-the changed default mode remains required before the full campaign.
+are under `offset-candidate-a242597/exact-count-profile`. Fresh local qualification
+and workflow checks now pass for the selected mode.
 
 ## Remaining plan and completion
 
-1. Finish selected-mode local qualification, audits and workflow verification.
-   Keep full-network execution on hold until those gates pass.
-2. Complete all missing or invalidated matrix cases with
+1. Run the fresh complete matrix with the selected implementation. The required
+   first case also measures full-pipeline throughput; no optional benchmark.
+2. Complete all matrix cases with
    fresh repeats, and sugar/P9 four-trial batches. Retain causal audits, pooled
    metrics, 100 ms localization and provenance; reuse only compatible evidence.
 3. Record results and limitations, push changes, pass required checks and release
    outputs after their verification consumers finish.
 
-Progress: **28%**: inventory 10 points, workflow implementation 8 and candidate
-implementation 10. The changed mode awaits 8 local points; the 49 matrix, 10 batch
-and 5 delivery points remain unaccepted.
-Total remaining duration depends on the timing repair. Integration is complete;
-the next local checkpoint has a **15-minute
-90%-confidence elapsed estimate**. The full matrix now
+Progress: **36%**: inventory 10 points, workflow implementation 8, current local
+evidence 8 and candidate implementation 10. The 49 matrix, 10 batch and 5 delivery
+points remain unaccepted.
+The local checkpoint finished within its 15-minute estimate. Remaining duration
+depends on full-network timing acceptance. The full matrix
 requires 1,231,000 steps per engine twice: about 46 hours of paired execution at
 the previous measured throughput, before batches, diagnosis or repairs. New
 representation/observation throughput is unmeasured. A 90%-confidence total
