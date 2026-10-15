@@ -12,11 +12,11 @@ Apple silicon, uv-managed and database-free. Implementation stays in this chat;
 Preserve pinned inputs, independent references, tolerances and every scientific
 acceptance gate.
 
-The development guide owns the authoritative streamlined approach and execution
-budgets. Decision:
-qualify the increment candidate and queue throughput before more matrix runs.
-Confidence: 95% at `4af07fb`. Hooks and exact-revision CI passed. Local
-qualification passed; full-network acceptance remains pending.
+The development guide owns batching, validation frequency and execution budgets.
+Decision: finish planned implementation before discretionary testing. Early
+diagnostics require a failure that blocks confident progress. Hooks/CI remain;
+qualify stable sources once with compatible retained evidence. Confidence: 95%
+at `8b1facc`. No new throughput target blocks acceptance.
 
 ## Current implementation and evidence
 
@@ -50,19 +50,17 @@ On `c53af8a`, five sugar/1,000-step trials passed with fresh repeats; four match
 Brian2 spikes exactly. Trial 1 has a bound roundoff review; its raw unaccepted
 report remains unchanged. These proofs qualify that producer only.
 
-**Current hold: sugar/10,000 steps/trial 0 fails the fixed timing gate.** On
-`c53af8a`, its complete first paired replay took 1,576.930 seconds, with no preceding
-state-budget violation and a first spike difference at step 5719, neuron 100750.
-Native spike rescoring gives timing F1 **0.798815 < 0.95**. Activity Jaccard
-0.990315, total-count error 0.005193 and neuron-count error 0.020714 pass their
-floors. Correlation, CPU comparisons, repeatability and full-case acceptance remain
-unverified. The owned run was interrupted after this decisive failure; the fresh
-repeat stopped at step count 1632 and neither CPU run started. All native evidence
-and the bounded diagnostic remain under
-`executions/implementation-20261014-matrix/qualified-c53af8a`.
-Local repair checks passed. Release the hold only after the one-second case meets
-fixed metrics, fresh repeats and causal acceptance. Changed arithmetic invalidates
-old case acceptance; regenerate all affected evidence.
+**Current hold: complete causal acceptance for sugar/10,000 steps/trial 0.** The
+fresh `8b1facc` checkpoint finished in 1,447.08 seconds with unchanged source bytes.
+All fixed and paired metrics pass: timing F1 **1.0**, exact activity and per-neuron
+counts, 16,752 spikes each. Common-history budgets pass. One spike differs by one
+step, first at step 9588/neuron 10133; the raw case remains unaccepted and requires
+its bound causal review. Fresh paired and CPU repeats completed; final case
+verification/adjudication remains pending. Evidence is under
+`executions/implementation-20261014-matrix/checkpoint-8b1facc-sugar-10000-0`.
+First paired replay fell from 1,576.93 seconds on `c53af8a` to about 704.27 seconds:
+55% less time, 2.24 times faster. The old failed timing F1 was 0.798815; its partial
+raw evidence remains retained. Changed arithmetic requires fresh affected cases.
 **Candidate acceptance is 0/52; prior 5/52 `c53af8a` proofs remain retained.**
 
 Fresh production workflow checks passed: sugar/100 steps/two trials produced 100
@@ -73,21 +71,17 @@ self-comparison JSON/CSV outputs were verified. These short runs took 14.214 and
 
 ## Remaining plan and completion
 
-1. Repair integration using the validated frozen replay: 5,720 steps and 152
-   incoming edges reproduce native states in 1.34 seconds. The increment candidate
-   passes reviewed-coefficient MLX replay in 11.47 seconds; critical voltage error
-   is 0.00000143 mV. Local gates passed; full-network adoption is pending.
-2. Queue storage fell from 287 MB to 2.6 MB. Sparse due-set validation preserves
-   exact membership, multiplicity and dense-bitmap hashes. Retained 64-step
-   comparisons preserve all phase hashes, spikes, edge deliveries and 19 logical
-   slots. Shared scaling preserves the reviewed operation sequence and passes
-   all 157 scalars. Observed steps improved 145→63 ms; warm production 35→22 ms.
-   Guarded count reduction saved only 6% and remains unselected. The 15 ms target
-   and full-network qualification remain pending.
-3. The controller now overlaps a spawned, single-thread CPU reference with MLX
-   and scores the first replay before its paired repeat. Native equivalence,
-   failure stopping and worker cleanup passed. Demonstrate one-second sugar accuracy
-   and throughput before the complete matrix on stable sources.
+1. Bind the one-second case's causal evidence and verify fresh repeats and full
+   case acceptance. The native-validated frozen replay and current local gates
+   support the integration repair; broader adoption still requires the matrix.
+2. Reuse the completed checkpoint after compatibility verification; run the missing
+   prescribed cases on stable sources. Source queues reduced storage 287→2.6 MB;
+   sparse due verification and shared scaling preserve observed phase bytes.
+   Actual one-second throughput is about 70 ms/step. Further optimization must
+   justify its implementation and requalification cost.
+3. Preserve verified CPU overlap, first-replay scoring and owned worker cleanup.
+   Diagnose a failed gate using retained native evidence and the smallest replay
+   before launching another full-network execution.
 4. Complete sugar/P9 four-trial batches, causal audits, pooled metrics, 100 ms
    localization and provenance. Record results and limitations, push all changes,
    pass required checks and release outputs after their verification consumers finish.
@@ -95,10 +89,9 @@ self-comparison JSON/CSV outputs were verified. These short runs took 14.214 and
 Progress: **36%**: inventory 10 points, workflows 8, current local evidence 8,
 implementation 10 and 0/52 of 49 matrix points. Batches and delivery retain
 10 and 5 points; their acceptance remains incomplete.
-The working target is **4–6 days of agent elapsed execution**, with a
+The working target is **3–5 days of agent elapsed execution**, with a
 **90%-confidence remaining estimate of 3–14 days**, assuming continuous Mac
 availability. All fresh cases require 1,231,000 steps per engine, twice with
-repeats. Extrapolating 63 ms observed steps plus earlier pairing/CPU overhead
-projects 2.8 matrix days before overlap, batches, diagnosis and repairs.
-Full-network accuracy and sustained throughput remain unverified; confirm both
-in the one-second checkpoint. A one-day target remains conditional.
+repeats. Extrapolating the measured 70 ms/step projects about two matrix days of
+paired execution before batches, diagnosis and repairs; CPU overlap is demonstrated.
+One case does not establish accuracy or sustained throughput across the matrix.

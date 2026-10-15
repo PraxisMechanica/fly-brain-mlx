@@ -5,56 +5,54 @@ Read `milestone.md` for current holds and `numerical-contract.md` for acceptance
 
 ## Development loop
 
-1. Read the current milestone and affected source. Choose one bounded outcome.
-   Reuse verified task state; inspect immediate dependencies only as needed to
-   resolve a concrete uncertainty.
-2. Implement the smallest change. Remove superseded paths and duplicate checks;
-   keep one implementation and direct assertions of its required behavior.
-3. Let commit hooks and CI select routine affected tests. Do not run those tests
-   manually as well. Fix a failure with a targeted check before retrying delivery.
-4. Reproduce a scientific failure in the smallest deterministic replay using
-   retained native inputs and state. Verify the replay against actual native
-   bytes before testing a correction. A representative full-network case then
-   checks accuracy; the milestone owns its choice.
-5. Profile simulation and observation with short runs. Remove the measured
-   dominant cost. Demonstrate accuracy and the milestone's throughput target
-   before starting the full campaign. Qualify changed arithmetic, representation
-   or execution modes before adoption.
-6. Overlap independent CPU references with MLX execution, preserving fresh
-   initial states, single-thread settings per process, repeats and provenance.
-   Score the first completed replay. Stop decisively rejected candidates and
-   preserve partial evidence without granting full-case acceptance.
-7. Once the implementation is stable, run the required matrix, fresh repeats and
-   sugar/P9 batches. Reuse completed cases only after canonical-input, source,
-   environment, native-replay and scoring checks establish compatibility with the
-   delivered implementation. Resume missing work. New code, inputs, execution
-   mode or unresolved failures determine which evidence must be regenerated.
-8. Update the milestone with results, missing acceptance and revised estimates;
-   commit, push and verify CI. Keep detailed history in Git.
+1. Implement first; validate at the end. Finish the candidate's planned changes,
+   affected callers, collectors and tests before discretionary testing. Use source
+   review and retained evidence while coding. Remove superseded paths; avoid
+   optional cleanup, abstractions and checker/report work.
+2. Preserve failure attribution: keep subchanges separable in the diff and know
+   which focused observation distinguishes their failures. Combine low-risk
+   fixes when attribution remains clear. Separate independent numerical changes
+   if their failures cannot be distinguished by a small deterministic replay.
+3. Let hooks and CI run affected routine tests once per completed batch. Do not
+   test after each edit or pre-run their selected tests manually. Before the
+   candidate is complete, run a diagnostic only when a specific unresolved failure
+   prevents confident progress. Use the smallest discriminating replay; repair
+   related causes together before checking again.
+4. Reuse retained native evidence for diagnosis and rescoring. Validate a small
+   replay against native bytes before trying a scientific correction. After the
+   planned implementation stabilizes, complete required local checks once, then
+   the scientific campaign. Defer full suites, full-network cases, fresh repeats
+   and batch comparisons until this point unless needed for a blocking diagnosis.
+   Retain compatible checkpoints for matrix resumption.
+5. Before an expensive run, identify its unanswered question or required gate,
+   relevant changes, expected duration and stopping condition in the existing
+   execution record or milestone. Run only if retained evidence cannot answer it.
+   Profile briefly only for a measured bottleneck; pursue an optimization when
+   expected savings justify implementation and requalification. Throughput goals
+   are estimates, not additional scientific acceptance gates.
+6. Freeze scientific sources for qualification. Overlap independent CPU references
+   with MLX, retaining fresh initial states, settings, repeats and provenance.
+   Score the first replay and stop decisive failures. Complete all 52 paired cases,
+   fresh repeats and sugar/P9 batches for the stable implementation. Regenerate
+   only evidence invalidated by relevant source, input, environment or mode changes,
+   as determined by the existing compatibility verifier. A documentation commit
+   alone does not require rerunning simulations.
+7. Update the milestone after each completed batch or material result. Commit and
+   push the coherent batch, then verify its CI; avoid micro-commits and chains of
+   unpushed commits that repeatedly select accumulated changes. Keep history in Git.
 
-Routine test commands have a five-minute maximum. Assess any overrun before
-retrying. Long scientific executions run only for a concrete unresolved diagnosis
-or contract-required acceptance. Never shorten an experiment or weaken its gates
-to fit the routine test budget. Target
-less than 10% idle waiting; continue useful independent work without changing
-sources consumed by an active run. Stop unnecessary runs instead of inventing
-work to occupy their duration. Concentrate on implementation and acceptance;
-further code-quality checker/report tuning is outside the current scope.
+Routine test commands have a five-minute maximum; diagnose overruns before retrying.
+Long scientific executions require the concrete reason above. Preserve all contract
+horizons and gates. Minimize total validation time and target less than 10% idle
+waiting; useful concurrent work must not change sources consumed by an active run.
+Do not manufacture work to hide waiting. Use existing command receipts to report
+routine validation, scientific execution and remaining uncertainty separately.
 
 ## Tools and delivery
 
-Use Apple silicon/macOS, Python 3.10.14 and uv. Metric tooling uses the versions
-in `package.json`; shared commands are in `justfile`.
-
-```sh
-just bootstrap
-```
-
-Bootstrap installs locked tools and hooks. Commit and CI automatically select
-changed/affected Ruff, Pyright, import, scientific-source and behavior checks.
-Push performs static delivery checks without another pytest run. Do not add
-manual routine test replays. Missing tools, malformed results and failed adopted
-checks block delivery; numerical code-quality scores remain advisory.
+Use Apple silicon/macOS and uv; `justfile` owns shared commands. Push performs
+static delivery checks without pytest. Missing tools, malformed results and failed
+adopted checks block delivery; numerical code-quality scores remain advisory.
 
 `AGENTS.md` owns the documentation budget and retention policy.
 
@@ -64,8 +62,8 @@ checks block delivery; numerical code-quality scores remain advisory.
 uv run --locked --group qualification fly-brain qualify --output executions/local-01
 ```
 
-This runs local independent-reference and MLX scientific tests, including bounded
-observation transparency, all-slot faults, repeats, chunks and batch regressions.
+Local qualification covers independent-reference and MLX scientific behavior;
+routine hooks do not replace it.
 
 The runner stops at the first failure and enforces five minutes including setup, kills its owned process group
 on expiry and returns unaccepted exit 124. Partial counts are untrusted. Diagnose
@@ -79,11 +77,9 @@ uv run --locked --group qualification python -m tools.qualify_matrix --output ex
 uv run --locked --group qualification python -m tools.qualify_matrix --resume-from executions/matrix-01 --reviews executions/matrix-01/reviews --verify-only --output executions/matrix-preflight-01
 ```
 
-Check the milestone's current scope before launching. The matrix preserves all 52
-prescribed cases, fresh repeats and sugar/P9 one-second four-trial comparisons.
-It independently verifies canonical inputs, source/execution identities and
-native scoring, stops on an unaccepted case and reports incomplete coverage as
-unaccepted. Batch input requires accepted compatible singletons 0–3; exact native
+The matrix verifies canonical inputs, source/execution identities and native
+scoring, stops on an unaccepted case and rejects incomplete coverage.
+Batch input requires accepted compatible singletons 0–3; exact native
 phase/final equality suffices for the state budgets. Differences require diagnosis.
 No source edits, commits or push-hook stashing while a run consumes those sources.
 
