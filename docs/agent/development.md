@@ -19,11 +19,14 @@ Read `milestone.md` for current holds and `numerical-contract.md` for acceptance
    changes compound it. Choose the smallest discriminating replay; repair related
    causes together before checking again.
 4. Reuse retained native evidence for diagnosis and rescoring. Validate a small
-   replay against native bytes before trying a scientific correction. After the
-   batch, verify affected scientific behavior before building on it; do not defer
-   a discriminating check because unrelated implementation remains. Once the
-   candidate stabilizes, complete required local checks and the scientific
-   campaign. Avoid unaffected suite reruns; retain compatible checkpoints.
+   replay against native bytes before trying a scientific correction. For a
+   repaired full-network failure, screen its spike metrics with the production
+   MLX runner against compatible retained references before another paired run.
+   Validate the screen against retained baseline events/inputs; record each
+   candidate's source and mode. A screen rejects candidates; acceptance requires
+   state, queue, causal, fresh-repeat and full campaign checks. Verify affected
+   scientific behavior before dependent work; complete required local checks and
+   the campaign once the candidate stabilizes. Retain compatible checkpoints.
 5. Before an expensive run, identify its unanswered question or required gate,
    relevant changes, expected duration and stopping condition in the existing
    execution record or milestone. Run only if retained evidence cannot answer it.

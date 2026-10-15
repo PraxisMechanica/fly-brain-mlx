@@ -28,13 +28,19 @@ remain exact. Evidence under
 `executions/implementation-20261014-matrix/threshold-candidate-01`.
 
 **Current arithmetic: 0/52 accepted; all matrix cases and batches remain.**
-The preceding candidate accepted seven cases before sugar 10,000-step trial
-2 fails timing F1: **0.9105285060 < 0.95**. Other fixed/paired metrics pass;
-first difference is step 3388, neuron 89930, within state budgets. The first
-replay is retained under `matrix-offset-exact-02`; no paired repeat ran.
-The earlier seven
-cases remain valid for their original arithmetic under `matrix-offset-exact-01`,
-including trial 1's bound causal review; they cannot qualify this representation.
+The retry at `415f005` still fails timing F1 **0.9105285060 < 0.95**, after
+601.20 seconds; no paired repeat ran. First difference moved to step 7898,
+neuron 117657. Native/host reconstruction is exact; even the correctly rounded
+reference physical float32 voltage equals threshold. Both origins and synaptic
+update variants retain this mismatch. The completed failure-only Astra review
+requires explicit user amendment before comparing stored `u>0` before decoding;
+the current contract forbids it. Hold numerical changes and further full runs.
+Review and parent verification:
+`matrix-threshold-target-01/diagnostics/threshold-projection-review`.
+The proposed amendment is unapproved; no acceptance gate was waived.
+Preceding rest-relative arithmetic accepted seven cases under `matrix-offset-exact-01`
+before the same trial failed at step 3388 under `matrix-offset-exact-02`.
+Those cases qualify only their original arithmetic.
 
 The absolute-voltage predecessor failed ten-second sugar trial 0 timing:
 F1 **0.6064396002 < 0.95**. `matrix-increment-02` retains its replay and diagnosis.
@@ -53,7 +59,7 @@ Current CLI workflows pass under `workflows-threshold-01`: 100 sugar spikes
 across two trials match independent Brian2 prefixes exactly; silent output is
 typed empty. Schemas, identities, times, inputs, provenance and comparison
 JSON/CSV pass. Simulation elapsed: 7.69 and 6.18 seconds. These bounded checks do
-not replace scientific batches. Current delivery checks remain pending.
+not replace scientific batches. `415f005` hooks and exact-revision CI pass.
 
 Count modes match all native bytes in four fresh 64-step runs. Mean native step
 time falls **23.14 to 13.24 ms (1.75×)**, excluding reference/observation overhead.
@@ -61,21 +67,24 @@ Decision and measurements: `offset-candidate-a242597/exact-count-profile`.
 
 ## Remaining plan and completion
 
-1. Retry failed sugar 10,000-step trial 2 after current workflow and hook checks.
-   Stop a decisive failure before its paired repeat. A passing candidate still
-   needs all 52 cases, fresh repeats, causal audits, pooled/localized metrics and
-   sugar/P9 batches; reuse only compatible evidence.
+The production MLX failure screen reproduces all **16,841 native spikes exactly**
+in **104.66 seconds**, versus 601.20 seconds paired: **5.74× faster**, 82.6% less
+time for this counterexample. Evidence: `fast-screen-baseline-415f005`.
+It rejects the same candidate and grants no state/repeat/causal acceptance.
+
+1. Obtain explicit approval of the stored-offset predicate amendment before
+   changing production or independent expectations. Then run bounded native
+   target/boundary/repeat/chunk/batch probes and the faithful fast failure screen.
+   A passing candidate still needs all 52 cases,
+   repeats, causal audits, pooled/localized metrics and sugar/P9 batches.
 2. Record results and limitations, push changes, pass required checks and release
    outputs after their verification consumers finish.
 
 Progress: **36%**: inventory 10 points, workflow implementation 8, candidate
 implementation 10 and local evidence 8. Matrix, batch and delivery acceptance remain.
-The bounded repair checkpoint finished within its 10–20 minute estimate. Next
-failed-case retry: estimated 10–22 minutes, stopping early if metrics fail. Total duration
-depends on full-network timing acceptance. The full matrix
-requires 1,231,000 steps per engine twice. The first case records 138.79 seconds,
-24% below its preceding 183.69-second result. Preceding one-second throughput averages 55.22
-ms/step, projecting about 38 hours if representative, before batches, setup,
-diagnosis or repairs. Long-horizon throughput remains unmeasured. A 90%-confidence total
-estimate remains unsupported until the failed horizon passes. Independent
-worktree coding may overlap gates; it cannot reduce their execution duration.
+The repair and review/screen checkpoints met their estimates; the retry failed
+after 10 minutes. After approval, next native prototype: estimated 10–20 minutes.
+Total duration depends on timing acceptance. The matrix requires 1,231,000 steps
+per engine twice. Previous paired throughput of 55.22 ms/step projects 38 hours
+if representative, before batches, setup or repairs. Long-horizon throughput and
+a 90%-confidence total remain unsupported. Independent coding can overlap gates.
