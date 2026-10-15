@@ -3,7 +3,7 @@
 import hashlib
 import json
 import subprocess
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, field
 from pathlib import Path
 
 import numpy as np
@@ -13,7 +13,10 @@ from fly_brain.comparison.acceptance import (
     steps_from_reference_clock,
     validate_coordinates,
 )
-from fly_brain.qualification.adapters.batch_environment import read_environment
+from fly_brain.qualification.adapters.batch_environment import (
+    intake_sources,
+    read_environment,
+)
 from fly_brain.qualification.adapters.batch_stimulus import load as load_stimulus
 from fly_brain.qualification.adapters.case_binding import (
     require_bound_files,
@@ -80,6 +83,9 @@ class VerifiedCase:
     artifact_sha256: dict[str, str]
     review: Path | None
     review_sha256: dict[str, str]
+    validation_source_sha256: dict[str, str] = field(
+        default_factory=lambda: dict[str, str]()
+    )
 
     def record(self) -> dict[str, object]:
         return {
@@ -90,6 +96,7 @@ class VerifiedCase:
             'artifact_sha256': self.artifact_sha256,
             'review_directory': str(self.review) if self.review is not None else None,
             'review_artifact_sha256': self.review_sha256,
+            'validation_source_sha256': self.validation_source_sha256,
         }
 
 
@@ -242,4 +249,10 @@ def verify_case(
         manifest,
         review,
         review_hashes,
+        {
+            **intake_sources(project),
+            'tools.qualification_cases': hashlib.sha256(
+                Path(__file__).read_bytes()
+            ).hexdigest(),
+        },
     )

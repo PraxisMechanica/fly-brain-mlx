@@ -18,6 +18,9 @@ pytestmark = pytest.mark.integration
     'fault',
     (
         'none',
+        'astra',
+        'missing_dispatch',
+        'unknown_reviewer',
         'pending',
         'unexplained',
         'trial',
@@ -85,13 +88,14 @@ def test_completed_cause_cannot_apply_to_changed_or_incomplete_evidence(
             if fault != 'archive_incomplete' or 'spike-context' not in name:
                 archive.write(run / name, name)
     for name in (
-        'astra-review.md',
+        'causal-review.md',
         'executed-preflight.py',
         'parent-host-proof.json',
         'executed-host-proof.py',
-        'dispatch.json',
     ):
         (review / name).write_text('completed bound evidence ' + name)
+    if fault in ('astra', 'missing_dispatch'):
+        (review / 'dispatch.json').write_text('actual specialist dispatch fixture')
     case = ParityCase('sugar', 10000, TrialId(0))
     identity = {
         **asdict(case),
@@ -108,7 +112,12 @@ def test_completed_cause_cannot_apply_to_changed_or_incomplete_evidence(
     }
     if fault == 'missing_proof':
         bound.pop('executed-host-proof.py')
+    elif fault == 'missing_dispatch':
+        bound.pop('dispatch.json')
     decision = {
+        'reviewer': 'unknown'
+        if fault == 'unknown_reviewer'
+        else ('astra' if fault in ('astra', 'missing_dispatch') else 'parent'),
         'review_complete': fault != 'pending',
         'case_accepted': False,
         'classification': 'Explained finite-precision trajectory roundoff under the existing policy.'
@@ -119,13 +128,13 @@ def test_completed_cause_cannot_apply_to_changed_or_incomplete_evidence(
     }
     (review / 'review-decision.json').write_text(json.dumps(decision))
     if fault == 'review_changed':
-        (review / 'astra-review.md').write_text('changed review')
+        (review / 'causal-review.md').write_text('changed review')
     elif fault == 'execution_changed':
         (paired / 'spike-context.npz').write_bytes(b'changed cause')
     audit = CausalAudit(
         step=10000, first_spike_step=5719, first_spike_neurons=(NeuronRow(100750),)
     )
-    if fault == 'none':
+    if fault in ('none', 'astra'):
         hashes = require_cause_binding(run, review, case, audit, 'launch')
         assert set(hashes) == {*bound, 'review-decision.json'}
     else:

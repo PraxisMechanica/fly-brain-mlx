@@ -40,6 +40,10 @@ Preserve pinned FlyWire inputs and the seven independent regression fixtures.
 | Brian reference execution | Generated numerical code, inputs, initialization, schedule, build settings and failure handling |
 | Producer source dependencies | Every actual source-identity consumer and existing omission/change rejection cases |
 
+Case reuse checks every original source hash against its launch. Current producing
+sources must match; only the post-run `case_binding` and `batch_environment`
+validators may change. Their current hashes are recorded separately.
+
 Use the automatic affected-test boundaries for ordinary changes. Scientific
 checks follow the affected numerical behavior. Any new arithmetic, representation
 or execution mode

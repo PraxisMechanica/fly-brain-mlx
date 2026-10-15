@@ -10,6 +10,26 @@ from fly_brain.simulation.identifiers import TrialId
 LaunchReader = Callable[[str, str], bytes]
 ExecutionEvidence = tuple[Path, str]
 
+# These modules validate completed artifacts. Neither is imported by a case
+# producer. Their original bytes remain checked against the launch commit; their
+# current validation identities are recorded separately when old runs are read.
+_INTAKE_ONLY = frozenset(
+    (
+        'fly_brain.qualification.adapters.batch_environment',
+        'fly_brain.qualification.adapters.case_binding',
+    )
+)
+
+
+def intake_sources(project: Path) -> dict[str, str]:
+    return {
+        name: hashlib.sha256(
+            (project / 'src' / Path(*name.split('.')).with_suffix('.py')).read_bytes()
+        ).hexdigest()
+        for name in sorted(_INTAKE_ONLY)
+    }
+
+
 _SOURCES = frozenset(
     (
         'fly_brain.simulation.backend.core',
@@ -119,9 +139,9 @@ def read_environment(
             else base / '__init__.py'
         )
         relative = str(path.relative_to(project))
-        if (
-            hashlib.sha256(path.read_bytes()).hexdigest() != digest
-            or hashlib.sha256(read_launch(launch, relative)).hexdigest() != digest
+        if hashlib.sha256(read_launch(launch, relative)).hexdigest() != digest or (
+            name not in _INTAKE_ONLY
+            and hashlib.sha256(path.read_bytes()).hexdigest() != digest
         ):
             raise ValueError(
                 f'Executed source differs from its launch or current source: {name}'
@@ -139,7 +159,11 @@ def require_environments(
         raise ValueError('Batch environment requires all four independent identities')
     actual = read_environment(project, batch, read_launch)
     settings = actual.model_dump(exclude={'source_sha256', 'scope'})
-    common = dict(actual.source_sha256)
+    common = {
+        name: digest
+        for name, digest in actual.source_sha256.items()
+        if name not in _INTAKE_ONLY
+    }
     for trial in range(4):
         expected = read_environment(project, singletons[TrialId(trial)], read_launch)
         if expected.model_dump(exclude={'source_sha256', 'scope'}) != settings:

@@ -99,7 +99,8 @@ bound reference build provenance, native replay evidence and `case.json`.
 spike difference needs the prescribed causal decision, bound to the original
 artifacts. Preserve the unaccepted raw report and record any reviewed acceptance
 separately. Good summary metrics or small threshold margins alone do not establish
-acceptance.
+acceptance. The implementation agent makes evidence-backed causal decisions;
+the escalation conditions in `AGENTS.md` govern optional Astra assistance.
 
 ## Diagnostics and outputs
 

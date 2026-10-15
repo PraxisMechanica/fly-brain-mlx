@@ -65,13 +65,13 @@ instruction overrides general schema and database approval requirements.
 Use GPT-6.1 Sol for implementation at the user-selected effort (currently
 `xhigh`). Only the user may change the parent model.
 
-Resolve precision, numerical representation, and implementation choices using
-the delegated engineering judgment. For deeper scientific, numerical, or
-kernel-design judgment, use the installed `bounded-subagent` skill.
-Spawn `gpt-6-astra` explicitly at `xhigh` with fresh context; await completion,
-verify the evidence, and record the decision and limits before dependent work.
-Sol then resumes implementation. The active milestone controls delegation
-authorization. Keep assigned reviews with their current owners.
+Resolve engineering and causal decisions here using verified evidence. Use Astra
+only when a specific unresolved uncertainty blocks further confident progress
+after bounded diagnosis. State that uncertainty before dispatch. Astra is not a
+routine check or a required reviewer for every case. For a necessary escalation,
+use `bounded-subagent`, `gpt-6-astra` at `xhigh`, fresh context, one reviewer at a
+time and no implementation delegation. Await completion, verify the evidence and
+record the decision and limits. Keep assigned reviews with their current owners.
 
 ## Repository remotes
 

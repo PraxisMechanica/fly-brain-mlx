@@ -84,15 +84,19 @@ def require_cause_binding(
         tuple(identity['first_spike_neurons']),
     )
     bound = decision['bound_artifact_sha256']
+    reviewer = decision['reviewer']
+    if reviewer not in ('parent', 'astra'):
+        raise ValueError('Cause binding requires the actual decision owner')
     required = {
-        'astra-review.md',
+        'causal-review.md',
         'first-cause-preflight.json',
         'first-observation.zip',
         'executed-preflight.py',
         'parent-host-proof.json',
         'executed-host-proof.py',
-        'dispatch.json',
     }
+    if reviewer == 'astra':
+        required.add('dispatch.json')
     if set(bound) != required:
         raise ValueError('Cause binding requires every completed review artifact')
     for name, digest in bound.items():

@@ -14,6 +14,10 @@ pytestmark = pytest.mark.integration
     'fault,changed_source',
     (
         ('none', 'fly_brain.simulation.backend.core'),
+        ('intake_changed', 'fly_brain.qualification.adapters.case_binding'),
+        ('intake_changed', 'fly_brain.qualification.adapters.batch_environment'),
+        ('source_changed', 'fly_brain.qualification.adapters.case_binding'),
+        ('launch_changed', 'fly_brain.qualification.adapters.batch_environment'),
         ('missing', 'fly_brain.simulation.backend.core'),
         ('version', 'fly_brain.simulation.backend.core'),
         ('precision', 'fly_brain.simulation.backend.core'),
@@ -94,9 +98,13 @@ def test_batch_cannot_reuse_evidence_with_changed_execution_settings_or_source(
         'fly_brain.infrastructure.seeded_random',
     ]
     project = tmp_path / 'project'
+    intake = (
+        'fly_brain.qualification.adapters.case_binding',
+        'fly_brain.qualification.adapters.batch_environment',
+    )
     originals: dict[str, bytes] = {}
     hashes: dict[str, str] = {}
-    for name in (*names, 'fly_brain.qualification.adapters.batch_extra'):
+    for name in (*names, *intake, 'fly_brain.qualification.adapters.batch_extra'):
         path = project / 'src' / Path(*name.split('.')).with_suffix('.py')
         path.parent.mkdir(parents=True, exist_ok=True)
         data = ('recorded source ' + name).encode()
@@ -128,8 +136,11 @@ def test_batch_cannot_reuse_evidence_with_changed_execution_settings_or_source(
         'cpu_default_dtype': 'torch.float32',
         'cpu_deterministic_algorithms': False,
         'scope': 'fixture',
-        'source_sha256': {name: hashes[name] for name in names},
+        'source_sha256': {name: hashes[name] for name in (*names, *intake)},
     }
+    if fault == 'intake_changed':
+        current = project / 'src' / Path(*changed_source.split('.')).with_suffix('.py')
+        current.write_bytes(b'changed post-run validator; producer bytes unchanged')
     batch = tmp_path / 'batch'
     batch.mkdir()
     batch_data = json.loads(json.dumps(baseline))
@@ -178,7 +189,7 @@ def test_batch_cannot_reuse_evidence_with_changed_execution_settings_or_source(
             else originals[relative]
         )
 
-    if fault in ('none', 'extra_source'):
+    if fault in ('none', 'extra_source', 'intake_changed'):
         assert require_environments(
             project, (batch, 'launch'), singles, read_launch
         ) == {name: hashes[name] for name in names}
