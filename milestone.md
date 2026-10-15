@@ -14,18 +14,19 @@ acceptance gate. The practical architecture refactor is complete.
 
 The development guide owns the authoritative streamlined approach and execution
 budgets. Each document owns its subject; Git retains detailed history. Decision:
-diagnose and repair the proven one-second timing failure before more matrix runs.
-Confidence: 99% at `c53af8a`. Routine hooks
-and exact-revision CI passed for `c53af8a`: 65 affected tests in 3.91 seconds.
+qualify the increment candidate and queue throughput before more matrix runs.
+Confidence: 95% at `7e54641`. Checkpoint hooks and exact-revision CI passed;
+candidate arithmetic needs fresh qualification.
 
 ## Current implementation and evidence
 
 All five experiments, canonical persisted replay, six-column Parquet output,
 typed empty output, comparison JSON/CSV, paired collectors and matrix/batch
 controllers exist. Channel class/amplitude and qualification source, compiler,
-header, input and executable provenance are recorded. Production retains the
-original coupled float32 voltage update, compensated destination-bucket reduction
-and uncompiled Metal execution; no new arithmetic is adopted.
+header, input and executable provenance are recorded. The candidate evaluates the
+coupled float32 voltage solution as an increment using the existing coefficients
+and old synaptic state. Compensated reduction and uncompiled Metal remain;
+the changed evaluation order is unqualified.
 
 Current native tests directly verify phase bytes, all 19 queue slots,
 due events, faults, repeats, chunks and standalone/batch behavior. The three
@@ -33,17 +34,17 @@ independent reference sources, their protection records and all seven independen
 regression fixtures retain their reviewed bytes. Required spike columns and
 scientific acceptance gates are unchanged.
 
-Local scientific qualification: 319/320 tests passed in 268.189 seconds, none
+Baseline local qualification: 319/320 tests passed in 268.189 seconds, none
 skipped. One schedule assertion used the wrong serialized dtype and activated
 refractory period; its targeted repair passed in 1.299 seconds. References were
 unchanged. The full run was not repeated. Both results and native evidence remain
-retained.
+retained. Candidate scientific checks remain pending.
 
 Retained scalar/layout/pulse audits cover all 157 scalar cases, pinned fan-in,
 every original device row and the full-connectome pulse. Input pin, row identity
 and grouping checks remain retained. Older consumed outputs have expired.
 
-The 52-case canonical preflight passed. All five sugar/1,000-step trials pass
+The 52-case canonical preflight passed. On `c53af8a`, five sugar/1,000-step trials pass
 derived acceptance with complete fresh repeats. Four match Brian2 spikes exactly.
 Trial 1's first difference at step 999, neuron 41514, has a completed bound Astra
 roundoff review and native host reconstruction; its raw unaccepted report remains
@@ -64,7 +65,7 @@ and the bounded diagnostic remain under
 Release the hold only after a focused numerical repair passes affected local
 requirements and retained-input diagnosis. Changed arithmetic invalidates old
 case acceptance for the new implementation; regenerate affected evidence.
-**Scientific acceptance is 5/52 for unchanged `c53af8a`; the matrix is unaccepted.**
+**Candidate acceptance is 0/52; prior 5/52 `c53af8a` proofs remain retained.**
 
 Fresh production workflow checks passed: sugar/100 steps/two trials produced 100
 spikes; silent/one step produced typed empty output. Six-column schemas, integer
@@ -75,8 +76,8 @@ self-comparison JSON/CSV outputs were verified. These short runs took 14.214 and
 ## Remaining plan and completion
 
 1. Repair integration using the validated frozen replay: 5,720 steps and 152
-   incoming edges reproduce native states in 1.34 seconds. Increment evaluation
-   with existing coefficients fixes this first difference; adoption is pending.
+   incoming edges reproduce native states in 1.34 seconds. The increment candidate
+   passes actual MLX replay in 13.53 seconds. Local/full-network adoption is pending.
 2. Measure and reduce simulation/observation cost. Replace the 287 MB per-trial
    edge queue with a 2.6 MB source-neuron queue, retaining original edge delivery.
    Qualify all queue/discrete behavior. Target 15 ms per paired step versus 158 ms.
@@ -87,8 +88,8 @@ self-comparison JSON/CSV outputs were verified. These short runs took 14.214 and
    localization and provenance. Record results and limitations, push all changes,
    pass required checks and release outputs after their verification consumers finish.
 
-Progress: **36%**: inventory 10 points, workflows 8, local evidence 8, repairs 5
-and 5/52 of 49 matrix points. Batches and final acceptance remain incomplete.
+Progress: **31%**: inventory 10 points, workflows 8, baseline local evidence 8,
+repairs 5 and 0/52 of 49 matrix points. Batches and final acceptance remain incomplete.
 The working target is **7–10 days of agent elapsed execution**, with a
 **90%-confidence remaining estimate of 6–21 days**, assuming continuous Mac
 availability. Three completed fresh cases project 5.3 days for the remaining

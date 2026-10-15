@@ -139,7 +139,8 @@ def integrate(
 ) -> tuple[mx.array, mx.array]:
     a, b, c = COEFFICIENTS
     with mx.stream(mx.gpu):
-        voltage = -52 + a * (voltage_mv + 52) + c * synaptic_mv
+        # Add the analytic increment to avoid rounding the full voltage twice.
+        voltage = voltage_mv + ((a - 1) * (voltage_mv + 52) + c * synaptic_mv)
         synaptic = b * synaptic_mv
         return mx.where(available, voltage, voltage_mv), mx.where(
             available, synaptic, synaptic_mv
