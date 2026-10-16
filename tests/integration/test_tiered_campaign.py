@@ -251,10 +251,17 @@ def test_chained_resume_never_reruns_or_overwrites_completed_trials(
     (first / 'wave/brian-sugar-10000-0-completed.json').unlink()
     failures.clear()
     failures.add(2)
+    revised = profile.model_copy(
+        update={'scope': 'revised scheduling profile; scientific worker unchanged'}
+    )
+    revised_path = tmp_path / 'revised-profile.json'
+    runner.write(revised_path, revised)
     with pytest.raises(RuntimeError):
-        runner.campaign(project, second, path, max_hours=0.01, resume=first)
+        runner.campaign(project, second, revised_path, max_hours=0.01, resume=first)
     failures.clear()
-    result = runner.campaign(project, third, path, max_hours=0.01, resume=second)
+    result = runner.campaign(
+        project, third, revised_path, max_hours=0.01, resume=second
+    )
     assert result['execution_complete'] is True
     assert [job.trial for job in launched] == [0, 1, 1, 2, 2]
     assert (first / 'wave/jobs/brian-sugar-10000-0/trial.json').read_bytes() == original
@@ -263,6 +270,36 @@ def test_chained_resume_never_reruns_or_overwrites_completed_trials(
         runner.campaign(
             project, tmp_path / 'tampered', path, max_hours=0.01, resume=third
         )
+
+
+def test_scheduling_source_changes_do_not_discard_verified_scientific_trials(
+    tmp_path: Path,
+) -> None:
+    project, command, _, _ = setup_worker(tmp_path)
+    job = Job('brian', 'sugar', 0)
+    row = runner.execute(
+        project,
+        tmp_path / 'wave',
+        (job,),
+        allocation(1),
+        deadline=perf_counter() + 20,
+        command=command,
+        memory=lambda: 128 * GIB,
+        swap=lambda: 0,
+    )[0]
+    receipt = row.directory / 'trial.json'
+    report = json.loads(receipt.read_text())
+    report['source_sha256']['tools/run_tiered_campaign.py'] = (
+        'prior scheduling implementation'
+    )
+    receipt.write_text(json.dumps(report))
+    runner.verify(row.directory, job, sources(project))
+    report['source_sha256']['src/fly_brain/simulation/backend/core.py'] = (
+        'different arithmetic'
+    )
+    receipt.write_text(json.dumps(report))
+    with pytest.raises(ValueError, match='identity or evidence is incompatible'):
+        runner.verify(row.directory, job, sources(project))
 
 
 def test_expensive_campaign_can_be_planned_but_cannot_launch_under_two_hour_limit(

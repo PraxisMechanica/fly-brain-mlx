@@ -99,6 +99,14 @@ def sources(project: Path) -> dict[str, str]:
     return {str(path.relative_to(project)): digest(path) for path in paths}
 
 
+def producer_sources(identity: dict[str, str]) -> dict[str, str]:
+    return {
+        name: value
+        for name, value in identity.items()
+        if name not in ('tools/campaign_resources.py', 'tools/run_tiered_campaign.py')
+    }
+
+
 def run(job: Job, project: Path, output: Path) -> dict[str, object]:
     started = perf_counter()
     import pyarrow as pa

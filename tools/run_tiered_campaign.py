@@ -32,7 +32,14 @@ from .campaign_resources import (
     makespan,
     select,
 )
-from .tiered_trial import Engine, Job, digest, package_versions, sources
+from .tiered_trial import (
+    Engine,
+    Job,
+    digest,
+    package_versions,
+    producer_sources,
+    sources,
+)
 
 EXPERIMENTS: tuple[ExperimentName, ...] = (
     'sugar',
@@ -205,7 +212,7 @@ def verify(
     if (
         report.completed is not True
         or report.job != job
-        or report.source_sha256 != identity
+        or producer_sources(report.source_sha256) != producer_sources(identity)
         or report.seed != 20261004
         or not {'stimulus.json', 'stimulus.npz', 'spikes.npz'}
         <= report.artifact_sha256.keys()
@@ -617,11 +624,9 @@ def campaign(
             reused.append(row)
     if resume is not None:
         previous = Campaign.model_validate_json((resume / 'campaign.json').read_text())
-        if (
-            previous.profile_sha256 != digest(profile_path)
-            or previous.jobs != selected
-            or previous.source_sha256 != identity
-        ):
+        if previous.jobs != selected or producer_sources(
+            previous.source_sha256
+        ) != producer_sources(identity):
             raise ValueError('Resume profile changed')
         originals = previous.reused + [
             Completed.model_validate_json(path.read_text())
