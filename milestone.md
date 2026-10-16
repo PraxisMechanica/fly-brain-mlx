@@ -1,7 +1,7 @@
 # MLX fly-brain milestone
 
 Updated 2026-10-15. Disposable logs and reusable evidence have separate lifetimes.
-Next: resume the user's tiered-validation and Eon candidate package after delivery.
+Next: full-network precision tier, then campaign pricing and Eon packaging.
 Preserve v783 inputs, production arithmetic, architecture and seven fixtures.
 
 ## Evidence lifetime
@@ -38,21 +38,20 @@ The source audit covers Eon pin `a3db62f` and Kisame `e417b33`, including every
 requested file and six parity pitfalls. Constants agree; dataset, Brian2 version,
 delivery masking, channels and accumulation differ.
 
-The independent NumPy64 prototype passed four semantic fixtures and the ordinary
-800-neuron/2,803-edge case: 3,138 exact spikes, five propagated spikes and maximum
-phase error `2.78e-14 mV`. Its two-class coverage gate failed for zero propagated
-spikes. Diagnostic inspection found all eight fast-class targets inhibitory;
-a connectivity-based target selection is prospective. No gate was relaxed and no
-later-tier simulation launched. Keep the failed inputs and original source hashes.
+Independent NumPy64 passed all eight exact configurations in `exact-02`:
+800 neurons/2,803 edges; 3,138 ordinary spikes and 2,480 two-class spikes, including
+196 propagated spikes. Maximum phase error is `2.78e-14 mV`, below `1e-11`.
+Spikes, refractory/reset and delivery membership match exactly. Two-class targets
+follow positive outgoing contact strength. Keep the failed first fixture.
+This qualifies oracle logic; full-network/MLX tiers remain pending.
 
 ## Remaining work and holds
 
-1. Complete the exact tier with informative recurrent two-class activity.
-2. Compare full-network MLX32 and NumPy64 on fixed input; reuse compatible native
+1. Compare full-network MLX32 and NumPy64 on fixed input; reuse compatible native
    runs. Record counts, first divergence and causal limits.
-3. Price/preregister five experiments with 30 Brian2, 30 MLX-A and 30 independent
+2. Price/preregister five experiments with 30 Brian2, 30 MLX-A and 30 independent
    MLX-B trials each. Report z-scores and Eon's metrics with justified thresholds.
-4. Replace most of the 52-case campaign, propose retained sentinels, measure
+3. Replace most of the 52-case campaign, propose retained sentinels, measure
    setup/simulation/memory, and draft the upstream structure/README. Open no PR.
 
 Original estimate: 40–64 hours and 49 GiB; replacement pricing remains pending.
@@ -60,5 +59,5 @@ Get explicit approval before any job/campaign expected to exceed two hours.
 The separate `pr-split` checkout's prior matrix remains its owner's work; preserve
 its sources/process/outputs. This checkout is detached from `1e33d98`. Scientific
 completion, prototype adoption and the whole original goal remain unverified.
-Baseline `test_numerical_value_contracts` fails; core/test blobs are unchanged.
-Preserve that hold.
+The baseline assertion was a retired adapter snapshot. Its replacement preserves
+approved constant construction and float32 precision; require its focused pass.

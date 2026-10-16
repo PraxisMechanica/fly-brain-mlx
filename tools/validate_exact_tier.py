@@ -383,12 +383,23 @@ def run(output: Path) -> dict[str, object]:
             )
         )
         two_class = draws < np.asarray([0.02] * 8 + [0.01] * 7 + [0.0])
+        excitation = np.bincount(
+            small.sources, weights=np.maximum(small.counts, 0), minlength=800
+        )
+        two_targets = tuple(map(int, np.lexsort((np.arange(800), -excitation))[:16]))
+        report['two_class_target_selection'] = {
+            'criterion': 'Descending positive outgoing contact sum, then neuron row.',
+            'rows': two_targets,
+            'positive_contacts': list(map(int, excitation[list(two_targets)])),
+            'rates_hz': [200] * 8 + [100] * 7 + [0],
+            'seed': 20261015,
+        }
         results.append(
             run_case(
                 output,
                 'connected-800-two-class',
                 small,
-                targets,
+                two_targets,
                 two_class,
                 require_propagation=True,
             )
