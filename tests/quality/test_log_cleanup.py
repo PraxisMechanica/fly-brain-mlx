@@ -120,7 +120,15 @@ def test_hook_cleanup_requires_all_checks_to_pass(tmp_path: Path, tool: str) -> 
 @pytest.mark.integration
 def test_commit_and_push_keep_unlisted_evidence_and_clear_only_disposable_logs(
     tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
 ) -> None:
+    for name in (
+        'QUALITY_BASE',
+        'QUALITY_HEAD',
+        'PRE_COMMIT_FROM_REF',
+        'PRE_COMMIT_TO_REF',
+    ):
+        monkeypatch.delenv(name, raising=False)
     root = tmp_path / 'candidate'
     root.mkdir()
     repo, environment = hook_repository(root)

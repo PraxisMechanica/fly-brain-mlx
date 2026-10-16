@@ -14,7 +14,8 @@ belong in `executions/`, which hooks never delete, even without manifest entries
 Failures use fresh directories. Removing a retention entry cannot delete evidence.
 Explicitly finish all verification/reuse consumers before considering its removal.
 
-Commit `3a5eba4` passed required hooks, including commit/push regressions. All 719
+Commit `3a5eba4` passed local hooks, including commit/push regressions. The push
+fixture clears parent check ranges. All 719
 inventoried evidence files survived unchanged; production source is unchanged.
 Delivery receipts live in `executions/retention-20261015`.
 
@@ -59,3 +60,5 @@ Get explicit approval before any job/campaign expected to exceed two hours.
 The separate `pr-split` checkout's prior matrix remains its owner's work; preserve
 its sources/process/outputs. This checkout is detached from `1e33d98`. Scientific
 completion, prototype adoption and the whole original goal remain unverified.
+Baseline `test_numerical_value_contracts` fails; core/test blobs are unchanged.
+Preserve that hold.
