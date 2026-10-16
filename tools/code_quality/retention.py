@@ -8,7 +8,8 @@ from typing import cast
 
 from .git_environment import isolated_environment
 
-MANAGED_ROOTS = ('logs', 'executions', '.quality-reports')
+MANAGED_ROOTS = ('logs',)
+OUTPUT_ROOTS = (*MANAGED_ROOTS, '.quality-reports', 'executions')
 POLICY = 'tools/code_quality/retention.json'
 
 
@@ -49,7 +50,7 @@ def _relative_path(value: object) -> Path:
         or any(part in ('', '.', '..') for part in value.split('/'))
         or any(part.casefold() == '.git' for part in path.parts)
         or any(char in value for char in '\\*?[]')
-        or value in MANAGED_ROOTS
+        or value in OUTPUT_ROOTS
     ):
         raise ValueError(
             'Retention path cannot be absolute, traversal, Git metadata or a cleanup root'
@@ -116,7 +117,7 @@ def clean_outputs(root: Path) -> None:
     entries = read_retention(root)
     tracked = set(
         subprocess.check_output(
-            ['git', 'ls-files', '-z', '--', POLICY, *MANAGED_ROOTS],
+            ['git', 'ls-files', '-z', '--', POLICY, *OUTPUT_ROOTS],
             cwd=root,
             env=isolated_environment(),
             text=True,
@@ -130,13 +131,14 @@ def clean_outputs(root: Path) -> None:
         root / entry.path for entry in entries if entry.path.parts[0] in MANAGED_ROOTS
     )
     planned: list[Path] = []
-    for name in MANAGED_ROOTS:
+    for name in OUTPUT_ROOTS:
         directory = root / name
         if directory.is_symlink():
             raise ValueError(f'Refusing to clean a symlinked {name} root')
         if directory.exists() and not directory.is_dir():
             raise ValueError(f'The {name} path must be a directory')
-        planned.extend(_deletions(directory, retained))
+        if name in MANAGED_ROOTS:
+            planned.extend(_deletions(directory, retained))
     for path in planned:
         if path.is_symlink() or not path.is_dir():
             path.unlink()

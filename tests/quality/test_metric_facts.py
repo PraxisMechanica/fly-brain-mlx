@@ -67,7 +67,9 @@ def test_warm_invocation_skips_blob_reads_and_calculators_then_reads_one_change(
         {'blobs': 5, 'python': 1},
         {'blobs': 0, 'python': 0},
     )
-    facts = json.loads((root / 'logs/quality/metric-facts.json').read_text())
+    facts = json.loads(
+        (root / 'executions/quality-cache/metric-facts.json').read_text()
+    )
     assert len(facts[2]) == 5
     (root / 'calculation.py').write_text(
         'def calculate(value):\n    return value + 2\n'
@@ -92,7 +94,9 @@ def test_configuration_invalidates_facts_and_malformed_protocol_fails(
         environment={'CSHARP_DEFINE_SYMBOLS': 'METRIC_FACT_QUALIFICATION'},
     )
     assert counts == {'blobs': 5, 'python': 1}
-    (root / 'logs/quality/metric-facts.json').write_text('[1, "invalid", []]')
+    (root / 'executions/quality-cache/metric-facts.json').write_text(
+        '[1, "invalid", []]'
+    )
     result = run(['node', str(METRICS), '--staged'], root)
     assert (result.returncode, json.loads(result.stdout)['error']['message']) == (
         2,

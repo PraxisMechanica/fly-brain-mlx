@@ -62,14 +62,19 @@
       "release_when": "The named consumer is removed or receives an independently validated replacement fixture."
     },
     {
-      "path": "logs/quality/imports",
+      "path": "executions/quality-cache/imports",
       "reason": "Native Grimp import facts consumed by tools/code_quality/boundaries.py; unchanged source parsing is reused across commit and delivery checks. No test or quality verdict is cached.",
       "release_when": "The native import-cache consumer is removed or its cache format becomes incompatible."
     },
     {
-      "path": "logs/quality/metric-facts.json",
+      "path": "executions/quality-cache/metric-facts.json",
       "reason": "Numeric per-blob native metric calculations consumed by tools/code_quality/metrics.mjs across commit and delivery invocations; source/analyzer identities invalidate facts and no quality verdict is stored.",
       "release_when": "The native metric-fact consumer is removed or its fact format becomes incompatible."
+    },
+    {
+      "path": "executions/tiered-validation-20261015",
+      "reason": "Source audit, exact-tier inputs/results/failure, independent twelve-case reuse verification and recovered historical evidence are current consumers for diagnosis, reuse and the tiered-validation candidate package. Hooks preserve all executions independently of this record.",
+      "release_when": "Historical-recovery audit, failed-fixture diagnosis, tiered qualification, reuse and candidate-package review consumers are finished and their verified limits are recorded in milestone.md."
     }
   ]
 }

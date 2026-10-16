@@ -9,9 +9,13 @@ __version__: str
 
 class BrianObject: ...
 
+class CodeObject:
+    code: Mapping[str, str]
+
 class CodeRunner:
     active: bool
     abstract_code: str
+    codeobj: CodeObject
 
 class Variable:
     dtype: object
@@ -123,10 +127,14 @@ class StandalonePreferences:
 class DevicePreferences:
     cpp_standalone: StandalonePreferences
 
+class LegacyPreferences:
+    refractory_timing: bool
+
 class Preferences:
     as_file: str
     codegen: CodeGeneration
     devices: DevicePreferences
+    legacy: LegacyPreferences
 
 prefs: Preferences
 

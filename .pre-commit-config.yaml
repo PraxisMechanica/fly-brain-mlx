@@ -21,7 +21,7 @@ repos:
         require_serial: true
         stages: [pre-push]
       - id: diagnostic-cleanup
-        name: Remove outputs without reviewed retention exceptions
+        name: Remove disposable logs and preserve execution evidence
         entry: uv run --locked --no-sync python -m tools.code_quality.cleanup
         language: system
         always_run: true

@@ -3,12 +3,14 @@ from pathlib import Path
 import pytest
 
 from tests.quality.hook_fixture import commit_document, hook_repository
-from tests.quality.support import git
-from tests.quality.test_output_retention import retain, retention_repository
+from tests.quality.support import git, run
+from tests.quality.test_output_retention import retention_repository
 from tools.code_quality.cleanup import clean_logs
 
 
-def test_cleanup_removes_all_unretained_outputs(tmp_path: Path) -> None:
+def test_cleanup_removes_disposable_logs_and_preserves_unlisted_runs(
+    tmp_path: Path,
+) -> None:
     repo = retention_repository(tmp_path)
     logs = repo / 'logs' / 'quality'
     logs.mkdir(parents=True)
@@ -17,7 +19,8 @@ def test_cleanup_removes_all_unretained_outputs(tmp_path: Path) -> None:
     execution.parent.mkdir()
     execution.write_bytes(b'required native evidence')
     clean_logs(repo)
-    assert ((repo / 'logs').exists(), execution.exists()) == (False, False)
+    assert not (repo / 'logs').exists()
+    assert execution.read_bytes() == b'required native evidence'
 
 
 def test_missing_logs_are_a_valid_clean_state(tmp_path: Path) -> None:
@@ -46,7 +49,6 @@ def test_nested_symlink_does_not_remove_its_target(tmp_path: Path) -> None:
     evidence.mkdir()
     original = evidence / 'trace.npz'
     original.write_bytes(b'keep')
-    retain(repo, 'executions/trace.npz')
     (logs / 'trace').symlink_to(evidence, target_is_directory=True)
     clean_logs(repo)
     assert original.read_bytes() == b'keep'
@@ -94,7 +96,6 @@ def test_hook_cleanup_requires_all_checks_to_pass(tmp_path: Path, tool: str) -> 
     execution = repo / 'executions' / 'trace.npz'
     execution.parent.mkdir()
     execution.write_bytes(b'scientific evidence')
-    retain(repo, 'executions/trace.npz')
     previous = git(repo, 'rev-parse', 'HEAD')
     source = repo / 'src/fly_brain/simulation/service.py'
     source.write_text(source.read_text() + '# Changed checked input\n')
@@ -104,10 +105,46 @@ def test_hook_cleanup_requires_all_checks_to_pass(tmp_path: Path, tool: str) -> 
         assert result.returncode != 0
         assert git(repo, 'rev-parse', 'HEAD') == previous
         assert diagnostic.read_text() == 'needed for diagnosis\n'
+        failures = tuple((repo / 'executions/quality-failures').rglob('*.log'))
+        assert failures
+        original = {path: path.read_bytes() for path in failures}
+        retried = commit_document(repo, environment)
+        assert retried.returncode == 0, retried.stdout + retried.stderr
+        assert all(path.read_bytes() == contents for path, contents in original.items())
     else:
         assert result.returncode == 0, result.stdout + result.stderr
         assert not logs.exists()
     assert execution.read_bytes() == b'scientific evidence'
+
+
+@pytest.mark.integration
+def test_commit_and_push_keep_unlisted_evidence_and_clear_only_disposable_logs(
+    tmp_path: Path,
+) -> None:
+    root = tmp_path / 'candidate'
+    root.mkdir()
+    repo, environment = hook_repository(root)
+    remote = tmp_path / 'remote.git'
+    git(tmp_path, 'clone', '--bare', str(repo), str(remote))
+    git(repo, 'remote', 'add', 'origin', str(remote))
+    git(repo, 'fetch', 'origin', 'main')
+    evidence = repo / 'executions/unlisted/native.npz'
+    evidence.parent.mkdir(parents=True)
+    evidence.write_bytes(b'complete reusable proof without a manifest exception')
+    logs = repo / 'logs'
+    logs.mkdir()
+    (logs / 'completed.log').write_text('disposable')
+    committed = commit_document(repo, environment)
+    assert committed.returncode == 0, committed.stdout + committed.stderr
+    assert not logs.exists()
+    logs.mkdir()
+    (logs / 'completed.log').write_text('disposable push diagnostics')
+    pushed = run(['git', 'push', 'origin', 'main'], repo, environment)
+    assert pushed.returncode == 0, pushed.stdout + pushed.stderr
+    assert not logs.exists()
+    assert (
+        evidence.read_bytes() == b'complete reusable proof without a manifest exception'
+    )
 
 
 @pytest.mark.integration

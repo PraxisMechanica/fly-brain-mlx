@@ -49,7 +49,12 @@ def test_metric_report_preserves_valid_status(
         'blocking': exit_code == 2,
         'advisory': exit_code == 1,
     }
-    assert json.loads((tmp_path / 'logs/quality/staged.json').read_text()) == report
+    destination = (
+        tmp_path / 'logs/quality/staged.json'
+        if exit_code == 0
+        else next((tmp_path / 'executions/quality-failures').rglob('staged.json'))
+    )
+    assert json.loads(destination.read_text()) == report
 
 
 @pytest.mark.parametrize(
@@ -79,7 +84,11 @@ def test_invalid_or_oversized_metric_output_fails_closed(
 
     monkeypatch.setattr(diagnostics.subprocess, 'run', execute)
     assert diagnostics.measure(['--staged'], 'staged') == 2
-    report = json.loads((tmp_path / 'logs/quality/staged.json').read_text())
+    report = json.loads(
+        next(
+            (tmp_path / 'executions/quality-failures').rglob('staged.json')
+        ).read_text()
+    )
     assert (report['status'], report['passed']) == ('analysis_error', False)
     assert report['error']['message']
     assert len(report['error']['process_output'].encode('utf-8')) <= 2000

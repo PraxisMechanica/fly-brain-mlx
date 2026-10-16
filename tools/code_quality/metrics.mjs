@@ -78,7 +78,7 @@ try {
   }
   const { checkStaged, checkCommits, createAnalysisManifest, loadMetricFacts, saveMetricFacts } = await import('@eng-metrics/code-quality');
   const identity = await factIdentity(createAnalysisManifest());
-  const filename = 'logs/quality/metric-facts.json';
+  const filename = 'executions/quality-cache/metric-facts.json';
   const cache = await loadMetricFacts(filename, identity);
   const result = values.staged
     ? await checkStaged({ cache })

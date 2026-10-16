@@ -17,6 +17,6 @@ installation, simulation, and spike comparison instructions.
 | [Typing limits](typing.md) | Local third-party stubs and narrow suppressions |
 | [Quality coverage](quality-coverage.md) | Required project checks and their verification limits |
 | [Source ownership](architecture-ownership.md) | Three protected scientific source identities, provenance and preservation rules |
-| [Output retention manifest](../../tools/code_quality/retention.json) | Exact current exceptions, operational consumers, and release conditions |
+| [Output retention manifest](../../tools/code_quality/retention.json) | Evidence consumers, release conditions and legacy diagnostic holds |
 
 Update the document that owns a fact. Other documents link to that owner.

@@ -1,6 +1,7 @@
 import json
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 from typing import cast
 
@@ -17,11 +18,14 @@ def bounded(text: str, limit: int) -> str:
     return head + f'\n[{omitted} bytes omitted]\n' + tail
 
 
-def destination(name: str, suffix: str) -> Path:
-    directory = Path('logs') / 'quality'
-    if Path('logs').is_symlink() or directory.is_symlink():
+def destination(name: str, suffix: str, *, retained: bool = False) -> Path:
+    root = Path('executions' if retained else 'logs')
+    directory = root / ('quality-failures' if retained else 'quality')
+    if root.is_symlink() or directory.is_symlink():
         raise ValueError('Diagnostic logs must not use a symlinked directory')
     directory.mkdir(parents=True, exist_ok=True)
+    if retained:
+        directory = Path(tempfile.mkdtemp(prefix=name + '-', dir=directory))
     report = directory / f'{name}.{suffix}'
     if report.is_symlink():
         raise ValueError('Diagnostic report must not be a symlink')
@@ -84,7 +88,7 @@ def project_metric_exit(payload: dict[str, object], native_exit: int) -> int:
 
 
 def measure(arguments: list[str], name: str) -> int:
-    report = destination(name, 'json')
+    disposable = destination(name, 'json')
     process = subprocess.run(
         ['node', str(Path(__file__).with_name('metrics.mjs')), *arguments],
         capture_output=True,
@@ -111,6 +115,11 @@ def measure(arguments: list[str], name: str) -> int:
         'blocking': exit_code != 0,
         'advisory': process.returncode == 1 and exit_code == 0,
     }
+    report = (
+        destination(name, 'json', retained=True)
+        if payload['status'] != 'pass'
+        else disposable
+    )
     report.write_text(json.dumps(payload, indent=2) + '\n')
     print(
         f'{name}: {payload["status"]}; blocking: {exit_code != 0}; diagnostics: {report}'

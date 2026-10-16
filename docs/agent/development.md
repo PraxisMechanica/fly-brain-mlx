@@ -120,6 +120,8 @@ Each diagnostic uses `fly-brain <command> --output executions/<fresh-directory>`
 `qualify-device-layout`, `qualify-connectome-pulse`. Their contract-defined local
 scope does not replace full-network qualification.
 
-Use fresh directories under ignored `logs/` and `executions/`. Follow `AGENTS.md`
+Use `logs/` only for disposable diagnostics. Keep scientific artifacts, reusable
+verification results and failure reports in fresh directories under `executions/`.
+Commit/push cleanup never removes execution evidence. Follow `AGENTS.md`
 and the retention manifest for unfinished consumers. Report failed, skipped and
 incomplete verification honestly.

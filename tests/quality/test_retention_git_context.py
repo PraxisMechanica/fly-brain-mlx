@@ -35,5 +35,8 @@ def test_cleanup_uses_requested_repository_under_foreign_git_context(
     monkeypatch.setenv('GIT_INDEX_FILE', str(foreign / '.git/index'))
     with pytest.raises(ValueError, match=error) if error else nullcontext():
         clean_outputs(target)
-    assert all(marker.is_file() == bool(error) for marker in markers)
+    assert all(
+        marker.is_file() == (bool(error) or not marker.is_relative_to(target / 'logs'))
+        for marker in markers
+    )
     assert (foreign / POLICY).is_file()

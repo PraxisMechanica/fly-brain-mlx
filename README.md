@@ -45,9 +45,11 @@ Parquet spike events, the exact stimulus and its provenance, and a
 `simulation.json` report with counts, timings, versions, and hashes. Spike files
 retain the existing six-column format, including typed empty output.
 
-Commit and push hooks delete execution outputs by default. Keep an output across
-commits only with an explicit operational reason and release condition in
-`tools/code_quality/retention.json`.
+Commit and push hooks preserve `executions/`, including unlisted runs. Only
+disposable `logs/` are cleared after successful checks. Legacy `.quality-reports/`
+stays until classified. Keep scientific evidence and failure reports in `executions/`
+until their verification and reuse consumers finish. The retention manifest
+records consumers; it is not required to protect execution evidence.
 
 ## Compare spike files
 

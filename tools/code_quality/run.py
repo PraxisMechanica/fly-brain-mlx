@@ -14,7 +14,7 @@ def check(name: str, command: Sequence[str]) -> int:
     except OSError as error:
         output, result = str(error), 2
     if result:
-        report = destination(name, 'log')
+        report = destination(name, 'log', retained=True)
         report.write_text(bounded(output, 65536))
         print(f'{name}: FAIL ({result}); diagnostics: {report}', file=sys.stderr)
         print(bounded(output, 4096), file=sys.stderr)

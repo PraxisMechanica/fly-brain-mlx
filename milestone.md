@@ -1,77 +1,57 @@
 # MLX fly-brain milestone
 
-Updated 2026-10-15. Evidence root:
-`executions/implementation-20261014-matrix`; paths below are relative.
+Updated 2026-10-15. Current priority: separate disposable logs from reusable
+evidence before resuming the user's tiered-validation and Eon candidate package.
+Preserve v783 inputs, production arithmetic, architecture and seven fixtures.
 
-## Scope and implementation
+## Evidence lifetime
 
-Worktree: `/Users/ocasta/.codex/worktrees/pr-split/fly-brain`, `origin/main`.
-Preserve all gates, pinned inputs, protected references, seven fixtures and
-practical architecture. `AGENTS.md` owns execution policies.
+Only disposable output belongs in `logs/`, which hooks clear after successful
+checks. Preserve legacy `.quality-reports/` until classified. Scientific inputs, spikes, native
+states, provenance, verification results, reusable caches and unresolved failures
+belong in `executions/`, which hooks never delete, even without manifest entries.
+Failures use fresh directories. Removing a retention entry cannot delete evidence.
+Explicitly finish all verification/reuse consumers before considering its removal.
 
-Simulation, comparison, canonical replay and qualification workflows exist.
-Production uses float32 threshold-relative voltage, stable synaptic decay and
-transient compensated integration. The contract specifies its order; no
-correction state persists. Accumulation and source queues are unchanged.
+The tracked historical recovery contains 687 files, 88,331,555 bytes, verified
+against every original Git blob at `5f7b0d7`. It lives under
+`executions/tiered-validation-20261015/recovered-5f7b0d7`, outside source metrics.
+Recovery does not reaccept old numerical modes. Audit compatibility before reruns.
+Current verification logs moved from `logs/tiered-review` into that execution
+root's `reuse-verification`; the failed exact command log is in `exact-01`.
 
-Delivered `2031e77`: hooks, push and exact-revision CI pass. Evidence:
-`compensated-voltage-candidate-01/delivery.json`.
+## Verified scientific state
 
-## Current scientific evidence
+The twelve accepted sugar cases remain compatible: ten 0.1/1-second cases and
+ten-second trials 0/1. Original artifacts, 108 scientific checks, 132 metric gates,
+1,488 source comparisons and build identities were rechecked without simulations.
+Ten-second trial 0 has 170,752 exact events. Trial 1 has 171,973 events and four
+reviewed one-step shifts, first at step 36,217/neuron 106,477.
 
-Ten-second sugar trial 1 qualifies after bound parent causal review:
-**171,973 spikes per engine**, with four one-step shifts. Native reconstruction
-explains finite-precision state error within budget; every metric and fresh
-repeat passes. Evidence:
-`matrix-compensated-voltage-01/reviews/sugar-100000-1/review-decision.json`.
+The source audit covers Eon pin `a3db62f` and Kisame `e417b33`, including every
+requested file and six parity pitfalls. Constants agree; dataset, Brian2 version,
+delivery masking, channels and accumulation differ.
 
-The full ten-second sugar trial-0 case passes every gate and fresh repeats for
-all engines: **all 170,752 reference spikes match exactly**, timing F1 **1.0**.
-No spike or common-history budget differences occur. Completion takes **12,710.06
-seconds**. Native archives and complete digest files repeat identically.
-Evidence: `matrix-compensated-voltage-01/cases/sugar-100000-0/case.json`.
+The independent NumPy64 prototype passed four semantic fixtures and the ordinary
+800-neuron/2,803-edge case: 3,138 exact spikes, five propagated spikes and maximum
+phase error `2.78e-14 mV`. Its two-class coverage gate failed for zero propagated
+spikes. Diagnostic inspection found all eight fast-class targets inhibitory;
+a connectivity-based target selection is prospective. No gate was relaxed and no
+later-tier simulation launched. Keep the failed inputs and original source hashes.
 
-**Local scientific inventory: all 323 checks covered**, with **222 fresh passes
-and 101 unchanged reference passes verified and reused**. Fresh groups contain
-210/6/6 tests, with exact disjoint node coverage and zero failures/errors/skips.
-Two broader commands hit their 300-second limits; both remain unaccepted.
-Only affected checks were subsequently run. Five unchanged accumulation/layout
-audits are source/input/device compatible; all 221 retained archive hashes verify.
-The changed-integration connectome pulse passes fresh, with two archive hashes
-verified. The 99 original-state conversion and other contract limitations remain.
-Evidence: `compensated-voltage-candidate-01/local-verification.json`,
-`unchanged-reference-verification.json` and `audit-verification.json` there.
+## Remaining work and holds
 
-Fresh CLI workflows pass under `workflows-compensated-voltage-01`: two sugar
-trials match Brian2 prefixes; silent output is typed empty. Schemas, provenance
-and comparison JSON/CSV pass. Post-run verification corrects a prematurely hashed
-diagnostic transcript; scientific artifact bindings verify.
+1. Finish retention routing, focused hook/cleanup verification and delivery.
+2. Complete the exact tier with informative recurrent two-class activity.
+3. Compare full-network MLX32 and NumPy64 on fixed input; reuse compatible native
+   runs. Record counts, first divergence and causal limits.
+4. Price/preregister five experiments with 30 Brian2, 30 MLX-A and 30 independent
+   MLX-B trials each. Report z-scores and Eon's metrics with justified thresholds.
+5. Replace most of the 52-case campaign, propose retained sentinels, measure
+   setup/simulation/memory, and draft the upstream structure/README. Open no PR.
 
-**Previous arithmetic: 10/52 accepted** (sugar trials 0–4 at 0.1 and 1 second).
-**Current arithmetic: 12/52 accepted**; numerical changes required new qualification.
-All ten shorter sugar cases pass without spike or state-budget differences.
-Ten-second trials 0 and 1 qualify as described above.
-Evidence: `preflight-compensated-voltage-01/matrix.json`.
-
-## Remaining plan and completion
-
-1. **Done:** candidate delivery with required hooks and exact-revision CI.
-2. **Next step: complete all 52 paired cases**, fresh repeats for all engines,
-   causal audits, pooled/localized metrics and sugar/P9 one-second four-trial
-   comparisons. Resume only verified compatible evidence. Stop failed gates and
-   diagnose their causes before continuing; a first spike difference alone is
-   not a failed timing metric.
-3. Record results and limitations, commit and push, pass delivery checks, finish
-   clean and release outputs after their verification consumers end.
-
-Progress: **47%**: inventory 10, workflows 8, candidate 10, local acceptance 8,
-matrix 11. Remaining matrix, batch and delivery gates are unverified. Routine
-tests belong to hooks and CI; scientific runs reuse compatible retained evidence.
-
-Remaining elapsed execution time: working estimate **40–64 hours**;
-**90%-confidence planning range: 36–112 hours**, including further repair and
-requalification risk. This is engineering judgment, assuming continuous Mac
-availability. Two completed ten-second cases project **32.93 hours** for remaining
-paired steps; other cases, batches and system swapping add uncertainty. Evidence:
-`matrix-compensated-voltage-01-launch.json`.
-Storage preflight projects 49 GiB; doubled allowance and batches fit 115 GiB free.
+Original estimate: 40–64 hours and 49 GiB; replacement pricing remains pending.
+Get explicit approval before any job/campaign expected to exceed two hours.
+The separate `pr-split` checkout's prior matrix remains its owner's work; preserve
+its sources/process/outputs. This checkout is detached from `1e33d98`. Scientific
+completion, prototype adoption and the whole original goal remain unverified.

@@ -6,6 +6,7 @@ import pytest
 from tests.quality.support import git, repository
 from tools.code_quality.retention import (
     MANAGED_ROOTS,
+    OUTPUT_ROOTS,
     POLICY,
     clean_outputs,
     read_retention,
@@ -40,20 +41,22 @@ def retention_repository(root: Path) -> Path:
 
 
 def managed_markers(root: Path) -> tuple[Path, ...]:
-    markers = tuple(root / name / 'marker.txt' for name in MANAGED_ROOTS)
+    markers = tuple(root / name / 'marker.txt' for name in OUTPUT_ROOTS)
     for path in markers:
         path.parent.mkdir()
         path.write_text('retain if validation fails')
     return markers
 
 
-def test_default_policy_removes_all_managed_outputs_and_preserves_inputs(
+def test_default_policy_clears_disposable_logs_and_keeps_unlisted_evidence(
     tmp_path: Path,
 ) -> None:
     repo = retention_repository(tmp_path)
     managed_markers(repo)
     clean_outputs(repo)
     assert all(not (repo / name).exists() for name in MANAGED_ROOTS)
+    assert (repo / 'executions/marker.txt').read_text() == 'retain if validation fails'
+    assert (repo / '.quality-reports/marker.txt').is_file()
     assert (repo / 'calculation.py').is_file() and (repo / POLICY).is_file()
 
 
@@ -73,7 +76,8 @@ def test_specific_active_run_and_exact_file_bridge_a_commit(tmp_path: Path) -> N
     clean_outputs(repo)
     assert kept.read_bytes() == b'complete active evidence'
     assert report.read_text() == '{"useful":true}\n'
-    assert not sibling.exists() and not (repo / '.quality-reports').exists()
+    assert (sibling / 'native.npz').read_bytes() == b'unretained'
+    assert (repo / '.quality-reports/marker.txt').is_file()
     assert all(record.reason and record.release_when for record in records)
 
 

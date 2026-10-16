@@ -19,7 +19,9 @@ def test_failed_check_keeps_its_exit_status_and_bounds_display(
         ),
     )
     display = capsys.readouterr().err
-    saved = (tmp_path / 'logs/quality/types.log').read_text()
+    saved = next(
+        (tmp_path / 'executions/quality-failures').rglob('types.log')
+    ).read_text()
     assert status == 7
     assert len(display) < 4300 and len(saved) <= 65536
     assert 'bytes omitted' in display and 'bytes omitted' in saved
@@ -42,12 +44,30 @@ def test_missing_tool_is_a_failure_with_a_useful_diagnostic(
     assert check('types', ('missing-project-check-tool',)) == 2
     assert (
         'missing-project-check-tool'
-        in (tmp_path / 'logs/quality/types.log').read_text()
+        in next(
+            (tmp_path / 'executions/quality-failures').rglob('types.log')
+        ).read_text()
     )
 
 
 def test_short_output_is_preserved() -> None:
     assert bounded('source.py: error', 1024) == 'source.py: error'
+
+
+def test_repeated_failures_keep_both_diagnostics(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.chdir(tmp_path)
+    for message in ('first failure', 'second failure'):
+        assert (
+            check('types', (sys.executable, '-c', f'raise SystemExit({message!r})'))
+            == 1
+        )
+    reports = list((tmp_path / 'executions/quality-failures').rglob('types.log'))
+    assert sorted(report.read_text().strip() for report in reports) == [
+        'first failure',
+        'second failure',
+    ]
 
 
 def test_unicode_output_obeys_the_byte_limit_without_breaking_characters() -> None:

@@ -40,8 +40,7 @@ def current_graph(root: Path, tree: str | None) -> grimp.ImportGraph:
     """Use explicit directories, never editable package or sys.modules discovery.
 
     The cache consumer is current-plan dependency traversal. Its tree-keyed output
-    lives under logs/quality/imports. The registered cache remains across cleanup
-    while the current-plan/boundary consumers are active; their release ends retention.
+    lives under executions/quality-cache/imports and survives routine log cleanup.
     Manual/unindexed working inputs use a fresh scan. No previous-context claim.
     """
     previous: object = settings.PACKAGE_FINDER
@@ -68,7 +67,9 @@ def current_graph(root: Path, tree: str | None) -> grimp.ImportGraph:
             *PACKAGES,
             include_external_packages=True,
             exclude_type_checking_imports=False,
-            cache_dir=str(root / 'logs/quality/imports' / ('grimp-3.17-' + tree))
+            cache_dir=str(
+                root / 'executions/quality-cache/imports' / ('grimp-3.17-' + tree)
+            )
             if tree
             else None,
         )
