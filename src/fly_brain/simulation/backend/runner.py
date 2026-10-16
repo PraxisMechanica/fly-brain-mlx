@@ -35,6 +35,7 @@ def run(
     first_step_s = simulation_s = collection_s = 0.0
     collected: list[tuple[NDArray[np.int64], NDArray[np.int64], NDArray[np.int64]]] = []
     trial_ids = np.array(stimulus.trial_indices, dtype=np.int64)
+    started_loop = perf_counter()
     for begin in range(0, steps, 256):
         block: list[mx.array] = []
         for step in range(begin, min(begin + 256, steps)):
@@ -68,6 +69,7 @@ def run(
         )
         collection_s += perf_counter() - started_collection
         print(f'Simulated {min(begin + 256, steps)}/{steps} steps', flush=True)
+    simulation_wall_s = perf_counter() - started_loop
     started_collection = perf_counter()
     trials = np.concatenate([part[0] for part in collected])
     neurons = np.concatenate([part[1] for part in collected])
@@ -83,6 +85,7 @@ def run(
             'setup_s': setup_s,
             'first_step_s': first_step_s,
             'warm_simulation_s': simulation_s,
+            'simulation_wall_s': simulation_wall_s,
             'collection_s': collection_s,
             'compilation_s': 0.0,
         },
