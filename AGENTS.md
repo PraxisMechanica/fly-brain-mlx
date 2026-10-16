@@ -49,7 +49,8 @@ that its repeat, batch, scoring, review and reuse consumers are finished.
 Keep the seven registered independent regression fixtures while their consumers
 need them. Historical conclusions do not imply that deleted raw proofs remain
 reproducible from this checkout. Use bounded diagnostic summaries with explicit
-omissions. Generated outputs do not belong in Git. Edit directly without
+omissions. Generated outputs stay outside Git except the user-requested
+`handoffs/m5-handoff-20261016.tar.gz`. Edit directly without
 temporary preservation or backup copies.
 
 ## Non-production schema and database authorization
