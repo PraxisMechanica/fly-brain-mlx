@@ -65,10 +65,15 @@ def test_source_inventory_rejects_an_editable_import_from_another_checkout(
         require_loaded_sources(project, sources(project))
 
 
-def test_campaign_cohorts_have_independent_seeds_and_unique_jobs() -> None:
-    selected = jobs()
-    assert len(selected) == len(set(selected)) == 450
+@pytest.mark.parametrize('silent_trials', (1, 30))
+def test_campaign_cohorts_have_independent_seeds_and_unique_jobs(
+    silent_trials: int,
+) -> None:
+    assert jobs() == jobs(30)
+    selected = jobs(silent_trials)
+    assert len(selected) == len(set(selected)) == 360 + 3 * silent_trials
     for experiment in ('sugar', 'p9', 'sugar-silenced', 'two-class', 'silent'):
+        count = silent_trials if experiment == 'silent' else 30
         cpu = {
             job.trial
             for job in selected
@@ -79,6 +84,12 @@ def test_campaign_cohorts_have_independent_seeds_and_unique_jobs() -> None:
             for job in selected
             if job.experiment == experiment and job.engine == 'mlx'
         }
-        assert cpu == set(range(1000, 1030))
-        assert gpu == set(range(30)) | set(range(2000, 2030))
+        assert cpu == set(range(1000, 1000 + count))
+        assert gpu == set(range(count)) | set(range(2000, 2000 + count))
         assert not cpu & gpu
+
+
+@pytest.mark.parametrize('count', (0, -1, 31, True))
+def test_invalid_silent_cohort_size_is_rejected(count: int) -> None:
+    with pytest.raises(ValueError, match='Silent cohort size'):
+        jobs(count)

@@ -190,7 +190,7 @@ def test_chained_resume_never_reruns_or_overwrites_completed_trials(
     project, command, launched, failures = setup_worker(tmp_path)
     hardware = Hardware('test', 8, 32 * GIB, 'test', 1)
     selected = tuple(Job('brian', 'sugar', i) for i in range(3))
-    monkeypatch.setattr(runner, 'jobs', lambda: selected)
+    monkeypatch.setattr(runner, 'jobs', lambda silent_trials=30: selected)
     monkeypatch.setattr(runner, 'detect', lambda: hardware)
     monkeypatch.setattr(runner, 'versions', lambda: {'runtime': 'test'})
     execute = runner.execute
@@ -302,8 +302,11 @@ def test_scheduling_source_changes_do_not_discard_verified_scientific_trials(
         runner.verify(row.directory, job, sources(project))
 
 
+@pytest.mark.parametrize('silent_trials', (1, 30))
 def test_expensive_campaign_can_be_planned_but_cannot_launch_under_two_hour_limit(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    silent_trials: int,
 ) -> None:
     project = Path(__file__).resolve().parents[2]
     hardware = Hardware('test', 8, 32 * GIB, 'test', 1)
@@ -337,12 +340,27 @@ def test_expensive_campaign_can_be_planned_but_cannot_launch_under_two_hour_limi
     path = tmp_path / 'profile.json'
     runner.write(path, profile)
     plan = runner.campaign(
-        project, tmp_path / 'plan', path, max_hours=2, resume=None, plan_only=True
+        project,
+        tmp_path / 'plan',
+        path,
+        max_hours=2,
+        resume=None,
+        plan_only=True,
+        silent_trials=silent_trials,
     )
-    assert plan['remaining_jobs'] == 450
+    assert plan['remaining_jobs'] == 360 + 3 * silent_trials
+    manifest = json.loads((tmp_path / 'plan/campaign.json').read_text())
+    assert manifest['silent_trials'] == silent_trials
     assert not (tmp_path / 'plan/wave').exists()
     with pytest.raises(ValueError, match='explicit approval'):
-        runner.campaign(project, tmp_path / 'blocked', path, max_hours=2, resume=None)
+        runner.campaign(
+            project,
+            tmp_path / 'blocked',
+            path,
+            max_hours=2,
+            resume=None,
+            silent_trials=silent_trials,
+        )
     assert not (tmp_path / 'blocked').exists()
 
 
@@ -417,7 +435,7 @@ def test_compatible_pilot_evidence_is_counted_once_without_another_worker(
     )
     path = tmp_path / 'profile.json'
     runner.write(path, profile)
-    monkeypatch.setattr(runner, 'jobs', lambda: (job,))
+    monkeypatch.setattr(runner, 'jobs', lambda silent_trials=30: (job,))
     result = runner.campaign(
         project, tmp_path / 'run', path, max_hours=0.01, resume=None
     )

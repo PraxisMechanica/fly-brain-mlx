@@ -115,19 +115,24 @@ class Campaign(BaseModel):
     estimated_hours: float
     estimated_bytes: int
     source_sha256: dict[str, str]
+    silent_trials: int = 30
 
 
-def jobs() -> tuple[Job, ...]:
-    cohorts: tuple[tuple[Engine, range], ...] = (
-        ('brian', range(1000, 1030)),
-        ('mlx', range(30)),
-        ('mlx', range(2000, 2030)),
+def jobs(silent_trials: int = 30) -> tuple[Job, ...]:
+    if type(silent_trials) is not int or not 1 <= silent_trials <= 30:
+        raise ValueError('Silent cohort size must be an integer from 1 to 30')
+    cohorts: tuple[tuple[Engine, int], ...] = (
+        ('brian', 1000),
+        ('mlx', 0),
+        ('mlx', 2000),
     )
     return tuple(
         Job(engine, experiment, trial)
         for experiment in EXPERIMENTS
-        for engine, trials in cohorts
-        for trial in trials
+        for engine, start in cohorts
+        for trial in range(
+            start, start + (silent_trials if experiment == 'silent' else 30)
+        )
     )
 
 
@@ -585,6 +590,7 @@ def campaign(
     max_hours: float,
     resume: Path | None,
     plan_only: bool = False,
+    silent_trials: int = 30,
 ) -> dict[str, object]:
     profile = Profile.model_validate_json(profile_path.read_text())
     identity = sources(project)
@@ -609,7 +615,7 @@ def campaign(
         > allocation.memory_budget_bytes
     ):
         raise ValueError('Profile allocation exceeds reserved hardware capacity')
-    selected = jobs()
+    selected = jobs(silent_trials)
     reused: list[Completed] = []
     for row in profile.isolated:
         if row.job in selected and row.job not in {item.job for item in reused}:
@@ -719,6 +725,7 @@ def campaign(
             estimated_hours=estimated_s / 3600,
             estimated_bytes=estimated_bytes,
             source_sha256=identity,
+            silent_trials=silent_trials,
         ),
     )
     if plan_only:
@@ -758,6 +765,13 @@ if __name__ == '__main__':
     parser.add_argument('--resume-from', type=Path)
     parser.add_argument('--max-hours', type=float, default=2)
     parser.add_argument('--os-cores', type=int, default=2)
+    parser.add_argument(
+        '--silent-trials',
+        type=int,
+        choices=range(1, 31),
+        default=30,
+        help='Trials per silent cohort; active cohorts always retain 30 trials.',
+    )
     args = parser.parse_args()
     if not math.isfinite(args.max_hours) or args.max_hours <= 0:
         parser.error('--max-hours must be positive and finite')
@@ -784,6 +798,7 @@ if __name__ == '__main__':
                     max_hours=args.max_hours,
                     resume=args.resume_from,
                     plan_only=args.mode == 'plan',
+                    silent_trials=args.silent_trials,
                 ),
                 indent=2,
             )

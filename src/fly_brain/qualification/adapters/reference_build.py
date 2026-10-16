@@ -21,19 +21,34 @@ def command(*arguments: str, directory: Path | None = None) -> str:
 def snapshot() -> dict[str, object]:
     sdk = Path(command('xcrun', '--show-sdk-path'))
     compiler = Path(command('xcrun', '--find', 'clang++'))
-    framework = (
-        Path(str(sysconfig.get_config_var('PYTHONFRAMEWORKPREFIX')))
-        / (str(sysconfig.get_config_var('PYTHONFRAMEWORK')) + '.framework')
-        / 'Versions'
-        / str(sysconfig.get_config_var('VERSION'))
-        / str(sysconfig.get_config_var('PYTHONFRAMEWORK'))
-    )
+    framework = sysconfig.get_config_var('PYTHONFRAMEWORK')
+    if framework:
+        runtime_kind = 'framework'
+        runtime = (
+            Path(str(sysconfig.get_config_var('PYTHONFRAMEWORKPREFIX')))
+            / (str(framework) + '.framework')
+            / 'Versions'
+            / str(sysconfig.get_config_var('VERSION'))
+            / str(framework)
+        )
+    elif sysconfig.get_config_var('Py_ENABLE_SHARED'):
+        runtime_kind = 'shared-library'
+        runtime = Path(str(sysconfig.get_config_var('LIBDIR'))) / str(
+            sysconfig.get_config_var('LDLIBRARY')
+        )
+    else:
+        runtime_kind = 'executable'
+        runtime = Path(sys.executable).resolve()
     return {
         'preferences': b.prefs.as_file,
         'packages': installed_packages(),
         'python': sys.version,
         'python_executable': file_record(Path(sys.executable)),
-        'python_framework': file_record(framework),
+        'python_runtime': {
+            'kind': runtime_kind,
+            'path': str(runtime),
+            'file': file_record(runtime),
+        },
         'os_build': command('sw_vers', '-buildVersion'),
         'platform': platform.platform(),
         'processor': command('sysctl', '-n', 'machdep.cpu.brand_string'),

@@ -1,21 +1,15 @@
 # MLX fly-brain milestone
 
-Updated 2026-10-16. M5 handoff: tracked `handoffs/README.md` and
-`handoffs/m5-handoff-20261016.tar.gz`. Next: bounded M5 pilot and campaign price.
-Preserve v783 inputs, arithmetic, architecture and seven fixtures.
+Updated 2026-10-16. M5 bundle: `handoffs/README.md`. Preserve v783, arithmetic,
+architecture and seven fixtures.
 
 ## Evidence lifetime
 
-Hooks clear disposable `logs/` only. Preserve legacy `.quality-reports/` until
-classified. Scientific evidence, failures and caches belong in protected
-`executions/`, independently of retention entries. Finish consumers before deletion.
-Retention regressions passed; 719 inventoried files survived unchanged. Receipts:
-`executions/retention-20261015`.
-
-Recovered 687 files (88,331,555 bytes), verified against Git `5f7b0d7`, in
-`executions/tiered-validation-20261015/recovered-5f7b0d7`. Audit compatibility before
-reuse; recovery does not reaccept arithmetic. That execution root preserves
-`reuse-verification`, the failed `exact-01` fixture and current tier proofs.
+`AGENTS.md` owns retention. Preserve `executions/` and unclassified
+`.quality-reports/`. Retention: 719 files unchanged (`executions/retention-20261015`).
+Recovered 687 files/88,331,555 bytes verified against `5f7b0d7`:
+`executions/tiered-validation-20261015/recovered-5f7b0d7`. That root retains audits
+and failures; check compatibility before reuse.
 
 ## Verified scientific state
 
@@ -41,12 +35,19 @@ results were reused; see `precision-02/03` and `precision-03-review-binding.json
 
 ## Remaining work and holds
 
-M5 Max/128 GB alone: measure resources, setup/simulation/memory and price 450
-one-second trials. The archive contains preregistration, sentinels and Eon
-structure/README drafts. Open no PR. After approval, run 30 Brian2/30 MLX-A/30
-independent MLX-B trials per experiment; report z-scores/Eon metrics and complete
-scientific mode gates. Runner checks passed (19 tests); M5 qualification remains
-pending. Provisional compute: 6–13 hours assuming 1.5–2× M1 throughput; actual
-speed/storage remain unmeasured. Get explicit approval before work expected over
-two hours. The M1 goal is paused. Preserve the separate `pr-split` owner's
-sources/process/outputs. Ensemble qualification and final adoption remain pending.
+M5: 57 transfer files verified. Pilot passed 15 jobs; five one-second Brian2/MLX
+pairs match native events/counts; sugar repeats match. Selected qualification:
+89 passes, 234 deselected; connectome pulse passed. Receipts:
+`executions/m5-pilot-01`, `m5-pilot-check-03`, `m5-local-qualification-01`,
+`m5-connectome-pulse-01`.
+
+Pre-repair price (`executions/m5-plan-01`): 445 jobs, 5.83 hours/107.56 GiB,
+including 25% and five reused trials. One CPU/one GPU; reserve five CPU cores/
+12.8 GiB for macOS, two agents and GPU host work.
+
+Observed sugar stopped before simulation: framework-Python provenance assumption.
+Repair binds the actual runtime; verify and refresh the source-bound profile.
+Preserve failed `executions/m5-observed-launch-01`. Full-state/ensemble acceptance
+remains pending. Latest user authorizes necessary tests without further approval
+pauses: retain 30 trials/active cohort, reduce silent to one/cohort (363 jobs).
+M5 alone; M1 goal paused; preserve `pr-split`. Eon remains draft; open no PR.
