@@ -1,7 +1,7 @@
 # MLX fly-brain milestone
 
 Updated 2026-10-15. Disposable logs and reusable evidence have separate lifetimes.
-Next: full-network precision tier, then campaign pricing and Eon packaging.
+Next: price the ensemble campaign and draft Eon packaging.
 Preserve v783 inputs, production arithmetic, architecture and seven fixtures.
 
 ## Evidence lifetime
@@ -11,15 +11,14 @@ classified. Scientific/reuse/failure evidence and caches belong in `executions/`
 protected without manifest entries. Failures use fresh directories. Removing an
 entry cannot delete evidence; finish all consumers before considering removal.
 
-Commit `3a5eba4` passed local hooks, including commit/push regressions. The push
-fixture clears parent check ranges. All 719
-inventoried evidence files survived unchanged; production source is unchanged.
-Delivery receipts live in `executions/retention-20261015`.
+Retention hooks and commit/push regressions pass. All 719 inventoried evidence
+files survived unchanged; production source is unchanged. Receipts:
+`executions/retention-20261015`.
 
 Recovered 687 tracked files, 88,331,555 bytes, verified against every original Git
 blob at `5f7b0d7`, under
 `executions/tiered-validation-20261015/recovered-5f7b0d7`, outside source metrics.
-Recovery does not reaccept old numerical modes. Audit compatibility before reruns.
+Audit compatibility before reuse; recovery does not reaccept old arithmetic.
 Current verification logs moved from `logs/tiered-review` into that execution
 root's `reuse-verification`; the failed exact command log is in `exact-01`.
 
@@ -40,26 +39,27 @@ Independent NumPy64 passed all eight exact configurations in `exact-02`:
 196 propagated spikes. Maximum phase error is `2.78e-14 mV`, below `1e-11`.
 Spikes, refractory/reset and delivery membership match exactly. Two-class targets
 follow positive outgoing contact strength. Keep the failed first fixture.
-This qualifies oracle logic; full-network/MLX tiers remain pending.
+This qualifies oracle logic; the ensemble tier remains pending.
 
-Full-network sugar trial 0 at one second now has 16,752 exact NumPy64/Brian2/MLX
-spikes and identical per-neuron counts. Final NumPy64/reference voltage error is
-`1.61e-12 mV`, below `1e-11`; see `precision-02`. Both native engine results were
-reused. The ten-second drift check remains next.
+Full-network NumPy64 matches Brian2 at one second (16,752 spikes) and ten seconds
+(171,973), including counts, refractory state and pending queues. Maximum final
+voltage error is `1.61e-12 mV`. MLX matches one second exactly; its four one-step
+shifts at ten seconds preserve counts. The first difference matches the bound
+roundoff review; oracle/context voltage differs by `7.11e-15 mV`.
+See `precision-02/03` and `precision-03-review-binding.json`; native results were reused.
 
 ## Remaining work and holds
 
-1. Compare full-network MLX32 and NumPy64 on fixed input; reuse compatible native
-   runs. Record counts, first divergence and causal limits.
-2. Price/preregister five experiments with 30 Brian2, 30 MLX-A and 30 independent
+1. Price/preregister five experiments with 30 Brian2, 30 MLX-A and 30 independent
    MLX-B trials each. Report z-scores and Eon's metrics with justified thresholds.
-3. Replace most of the 52-case campaign, propose retained sentinels, measure
+2. Replace most of the 52-case campaign, propose retained sentinels, measure
    setup/simulation/memory, and draft the upstream structure/README. Open no PR.
 
-Original estimate: 40–64 hours and 49 GiB; replacement pricing remains pending.
+Original estimate: 40–64 hours/49 GiB. Provisional M1 compute: 12–20 hours;
+at 75% throughput, 16–27 hours. M5 speedup and compact storage remain unmeasured.
+See `executions/tiered-validation-20261015/parallel-campaign-planning.json`.
 Get explicit approval before any job/campaign expected to exceed two hours.
 The separate `pr-split` checkout's prior matrix remains its owner's work; preserve
 its sources/process/outputs. This checkout is detached from `1e33d98`. Scientific
 completion, prototype adoption and the whole original goal remain unverified.
-The retired adapter assertion is repaired; its constant/precision guard and
-hosted checks pass at `ff38fb5`. Production arithmetic is unchanged.
+The retired assertion is repaired; constant/precision guards and hosted checks pass.
