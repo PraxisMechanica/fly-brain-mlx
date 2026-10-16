@@ -34,9 +34,9 @@ The source audit covers Eon pin `a3db62f` and Kisame `e417b33`, including every
 requested file and six parity pitfalls. Constants agree; dataset, Brian2 version,
 delivery masking, channels and accumulation differ.
 
-Independent NumPy64 passed all eight exact configurations in `exact-02`:
-800 neurons/2,803 edges; 3,138 ordinary spikes and 2,480 two-class spikes, including
-196 propagated spikes. Maximum phase error is `2.78e-14 mV`, below `1e-11`.
+Independent NumPy64 passed eight configurations in `exact-02`: four
+800-neuron/2,803-edge cases and four microfixtures. Two-class drive produced
+2,480 spikes, including 196 propagated spikes. Maximum phase error is `2.78e-14 mV`.
 Spikes, refractory/reset and delivery membership match exactly. Two-class targets
 follow positive outgoing contact strength. Keep the failed first fixture.
 This qualifies oracle logic; the ensemble tier remains pending.
@@ -55,11 +55,11 @@ See `precision-02/03` and `precision-03-review-binding.json`; native results wer
 2. Replace most of the 52-case campaign, propose retained sentinels, measure
    setup/simulation/memory, and draft the upstream structure/README. Open no PR.
 
-Original estimate: 40–64 hours/49 GiB. Provisional M1 compute: 12–20 hours;
-at 75% throughput, 16–27 hours. M5 speedup and compact storage remain unmeasured.
-See `executions/tiered-validation-20261015/parallel-campaign-planning.json`.
+User amendment: M5 Max/128 GB alone; notify when handoff is ready. Reserve OS
+capacity; measure CPU/GPU concurrency instead of fixing 75%. Runner verification
+and M5 pilots remain pending. Provisional M5 compute: 6–13 hours, assuming
+1.5–2× M1 throughput; actual speed and retained storage remain unmeasured.
 Get explicit approval before any job/campaign expected to exceed two hours.
 The separate `pr-split` checkout's prior matrix remains its owner's work; preserve
-its sources/process/outputs. This checkout is detached from `1e33d98`. Scientific
-completion, prototype adoption and the whole original goal remain unverified.
+its sources/process/outputs. Ensemble qualification and final adoption remain pending.
 The retired assertion is repaired; constant/precision guards and hosted checks pass.
