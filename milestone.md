@@ -6,21 +6,18 @@ Preserve v783 inputs, production arithmetic, architecture and seven fixtures.
 
 ## Evidence lifetime
 
-Only disposable output belongs in `logs/`, which hooks clear after successful
-checks. Preserve legacy `.quality-reports/` until classified. Scientific inputs,
-spikes, native
-states, provenance, verification results, reusable caches and unresolved failures
-belong in `executions/`, which hooks never delete, even without manifest entries.
-Failures use fresh directories. Removing a retention entry cannot delete evidence.
-Explicitly finish all verification/reuse consumers before considering its removal.
+Hooks clear only disposable `logs/`. Preserve legacy `.quality-reports/` until
+classified. Scientific/reuse/failure evidence and caches belong in `executions/`,
+protected without manifest entries. Failures use fresh directories. Removing an
+entry cannot delete evidence; finish all consumers before considering removal.
 
 Commit `3a5eba4` passed local hooks, including commit/push regressions. The push
 fixture clears parent check ranges. All 719
 inventoried evidence files survived unchanged; production source is unchanged.
 Delivery receipts live in `executions/retention-20261015`.
 
-The tracked historical recovery contains 687 files, 88,331,555 bytes, verified
-against every original Git blob at `5f7b0d7`. It lives under
+Recovered 687 tracked files, 88,331,555 bytes, verified against every original Git
+blob at `5f7b0d7`, under
 `executions/tiered-validation-20261015/recovered-5f7b0d7`, outside source metrics.
 Recovery does not reaccept old numerical modes. Audit compatibility before reruns.
 Current verification logs moved from `logs/tiered-review` into that execution
@@ -45,6 +42,11 @@ Spikes, refractory/reset and delivery membership match exactly. Two-class target
 follow positive outgoing contact strength. Keep the failed first fixture.
 This qualifies oracle logic; full-network/MLX tiers remain pending.
 
+Full-network sugar trial 0 at one second now has 16,752 exact NumPy64/Brian2/MLX
+spikes and identical per-neuron counts. Final NumPy64/reference voltage error is
+`1.61e-12 mV`, below `1e-11`; see `precision-02`. Both native engine results were
+reused. The ten-second drift check remains next.
+
 ## Remaining work and holds
 
 1. Compare full-network MLX32 and NumPy64 on fixed input; reuse compatible native
@@ -59,5 +61,5 @@ Get explicit approval before any job/campaign expected to exceed two hours.
 The separate `pr-split` checkout's prior matrix remains its owner's work; preserve
 its sources/process/outputs. This checkout is detached from `1e33d98`. Scientific
 completion, prototype adoption and the whole original goal remain unverified.
-The baseline assertion was a retired adapter snapshot. Its replacement preserves
-approved constant construction and float32 precision; require its focused pass.
+The retired adapter assertion is repaired; its constant/precision guard and
+hosted checks pass at `ff38fb5`. Production arithmetic is unchanged.
