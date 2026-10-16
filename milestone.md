@@ -37,7 +37,7 @@ results were reused; see `precision-02/03` and `precision-03-review-binding.json
 
 M5: 57 transfer files verified. Pilot passed 15 jobs; five one-second Brian2/MLX
 pairs match native events/counts; sugar repeats match. Selected qualification:
-89 passes, 234 deselected; connectome pulse passed. Receipts:
+190 passes in disjoint selections; connectome pulse passed. Receipts:
 `executions/m5-pilot-01`, `m5-pilot-check-03`, `m5-local-qualification-01`,
 `m5-connectome-pulse-01`.
 
@@ -45,9 +45,10 @@ Pre-repair price (`executions/m5-plan-01`): 445 jobs, 5.83 hours/107.56 GiB,
 including 25% and five reused trials. One CPU/one GPU; reserve five CPU cores/
 12.8 GiB for macOS, two agents and GPU host work.
 
-Observed sugar stopped before simulation: framework-Python provenance assumption.
-Repair binds the actual runtime; verify and refresh the source-bound profile.
-Preserve failed `executions/m5-observed-launch-01`. Full-state/ensemble acceptance
+Provenance repair passed CI and 0.1/1-second sugar state/queue, repeat and paired
+gates; preserve failed `executions/m5-observed-launch-01`. Four sentinels remain.
+The tested scorer retains prospective alarms/low-rate support. Refresh the profile
+after integrating whole-loop/reference-build stopwatches. Ensemble acceptance
 remains pending. Latest user authorizes necessary tests without further approval
 pauses: retain 30 trials/active cohort, reduce silent to one/cohort (363 jobs).
 M5 alone; M1 goal paused; preserve `pr-split`. Eon remains draft; open no PR.

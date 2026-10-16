@@ -254,7 +254,12 @@ def run(job: Job, project: Path, output: Path) -> dict[str, object]:
             ).encode()
         ).hexdigest()
         execution_identity['os_build'] = command('sw_vers', '-buildVersion')
-        timings = {'setup_s': built - prepared, 'simulation_s': simulated - built}
+        timings = {
+            'setup_s': built - prepared,
+            'network_setup_s': built - prepared - reference.device_build_s,
+            'build_s': reference.device_build_s,
+            'simulation_s': simulated - built,
+        }
     else:
         from fly_brain.bootstrap import configure_mlx
 

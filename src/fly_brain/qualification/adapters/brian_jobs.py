@@ -4,7 +4,7 @@ from collections.abc import Generator
 from contextlib import ExitStack
 from dataclasses import dataclass
 from pathlib import Path
-from time import time_ns
+from time import perf_counter, time_ns
 
 import brian2 as b
 import numpy as np
@@ -36,6 +36,7 @@ class BrianJob:
     observed: bool
     files: dict[str, str]
     build_context: dict[str, object] | None = None
+    device_build_s: float = 0.0
 
 
 def build(
@@ -167,9 +168,11 @@ def build(
         b.prefs.devices.cpp_standalone.extra_make_args_unix = ['-j2']
         started_ns = time_ns()
         context = snapshot() if bind_build else None
+        build_started = perf_counter()
         b.device.build(
             directory=str(directory), clean=False, with_output=False, run=False
         )
+        device_build_s = perf_counter() - build_started
         if context is not None:
             if context != snapshot():
                 raise ValueError(
@@ -183,7 +186,9 @@ def build(
             raise RuntimeError(
                 'Reference compiler flags differ from the frozen baseline'
             )
-        return BrianJob(directory, shape, block_size is not None, files, context)
+        return BrianJob(
+            directory, shape, block_size is not None, files, context, device_build_s
+        )
     finally:
         b.device.reinit()
         b.set_device('runtime')
