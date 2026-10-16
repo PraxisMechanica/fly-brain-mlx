@@ -1,17 +1,22 @@
 # MLX fly-brain milestone
 
-Updated 2026-10-15. Current priority: separate disposable logs from reusable
-evidence before resuming the user's tiered-validation and Eon candidate package.
+Updated 2026-10-15. Disposable logs and reusable evidence have separate lifetimes.
+Next: resume the user's tiered-validation and Eon candidate package after delivery.
 Preserve v783 inputs, production arithmetic, architecture and seven fixtures.
 
 ## Evidence lifetime
 
 Only disposable output belongs in `logs/`, which hooks clear after successful
-checks. Preserve legacy `.quality-reports/` until classified. Scientific inputs, spikes, native
+checks. Preserve legacy `.quality-reports/` until classified. Scientific inputs,
+spikes, native
 states, provenance, verification results, reusable caches and unresolved failures
 belong in `executions/`, which hooks never delete, even without manifest entries.
 Failures use fresh directories. Removing a retention entry cannot delete evidence.
 Explicitly finish all verification/reuse consumers before considering its removal.
+
+Commit `3a5eba4` passed required hooks, including commit/push regressions. All 719
+inventoried evidence files survived unchanged; production source is unchanged.
+Delivery receipts live in `executions/retention-20261015`.
 
 The tracked historical recovery contains 687 files, 88,331,555 bytes, verified
 against every original Git blob at `5f7b0d7`. It lives under
@@ -41,13 +46,12 @@ later-tier simulation launched. Keep the failed inputs and original source hashe
 
 ## Remaining work and holds
 
-1. Finish retention routing, focused hook/cleanup verification and delivery.
-2. Complete the exact tier with informative recurrent two-class activity.
-3. Compare full-network MLX32 and NumPy64 on fixed input; reuse compatible native
+1. Complete the exact tier with informative recurrent two-class activity.
+2. Compare full-network MLX32 and NumPy64 on fixed input; reuse compatible native
    runs. Record counts, first divergence and causal limits.
-4. Price/preregister five experiments with 30 Brian2, 30 MLX-A and 30 independent
+3. Price/preregister five experiments with 30 Brian2, 30 MLX-A and 30 independent
    MLX-B trials each. Report z-scores and Eon's metrics with justified thresholds.
-5. Replace most of the 52-case campaign, propose retained sentinels, measure
+4. Replace most of the 52-case campaign, propose retained sentinels, measure
    setup/simulation/memory, and draft the upstream structure/README. Open no PR.
 
 Original estimate: 40–64 hours and 49 GiB; replacement pricing remains pending.
