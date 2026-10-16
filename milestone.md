@@ -1,8 +1,7 @@
 # MLX fly-brain milestone
 
-Updated 2026-10-15. The numerical contract owns acceptance; the agent index owns
-navigation. Detailed evidence remains under the registered root
-`executions/implementation-20261014-matrix`; paths below are relative to it.
+Updated 2026-10-15. Evidence root:
+`executions/implementation-20261014-matrix`; paths below are relative.
 
 ## Scope and implementation
 
@@ -15,24 +14,22 @@ Production uses float32 threshold-relative voltage, stable synaptic decay and
 transient compensated integration. The contract specifies its order; no
 correction state persists. Accumulation and source queues are unchanged.
 
-Delivery baseline: `810359d`. Current commit, push and CI evidence belongs in
-`compensated-voltage-candidate-01/delivery.json` when those checks finish.
+Delivered `2031e77`: hooks, push and exact-revision CI pass. Evidence:
+`compensated-voltage-candidate-01/delivery.json`.
 
 ## Current scientific evidence
 
-The ten-second sugar trial-0 screen at `810359d` fails timing F1 **0.4705927123**.
-Synaptic-increment arithmetic also fails, with optimistic F1 at most **0.93406**.
-Native-bound diagnosis identifies inherited voltage-operation rounding. See
-`decay-first-difference-03` and
-`decay-timing-continuation-01/timing-upper-bound.json`.
+Ten-second sugar trial 1 qualifies after bound parent causal review:
+**171,973 spikes per engine**, with four one-step shifts. Native reconstruction
+explains finite-precision state error within budget; every metric and fresh
+repeat passes. Evidence:
+`matrix-compensated-voltage-01/reviews/sugar-100000-1/review-decision.json`.
 
-The current whole-network ten-second screen matches **all 170,752 reference
-spikes exactly**, timing F1 **1.0**, and satisfies every primary metric gate.
-Six continuous native chunks take **1,279.66 seconds**; scoring takes **1.82
-seconds** without another simulation. Evidence: `voltage-first-difference-01`
-through `-06`, `voltage-timing-screen-01`. This screen grants no case acceptance.
-Native target/linear probes pass. A bundled prototype hit its 295-second guard;
-only missing work reran, passing in 27.82 seconds.
+The full ten-second sugar trial-0 case passes every gate and fresh repeats for
+all engines: **all 170,752 reference spikes match exactly**, timing F1 **1.0**.
+No spike or common-history budget differences occur. Completion takes **12,710.06
+seconds**. Native archives and complete digest files repeat identically.
+Evidence: `matrix-compensated-voltage-01/cases/sugar-100000-0/case.json`.
 
 **Local scientific inventory: all 323 checks covered**, with **222 fresh passes
 and 101 unchanged reference passes verified and reused**. Fresh groups contain
@@ -51,12 +48,14 @@ and comparison JSON/CSV pass. Post-run verification corrects a prematurely hashe
 diagnostic transcript; scientific artifact bindings verify.
 
 **Previous arithmetic: 10/52 accepted** (sugar trials 0–4 at 0.1 and 1 second).
-Those passes remain recorded for that implementation. **Current arithmetic:
-0/52 accepted**; changed numerical updates require renewed MLX qualification.
+**Current arithmetic: 12/52 accepted**; numerical changes required new qualification.
+All ten shorter sugar cases pass without spike or state-budget differences.
+Ten-second trials 0 and 1 qualify as described above.
+Evidence: `preflight-compensated-voltage-01/matrix.json`.
 
 ## Remaining plan and completion
 
-1. Deliver the candidate with required hooks and exact-revision CI.
+1. **Done:** candidate delivery with required hooks and exact-revision CI.
 2. **Next step: complete all 52 paired cases**, fresh repeats for all engines,
    causal audits, pooled/localized metrics and sugar/P9 one-second four-trial
    comparisons. Resume only verified compatible evidence. Stop failed gates and
@@ -65,13 +64,14 @@ Those passes remain recorded for that implementation. **Current arithmetic:
 3. Record results and limitations, commit and push, pass delivery checks, finish
    clean and release outputs after their verification consumers end.
 
-Progress: **36%** (inventory 10 points, workflows 8, candidate 10, local acceptance
-8). Matrix, batch and final delivery acceptance remain. Routine tests belong to
-hooks and CI; scientific runs use bounded scope and compatible retained evidence.
+Progress: **47%**: inventory 10, workflows 8, candidate 10, local acceptance 8,
+matrix 11. Remaining matrix, batch and delivery gates are unverified. Routine
+tests belong to hooks and CI; scientific runs reuse compatible retained evidence.
 
-Remaining elapsed execution time: working estimate **48–72 hours**;
-**90%-confidence planning range: 40–120 hours**, including further repair and
+Remaining elapsed execution time: working estimate **40–64 hours**;
+**90%-confidence planning range: 36–112 hours**, including further repair and
 requalification risk. This is engineering judgment, assuming continuous Mac
-availability. Previous paired throughput projects **38–45 hours** of required
-qualification; revise after measuring the new candidate's paired cases.
-Storage preflight projects 49 GiB; doubled allowance and batches fit 192 GiB free.
+availability. Two completed ten-second cases project **32.93 hours** for remaining
+paired steps; other cases, batches and system swapping add uncertainty. Evidence:
+`matrix-compensated-voltage-01-launch.json`.
+Storage preflight projects 49 GiB; doubled allowance and batches fit 115 GiB free.
