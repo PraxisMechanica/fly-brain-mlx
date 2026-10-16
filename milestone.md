@@ -1,7 +1,7 @@
 # MLX fly-brain milestone
 
-Updated 2026-10-15. Disposable logs and reusable evidence have separate lifetimes.
-Next: price the ensemble campaign and draft Eon packaging.
+Updated 2026-10-16. Disposable logs and reusable evidence have separate lifetimes.
+Next: M5 pilot, measured campaign price, then approved ensemble.
 Preserve v783 inputs, production arithmetic, architecture and seven fixtures.
 
 ## Evidence lifetime
@@ -50,16 +50,18 @@ See `precision-02/03` and `precision-03-review-binding.json`; native results wer
 
 ## Remaining work and holds
 
-1. Price/preregister five experiments with 30 Brian2, 30 MLX-A and 30 independent
-   MLX-B trials each. Report z-scores and Eon's metrics with justified thresholds.
-2. Replace most of the 52-case campaign, propose retained sentinels, measure
-   setup/simulation/memory, and draft the upstream structure/README. Open no PR.
+1. Measure M5 setup/simulation/memory and price 450 one-second trials. The
+   preregistration, sentinel proposal and upstream structure/README draft are in
+   `executions/tiered-validation-20261015/m5-handoff`; open no PR.
+2. After approval, run 30 Brian2/30 MLX-A/30 independent MLX-B trials per
+   experiment, report z-scores/Eon metrics, and complete scientific mode gates.
 
-User amendment: M5 Max/128 GB alone; notify when handoff is ready. Reserve OS
-capacity; measure CPU/GPU concurrency instead of fixing 75%. Runner verification
-and M5 pilots remain pending. Provisional M5 compute: 6–13 hours, assuming
-1.5–2× M1 throughput; actual speed and retained storage remain unmeasured.
+User amendment: M5 Max/128 GB alone. The runner reserves OS capacity, measures
+CPU/GPU concurrency, reuses compatible trials and preserves interrupted work.
+Local runner checks pass; M5 runtime/pilot qualification remains pending.
+Provisional compute: 6–13 hours, assuming 1.5–2× M1 throughput; actual speed and
+retained storage remain unmeasured. Full handoff instructions accompany the evidence.
 Get explicit approval before any job/campaign expected to exceed two hours.
 The separate `pr-split` checkout's prior matrix remains its owner's work; preserve
 its sources/process/outputs. Ensemble qualification and final adoption remain pending.
-The retired assertion is repaired; constant/precision guards and hosted checks pass.
+Constant/precision guards and hosted scientific-tool checks pass.
