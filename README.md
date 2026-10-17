@@ -412,6 +412,32 @@ Legacy version 630 data is kept in `data/archive/` for paper figure reproduction
 - NEST GPU compiled from source (for `--nestgpu` backend)
 - `scripts/setup_WSL_CUDA.sh` documents the full setup from a fresh Windows machine
 
+## Experimental Apple MLX backend
+
+Native Apple silicon macOS users can install the isolated optional environment
+with Python 3.10.14 and uv; the existing backend environments remain unchanged:
+
+```sh
+uv venv --python 3.10.14
+uv pip install -r requirements-mlx.txt
+uv run --no-project python main.py --mlx --t_run 0.1 --n_run 1 --run-label mlx_first --no_log_file
+```
+
+MLX is explicit and opt-in. Use a fresh run label: existing MLX outputs are
+rejected. `n_run` runs fresh trials sequentially, with canonical PCG64 seed
+20261004; repeated rounds reuse inputs and are not independent statistical
+samples. `--disable-spike-io` is unsupported. The ordinary benchmark CSV, round
+manifest and six-column typed Parquet outputs work with both comparison tools.
+The adjacent `.mlx.json` records timing, memory scopes, seeds and hashes.
+
+The candidate passed 323 qualification tests, five observed one-second cases
+and prospective gross-error screens over 363 independent-seed jobs. P9 count
+equivalence remains unestablished; nine of twelve pointwise count-ratio intervals
+fit ±2%. Current singleton MLX performance is 50–56 seconds per biological second,
+versus 1.7–2.6 seconds for Brian2. No speedup or new M5 full-network batch/ten-second
+validation is claimed. See [integration, replay and validation details](docs/mlx-integration.md)
+for exact scope, portable reference fixtures, tests and attribution.
+
 ## License
 
 Except where otherwise noted, this project is licensed under the GNU General

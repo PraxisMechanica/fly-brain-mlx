@@ -1,0 +1,18 @@
+{
+  "source_repository": "https://github.com/PraxisMechanica/fly-brain-mlx",
+  "source_commit": "72627c714ba6941e017b4585ff3d77bd20a4dfde",
+  "expected_engine": "Brian2 2.8.0 float64 C++ standalone",
+  "duration_s": 1,
+  "trial": 0,
+  "seed": 20261004,
+  "retained_trial": "executions/m5-pilot-02/isolated-brian-sugar/jobs/brian-sugar-10000-0",
+  "source_receipt_sha256": "64c121f5e002c349e58a907a22a8f0aebdb8a2e7974a0a0b96bc7dcad24ff54d",
+  "accepted_observed_case_sha256": "f04bc270229a221af3d3e7c5f437abd8a9fe8beee6ea86be8c3adf9b718f0bf1",
+  "files": {
+    "stimulus.json": "9b4f768f1b1679e6c467365cb08909d2a602f025050b943bed585eb04ebabf0d",
+    "stimulus.npz": "54008b4e235b1c50a08d40fd2493815952f32dd86ef9e74aacb0c582867dd42e",
+    "spikes.npz": "526602032715b0981a5369826ef660071499845a4d12b51b317daad7bb4b6fc4",
+    "trial.json": "64c121f5e002c349e58a907a22a8f0aebdb8a2e7974a0a0b96bc7dcad24ff54d",
+    "observed-case.json": "f04bc270229a221af3d3e7c5f437abd8a9fe8beee6ea86be8c3adf9b718f0bf1"
+  }
+}

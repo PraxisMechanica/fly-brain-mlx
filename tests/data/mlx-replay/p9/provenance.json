@@ -1,0 +1,18 @@
+{
+  "source_repository": "https://github.com/PraxisMechanica/fly-brain-mlx",
+  "source_commit": "72627c714ba6941e017b4585ff3d77bd20a4dfde",
+  "expected_engine": "Brian2 2.8.0 float64 C++ standalone",
+  "duration_s": 1,
+  "trial": 0,
+  "seed": 20261004,
+  "retained_trial": "executions/m5-pilot-02/isolated-brian-p9/jobs/brian-p9-10000-0",
+  "source_receipt_sha256": "550fa2d776a5a4c32948ddbbb31dd43f6cc6d5fab86c8e7b3d6aea37f7ee0c12",
+  "accepted_observed_case_sha256": "63b4515c9ade63b8f6490576e84a799b40cdaebca5f7563bb67a0ccc2a1f3dcd",
+  "files": {
+    "stimulus.json": "eded3fbdfbc68d4a44b89b2615f61b8f663aeae1ae53ac1a76f4653fe7104b2c",
+    "stimulus.npz": "ef04ffcb601a67a10bcf113a3cf39cf6b4b892cab3b80ececf1fb0d3f9c5bb6c",
+    "spikes.npz": "68ee772d264db00c958dc891e1e85c5e496d90ba0dd2c90dfb6030803eac5d44",
+    "trial.json": "550fa2d776a5a4c32948ddbbb31dd43f6cc6d5fab86c8e7b3d6aea37f7ee0c12",
+    "observed-case.json": "63b4515c9ade63b8f6490576e84a799b40cdaebca5f7563bb67a0ccc2a1f3dcd"
+  }
+}

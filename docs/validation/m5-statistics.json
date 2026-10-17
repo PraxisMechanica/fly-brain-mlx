@@ -1,0 +1,1109 @@
+{
+  "execution_complete": true,
+  "gross_error_alarm": false,
+  "scientific_acceptance": false,
+  "experiments": {
+    "sugar": {
+      "Brian2-vs-MLX-A": {
+        "primary": {
+          "total_spikes": {
+            "mean_a": 16948.6,
+            "mean_b": 16897.266666666666,
+            "sample_variance_a": 70017.83448275863,
+            "sample_variance_b": 98454.68505747129,
+            "difference": 51.33333333333212,
+            "z": 0.6850078651811973,
+            "welch_df": 56.393308756578826,
+            "constant_discrepancy": false,
+            "difference_ci95": [
+              -101.93272432724422,
+              204.59939099390846
+            ],
+            "gross_error_alarm": false
+          },
+          "active_neurons": {
+            "mean_a": 398.53333333333336,
+            "mean_b": 398.76666666666665,
+            "sample_variance_a": 93.56781609195403,
+            "sample_variance_b": 105.21954022988506,
+            "difference": -0.23333333333329165,
+            "z": -0.09064482891859979,
+            "welch_df": 57.801417323724216,
+            "constant_discrepancy": false,
+            "difference_ci95": [
+              -5.498060020163149,
+              5.031393353496566
+            ],
+            "gross_error_alarm": false
+          }
+        },
+        "gross_error_alarm": false,
+        "per_neuron_support": 138639,
+        "active_union": 452,
+        "per_neuron_outliers": 0,
+        "active_outlier_fraction": 0.0,
+        "constant_discrepancies": 0,
+        "count_ratio_ci95": [
+          0.9879732827984817,
+          1.0060369554275281
+        ],
+        "count_margin_2pct": "resolved-within-margin",
+        "eon": {
+          "jaccard_raw": 0.9712389380530974,
+          "jaccard_eon_rounded": 0.9712,
+          "shared_active_pearson_raw": 0.9997635075651344,
+          "shared_active_pearson_eon_rounded": 0.999764,
+          "spike_count_ratio_raw": 0.9969712345955811,
+          "spike_count_ratio_eon_rounded": 0.997,
+          "active_union": 452,
+          "shared_active": 439,
+          "both_silent_exact_agreement": false
+        }
+      },
+      "Brian2-vs-MLX-B": {
+        "primary": {
+          "total_spikes": {
+            "mean_a": 16948.6,
+            "mean_b": 16929.166666666668,
+            "sample_variance_a": 70017.83448275863,
+            "sample_variance_b": 77080.9712643678,
+            "difference": 19.433333333330665,
+            "z": 0.27752579409107186,
+            "welch_df": 57.86658495942786,
+            "constant_discrepancy": false,
+            "difference_ci95": [
+              -123.78084792482889,
+              162.64751459149022
+            ],
+            "gross_error_alarm": false
+          },
+          "active_neurons": {
+            "mean_a": 398.53333333333336,
+            "mean_b": 402.8333333333333,
+            "sample_variance_a": 93.56781609195403,
+            "sample_variance_b": 90.69540229885058,
+            "difference": -4.2999999999999545,
+            "z": -1.7350410594013095,
+            "welch_df": 57.985909085734036,
+            "constant_discrepancy": false,
+            "difference_ci95": [
+              -9.36874889992809,
+              0.7687488999281813
+            ],
+            "gross_error_alarm": false
+          }
+        },
+        "gross_error_alarm": false,
+        "per_neuron_support": 138639,
+        "active_union": 452,
+        "per_neuron_outliers": 0,
+        "active_outlier_fraction": 0.0,
+        "constant_discrepancies": 0,
+        "count_ratio_ci95": [
+          0.9904418308900846,
+          1.0073328579926042
+        ],
+        "count_margin_2pct": "resolved-within-margin",
+        "eon": {
+          "jaccard_raw": 0.9800884955752213,
+          "jaccard_eon_rounded": 0.9801,
+          "shared_active_pearson_raw": 0.9997091065014462,
+          "shared_active_pearson_eon_rounded": 0.999709,
+          "spike_count_ratio_raw": 0.9988533959540414,
+          "spike_count_ratio_eon_rounded": 0.9989,
+          "active_union": 452,
+          "shared_active": 443,
+          "both_silent_exact_agreement": false
+        }
+      },
+      "MLX-A-vs-MLX-B": {
+        "primary": {
+          "total_spikes": {
+            "mean_a": 16897.266666666666,
+            "mean_b": 16929.166666666668,
+            "sample_variance_a": 98454.68505747129,
+            "sample_variance_b": 77080.9712643678,
+            "difference": -31.900000000001455,
+            "z": -0.4170312854379556,
+            "welch_df": 57.152644572921176,
+            "constant_discrepancy": false,
+            "difference_ci95": [
+              -188.34587795258696,
+              124.54587795258405
+            ],
+            "gross_error_alarm": false
+          },
+          "active_neurons": {
+            "mean_a": 398.76666666666665,
+            "mean_b": 402.8333333333333,
+            "sample_variance_a": 105.21954022988506,
+            "sample_variance_b": 90.69540229885058,
+            "difference": -4.066666666666663,
+            "z": -1.5913489531086686,
+            "welch_df": 57.68297518380733,
+            "constant_discrepancy": false,
+            "difference_ci95": [
+              -9.293218137412309,
+              1.1598848040789829
+            ],
+            "gross_error_alarm": false
+          }
+        },
+        "gross_error_alarm": false,
+        "per_neuron_support": 138639,
+        "active_union": 454,
+        "per_neuron_outliers": 0,
+        "active_outlier_fraction": 0.0,
+        "constant_discrepancies": 0,
+        "count_ratio_ci95": [
+          0.9926672467681626,
+          1.0112048584313256
+        ],
+        "count_margin_2pct": "resolved-within-margin",
+        "eon": {
+          "jaccard_raw": 0.973568281938326,
+          "jaccard_eon_rounded": 0.9736,
+          "shared_active_pearson_raw": 0.9997996127474632,
+          "shared_active_pearson_eon_rounded": 0.9998,
+          "spike_count_ratio_raw": 1.0018878793019779,
+          "spike_count_ratio_eon_rounded": 1.0019,
+          "active_union": 454,
+          "shared_active": 442,
+          "both_silent_exact_agreement": false
+        }
+      }
+    },
+    "p9": {
+      "Brian2-vs-MLX-A": {
+        "primary": {
+          "total_spikes": {
+            "mean_a": 883.4333333333333,
+            "mean_b": 797.5666666666667,
+            "sample_variance_a": 30445.28850574713,
+            "sample_variance_b": 13645.564367816098,
+            "difference": 85.86666666666656,
+            "z": 2.2398089797856007,
+            "welch_df": 50.647052320951175,
+            "constant_discrepancy": false,
+            "difference_ci95": [
+              7.459510733840048,
+              164.2738225994931
+            ],
+            "gross_error_alarm": false
+          },
+          "active_neurons": {
+            "mean_a": 110.83333333333333,
+            "mean_b": 99.4,
+            "sample_variance_a": 935.5229885057471,
+            "sample_variance_b": 810.1103448275861,
+            "difference": 11.433333333333323,
+            "z": 1.4988458836672014,
+            "welch_df": 57.7021697970584,
+            "constant_discrepancy": false,
+            "difference_ci95": [
+              -4.167865226524276,
+              27.034531893190923
+            ],
+            "gross_error_alarm": false
+          }
+        },
+        "gross_error_alarm": false,
+        "per_neuron_support": 138639,
+        "active_union": 187,
+        "per_neuron_outliers": 0,
+        "active_outlier_fraction": 0.0,
+        "constant_discrepancies": 0,
+        "count_ratio_ci95": [
+          0.8244759002307457,
+          0.9910057893913055
+        ],
+        "count_margin_2pct": "inconclusive-or-outside-margin",
+        "eon": {
+          "jaccard_raw": 0.9251336898395722,
+          "jaccard_eon_rounded": 0.9251,
+          "shared_active_pearson_raw": 0.9988123271868297,
+          "shared_active_pearson_eon_rounded": 0.998812,
+          "spike_count_ratio_raw": 0.9028034562125042,
+          "spike_count_ratio_eon_rounded": 0.9028,
+          "active_union": 187,
+          "shared_active": 173,
+          "both_silent_exact_agreement": false
+        }
+      },
+      "Brian2-vs-MLX-B": {
+        "primary": {
+          "total_spikes": {
+            "mean_a": 883.4333333333333,
+            "mean_b": 839.1,
+            "sample_variance_a": 30445.28850574713,
+            "sample_variance_b": 25723.955172413796,
+            "difference": 44.33333333333326,
+            "z": 1.0245702128311078,
+            "welch_df": 57.59308610026641,
+            "constant_discrepancy": false,
+            "difference_ci95": [
+              -44.16411304209596,
+              132.83077970876246
+            ],
+            "gross_error_alarm": false
+          },
+          "active_neurons": {
+            "mean_a": 110.83333333333333,
+            "mean_b": 105.73333333333333,
+            "sample_variance_a": 935.5229885057471,
+            "sample_variance_b": 763.7195402298851,
+            "difference": 5.099999999999994,
+            "z": 0.6776463741576573,
+            "welch_df": 57.41310013102105,
+            "constant_discrepancy": false,
+            "difference_ci95": [
+              -10.292499056521248,
+              20.492499056521236
+            ],
+            "gross_error_alarm": false
+          }
+        },
+        "gross_error_alarm": false,
+        "per_neuron_support": 138639,
+        "active_union": 185,
+        "per_neuron_outliers": 0,
+        "active_outlier_fraction": 0.0,
+        "constant_discrepancies": 0,
+        "count_ratio_ci95": [
+          0.8571255552652506,
+          1.0528974552607617
+        ],
+        "count_margin_2pct": "inconclusive-or-outside-margin",
+        "eon": {
+          "jaccard_raw": 0.918918918918919,
+          "jaccard_eon_rounded": 0.9189,
+          "shared_active_pearson_raw": 0.9995975924820185,
+          "shared_active_pearson_eon_rounded": 0.999598,
+          "spike_count_ratio_raw": 0.9498170018488473,
+          "spike_count_ratio_eon_rounded": 0.9498,
+          "active_union": 185,
+          "shared_active": 170,
+          "both_silent_exact_agreement": false
+        }
+      },
+      "MLX-A-vs-MLX-B": {
+        "primary": {
+          "total_spikes": {
+            "mean_a": 797.5666666666667,
+            "mean_b": 839.1,
+            "sample_variance_a": 13645.564367816098,
+            "sample_variance_b": 25723.955172413796,
+            "difference": -41.5333333333333,
+            "z": -1.1465087078382898,
+            "welch_df": 53.0104706106661,
+            "constant_discrepancy": false,
+            "difference_ci95": [
+              -115.62365980810854,
+              32.556993141441936
+            ],
+            "gross_error_alarm": false
+          },
+          "active_neurons": {
+            "mean_a": 99.4,
+            "mean_b": 105.73333333333333,
+            "sample_variance_a": 810.1103448275861,
+            "sample_variance_b": 763.7195402298851,
+            "difference": -6.333333333333329,
+            "z": -0.8744079141735035,
+            "welch_df": 57.94965004902459,
+            "constant_discrepancy": false,
+            "difference_ci95": [
+              -21.146924172208376,
+              8.480257505541719
+            ],
+            "gross_error_alarm": false
+          }
+        },
+        "gross_error_alarm": false,
+        "per_neuron_support": 138639,
+        "active_union": 177,
+        "per_neuron_outliers": 0,
+        "active_outlier_fraction": 0.0,
+        "constant_discrepancies": 0,
+        "count_ratio_ci95": [
+          0.9604367529262894,
+          1.1500258220933284
+        ],
+        "count_margin_2pct": "inconclusive-or-outside-margin",
+        "eon": {
+          "jaccard_raw": 0.9491525423728814,
+          "jaccard_eon_rounded": 0.9492,
+          "shared_active_pearson_raw": 0.9992591798215802,
+          "shared_active_pearson_eon_rounded": 0.999259,
+          "spike_count_ratio_raw": 1.0520750616458394,
+          "spike_count_ratio_eon_rounded": 1.0521,
+          "active_union": 177,
+          "shared_active": 168,
+          "both_silent_exact_agreement": false
+        }
+      }
+    },
+    "sugar-silenced": {
+      "Brian2-vs-MLX-A": {
+        "primary": {
+          "total_spikes": {
+            "mean_a": 4124.333333333333,
+            "mean_b": 4112.666666666667,
+            "sample_variance_a": 3339.8160919540237,
+            "sample_variance_b": 3568.436781609195,
+            "difference": 11.66666666666606,
+            "z": 0.7688175770674869,
+            "welch_df": 57.936547721526765,
+            "constant_discrepancy": false,
+            "difference_ci95": [
+              -19.369320547050382,
+              42.7026538803825
+            ],
+            "gross_error_alarm": false
+          },
+          "active_neurons": {
+            "mean_a": 21.0,
+            "mean_b": 21.0,
+            "sample_variance_a": 0.0,
+            "sample_variance_b": 0.0,
+            "difference": 0.0,
+            "z": 0.0,
+            "welch_df": null,
+            "constant_discrepancy": false,
+            "difference_ci95": [
+              0.0,
+              0.0
+            ],
+            "gross_error_alarm": false
+          }
+        },
+        "gross_error_alarm": false,
+        "per_neuron_support": 138639,
+        "active_union": 21,
+        "per_neuron_outliers": 0,
+        "active_outlier_fraction": 0.0,
+        "constant_discrepancies": 0,
+        "count_ratio_ci95": [
+          0.9896835989997813,
+          1.0047135206180253
+        ],
+        "count_margin_2pct": "resolved-within-margin",
+        "eon": {
+          "jaccard_raw": 1.0,
+          "jaccard_eon_rounded": 1.0,
+          "shared_active_pearson_raw": -0.2892653323217494,
+          "shared_active_pearson_eon_rounded": -0.289265,
+          "spike_count_ratio_raw": 0.9971712600016164,
+          "spike_count_ratio_eon_rounded": 0.9972,
+          "active_union": 21,
+          "shared_active": 21,
+          "both_silent_exact_agreement": false
+        }
+      },
+      "Brian2-vs-MLX-B": {
+        "primary": {
+          "total_spikes": {
+            "mean_a": 4124.333333333333,
+            "mean_b": 4130.0,
+            "sample_variance_a": 3339.8160919540237,
+            "sample_variance_b": 5251.793103448276,
+            "difference": -5.66666666666697,
+            "z": -0.33485056567645927,
+            "welch_df": 55.26314432664229,
+            "constant_discrepancy": false,
+            "difference_ci95": [
+              -40.27803014260864,
+              28.944696809274703
+            ],
+            "gross_error_alarm": false
+          },
+          "active_neurons": {
+            "mean_a": 21.0,
+            "mean_b": 21.0,
+            "sample_variance_a": 0.0,
+            "sample_variance_b": 0.0,
+            "difference": 0.0,
+            "z": 0.0,
+            "welch_df": null,
+            "constant_discrepancy": false,
+            "difference_ci95": [
+              0.0,
+              0.0
+            ],
+            "gross_error_alarm": false
+          }
+        },
+        "gross_error_alarm": false,
+        "per_neuron_support": 138639,
+        "active_union": 21,
+        "per_neuron_outliers": 0,
+        "active_outlier_fraction": 0.0,
+        "constant_discrepancies": 0,
+        "count_ratio_ci95": [
+          0.9930047407158017,
+          1.0097980078710536
+        ],
+        "count_margin_2pct": "resolved-within-margin",
+        "eon": {
+          "jaccard_raw": 1.0,
+          "jaccard_eon_rounded": 1.0,
+          "shared_active_pearson_raw": -0.22986551635370484,
+          "shared_active_pearson_eon_rounded": -0.229866,
+          "spike_count_ratio_raw": 1.0013739594277864,
+          "spike_count_ratio_eon_rounded": 1.0014,
+          "active_union": 21,
+          "shared_active": 21,
+          "both_silent_exact_agreement": false
+        }
+      },
+      "MLX-A-vs-MLX-B": {
+        "primary": {
+          "total_spikes": {
+            "mean_a": 4112.666666666667,
+            "mean_b": 4130.0,
+            "sample_variance_a": 3568.436781609195,
+            "sample_variance_b": 5251.793103448276,
+            "difference": -17.33333333333303,
+            "z": -1.010887354936381,
+            "welch_df": 55.961631645960935,
+            "constant_discrepancy": false,
+            "difference_ci95": [
+              -52.402173552954366,
+              17.735506886288306
+            ],
+            "gross_error_alarm": false
+          },
+          "active_neurons": {
+            "mean_a": 21.0,
+            "mean_b": 21.0,
+            "sample_variance_a": 0.0,
+            "sample_variance_b": 0.0,
+            "difference": 0.0,
+            "z": 0.0,
+            "welch_df": null,
+            "constant_discrepancy": false,
+            "difference_ci95": [
+              0.0,
+              0.0
+            ],
+            "gross_error_alarm": false
+          }
+        },
+        "gross_error_alarm": false,
+        "per_neuron_support": 138639,
+        "active_union": 21,
+        "per_neuron_outliers": 0,
+        "active_outlier_fraction": 0.0,
+        "constant_discrepancies": 0,
+        "count_ratio_ci95": [
+          0.9957023964488132,
+          1.0127859296301032
+        ],
+        "count_margin_2pct": "resolved-within-margin",
+        "eon": {
+          "jaccard_raw": 1.0,
+          "jaccard_eon_rounded": 1.0,
+          "shared_active_pearson_raw": 0.039440791759471364,
+          "shared_active_pearson_eon_rounded": 0.039441,
+          "spike_count_ratio_raw": 1.0042146214945695,
+          "spike_count_ratio_eon_rounded": 1.0042,
+          "active_union": 21,
+          "shared_active": 21,
+          "both_silent_exact_agreement": false
+        }
+      }
+    },
+    "two-class": {
+      "Brian2-vs-MLX-A": {
+        "primary": {
+          "total_spikes": {
+            "mean_a": 17430.766666666666,
+            "mean_b": 17388.0,
+            "sample_variance_a": 91390.18505747124,
+            "sample_variance_b": 87830.3448275862,
+            "difference": 42.766666666666424,
+            "z": 0.5533146263118488,
+            "welch_df": 57.97712599654386,
+            "constant_discrepancy": false,
+            "difference_ci95": [
+              -115.31275180975382,
+              200.84608514308667
+            ],
+            "gross_error_alarm": false
+          },
+          "active_neurons": {
+            "mean_a": 437.3333333333333,
+            "mean_b": 439.9,
+            "sample_variance_a": 116.367816091954,
+            "sample_variance_b": 182.43793103448272,
+            "difference": -2.566666666666663,
+            "z": -0.8132716336342045,
+            "welch_df": 55.296479218061314,
+            "constant_discrepancy": false,
+            "difference_ci95": [
+              -9.021364618792337,
+              3.88803128545901
+            ],
+            "gross_error_alarm": false
+          }
+        },
+        "gross_error_alarm": false,
+        "per_neuron_support": 138639,
+        "active_union": 554,
+        "per_neuron_outliers": 0,
+        "active_outlier_fraction": 0.0,
+        "constant_discrepancies": 0,
+        "count_ratio_ci95": [
+          0.9885303876172339,
+          1.0066462580927125
+        ],
+        "count_margin_2pct": "resolved-within-margin",
+        "eon": {
+          "jaccard_raw": 0.9368231046931408,
+          "jaccard_eon_rounded": 0.9368,
+          "shared_active_pearson_raw": 0.999836382533687,
+          "shared_active_pearson_eon_rounded": 0.999836,
+          "spike_count_ratio_raw": 0.9975464838991591,
+          "spike_count_ratio_eon_rounded": 0.9975,
+          "active_union": 554,
+          "shared_active": 519,
+          "both_silent_exact_agreement": false
+        }
+      },
+      "Brian2-vs-MLX-B": {
+        "primary": {
+          "total_spikes": {
+            "mean_a": 17430.766666666666,
+            "mean_b": 17309.933333333334,
+            "sample_variance_a": 91390.18505747124,
+            "sample_variance_b": 85442.0643678161,
+            "difference": 120.83333333333212,
+            "z": 1.5738619931042475,
+            "welch_df": 57.9344498804073,
+            "constant_discrepancy": false,
+            "difference_ci95": [
+              -36.18927485837824,
+              277.85594152504245
+            ],
+            "gross_error_alarm": false
+          },
+          "active_neurons": {
+            "mean_a": 437.3333333333333,
+            "mean_b": 437.43333333333334,
+            "sample_variance_a": 116.367816091954,
+            "sample_variance_b": 150.52988505747123,
+            "difference": -0.10000000000002274,
+            "z": -0.033526499474074975,
+            "welch_df": 57.06509134415338,
+            "constant_discrepancy": false,
+            "difference_ci95": [
+              -6.20033756645155,
+              6.000337566451504
+            ],
+            "gross_error_alarm": false
+          }
+        },
+        "gross_error_alarm": false,
+        "per_neuron_support": 138639,
+        "active_union": 536,
+        "per_neuron_outliers": 0,
+        "active_outlier_fraction": 0.0,
+        "constant_discrepancies": 0,
+        "count_ratio_ci95": [
+          0.98413303988176,
+          1.0020858884287294
+        ],
+        "count_margin_2pct": "resolved-within-margin",
+        "eon": {
+          "jaccard_raw": 0.9291044776119403,
+          "jaccard_eon_rounded": 0.9291,
+          "shared_active_pearson_raw": 0.9998506277333614,
+          "shared_active_pearson_eon_rounded": 0.999851,
+          "spike_count_ratio_raw": 0.9930678130432206,
+          "spike_count_ratio_eon_rounded": 0.9931,
+          "active_union": 536,
+          "shared_active": 498,
+          "both_silent_exact_agreement": false
+        }
+      },
+      "MLX-A-vs-MLX-B": {
+        "primary": {
+          "total_spikes": {
+            "mean_a": 17388.0,
+            "mean_b": 17309.933333333334,
+            "sample_variance_a": 87830.3448275862,
+            "sample_variance_b": 85442.0643678161,
+            "difference": 78.0666666666657,
+            "z": 1.0272154821023665,
+            "welch_df": 57.98898315304415,
+            "constant_discrepancy": false,
+            "difference_ci95": [
+              -77.36738150634127,
+              233.50071483967267
+            ],
+            "gross_error_alarm": false
+          },
+          "active_neurons": {
+            "mean_a": 439.9,
+            "mean_b": 437.43333333333334,
+            "sample_variance_a": 182.43793103448272,
+            "sample_variance_b": 150.52988505747123,
+            "difference": 2.46666666666664,
+            "z": 0.7404060581162515,
+            "welch_df": 57.472218859141655,
+            "constant_discrepancy": false,
+            "difference_ci95": [
+              -4.347026615047677,
+              9.280359948380958
+            ],
+            "gross_error_alarm": false
+          }
+        },
+        "gross_error_alarm": false,
+        "per_neuron_support": 138639,
+        "active_union": 551,
+        "per_neuron_outliers": 0,
+        "active_outlier_fraction": 0.0,
+        "constant_discrepancies": 0,
+        "count_ratio_ci95": [
+          0.986631531389827,
+          1.0044697453438498
+        ],
+        "count_margin_2pct": "resolved-within-margin",
+        "eon": {
+          "jaccard_raw": 0.9038112522686026,
+          "jaccard_eon_rounded": 0.9038,
+          "shared_active_pearson_raw": 0.9997895771682693,
+          "shared_active_pearson_eon_rounded": 0.99979,
+          "spike_count_ratio_raw": 0.9955103136262556,
+          "spike_count_ratio_eon_rounded": 0.9955,
+          "active_union": 551,
+          "shared_active": 498,
+          "both_silent_exact_agreement": false
+        }
+      }
+    },
+    "silent": {
+      "Brian2-vs-MLX-A": {
+        "gross_error_alarm": false,
+        "exact_zero": true,
+        "welch": "not applicable: deterministic silent control",
+        "eon": {
+          "jaccard_raw": 0.0,
+          "jaccard_eon_rounded": 0.0,
+          "shared_active_pearson_raw": null,
+          "shared_active_pearson_eon_rounded": null,
+          "spike_count_ratio_raw": null,
+          "spike_count_ratio_eon_rounded": null,
+          "active_union": 0,
+          "shared_active": 0,
+          "both_silent_exact_agreement": true
+        }
+      },
+      "Brian2-vs-MLX-B": {
+        "gross_error_alarm": false,
+        "exact_zero": true,
+        "welch": "not applicable: deterministic silent control",
+        "eon": {
+          "jaccard_raw": 0.0,
+          "jaccard_eon_rounded": 0.0,
+          "shared_active_pearson_raw": null,
+          "shared_active_pearson_eon_rounded": null,
+          "spike_count_ratio_raw": null,
+          "spike_count_ratio_eon_rounded": null,
+          "active_union": 0,
+          "shared_active": 0,
+          "both_silent_exact_agreement": true
+        }
+      },
+      "MLX-A-vs-MLX-B": {
+        "gross_error_alarm": false,
+        "exact_zero": true,
+        "welch": "not applicable: deterministic silent control",
+        "eon": {
+          "jaccard_raw": 0.0,
+          "jaccard_eon_rounded": 0.0,
+          "shared_active_pearson_raw": null,
+          "shared_active_pearson_eon_rounded": null,
+          "spike_count_ratio_raw": null,
+          "spike_count_ratio_eon_rounded": null,
+          "active_union": 0,
+          "shared_active": 0,
+          "both_silent_exact_agreement": true
+        }
+      }
+    }
+  },
+  "confidence_method": "Estimated-variance Welch statistics, ddof=1; conservative df29 t=2.0452296421327043 for 95% difference/Fieller intervals. Normal-sample assumptions and low-count limitations apply; passing alarms is not equivalence.",
+  "per_neuron_coverage": "All pinned neurons, including low-rate and all-zero support; every outlier in CSV, full vectors in NPZ.",
+  "timing_metrics": "Independent seeds: timing F1 is not a distributional gate.",
+  "eon_source": "eonsystemspbc/fly-brain@a3db62f:code/compare_ground_truth.py; empty Jaccard=0 and undefined/constant Pearson=null.",
+  "scorer_sha256": "223068e69d7f144678d454431609fdddb97cc142d91c8480e0ffd1e047b0a03b",
+  "trial_receipt_sha256": {
+    "mlx-sugar-10000-0": "d80883e1ca845105c241da007c5a8f2035807c84dd6e39920cd843c9a7c71517",
+    "mlx-p9-10000-0": "00544a110985b826e19474d0f81d3eb5e5c86414e57e0e6c3b47d2167d94b0a3",
+    "mlx-sugar-silenced-10000-0": "79857c69efdb81d38659589063c2f4e2f3eb72dc4a4240a5720f97db413a8433",
+    "mlx-two-class-10000-0": "33cdbcae8fe03d26cef97f12d6a6f44793212de844c143b3159e00c220eaf733",
+    "mlx-silent-10000-0": "40bd9eb6330311ec399e258b58ed135a4bdfe5aa363ac47e1df046e290d94a4d",
+    "brian-sugar-10000-1000": "696a53296efda187d8c90aeb8766af60fc7f12c805a8d7f580d21bd316efa24b",
+    "brian-sugar-10000-1001": "358ace253e402dead5666c30f0a005eb30af2dfaae221505a0f0c91b99c676c7",
+    "brian-sugar-10000-1002": "bacd4403e22bbbb1d6e6ab372ceb141c6db053f25d2d204598bfbe3268d983a5",
+    "brian-sugar-10000-1003": "d6a76f45a51bb8dc2c2296f7b5b0e5ceec2f3a9e322ab50151e0478811bbb192",
+    "brian-sugar-10000-1004": "3850e5f30e0a00f674493054ed48e5f007856891f138706dc982b90ea97d6153",
+    "mlx-sugar-10000-1": "cd5ecb96945c720a9c1c39eab3cb6a5bc8d5908025eec4a7048385ff84fcdb3e",
+    "brian-sugar-10000-1005": "dced9dd221daf25851e10bd1752a1ebebacc3eef81339ea84a179ab7370be9e0",
+    "brian-sugar-10000-1006": "0aebf795c354b69dc3d14434772ea169ccb834315ffbdf5ce8b90612295df44f",
+    "brian-sugar-10000-1007": "6fada31081d3f8476976cf687fe1fe63816ef4c0ec788427cf625cd52069550c",
+    "brian-sugar-10000-1008": "a5065564d9d422d4e7955843e38ba35e5aa5ea3aa47c23fed650921796a4be2c",
+    "brian-sugar-10000-1009": "be7ab9a374950f17824363df4d1511f687dddc7909ae8be5a47d7f2206f2855f",
+    "brian-sugar-10000-1010": "3c4a3ce68170330397c4e4bb5953bcdc820d689676dcabed79de2a6b82ca0de5",
+    "mlx-sugar-10000-2": "b2451e736f31d7f66a03afac4a48825cb3b81a8a7327287366102eceb6b0e5db",
+    "brian-sugar-10000-1011": "8eab7e35441b976db799155065af3717718bcb34fc72652073cf167837c177a7",
+    "brian-sugar-10000-1012": "981c6488fe58c9417fc477bb12d2049f9a99c4a00b0c722380a18ec7cef12b24",
+    "brian-sugar-10000-1013": "5779f857e6e19dbaf08d223b3b8721bdd2e7f7930585d84af398514de0e31d49",
+    "brian-sugar-10000-1014": "30c00fc45f7308784c4847ea6f4c09baf2e63f156b9cb67e6c986545dc1b13cd",
+    "brian-sugar-10000-1015": "d5d99987ba52fb82ccb66db2645bc2e5ec4cb05834141d0ceb11f6c18dd7aa59",
+    "mlx-sugar-10000-3": "7fd919bc6f189f0cca831401a834bad849dc5133b318be7d2ad3336973eb9f4e",
+    "brian-sugar-10000-1016": "035cace099facd2a3e0e04a65218ca68a99cb522e43ad293a3a3ce814bc9aefb",
+    "brian-sugar-10000-1017": "2c514cf3f9d9b91f94af0bc24813517566a400ece9cbc00b6cf32034ef448c43",
+    "brian-sugar-10000-1018": "3d599f63baf1048b9a478c770b5f2645f959e2eafff937dfa776e4e5909215c3",
+    "brian-sugar-10000-1019": "0e11e9ad70dc95c374b88d6cd794ff8e68da97d4d8b5f5246f35c99b6b4fcc24",
+    "brian-sugar-10000-1020": "544078ae76c6c36f5763a4a80c1a76675b1ede5dc3d74c0b61b2d844c4a93504",
+    "brian-sugar-10000-1021": "a396fa98cc08debfe1f672d7d083843c8ac592512ee7f22cfbee45982b48e712",
+    "mlx-sugar-10000-4": "159ed86302a3b1ade3a01e4eef222b5b182d1c90d14f2fc4c97a6abc1bf3dac9",
+    "brian-sugar-10000-1022": "579284f4137ff6e52ca5906cf7076202921c04a820483b8fe471186470bda6fd",
+    "brian-sugar-10000-1023": "4d3055d8d547d21507181d53b10ba79bb55b53de2da60da7e7fe575879899b17",
+    "brian-sugar-10000-1024": "ab58b2f6cf6e31aeec8d377d0c6b5e3b93c18920518a7123cdef89295844efe8",
+    "brian-sugar-10000-1025": "6a7cba7d72b161363c614963dc93f8d252c0986f9cd444d11dad63edf9ecc0fa",
+    "brian-sugar-10000-1026": "44a1ca068b349d2b3fd4e470196dcabb79cf7e7fe457f147ef5243bfd637cb3a",
+    "mlx-sugar-10000-5": "b24212824fbc7e61b10d7d1245625221f98913325e07a4408aabaf8073eec288",
+    "brian-sugar-10000-1027": "eb721fba4fd9d91b9a5b2222a941b7456407a062d7ff649a88dbe86b96951de0",
+    "brian-sugar-10000-1028": "68a3b74b755e208a670f0fd11d642619bf6acb660126c47445b089d8d446601a",
+    "brian-sugar-10000-1029": "bab913525ae0a1557c22e610ee74e1a1ce4bf9ca4de20b1436ad9329a5299608",
+    "brian-p9-10000-1000": "7ca9febc1af70173effcb49405754768268da409d4981bb3614b649f377c012f",
+    "brian-p9-10000-1001": "1ab712f7e46ffc731f91e095698a407c37bd0e2fb928607cc9c1d904ccda6d51",
+    "mlx-sugar-10000-6": "f1675550e90d48fc2e8402798e15f3e443f8b93f88534879b419925fc9c726b3",
+    "brian-p9-10000-1002": "0842dca5b2165d57388e46ec4b011b0bb10d3ee02a8ab900127df6a927349863",
+    "brian-p9-10000-1003": "319658da53d1875e260b82780259e39a4d061ac11f13acdc61810340286d9391",
+    "brian-p9-10000-1004": "caae9db62d0e611e33caab09f5d96e09640bbc1f95a6705b0e747d51f8bdced2",
+    "brian-p9-10000-1005": "581fe8575df4b95cb8a0a08e719bea6639ffe98ab5051ddca1add44eafc4c959",
+    "brian-p9-10000-1006": "f57c3b9068fe151388dd9298f61e97f55cb9a8af59fc93f602b6e725af0b0af5",
+    "mlx-sugar-10000-7": "2376792c170063b96ad7778ff68e367bce7355330c3a7170c323e2a5f83cf3bc",
+    "brian-p9-10000-1007": "e72f9295e11abf32c4ae0925b46caa42b727199ad5b97825709d8b85c2e7d7b3",
+    "brian-p9-10000-1008": "03e89dc0971c0ece7e1bbbe412f06de3a3d42bd9346f520769b43b78fa8c8570",
+    "brian-p9-10000-1009": "f8563b7aca827df226ca2f912c1071fa1d36e015b58979830a0220f1fb9ba859",
+    "brian-p9-10000-1010": "99d29a15487e7e3b35dc8042a58e21bae853a8298e6ae4a4e56c9aea7889ecae",
+    "brian-p9-10000-1011": "07407b382a1df45008167a3c521286e5f9aaefed666a8a2a06c68249ca1f48e9",
+    "mlx-sugar-10000-8": "4d96db4632e9a7567dab0fa719ae859682ae108ecc2d76f450052b61d9e086c4",
+    "brian-p9-10000-1012": "b753f44848e909e2d5dcd3184113a32aba745f03fdd40b753619fe50a08fe450",
+    "brian-p9-10000-1013": "66f0cc2cf9be420efbb8a829986249b7c93528127db8370b9091dcaad487f335",
+    "brian-p9-10000-1014": "72102deeed6ee07998a1b068e8f794443738d56ffc486800c367b58f70209794",
+    "brian-p9-10000-1015": "08ca8edf62b8143769bdf9043a4d5c95394859b322d0addc79332b11a994aed3",
+    "brian-p9-10000-1016": "30bc18f7cbba7fc68d59e0daa5ed13973ba21a09d9082b2fdec0856cc63ab753",
+    "brian-p9-10000-1017": "79b1cddb89115a6d8849eb30de62f69158cfb51edc729978d72f64478f597a42",
+    "mlx-sugar-10000-9": "d32dd438caa2ea25e8044a83c2e929ca2aa1372406612da095bab892e65c0b4e",
+    "brian-p9-10000-1018": "7f7fe98aed3242f0833242b417f1dfbce245e7da07667497df97c5be4df539d9",
+    "brian-p9-10000-1019": "9e474a159bb4c34cc0af9b9096ea7e4830733b309af8075944a3abe61e61b353",
+    "brian-p9-10000-1020": "0c9419e1fa8ab389ad4c28f4a65dfe0181d25274859480b979b02f0370d3a61d",
+    "brian-p9-10000-1021": "75619564b53911eeae2460a78db75484a30f261113f39095bc5c2440cdabe78c",
+    "brian-p9-10000-1022": "f1caaa9390b82e44c6340bdc9c20554f0e84cd3a022f4ff10ea18450105734b8",
+    "brian-p9-10000-1023": "86ce5e271efc2a5fd891718cf080dda1dfb432d57e8c43ba58a0954f0392d7fe",
+    "mlx-sugar-10000-10": "df5866b6ce4d647356f4448faaa64d8392615cd2a93c1c701a09ab0f8671e5ec",
+    "brian-p9-10000-1024": "7e617c0fb3c94f2a10e5d6c9fb0240336335bf19c7740c2dcd013d40e05648b5",
+    "brian-p9-10000-1025": "419039683a42fb215a23b542b8b49510d19983f6d14c7244e596c5beb2e70a21",
+    "brian-p9-10000-1026": "d8693753d2ae4ef8a27ad6323df1712cc7072bea2fd8d5ffde79e899a4fa1319",
+    "brian-p9-10000-1027": "6dc68735e8f254e06c80e0c4345a4785f8a034d162c85ababa5f4115e29d24c9",
+    "brian-p9-10000-1028": "107b3979135d5f751d172aacc80bd0e54857188aa5695f2a4819511740cc9e53",
+    "brian-p9-10000-1029": "9f0011e92013406a7a6ca5fff03521ff711371b04bbf27d06e110b045edfcf93",
+    "mlx-sugar-10000-11": "76eceeae3e86144afff17590a5f4a1de91de0d528c365fd6adce134ef6169485",
+    "brian-sugar-silenced-10000-1000": "340fbf29fa873c2bef5997e4b88d119d2309759553d9b574d85cfbbf50f0bc75",
+    "brian-sugar-silenced-10000-1001": "2dc0e018fc540a9143e9b7c78cd88b430569b1498b610b4e5e497607a1368303",
+    "brian-sugar-silenced-10000-1002": "f24fc7c2190b1acb47cb411d8e09991f39eaad2c77af512d5f278afb5c165016",
+    "mlx-sugar-10000-12": "10ecc02fc67081b34243336da1b234780ed140e74af6a44ec8086a62be32e6d4",
+    "brian-sugar-silenced-10000-1003": "8daae67d9a3bb783b546771633af6bbf7505ddd81aa14140808eaf96422c02e3",
+    "brian-sugar-silenced-10000-1004": "5c0a312090bb578e6d8e800ab10481ee605cb3043ca88cde334b603dacc7d523",
+    "brian-sugar-silenced-10000-1005": "d2a597575e6b25501d84296298fe218e3996290280b33c0b1a33a58eb53bfc42",
+    "brian-sugar-silenced-10000-1006": "ef93f7744b829bfd59424981cd92c1a506e5a0ba2bfdb14786dbea688261fd4c",
+    "mlx-sugar-10000-13": "65f4dae5cd522b99c20cdc1654cdee420cb01abc51e7943b4a05f5a66bd8dfc6",
+    "brian-sugar-silenced-10000-1007": "d4a3b20355529d01e8067aa338a6a2a77ec2172ea0bf36e9602f7b0185472e36",
+    "brian-sugar-silenced-10000-1008": "a8d509b8674ebf4f4b284518c70d83961a29e7eec0eb598901cbcf3fc3abe818",
+    "brian-sugar-silenced-10000-1009": "99991e420fbaa0b771b41c487b926ab29a24dab56c0dce0e0e649e191721b87f",
+    "mlx-sugar-10000-14": "914c80bbd8578f8da3773734e43b76316443c40e486811bb3d1043725f146bbb",
+    "brian-sugar-silenced-10000-1010": "3057c1c3f8a2139324a2e0ff9155a9c6bc86b0d4a8a22fed27c1e96160b10a65",
+    "brian-sugar-silenced-10000-1011": "21f581613fff090662d54c513a33343c80ef2cba672e460b8d9b7c7b943ceaba",
+    "brian-sugar-silenced-10000-1012": "927dfd817c83d80dae52e4dcf0d27662abfa625bff089bbfc21106c3d1c10a9b",
+    "mlx-sugar-10000-15": "0e44f4cc6fd8d44f14c69f9e0a9fa07e382e6273f2d9a4600d1ddea47dd28ae6",
+    "brian-sugar-silenced-10000-1013": "770174b61f99fe6d59646393188550bbb43a23033d96776171c6bdc6c1fbad7c",
+    "brian-sugar-silenced-10000-1014": "4678cdf66f95956b625df902c627651c8235ae6482ff175b1d96e3c252bba204",
+    "brian-sugar-silenced-10000-1015": "a9255888efcf910e4fb1da4499084699342f2209c3de199035add7bb0207136b",
+    "mlx-sugar-10000-16": "ac2eddfa4fa44831cfe2a4b294619094f9a044446d39379287cbd65289d96e53",
+    "brian-sugar-silenced-10000-1016": "b854b4b67dc1c48f1b1ed005b9fae839f260addda94326659c1db7afd7112d20",
+    "brian-sugar-silenced-10000-1017": "97a9633d21d2d77a59a3e5f3f7bd59f5b5410f5b93a6f5a9a5fe53df12a42693",
+    "brian-sugar-silenced-10000-1018": "482b6e44479543040ecfdcdb1895aebe6219f88574775233afdd0c0d8b33c031",
+    "mlx-sugar-10000-17": "50cd3340c599eee5647107f297da6c9d11f771f58e945ce23a42d1ea9933b520",
+    "brian-sugar-silenced-10000-1019": "4d2f8101ef6245dca467d7abd1c2a00d7251a189e3ecf896cc893d8aa3966908",
+    "brian-sugar-silenced-10000-1020": "1db9c26f30c6139964d7c4b559694a1d507b5d123b74f46e71e7b20d21b34f54",
+    "brian-sugar-silenced-10000-1021": "9c7f9979f68e93bf81b3265ecb57d3549d3d78fd43439d8f2d479c838bf04a93",
+    "mlx-sugar-10000-18": "ad13f192889f6bd9de563689d67856c23ce359c2e6bf37acb03bf852271c061c",
+    "brian-sugar-silenced-10000-1022": "a4a846125e77f006cf386c14ee53f47c33e8ed96c5a81bf2a5f858573f1a7f25",
+    "brian-sugar-silenced-10000-1023": "70156b43b00e05e1fbeafea49886b6583501d49fc228d0a271ebb2738a229f5f",
+    "brian-sugar-silenced-10000-1024": "9d5bb818744c3b0abe32b803cf31d8631afb88947fc7a52c5a8ed0ecb9ccc91e",
+    "mlx-sugar-10000-19": "23c78edcd577b2c94360a274c675f25865f056ff2b57056ecd459b910896c942",
+    "brian-sugar-silenced-10000-1025": "2863ed39bfeae7cde8e5a2f2817079e6f189f0d95dc1825efd5938f9c7bf19d4",
+    "brian-sugar-silenced-10000-1026": "e20b0988be2687e511e147902a2bde24e1cc2a2b50c66242e6364ef19bf4c912",
+    "brian-sugar-silenced-10000-1027": "028ef5667eb1f83b77659e75a7dc66a110e4985be36d99805aa42a9070a0dd87",
+    "mlx-sugar-10000-20": "a0c61f7e8fa490cef851f0f46e82d24902868e85286e8cad52a150f565ccaf91",
+    "brian-sugar-silenced-10000-1028": "166e70f9ff56dacaf3b6d8c89d7f321dd18c81bb3c3da38d036c8fc6c1eb8295",
+    "brian-sugar-silenced-10000-1029": "5dd90aff5e2577b2d9e7766ab3925b7280a13ddaca601b02ac9b1d72f25ec24c",
+    "brian-two-class-10000-1000": "409c2fc22f0e4a90b81c73f0f0bef98a21dbc3dc39b21ad77a568105a11109c4",
+    "brian-two-class-10000-1001": "9bed11ec7bf941aa4649e974f2cc21f35e707a155b21ae77c41fccc5ba493be0",
+    "mlx-sugar-10000-21": "4d79a9ea99ea34d64f5dc8303fb95457a58e712164da5f80174d57bbc4c2a537",
+    "brian-two-class-10000-1002": "74714eaef3faa6b6d7665437853503b32bb834f323d99fd815d9ace848b814b5",
+    "brian-two-class-10000-1003": "e4a56b5c1f6d5d471420ff56e1aaea662f1e8ec9f8b79220567f9111f09c2db8",
+    "brian-two-class-10000-1004": "13caf9453039a5264d44c6c7f4344b3c425c71cd7166ed4765b4567d8154d922",
+    "brian-two-class-10000-1005": "da5d7b37c67f0eac02e89b4b20f782650c28616ba9654b1ba70cafa2420e194a",
+    "brian-two-class-10000-1006": "182698134abcf1c702cd17cbe57fb6437cb96f52ed89a08780ef22297f7b9a9d",
+    "mlx-sugar-10000-22": "70dbce72d65bbcb1f347ae3370aa0e0edfd743e93062a0657cd0db929d379cf0",
+    "brian-two-class-10000-1007": "2d442a9feb90e4dfd05f1d9cd89f2d1cbfd8656bac51f1460d9a65faea1a1bfa",
+    "brian-two-class-10000-1008": "cabd0f7ad70a019cb977638702fcf0c55213fe03a945d490a0edcdb69f382208",
+    "brian-two-class-10000-1009": "e0102d2d42e2692edd3b6bc04332e7eb9a8f5c587d30a3edd3504be3c40f555f",
+    "brian-two-class-10000-1010": "480bba688a9b13aad94a58266cdeab22d7ffb4013ae713239944cf50c89932a1",
+    "mlx-sugar-10000-23": "648aeea235a45a45918f3e4bbccffd139bb038ee27eda1322d4f18d0f65fbd00",
+    "brian-two-class-10000-1011": "3804b7630573048aecc30337b55e6a4595ded11fce993d5f9138e10c2f86a09b",
+    "brian-two-class-10000-1012": "b7a98197bdddbbbfa31434845eaf0c2685000df9b3009274d9dbdf1ad16231d2",
+    "brian-two-class-10000-1013": "6591c64362f48b3de36a9e07c3b12c958abeda2e6f23d7e6a01fdaa822689ec9",
+    "brian-two-class-10000-1014": "1d06f52f49bc46a72dc8c2a01d21754221c9527d8298facda23a792f09e3f5b1",
+    "brian-two-class-10000-1015": "1f060ca47e5cf40b771315ee7171a8aac2affb78c5c1bfd140b99e40ea131bce",
+    "mlx-sugar-10000-24": "9eaa814765665aa63c301a5dc86030a2e07e513fb2a2b3ca2d671e2061c0ce48",
+    "brian-two-class-10000-1016": "130df3f7ad2ef00d0db9b39cbd43ea36783a5a022264347a36fb248196776848",
+    "brian-two-class-10000-1017": "eb085886796c2dadb7bbfab7103b148bc4e259de28c0b1319ec35aaf69f1c94a",
+    "brian-two-class-10000-1018": "e74b6156440b9389ba19beff302d93b902ed8ca08081322638d945441535eea0",
+    "brian-two-class-10000-1019": "aab1ccd7cf9b0b6397d663ced68d9e8ae6e9dd52671f3d09d3d57028f39201d6",
+    "mlx-sugar-10000-25": "c4bd6869308a55b2336823c0687277902122f0e0084c0d4d4bfb5a3780dc26fd",
+    "brian-two-class-10000-1020": "668320ed53b93bc3390c35c479f363559680ec85a22557f5bdc988f12581beb6",
+    "brian-two-class-10000-1021": "5621a83e071926b0555831bf656dc74b9e27b83921e0c2394fda2413a4500742",
+    "brian-two-class-10000-1022": "1e69a2e27bed29c015c70b6eaa022c09789d3c0621654ce01c14b3180c6b5394",
+    "brian-two-class-10000-1023": "bf593e4146787f7f12f7153a8eb498cc44d5faef0948ee8d1c35cf3d7b54406b",
+    "brian-two-class-10000-1024": "43f90d732db8a24df703e93bb422888b5bcec9cde1e70f619c0124688baabc5c",
+    "mlx-sugar-10000-26": "b9162ad7789fea069ce9e9f6c8ecf4ef914d78b21b212e39af60d796bcf7fce6",
+    "brian-two-class-10000-1025": "ee76e811aab4ba83802a2a41240ae3751f05b9ba04f48108cb2aa55202373315",
+    "brian-two-class-10000-1026": "41b86eb659fada5bd794a9f2901810e97046deb49facd7986d07cbcbdbf500b4",
+    "brian-two-class-10000-1027": "b9208c9b5eeed6ce6aa8b660b4e1a122b391d1fa015b5eb7ffddd52199a48758",
+    "brian-two-class-10000-1028": "90590ad349aedc21237bcd3289a2b5effca2d14c7d008fff3ec3564b0f1870b4",
+    "mlx-sugar-10000-27": "e23c63a752812aa932ed38b70384c7727e5104860dcd386a7b8605365e14c391",
+    "brian-two-class-10000-1029": "e34b66ec12e8c1872417bda7b4a52dc2222f7750f654277b5ea88339e42aa451",
+    "brian-silent-10000-1000": "fcc96cc5d5967d7bf506ed82a220d3f22f0c1c501fe6e99252e6ce5ae8c3e6b2",
+    "mlx-sugar-10000-28": "90d71b4ba0a9edb9cfa0afcf648aa28555474cb4717905c5878bd87fe3405e31",
+    "mlx-sugar-10000-29": "e5a2d0796c4de65afcb64f68482d1c4366e9a25a1d17d390c17a967144515908",
+    "mlx-sugar-10000-2000": "f76180f54c82e4cf17d2eeb52e6a3dd7b8124d738469267bdaf6d8993c1e1ba8",
+    "mlx-sugar-10000-2001": "3491f7c656d8b953d71445e7765e763cad9348a75f0432adfe275ecd09147a3a",
+    "mlx-sugar-10000-2002": "6e477c5eaa89b448f8b5931c5b4b33b73d2aab69be50213a1da6912a5a441d13",
+    "mlx-sugar-10000-2003": "91d36dd0fe6550837cbfecdbdd8f285b897617f1a17e7185a57217088835db22",
+    "mlx-sugar-10000-2004": "05c5fb5dd982af298dfc5d26fb34c37b1736b63b0e6d8f5fcbd25c7c401b66c1",
+    "mlx-sugar-10000-2005": "70d84b7d1f104b5b924c32f293d4a15e3b9db52cd0ba4181293ba7b43271ed84",
+    "mlx-sugar-10000-2006": "675006c4c02ae829b05f849c37a43b775abdacf901a3507e8d4a66fc09c53245",
+    "mlx-sugar-10000-2007": "3f72080bc57749b1b7cea1a37ceb1b640c40f9c690e54c4fd33394a0ca04a873",
+    "mlx-sugar-10000-2008": "8034af20d70ee3c4f585bb408b9e83fa61009f7fcf6690a137b964cdfe346452",
+    "mlx-sugar-10000-2009": "2ac07ed3a797743c71011d125e4a65ade31a7ced40e7f74c41cca3924eb49710",
+    "mlx-sugar-10000-2010": "0fa1111e1a4ac0455c7cfd724b0c3e86b641e24c59ce6757b36cbd9fe71c1916",
+    "mlx-sugar-10000-2011": "1023ee14d43d69b3bb5efee8647c07aaab1973d4e02ac9b7ad80794f7f68b11b",
+    "mlx-sugar-10000-2012": "957d71662980a1f5afb47d37e1651034bdfb5b74b62f6e170e933be3984ba43b",
+    "mlx-sugar-10000-2013": "6d462312e966bba3791fb230ce52202b3861740b865b8299a536e2019b3a6a25",
+    "mlx-sugar-10000-2014": "bab63f9b30f12f16f7d48f1c171b574856df3e579ed5dfe97d0dd7c3eb06e920",
+    "mlx-sugar-10000-2015": "ccc6ee71fd950d8c3f4888e687135862351ece2a2d9684ab87567df741db1a4b",
+    "mlx-sugar-10000-2016": "49053f5fac8cd697c69736d4f2f4bc6b37e5f890deed0a64f83b6a5d51cfba35",
+    "mlx-sugar-10000-2017": "78e95e7971454ac86ae0d4a6db801569e0e02bec4ebd7e6efde39dda03f7f711",
+    "mlx-sugar-10000-2018": "7153fec81700994427975edaf63e0a400660175d32b228c9407d6313d37a5a43",
+    "mlx-sugar-10000-2019": "3942d861d965099f1510f12f98a205b66013a3622ce7187279087fa658a4dec3",
+    "mlx-sugar-10000-2020": "a69b811c4bdbb770f959c4e7cbd8f010072a93c48ca5e80717598deb803a7166",
+    "mlx-sugar-10000-2021": "2867b628767388c62e462a992ab44e61ad2488ea1763d3cdc733f9f7ec526ccc",
+    "mlx-sugar-10000-2022": "42df2a336a6edc87199b20d45f90b929b5dd752e2872e40eb8e34fd198a1610f",
+    "mlx-sugar-10000-2023": "dfa4e18f1a4c7194467d99337b9f59fc2a22f4cbec2346247d2bb4da78f530b0",
+    "mlx-sugar-10000-2024": "c611db4654d5d78844f723b13a5cc01486ecd7a2abfcbc217002f5046c89a105",
+    "mlx-sugar-10000-2025": "2d7ee0e3dc9dc190c31bf58eb9229b1723a6dfdac70b96f8997066321c8704de",
+    "mlx-sugar-10000-2026": "6df4189c1ba3b85e258f54e0047401180a3c7ac32747ebc86e796755c6b92690",
+    "mlx-sugar-10000-2027": "6c76e4d6f6b973d7a8b424949aeb248f72f14eec1a21aaadc41b601d99ba5b04",
+    "mlx-sugar-10000-2028": "3ff649d6fde881db9a87d50066fc74b6cdbc78224e18a56a95d059af8d145113",
+    "mlx-sugar-10000-2029": "a05d1c0132c2d63c4cfe02825b6fb714d7d580709abcedaf94bff941981e182e",
+    "mlx-p9-10000-1": "befc03da4241b3d19eee5dc58ebc8e077301a11b743aecc32724e691a0f2e187",
+    "mlx-p9-10000-2": "eee6358f8c5cdaa45d6e7d87ed8ba221d58ffb17200b64441d5eea96b4f4c38a",
+    "mlx-p9-10000-3": "aaf5f93876fa2fb4450bff468268bcbea1923bbad47bdace299333bdf4520ac0",
+    "mlx-p9-10000-4": "12fcd2740e476b5e0eca4515dedfc613dd6fd3d863faf6e476960e7d34fff6ee",
+    "mlx-p9-10000-5": "01a4d7ad8fa916b8ce90fdff032ef11be1834f2a4084197c06eebd95effc47f3",
+    "mlx-p9-10000-6": "ddf090d1a9ccb845d8c90436b9b15d9b5628a00379643c7418695a163d853c55",
+    "mlx-p9-10000-7": "99e04c83c0cc683c6a182735c9b3caad36505395d6b79f8e269944227ff93cd4",
+    "mlx-p9-10000-8": "266023777a3cc317643a40999dde8f1f34e325673f38c72d1aebb868b7dd387f",
+    "mlx-p9-10000-9": "e1517dd28983cd42378b8651532c1f14ff71512d3b1c290ad5fa9fe539fc47cf",
+    "mlx-p9-10000-10": "bd988d3840498266007b5ce4f2cd4ff8e99cff48a78afb3fed1adacd50af0f30",
+    "mlx-p9-10000-11": "a24d8727f66259c75b7632f4c4d1509747748e80fc1af710592978a6c9db90f2",
+    "mlx-p9-10000-12": "89d2d2b1102a0ea7adc0e6624fdb73cea92103ebf395edc0b1e98ffe58d6b683",
+    "mlx-p9-10000-13": "3be6cd38990ec975fe1b38c4c6b7b9574455d460c57b92e00a8fd9219e428521",
+    "mlx-p9-10000-14": "b000e44340b5a846c0e237da30a324e4201f22a41feceec3f80f260843df9337",
+    "mlx-p9-10000-15": "04dd2779646880493fc32ba8aff836381be23651fd46d9647e6878c661ccec34",
+    "mlx-p9-10000-16": "a49d85f942627196125def37dcaf370bc76a1c8b2ce07c92c8e07ef924cbeb1f",
+    "mlx-p9-10000-17": "764e037f04ed507f71015c6753b36ec65c0b6ecf15bf564bda99c03adffedb44",
+    "mlx-p9-10000-18": "69c65344502f82703cea6f83ee9203d9347011f305766880f7ea129542072fb8",
+    "mlx-p9-10000-19": "5ce98fff805d70eea45f824e5d5652d7319fa344592d12164bf9abff5f238982",
+    "mlx-p9-10000-20": "3bd05c468b1875cba824df90393dda6626f3fd96db608998d49809a329a86676",
+    "mlx-p9-10000-21": "d1a4cb828653a460a50b5d3d637fdb74df9e5dc2fbb43ec92484888bc70a0380",
+    "mlx-p9-10000-22": "1e83c1ab4f08938c0b9c2411baf4896b514b52c5305a600d91d81fa5eab69234",
+    "mlx-p9-10000-23": "504ef43b2669ffe9f63295fbb7a3ab622f77bed7d4f63aa2fcf1cdf302c893d2",
+    "mlx-p9-10000-24": "688a8b58bb1eb5889451598b81ea602a35ad1195fa3e86d5c7820fe489935038",
+    "mlx-p9-10000-25": "6341ba3dfcc46e69b842cb4aadfe7e35af9b153ffef56407c89e3bd1166ba4a5",
+    "mlx-p9-10000-26": "c50e75b87888f06b96e98ae133417b42a78c13957b6c22b6fe1be71e38370009",
+    "mlx-p9-10000-27": "6a8a5bda3909d84ed5596653e962782c759c6c04b8f47c9194ef9dcf83775800",
+    "mlx-p9-10000-28": "51e37b258d92fdd8fad17e75981207545977842626e3215c481034ff18854dd3",
+    "mlx-p9-10000-29": "ef51aa1dd64a64eff3c45c3f506dc61b92fc7909a3afe1b98579d2b919d71f5f",
+    "mlx-p9-10000-2000": "0eff1f6bb03dd153e9a0ce881037e9fab77f94520533a742a8fd016842ff4f8d",
+    "mlx-p9-10000-2001": "65ef95b725631b79579eea53b3d7dc59697448cdf2f9429feb7bf3e9832bc52e",
+    "mlx-p9-10000-2002": "204cab2f05f7a460f987a401787a2aad778bcb5e0bfc934c5a43b503ec79ba1c",
+    "mlx-p9-10000-2003": "02c7567ade71f98c05d1f5d7c6d4755ab1eba4f4be8a14b70203f331ceea8a62",
+    "mlx-p9-10000-2004": "f7fb257f2b72348a699574d00fbac40e1d45e70e5a0bd04a20cfc2177eadd2f7",
+    "mlx-p9-10000-2005": "aeba06a7aeae7b35e76e679df75f0b88236eb4f1a1f8152b0d63f3c007603c98",
+    "mlx-p9-10000-2006": "33eda64072a76097161c9e502bdc89c1cc21bc40c950042d9979f271afcb1b3e",
+    "mlx-p9-10000-2007": "9b13aa03fc854e14642c1c8fa1077df9490e35987b09a72c51907fc138f184f5",
+    "mlx-p9-10000-2008": "25f6cb7814bcc2a82c9ccdff5351a4cb0c2136c21504b0bbacdecdf0c0477103",
+    "mlx-p9-10000-2009": "0b793075ebaecc0c497272fdf3bb92a28514613483f166331dee269c8ba814cf",
+    "mlx-p9-10000-2010": "d8f904dc0c25a1b315916892f49545dfbb010aad8b4059fe9aff7bb85538b0f0",
+    "mlx-p9-10000-2011": "2ce2c216abb02b5fc0308876f9b30fcfb92f218378739762867144cd449cedaa",
+    "mlx-p9-10000-2012": "b298c7fc9ab7e57001b8f3027eec5c69e6c07cea0b2363dcd56cfc21af9c5835",
+    "mlx-p9-10000-2013": "360b450aff4c9eda3c9739f82278739ce8626a98e5fa662301bb4e5a43ee5d1c",
+    "mlx-p9-10000-2014": "ee8f7420dc417cd064d575f6a567262c42b2ff8bcb9db27b3ef8ec0a197f64d2",
+    "mlx-p9-10000-2015": "fe0e4d80be0d759a4efb2565770354eb909af2014d8d5386ad4de71fe48db0ed",
+    "mlx-p9-10000-2016": "763d8b5eb6277e29c9481b59c951e2007675c0365e0c49a2638bc85f0335eeb4",
+    "mlx-p9-10000-2017": "d9e35dde81e9c19067df5c9af9d1bde828b5e88f6f6dd77d8601cbabc8ea3f9b",
+    "mlx-p9-10000-2018": "8f742f1e85334faf26869aff138c81e00d3239f92f044d8f121e54d75e3bb8fa",
+    "mlx-p9-10000-2019": "92517c0a0d99b77a057b72fa3d6085ca134be104d5f708a818e0c034d572c139",
+    "mlx-p9-10000-2020": "921e031557b6609b5aeb3ade0a8f89d26320471cffdd99c9e3a102149529998a",
+    "mlx-p9-10000-2021": "4662d6b21003425cbf9cb87dfd63e9ff336a89a7827669230fa921ece3c2e6e1",
+    "mlx-p9-10000-2022": "60054a22af4c9c612d999c876763c021725dfbdb4578d3e911f44ba729071f7a",
+    "mlx-p9-10000-2023": "0a5181eeb07b498437d1d2c1427ba58f974bde0ae76234f6374b0c548b217e36",
+    "mlx-p9-10000-2024": "25c4ad0b28a3ee34cab3b2b8d1db8faac4eb6e75fcd3cff039770fdec386ea83",
+    "mlx-p9-10000-2025": "d52c4f428989162370a7128b08afe829b90d612934ea988f95ebf8dd217a9a9f",
+    "mlx-p9-10000-2026": "57f05873a43de74edfea762500d069b90910a1c851307a4a0bafb6b3fc40269d",
+    "mlx-p9-10000-2027": "da48d4a9414fdf34708f06710e703c4bf97c6568a733f9c377b5c5929af5275c",
+    "mlx-p9-10000-2028": "68be9f1d2637978235d2e0eecc3a278622902868fd126c23c42b13dca4db5d95",
+    "mlx-p9-10000-2029": "7cececee2121386347aee7cd74bacdc92eba1949fb9e877384567d6e233d30f7",
+    "mlx-sugar-silenced-10000-1": "ed0a9d2c260f9f6c16aec59ac6e1ffc0f06cf957b538c9fb44d8d7bb0271515b",
+    "mlx-sugar-silenced-10000-2": "c46ec6a8f4226c8293d1ecaf311b057d0cda82c0e36246a84186ed590f8227d5",
+    "mlx-sugar-silenced-10000-3": "6e0de5b9d62ce6202d7560d36159faf4d2c514703365d1ee67f88a36ed972365",
+    "mlx-sugar-silenced-10000-4": "9c9f2cc9c9d96f9548719a9d5769c2b6af1d47917db6c8f2f992df34087844f2",
+    "mlx-sugar-silenced-10000-5": "b1f2b45ec49c972179f2f6a5f5389e236071d4ba0cff873e07aec81ff0cec69d",
+    "mlx-sugar-silenced-10000-6": "c617de660d465f6f894197c3a58f651eb713aa7948c9d205ac4e757b99f0611f",
+    "mlx-sugar-silenced-10000-7": "0ecafa231cb626e1f310e32114ce9a9bc5e6eeeb570085218e8238f85f17a5c0",
+    "mlx-sugar-silenced-10000-8": "dbf00784c810a2b05a29de97b9854840e711b23e9ea907f42f2e9524bcbbc9e6",
+    "mlx-sugar-silenced-10000-9": "30f3e5bf62e5b9523baa61c1f054cd16002b9b4369d022f10ddad036667ecaf4",
+    "mlx-sugar-silenced-10000-10": "1b7b1035a7bb4df4542ed9fa5dbef02715888fe6eb38dfc15cd6effe500344f6",
+    "mlx-sugar-silenced-10000-11": "6ed56dd2d9f7a298b3cf63b84315cb1f53942cc687624ad908ebafccf3ca2ed0",
+    "mlx-sugar-silenced-10000-12": "09fe5b7843f53694a4e15d1ac9d6251b1e58352431c56001b7b3f332230aa550",
+    "mlx-sugar-silenced-10000-13": "b923ca29871a09bb75cbff1285e297d7e26d6956cb501e308835ecb7a8c64845",
+    "mlx-sugar-silenced-10000-14": "e7e1c3a857349bb9efa0170ff5cbd91621399a903a87ec975d8456031d6a9e6b",
+    "mlx-sugar-silenced-10000-15": "3adc6f50c3720fc30be6c09c1a047922499a5ef530287568d81832afbf6eb8f2",
+    "mlx-sugar-silenced-10000-16": "9ce845b27c054259f00518c26b5c2e95bea33ea280756d205262b10214372e0b",
+    "mlx-sugar-silenced-10000-17": "427e9051eae30e106b2eea705862ebb38aa6277737473a6bc178af303aa2b6eb",
+    "mlx-sugar-silenced-10000-18": "ba6fef36da4d23cdbb6256af317eef1a9bf4fc19e0d16c47109c8139cb5fa60a",
+    "mlx-sugar-silenced-10000-19": "b7d8a2f3532f6d5ce37d45e0a0c6040e3921df19107cf9522a15fae45f3ac336",
+    "mlx-sugar-silenced-10000-20": "9be5dcd3ee71fbbfded612e7df07192a01035890242d5de3b6808b2145ad2ad4",
+    "mlx-sugar-silenced-10000-21": "b52f381e8de1f1fa0ecac182a1bb7620fbea8266c916d62f1b7a702b8bd99f97",
+    "mlx-sugar-silenced-10000-22": "b92c14979237241445e843aff750f7ecef24109bb0d7513f5c7c1fefcf8ac88d",
+    "mlx-sugar-silenced-10000-23": "1f07ab788678aa0264dffac43d0dfa6b76e8d882acb4fce7e45cbdc41a9efe16",
+    "mlx-sugar-silenced-10000-24": "78f918f45c864e878bb0522ce770f3f871ec68d0e7a0da2b7102823712a2fa4d",
+    "mlx-sugar-silenced-10000-25": "f60ab0eee32588f377d138d3e19c47518a36e4066dd6cda6f09c29b491b69608",
+    "mlx-sugar-silenced-10000-26": "cc7dc7c21d4230edda8736ffec17b899eb62a6f9bfe92fd8d89125fe159a106c",
+    "mlx-sugar-silenced-10000-27": "1dec981b965f02487c07cdb26c98c6ab9d32933563a51e7c76b6bf77b7789c47",
+    "mlx-sugar-silenced-10000-28": "aa66c773e0812e4de6617a7ca1b54465503054b1c451294a10753ce32906178d",
+    "mlx-sugar-silenced-10000-29": "8be690a711aa5458089264e96c92cdd643854a9b4ccac2edf2c6fcf9a2cc1098",
+    "mlx-sugar-silenced-10000-2000": "60321ca83e20101bbc9be3eccd4641d602036491dec03a05c206f155c95ef330",
+    "mlx-sugar-silenced-10000-2001": "0ab022f3cba8fd583151d87b2df421c67e6963b72e4482580098239b2e07ed57",
+    "mlx-sugar-silenced-10000-2002": "2c3847eacd7ef83d16dc7a706320b962cc0778ffdd97c9a71c9a9d740a8965af",
+    "mlx-sugar-silenced-10000-2003": "ef03e696b8c29165dea6c6a6d36ccdb741442659fd46937a7529a949fccf947b",
+    "mlx-sugar-silenced-10000-2004": "ecbf84e0da33b0bf4186b520f5f75281039445fa16297a91923ecd1dea261755",
+    "mlx-sugar-silenced-10000-2005": "13d9a1e6a28e41791c23297de730e1f86e1aa0ff396ff203745474d5a7cd4b9f",
+    "mlx-sugar-silenced-10000-2006": "925fcc0d3a3c57d0b5ee96b2a43b658d24f2b7ec8b4005fec1be4fd453164cb3",
+    "mlx-sugar-silenced-10000-2007": "3d4df96a64ce69fb0648f969d9bf71090bf432ed57477879b4f7866e78da7046",
+    "mlx-sugar-silenced-10000-2008": "26bc1e489a174c0f8083ac9d9a62802a2b1f5f4682bcbf41858e8767c58c0ae0",
+    "mlx-sugar-silenced-10000-2009": "4689be83a740a9f93951c385125110f411eaae8d3f977591ed151f3a58511670",
+    "mlx-sugar-silenced-10000-2010": "f82880c3cba9c39f001d70635bfaeab9cc129d62915b52ea063dec9155515a60",
+    "mlx-sugar-silenced-10000-2011": "de6374d4fb57ca56ba4d36aa7cdec00cfc36daefdd70f78abc21457e9ec070c2",
+    "mlx-sugar-silenced-10000-2012": "b483281e81758847dcb80b97b1a3274a3eeecf208473c7d7b20dcdd15777171a",
+    "mlx-sugar-silenced-10000-2013": "1362d02ad0e810dd7f0568437fc5c365147b00581d48f929deabbffb598aaa64",
+    "mlx-sugar-silenced-10000-2014": "0eae097fe94d5023a8fa631c35132e4a29b6d165f04803df779ffe64a2f93aa8",
+    "mlx-sugar-silenced-10000-2015": "14ef78b0f0223fe68edf73c1a67bf07a82c98dd9af2c784c4b5425e296918f45",
+    "mlx-sugar-silenced-10000-2016": "ba7ac4d94dea2f51fea212e44caf318658dd342a263e93188bf75f4ef9c351c4",
+    "mlx-sugar-silenced-10000-2017": "826bc435195c0733ecd44aaac785cd4346b5da94e1f6d4cc50ecd9e4d135b74d",
+    "mlx-sugar-silenced-10000-2018": "7f1ac72368ec665d91ceae11fe28dea1429db17e0ecb5db17f494349feb09f7f",
+    "mlx-sugar-silenced-10000-2019": "24e33fe1c33b379fe73fef341eeefbe57549a9f5ddb3b7ecc19c182516a2d332",
+    "mlx-sugar-silenced-10000-2020": "e173f899c04d066efb5beb3df1636614ccb80434dc416cb9833867c9d68da1e1",
+    "mlx-sugar-silenced-10000-2021": "69d740c27e346d9bd1efc79f0b1c38746a8c8fda58beb497e202b135b6fd313f",
+    "mlx-sugar-silenced-10000-2022": "34ac2fefb0cf415b125ab69e5ffc6e496431b4d4d9a049bbb8bf0b9ff0c71ec0",
+    "mlx-sugar-silenced-10000-2023": "29b8ddc670aff3f947926b781d15d3b663e7a9705f75a1faee65e017944667c7",
+    "mlx-sugar-silenced-10000-2024": "c0a892739b205022acc7c2ad3bf5f07a98729f62343af3612420bb81d91f9560",
+    "mlx-sugar-silenced-10000-2025": "a166e0a5e1ee7f370022f653b84a3d41046a342ddfeda144a3f86d317d80551d",
+    "mlx-sugar-silenced-10000-2026": "969abff7a37c4207639cd539ca5bf32b38dc55b3f5024e8120af236544619366",
+    "mlx-sugar-silenced-10000-2027": "c010fe09004d0b88e9be82443ad69667edbd707176e67b68aace8146d356ee14",
+    "mlx-sugar-silenced-10000-2028": "d7441554cb9715ac9c3fcb09ce7993ceaae597955ae6b52d244895fb3f978e65",
+    "mlx-sugar-silenced-10000-2029": "ca8ee082aba982c0b0e583ca73c70c855b51ee87e5ee7f1b5469bd4348592722",
+    "mlx-two-class-10000-1": "662b8da17cd0e966f757544eaf57b8e4b19b6479fe20677fbe3538954eb33a79",
+    "mlx-two-class-10000-2": "3a7583387a3f0731e7e1cead407723d774ecc83edb66831439af954bf8b12e4d",
+    "mlx-two-class-10000-3": "c6cd04ee5ce189c323ebcf89536703f2b0da4d2b4b253e3ff9f6a0651e51412a",
+    "mlx-two-class-10000-4": "fa66e56ce53bf13eef9ce69a75becb63213609095c6cc63ba8a42e6bc392a122",
+    "mlx-two-class-10000-5": "42579db78041fc010ec2a01f3eef339778205f85ce4ecb7c0b737670e7b95be8",
+    "mlx-two-class-10000-6": "e3174e2125216656bf78f5b86ee4ef53c05e5e59ab593b79c3faeb89aa04ee25",
+    "mlx-two-class-10000-7": "487378cb0d265080b921d140a57ef9b7a6deb42b16dc9218c69623481c729832",
+    "mlx-two-class-10000-8": "14762b5d4cfa7b1f013ce94b9fb6a2e03839b7320d5d3baa3e5b9c52913924a4",
+    "mlx-two-class-10000-9": "96ff228c5d99b930f1062b6cbe8a5c111e94cd19961974d76ed274c1d35ad3e5",
+    "mlx-two-class-10000-10": "02ac916fa38a9dc39bd76631be2837ab5219287ba1f164781e5c1f800de83e26",
+    "mlx-two-class-10000-11": "13b98537086ed922341ae5f7d7e0e12501b9f7539f6837aacd77183c30e3e4e1",
+    "mlx-two-class-10000-12": "76dd73a187761db9b0139b6b73fc63768f627a574b25373c983c4627bb591b09",
+    "mlx-two-class-10000-13": "e7874236142a83c16feb3ce67875f3984dd1bdf874b5041c570df9b3a221b4f5",
+    "mlx-two-class-10000-14": "17a82887a470ee6f99d9d6fa7744e8d07b7cd5346b46e3ac23f324fcd10d7902",
+    "mlx-two-class-10000-15": "a191e8ab922959cac5105bed947fda70a4e97046f27fe5ff2ccdffddb50942bc",
+    "mlx-two-class-10000-16": "f2e81298baf4b2b14591e43923e729e3ece39e99a478eeb0f3d13369978da014",
+    "mlx-two-class-10000-17": "b84fdfe93670928e1c2942a8a043629a3a75339f3b4e26875edc4936ccf84faa",
+    "mlx-two-class-10000-18": "56cb4e01b5918d87b9107440abb15f2ac3c6df26dabd39cecef330e176397ac0",
+    "mlx-two-class-10000-19": "6491d254f90428fc0e58791da77e0e227b756d39ac5e032e9f1a5b9704de9454",
+    "mlx-two-class-10000-20": "c5b7459edf2190a0e6c3d7b5f3bc55dd29340df311e26200f08d7b7ac05b35c5",
+    "mlx-two-class-10000-21": "a73a6a249a29d2b66ef4752d92585c20c8f7af9fc38cbc310c4fa1e0466a468e",
+    "mlx-two-class-10000-22": "d8790db22292b29f6e86ae896fe78ae0f102498cfcb20cba7253afdbf29d2ae9",
+    "mlx-two-class-10000-23": "805d78ad1c23d13497cbb9eec2490010bac00b335d6fe26d677a8b8c15eeaad9",
+    "mlx-two-class-10000-24": "aed4d44d7f19fc077bb3e5ad2b66cb5ee5e29f060d97304c927bb1456f5a51ea",
+    "mlx-two-class-10000-25": "597c9cf213ec8cc28b14c6c8853c282be11473860d0046df94f5a7eccc30d65c",
+    "mlx-two-class-10000-26": "a0dca3bb6121da5779767b82df51486d567e444911a2ae42d455d9789dd97a55",
+    "mlx-two-class-10000-27": "e86de310998bc8fabfdd535b11197b906bc3341bfe287c268404fbcf1fd7e1e9",
+    "mlx-two-class-10000-28": "308bd92bf54cd8e6d5af3e81419ac7de26256c32fdc4aef298905fdcfcf29654",
+    "mlx-two-class-10000-29": "5980de44c3b4cd0dbdbcec90e324e4d0e2e706504b2a768ccba772a719c6e6ed",
+    "mlx-two-class-10000-2000": "521d4b1220e532df0a02c71b0b4ce74a1f8c763e5a3506d3f84d6922eb1a8156",
+    "mlx-two-class-10000-2001": "ff03982b07ed8c5274dc5c940b06fb1c016cc7a6e4b446cac4355c298d388b13",
+    "mlx-two-class-10000-2002": "9a1e0a80bab5533adc328ab6c5a66bcccf223272d7b68652eef4a34f74d7c9ba",
+    "mlx-two-class-10000-2003": "09ff8ba82b8a03bab303e39d53d86cc5d89da4e4cc973cd8e3b0c74b40dd42c9",
+    "mlx-two-class-10000-2004": "6234c5a8cf7c957341e44d31d0725fac30df32e6e9bcf2cc6ea701d75ebff711",
+    "mlx-two-class-10000-2005": "63458e102b957c6a27b8364cc9adc03d8aeef2a06d4604f17c2b16be3879f67f",
+    "mlx-two-class-10000-2006": "86643c2a8bb9edc09438f5b4becccbf8e8cfc9b61814df2f60d47c378864f90d",
+    "mlx-two-class-10000-2007": "6018b4afaf4cd82fe3c26595cca9017d56db17cc23bdbd091cf88d5f4722d65d",
+    "mlx-two-class-10000-2008": "33bb00c6b237370d840fff3c2c01a0954bad86b8d53c3b8bbe53af6061bdc25a",
+    "mlx-two-class-10000-2009": "57f1f62f05136739bee954558563bbe17713793ad0c9cc1f07a178e9ed5bfb88",
+    "mlx-two-class-10000-2010": "83a936a76fe09c95f9d927f36381d64b3dc1de66841865618758e9d97d97ab4c",
+    "mlx-two-class-10000-2011": "650a406f570df9050e7d1e4411343af25f41c2b72c9b795f6884a11111a34324",
+    "mlx-two-class-10000-2012": "e33ae147aeb1e7cbab5c400274165c5ce600972e5f94919cfc1e716ee16b68fb",
+    "mlx-two-class-10000-2013": "252c30b491be250082a428d3ecd7d515121909ee4d3be7aaec63e3b6c7e6de20",
+    "mlx-two-class-10000-2014": "8413fb6f97ce037b24449b7152fb5696facbd63f1588061f2103c9af8176a12c",
+    "mlx-two-class-10000-2015": "93288f582af1ced7f2de7851e9235576e4ce1cea4e1648156b5441b7b993bb0b",
+    "mlx-two-class-10000-2016": "4015750f07add401a6d91a1fd4c3fea13af1dbfaa77ea19e0c8dad4bed171234",
+    "mlx-two-class-10000-2017": "35c2ec3a5dd7bf93f3a708ae3a6bfa701c41496f47249657a7b8e050ec29c25b",
+    "mlx-two-class-10000-2018": "52a8fedbd0ec031ebd56609de8e692e2cbc50c0f05fc104ddaea5e1013031693",
+    "mlx-two-class-10000-2019": "5329296f0a5059d3d50dea3597ba36de23d165b72be5e3c9b5c9c0c235a7d751",
+    "mlx-two-class-10000-2020": "c9c5b9cc622f235e50b9e50643920fb7a37e315537e590b0f4917f2a8815a135",
+    "mlx-two-class-10000-2021": "c1755cd6beafcd406699f9bd228f55726bc151583e7e599b22736478afc11784",
+    "mlx-two-class-10000-2022": "4a29fa4357df5d60aecdf234faee11607553c40f327010edd7275a618bde29f8",
+    "mlx-two-class-10000-2023": "e14e873233f02fc8df0cad91181a4c62c8a47970ec1c8f9918eae98c2ddc8dd6",
+    "mlx-two-class-10000-2024": "f07b61ce276aed607dbdce04691e45972ac926fbc3073754153067dbd49db080",
+    "mlx-two-class-10000-2025": "570f926a240031f4178be67d5cbbccb091f6f61ac56a828906988e4f575982a8",
+    "mlx-two-class-10000-2026": "098e6558ecfe8fb207ccbb060a4953b838302e586ada38b6806e9ecd7babd414",
+    "mlx-two-class-10000-2027": "025e1110596a4a2f9909546c6be4517187c3d7520e8893c940e2ccab060df1ee",
+    "mlx-two-class-10000-2028": "9ac973459690b5ec7782ad5e6cf5ae265071444f78bbb87ccea8d771a5fb99ac",
+    "mlx-two-class-10000-2029": "631b63957e1bf747baf8a701669d100431ee7a88d6019eb64bd4de0da87c7612",
+    "mlx-silent-10000-2000": "12b8b7d150311656b2315de13abb5dfcf30680ff7ac7cbb87d77ce6069a24a2f"
+  },
+  "campaign_sha256": "cded033b6a30249915cad9a11b3711724a3ea7e3df812e9ce9358250002df620",
+  "scorer_commit": "72627c714ba6941e017b4585ff3d77bd20a4dfde"
+}
