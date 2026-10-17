@@ -1,5 +1,4 @@
-import pytest
+import sys
+from pathlib import Path
 
-
-def pytest_addoption(parser: pytest.Parser) -> None:
-    parser.addoption('--artifact-output', help='Fresh qualification artifact directory')
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "code"))
