@@ -7,7 +7,7 @@ The user authorized necessary tests without further approval pauses.
 
 This replaces the old 52-case completion plan for the scoped one-second
 singleton claim. No additional long campaign is queued. Full-matrix, M5
-full-network batch/ten-second and implemented upstream-backend claims remain
+full-network batch/ten-second claims remain
 outside this scope; their gates remain intact.
 
 Retained evidence: Eon `a3db62f`/Kisame `e417b33` source/six-pitfall audit;
@@ -42,5 +42,10 @@ Results: `executions/m5-statistics-01`, `m5-final-report-01`,
 Preserve these, both pilots, all trials/failures, the 57-file baseline bundle,
 seven fixtures and original M1 retention/recovery evidence under their owners.
 `AGENTS.md` owns retention. M1/`pr-split` remains paused/untouched.
-Eon structure/README draft and benchmark CSV/memory sidecar are complete;
-open no PR. Pinned arithmetic/data remain unchanged.
+Eon integration is implemented on
+[`ocasta181/eon-mlx-backend`](https://github.com/PraxisMechanica/fly-brain-mlx/tree/4a3ac24),
+based on `a3db62f`; 19 runtime files match `abbf6a2` byte-for-byte.
+34 host/four Metal tests pass: exact one-second sugar/P9 Brian2 spikes,
+fresh sequential trials, real 0.1-second CLI and typed exports/comparison loaders.
+Portable fixtures, receipts and statistics accompany its integration report.
+No PR opened. Pinned arithmetic/data remain unchanged.
