@@ -18,12 +18,6 @@ def compensated_tree(values: mx.array) -> tuple[mx.array, mx.array]:
     return high[..., 0], low[..., 0]
 
 
-def plain_tree(values: mx.array) -> mx.array:
-    while values.shape[-1] > 1:
-        values = values[..., ::2] + values[..., 1::2]
-    return values[..., 0]
-
-
 SCALE = 0.275
 
 
@@ -48,13 +42,6 @@ def two_product(left: mx.array, right: mx.array) -> tuple[mx.array, mx.array]:
         - left_high * right_low
     )
     return product, residual
-
-
-def factored_sum(
-    counts: mx.array, initial: mx.array
-) -> tuple[mx.array, mx.array, mx.array]:
-    count_high, count_low = compensated_tree(counts)
-    return scaled_count_sum(count_high, count_low, initial)
 
 
 def scaled_count_sum(

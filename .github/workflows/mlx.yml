@@ -3,7 +3,7 @@ name: MLX integration
 on:
   pull_request:
   push:
-    branches: ['ocasta181/**']
+    branches: [main, 'ocasta181/**']
 
 jobs:
   host-contracts:

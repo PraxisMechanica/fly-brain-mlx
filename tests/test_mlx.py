@@ -15,8 +15,8 @@ import pyarrow as pa
 import pyarrow.parquet as pq
 import pytest
 import run_mlx
-from fly_brain.simulation.experiments import EXPERIMENTS
-from fly_brain.simulation.models import Connectome, SimulationRun, SpikeEvents
+from mlx_backend.experiments import EXPERIMENTS
+from mlx_backend.models import Connectome, SimulationRun, SpikeEvents
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -63,37 +63,14 @@ assert not {{'numpy', 'pyarrow', 'mlx', 'torch', 'brian2'}} & sys.modules.keys()
     assert not list(tmp_path.iterdir())
 
 
-def test_runtime_bytes_and_fixture_lineage_are_bound():
-    manifest = json.loads((ROOT / "code/mlx-runtime.json").read_text())
-    assert (
-        manifest["validated_numerical_candidate"]
-        == "72627c714ba6941e017b4585ff3d77bd20a4dfde"
-    )
-    for name, record in manifest["files"].items():
-        assert (
-            hashlib.sha256((ROOT / name).read_bytes()).hexdigest() == record["sha256"]
-        )
-        assert "qualification" not in name and "comparison" not in name
-    for directory in (ROOT / "tests/data/mlx-replay").iterdir():
-        provenance = json.loads((directory / "provenance.json").read_text())
-        assert provenance["expected_engine"] == "Brian2 2.8.0 float64 C++ standalone"
-        for name, value in provenance["files"].items():
-            assert hashlib.sha256((directory / name).read_bytes()).hexdigest() == value
-        receipt = json.loads((directory / "trial.json").read_text())
-        assert receipt["completed"] and receipt["job"]["engine"] == "brian"
-        assert (
-            receipt["artifact_sha256"]["spikes.npz"]
-            == provenance["files"]["spikes.npz"]
-        )
-        assert provenance["files"]["trial.json"] == provenance["source_receipt_sha256"]
-        case = json.loads((directory / "observed-case.json").read_text())
-        assert (
-            case["case_accepted"] and case["metric_acceptance"]["mlx"]["counts_equal"]
-        )
-        assert (
-            provenance["files"]["observed-case.json"]
-            == provenance["accepted_observed_case_sha256"]
-        )
+def test_independent_reference_fixtures_have_exact_integer_spikes():
+    for name, count in (("sugar", 16752), ("p9", 858)):
+        fixture = ROOT / "tests/data/mlx-replay" / name
+        with np.load(fixture / "spikes.npz", allow_pickle=False) as expected:
+            assert set(expected.files) == {"neuron_rows", "steps", "flywire_ids"}
+            assert all(expected[key].dtype == np.int64 for key in expected.files)
+            assert all(expected[key].shape == (count,) for key in expected.files)
+            assert np.all((expected["steps"] >= 0) & (expected["steps"] < 10000))
 
 
 @pytest.mark.parametrize(

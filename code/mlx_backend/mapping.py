@@ -1,8 +1,14 @@
 import numpy as np
 from numpy.typing import NDArray
 
-from .identifiers import EdgeRows32, NeuronRows32, PaddedEdgeRows32
-from .models import Connectome, DestinationBucket, DestinationGrouping
+from .models import (
+    Connectome,
+    DestinationBucket,
+    DestinationGrouping,
+    EdgeRows32,
+    NeuronRows32,
+    PaddedEdgeRows32,
+)
 
 
 def absolute_count_sums(connectome: Connectome) -> NDArray[np.int64]:

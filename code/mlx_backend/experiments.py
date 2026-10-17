@@ -1,5 +1,4 @@
-from .identifiers import FlyWireNeuronId
-from .models import Experiment, ExperimentName
+from .models import Experiment, ExperimentName, FlyWireNeuronId
 
 SUGAR_IDS = (
     FlyWireNeuronId(720575940624963786),

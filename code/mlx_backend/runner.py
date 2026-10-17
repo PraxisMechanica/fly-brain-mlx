@@ -4,12 +4,17 @@ import mlx.core as mx
 import numpy as np
 from numpy.typing import NDArray
 
-from fly_brain.simulation.identifiers import NeuronRows64, TrialIds64
-from fly_brain.simulation.models import Connectome, SimulationRun, SpikeEvents, Stimulus
-
 from . import core
-from .arrays import boolean_input, evaluate
 from .bucketed import prepare
+from .core import boolean_input, evaluate
+from .models import (
+    Connectome,
+    NeuronRows64,
+    SimulationRun,
+    SpikeEvents,
+    Stimulus,
+    TrialIds64,
+)
 
 
 def run(

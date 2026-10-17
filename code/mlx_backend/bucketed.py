@@ -1,22 +1,23 @@
+from collections.abc import Callable
 from dataclasses import dataclass
 from functools import partial
 
 import mlx.core as mx
 import numpy as np
 
-from fly_brain.simulation.mapping import (
-    absolute_count_sums,
-    bucket_destinations,
-    silence_sources,
-)
-from fly_brain.simulation.models import Connectome
-from fly_brain.simulation.observations import ReductionReader
-
 from . import core
 from .accumulation import compensated_tree, scaled_count_sum
-from .arrays import boolean_input
-from .engines import Execution
-from .reduction_evidence import read_rows
+from .core import boolean_input
+from .mapping import absolute_count_sums, bucket_destinations, silence_sources
+from .models import Connectome
+
+Advance = Callable[[core.State, mx.array], tuple[core.State, core.StepTrace]]
+
+
+@dataclass(frozen=True)
+class Execution:
+    network: core.Network
+    advance: Advance
 
 
 @dataclass(frozen=True)
@@ -184,19 +185,3 @@ def prepare(
         connectome, input_targets, silenced, precision, exact_counts=exact_counts
     )
     return Execution(network, partial(advance, network, layout))
-
-
-def prepare_observed(
-    connectome: Connectome,
-    input_targets: tuple[int, ...],
-    silenced: tuple[int, ...],
-    precision: str,
-    *,
-    exact_counts: bool = True,
-) -> tuple[Execution, ReductionReader]:
-    network, layout = _components(
-        connectome, input_targets, silenced, precision, exact_counts=exact_counts
-    )
-    return Execution(network, partial(advance, network, layout)), partial(
-        read_rows, layout
-    )

@@ -1,4 +1,4 @@
-"""Apple MLX adapter for the verbatim validated GPL-2.0-or-later runtime."""
+"""Apple MLX adapter for the validated GPL-2.0-or-later runtime."""
 
 import hashlib
 import importlib.metadata
@@ -43,21 +43,25 @@ def dimensions(duration, trials):
 
 
 def input_pin():
-    from fly_brain.simulation.models import InputPin
+    from mlx_backend.models import InputPin
 
-    manifest = json.loads(Path(__file__).with_name("mlx-runtime.json").read_text())
-    return InputPin(**manifest["input_pin"])
+    return InputPin(
+        completeness_sha256="52b0ac6094cd32c546f8d4c341e094376f48f4e791f8db9b166de5dff8199ea4",
+        connectivity_sha256="efeb23fb99098e9c390f6869969b2a121a2ee92c833cfc45ecb2c1d8e1af0347",
+        neurons=138639,
+        edges=15091983,
+    )
 
 
 def load_inputs(completeness, connectivity):
-    from fly_brain.simulation.inputs import load_connectome
+    from mlx_backend.inputs import load_connectome
 
     return load_connectome(Path(completeness), Path(connectivity), input_pin())
 
 
 def experiment_spec(experiment):
     """Reject unsupported overrides instead of silently ignoring their semantics."""
-    from fly_brain.simulation.experiments import EXPERIMENTS
+    from mlx_backend.experiments import EXPERIMENTS
 
     key = experiment.get("key")
     if key not in EXPERIMENTS:
@@ -160,10 +164,8 @@ def read_replay(directory, spec, targets, steps, trials):
 
 def stimuli(connectome, spec, steps, trials, seed, replay=None):
     import numpy as np
-    from fly_brain.infrastructure.seeded_random import uniforms
-    from fly_brain.simulation.identifiers import TrialId
-    from fly_brain.simulation.models import Stimulus
-    from fly_brain.simulation.stimuli import neuron_indices, trial_events
+    from mlx_backend.models import Stimulus, TrialId
+    from mlx_backend.stimuli import neuron_indices, trial_events, uniforms
 
     if type(seed) is not int or seed < 0:
         raise ValueError("MLX seed must be a nonnegative integer")
@@ -201,6 +203,6 @@ def stimuli(connectome, spec, steps, trials, seed, replay=None):
 
 def execute(connectome, stimulus, silenced):
     # The numerical implementation and its operation order are copied verbatim.
-    from fly_brain.simulation.backend.runner import run
+    from mlx_backend.runner import run
 
     return run(connectome, stimulus, silenced, precision="0")

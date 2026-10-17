@@ -6,9 +6,8 @@ import numpy as np
 import pyarrow.parquet as pq
 from numpy.typing import NDArray
 
-from .identifiers import FlyWireIds64, NeuronRows32
 from .mapping import absolute_count_sums
-from .models import Connectome, InputPin
+from .models import Connectome, FlyWireIds64, InputPin, NeuronRows32
 
 
 def file_sha256(path: Path) -> str:

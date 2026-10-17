@@ -1,6 +1,6 @@
 """Eon benchmark entry points for the optional Apple MLX backend.
 
-GPL-2.0-or-later. Numerical runtime lineage is in mlx-runtime.json.
+GPL-2.0-or-later. See mlx_backend and the independent regression fixtures.
 """
 
 import hashlib
@@ -153,7 +153,6 @@ def run_single_benchmark(
         "round": round_idx or "",
         "spike_path": str(path),
     }
-    manifest_path = Path(__file__).with_name("mlx-runtime.json")
     pin = mlx_engine.input_pin()
     metadata = {
         "result": result,
@@ -176,9 +175,6 @@ def run_single_benchmark(
             "connectivity": pin.connectivity_sha256,
         },
         "spike_sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
-        "runtime_manifest_sha256": hashlib.sha256(
-            manifest_path.read_bytes()
-        ).hexdigest(),
         "mlx_peak_allocation_bytes": max(x.peak_device_bytes for x in runs),
         "process_peak_rss_bytes": resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
         "per_trial_timings": [x.timings for x in runs],

@@ -414,8 +414,7 @@ Legacy version 630 data is kept in `data/archive/` for paper figure reproduction
 
 ## Experimental Apple MLX backend
 
-Native Apple silicon macOS users can install the isolated optional environment
-with Python 3.10.14 and uv; the existing backend environments remain unchanged:
+On native Apple silicon macOS, use Python 3.10.14 and the optional uv environment:
 
 ```sh
 uv venv --python 3.10.14
@@ -423,20 +422,24 @@ uv pip install -r requirements-mlx.txt
 uv run --no-project python main.py --mlx --t_run 0.1 --n_run 1 --run-label mlx_first --no_log_file
 ```
 
-MLX is explicit and opt-in. Use a fresh run label: existing MLX outputs are
-rejected. `n_run` runs fresh trials sequentially, with canonical PCG64 seed
-20261004; repeated rounds reuse inputs and are not independent statistical
-samples. `--disable-spike-io` is unsupported. The ordinary benchmark CSV, round
-manifest and six-column typed Parquet outputs work with both comparison tools.
-The adjacent `.mlx.json` records timing, memory scopes, seeds and hashes.
+`--mlx` is opt-in; existing backends and defaults are unchanged. Use a fresh run
+label. Trials run as sequential fresh singletons with canonical PCG64 inputs
+(seed 20261004); repeated rounds reuse inputs. The usual CSV, round manifest and
+Parquet spikes are supported, with timing/input/memory details in `.mlx.json`.
+Timing-only `--disable-spike-io` is unsupported. Install `pandas==2.3.3` to use
+the existing comparison tools in this environment.
 
-The candidate passed 323 qualification tests, five observed one-second cases
-and prospective gross-error screens over 363 independent-seed jobs. P9 count
-equivalence remains unestablished; nine of twelve pointwise count-ratio intervals
-fit ±2%. Current singleton MLX performance is 50–56 seconds per biological second,
-versus 1.7–2.6 seconds for Brian2. No speedup or new M5 full-network batch/ten-second
-validation is claimed. See [integration, replay and validation details](docs/mlx-integration.md)
-for exact scope, portable reference fixtures, tests and attribution.
+MLX uses the validated float32 model with compilation and TF32 disabled.
+Same-input one-second sugar/P9 replays match independent Brian2 fixtures exactly.
+Independent-cohort P9 equivalence remains unestablished. Measured singleton MLX
+runtime is 50–56 seconds per biological second versus 1.7–2.6 for Brian2; no
+speedup or new full-network M5 batch/ten-second acceptance is claimed.
+
+For regression checks, install `requirements-mlx-test.txt`, then run
+`python -m pytest -m 'not metal'` and, on Apple silicon, `python -m pytest -m metal`.
+The [fixtures](tests/data/mlx-replay/README.md) include independent saved inputs
+and expected spikes. A Python caller can pass their directory as `stimulus_path`
+to `run_mlx.run_single_benchmark` for verified replay.
 
 ## License
 

@@ -9,10 +9,20 @@ from numpy.typing import ArrayLike, NDArray
 from .accumulation import compensated_tree, two_product, two_sum
 
 DT_MS = 0.1
+
+
 DELAY_STEPS = 18
+
+
 QUEUE_SLOTS = DELAY_STEPS + 1
+
+
 INITIAL_LAST_SPIKE = -100000000
+
+
 _a = math.exp(-DT_MS / 20)
+
+
 COEFFICIENTS = tuple(
     float(np.float32(value))
     for value in (
@@ -21,7 +31,11 @@ COEFFICIENTS = tuple(
         _a * -math.expm1(-DT_MS * (1 / 5 - 1 / 20)) / 3,
     )
 )
+
+
 VOLTAGE_INCREMENT = float(np.float32(math.expm1(-DT_MS / 20)))
+
+
 SYNAPTIC_INCREMENT = float(np.float32(math.expm1(-DT_MS / 5)))
 
 
@@ -176,67 +190,9 @@ def threshold_spikes(voltage_offset_mv: mx.array, available: mx.array) -> mx.arr
         return available & (voltage_offset_mv > 0)
 
 
-def advance(
-    network: Network, state: State, events: mx.array
-) -> tuple[State, StepTrace]:
-    trials = state.voltage_offset_mv.shape[0]
-    if events.shape != (trials, network.input_targets.size) or events.dtype != mx.bool_:
-        raise ValueError('Events must be Boolean with shape (trials, input channels)')
-    with mx.stream(mx.gpu):
-        available = state.step - state.last_spike_step >= network.refractory_steps
-        voltage, synaptic = integrate(
-            state.voltage_offset_mv, state.synaptic_mv, available
-        )
-        pre_voltage, pre_synaptic = voltage, synaptic
-        pre_physical_voltage = pre_voltage - 45
-        spikes = threshold_spikes(pre_voltage, available)
-        last_spike = mx.where(spikes, state.step, state.last_spike_step)
-        receiving = available & ~spikes
-        due = state.queue[state.step % QUEUE_SLOTS][:, network.sources]
-        accepted = due & receiving[:, network.destinations]
-        discarded = due & ~receiving[:, network.destinations]
-        neurons = mx.arange(network.neurons)
-        # Ordered device updates avoid atomic accumulation in this small-network oracle.
-        for edge in range(network.sources.size):
-            target = neurons == network.destinations[edge]
-            synaptic = mx.where(
-                accepted[:, edge, None] & target,
-                synaptic + network.weights_mv[edge],
-                synaptic,
-            )
-        accepted_inputs = events & receiving[:, network.input_targets]
-        for channel in range(network.input_targets.size):
-            target = neurons == network.input_targets[channel]
-            voltage = mx.where(
-                accepted_inputs[:, channel, None] & target, voltage + 68.75, voltage
-            )
-        slots = mx.arange(QUEUE_SLOTS)[:, None, None]
-        queue = mx.where(slots == state.step % QUEUE_SLOTS, False, state.queue)
-        queue = mx.where(
-            slots == (state.step + DELAY_STEPS) % QUEUE_SLOTS,
-            spikes[None, :, :],
-            queue,
-        )
-        trace = StepTrace(
-            pre_physical_voltage,
-            pre_synaptic,
-            available,
-            spikes,
-            receiving,
-            due,
-            accepted,
-            discarded,
-            accepted_inputs,
-            voltage - 45,
-            synaptic,
-            pre_voltage,
-            voltage,
-        )
-        next_state = State(
-            mx.where(spikes, -7, voltage),
-            mx.where(spikes, 0, synaptic),
-            last_spike,
-            queue,
-            state.step + 1,
-        )
-        return next_state, trace
+def evaluate(*arrays: mx.array) -> None:
+    mx.eval(*arrays)  # pyright: ignore[reportUnknownMemberType]
+
+
+def boolean_input(events: NDArray[np.bool_]) -> mx.array:
+    return mx.array(events)  # pyright: ignore[reportArgumentType]

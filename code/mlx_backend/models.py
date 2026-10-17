@@ -1,34 +1,18 @@
 from dataclasses import dataclass
-from pathlib import Path
-from typing import Literal
+from typing import Literal, NewType
 
 import numpy as np
-from numpy.typing import ArrayLike, NDArray
+from numpy.typing import NDArray
 
-from .identifiers import (
-    EdgeRows32,
-    FlyWireIds64,
-    FlyWireNeuronId,
-    NeuronRow,
-    NeuronRows32,
-    NeuronRows64,
-    PaddedEdgeRows32,
-    TrialId,
-    TrialIds64,
-)
-
-
-@dataclass(frozen=True)
-class NetworkCase:
-    neurons: int
-    sources: tuple[NeuronRow, ...] = ()
-    destinations: tuple[NeuronRow, ...] = ()
-    weights: tuple[float, ...] = ()
-    targets: tuple[NeuronRow, ...] = ()
-    silenced: tuple[NeuronRow, ...] = ()
-    voltage: ArrayLike = -52
-    synaptic: ArrayLike = 0
-    last_spike: ArrayLike = -100000000
+FlyWireNeuronId = NewType('FlyWireNeuronId', int)
+NeuronRow = NewType('NeuronRow', int)
+TrialId = NewType('TrialId', int)
+FlyWireIds64 = NewType('FlyWireIds64', NDArray[np.int64])
+NeuronRows32 = NewType('NeuronRows32', NDArray[np.int32])
+NeuronRows64 = NewType('NeuronRows64', NDArray[np.int64])
+EdgeRows32 = NewType('EdgeRows32', NDArray[np.int32])
+PaddedEdgeRows32 = NewType('PaddedEdgeRows32', NDArray[np.int32])
+TrialIds64 = NewType('TrialIds64', NDArray[np.int64])
 
 
 @dataclass(frozen=True)
@@ -100,16 +84,6 @@ class Stimulus:
 
 
 @dataclass(frozen=True)
-class SimulationRequest:
-    project: Path
-    output: Path
-    experiment: ExperimentName
-    duration_s: float
-    trials: int
-    seed: int
-
-
-@dataclass(frozen=True)
 class SpikeEvents:
     trials: TrialIds64
     neurons: NeuronRows64
@@ -122,11 +96,3 @@ class SimulationRun:
     timings: dict[str, float]
     peak_device_bytes: int
     device_name: str
-
-
-@dataclass(frozen=True)
-class SimulationResult:
-    spike_file: Path
-    spikes: int
-    active_neurons: int
-    elapsed_s: float

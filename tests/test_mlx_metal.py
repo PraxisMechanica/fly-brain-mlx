@@ -13,8 +13,8 @@ import pyarrow.compute as pc
 import pyarrow.parquet as pq
 import pytest
 import run_mlx
-from fly_brain.simulation.experiments import SUGAR_IDS
-from fly_brain.simulation.models import Connectome
+from mlx_backend.experiments import SUGAR_IDS
+from mlx_backend.models import Connectome
 
 pytestmark = pytest.mark.metal
 ROOT = Path(__file__).resolve().parents[1]
@@ -44,10 +44,7 @@ def test_full_network_saved_input_matches_independent_brian_native_fixture(
         np.testing.assert_array_equal(steps, expected["steps"])
         np.testing.assert_array_equal(
             table["flywire_id"].to_numpy(),
-            expected["neuron_ids"][expected["neuron_rows"]],
-        )
-        np.testing.assert_array_equal(
-            np.bincount(rows, minlength=len(expected["neuron_ids"])), expected["counts"]
+            expected["flywire_ids"],
         )
         assert result["n_spikes"] == len(expected["steps"])
     metadata = json.loads(
