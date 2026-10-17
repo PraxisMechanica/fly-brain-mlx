@@ -1,7 +1,7 @@
 # M5 handoff
 
-Use `main` containing this directory. Scientific sources match baseline
-`6429e722c27e10ee1b7c546ba5da9b40baa5f44d`; keep the delivery checkout.
+The archive captures baseline `6429e722c27e10ee1b7c546ba5da9b40baa5f44d`.
+Current M5 results and the replacement tiered scope are in `milestone.md`.
 
 The bundle includes full instructions,
 57 manifest-verified files, scientific baselines, prospective statistics and the
@@ -26,6 +26,6 @@ Downloads/manual-transfer directions are superseded by the commands above;
 `6429e72` identifies scientific provenance, not the delivery checkout to select.
 No separate file transfer is needed.
 
-M5 qualification remains pending. Get human approval before work expected over
-two hours. Preserve this bundle while its M5 qualification/reuse consumers remain.
-The M1 goal stays paused; normal generated runs remain under ignored `executions/`.
+The user subsequently authorized the necessary M5 campaign without approval
+pauses; it is complete. Preserve this baseline bundle and new ignored
+`executions/` evidence. The M1 goal stays paused. Eon integration remains a draft.

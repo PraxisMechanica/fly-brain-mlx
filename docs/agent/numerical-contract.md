@@ -139,9 +139,9 @@ universally lossless: expose actual decoded and encoded initial state and retain
 the exact physical configuration gate. Record actual `u` at pre/before/end phases
 and in final, repeat, chunk and batch evidence. Bounded target/linear probes
 support implementation, not adoption: all unchanged local/reference, scalar,
-fan-in/layout, observation, discrete, state and repeat gates, the complete 52-case
-matrix and prescribed batches remain required. Prior executions qualify only
-their original arithmetic.
+fan-in/layout, observation, discrete, state and repeat gates remain required.
+Full-matrix/batch claims additionally require the complete matrix and prescribed
+batches. Prior executions qualify only their original arithmetic.
 
 ## Shared stimuli and repeatability protocol
 
@@ -165,7 +165,10 @@ These are conservative engineering parity requirements, not thresholds estimated
 
 Use the input hashes and identifier ordering enforced by `simulation.inputs.load_connectome`; preserve presynaptic-to-postsynaptic orientation and original connection rows. Baseline Brian2 is C++ standalone float64, one independent trial per fresh initial state, with shared replay. The paired PyTorch baseline is the pinned float32 `TorchModel`/`AlphaLIF` numerical core, on CPU for a reproducible local comparator, with its Euler integration, delayed propagation, reset, and refractory behavior unchanged. Record version, device, thread settings, and reduction mode. Feed replay counts instead of sampling its Poisson generator. For all three engines supply the same outgoing-silenced connectivity and the union of activated indices to existing refractory-configuration inputs. This defines the comparison for perturbations the old benchmark wrapper ignores; label it **pinned PyTorch core with common experiment setup/replay**, not the unchanged benchmark CLI. No PyTorch repair or retuning is authorized. A different PyTorch device/path is an additional comparison, not a selectable easier baseline.
 
-Required matrix (each trial is paired across all three engines):
+The tiered singleton scope in `milestone.md` replaces matrix completion with
+retained oracle/precision evidence, five one-second sentinels and independent
+cohorts. The following protocol governs a full-matrix claim, outside that scope.
+Each matrix trial is paired across all three engines:
 
 | Experiment code | Configuration | Durations | Independent trial indices |
 | --- | --- | --- | --- |

@@ -38,8 +38,8 @@ Read `milestone.md` for current holds and `numerical-contract.md` for acceptance
    integrate after its prerequisite passes. Avoid device contention and changes that would
    invalidate the running qualification. Overlap independent CPU references
    with MLX, retaining fresh initial states, settings, repeats and provenance.
-   Score the first replay and stop decisive failures. Complete all 52 paired cases,
-   fresh repeats and sugar/P9 batches for the stable implementation. Regenerate
+   Score the first replay and stop decisive failures. Complete the claimed tiered
+   scope in `milestone.md`; matrix/batch claims require their corresponding gates. Regenerate
    only evidence invalidated by relevant source, input, environment or mode changes,
    as determined by the existing compatibility verifier. A documentation commit
    alone does not require rerunning simulations.

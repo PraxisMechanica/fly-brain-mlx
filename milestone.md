@@ -1,54 +1,46 @@
 # MLX fly-brain milestone
 
-Updated 2026-10-16. M5 bundle: `handoffs/README.md`. Preserve v783, arithmetic,
-architecture and seven fixtures.
+Updated 2026-10-16. Issue #9 tiered M5 singleton validation is complete.
+The user authorized necessary tests without further approval pauses.
 
-## Evidence lifetime
+## Scope and results
 
-`AGENTS.md` owns retention. Preserve `executions/` and unclassified
-`.quality-reports/`. Retention: 719 files unchanged (`executions/retention-20261015`).
-Recovered 687 files/88,331,555 bytes verified against `5f7b0d7`:
-`executions/tiered-validation-20261015/recovered-5f7b0d7`. That root retains audits
-and failures; check compatibility before reuse.
+This replaces the old 52-case completion plan for the scoped one-second
+singleton claim. No additional long campaign is queued. Full-matrix, M5
+full-network batch/ten-second and implemented upstream-backend claims remain
+outside this scope; their gates remain intact.
 
-## Verified scientific state
+Retained evidence: Eon `a3db62f`/Kisame `e417b33` source/six-pitfall audit;
+eight NumPy64/Brian2 exact configurations (maximum phase error `2.78e-14 mV`);
+full-network one/ten-second precision proof. The ten-second sugar trial1 has
+171,973 spikes, identical counts and four reviewed one-step MLX shifts, first
+at step 36,217. Historical M1 conclusions retain their original hardware/limits.
 
-Twelve sugar cases remain compatible: ten 0.1/1-second cases and ten-second trials
-0/1. Artifacts, 108 scientific checks, 132 metrics, 1,488 source comparisons and
-build identities were rechecked without simulation. Ten-second trials have
-170,752 exact events and 171,973 events with four reviewed one-step MLX shifts,
-respectively; first difference: step 36,217, row 106,477.
+M5 passed 323 qualification tests without failures/errors/skips, the connectome
+pulse, and five one-second three-engine sentinels with state/queue, paired
+metrics and fresh repeats. The standalone-Python provenance failure was repaired;
+preserve `executions/m5-observed-launch-01`.
 
-Source audit: Eon `a3db62f`, Kisame `e417b33`, all requested files/six pitfalls.
-Constants agree; dataset, Brian2, delivery, channels and accumulation differ.
+The 363-job campaign completed: 30 independent trials per active experiment/cohort,
+plus one silent control/cohort. All prospective gross-error gates passed;
+maximum primary absolute statistic `2.240`, zero per-neuron outliers.
+Nine of twelve 95% count-ratio intervals fit ±2%. P9 remains unresolved:
+MLX-A/Brian2 ratio `0.9028`, interval `[0.8245,0.9910]`; MLX-B/Brian2 ratio `0.9498`,
+interval `[0.8571,1.0529]`. Passing alarms does not establish equivalence.
 
-NumPy64/Brian2 passed eight `exact-02` configurations: four connected
-800-neuron/2,803-edge cases and four microfixtures. Two-class drive yielded
-2,480 spikes/196 propagated; maximum phase error `2.78e-14 mV`. Spikes,
-refractory/reset and delivery match. The ensemble remains pending.
+## Cost, evidence and delivery
 
-Full-network NumPy64 matches Brian2 at one/ten seconds (16,752/171,973 spikes),
-including counts, refractory and pending queues. Maximum final voltage error:
-`1.61e-12 mV`. MLX matches one second; ten-second shifts preserve counts. The
-bound roundoff review agrees with the oracle within `7.11e-15 mV`. Native
-results were reused; see `precision-02/03` and `precision-03-review-binding.json`.
+Campaign: 3.774 active hours/69.45 GiB, versus priced 4.91 hours/86.80 GiB.
+Five sentinels: 0.865 hours/4.64 GiB. One CPU/one GPU worker reserved five CPU
+cores/12.8 GiB for macOS/two agents/host work. Median whole-loop seconds per
+biological second: MLX 50.23–55.91; Brian2 1.72–2.59, plus separately measured
+build/setup. MLX singleton throughput is slower. Peak sampled tree RSS:
+MLX 3.14 GiB, Brian2 3.69 GiB; MLX allocator 1.35 GiB, a separate scope.
 
-## Remaining work and holds
-
-M5: 57 transfer files verified. Pilot passed 15 jobs; five one-second Brian2/MLX
-pairs match native events/counts; sugar repeats match. Selected qualification:
-190 passes in disjoint selections; connectome pulse passed. Receipts:
-`executions/m5-pilot-01`, `m5-pilot-check-03`, `m5-local-qualification-01`,
-`m5-connectome-pulse-01`.
-
-Pre-repair price (`executions/m5-plan-01`): 445 jobs, 5.83 hours/107.56 GiB,
-including 25% and five reused trials. One CPU/one GPU; reserve five CPU cores/
-12.8 GiB for macOS, two agents and GPU host work.
-
-Provenance repair passed CI and 0.1/1-second sugar state/queue, repeat and paired
-gates; preserve failed `executions/m5-observed-launch-01`. Four sentinels remain.
-The tested scorer retains prospective alarms/low-rate support. Refresh the profile
-after integrating whole-loop/reference-build stopwatches. Ensemble acceptance
-remains pending. Latest user authorizes necessary tests without further approval
-pauses: retain 30 trials/active cohort, reduce silent to one/cohort (363 jobs).
-M5 alone; M1 goal paused; preserve `pr-split`. Eon remains draft; open no PR.
+Results: `executions/m5-statistics-01`, `m5-final-report-01`,
+`m5-final-review-01`; coverage: `m5-continuation-02/qualification-coverage.json`.
+Preserve these, both pilots, all trials/failures, the 57-file baseline bundle,
+seven fixtures and original M1 retention/recovery evidence under their owners.
+`AGENTS.md` owns retention. M1/`pr-split` remains paused/untouched.
+Eon structure/README draft and benchmark CSV/memory sidecar are complete;
+open no PR. Pinned arithmetic/data remain unchanged.
